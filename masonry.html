@@ -624,19 +624,383 @@
             </section>
 
 
+       ```html
         </main>
-
 
     </div>
 
 
-
     <!-- =========================================
+         BATIFLOW - CALCULATEUR MAÇONNERIE
          JAVASCRIPT
     ========================================== -->
 
-    ```html
-<script src="./js/masonry.js"></script>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+            // =====================================
+            // FORMULAIRE
+            // =====================================
+
+            const form =
+                document.getElementById("masonryForm");
+
+
+            if (!form) {
+
+                console.error(
+                    "Formulaire masonryForm introuvable."
+                );
+
+                return;
+
+            }
+
+
+            // =====================================
+            // CALCUL
+            // =====================================
+
+            form.addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+
+                // ---------------------------------
+                // RÉCUPÉRATION DES VALEURS
+                // ---------------------------------
+
+                const wallLength =
+                    parseFloat(
+                        document.getElementById(
+                            "wallLength"
+                        ).value
+                    );
+
+
+                const wallHeight =
+                    parseFloat(
+                        document.getElementById(
+                            "wallHeight"
+                        ).value
+                    );
+
+
+                const brickLength =
+                    parseFloat(
+                        document.getElementById(
+                            "brickLength"
+                        ).value
+                    );
+
+
+                const brickHeight =
+                    parseFloat(
+                        document.getElementById(
+                            "brickHeight"
+                        ).value
+                    );
+
+
+                const joint =
+                    parseFloat(
+                        document.getElementById(
+                            "jointThickness"
+                        ).value
+                    );
+
+
+                const loss =
+                    parseFloat(
+                        document.getElementById(
+                            "masonryLoss"
+                        ).value
+                    );
+
+
+                // ---------------------------------
+                // VÉRIFICATION
+                // ---------------------------------
+
+                if (
+                    !Number.isFinite(wallLength) ||
+                    !Number.isFinite(wallHeight) ||
+                    !Number.isFinite(brickLength) ||
+                    !Number.isFinite(brickHeight) ||
+                    !Number.isFinite(joint) ||
+                    !Number.isFinite(loss)
+                ) {
+
+                    alert(
+                        "Veuillez remplir tous les champs."
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    wallLength <= 0 ||
+                    wallHeight <= 0 ||
+                    brickLength <= 0 ||
+                    brickHeight <= 0 ||
+                    joint < 0
+                ) {
+
+                    alert(
+                        "Veuillez entrer des valeurs valides."
+                    );
+
+                    return;
+
+                }
+
+
+                // =================================
+                // 1. SURFACE DU MUR
+                // =================================
+
+                const wallArea =
+                    wallLength *
+                    wallHeight;
+
+
+                // =================================
+                // 2. CONVERSION CM → M
+                // =================================
+
+                const brickLengthM =
+                    brickLength / 100;
+
+
+                const brickHeightM =
+                    brickHeight / 100;
+
+
+                const jointM =
+                    joint / 100;
+
+
+                // =================================
+                // 3. SURFACE MODULAIRE
+                // =================================
+
+                const moduleLength =
+                    brickLengthM +
+                    jointM;
+
+
+                const moduleHeight =
+                    brickHeightM +
+                    jointM;
+
+
+                const moduleArea =
+                    moduleLength *
+                    moduleHeight;
+
+
+                // =================================
+                // 4. BRIQUES THÉORIQUES
+                // =================================
+
+                const theoreticalBricks =
+                    wallArea /
+                    moduleArea;
+
+
+                // =================================
+                // 5. BRIQUES AVEC PERTE
+                // =================================
+
+                const finalBricks =
+                    Math.ceil(
+                        theoreticalBricks *
+                        (1 + loss / 100)
+                    );
+
+
+                // =================================
+                // 6. MORTIER
+                // =================================
+
+                /*
+                 * Estimation simplifiée.
+                 *
+                 * Épaisseur conventionnelle :
+                 * 15 cm.
+                 *
+                 * Cette valeur sera rendue
+                 * configurable dans une future
+                 * version.
+                 */
+
+                const wallThickness =
+                    0.15;
+
+
+                const masonryVolume =
+                    wallArea *
+                    wallThickness;
+
+
+                const brickVolume =
+                    brickLengthM *
+                    brickHeightM *
+                    wallThickness;
+
+
+                const bricksVolume =
+                    theoreticalBricks *
+                    brickVolume;
+
+
+                let mortarVolume =
+                    masonryVolume -
+                    bricksVolume;
+
+
+                if (mortarVolume < 0) {
+
+                    mortarVolume = 0;
+
+                }
+
+
+                const mortarFinal =
+                    mortarVolume *
+                    (1 + loss / 100);
+
+
+                // =================================
+                // 7. AFFICHAGE
+                // =================================
+
+                document.getElementById(
+                    "wallAreaResult"
+                ).textContent =
+                    wallArea.toFixed(2) +
+                    " m²";
+
+
+                document.getElementById(
+                    "brickTheoreticalResult"
+                ).textContent =
+                    Math.ceil(
+                        theoreticalBricks
+                    );
+
+
+                document.getElementById(
+                    "brickFinalResult"
+                ).textContent =
+                    finalBricks;
+
+
+                document.getElementById(
+                    "mortarVolumeResult"
+                ).textContent =
+                    mortarFinal.toFixed(3) +
+                    " m³";
+
+
+                // =================================
+                // 8. AFFICHER LES CARTES
+                // =================================
+
+                const results =
+                    document.getElementById(
+                        "masonryResults"
+                    );
+
+
+                results.style.display =
+                    "block";
+
+
+                results.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+
+            });
+
+
+            // =====================================
+            // DÉCONNEXION
+            // =====================================
+
+            const logoutButton =
+                document.getElementById(
+                    "logoutButton"
+                );
+
+
+            if (logoutButton) {
+
+                logoutButton.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+
+                        localStorage.removeItem(
+                            "batiflowLoggedIn"
+                        );
+
+                        window.location.href =
+                            "login.html";
+
+                    }
+                );
+
+            }
+
+
+            // =====================================
+            // MENU MOBILE
+            // =====================================
+
+            const mobileMenu =
+                document.getElementById(
+                    "mobileMenu"
+                );
+
+
+            const sidebar =
+                document.getElementById(
+                    "sidebar"
+                );
+
+
+            if (
+                mobileMenu &&
+                sidebar
+            ) {
+
+                mobileMenu.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.toggle(
+                            "open"
+                        );
+
+                    }
+                );
+
+            }
+
+        });
+
+    </script>
+
 </body>
+
 </html>
+```
 
