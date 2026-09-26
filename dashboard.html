@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Tableau de bord — BATIFLOW</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <a href="dashboard.html" class="logo">
+            BATI<span>FLOW</span>
+        </a>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <p class="nav-title">
+            PRINCIPAL
+        </p>
+
+        <a href="dashboard.html" class="nav-link active">
+            <span>📊</span>
+            Tableau de bord
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>🏗️</span>
+            Chantiers
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>📋</span>
+            DQE & Métré
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>💰</span>
+            Devis
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>🧮</span>
+            Calculateur BTP
+        </a>
+
+
+        <p class="nav-title">
+            GESTION
+        </p>
+
+        <a href="#" class="nav-link">
+            <span>👷</span>
+            Clients
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>📦</span>
+            Matériaux
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>📄</span>
+            Documents
+        </a>
+
+
+        <p class="nav-title">
+            SYSTÈME
+        </p>
+
+        <a href="#" class="nav-link">
+            <span>⚙️</span>
+            Paramètres
+        </a>
+
+        <a href="#" class="nav-link logout" id="logoutButton">
+            <span>🚪</span>
+            Déconnexion
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+        <small>
+            BATIFLOW V1.0
+        </small>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="dashboard-main">
+
+
+    <!-- HEADER -->
+
+    <header class="dashboard-header">
+
+        <button
+            class="mobile-menu"
+            id="mobileMenu"
+        >
+            ☰
+        </button>
+
+
+        <div class="header-search">
+
+            <span>🔍</span>
+
+            <input
+                type="text"
+                placeholder="Rechercher..."
+            >
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="notification">
+                🔔
+            </div>
+
+            <div class="user-avatar">
+                👤
+            </div>
+
+            <div class="user-info">
+
+                <strong id="userName">
+                    Utilisateur
+                </strong>
+
+                <small>
+                    Professionnel BTP
+                </small>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- CONTENU -->
+
+    <main class="dashboard-content">
+
+
+        <!-- BIENVENUE -->
+
+        <section class="welcome-section">
+
+            <div>
+
+                <span class="welcome-label">
+                    TABLEAU DE BORD
+                </span>
+
+                <h1>
+                    Bonjour <span id="welcomeName">
+                        👋
+                    </span>
+                </h1>
+
+                <p>
+                    Voici un aperçu de votre activité BTP.
+                </p>
+
+            </div>
+
+
+            <button class="primary-action">
+
+                + Nouveau chantier
+
+            </button>
+
+        </section>
+
+
+
+        <!-- STATISTIQUES -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🏗️
+                </div>
+
+                <div>
+
+                    <span>
+                        Chantiers actifs
+                    </span>
+
+                    <strong>
+                        0
+                    </strong>
+
+                    <small>
+                        Aucun chantier
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Devis
+                    </span>
+
+                    <strong>
+                        0
+                    </strong>
+
+                    <small>
+                        Ce mois
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👷
+                </div>
+
+                <div>
+
+                    <span>
+                        Clients
+                    </span>
+
+                    <strong>
+                        0
+                    </strong>
+
+                    <small>
+                        Total
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📋
+                </div>
+
+                <div>
+
+                    <span>
+                        DQE
+                    </span>
+
+                    <strong>
+                        0
+                    </strong>
+
+                    <small>
+                        Documents
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ZONE PRINCIPALE -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- CHANTIERS -->
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            PROJETS
+                        </span>
+
+                        <h2>
+                            Chantiers récents
+                        </h2>
+
+                    </div>
+
+                    <a href="#">
+                        Voir tout →
+                    </a>
+
+                </div>
+
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        🏗️
+                    </div>
+
+                    <h3>
+                        Aucun chantier
+                    </h3>
+
+                    <p>
+                        Commencez par créer votre premier chantier.
+                    </p>
+
+                    <button class="secondary-action">
+                        + Créer un chantier
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIONS RAPIDES -->
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            OUTILS
+                        </span>
+
+                        <h2>
+                            Actions rapides
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <a href="#" class="quick-action">
+
+                        <span>
+                            🧮
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Calculateur
+                            </strong>
+
+                            <small>
+                                Effectuer un calcul BTP
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <a href="#" class="quick-action">
+
+                        <span>
+                            📋
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Nouveau DQE
+                            </strong>
+
+                            <small>
+                                Créer un bordereau
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <a href="#" class="quick-action">
+
+                        <span>
+                            💰
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Nouveau devis
+                            </strong>
+
+                            <small>
+                                Préparer un devis
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <a href="#" class="quick-action">
+
+                        <span>
+                            👷
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Ajouter un client
+                            </strong>
+
+                            <small>
+                                Enregistrer un client
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ACTIVITÉ -->
+
+        <section class="dashboard-panel activity-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span>
+                        ACTIVITÉ
+                    </span>
+
+                    <h2>
+                        Activité récente
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="empty-state small">
+
+                <div class="empty-icon">
+                    📈
+                </div>
+
+                <p>
+                    Votre activité apparaîtra ici.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
