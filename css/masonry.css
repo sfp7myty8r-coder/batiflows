@@ -1,0 +1,172 @@
+```css
+/* =========================================
+   BATIFLOW - CALCULATEUR MAÇONNERIE
+   STYLE SPÉCIFIQUE
+   ========================================= */
+
+
+/* =========================================
+   CONTENEUR PRINCIPAL
+   ========================================= */
+
+.masonry-page {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   BOÎTE CALCULATEUR
+   ========================================= */
+
+.masonry-calculator {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================
+   FORMULAIRE
+   ========================================= */
+
+#masonryForm {
+    width: 100%;
+}
+
+
+/* =========================================
+   CHAMPS
+   ========================================= */
+
+#masonryForm .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+#masonryForm label {
+    font-weight: 600;
+}
+
+
+#masonryForm input,
+#masonryForm select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BOUTON CALCUL
+   ========================================= */
+
+#masonryForm .calculate-button {
+    margin-top: 20px;
+    min-height: 48px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+/* =========================================
+   RÉSULTATS
+   ========================================= */
+
+#masonryResults {
+    margin-top: 30px;
+}
+
+
+#masonryResults .results-title {
+    margin-bottom: 20px;
+}
+
+
+#masonryResults .results-title h2 {
+    margin-bottom: 5px;
+}
+
+
+#masonryResults .results-title p {
+    margin: 0;
+}
+
+
+/* =========================================
+   CARTES DE RÉSULTATS
+   ========================================= */
+
+#masonryResults .result-card {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+#masonryResults .result-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================
+   NOTE TECHNIQUE
+   ========================================= */
+
+#masonryResults .calculator-note {
+    margin-top: 25px;
+
+    padding: 18px;
+
+    border-left: 4px solid #f28c28;
+
+    background: #fff8ef;
+
+    border-radius: 8px;
+}
+
+
+#masonryResults .calculator-note strong {
+    display: block;
+
+    margin-bottom: 7px;
+}
+
+
+#masonryResults .calculator-note p {
+    margin: 0;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .masonry-calculator {
+        padding: 20px;
+    }
+
+
+    #masonryForm .calculate-button {
+        width: 100%;
+    }
+
+
+    #masonryResults .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+```
