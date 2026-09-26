@@ -1,0 +1,489 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Calculateur Mortier — BATIFLOW</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculator.css">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <a href="dashboard.html" class="logo">
+            BATI<span>FLOW</span>
+        </a>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <p class="nav-title">
+            PRINCIPAL
+        </p>
+
+        <a href="dashboard.html" class="nav-link">
+            <span>📊</span>
+            Tableau de bord
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>🏗️</span>
+            Chantiers
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>📋</span>
+            DQE & Métré
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>💰</span>
+            Devis
+        </a>
+
+        <a href="calculator.html" class="nav-link">
+            <span>🧮</span>
+            Calculateur Béton
+        </a>
+
+        <a href="mortar.html" class="nav-link active">
+            <span>🪣</span>
+            Calculateur Mortier
+        </a>
+
+
+        <p class="nav-title">
+            GESTION
+        </p>
+
+        <a href="#" class="nav-link">
+            <span>👷</span>
+            Clients
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>📦</span>
+            Matériaux
+        </a>
+
+        <a href="#" class="nav-link">
+            <span>📄</span>
+            Documents
+        </a>
+
+
+        <p class="nav-title">
+            SYSTÈME
+        </p>
+
+        <a href="#" class="nav-link">
+            <span>⚙️</span>
+            Paramètres
+        </a>
+
+        <a
+            href="#"
+            class="nav-link logout"
+            id="logoutButton"
+        >
+            <span>🚪</span>
+            Déconnexion
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+        <small>
+            BATIFLOW V1.0
+        </small>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================
+     CONTENU PRINCIPAL
+========================= -->
+
+<div class="dashboard-main">
+
+
+    <!-- HEADER -->
+
+    <header class="dashboard-header">
+
+        <button
+            class="mobile-menu"
+            id="mobileMenu"
+        >
+            ☰
+        </button>
+
+
+        <div>
+
+            <h1>
+                Calculateur Mortier
+            </h1>
+
+            <p>
+                Estimez le volume de mortier,
+                le ciment et le sable nécessaires.
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- CONTENU -->
+
+    <main class="dashboard-content">
+
+
+        <!-- TITRE -->
+
+        <section class="welcome-section">
+
+            <div>
+
+                <span class="welcome-label">
+                    CALCULATEUR BTP
+                </span>
+
+                <h1>
+                    Mortier de construction
+                </h1>
+
+                <p>
+                    Entrez les dimensions de votre ouvrage
+                    pour obtenir une estimation des matériaux.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CALCULATEUR -->
+
+        <section class="dashboard-panel calculator-box">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span>
+                        CALCULATEUR 02
+                    </span>
+
+                    <h2>
+                        Volume de mortier
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FORMULAIRE -->
+
+            <form id="mortarForm">
+
+
+                <div class="form-grid">
+
+
+                    <!-- LONGUEUR -->
+
+                    <div class="form-group">
+
+                        <label for="mortarLength">
+                            Longueur (m)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="mortarLength"
+                            placeholder="Ex : 5"
+                            min="0"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- LARGEUR -->
+
+                    <div class="form-group">
+
+                        <label for="mortarWidth">
+                            Largeur (m)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="mortarWidth"
+                            placeholder="Ex : 4"
+                            min="0"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- EPAISSEUR -->
+
+                    <div class="form-group">
+
+                        <label for="mortarThickness">
+                            Épaisseur (m)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="mortarThickness"
+                            placeholder="Ex : 0.02"
+                            min="0"
+                            step="0.001"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- DOSAGE -->
+
+                    <div class="form-group">
+
+                        <label for="mortarDosage">
+                            Dosage du mortier
+                        </label>
+
+                        <select id="mortarDosage">
+
+                            <option value="250">
+                                250 kg/m³
+                            </option>
+
+                            <option
+                                value="300"
+                                selected
+                            >
+                                300 kg/m³
+                            </option>
+
+                            <option value="350">
+                                350 kg/m³
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- MARGE -->
+
+                <div class="loss-option">
+
+                    <input
+                        type="checkbox"
+                        id="mortarLoss"
+                        checked
+                    >
+
+                    <label for="mortarLoss">
+                        Ajouter une marge de perte de 5 %
+                    </label>
+
+                </div>
+
+
+
+                <!-- BOUTON -->
+
+                <button
+                    type="submit"
+                    class="calculate-button"
+                >
+                    🧮 Calculer le mortier
+                </button>
+
+
+            </form>
+
+
+
+            <!-- RÉSULTATS -->
+
+            <div
+                class="results"
+                id="mortarResults"
+                style="display: none;"
+            >
+
+
+                <div class="results-title">
+
+                    <h2>
+                        Résultats
+                    </h2>
+
+                    <p>
+                        Estimation des matériaux nécessaires.
+                    </p>
+
+                </div>
+
+
+
+                <div class="result-grid">
+
+
+                    <div class="result-card">
+
+                        <span>
+                            Volume théorique
+                        </span>
+
+                        <strong id="mortarVolumeResult">
+                            0 m³
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="result-card">
+
+                        <span>
+                            Volume avec perte
+                        </span>
+
+                        <strong id="mortarVolumeLossResult">
+                            0 m³
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="result-card">
+
+                        <span>
+                            Ciment nécessaire
+                        </span>
+
+                        <strong id="mortarCementResult">
+                            0 kg
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="result-card">
+
+                        <span>
+                            Sacs de ciment
+                        </span>
+
+                        <strong id="mortarBagsResult">
+                            0 sacs
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="result-card">
+
+                        <span>
+                            Sable estimé
+                        </span>
+
+                        <strong id="mortarSandResult">
+                            0 m³
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="calculator-note">
+
+                    <strong>
+                        ℹ️ Note :
+                    </strong>
+
+                    <p>
+                        Les résultats sont des estimations.
+                        Le dosage et la quantité de sable
+                        doivent être adaptés aux matériaux,
+                        à l'usage du mortier et aux exigences
+                        du projet.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<script src="js/mortar.js"></script>
+
+</body>
+
+</html>
+```
