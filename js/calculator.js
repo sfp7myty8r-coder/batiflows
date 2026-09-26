@@ -1,4 +1,4 @@
-alert("BATIFLOW CALCULATEUR JS CHARGÉ");
+
 // =========================================
 // BATIFLOW - CALCULATEUR BTP
 // =========================================
