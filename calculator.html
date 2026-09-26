@@ -1,433 +1,992 @@
 ```html
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Calculateur BTP - BATIFLOW</title>
 
     <link rel="stylesheet" href="css/style.css">
+
     <link rel="stylesheet" href="css/calculator.css">
+
 </head>
 
-<body>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+<body class="dashboard-body">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <!-- LOGO -->
 
         <div class="sidebar-logo">
-            BATI<span>FLOW</span>
+
+            <a href="dashboard.html"
+               class="logo">
+
+                BATI<span>FLOW</span>
+
+            </a>
+
         </div>
+
+
+        <!-- MENU -->
 
         <nav class="sidebar-nav">
 
-            <a href="dashboard.html">
-                🏠 Tableau de bord
+
+            <p class="nav-title">
+                PRINCIPAL
+            </p>
+
+
+            <a href="dashboard.html"
+               class="nav-link">
+
+                <span>📊</span>
+
+                Tableau de bord
+
             </a>
 
-            <a href="#">
-                🏗️ Chantiers
+
+            <a href="#"
+               class="nav-link">
+
+                <span>🏗️</span>
+
+                Chantiers
+
             </a>
 
-            <a href="#">
-                📐 DQE & Métré
+
+            <a href="#"
+               class="nav-link">
+
+                <span>📋</span>
+
+                DQE & Métré
+
             </a>
 
-            <a href="#">
-                🧾 Devis
+
+            <a href="#"
+               class="nav-link">
+
+                <span>💰</span>
+
+                Devis
+
             </a>
 
-            <a href="calculator.html" class="active">
-                🧮 Calculateur BTP
+
+            <a href="calculator.html"
+               class="nav-link active">
+
+                <span>🧮</span>
+
+                Calculateur BTP
+
             </a>
 
-            <a href="#">
-                👥 Clients
+
+            <!-- MORTIER -->
+
+            <a href="mortar.html"
+               class="nav-link">
+
+                <span>🪣</span>
+
+                Calculateur Mortier
+
             </a>
 
-            <a href="#">
-                🧱 Matériaux
+
+            <p class="nav-title">
+                GESTION
+            </p>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>👷</span>
+
+                Clients
+
             </a>
 
-            <a href="#">
-                📁 Documents
+
+            <a href="#"
+               class="nav-link">
+
+                <span>📦</span>
+
+                Matériaux
+
             </a>
 
-            <a href="#">
-                ⚙️ Paramètres
+
+            <a href="#"
+               class="nav-link">
+
+                <span>📄</span>
+
+                Documents
+
             </a>
+
+
+            <p class="nav-title">
+                SYSTÈME
+            </p>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>⚙️</span>
+
+                Paramètres
+
+            </a>
+
+
+            <a href="login.html"
+               class="nav-link logout"
+               id="logoutButton">
+
+                <span>🚪</span>
+
+                Déconnexion
+
+            </a>
+
 
         </nav>
 
-        <div class="sidebar-bottom">
-            <a href="login.html" id="logoutButton">
-                🚪 Déconnexion
-            </a>
+
+        <!-- BAS SIDEBAR -->
+
+        <div class="sidebar-footer">
+
+            <small>
+                BATIFLOW V1.0
+            </small>
+
         </div>
+
 
     </aside>
 
 
-    <!-- CONTENU PRINCIPAL -->
-    <main class="main-content">
+
+    <!-- =========================================
+         CONTENU PRINCIPAL
+    ========================================== -->
+
+    <div class="dashboard-main">
+
+
+        <!-- HEADER -->
 
         <header class="dashboard-header">
 
-            <div>
-                <button class="mobile-menu" id="mobileMenu">
-                    ☰
-                </button>
 
-                <h1>Calculateur BTP</h1>
+            <button
+                class="mobile-menu"
+                id="mobileMenu">
 
-                <p>
-                    Calculez rapidement les quantités nécessaires
-                    pour vos travaux.
-                </p>
+                ☰
+
+            </button>
+
+
+            <div class="header-search">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    placeholder="Rechercher..."
+                >
+
             </div>
+
+
+            <div class="header-user">
+
+                <div class="notification">
+                    🔔
+                </div>
+
+
+                <div class="user-avatar">
+                    👤
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong id="userName">
+                        Utilisateur
+                    </strong>
+
+                    <small>
+                        Professionnel BTP
+                    </small>
+
+                </div>
+
+            </div>
+
 
         </header>
 
 
-        <!-- MODULES -->
-        <section class="calculator-section">
 
-            <div class="section-title">
-                <h2>Choisir un calculateur</h2>
-                <p>
-                    Sélectionnez le type de calcul que vous souhaitez effectuer.
-                </p>
-            </div>
+        <!-- =========================================
+             CONTENU
+        ========================================== -->
+
+        <main class="dashboard-content">
 
 
-            <div class="calculator-cards">
+            <!-- TITRE -->
 
-                <button class="calculator-card active" data-calculator="beton">
-
-                    <div class="calculator-icon">
-                        🧱
-                    </div>
-
-                    <div>
-                        <h3>Béton</h3>
-                        <p>
-                            Volume et quantité de ciment
-                        </p>
-                    </div>
-
-                </button>
+            <section class="welcome-section">
 
 
-                <button class="calculator-card disabled">
+                <div>
 
-                    <div class="calculator-icon">
-                        🪣
-                    </div>
-
-                    <div>
-                        <h3>Mortier</h3>
-                        <p>
-                            Disponible prochainement
-                        </p>
-                    </div>
-
-                </button>
+                    <span class="welcome-label">
+                        CALCULATEUR BTP
+                    </span>
 
 
-                <button class="calculator-card disabled">
-
-                    <div class="calculator-icon">
-                        🧱
-                    </div>
-
-                    <div>
-                        <h3>Maçonnerie</h3>
-                        <p>
-                            Disponible prochainement
-                        </p>
-                    </div>
-
-                </button>
+                    <h1>
+                        Calculateur BTP
+                    </h1>
 
 
-                <button class="calculator-card disabled">
-
-                    <div class="calculator-icon">
-                        🏠
-                    </div>
-
-                    <div>
-                        <h3>Dalle</h3>
-                        <p>
-                            Disponible prochainement
-                        </p>
-                    </div>
-
-                </button>
-
-
-                <button class="calculator-card disabled">
-
-                    <div class="calculator-icon">
-                        🏗️
-                    </div>
-
-                    <div>
-                        <h3>Fondations</h3>
-                        <p>
-                            Disponible prochainement
-                        </p>
-                    </div>
-
-                </button>
-
-
-                <button class="calculator-card disabled">
-
-                    <div class="calculator-icon">
-                        📐
-                    </div>
-
-                    <div>
-                        <h3>Poteaux & Poutres</h3>
-                        <p>
-                            Disponible prochainement
-                        </p>
-                    </div>
-
-                </button>
-
-            </div>
-
-
-            <!-- CALCULATEUR BETON -->
-            <div class="calculator-box">
-
-                <div class="calculator-header">
-
-                    <div>
-                        <span class="calculator-label">
-                            CALCULATEUR 01
-                        </span>
-
-                        <h2>Volume de béton</h2>
-
-                        <p>
-                            Entrez les dimensions de votre élément
-                            en mètres.
-                        </p>
-                    </div>
+                    <p>
+                        Calculez rapidement les quantités
+                        nécessaires pour vos travaux.
+                    </p>
 
                 </div>
 
 
-                <form id="concreteForm">
-
-                    <div class="form-grid">
-
-                        <div class="form-group">
-
-                            <label for="length">
-                                Longueur (m)
-                            </label>
-
-                            <input
-                                type="number"
-                                id="length"
-                                placeholder="Ex : 5"
-                                min="0"
-                                step="0.01"
-                                required
-                            >
-
-                        </div>
+            </section>
 
 
-                        <div class="form-group">
 
-                            <label for="width">
-                                Largeur (m)
-                            </label>
+            <!-- =====================================
+                 MODULES
+            ====================================== -->
 
-                            <input
-                                type="number"
-                                id="width"
-                                placeholder="Ex : 4"
-                                min="0"
-                                step="0.01"
-                                required
-                            >
-
-                        </div>
+            <section class="calculator-section">
 
 
-                        <div class="form-group">
+                <div class="section-title">
 
-                            <label for="height">
-                                Épaisseur / Hauteur (m)
-                            </label>
-
-                            <input
-                                type="number"
-                                id="height"
-                                placeholder="Ex : 0.15"
-                                min="0"
-                                step="0.01"
-                                required
-                            >
-
-                        </div>
+                    <h2>
+                        Choisir un calculateur
+                    </h2>
 
 
-                        <div class="form-group">
+                    <p>
+                        Sélectionnez le type de calcul
+                        que vous souhaitez effectuer.
+                    </p>
 
-                            <label for="dosage">
-                                Dosage du béton
-                            </label>
-
-                            <select id="dosage">
-
-                                <option value="250">
-                                    250 kg/m³
-                                </option>
-
-                                <option value="300" selected>
-                                    300 kg/m³
-                                </option>
-
-                                <option value="350">
-                                    350 kg/m³
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
+                </div>
 
 
-                    <div class="loss-option">
 
-                        <input
-                            type="checkbox"
-                            id="loss"
-                            checked
-                        >
+                <div class="calculator-cards">
 
-                        <label for="loss">
-                            Ajouter une marge de perte de 5 %
-                        </label>
 
-                    </div>
-
+                    <!-- ==============================
+                         BETON
+                    =============================== -->
 
                     <button
-                        type="submit"
-                        class="calculate-button"
-                    >
-                        🧮 Calculer
+                        class="calculator-card active"
+                        data-calculator="beton">
+
+
+                        <div class="calculator-icon">
+                            🧱
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Béton
+                            </h3>
+
+
+                            <p>
+                                Volume et quantité
+                                de ciment
+                            </p>
+
+                        </div>
+
+
                     </button>
 
-                </form>
 
 
-                <!-- RESULTATS -->
-                <div
-                    class="results"
-                    id="results"
-                    style="display: none;"
-                >
+                    <!-- ==============================
+                         MORTIER
+                    =============================== -->
 
-                    <div class="results-title">
-                        <h2>Résultats</h2>
-                        <p>
-                            Estimation calculée automatiquement.
-                        </p>
-                    </div>
+                    <a
+                        href="mortar.html"
+                        class="calculator-card">
 
 
-                    <div class="result-grid">
+                        <div class="calculator-icon">
+                            🪣
+                        </div>
 
-                        <div class="result-card">
 
-                            <span>
-                                Volume théorique
-                            </span>
+                        <div>
 
-                            <strong id="volumeResult">
-                                0 m³
-                            </strong>
+                            <h3>
+                                Mortier
+                            </h3>
+
+
+                            <p>
+                                Volume, ciment
+                                et sable
+                            </p>
 
                         </div>
 
 
-                        <div class="result-card">
+                        <span class="calculator-arrow">
+                            →
+                        </span>
 
-                            <span>
-                                Volume avec perte
-                            </span>
 
-                            <strong id="volumeLossResult">
-                                0 m³
-                            </strong>
+                    </a>
+
+
+
+                    <!-- ==============================
+                         MAÇONNERIE
+                    =============================== -->
+
+                    <button
+                        class="calculator-card disabled"
+                        type="button">
+
+
+                        <div class="calculator-icon">
+                            🧱
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Maçonnerie
+                            </h3>
+
+
+                            <p>
+                                Disponible
+                                prochainement
+                            </p>
 
                         </div>
 
 
-                        <div class="result-card">
+                    </button>
 
-                            <span>
-                                Ciment nécessaire
-                            </span>
 
-                            <strong id="cementResult">
-                                0 kg
-                            </strong>
+
+                    <!-- ==============================
+                         DALLE
+                    =============================== -->
+
+                    <button
+                        class="calculator-card disabled"
+                        type="button">
+
+
+                        <div class="calculator-icon">
+                            🏠
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Dalle
+                            </h3>
+
+
+                            <p>
+                                Disponible
+                                prochainement
+                            </p>
 
                         </div>
 
 
-                        <div class="result-card">
+                    </button>
 
-                            <span>
-                                Sacs de ciment
-                            </span>
 
-                            <strong id="bagsResult">
-                                0 sacs
-                            </strong>
+
+                    <!-- ==============================
+                         FONDATIONS
+                    =============================== -->
+
+                    <button
+                        class="calculator-card disabled"
+                        type="button">
+
+
+                        <div class="calculator-icon">
+                            🏗️
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Fondations
+                            </h3>
+
+
+                            <p>
+                                Disponible
+                                prochainement
+                            </p>
 
                         </div>
 
-                    </div>
+
+                    </button>
 
 
-                    <div class="calculator-note">
 
-                        <strong>ℹ️ Note :</strong>
+                    <!-- ==============================
+                         POTEAUX / POUTRES
+                    =============================== -->
 
-                        <p>
-                            Ce calculateur fournit une estimation
-                            des quantités. Le dosage réel du béton
-                            doit être adapté à la formulation,
-                            aux matériaux disponibles et aux
-                            exigences du projet.
-                        </p>
+                    <button
+                        class="calculator-card disabled"
+                        type="button">
 
-                    </div>
+
+                        <div class="calculator-icon">
+                            📐
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Poteaux & Poutres
+                            </h3>
+
+
+                            <p>
+                                Disponible
+                                prochainement
+                            </p>
+
+                        </div>
+
+
+                    </button>
+
 
                 </div>
 
-            </div>
-
-        </section>
-
-    </main>
 
 
-<script src="js/calculator.js"></script>
+                <!-- =================================
+                     CALCULATEUR BETON
+                ================================== -->
+
+                <div class="calculator-box">
+
+
+                    <div class="calculator-header">
+
+
+                        <div>
+
+                            <span class="calculator-label">
+                                CALCULATEUR 01
+                            </span>
+
+
+                            <h2>
+                                Volume de béton
+                            </h2>
+
+
+                            <p>
+                                Entrez les dimensions
+                                de votre élément en mètres.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- FORMULAIRE -->
+
+                    <form id="concreteForm">
+
+
+                        <div class="form-grid">
+
+
+                            <!-- LONGUEUR -->
+
+                            <div class="form-group">
+
+                                <label for="length">
+                                    Longueur (m)
+                                </label>
+
+
+                                <input
+                                    type="number"
+                                    id="length"
+                                    placeholder="Ex : 5"
+                                    min="0"
+                                    step="0.01"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- LARGEUR -->
+
+                            <div class="form-group">
+
+                                <label for="width">
+                                    Largeur (m)
+                                </label>
+
+
+                                <input
+                                    type="number"
+                                    id="width"
+                                    placeholder="Ex : 4"
+                                    min="0"
+                                    step="0.01"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- HAUTEUR -->
+
+                            <div class="form-group">
+
+                                <label for="height">
+                                    Épaisseur / Hauteur (m)
+                                </label>
+
+
+                                <input
+                                    type="number"
+                                    id="height"
+                                    placeholder="Ex : 0.15"
+                                    min="0"
+                                    step="0.01"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- DOSAGE -->
+
+                            <div class="form-group">
+
+                                <label for="dosage">
+                                    Dosage du béton
+                                </label>
+
+
+                                <select id="dosage">
+
+
+                                    <option value="250">
+                                        250 kg/m³
+                                    </option>
+
+
+                                    <option
+                                        value="300"
+                                        selected>
+
+                                        300 kg/m³
+
+                                    </option>
+
+
+                                    <option value="350">
+                                        350 kg/m³
+                                    </option>
+
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- PERTE -->
+
+                        <div class="loss-option">
+
+
+                            <input
+                                type="checkbox"
+                                id="loss"
+                                checked
+                            >
+
+
+                            <label for="loss">
+
+                                Ajouter une marge
+                                de perte de 5 %
+
+                            </label>
+
+
+                        </div>
+
+
+
+                        <!-- BOUTON -->
+
+                        <button
+                            type="submit"
+                            class="calculate-button">
+
+                            🧮 Calculer
+
+                        </button>
+
+
+                    </form>
+
+
+
+                    <!-- =================================
+                         RESULTATS
+                    ================================== -->
+
+                    <div
+                        class="results"
+                        id="results"
+                        style="display: none;"
+                    >
+
+
+                        <div class="results-title">
+
+
+                            <h2>
+                                Résultats
+                            </h2>
+
+
+                            <p>
+                                Estimation calculée
+                                automatiquement.
+                            </p>
+
+
+                        </div>
+
+
+
+                        <div class="result-grid">
+
+
+                            <!-- VOLUME -->
+
+                            <div class="result-card">
+
+
+                                <span>
+                                    Volume théorique
+                                </span>
+
+
+                                <strong id="volumeResult">
+                                    0 m³
+                                </strong>
+
+
+                            </div>
+
+
+
+                            <!-- VOLUME PERTE -->
+
+                            <div class="result-card">
+
+
+                                <span>
+                                    Volume avec perte
+                                </span>
+
+
+                                <strong id="volumeLossResult">
+                                    0 m³
+                                </strong>
+
+
+                            </div>
+
+
+
+                            <!-- CIMENT -->
+
+                            <div class="result-card">
+
+
+                                <span>
+                                    Ciment nécessaire
+                                </span>
+
+
+                                <strong id="cementResult">
+                                    0 kg
+                                </strong>
+
+
+                            </div>
+
+
+
+                            <!-- SACS -->
+
+                            <div class="result-card">
+
+
+                                <span>
+                                    Sacs de ciment
+                                </span>
+
+
+                                <strong id="bagsResult">
+                                    0 sacs
+                                </strong>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- NOTE -->
+
+                        <div class="calculator-note">
+
+
+                            <strong>
+                                ℹ️ Note :
+                            </strong>
+
+
+                            <p>
+
+                                Ce calculateur fournit
+                                une estimation des quantités.
+
+                                Le dosage réel du béton doit
+                                être adapté à la formulation,
+                                aux matériaux disponibles et
+                                aux exigences du projet.
+
+                            </p>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script src="js/calculator.js"></script>
+
+
+    <script>
+
+        /* ================================
+           MENU MOBILE
+        ================================= */
+
+        const mobileMenu =
+            document.getElementById("mobileMenu");
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+
+        if (
+            mobileMenu &&
+            sidebar
+        ) {
+
+            mobileMenu.addEventListener(
+                "click",
+                function () {
+
+                    sidebar.classList.toggle(
+                        "open"
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* ================================
+           DECONNEXION
+        ================================= */
+
+        const logoutButton =
+            document.getElementById(
+                "logoutButton"
+            );
+
+
+        if (logoutButton) {
+
+            logoutButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    localStorage.removeItem(
+                        "batiflowLoggedIn"
+                    );
+
+
+                    window.location.href =
+                        "login.html";
+
+                }
+            );
+
+        }
+
+
+
+        /* ================================
+           NOM UTILISATEUR
+        ================================= */
+
+        const savedUser =
+            localStorage.getItem(
+                "batiflowUser"
+            );
+
+
+        if (savedUser) {
+
+            try {
+
+                const user =
+                    JSON.parse(savedUser);
+
+
+                const userName =
+                    document.getElementById(
+                        "userName"
+                    );
+
+
+                if (
+                    userName &&
+                    user.name
+                ) {
+
+                    userName.textContent =
+                        user.name;
+
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Utilisateur non disponible."
+                );
+
+            }
+
+        }
+
+    </script>
+
 
 </body>
+
 </html>
 ```
