@@ -1,0 +1,997 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Calculateur Dalle - BATIFLOW</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculator.css">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <div class="sidebar-logo">
+
+            <a href="dashboard.html"
+               class="logo">
+
+                BATI<span>FLOW</span>
+
+            </a>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+
+            <p class="nav-title">
+                PRINCIPAL
+            </p>
+
+
+            <a href="dashboard.html"
+               class="nav-link">
+
+                <span>📊</span>
+                Tableau de bord
+
+            </a>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>🏗️</span>
+                Chantiers
+
+            </a>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>📋</span>
+                DQE & Métré
+
+            </a>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>💰</span>
+                Devis
+
+            </a>
+
+
+            <a href="calculator.html"
+               class="nav-link active">
+
+                <span>🧮</span>
+                Calculateur BTP
+
+            </a>
+
+
+            <a href="mortar.html"
+               class="nav-link">
+
+                <span>🪣</span>
+                Calculateur Mortier
+
+            </a>
+
+
+            <a href="masonry.html"
+               class="nav-link">
+
+                <span>🧱</span>
+                Calculateur Maçonnerie
+
+            </a>
+
+
+            <a href="slab.html"
+               class="nav-link">
+
+                <span>🏗️</span>
+                Calculateur Dalle
+
+            </a>
+
+
+            <p class="nav-title">
+                GESTION
+            </p>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>👷</span>
+                Clients
+
+            </a>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>📦</span>
+                Matériaux
+
+            </a>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>📄</span>
+                Documents
+
+            </a>
+
+
+            <p class="nav-title">
+                SYSTÈME
+            </p>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>⚙️</span>
+                Paramètres
+
+            </a>
+
+
+            <a href="login.html"
+               class="nav-link logout"
+               id="logoutButton">
+
+                <span>🚪</span>
+                Déconnexion
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <small>
+                BATIFLOW V1.0
+            </small>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         CONTENU
+    ========================================== -->
+
+    <div class="dashboard-main">
+
+
+        <header class="dashboard-header">
+
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu">
+
+                ☰
+
+            </button>
+
+
+            <div class="header-search">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    placeholder="Rechercher..."
+                >
+
+            </div>
+
+
+            <div class="header-user">
+
+                <div class="notification">
+                    🔔
+                </div>
+
+
+                <div class="user-avatar">
+                    👤
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong id="userName">
+                        Utilisateur
+                    </strong>
+
+                    <small>
+                        Professionnel BTP
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <main class="dashboard-content">
+
+
+            <!-- =================================
+                 INTRODUCTION
+            ================================== -->
+
+            <section class="welcome-section">
+
+
+                <div>
+
+                    <span class="welcome-label">
+                        CALCULATEUR BTP
+                    </span>
+
+
+                    <h1>
+                        Calculateur Dalle
+                    </h1>
+
+
+                    <p>
+                        Calculez le volume de béton et
+                        estimez les quantités de ciment,
+                        sable et gravier nécessaires.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================
+                 CALCULATEUR
+            ================================== -->
+
+            <section class="dashboard-panel calculator-box">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span>
+                            CALCULATEUR 04
+                        </span>
+
+
+                        <h2>
+                            Dalle en béton
+                        </h2>
+
+
+                        <p>
+                            Entrez les dimensions de la dalle
+                            et le dosage du béton.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <form id="slabForm">
+
+
+                    <div class="form-grid">
+
+
+                        <!-- LONGUEUR -->
+
+                        <div class="form-group">
+
+                            <label for="slabLength">
+                                Longueur de la dalle (m)
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="slabLength"
+                                placeholder="Ex : 10"
+                                min="0.01"
+                                step="0.01"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- LARGEUR -->
+
+                        <div class="form-group">
+
+                            <label for="slabWidth">
+                                Largeur de la dalle (m)
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="slabWidth"
+                                placeholder="Ex : 8"
+                                min="0.01"
+                                step="0.01"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- ÉPAISSEUR -->
+
+                        <div class="form-group">
+
+                            <label for="slabThickness">
+                                Épaisseur de la dalle (cm)
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="slabThickness"
+                                value="15"
+                                min="1"
+                                step="0.5"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- DOSAGE -->
+
+                        <div class="form-group">
+
+                            <label for="slabDosage">
+                                Dosage du béton (kg/m³)
+                            </label>
+
+
+                            <select id="slabDosage">
+
+                                <option value="250">
+                                    250 kg/m³
+                                </option>
+
+                                <option value="300"
+                                        selected>
+                                    300 kg/m³
+                                </option>
+
+                                <option value="350">
+                                    350 kg/m³
+                                </option>
+
+                                <option value="400">
+                                    400 kg/m³
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- PERTE -->
+
+                        <div class="form-group">
+
+                            <label for="slabLoss">
+                                Perte
+                            </label>
+
+
+                            <select id="slabLoss">
+
+                                <option value="0">
+                                    0 %
+                                </option>
+
+
+                                <option value="5"
+                                        selected>
+                                    5 %
+                                </option>
+
+
+                                <option value="10">
+                                    10 %
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- NOTE -->
+
+                    <div class="calculator-note">
+
+                        <strong>
+                            ℹ️ Principe du calcul
+                        </strong>
+
+
+                        <p>
+                            Le volume de béton est calculé
+                            à partir de la longueur, de la
+                            largeur et de l'épaisseur de la dalle.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- BOUTON -->
+
+                    <button
+                        type="submit"
+                        class="calculate-button">
+
+                        🧮 Calculer la dalle
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- =================================
+                     RÉSULTATS
+                ================================== -->
+
+                <div
+                    class="results"
+                    id="slabResults"
+                    style="display:none;"
+                >
+
+
+                    <div class="results-title">
+
+                        <h2>
+                            Résultats
+                        </h2>
+
+
+                        <p>
+                            Estimation des quantités nécessaires.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="result-grid">
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Surface de la dalle
+                            </span>
+
+
+                            <strong id="slabAreaResult">
+                                0 m²
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Volume théorique
+                            </span>
+
+
+                            <strong id="slabVolumeResult">
+                                0 m³
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Volume avec perte
+                            </span>
+
+
+                            <strong id="slabVolumeLossResult">
+                                0 m³
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Ciment
+                            </span>
+
+
+                            <strong id="slabCementResult">
+                                0 kg
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Sacs de ciment
+                            </span>
+
+
+                            <strong id="slabBagsResult">
+                                0 sacs
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Sable estimé
+                            </span>
+
+
+                            <strong id="slabSandResult">
+                                0 m³
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Gravier estimé
+                            </span>
+
+
+                            <strong id="slabGravelResult">
+                                0 m³
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="calculator-note">
+
+                        <strong>
+                            ⚠️ Note technique
+                        </strong>
+
+
+                        <p>
+                            Les quantités de sable et de gravier
+                            sont des estimations indicatives.
+                            Le dosage, la formulation réelle du
+                            béton et les conditions de chantier
+                            doivent être vérifiés avant exécution.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                // =================================
+                // FORMULAIRE
+                // =================================
+
+                const form =
+                    document.getElementById(
+                        "slabForm"
+                    );
+
+
+                if (!form) {
+
+                    return;
+
+                }
+
+
+                // =================================
+                // CALCUL
+                // =================================
+
+                form.addEventListener(
+                    "submit",
+                    function (event) {
+
+                        event.preventDefault();
+
+
+                        // -----------------------------
+                        // VALEURS
+                        // -----------------------------
+
+                        const length =
+                            parseFloat(
+                                document.getElementById(
+                                    "slabLength"
+                                ).value
+                            );
+
+
+                        const width =
+                            parseFloat(
+                                document.getElementById(
+                                    "slabWidth"
+                                ).value
+                            );
+
+
+                        const thicknessCm =
+                            parseFloat(
+                                document.getElementById(
+                                    "slabThickness"
+                                ).value
+                            );
+
+
+                        const dosage =
+                            parseFloat(
+                                document.getElementById(
+                                    "slabDosage"
+                                ).value
+                            );
+
+
+                        const loss =
+                            parseFloat(
+                                document.getElementById(
+                                    "slabLoss"
+                                ).value
+                            );
+
+
+                        // -----------------------------
+                        // VALIDATION
+                        // -----------------------------
+
+                        if (
+                            length <= 0 ||
+                            width <= 0 ||
+                            thicknessCm <= 0
+                        ) {
+
+                            alert(
+                                "Veuillez entrer des dimensions valides."
+                            );
+
+                            return;
+
+                        }
+
+
+                        // -----------------------------
+                        // CONVERSION
+                        // -----------------------------
+
+                        const thickness =
+                            thicknessCm / 100;
+
+
+                        // -----------------------------
+                        // SURFACE
+                        // -----------------------------
+
+                        const area =
+                            length *
+                            width;
+
+
+                        // -----------------------------
+                        // VOLUME
+                        // -----------------------------
+
+                        const volume =
+                            area *
+                            thickness;
+
+
+                        // -----------------------------
+                        // VOLUME AVEC PERTE
+                        // -----------------------------
+
+                        const volumeWithLoss =
+                            volume *
+                            (1 + loss / 100);
+
+
+                        // -----------------------------
+                        // CIMENT
+                        // -----------------------------
+
+                        const cementKg =
+                            volumeWithLoss *
+                            dosage;
+
+
+                        // -----------------------------
+                        // SACS 50 KG
+                        // -----------------------------
+
+                        const bags =
+                            Math.ceil(
+                                cementKg / 50
+                            );
+
+
+                        // -----------------------------
+                        // SABLE
+                        // -----------------------------
+
+                        /*
+                         * Estimation simplifiée :
+                         * 0,50 m³ de sable par m³
+                         * de béton.
+                         */
+
+                        const sand =
+                            volumeWithLoss *
+                            0.50;
+
+
+                        // -----------------------------
+                        // GRAVIER
+                        // -----------------------------
+
+                        /*
+                         * Estimation simplifiée :
+                         * 0,80 m³ de gravier par m³
+                         * de béton.
+                         */
+
+                        const gravel =
+                            volumeWithLoss *
+                            0.80;
+
+
+                        // -----------------------------
+                        // AFFICHAGE
+                        // -----------------------------
+
+                        document.getElementById(
+                            "slabAreaResult"
+                        ).textContent =
+                            area.toFixed(2) +
+                            " m²";
+
+
+                        document.getElementById(
+                            "slabVolumeResult"
+                        ).textContent =
+                            volume.toFixed(2) +
+                            " m³";
+
+
+                        document.getElementById(
+                            "slabVolumeLossResult"
+                        ).textContent =
+                            volumeWithLoss.toFixed(2) +
+                            " m³";
+
+
+                        document.getElementById(
+                            "slabCementResult"
+                        ).textContent =
+                            cementKg.toFixed(1) +
+                            " kg";
+
+
+                        document.getElementById(
+                            "slabBagsResult"
+                        ).textContent =
+                            bags +
+                            " sacs";
+
+
+                        document.getElementById(
+                            "slabSandResult"
+                        ).textContent =
+                            sand.toFixed(2) +
+                            " m³";
+
+
+                        document.getElementById(
+                            "slabGravelResult"
+                        ).textContent =
+                            gravel.toFixed(2) +
+                            " m³";
+
+
+                        // -----------------------------
+                        // AFFICHER RÉSULTATS
+                        // -----------------------------
+
+                        const results =
+                            document.getElementById(
+                                "slabResults"
+                            );
+
+
+                        results.style.display =
+                            "block";
+
+
+                        results.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+                );
+
+
+                // =================================
+                // DÉCONNEXION
+                // =================================
+
+                const logoutButton =
+                    document.getElementById(
+                        "logoutButton"
+                    );
+
+
+                if (logoutButton) {
+
+                    logoutButton.addEventListener(
+                        "click",
+                        function (event) {
+
+                            event.preventDefault();
+
+
+                            localStorage.removeItem(
+                                "batiflowLoggedIn"
+                            );
+
+
+                            window.location.href =
+                                "login.html";
+
+                        }
+                    );
+
+                }
+
+
+                // =================================
+                // MENU MOBILE
+                // =================================
+
+                const mobileMenu =
+                    document.getElementById(
+                        "mobileMenu"
+                    );
+
+
+                const sidebar =
+                    document.getElementById(
+                        "sidebar"
+                    );
+
+
+                if (
+                    mobileMenu &&
+                    sidebar
+                ) {
+
+                    mobileMenu.addEventListener(
+                        "click",
+                        function () {
+
+                            sidebar.classList.toggle(
+                                "open"
+                            );
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
+```
