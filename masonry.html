@@ -1,0 +1,645 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Calculateur Maçonnerie - BATIFLOW</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/calculator.css">
+
+    <link rel="stylesheet" href="css/masonry.css">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <div class="sidebar-logo">
+
+            <a href="dashboard.html"
+               class="logo">
+
+                BATI<span>FLOW</span>
+
+            </a>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+
+            <p class="nav-title">
+                PRINCIPAL
+            </p>
+
+
+            <a href="dashboard.html"
+               class="nav-link">
+
+                <span>📊</span>
+                Tableau de bord
+
+            </a>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>🏗️</span>
+                Chantiers
+
+            </a>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>📋</span>
+                DQE & Métré
+
+            </a>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>💰</span>
+                Devis
+
+            </a>
+
+
+            <a href="calculator.html"
+               class="nav-link active">
+
+                <span>🧮</span>
+                Calculateur BTP
+
+            </a>
+
+
+            <a href="mortar.html"
+               class="nav-link">
+
+                <span>🪣</span>
+                Calculateur Mortier
+
+            </a>
+
+
+            <a href="masonry.html"
+               class="nav-link">
+
+                <span>🧱</span>
+                Calculateur Maçonnerie
+
+            </a>
+
+
+            <p class="nav-title">
+                GESTION
+            </p>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>👷</span>
+                Clients
+
+            </a>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>📦</span>
+                Matériaux
+
+            </a>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>📄</span>
+                Documents
+
+            </a>
+
+
+            <p class="nav-title">
+                SYSTÈME
+            </p>
+
+
+            <a href="#"
+               class="nav-link">
+
+                <span>⚙️</span>
+                Paramètres
+
+            </a>
+
+
+            <a href="login.html"
+               class="nav-link logout"
+               id="logoutButton">
+
+                <span>🚪</span>
+                Déconnexion
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <small>
+                BATIFLOW V1.0
+            </small>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =========================================
+         CONTENU PRINCIPAL
+    ========================================== -->
+
+    <div class="dashboard-main">
+
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu">
+
+                ☰
+
+            </button>
+
+
+            <div class="header-search">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    placeholder="Rechercher..."
+                >
+
+            </div>
+
+
+            <div class="header-user">
+
+                <div class="notification">
+                    🔔
+                </div>
+
+
+                <div class="user-avatar">
+                    👤
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong id="userName">
+                        Utilisateur
+                    </strong>
+
+                    <small>
+                        Professionnel BTP
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =========================================
+             CONTENU
+        ========================================== -->
+
+        <main class="dashboard-content">
+
+
+            <section class="welcome-section">
+
+
+                <div>
+
+                    <span class="welcome-label">
+                        CALCULATEUR BTP
+                    </span>
+
+
+                    <h1>
+                        Calculateur Maçonnerie
+                    </h1>
+
+
+                    <p>
+                        Calculez le nombre de briques,
+                        le volume de mur et une estimation
+                        du mortier nécessaire.
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =====================================
+                 CALCULATEUR
+            ====================================== -->
+
+            <section class="dashboard-panel calculator-box">
+
+
+                <div class="panel-header">
+
+
+                    <div>
+
+                        <span>
+                            CALCULATEUR 03
+                        </span>
+
+
+                        <h2>
+                            Mur en maçonnerie
+                        </h2>
+
+
+                        <p>
+                            Entrez les dimensions du mur
+                            et les dimensions de la brique.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FORMULAIRE -->
+
+                <form id="masonryForm">
+
+
+                    <div class="form-grid">
+
+
+                        <!-- LONGUEUR DU MUR -->
+
+                        <div class="form-group">
+
+                            <label for="wallLength">
+                                Longueur du mur (m)
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="wallLength"
+                                placeholder="Ex : 10"
+                                min="0"
+                                step="0.01"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- HAUTEUR DU MUR -->
+
+                        <div class="form-group">
+
+                            <label for="wallHeight">
+                                Hauteur du mur (m)
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="wallHeight"
+                                placeholder="Ex : 3"
+                                min="0"
+                                step="0.01"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- LONGUEUR BRIQUE -->
+
+                        <div class="form-group">
+
+                            <label for="brickLength">
+                                Longueur brique (cm)
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="brickLength"
+                                placeholder="Ex : 40"
+                                min="1"
+                                step="0.1"
+                                value="40"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- HAUTEUR BRIQUE -->
+
+                        <div class="form-group">
+
+                            <label for="brickHeight">
+                                Hauteur brique (cm)
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="brickHeight"
+                                placeholder="Ex : 20"
+                                min="1"
+                                step="0.1"
+                                value="20"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- JOINT -->
+
+                        <div class="form-group">
+
+                            <label for="jointThickness">
+                                Épaisseur du joint (cm)
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="jointThickness"
+                                placeholder="Ex : 1,5"
+                                min="0"
+                                step="0.1"
+                                value="1.5"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <!-- PERTE -->
+
+                        <div class="form-group">
+
+                            <label for="masonryLoss">
+                                Perte
+                            </label>
+
+
+                            <select id="masonryLoss">
+
+                                <option value="0">
+                                    0 %
+                                </option>
+
+
+                                <option value="5" selected>
+                                    5 %
+                                </option>
+
+
+                                <option value="10">
+                                    10 %
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="calculator-note">
+
+
+                        <strong>
+                            ℹ️ Principe du calcul
+                        </strong>
+
+
+                        <p>
+                            Le nombre de briques est estimé
+                            à partir de la surface du mur
+                            et de la surface apparente
+                            d'une brique avec son joint.
+                        </p>
+
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="calculate-button">
+
+                        🧮 Calculer la maçonnerie
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- =================================
+                     RESULTATS
+                ================================== -->
+
+                <div
+                    class="results"
+                    id="masonryResults"
+                    style="display: none;"
+                >
+
+
+                    <div class="results-title">
+
+                        <h2>
+                            Résultats
+                        </h2>
+
+
+                        <p>
+                            Estimation des quantités
+                            nécessaires.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="result-grid">
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Surface du mur
+                            </span>
+
+
+                            <strong id="wallAreaResult">
+                                0 m²
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Briques théoriques
+                            </span>
+
+
+                            <strong id="brickTheoreticalResult">
+                                0
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Briques avec perte
+                            </span>
+
+
+                            <strong id="brickFinalResult">
+                                0
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="result-card">
+
+                            <span>
+                                Mortier estimé
+                            </span>
+
+
+                            <strong id="mortarVolumeResult">
+                                0 m³
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="calculator-note">
+
+
+                        <strong>
+                            ⚠️ Note technique
+                        </strong>
+
+
+                        <p>
+                            Cette estimation ne remplace pas
+                            un métré d'exécution. Les dimensions
+                            réelles des blocs, l'épaisseur des
+                            joints, les ouvertures et les pertes
+                            de chantier doivent être pris en compte.
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script src="js/masonry.js"></script>
+
+
+</body>
+
+</html>
+```
