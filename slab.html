@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -252,5 +251,1699 @@
             margin: 0 0 8px;
             color: #6b7280;
             font-size: 13px;
-            font-weight:
-```
+            font-weight: 600;
+        }
+
+        .result-card p {
+            margin: 0;
+            color: #111827;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .result-card.highlight {
+            border-color: #2563eb;
+            background: #f7faff;
+        }
+
+        .calculation-note {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f3f4f6;
+            color: #4b5563;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .floor-type-options {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .calculator-section,
+            .floor-type-box {
+                padding: 16px;
+            }
+
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+<!-- =========================================
+     SIDEBAR
+========================================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <a href="dashboard.html" class="logo">
+            BATI<span>FLOW</span>
+        </a>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <p class="nav-title">
+            PRINCIPAL
+        </p>
+
+
+        <a href="dashboard.html" class="nav-link">
+            <span>📊</span>
+            Tableau de bord
+        </a>
+
+
+        <a href="#" class="nav-link">
+            <span>🏗️</span>
+            Chantiers
+        </a>
+
+
+        <a href="#" class="nav-link">
+            <span>📋</span>
+            DQE & Métré
+        </a>
+
+
+        <a href="#" class="nav-link">
+            <span>💰</span>
+            Devis
+        </a>
+
+
+        <a href="calculator.html" class="nav-link">
+            <span>🧮</span>
+            Calculateur BTP
+        </a>
+
+
+        <a href="mortar.html" class="nav-link">
+            <span>🪣</span>
+            Calculateur Mortier
+        </a>
+
+
+        <a href="masonry.html" class="nav-link">
+            <span>🧱</span>
+            Calculateur Maçonnerie
+        </a>
+
+
+        <a href="slab.html" class="nav-link active">
+            <span>🏠</span>
+            Calculateur Dalle
+        </a>
+
+
+        <p class="nav-title">
+            GESTION
+        </p>
+
+
+        <a href="#" class="nav-link">
+            <span>👷</span>
+            Clients
+        </a>
+
+
+        <a href="#" class="nav-link">
+            <span>📦</span>
+            Matériaux
+        </a>
+
+
+        <a href="#" class="nav-link">
+            <span>📄</span>
+            Documents
+        </a>
+
+
+        <p class="nav-title">
+            SYSTÈME
+        </p>
+
+
+        <a href="#" class="nav-link">
+            <span>⚙️</span>
+            Paramètres
+        </a>
+
+
+        <a href="login.html"
+           class="nav-link logout"
+           id="logoutButton">
+
+            <span>🚪</span>
+            Déconnexion
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+        <small>
+            BATIFLOW V1.0
+        </small>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<div class="dashboard-main">
+
+
+    <!-- HEADER -->
+
+    <header class="dashboard-header">
+
+        <button
+            class="mobile-menu"
+            id="mobileMenu"
+        >
+            ☰
+        </button>
+
+
+        <div class="header-search">
+
+            <span>🔍</span>
+
+            <input
+                type="text"
+                placeholder="Rechercher..."
+            >
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="notification">
+                🔔
+            </div>
+
+            <div class="user-avatar">
+                👤
+            </div>
+
+            <div class="user-info">
+
+                <strong id="userName">
+                    Utilisateur
+                </strong>
+
+                <small>
+                    Professionnel BTP
+                </small>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTENU
+    ========================================= -->
+
+    <main class="dashboard-content">
+
+        <div class="slab-container">
+
+
+            <!-- INTRODUCTION -->
+
+            <section class="calculator-intro">
+
+                <span class="welcome-label">
+                    CALCULATEUR BTP
+                </span>
+
+                <h1>
+                    Calculateur Dalles & Planchers
+                </h1>
+
+                <p>
+                    Calculez les quantités principales nécessaires
+                    pour une dalle pleine ou un plancher à entrevous.
+                </p>
+
+            </section>
+
+
+            <!-- =====================================
+                 CHOIX DU TYPE
+            ====================================== -->
+
+            <section class="floor-type-box">
+
+                <h2>
+                    1. Type de plancher
+                </h2>
+
+
+                <div class="floor-type-options">
+
+
+                    <div class="floor-option">
+
+                        <input
+                            type="radio"
+                            id="fullSlab"
+                            name="floorType"
+                            value="full"
+                            checked
+                        >
+
+                        <label for="fullSlab">
+
+                            <span class="floor-option-title">
+                                🔲 Dalle pleine
+                            </span>
+
+                            <span class="floor-option-description">
+                                Dalle en béton armé coulée sur toute la surface.
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="floor-option">
+
+                        <input
+                            type="radio"
+                            id="hourdisSlab"
+                            name="floorType"
+                            value="hourdis"
+                        >
+
+                        <label for="hourdisSlab">
+
+                            <span class="floor-option-title">
+                                🧱 Plancher à entrevous / hourdis
+                            </span>
+
+                            <span class="floor-option-description">
+                                Poutrelles + entrevous + dalle de compression.
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 FORMULAIRE
+            ====================================== -->
+
+            <form id="slabForm">
+
+
+                <!-- DIMENSIONS -->
+
+                <section class="calculator-section">
+
+                    <h2>
+                        2. Dimensions du plancher
+                    </h2>
+
+                    <p class="section-description">
+                        Entrez les dimensions réelles du plancher à calculer.
+                    </p>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="slabLength">
+                                Longueur du plancher (m)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="slabLength"
+                                min="0.01"
+                                step="0.01"
+                                placeholder="Ex : 10"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="slabWidth">
+                                Largeur du plancher (m)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="slabWidth"
+                                min="0.01"
+                                step="0.01"
+                                placeholder="Ex : 8"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="slabThickness">
+                                Épaisseur dalle pleine (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="slabThickness"
+                                min="1"
+                                step="1"
+                                value="15"
+                            >
+
+                            <span class="field-help">
+                                Utilisé uniquement pour la dalle pleine.
+                            </span>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="compressionThickness">
+                                Dalle de compression (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="compressionThickness"
+                                min="1"
+                                step="1"
+                                value="5"
+                            >
+
+                            <span class="field-help">
+                                Généralement 4 à 6 cm selon le système retenu.
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================================
+                     HOURDIS
+                ====================================== -->
+
+                <section
+                    class="calculator-section"
+                    id="hourdisSection"
+                >
+
+                    <h2>
+                        3. Paramètres des entrevous / hourdis
+                    </h2>
+
+                    <p class="section-description">
+                        Ces paramètres servent au métré indicatif du plancher.
+                    </p>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="hourdisLength">
+                                Longueur de l'entrevous (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="hourdisLength"
+                                value="53"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="field-help">
+                                Exemple courant : 53 cm.
+                            </span>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="hourdisWidth">
+                                Largeur de l'entrevous (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="hourdisWidth"
+                                value="20"
+                                min="1"
+                                step="1"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="hourdisHeight">
+                                Hauteur de l'entrevous (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="hourdisHeight"
+                                value="16"
+                                min="1"
+                                step="1"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="beamWidth">
+                                Largeur de la poutrelle (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="beamWidth"
+                                value="12"
+                                min="1"
+                                step="1"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="beamSpacing">
+                                Entraxe des poutrelles (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="beamSpacing"
+                                value="60"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="field-help">
+                                Distance entre axes des poutrelles.
+                            </span>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="hourdisLoss">
+                                Perte entrevous (%)
+                            </label>
+
+                            <select id="hourdisLoss">
+
+                                <option value="0">
+                                    0 %
+                                </option>
+
+                                <option value="5" selected>
+                                    5 %
+                                </option>
+
+                                <option value="10">
+                                    10 %
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================================
+                     BETON
+                ====================================== -->
+
+                <section class="calculator-section">
+
+                    <h2>
+                        4. Béton
+                    </h2>
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="slabDosage">
+                                Dosage du béton (kg/m³)
+                            </label>
+
+                            <select id="slabDosage">
+
+                                <option value="250">
+                                    250 kg/m³
+                                </option>
+
+                                <option value="300" selected>
+                                    300 kg/m³
+                                </option>
+
+                                <option value="350">
+                                    350 kg/m³
+                                </option>
+
+                                <option value="400">
+                                    400 kg/m³
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="concreteLoss">
+                                Perte béton (%)
+                            </label>
+
+                            <select id="concreteLoss">
+
+                                <option value="0">
+                                    0 %
+                                </option>
+
+                                <option value="5" selected>
+                                    5 %
+                                </option>
+
+                                <option value="10">
+                                    10 %
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="sandRatio">
+                                Sable indicatif (m³/m³ béton)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="sandRatio"
+                                value="0.50"
+                                min="0"
+                                step="0.01"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="gravelRatio">
+                                Gravier indicatif (m³/m³ béton)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="gravelRatio"
+                                value="0.80"
+                                min="0"
+                                step="0.01"
+                            >
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================================
+                     ACIER
+                ====================================== -->
+
+                <section class="calculator-section">
+
+                    <h2>
+                        5. Paramètres d'armatures
+                    </h2>
+
+                    <p class="section-description">
+                        Ces valeurs servent à produire une estimation de métré.
+                        Elles ne remplacent pas le dimensionnement structurel.
+                    </p>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="steelPerM2">
+                                Acier estimatif (kg/m²)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="steelPerM2"
+                                value="8"
+                                min="0"
+                                step="0.1"
+                            >
+
+                            <span class="field-help">
+                                Valeur modifiable selon le projet.
+                            </span>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="meshWidth">
+                                Largeur utile treillis (m)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="meshWidth"
+                                value="2.4"
+                                min="0.1"
+                                step="0.1"
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="reinforcement-note">
+
+                        ⚠️ <strong>Important :</strong>
+                        le ferraillage réel d'une dalle ou d'un plancher
+                        doit être déterminé à partir du calcul structurel,
+                        des charges, des portées, des appuis et des règles
+                        de calcul applicables.
+
+                    </div>
+
+                </section>
+
+
+                <!-- PERTE -->
+
+                <section class="calculator-section">
+
+                    <h2>
+                        6. Lancer le calcul
+                    </h2>
+
+                    <button
+                        type="submit"
+                        class="calculate-main-button"
+                    >
+                        🧮 Calculer le plancher
+                    </button>
+
+                </section>
+
+
+            </form>
+
+
+            <!-- =====================================
+                 RESULTATS
+            ====================================== -->
+
+            <section id="slabResults">
+
+
+                <div class="results-header">
+
+                    <span class="welcome-label">
+                        RÉSULTATS
+                    </span>
+
+                    <h2>
+                        Métré estimatif du plancher
+                    </h2>
+
+                    <p id="resultType">
+                        Résultats de calcul
+                    </p>
+
+                </div>
+
+
+                <!-- GEOMETRIE -->
+
+                <h3 class="results-category">
+                    📐 Géométrie
+                </h3>
+
+                <div class="result-grid">
+
+
+                    <div class="result-card highlight">
+
+                        <h3>
+                            Surface
+                        </h3>
+
+                        <p id="slabAreaResult">
+                            0 m²
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-card">
+
+                        <h3>
+                            Volume béton
+                        </h3>
+
+                        <p id="slabVolumeResult">
+                            0 m³
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-card">
+
+                        <h3>
+                            Volume béton avec pertes
+                        </h3>
+
+                        <p id="slabVolumeLossResult">
+                            0 m³
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- BETON -->
+
+                <h3 class="results-category">
+                    🧱 Matériaux béton
+                </h3>
+
+                <div class="result-grid">
+
+
+                    <div class="result-card">
+
+                        <h3>
+                            Ciment
+                        </h3>
+
+                        <p id="slabCementResult">
+                            0 kg
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-card">
+
+                        <h3>
+                            Sacs de ciment
+                        </h3>
+
+                        <p id="slabBagsResult">
+                            0 sacs
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-card">
+
+                        <h3>
+                            Sable
+                        </h3>
+
+                        <p id="slabSandResult">
+                            0 m³
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-card">
+
+                        <h3>
+                            Gravier
+                        </h3>
+
+                        <p id="slabGravelResult">
+                            0 m³
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- HOURDIS -->
+
+                <div id="hourdisResults">
+
+
+                    <h3 class="results-category">
+                        🧱 Entrevous / Hourdis
+                    </h3>
+
+                    <div class="result-grid">
+
+
+                        <div class="result-card highlight">
+
+                            <h3>
+                                Nombre d'entrevous
+                            </h3>
+
+                            <p id="hourdisCountResult">
+                                0 unités
+                            </p>
+
+                        </div>
+
+
+                        <div class="result-card">
+
+                            <h3>
+                                Nombre de poutrelles
+                            </h3>
+
+                            <p id="beamCountResult">
+                                0 unités
+                            </p>
+
+                        </div>
+
+
+                        <div class="result-card">
+
+                            <h3>
+                                Entraxe
+                            </h3>
+
+                            <p id="beamSpacingResult">
+                                0 cm
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <h3 class="results-category">
+                        🏗️ Dalle de compression
+                    </h3>
+
+
+                    <div class="result-grid">
+
+
+                        <div class="result-card">
+
+                            <h3>
+                                Épaisseur compression
+                            </h3>
+
+                            <p id="compressionThicknessResult">
+                                0 cm
+                            </p>
+
+                        </div>
+
+
+                        <div class="result-card highlight">
+
+                            <h3>
+                                Volume compression
+                            </h3>
+
+                            <p id="compressionVolumeResult">
+                                0 m³
+                            </p>
+
+                        </div>
+
+
+                        <div class="result-card">
+
+                            <h3>
+                                Béton compression + pertes
+                            </h3>
+
+                            <p id="compressionVolumeLossResult">
+                                0 m³
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <h3 class="results-category">
+                        🔩 Estimation acier
+                    </h3>
+
+
+                    <div class="result-grid">
+
+
+                        <div class="result-card highlight">
+
+                            <h3>
+                                Acier estimatif
+                            </h3>
+
+                            <p id="steelResult">
+                                0 kg
+                            </p>
+
+                        </div>
+
+
+                        <div class="result-card">
+
+                            <h3>
+                                Treillis estimatif
+                            </h3>
+
+                            <p id="meshResult">
+                                0 panneaux
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="calculation-note">
+
+                    <strong>Note BATIFLOW :</strong>
+                    les résultats sont des estimations quantitatives destinées
+                    au métré et à la préparation d'un devis. Le calcul ne
+                    constitue pas un dimensionnement structurel et ne remplace
+                    pas une étude réalisée par un professionnel qualifié.
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =========================================
+       ELEMENTS
+    ========================================= */
+
+    const slabForm =
+        document.getElementById("slabForm");
+
+    const fullSlab =
+        document.getElementById("fullSlab");
+
+    const hourdisSlab =
+        document.getElementById("hourdisSlab");
+
+    const hourdisSection =
+        document.getElementById("hourdisSection");
+
+    const hourdisResults =
+        document.getElementById("hourdisResults");
+
+
+    /* =========================================
+       TYPE DE PLANCHER
+    ========================================= */
+
+    function updateFloorType() {
+
+        if (hourdisSlab.checked) {
+
+            hourdisSection.style.display = "block";
+            hourdisResults.style.display = "block";
+
+        } else {
+
+            hourdisSection.style.display = "none";
+            hourdisResults.style.display = "none";
+
+        }
+
+    }
+
+
+    fullSlab.addEventListener(
+        "change",
+        updateFloorType
+    );
+
+
+    hourdisSlab.addEventListener(
+        "change",
+        updateFloorType
+    );
+
+
+    updateFloorType();
+
+
+    /* =========================================
+       CALCUL PRINCIPAL
+    ========================================= */
+
+    slabForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            /* DIMENSIONS */
+
+            const length =
+                parseFloat(
+                    document.getElementById("slabLength").value
+                );
+
+            const width =
+                parseFloat(
+                    document.getElementById("slabWidth").value
+                );
+
+            const slabThickness =
+                parseFloat(
+                    document.getElementById("slabThickness").value
+                );
+
+            const compressionThickness =
+                parseFloat(
+                    document.getElementById("compressionThickness").value
+                );
+
+
+            /* BETON */
+
+            const dosage =
+                parseFloat(
+                    document.getElementById("slabDosage").value
+                );
+
+            const concreteLoss =
+                parseFloat(
+                    document.getElementById("concreteLoss").value
+                );
+
+            const sandRatio =
+                parseFloat(
+                    document.getElementById("sandRatio").value
+                );
+
+            const gravelRatio =
+                parseFloat(
+                    document.getElementById("gravelRatio").value
+                );
+
+
+            /* VALIDATION */
+
+            if (
+                !Number.isFinite(length) ||
+                !Number.isFinite(width) ||
+                length <= 0 ||
+                width <= 0
+            ) {
+
+                alert(
+                    "Veuillez entrer une longueur et une largeur valides."
+                );
+
+                return;
+
+            }
+
+
+            /* =====================================
+               SURFACE
+            ====================================== */
+
+            const area =
+                length * width;
+
+
+            let concreteVolume = 0;
+
+
+            /* =====================================
+               DALLE PLEINE
+            ====================================== */
+
+            if (fullSlab.checked) {
+
+                const thickness =
+                    slabThickness / 100;
+
+                concreteVolume =
+                    area * thickness;
+
+            }
+
+
+            /* =====================================
+               DALLE À ENTREVOU
+            ====================================== */
+
+            else {
+
+                const compression =
+                    compressionThickness / 100;
+
+                /*
+                 * Volume de la dalle de compression.
+                 *
+                 * Cette estimation considère la surface
+                 * totale multipliée par l'épaisseur
+                 * de compression.
+                 */
+
+                concreteVolume =
+                    area * compression;
+
+            }
+
+
+            const concreteVolumeLoss =
+                concreteVolume *
+                (1 + concreteLoss / 100);
+
+
+            /* =====================================
+               CIMENT
+            ====================================== */
+
+            const cementKg =
+                concreteVolumeLoss * dosage;
+
+
+            const cementBags =
+                Math.ceil(cementKg / 50);
+
+
+            /* =====================================
+               SABLE
+            ====================================== */
+
+            const sand =
+                concreteVolumeLoss * sandRatio;
+
+
+            /* =====================================
+               GRAVIER
+            ====================================== */
+
+            const gravel =
+                concreteVolumeLoss * gravelRatio;
+
+
+            /* =====================================
+               AFFICHAGE GENERAL
+            ====================================== */
+
+            document.getElementById(
+                "slabAreaResult"
+            ).textContent =
+                area.toFixed(2) + " m²";
+
+
+            document.getElementById(
+                "slabVolumeResult"
+            ).textContent =
+                concreteVolume.toFixed(2) + " m³";
+
+
+            document.getElementById(
+                "slabVolumeLossResult"
+            ).textContent =
+                concreteVolumeLoss.toFixed(2) + " m³";
+
+
+            document.getElementById(
+                "slabCementResult"
+            ).textContent =
+                cementKg.toFixed(1) + " kg";
+
+
+            document.getElementById(
+                "slabBagsResult"
+            ).textContent =
+                cementBags + " sacs";
+
+
+            document.getElementById(
+                "slabSandResult"
+            ).textContent =
+                sand.toFixed(2) + " m³";
+
+
+            document.getElementById(
+                "slabGravelResult"
+            ).textContent =
+                gravel.toFixed(2) + " m³";
+
+
+            /* =====================================
+               TITRE RESULTAT
+            ====================================== */
+
+            document.getElementById(
+                "resultType"
+            ).textContent =
+                fullSlab.checked
+                    ? "Dalle pleine"
+                    : "Plancher à entrevous / hourdis";
+
+
+            /* =====================================
+               CALCUL ENTREVOU
+            ====================================== */
+
+            if (hourdisSlab.checked) {
+
+
+                const hourdisLength =
+                    parseFloat(
+                        document.getElementById(
+                            "hourdisLength"
+                        ).value
+                    );
+
+
+                const hourdisWidth =
+                    parseFloat(
+                        document.getElementById(
+                            "hourdisWidth"
+                        ).value
+                    );
+
+
+                const beamWidth =
+                    parseFloat(
+                        document.getElementById(
+                            "beamWidth"
+                        ).value
+                    );
+
+
+                const beamSpacing =
+                    parseFloat(
+                        document.getElementById(
+                            "beamSpacing"
+                        ).value
+                    );
+
+
+                const hourdisLoss =
+                    parseFloat(
+                        document.getElementById(
+                            "hourdisLoss"
+                        ).value
+                    );
+
+
+                if (
+                    !Number.isFinite(hourdisLength) ||
+                    !Number.isFinite(hourdisWidth) ||
+                    !Number.isFinite(beamWidth) ||
+                    !Number.isFinite(beamSpacing) ||
+                    hourdisLength <= 0 ||
+                    hourdisWidth <= 0 ||
+                    beamWidth <= 0 ||
+                    beamSpacing <= 0
+                ) {
+
+                    alert(
+                        "Veuillez vérifier les dimensions des entrevous et des poutrelles."
+                    );
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   ENTREVOUX
+                ================================= */
+
+                const moduleLength =
+                    hourdisLength / 100;
+
+                const moduleWidth =
+                    beamSpacing / 100;
+
+
+                const hourdisPerModule =
+                    moduleLength *
+                    moduleWidth;
+
+
+                const theoreticalHourdis =
+                    area /
+                    hourdisPerModule;
+
+
+                const finalHourdis =
+                    Math.ceil(
+                        theoreticalHourdis *
+                        (1 + hourdisLoss / 100)
+                    );
+
+
+                /* =================================
+                   POUTRELLES
+                ================================= */
+
+                const beamSpacingM =
+                    beamSpacing / 100;
+
+
+                const beamCount =
+                    Math.ceil(
+                        width /
+                        beamSpacingM
+                    ) + 1;
+
+
+                /* =================================
+                   COMPRESSION
+                ================================= */
+
+                const compressionM =
+                    compressionThickness / 100;
+
+
+                const compressionVolume =
+                    area *
+                    compressionM;
+
+
+                const compressionVolumeLoss =
+                    compressionVolume *
+                    (1 + concreteLoss / 100);
+
+
+                /* =================================
+                   ACIER ESTIMATIF
+                ================================= */
+
+                const steelPerM2 =
+                    parseFloat(
+                        document.getElementById(
+                            "steelPerM2"
+                        ).value
+                    );
+
+
+                const meshWidth =
+                    parseFloat(
+                        document.getElementById(
+                            "meshWidth"
+                        ).value
+                    );
+
+
+                const steelKg =
+                    area *
+                    steelPerM2;
+
+
+                const meshPanels =
+                    Math.ceil(
+                        area /
+                        meshWidth
+                    );
+
+
+                /* =================================
+                   AFFICHAGE
+                ================================= */
+
+                document.getElementById(
+                    "hourdisCountResult"
+                ).textContent =
+                    finalHourdis +
+                    " unités";
+
+
+                document.getElementById(
+                    "beamCountResult"
+                ).textContent =
+                    beamCount +
+                    " unités";
+
+
+                document.getElementById(
+                    "beamSpacingResult"
+                ).textContent =
+                    beamSpacing +
+                    " cm";
+
+
+                document.getElementById(
+                    "compressionThicknessResult"
+                ).textContent =
+                    compressionThickness +
+                    " cm";
+
+
+                document.getElementById(
+                    "compressionVolumeResult"
+                ).textContent =
+                    compressionVolume.toFixed(2) +
+                    " m³";
+
+
+                document.getElementById(
+                    "compressionVolumeLossResult"
+                ).textContent =
+                    compressionVolumeLoss.toFixed(2) +
+                    " m³";
+
+
+                document.getElementById(
+                    "steelResult"
+                ).textContent =
+                    steelKg.toFixed(1) +
+                    " kg";
+
+
+                document.getElementById(
+                    "meshResult"
+                ).textContent =
+                    meshPanels +
+                    " panneaux";
+
+            }
+
+
+            /* =====================================
+               AFFICHER RESULTATS
+            ====================================== */
+
+            const results =
+                document.getElementById(
+                    "slabResults"
+                );
+
+
+            results.style.display =
+                "block";
+
+
+            results.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+    );
+
+
+    /* =========================================
+       DECONNEXION
+    ========================================= */
+
+    const logoutButton =
+        document.getElementById(
+            "logoutButton"
+        );
+
+
+    if (logoutButton) {
+
+        logoutButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                localStorage.removeItem(
+                    "batiflowLoggedIn"
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       MENU MOBILE
+    ========================================= */
+
+    const mobileMenu =
+        document.getElementById(
+            "mobileMenu"
+        );
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    if (
+        mobileMenu &&
+        sidebar
+    ) {
+
+        mobileMenu.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.toggle(
+                    "open"
+                );
+
+            }
+        );
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>
