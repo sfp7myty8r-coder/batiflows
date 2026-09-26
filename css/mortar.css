@@ -1,0 +1,108 @@
+```css
+/* =========================================
+   BATIFLOW - CALCULATEUR MORTIER
+   STYLE SPÉCIFIQUE
+   ========================================= */
+
+.mortar-page {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* En-tête */
+
+.mortar-intro {
+    margin-bottom: 25px;
+}
+
+.mortar-intro .welcome-label {
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+/* Zone calculateur */
+
+.mortar-calculator {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Bouton */
+
+.mortar-calculator .calculate-button {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Résultats */
+
+#mortarResults {
+    margin-top: 30px;
+}
+
+#mortarResults .results-title {
+    margin-bottom: 20px;
+}
+
+#mortarResults .results-title h2 {
+    margin-bottom: 5px;
+}
+
+#mortarResults .results-title p {
+    color: #777;
+}
+
+/* Cartes de résultats */
+
+#mortarResults .result-card {
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+#mortarResults .result-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Note technique */
+
+#mortarResults .calculator-note {
+    margin-top: 25px;
+    padding: 18px;
+    border-left: 4px solid #f28c28;
+    background: #fff8ef;
+    border-radius: 8px;
+}
+
+#mortarResults .calculator-note strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+#mortarResults .calculator-note p {
+    margin: 0;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .mortar-calculator {
+        padding: 20px;
+    }
+
+    .mortar-calculator .calculate-button {
+        max-width: 100%;
+    }
+
+    #mortarResults .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+```
