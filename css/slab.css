@@ -1,0 +1,184 @@
+```css
+/* =========================================
+   BATIFLOW
+   CALCULATEUR DALLE
+   STYLE PROFESSIONNEL
+========================================= */
+
+/* FORMULAIRE DALLE */
+#slabForm {
+    width: 100%;
+}
+
+/* GRILLE DU FORMULAIRE */
+#slabForm .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* GROUPES */
+#slabForm .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* LABELS */
+#slabForm .form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* CHAMPS */
+#slabForm input,
+#slabForm select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1f2937;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+/* FOCUS */
+#slabForm input:focus,
+#slabForm select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+/* BOUTON CALCUL */
+#slabForm .calculate-button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#slabForm .calculate-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+/* NOTE */
+#slabForm .calculator-note {
+    margin-top: 20px;
+    padding: 14px 16px;
+    border-left: 4px solid #2563eb;
+    border-radius: 6px;
+    background: #f3f6fb;
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* =========================================
+   RESULTATS
+========================================= */
+
+#slabResults {
+    margin-top: 30px;
+}
+
+#slabResults .results-title {
+    margin-bottom: 20px;
+    color: #111827;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* GRILLE RESULTATS */
+#slabResults .result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+/* CARTE RESULTAT */
+#slabResults .result-card {
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* TITRE RESULTAT */
+#slabResults .result-card h3 {
+    margin: 0 0 8px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* VALEUR */
+#slabResults .result-card p {
+    margin: 0;
+    color: #111827;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+/* RESULTAT IMPORTANT */
+#slabResults .result-card.highlight {
+    border-color: #2563eb;
+    background: #f8fbff;
+}
+
+/* =========================================
+   RESPONSIVE TABLETTE
+========================================= */
+
+@media (max-width: 768px) {
+
+    #slabForm .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #slabResults .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #slabResults .results-title {
+        font-size: 20px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    #slabForm input,
+    #slabForm select {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    #slabForm .calculate-button {
+        padding: 13px;
+        font-size: 15px;
+    }
+
+    #slabResults .result-card {
+        padding: 15px;
+    }
+
+    #slabResults .result-card p {
+        font-size: 19px;
+    }
+}
+```
