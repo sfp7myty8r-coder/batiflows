@@ -1,567 +1,498 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tableau de bord — BATIFLOW</title>
 
-    <meta charset="UTF-8">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<!-- STYLE DE SECOURS DU TABLEAU DE BORD
+     Garantit l'affichage même si dashboard.css est incomplet. -->
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body.dashboard-body{
+    min-height:100vh;
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#172033;
+}
+.dashboard-body .sidebar{
+    position:fixed;
+    top:0;left:0;bottom:0;
+    width:260px;
+    background:#101827;
+    color:#fff;
+    z-index:1000;
+    display:flex;
+    flex-direction:column;
+    overflow-y:auto;
+}
+.sidebar-logo{
+    height:78px;
+    display:flex;
+    align-items:center;
+    padding:0 24px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+.sidebar-logo .logo{
+    color:#fff;
+    text-decoration:none;
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+.sidebar-logo .logo span{color:#f59e0b}
+.sidebar-nav{padding:20px 14px;flex:1}
+.nav-title{
+    margin:18px 10px 8px;
+    font-size:11px;
+    font-weight:800;
+    color:#7f8ba3;
+    letter-spacing:1.2px;
+}
+.nav-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-height:44px;
+    padding:10px 13px;
+    margin:4px 0;
+    border-radius:10px;
+    color:#cbd5e1;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+.nav-link span{width:22px;text-align:center;flex:none}
+.nav-link:hover{background:#1c2738;color:#fff}
+.nav-link.active{
+    background:#f59e0b;
+    color:#111827;
+    font-weight:700;
+}
+.nav-link.logout:hover{background:#7f1d1d;color:#fff}
+.sidebar-footer{
+    padding:16px 24px;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#718096;
+}
+.dashboard-main{
+    min-height:100vh;
+    margin-left:260px;
+}
+.dashboard-header{
+    height:78px;
+    position:sticky;
+    top:0;
+    z-index:900;
+    background:#fff;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:0 30px;
+}
+.mobile-menu{
+    display:none;
+    border:0;
+    background:transparent;
+    font-size:25px;
+    cursor:pointer;
+}
+.header-search{
+    width:min(520px,55%);
+    height:42px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 14px;
+    background:#f3f4f6;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+}
+.header-search input{
+    width:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    font-size:14px;
+}
+.header-user{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.notification{
+    width:40px;height:40px;
+    display:grid;place-items:center;
+    border-radius:50%;
+    background:#f3f4f6;
+}
+.user-avatar{
+    width:40px;height:40px;
+    display:grid;place-items:center;
+    border-radius:50%;
+    background:#f59e0b;
+}
+.user-info{display:flex;flex-direction:column;gap:2px}
+.user-info strong{font-size:14px}
+.user-info small{font-size:11px;color:#6b7280}
+.dashboard-content{
+    max-width:1500px;
+    margin:0 auto;
+    padding:32px;
+}
+.welcome-section{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:28px;
+}
+.welcome-label{
+    display:block;
+    margin-bottom:7px;
+    color:#f59e0b;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.2px;
+}
+.welcome-section h1{
+    margin:0 0 7px;
+    font-size:30px;
+    line-height:1.2;
+}
+.welcome-section p{
+    margin:0;
+    color:#6b7280;
+}
+.primary-action,.secondary-action{
+    border:0;
+    border-radius:9px;
+    padding:12px 18px;
+    font-weight:700;
+    cursor:pointer;
+}
+.primary-action{
+    background:#f59e0b;
+    color:#111827;
+}
+.secondary-action{
+    background:#111827;
+    color:#fff;
+}
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:18px;
+    margin-bottom:24px;
+}
+.stat-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    box-shadow:0 4px 18px rgba(15,23,42,.05);
+}
+.stat-icon{
+    width:52px;height:52px;
+    display:grid;place-items:center;
+    border-radius:12px;
+    background:#fff7e6;
+    font-size:24px;
+}
+.stat-card>div:last-child{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+}
+.stat-card span{font-size:13px;color:#6b7280}
+.stat-card strong{font-size:25px}
+.stat-card small{font-size:11px;color:#9ca3af}
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.5fr) minmax(320px,1fr);
+    gap:20px;
+    margin-bottom:20px;
+}
+.dashboard-panel{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 4px 18px rgba(15,23,42,.05);
+}
+.panel-header{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:20px;
+}
+.panel-header span{
+    display:block;
+    color:#f59e0b;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1px;
+    margin-bottom:5px;
+}
+.panel-header h2{
+    margin:0;
+    font-size:20px;
+}
+.panel-header a{
+    color:#d97706;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+}
+.empty-state{
+    min-height:230px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    color:#6b7280;
+}
+.empty-state.small{min-height:140px}
+.empty-icon{
+    width:58px;height:58px;
+    display:grid;place-items:center;
+    border-radius:50%;
+    background:#f3f4f6;
+    font-size:27px;
+    margin-bottom:12px;
+}
+.empty-state h3{margin:0 0 7px;color:#1f2937}
+.empty-state p{margin:0 0 16px}
+.quick-actions{
+    display:grid;
+    gap:10px;
+}
+.quick-action{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:14px;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    text-decoration:none;
+    color:#172033;
+    transition:.2s;
+}
+.quick-action:hover{
+    border-color:#f59e0b;
+    background:#fffaf0;
+    transform:translateY(-1px);
+}
+.quick-action>span{
+    width:42px;height:42px;
+    display:grid;place-items:center;
+    border-radius:9px;
+    background:#f3f4f6;
+    font-size:20px;
+}
+.quick-action div{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+}
+.quick-action small{color:#6b7280}
+.activity-panel{margin-bottom:20px}
 
-    <title>Tableau de bord — BATIFLOW</title>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-
+@media(max-width:1100px){
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:800px){
+    .dashboard-body .sidebar{
+        transform:translateX(-100%);
+        transition:.25s;
+    }
+    .dashboard-body .sidebar.open{transform:translateX(0)}
+    .dashboard-main{margin-left:0}
+    .mobile-menu{display:block}
+    .dashboard-header{padding:0 18px}
+    .header-search{width:auto;flex:1}
+    .user-info{display:none}
+    .dashboard-content{padding:22px 18px}
+    .dashboard-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+    .stats-grid{grid-template-columns:1fr}
+    .welcome-section{align-items:flex-start;flex-direction:column}
+    .welcome-section h1{font-size:25px}
+    .dashboard-content{padding:18px 14px}
+    .header-search input{min-width:0}
+}
+</style>
 </head>
-
 
 <body class="dashboard-body">
 
-
-<!-- =========================
-     SIDEBAR
-========================= -->
-
 <aside class="sidebar" id="sidebar">
-
     <div class="sidebar-logo">
-
-        <a href="dashboard.html" class="logo">
-            BATI<span>FLOW</span>
-        </a>
-
+        <a href="dashboard.html" class="logo">BATI<span>FLOW</span></a>
     </div>
-
 
     <nav class="sidebar-nav">
+        <p class="nav-title">PRINCIPAL</p>
 
-        <p class="nav-title">
-            PRINCIPAL
-        </p>
+        <a href="dashboard.html" class="nav-link active"><span>📊</span>Tableau de bord</a>
+        <a href="#" class="nav-link"><span>🏗️</span>Chantiers</a>
+        <a href="#" class="nav-link"><span>📋</span>DQE &amp; Métré</a>
+        <a href="#" class="nav-link"><span>💰</span>Devis</a>
+        <a href="calculator.html" class="nav-link"><span>🧮</span>Calculateur BTP</a>
+        <a href="mortar.html" class="nav-link"><span>🪣</span>Calculateur Mortier</a>
+        <a href="masonry.html" class="nav-link"><span>🧱</span>Calculateur Maçonnerie</a>
+        <a href="slab.html" class="nav-link"><span>🏠</span>Calculateur Dalle</a>
 
-        <a href="dashboard.html" class="nav-link active">
-            <span>📊</span>
-            Tableau de bord
-        </a>
+        <p class="nav-title">GESTION</p>
+        <a href="#" class="nav-link"><span>👷</span>Clients</a>
+        <a href="#" class="nav-link"><span>📦</span>Matériaux</a>
+        <a href="#" class="nav-link"><span>📄</span>Documents</a>
 
-        <a href="#" class="nav-link">
-            <span>🏗️</span>
-            Chantiers
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>📋</span>
-            DQE & Métré
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>💰</span>
-            Devis
-        </a>
-
-      <a href="calculator.html" class="nav-link">
-    <span>🧮</span>
-    Calculateur BTP
-</a>
-
-<a href="mortar.html" class="nav-link">
-    <span>🪣</span>
-    Calculateur Mortier
-</a>
-
-<a href="masonry.html" class="nav-link">
-    <span>🧱</span>
-    Calculateur Maçonnerie
-</a>
-
-<a href="./slab.html"
-   class="nav-link">
-
-    <span>🏠</span>
-    Calculateur Dalle
-
-</a>
-
-       
-
-        <p class="nav-title">
-            GESTION
-        </p>
-
-        <a href="#" class="nav-link">
-            <span>👷</span>
-            Clients
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>📦</span>
-            Matériaux
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>📄</span>
-            Documents
-        </a>
-
-
-        <p class="nav-title">
-            SYSTÈME
-        </p>
-
-        <a href="#" class="nav-link">
-            <span>⚙️</span>
-            Paramètres
-        </a>
-
-        <a href="#" class="nav-link logout" id="logoutButton">
-            <span>🚪</span>
-            Déconnexion
-        </a>
-
+        <p class="nav-title">SYSTÈME</p>
+        <a href="#" class="nav-link"><span>⚙️</span>Paramètres</a>
+        <a href="login.html" class="nav-link logout" id="logoutButton"><span>🚪</span>Déconnexion</a>
     </nav>
 
-
-    <div class="sidebar-footer">
-
-        <small>
-            BATIFLOW V1.0
-        </small>
-
-    </div>
-
+    <div class="sidebar-footer"><small>BATIFLOW V1.0</small></div>
 </aside>
 
-
-
-<!-- =========================
-     MAIN
-========================= -->
-
 <div class="dashboard-main">
-
-
-    <!-- HEADER -->
-
     <header class="dashboard-header">
-
-        <button
-            class="mobile-menu"
-            id="mobileMenu"
-        >
-            ☰
-        </button>
-
+        <button class="mobile-menu" id="mobileMenu">☰</button>
 
         <div class="header-search">
-
             <span>🔍</span>
-
-            <input
-                type="text"
-                placeholder="Rechercher..."
-            >
-
+            <input type="text" placeholder="Rechercher...">
         </div>
-
 
         <div class="header-user">
-
-            <div class="notification">
-                🔔
-            </div>
-
-            <div class="user-avatar">
-                👤
-            </div>
-
+            <div class="notification">🔔</div>
+            <div class="user-avatar">👤</div>
             <div class="user-info">
-
-                <strong id="userName">
-                    Utilisateur
-                </strong>
-
-                <small>
-                    Professionnel BTP
-                </small>
-
+                <strong id="userName">Utilisateur</strong>
+                <small>Professionnel BTP</small>
             </div>
-
         </div>
-
     </header>
 
-
-
-    <!-- CONTENU -->
-
     <main class="dashboard-content">
-
-
-        <!-- BIENVENUE -->
-
         <section class="welcome-section">
-
             <div>
-
-                <span class="welcome-label">
-                    TABLEAU DE BORD
-                </span>
-
-                <h1>
-                    Bonjour <span id="welcomeName">
-                        👋
-                    </span>
-                </h1>
-
-                <p>
-                    Voici un aperçu de votre activité BTP.
-                </p>
-
+                <span class="welcome-label">TABLEAU DE BORD</span>
+                <h1>Bonjour <span id="welcomeName">👋</span></h1>
+                <p>Voici un aperçu de votre activité BTP.</p>
             </div>
-
-
-            <button class="primary-action">
-
-                + Nouveau chantier
-
-            </button>
-
+            <button class="primary-action">+ Nouveau chantier</button>
         </section>
-
-
-
-        <!-- STATISTIQUES -->
 
         <section class="stats-grid">
-
-
             <div class="stat-card">
-
-                <div class="stat-icon">
-                    🏗️
-                </div>
-
-                <div>
-
-                    <span>
-                        Chantiers actifs
-                    </span>
-
-                    <strong>
-                        0
-                    </strong>
-
-                    <small>
-                        Aucun chantier
-                    </small>
-
-                </div>
-
+                <div class="stat-icon">🏗️</div>
+                <div><span>Chantiers actifs</span><strong>0</strong><small>Aucun chantier</small></div>
             </div>
-
-
-
             <div class="stat-card">
-
-                <div class="stat-icon">
-                    💰
-                </div>
-
-                <div>
-
-                    <span>
-                        Devis
-                    </span>
-
-                    <strong>
-                        0
-                    </strong>
-
-                    <small>
-                        Ce mois
-                    </small>
-
-                </div>
-
+                <div class="stat-icon">💰</div>
+                <div><span>Devis</span><strong>0</strong><small>Ce mois</small></div>
             </div>
-
-
-
             <div class="stat-card">
-
-                <div class="stat-icon">
-                    👷
-                </div>
-
-                <div>
-
-                    <span>
-                        Clients
-                    </span>
-
-                    <strong>
-                        0
-                    </strong>
-
-                    <small>
-                        Total
-                    </small>
-
-                </div>
-
+                <div class="stat-icon">👷</div>
+                <div><span>Clients</span><strong>0</strong><small>Total</small></div>
             </div>
-
-
-
             <div class="stat-card">
-
-                <div class="stat-icon">
-                    📋
-                </div>
-
-                <div>
-
-                    <span>
-                        DQE
-                    </span>
-
-                    <strong>
-                        0
-                    </strong>
-
-                    <small>
-                        Documents
-                    </small>
-
-                </div>
-
+                <div class="stat-icon">📋</div>
+                <div><span>DQE</span><strong>0</strong><small>Documents</small></div>
             </div>
-
         </section>
-
-
-
-        <!-- ZONE PRINCIPALE -->
 
         <section class="dashboard-grid">
-
-
-            <!-- CHANTIERS -->
-
             <div class="dashboard-panel">
-
                 <div class="panel-header">
-
-                    <div>
-
-                        <span>
-                            PROJETS
-                        </span>
-
-                        <h2>
-                            Chantiers récents
-                        </h2>
-
-                    </div>
-
-                    <a href="#">
-                        Voir tout →
-                    </a>
-
+                    <div><span>PROJETS</span><h2>Chantiers récents</h2></div>
+                    <a href="#">Voir tout →</a>
                 </div>
-
-
                 <div class="empty-state">
-
-                    <div class="empty-icon">
-                        🏗️
-                    </div>
-
-                    <h3>
-                        Aucun chantier
-                    </h3>
-
-                    <p>
-                        Commencez par créer votre premier chantier.
-                    </p>
-
-                    <button class="secondary-action">
-                        + Créer un chantier
-                    </button>
-
+                    <div class="empty-icon">🏗️</div>
+                    <h3>Aucun chantier</h3>
+                    <p>Commencez par créer votre premier chantier.</p>
+                    <button class="secondary-action">+ Créer un chantier</button>
                 </div>
-
             </div>
 
-
-
-            <!-- ACTIONS RAPIDES -->
-
             <div class="dashboard-panel">
-
                 <div class="panel-header">
-
-                    <div>
-
-                        <span>
-                            OUTILS
-                        </span>
-
-                        <h2>
-                            Actions rapides
-                        </h2>
-
-                    </div>
-
+                    <div><span>OUTILS</span><h2>Actions rapides</h2></div>
                 </div>
-
 
                 <div class="quick-actions">
-
-
-<a href="calculator.html" class="quick-action">
-
-    <span>
-        🧮
-    </span>
-
-    <div>
-
-        <strong>
-            Calculateur
-        </strong>
-
-        <small>
-            Effectuer un calcul BTP
-        </small>
-
-    </div>
-
-</a>
-
-
-
-
-                    <a href="#" class="quick-action">
-
-                        <span>
-                            📋
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                Nouveau DQE
-                            </strong>
-
-                            <small>
-                                Créer un bordereau
-                            </small>
-
-                        </div>
-
+                    <a href="calculator.html" class="quick-action">
+                        <span>🧮</span>
+                        <div><strong>Calculateur</strong><small>Effectuer un calcul BTP</small></div>
                     </a>
-
-
-
                     <a href="#" class="quick-action">
-
-                        <span>
-                            💰
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                Nouveau devis
-                            </strong>
-
-                            <small>
-                                Préparer un devis
-                            </small>
-
-                        </div>
-
+                        <span>📋</span>
+                        <div><strong>Nouveau DQE</strong><small>Créer un bordereau</small></div>
                     </a>
-
-
-
                     <a href="#" class="quick-action">
-
-                        <span>
-                            👷
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                Ajouter un client
-                            </strong>
-
-                            <small>
-                                Enregistrer un client
-                            </small>
-
-                        </div>
-
+                        <span>💰</span>
+                        <div><strong>Nouveau devis</strong><small>Préparer un devis</small></div>
                     </a>
-
-
+                    <a href="#" class="quick-action">
+                        <span>👷</span>
+                        <div><strong>Ajouter un client</strong><small>Enregistrer un client</small></div>
+                    </a>
                 </div>
-
             </div>
-
         </section>
-
-
-
-        <!-- ACTIVITÉ -->
 
         <section class="dashboard-panel activity-panel">
-
             <div class="panel-header">
-
-                <div>
-
-                    <span>
-                        ACTIVITÉ
-                    </span>
-
-                    <h2>
-                        Activité récente
-                    </h2>
-
-                </div>
-
+                <div><span>ACTIVITÉ</span><h2>Activité récente</h2></div>
             </div>
-
-
             <div class="empty-state small">
-
-                <div class="empty-icon">
-                    📈
-                </div>
-
-                <p>
-                    Votre activité apparaîtra ici.
-                </p>
-
+                <div class="empty-icon">📈</div>
+                <p>Votre activité apparaîtra ici.</p>
             </div>
-
         </section>
-
-
     </main>
-
 </div>
 
-
-
 <script src="js/dashboard.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menu = document.getElementById("mobileMenu");
+    const sidebar = document.getElementById("sidebar");
+
+    if (menu && sidebar) {
+        menu.addEventListener("click", function () {
+            sidebar.classList.toggle("open");
+        });
+    }
+
+    const userName = localStorage.getItem("userName");
+    const nameElements = [
+        document.getElementById("userName"),
+        document.getElementById("welcomeName")
+    ];
+
+    if (userName) {
+        if (nameElements[0]) nameElements[0].textContent = userName;
+        if (nameElements[1]) nameElements[1].textContent = userName + " 👋";
+    }
+});
+</script>
 
 </body>
-
 </html>
