@@ -1,10 +1,8 @@
-```javascript
 // =========================================
 // BATIFLOW - CALCULATEUR BTP
 // =========================================
 
-
-// Vérification de connexion
+// Vérifier que l'utilisateur est connecté
 const loggedIn = localStorage.getItem("batiflowLoggedIn");
 
 if (loggedIn !== "true") {
@@ -12,41 +10,30 @@ if (loggedIn !== "true") {
 }
 
 
-// Récupération du formulaire
+// =========================================
+// ÉLÉMENTS DE LA PAGE
+// =========================================
+
 const concreteForm = document.getElementById("concreteForm");
-
-
-// Récupération des éléments de résultat
 const results = document.getElementById("results");
 
 const volumeResult = document.getElementById("volumeResult");
-
 const volumeLossResult = document.getElementById("volumeLossResult");
-
 const cementResult = document.getElementById("cementResult");
-
 const bagsResult = document.getElementById("bagsResult");
 
 
-// Fonction pour arrondir
-function roundNumber(number, decimals = 2) {
+// =========================================
+// CALCUL DU BÉTON
+// =========================================
 
-    return Number(
-        number.toFixed(decimals)
-    );
-
-}
-
-
-// Calculateur béton
 if (concreteForm) {
 
     concreteForm.addEventListener("submit", function(event) {
 
         event.preventDefault();
 
-
-        // Récupération des valeurs
+        // Récupérer les valeurs
         const length = parseFloat(
             document.getElementById("length").value
         );
@@ -63,48 +50,53 @@ if (concreteForm) {
             document.getElementById("dosage").value
         );
 
+        const lossCheckbox =
+            document.getElementById("loss");
 
-        // Vérification
+
+        // Vérifier les valeurs
         if (
             isNaN(length) ||
             isNaN(width) ||
             isNaN(height) ||
-            isNaN(dosage) ||
+            isNaN(dosage)
+        ) {
+
+            alert("Veuillez remplir tous les champs.");
+
+            return;
+        }
+
+
+        if (
             length <= 0 ||
             width <= 0 ||
             height <= 0
         ) {
 
             alert(
-                "Veuillez entrer des dimensions valides."
+                "Les dimensions doivent être supérieures à 0."
             );
 
             return;
-
         }
 
 
         // =====================================
-        // 1. VOLUME THÉORIQUE
+        // VOLUME
         // =====================================
 
         const volume =
-            length *
-            width *
-            height;
+            length * width * height;
 
 
         // =====================================
-        // 2. MARGE DE PERTE
+        // PERTE
         // =====================================
-
-        const lossCheckbox =
-            document.getElementById("loss");
 
         let volumeWithLoss = volume;
 
-
-        if (lossCheckbox.checked) {
+        if (lossCheckbox && lossCheckbox.checked) {
 
             volumeWithLoss =
                 volume * 1.05;
@@ -113,7 +105,7 @@ if (concreteForm) {
 
 
         // =====================================
-        // 3. CIMENT
+        // CIMENT
         // =====================================
 
         const cementKg =
@@ -121,42 +113,46 @@ if (concreteForm) {
 
 
         // =====================================
-        // 4. NOMBRE DE SACS
+        // SACS
         // =====================================
 
         const cementBags =
-            cementKg / 50;
+            Math.ceil(cementKg / 50);
 
 
         // =====================================
-        // AFFICHAGE
+        // AFFICHER LES RÉSULTATS
         // =====================================
 
         volumeResult.textContent =
-            roundNumber(volume, 2) + " m³";
+            volume.toFixed(2) + " m³";
 
 
         volumeLossResult.textContent =
-            roundNumber(volumeWithLoss, 2) + " m³";
+            volumeWithLoss.toFixed(2) + " m³";
 
 
         cementResult.textContent =
-            roundNumber(cementKg, 1) + " kg";
+            cementKg.toFixed(1) + " kg";
 
 
         bagsResult.textContent =
-            Math.ceil(cementBags) + " sacs";
+            cementBags + " sacs";
 
 
-        // Afficher les résultats
+        // Afficher la zone résultats
         results.style.display = "block";
 
 
         // Faire défiler vers les résultats
-        results.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+        setTimeout(function() {
+
+            results.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }, 100);
 
     });
 
@@ -169,7 +165,6 @@ if (concreteForm) {
 
 const logoutButton =
     document.getElementById("logoutButton");
-
 
 if (logoutButton) {
 
@@ -200,8 +195,7 @@ const mobileMenu =
     document.getElementById("mobileMenu");
 
 const sidebar =
-    document.querySelector(".sidebar");
-
+    document.getElementById("sidebar");
 
 if (mobileMenu && sidebar) {
 
@@ -215,4 +209,3 @@ if (mobileMenu && sidebar) {
     );
 
 }
-```
