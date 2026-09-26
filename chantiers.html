@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 ```
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Chantiers - BATIFLOW</title>
 
 <link rel="stylesheet" href="css/style.css">
@@ -25,81 +28,99 @@
 
 ```
 <div class="sidebar-logo">
+
     <a href="dashboard.html" class="logo">
         BATI<span>FLOW</span>
     </a>
+
 </div>
+
 
 <nav class="sidebar-nav">
 
     <p class="nav-title">PRINCIPAL</p>
+
 
     <a href="dashboard.html" class="nav-link">
         <span>📊</span>
         Tableau de bord
     </a>
 
+
     <a href="chantiers.html" class="nav-link active">
         <span>🏗️</span>
         Chantiers
     </a>
+
 
     <a href="#" class="nav-link">
         <span>📋</span>
         DQE & Métré
     </a>
 
+
     <a href="#" class="nav-link">
         <span>💰</span>
         Devis
     </a>
+
 
     <a href="calculator.html" class="nav-link">
         <span>🧮</span>
         Calculateur BTP
     </a>
 
+
     <a href="mortar.html" class="nav-link">
         <span>🪣</span>
         Calculateur Mortier
     </a>
+
 
     <a href="masonry.html" class="nav-link">
         <span>🧱</span>
         Calculateur Maçonnerie
     </a>
 
+
     <a href="slab.html" class="nav-link">
         <span>🏠</span>
         Calculateur Dalle
     </a>
+
 
     <a href="foundation.html" class="nav-link">
         <span>🏗️</span>
         Calculateur Fondations
     </a>
 
+
     <p class="nav-title">GESTION</p>
+
 
     <a href="#" class="nav-link">
         <span>👥</span>
         Clients
     </a>
 
+
     <a href="#" class="nav-link">
         <span>📦</span>
         Matériaux
     </a>
+
 
     <a href="#" class="nav-link">
         <span>📁</span>
         Documents
     </a>
 
+
     <a href="#" class="nav-link">
         <span>⚙️</span>
         Paramètres
     </a>
+
 
     <a href="#" class="nav-link" id="logoutButton">
         <span>🚪</span>
@@ -122,27 +143,51 @@
 
 <header class="dashboard-header">
 
-    <button class="mobile-menu" id="mobileMenu">
+
+    <button
+        class="mobile-menu"
+        id="mobileMenu"
+        type="button"
+    >
         ☰
     </button>
 
+
     <div class="header-title">
+
         <h1>Mes chantiers</h1>
-        <p>Suivez et gérez vos projets de construction.</p>
+
+        <p>
+            Suivez et gérez vos projets de construction.
+        </p>
+
     </div>
 
+
     <div class="header-user">
+
         <div class="user-avatar">
             👤
         </div>
 
+
         <div>
-            <strong id="userName">Utilisateur</strong>
-            <small>Compte BATIFLOW</small>
+
+            <strong id="userName">
+                Utilisateur
+            </strong>
+
+            <small>
+                Compte BATIFLOW
+            </small>
+
         </div>
+
     </div>
 
+
 </header>
+
 
 
 <!-- ==============================
@@ -151,84 +196,171 @@
 
 <section class="stats-grid">
 
-    <div class="stat-card">
-        <div class="stat-icon">🏗️</div>
-        <div>
-            <span>Total chantiers</span>
-            <strong id="totalChantiers">0</strong>
-        </div>
-    </div>
 
     <div class="stat-card">
-        <div class="stat-icon">🔨</div>
-        <div>
-            <span>En cours</span>
-            <strong id="chantiersEnCours">0</strong>
+
+        <div class="stat-icon">
+            🏗️
         </div>
+
+        <div>
+
+            <span>
+                Total chantiers
+            </span>
+
+            <strong id="totalChantiers">
+                0
+            </strong>
+
+        </div>
+
     </div>
 
-    <div class="stat-card">
-        <div class="stat-icon">⏸️</div>
-        <div>
-            <span>En pause</span>
-            <strong id="chantiersPause">0</strong>
-        </div>
-    </div>
 
     <div class="stat-card">
-        <div class="stat-icon">✅</div>
-        <div>
-            <span>Terminés</span>
-            <strong id="chantiersTermines">0</strong>
+
+        <div class="stat-icon">
+            🔨
         </div>
+
+        <div>
+
+            <span>
+                En cours
+            </span>
+
+            <strong id="chantiersEnCours">
+                0
+            </strong>
+
+        </div>
+
     </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            ⏸️
+        </div>
+
+        <div>
+
+            <span>
+                En pause
+            </span>
+
+            <strong id="chantiersPause">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            ✅
+        </div>
+
+        <div>
+
+            <span>
+                Terminés
+            </span>
+
+            <strong id="chantiersTermines">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
 
 </section>
 
 
+
 <!-- ==============================
-     BARRE D'ACTIONS
+     ACTIONS
 =============================== -->
 
 <section class="page-actions">
 
+
     <div>
-        <h2>Liste des chantiers</h2>
-        <p>Ajoutez et suivez vos projets BTP.</p>
+
+        <h2>
+            Liste des chantiers
+        </h2>
+
+        <p>
+            Ajoutez et suivez vos projets BTP.
+        </p>
+
     </div>
 
-    <button class="primary-button" id="addChantierButton">
+
+    <button
+        class="primary-button"
+        id="addChantierButton"
+        type="button"
+    >
         ＋ Nouveau chantier
     </button>
+
 
 </section>
 
 
+
 <!-- ==============================
-     LISTE DES CHANTIERS
+     LISTE
 =============================== -->
 
 <section class="chantiers-container">
 
-    <div id="emptyState" class="empty-state">
+
+    <div
+        id="emptyState"
+        class="empty-state"
+    >
 
         <div class="empty-icon">
             🏗️
         </div>
 
-        <h3>Aucun chantier pour le moment</h3>
+
+        <h3>
+            Aucun chantier pour le moment
+        </h3>
+
 
         <p>
             Commencez par ajouter votre premier chantier.
         </p>
 
-        <button class="primary-button" id="emptyAddButton">
+
+        <button
+            class="primary-button"
+            id="emptyAddButton"
+            type="button"
+        >
             ＋ Ajouter un chantier
         </button>
 
     </div>
 
-    <div id="chantiersList" class="chantiers-list"></div>
+
+    <div
+        id="chantiersList"
+        class="chantiers-list"
+    ></div>
+
 
 </section>
 ```
@@ -236,31 +368,54 @@
 </main>
 
 <!-- ==============================
-     MODALE NOUVEAU CHANTIER
+     MODALE
 ================================ -->
 
-<div class="modal" id="chantierModal">
+<div
+    class="modal"
+    id="chantierModal"
+>
 
 ```
 <div class="modal-content">
 
+
     <div class="modal-header">
 
+
         <div>
-            <h2>Nouveau chantier</h2>
-            <p>Enregistrez les informations de votre projet.</p>
+
+            <h2>
+                Nouveau chantier
+            </h2>
+
+            <p>
+                Enregistrez les informations de votre projet.
+            </p>
+
         </div>
 
-        <button class="modal-close" id="closeModal">
+
+        <button
+            class="modal-close"
+            id="closeModal"
+            type="button"
+        >
             ×
         </button>
+
 
     </div>
 
 
+
+    <!-- FORMULAIRE -->
+
     <form id="chantierForm">
 
+
         <div class="form-grid">
+
 
             <div class="form-group full-width">
 
@@ -276,6 +431,7 @@
                 >
 
             </div>
+
 
 
             <div class="form-group">
@@ -294,6 +450,7 @@
             </div>
 
 
+
             <div class="form-group">
 
                 <label for="chantierLocalisation">
@@ -308,6 +465,7 @@
                 >
 
             </div>
+
 
 
             <div class="form-group">
@@ -325,6 +483,7 @@
             </div>
 
 
+
             <div class="form-group">
 
                 <label for="dateFin">
@@ -338,6 +497,7 @@
                 >
 
             </div>
+
 
 
             <div class="form-group">
@@ -357,6 +517,7 @@
             </div>
 
 
+
             <div class="form-group">
 
                 <label for="chantierDepense">
@@ -371,6 +532,7 @@
                 >
 
             </div>
+
 
 
             <div class="form-group">
@@ -389,6 +551,7 @@
                 >
 
             </div>
+
 
 
             <div class="form-group">
@@ -420,6 +583,7 @@
             </div>
 
 
+
             <div class="form-group full-width">
 
                 <label for="chantierNotes">
@@ -434,10 +598,13 @@
 
             </div>
 
+
         </div>
 
 
+
         <div class="modal-actions">
+
 
             <button
                 type="button"
@@ -447,6 +614,7 @@
                 Annuler
             </button>
 
+
             <button
                 type="submit"
                 class="primary-button"
@@ -454,67 +622,1024 @@
                 Enregistrer le chantier
             </button>
 
+
         </div>
 
+
     </form>
+
 
 </div>
 ```
 
 </div>
 
+<!-- ==============================
+     JAVASCRIPT
+     DIRECTEMENT DANS LA PAGE
+================================ -->
+
 <script>
 
-    /* ==============================
-       PROTECTION CONNEXION
-    =============================== */
+document.addEventListener("DOMContentLoaded", function () {
 
-  <script>
-    const loggedIn = localStorage.getItem("batiflowLoggedIn");
 
-    if (loggedIn !== "true") {
-        window.location.href = "login.html";
-    }
+    /* ============================
+       UTILISATEUR
+    ============================ */
 
-    const savedUser = localStorage.getItem("batiflowUser");
+    const savedUser =
+        localStorage.getItem("batiflowUser");
+
 
     if (savedUser) {
-        try {
-            const user = JSON.parse(savedUser);
 
-            const userName = document.getElementById("userName");
+        try {
+
+            const user =
+                JSON.parse(savedUser);
+
+            const userName =
+                document.getElementById("userName");
 
             if (userName) {
-                userName.textContent = user.name;
+
+                userName.textContent =
+                    user.name || "Utilisateur";
+
             }
+
         } catch (error) {
-            console.log("Erreur utilisateur");
+
+            console.log(
+                "Erreur utilisateur"
+            );
+
         }
+
     }
 
-    const mobileMenu = document.getElementById("mobileMenu");
-    const sidebar = document.getElementById("sidebar");
 
-    if (mobileMenu && sidebar) {
-        mobileMenu.addEventListener("click", function () {
-            sidebar.classList.toggle("open");
-        });
+
+    /* ============================
+       ÉLÉMENTS
+    ============================ */
+
+    const modal =
+        document.getElementById(
+            "chantierModal"
+        );
+
+
+    const form =
+        document.getElementById(
+            "chantierForm"
+        );
+
+
+    const addButton =
+        document.getElementById(
+            "addChantierButton"
+        );
+
+
+    const emptyButton =
+        document.getElementById(
+            "emptyAddButton"
+        );
+
+
+    const closeButton =
+        document.getElementById(
+            "closeModal"
+        );
+
+
+    const cancelButton =
+        document.getElementById(
+            "cancelModal"
+        );
+
+
+    const list =
+        document.getElementById(
+            "chantiersList"
+        );
+
+
+    const emptyState =
+        document.getElementById(
+            "emptyState"
+        );
+
+
+
+    /* ============================
+       DONNÉES
+    ============================ */
+
+    let chantiers =
+        JSON.parse(
+            localStorage.getItem(
+                "batiflowChantiers"
+            ) || "[]"
+        );
+
+
+
+    /* ============================
+       OUVRIR
+    ============================ */
+
+    function ouvrirModal() {
+
+        modal.classList.add("show");
+
     }
 
-    const logoutButton = document.getElementById("logoutButton");
 
-    if (logoutButton) {
-        logoutButton.addEventListener("click", function (event) {
+
+    /* ============================
+       FERMER
+    ============================ */
+
+    function fermerModal() {
+
+        modal.classList.remove("show");
+
+        form.reset();
+
+        document.getElementById(
+            "chantierDepense"
+        ).value = 0;
+
+        document.getElementById(
+            "chantierAvancement"
+        ).value = 0;
+
+    }
+
+
+
+    /* ============================
+       BOUTONS
+    ============================ */
+
+    addButton.addEventListener(
+        "click",
+        ouvrirModal
+    );
+
+
+    emptyButton.addEventListener(
+        "click",
+        ouvrirModal
+    );
+
+
+    closeButton.addEventListener(
+        "click",
+        fermerModal
+    );
+
+
+    cancelButton.addEventListener(
+        "click",
+        fermerModal
+    );
+
+
+    modal.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target === modal
+            ) {
+
+                fermerModal();
+
+            }
+
+        }
+    );
+
+
+
+    /* ============================
+       FORMAT FCFA
+    ============================ */
+
+    function fcfa(value) {
+
+        return Number(value || 0)
+            .toLocaleString("fr-FR")
+            + " FCFA";
+
+    }
+
+
+
+    /* ============================
+       FORMAT DATE
+    ============================ */
+
+    function dateFr(date) {
+
+        if (!date) {
+            return "Non renseignée";
+        }
+
+        const d =
+            new Date(
+                date + "T00:00:00"
+            );
+
+        return d.toLocaleDateString(
+            "fr-FR"
+        );
+
+    }
+
+
+
+    /* ============================
+       AFFICHER
+    ============================ */
+
+    function afficher() {
+
+
+        list.innerHTML = "";
+
+
+        /* STATISTIQUES */
+
+        document.getElementById(
+            "totalChantiers"
+        ).textContent =
+            chantiers.length;
+
+
+        document.getElementById(
+            "chantiersEnCours"
+        ).textContent =
+            chantiers.filter(
+                c => c.statut === "en-cours"
+            ).length;
+
+
+        document.getElementById(
+            "chantiersPause"
+        ).textContent =
+            chantiers.filter(
+                c => c.statut === "pause"
+            ).length;
+
+
+        document.getElementById(
+            "chantiersTermines"
+        ).textContent =
+            chantiers.filter(
+                c => c.statut === "termine"
+            ).length;
+
+
+
+        /* ÉTAT VIDE */
+
+        if (
+            chantiers.length === 0
+        ) {
+
+            emptyState.style.display =
+                "block";
+
+            list.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        emptyState.style.display =
+            "none";
+
+        list.style.display =
+            "grid";
+
+
+
+        /* CARTES */
+
+        chantiers.forEach(
+            function (chantier, index) {
+
+
+                let statutTexte =
+                    "À démarrer";
+
+                let statutClasse =
+                    "status-a-demarrer";
+
+
+                if (
+                    chantier.statut ===
+                    "en-cours"
+                ) {
+
+                    statutTexte =
+                        "En cours";
+
+                    statutClasse =
+                        "status-en-cours";
+
+                }
+
+
+                if (
+                    chantier.statut ===
+                    "pause"
+                ) {
+
+                    statutTexte =
+                        "En pause";
+
+                    statutClasse =
+                        "status-pause";
+
+                }
+
+
+                if (
+                    chantier.statut ===
+                    "termine"
+                ) {
+
+                    statutTexte =
+                        "Terminé";
+
+                    statutClasse =
+                        "status-termine";
+
+                }
+
+
+
+                const card =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                card.className =
+                    "chantier-card";
+
+
+                card.innerHTML = `
+
+                    <div class="chantier-card-header">
+
+                        <div>
+
+                            <h3>
+                                ${chantier.nom}
+                            </h3>
+
+                            <p class="chantier-client">
+                                👤 ${chantier.client}
+                            </p>
+
+                        </div>
+
+                        <span class="status-badge ${statutClasse}">
+                            ${statutTexte}
+                        </span>
+
+                    </div>
+
+
+                    <div class="chantier-info-grid">
+
+                        <div class="chantier-info">
+
+                            <span>
+                                📍 Localisation
+                            </span>
+
+                            <strong>
+                                ${chantier.localisation}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="chantier-info">
+
+                            <span>
+                                📅 Début
+                            </span>
+
+                            <strong>
+                                ${dateFr(
+                                    chantier.dateDebut
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="chantier-info">
+
+                            <span>
+                                🏁 Fin prévue
+                            </span>
+
+                            <strong>
+                                ${dateFr(
+                                    chantier.dateFin
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="chantier-info">
+
+                            <span>
+                                💰 Budget
+                            </span>
+
+                            <strong>
+                                ${fcfa(
+                                    chantier.budget
+                                )}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="progress-section">
+
+                        <div class="progress-top">
+
+                            <span>
+                                Avancement
+                            </span>
+
+                            <strong>
+                                ${chantier.avancement}%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill"
+                                style="width:${chantier.avancement}%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="budget-section">
+
+                        <div class="budget-row">
+
+                            <span>
+                                Dépenses
+                            </span>
+
+                            <strong>
+                                ${fcfa(
+                                    chantier.depense
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="budget-row">
+
+                            <span>
+                                Solde budget
+                            </span>
+
+                            <strong>
+                                ${fcfa(
+                                    Number(
+                                        chantier.budget
+                                    )
+                                    -
+                                    Number(
+                                        chantier.depense
+                                    )
+                                )}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    ${
+                        chantier.notes
+                        ?
+                        `
+                        <div class="chantier-notes">
+                            📝 ${chantier.notes}
+                        </div>
+                        `
+                        :
+                        ""
+                    }
+
+
+                    <div class="chantier-actions">
+
+                        <button
+                            type="button"
+                            class="chantier-action"
+                            data-edit="${index}"
+                        >
+                            ✏️ Modifier
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="chantier-action delete"
+                            data-delete="${index}"
+                        >
+                            🗑️ Supprimer
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                list.appendChild(card);
+
+            }
+        );
+
+
+
+        /* MODIFIER */
+
+        document
+            .querySelectorAll(
+                "[data-edit]"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const index =
+                                Number(
+                                    this.dataset.edit
+                                );
+
+                            modifier(index);
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        /* SUPPRIMER */
+
+        document
+            .querySelectorAll(
+                "[data-delete]"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const index =
+                                Number(
+                                    this.dataset.delete
+                                );
+
+                            supprimer(index);
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+
+
+    /* ============================
+       ENREGISTRER
+    ============================ */
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
             event.preventDefault();
 
-            localStorage.removeItem("batiflowLoggedIn");
 
-            window.location.href = "login.html";
-        });
+            const chantier = {
+
+                nom:
+                    document.getElementById(
+                        "chantierNom"
+                    ).value.trim(),
+
+                client:
+                    document.getElementById(
+                        "chantierClient"
+                    ).value.trim(),
+
+                localisation:
+                    document.getElementById(
+                        "chantierLocalisation"
+                    ).value.trim(),
+
+                dateDebut:
+                    document.getElementById(
+                        "dateDebut"
+                    ).value,
+
+                dateFin:
+                    document.getElementById(
+                        "dateFin"
+                    ).value,
+
+                budget:
+                    Number(
+                        document.getElementById(
+                            "chantierBudget"
+                        ).value
+                    ),
+
+                depense:
+                    Number(
+                        document.getElementById(
+                            "chantierDepense"
+                        ).value
+                    ) || 0,
+
+                avancement:
+                    Number(
+                        document.getElementById(
+                            "chantierAvancement"
+                        ).value
+                    ) || 0,
+
+                statut:
+                    document.getElementById(
+                        "chantierStatut"
+                    ).value,
+
+                notes:
+                    document.getElementById(
+                        "chantierNotes"
+                    ).value.trim()
+
+            };
+
+
+            chantiers.push(
+                chantier
+            );
+
+
+            localStorage.setItem(
+                "batiflowChantiers",
+                JSON.stringify(
+                    chantiers
+                )
+            );
+
+
+            fermerModal();
+
+
+            afficher();
+
+
+            alert(
+                "Chantier enregistré avec succès !"
+            );
+
+        }
+    );
+
+
+
+    /* ============================
+       SUPPRIMER
+    ============================ */
+
+    function supprimer(index) {
+
+
+        if (
+            !confirm(
+                "Voulez-vous supprimer ce chantier ?"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        chantiers.splice(
+            index,
+            1
+        );
+
+
+        localStorage.setItem(
+            "batiflowChantiers",
+            JSON.stringify(
+                chantiers
+            )
+        );
+
+
+        afficher();
+
     }
-</script>
 
-<script src="./js/chantiers.js"></script>
+
+
+    /* ============================
+       MODIFIER
+    ============================ */
+
+    function modifier(index) {
+
+
+        const chantier =
+            chantiers[index];
+
+
+        if (!chantier) {
+            return;
+        }
+
+
+        document.getElementById(
+            "chantierNom"
+        ).value =
+            chantier.nom;
+
+
+        document.getElementById(
+            "chantierClient"
+        ).value =
+            chantier.client;
+
+
+        document.getElementById(
+            "chantierLocalisation"
+        ).value =
+            chantier.localisation;
+
+
+        document.getElementById(
+            "dateDebut"
+        ).value =
+            chantier.dateDebut;
+
+
+        document.getElementById(
+            "dateFin"
+        ).value =
+            chantier.dateFin;
+
+
+        document.getElementById(
+            "chantierBudget"
+        ).value =
+            chantier.budget;
+
+
+        document.getElementById(
+            "chantierDepense"
+        ).value =
+            chantier.depense;
+
+
+        document.getElementById(
+            "chantierAvancement"
+        ).value =
+            chantier.avancement;
+
+
+        document.getElementById(
+            "chantierStatut"
+        ).value =
+            chantier.statut;
+
+
+        document.getElementById(
+            "chantierNotes"
+        ).value =
+            chantier.notes;
+
+
+        ouvrirModal();
+
+
+        form.onsubmit =
+            function (event) {
+
+                event.preventDefault();
+
+
+                chantiers[index] = {
+
+                    nom:
+                        document.getElementById(
+                            "chantierNom"
+                        ).value.trim(),
+
+                    client:
+                        document.getElementById(
+                            "chantierClient"
+                        ).value.trim(),
+
+                    localisation:
+                        document.getElementById(
+                            "chantierLocalisation"
+                        ).value.trim(),
+
+                    dateDebut:
+                        document.getElementById(
+                            "dateDebut"
+                        ).value,
+
+                    dateFin:
+                        document.getElementById(
+                            "dateFin"
+                        ).value,
+
+                    budget:
+                        Number(
+                            document.getElementById(
+                                "chantierBudget"
+                            ).value
+                        ),
+
+                    depense:
+                        Number(
+                            document.getElementById(
+                                "chantierDepense"
+                            ).value
+                        ) || 0,
+
+                    avancement:
+                        Number(
+                            document.getElementById(
+                                "chantierAvancement"
+                            ).value
+                        ) || 0,
+
+                    statut:
+                        document.getElementById(
+                            "chantierStatut"
+                        ).value,
+
+                    notes:
+                        document.getElementById(
+                            "chantierNotes"
+                        ).value.trim()
+
+                };
+
+
+                localStorage.setItem(
+                    "batiflowChantiers",
+                    JSON.stringify(
+                        chantiers
+                    )
+                );
+
+
+                form.onsubmit = null;
+
+
+                fermerModal();
+
+
+                afficher();
+
+
+                alert(
+                    "Chantier modifié avec succès !"
+                );
+
+            };
+
+    }
+
+
+
+    /* ============================
+       MENU MOBILE
+    ============================ */
+
+    const mobileMenu =
+        document.getElementById(
+            "mobileMenu"
+        );
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    if (
+        mobileMenu &&
+        sidebar
+    ) {
+
+        mobileMenu.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.toggle(
+                    "open"
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* ============================
+       DÉCONNEXION
+    ============================ */
+
+    const logout =
+        document.getElementById(
+            "logoutButton"
+        );
+
+
+    if (logout) {
+
+        logout.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                localStorage.removeItem(
+                    "batiflowLoggedIn"
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+    }
+
+
+
+    /* ============================
+       AFFICHAGE INITIAL
+    ============================ */
+
+    afficher();
+
+
+});
+
+</script>
 
 </body>
 </html>
