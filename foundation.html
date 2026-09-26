@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Calculateur Fondations - BATIFLOW</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <style>
+
+        /* =========================================
+           STYLE LOCAL — CALCULATEUR FONDATIONS
+        ========================================== */
+
+        .foundation-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .foundation-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+            margin-bottom: 24px;
+        }
+
+        .foundation-header {
+            margin-bottom: 25px;
+        }
+
+        .foundation-label {
+            display: block;
+            color: #f59e0b;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            margin-bottom: 7px;
+        }
+
+        .foundation-header h2 {
+            margin: 0 0 8px;
+            font-size: 24px;
+        }
+
+        .foundation-header p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        .foundation-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .foundation-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .foundation-group label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .foundation-group input,
+        .foundation-group select {
+            width: 100%;
+            height: 46px;
+            padding: 0 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            outline: none;
+            background: #fff;
+            font-size: 14px;
+        }
+
+        .foundation-group input:focus,
+        .foundation-group select:focus {
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12);
+        }
+
+        .foundation-full {
+            grid-column: 1 / -1;
+        }
+
+        .foundation-options {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            margin-top: 22px;
+            padding: 18px;
+            background: #f9fafb;
+            border-radius: 12px;
+        }
+
+        .foundation-check {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .foundation-check input {
+            width: 17px;
+            height: 17px;
+            accent-color: #f59e0b;
+        }
+
+        .foundation-button {
+            width: 100%;
+            margin-top: 22px;
+            height: 50px;
+            border: 0;
+            border-radius: 10px;
+            background: #f59e0b;
+            color: #111827;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .foundation-button:hover {
+            background: #d97706;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .foundation-results {
+            display: none;
+        }
+
+        .foundation-results-title {
+            margin-bottom: 20px;
+        }
+
+        .foundation-results-title h2 {
+            margin: 0 0 5px;
+        }
+
+        .foundation-results-title p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        .foundation-result-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .foundation-result {
+            padding: 18px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+        }
+
+        .foundation-result span {
+            display: block;
+            color: #6b7280;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .foundation-result strong {
+            font-size: 21px;
+            color: #111827;
+        }
+
+        .foundation-note {
+            margin-top: 20px;
+            padding: 16px;
+            border-left: 4px solid #f59e0b;
+            background: #fffaf0;
+            border-radius: 8px;
+            color: #4b5563;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .foundation-note strong {
+            color: #111827;
+        }
+
+        @media (max-width: 1000px) {
+
+            .foundation-result-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .foundation-form-grid,
+            .foundation-options {
+                grid-template-columns: 1fr;
+            }
+
+            .foundation-result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .foundation-card {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+<!-- =========================================
+     SIDEBAR
+========================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <a href="dashboard.html" class="logo">
+            BATI<span>FLOW</span>
+        </a>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <p class="nav-title">
+            PRINCIPAL
+        </p>
+
+
+        <a href="dashboard.html" class="nav-link">
+            <span>📊</span>
+            Tableau de bord
+        </a>
+
+
+        <a href="#" class="nav-link">
+            <span>🏗️</span>
+            Chantiers
+        </a>
+
+
+        <a href="#" class="nav-link">
+            <span>📋</span>
+            DQE & Métré
+        </a>
+
+
+        <a href="#" class="nav-link">
+            <span>💰</span>
+            Devis
+        </a>
+
+
+        <a href="calculator.html" class="nav-link">
+            <span>🧮</span>
+            Calculateur BTP
+        </a>
+
+
+        <a href="mortar.html" class="nav-link">
+            <span>🪣</span>
+            Calculateur Mortier
+        </a>
+
+
+        <a href="masonry.html" class="nav-link">
+            <span>🧱</span>
+            Calculateur Maçonnerie
+        </a>
+
+
+        <a href="slab.html" class="nav-link">
+            <span>🏠</span>
+            Calculateur Dalle
+        </a>
+
+
+        <a href="foundation.html"
+           class="nav-link active">
+
+            <span>🏗️</span>
+            Calculateur Fondations
+
+        </a>
+
+
+        <p class="nav-title">
+            GESTION
+        </p>
+
+
+        <a href="#" class="nav-link">
+            <span>👷</span>
+            Clients
+        </a>
+
+
+        <a href="#" class="nav-link">
+            <span>📦</span>
+            Matériaux
+        </a>
+
+
+        <a href="#" class="nav-link">
+            <span>📄</span>
+            Documents
+        </a>
+
+
+        <p class="nav-title">
+            SYSTÈME
+        </p>
+
+
+        <a href="#" class="nav-link">
+            <span>⚙️</span>
+            Paramètres
+        </a>
+
+
+        <a href="login.html"
+           class="nav-link logout"
+           id="logoutButton">
+
+            <span>🚪</span>
+            Déconnexion
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+        <small>BATIFLOW V1.0</small>
+    </div>
+
+</aside>
+
+
+
+<!-- =========================================
+     CONTENU
+========================================== -->
+
+<div class="dashboard-main">
+
+
+    <header class="dashboard-header">
+
+        <button
+            class="mobile-menu"
+            id="mobileMenu">
+
+            ☰
+
+        </button>
+
+
+        <div class="header-search">
+
+            <span>🔍</span>
+
+            <input
+                type="text"
+                placeholder="Rechercher..."
+            >
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="notification">
+                🔔
+            </div>
+
+
+            <div class="user-avatar">
+                👤
+            </div>
+
+
+            <div class="user-info">
+
+                <strong id="userName">
+                    Utilisateur
+                </strong>
+
+                <small>
+                    Professionnel BTP
+                </small>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <main class="dashboard-content">
+
+
+        <!-- =================================
+             TITRE
+        ================================== -->
+
+        <section class="welcome-section">
+
+            <div>
+
+                <span class="welcome-label">
+                    CALCULATEUR FONDATIONS
+                </span>
+
+                <h1>
+                    Calculateur de fondations
+                </h1>
+
+                <p>
+                    Estimez les quantités de béton,
+                    ciment, sable, gravier et acier
+                    pour vos semelles isolées.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="foundation-section">
+
+
+            <!-- =================================
+                 FORMULAIRE
+            ================================== -->
+
+            <div class="foundation-card">
+
+                <div class="foundation-header">
+
+                    <span class="foundation-label">
+                        PARAMÈTRES
+                    </span>
+
+                    <h2>
+                        Semelles isolées
+                    </h2>
+
+                    <p>
+                        Entrez les dimensions et le nombre
+                        de semelles à réaliser.
+                    </p>
+
+                </div>
+
+
+                <form id="foundationForm">
+
+
+                    <div class="foundation-form-grid">
+
+
+                        <!-- NOMBRE -->
+
+                        <div class="foundation-group">
+
+                            <label for="foundationCount">
+                                Nombre de semelles
+                            </label>
+
+                            <input
+                                type="number"
+                                id="foundationCount"
+                                min="1"
+                                step="1"
+                                value="1"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- LONGUEUR -->
+
+                        <div class="foundation-group">
+
+                            <label for="foundationLength">
+                                Longueur de la semelle (m)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="foundationLength"
+                                min="0"
+                                step="0.01"
+                                value="0.90"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- LARGEUR -->
+
+                        <div class="foundation-group">
+
+                            <label for="foundationWidth">
+                                Largeur de la semelle (m)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="foundationWidth"
+                                min="0"
+                                step="0.01"
+                                value="0.90"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- EPAISSEUR -->
+
+                        <div class="foundation-group">
+
+                            <label for="foundationThickness">
+                                Épaisseur (m)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="foundationThickness"
+                                min="0"
+                                step="0.01"
+                                value="0.45"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- DOSAGE -->
+
+                        <div class="foundation-group">
+
+                            <label for="foundationDosage">
+                                Dosage du béton
+                            </label>
+
+                            <select id="foundationDosage">
+
+                                <option value="250">
+                                    250 kg/m³
+                                </option>
+
+                                <option value="300" selected>
+                                    300 kg/m³
+                                </option>
+
+                                <option value="350">
+                                    350 kg/m³
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- MARGE -->
+
+                        <div class="foundation-group">
+
+                            <label for="foundationLoss">
+                                Marge de perte
+                            </label>
+
+                            <select id="foundationLoss">
+
+                                <option value="0">
+                                    0 %
+                                </option>
+
+                                <option value="5" selected>
+                                    5 %
+                                </option>
+
+                                <option value="10">
+                                    10 %
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- ACIER -->
+
+                        <div class="foundation-group">
+
+                            <label for="steelPerM3">
+                                Acier estimatif (kg/m³)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="steelPerM3"
+                                min="0"
+                                step="1"
+                                value="80"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="foundation-options">
+
+                        <label class="foundation-check">
+
+                            <input
+                                type="checkbox"
+                                id="includeSteel"
+                                checked
+                            >
+
+                            Inclure l'estimation de l'acier
+
+                        </label>
+
+
+                        <label class="foundation-check">
+
+                            <input
+                                type="checkbox"
+                                id="includeMaterials"
+                                checked
+                            >
+
+                            Calculer sable et gravier
+
+                        </label>
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="foundation-button">
+
+                        🏗️ Calculer les fondations
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =================================
+                 RÉSULTATS
+            ================================== -->
+
+            <div
+                class="foundation-card foundation-results"
+                id="foundationResults">
+
+
+                <div class="foundation-results-title">
+
+                    <span class="foundation-label">
+                        RÉSULTATS
+                    </span>
+
+                    <h2>
+                        Estimation des quantités
+                    </h2>
+
+                    <p>
+                        Résultats calculés automatiquement
+                        à partir de vos dimensions.
+                    </p>
+
+                </div>
+
+
+                <div class="foundation-result-grid">
+
+
+                    <div class="foundation-result">
+
+                        <span>
+                            Volume théorique de béton
+                        </span>
+
+                        <strong id="foundationVolume">
+                            0 m³
+                        </strong>
+
+                    </div>
+
+
+                    <div class="foundation-result">
+
+                        <span>
+                            Volume avec perte
+                        </span>
+
+                        <strong id="foundationVolumeLoss">
+                            0 m³
+                        </strong>
+
+                    </div>
+
+
+                    <div class="foundation-result">
+
+                        <span>
+                            Ciment
+                        </span>
+
+                        <strong id="foundationCement">
+                            0 kg
+                        </strong>
+
+                    </div>
+
+
+                    <div class="foundation-result">
+
+                        <span>
+                            Sacs de ciment
+                        </span>
+
+                        <strong id="foundationBags">
+                            0 sacs
+                        </strong>
+
+                    </div>
+
+
+                    <div class="foundation-result">
+
+                        <span>
+                            Sable estimé
+                        </span>
+
+                        <strong id="foundationSand">
+                            0 m³
+                        </strong>
+
+                    </div>
+
+
+                    <div class="foundation-result">
+
+                        <span>
+                            Gravier estimé
+                        </span>
+
+                        <strong id="foundationGravel">
+                            0 m³
+                        </strong>
+
+                    </div>
+
+
+                    <div class="foundation-result">
+
+                        <span>
+                            Acier estimatif
+                        </span>
+
+                        <strong id="foundationSteel">
+                            0 kg
+                        </strong>
+
+                    </div>
+
+
+                    <div class="foundation-result">
+
+                        <span>
+                            Surface d'une semelle
+                        </span>
+
+                        <strong id="foundationArea">
+                            0 m²
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="foundation-note">
+
+                    <strong>ℹ️ Important :</strong>
+
+                    Cette estimation est destinée au
+                    métré et à l'avant-projet.
+
+                    Le dimensionnement réel des fondations,
+                    les sections d'acier, les ancrages,
+                    la profondeur et les vérifications
+                    géotechniques doivent être déterminés
+                    selon les charges du bâtiment,
+                    le sol et les règles de calcul
+                    applicables au projet.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =================================
+       MENU MOBILE
+    ================================== */
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+
+    if (mobileMenu && sidebar) {
+
+        mobileMenu.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.toggle("open");
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================
+       DÉCONNEXION
+    ================================== */
+
+    const logoutButton =
+        document.getElementById("logoutButton");
+
+
+    if (logoutButton) {
+
+        logoutButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                localStorage.removeItem(
+                    "batiflowLoggedIn"
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================
+       NOM UTILISATEUR
+    ================================== */
+
+    const savedUser =
+        localStorage.getItem("batiflowUser");
+
+
+    if (savedUser) {
+
+        try {
+
+            const user =
+                JSON.parse(savedUser);
+
+            const userName =
+                document.getElementById("userName");
+
+            if (
+                userName &&
+                user.name
+            ) {
+
+                userName.textContent =
+                    user.name;
+
+            }
+
+        } catch (error) {
+
+            console.log(
+                "Utilisateur non disponible."
+            );
+
+        }
+
+    }
+
+
+
+    /* =================================
+       CALCULATEUR
+    ================================== */
+
+    const foundationForm =
+        document.getElementById(
+            "foundationForm"
+        );
+
+
+    if (foundationForm) {
+
+        foundationForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const count =
+                    Number(
+                        document.getElementById(
+                            "foundationCount"
+                        ).value
+                    );
+
+
+                const length =
+                    Number(
+                        document.getElementById(
+                            "foundationLength"
+                        ).value
+                    );
+
+
+                const width =
+                    Number(
+                        document.getElementById(
+                            "foundationWidth"
+                        ).value
+                    );
+
+
+                const thickness =
+                    Number(
+                        document.getElementById(
+                            "foundationThickness"
+                        ).value
+                    );
+
+
+                const dosage =
+                    Number(
+                        document.getElementById(
+                            "foundationDosage"
+                        ).value
+                    );
+
+
+                const loss =
+                    Number(
+                        document.getElementById(
+                            "foundationLoss"
+                        ).value
+                    );
+
+
+                const steelPerM3 =
+                    Number(
+                        document.getElementById(
+                            "steelPerM3"
+                        ).value
+                    );
+
+
+                const includeSteel =
+                    document.getElementById(
+                        "includeSteel"
+                    ).checked;
+
+
+                const includeMaterials =
+                    document.getElementById(
+                        "includeMaterials"
+                    ).checked;
+
+
+
+                /* =============================
+                   VOLUME
+                ============================== */
+
+                const area =
+                    length * width;
+
+
+                const volumeOne =
+                    area * thickness;
+
+
+                const totalVolume =
+                    volumeOne * count;
+
+
+                const totalVolumeLoss =
+                    totalVolume *
+                    (1 + loss / 100);
+
+
+
+                /* =============================
+                   CIMENT
+                ============================== */
+
+                const cement =
+                    totalVolumeLoss * dosage;
+
+
+                const bags =
+                    Math.ceil(
+                        cement / 50
+                    );
+
+
+
+                /* =============================
+                   SABLE / GRAVIER
+                   ESTIMATION SIMPLIFIÉE
+                ============================== */
+
+                let sand = 0;
+                let gravel = 0;
+
+
+                if (includeMaterials) {
+
+                    sand =
+                        totalVolumeLoss * 0.50;
+
+                    gravel =
+                        totalVolumeLoss * 0.80;
+
+                }
+
+
+
+                /* =============================
+                   ACIER
+                ============================== */
+
+                let steel = 0;
+
+
+                if (includeSteel) {
+
+                    steel =
+                        totalVolumeLoss *
+                        steelPerM3;
+
+                }
+
+
+
+                /* =============================
+                   AFFICHAGE
+                ============================== */
+
+                document.getElementById(
+                    "foundationArea"
+                ).textContent =
+                    area.toFixed(2) + " m²";
+
+
+                document.getElementById(
+                    "foundationVolume"
+                ).textContent =
+                    totalVolume.toFixed(2) + " m³";
+
+
+                document.getElementById(
+                    "foundationVolumeLoss"
+                ).textContent =
+                    totalVolumeLoss.toFixed(2) + " m³";
+
+
+                document.getElementById(
+                    "foundationCement"
+                ).textContent =
+                    cement.toFixed(1) + " kg";
+
+
+                document.getElementById(
+                    "foundationBags"
+                ).textContent =
+                    bags + " sacs";
+
+
+                document.getElementById(
+                    "foundationSand"
+                ).textContent =
+                    sand.toFixed(2) + " m³";
+
+
+                document.getElementById(
+                    "foundationGravel"
+                ).textContent =
+                    gravel.toFixed(2) + " m³";
+
+
+                document.getElementById(
+                    "foundationSteel"
+                ).textContent =
+                    steel.toFixed(1) + " kg";
+
+
+                document.getElementById(
+                    "foundationResults"
+                ).style.display =
+                    "block";
+
+
+                document.getElementById(
+                    "foundationResults"
+                ).scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+        );
+
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>
+```
