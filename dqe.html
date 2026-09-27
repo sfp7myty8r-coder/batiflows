@@ -830,11 +830,17 @@ td select{
 
                             </div>
 
-                            <div class="form-group">
-                                <label>Client</label>
-                                <input type="text" id="client"
-                                       placeholder="Nom du client">
-                            </div>
+                           <div class="form-group">
+    <label for="clientId">Client</label>
+
+    <select id="clientId">
+        <option value="">Sélectionner un client</option>
+    </select>
+
+    <small style="display:block;margin-top:6px;color:#94a3b8;">
+        Client enregistré dans BATIFLOW
+    </small>
+</div>
 
                             <div class="form-group">
                                 <label>Chantier lié</label>
@@ -1062,7 +1068,8 @@ td select{
 
 const DQE_STORAGE_KEY = "batiflowDQEs";
 const CHANTIER_STORAGE_KEY = "batiflowChantiers";
-
+const CLIENT_STORAGE_KEY = "batiflowClients";
+    
 let sauvegardeTimer = null;
 
 
@@ -1127,7 +1134,42 @@ function obtenirChantiers(){
 
 }
 
+function obtenirClients() {
+    try {
+        const data = localStorage.getItem(CLIENT_STORAGE_KEY);
+        return data ? JSON.parse(data) : [];
+    } catch (error) {
+        console.error("Erreur lecture clients :", error);
+        return [];
+    }
+}
 
+  function chargerClients() {
+    const select = document.getElementById("clientId");
+
+    if (!select) return;
+
+    const clients = obtenirClients();
+
+    select.innerHTML = `
+        <option value="">Sélectionner un client</option>
+    `;
+
+    clients.forEach(client => {
+        const option = document.createElement("option");
+
+        option.value = client.id;
+
+        option.textContent =
+            client.entreprise
+                ? `${client.nom} — ${client.entreprise}`
+                : client.nom;
+
+        select.appendChild(option);
+    });
+}
+
+    
 function genererId(){
 
     return "dqe_" +
@@ -1731,6 +1773,13 @@ function collecterFormulaire(){
                 ) === String(chantierId)
         );
 
+    const clientId = document.getElementById("clientId")?.value || "";
+
+const clients = obtenirClients();
+
+const clientSelectionne = clients.find(
+    client => String(client.id) === String(clientId)
+);
     return {
 
         id,
