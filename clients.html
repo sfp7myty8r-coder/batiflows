@@ -2469,17 +2469,14 @@
                         String(id)
                 );
 
+sauvegarderClients(nouveauxClients);
 
-           if (
-    sauvegarderClients(
-        nouveauxClients
-    )
-) {
+afficherClients();
 
-                afficherToast(
-                    "✅ Client supprimé.",
-                    "success"
-                );
+afficherToast(
+    "✅ Client supprimé.",
+    "success"
+);
 
                 nouveauClient();
 
