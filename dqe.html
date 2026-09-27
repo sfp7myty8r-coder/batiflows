@@ -2653,17 +2653,40 @@ function collecterFormulaire(){
            NOUVELLE RELATION CLIENT
         */
 
-        clientId:
-            clientId,
+       clientId: clientId,
 
-        client:
-            clientSelectionne
-                ? (
-                    clientSelectionne.nom ||
-                    clientSelectionne.entreprise ||
-                    ""
-                )
-                : "",
+client:
+    clientSelectionne
+        ? (
+            clientSelectionne.nom ||
+            clientSelectionne.entreprise ||
+            ""
+        )
+        : "",
+
+clientNom:
+    clientSelectionne?.nom ||
+    "",
+
+entrepriseClient:
+    clientSelectionne?.entreprise ||
+    "",
+
+clientTelephone:
+    clientSelectionne?.telephone ||
+    "",
+
+clientWhatsapp:
+    clientSelectionne?.whatsapp ||
+    "",
+
+clientEmail:
+    clientSelectionne?.email ||
+    "",
+
+clientAdresse:
+    clientSelectionne?.adresse ||
+    "",
 
 
         /*
