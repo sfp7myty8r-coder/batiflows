@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BATIFLOW — DQE & Métré</title>
+
+    <meta
+        name="description"
+        content="BATIFLOW - DQE et métrés BTP"
+    >
+
+    <style>
+        /* =====================================================
+           BATIFLOW — DQE & MÉTRÉ
+           Version 1
+        ===================================================== */
+
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+            background:#f4f7fb;
+            color:#172033;
+            min-height:100vh;
+        }
+
+        button,
+        input,
+        select{
+            font:inherit;
+        }
+
+        button{
+            cursor:pointer;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar{
+            position:fixed;
+            left:0;
+            top:0;
+            width:260px;
+            height:100vh;
+            background:#0f172a;
+            color:#fff;
+            z-index:1000;
+            overflow-y:auto;
+            box-shadow:4px 0 20px rgba(15,23,42,.12);
+        }
+
+        .sidebar-logo{
+            height:82px;
+            display:flex;
+            align-items:center;
+            padding:0 20px;
+            border-bottom:1px solid rgba(255,255,255,.08);
+        }
+
+        .batiflow-logo{
+            display:flex;
+            align-items:center;
+            gap:11px;
+            text-decoration:none;
+            width:max-content;
+            position:relative;
+            transition:transform .25s ease;
+        }
+
+        .batiflow-logo:hover{
+            transform:translateY(-1px);
+        }
+
+        .batiflow-logo-icon{
+            width:48px;
+            height:48px;
+            flex:none;
+            filter:
+                drop-shadow(0 4px 8px rgba(0,0,0,.35))
+                drop-shadow(0 0 8px rgba(245,158,11,.12));
+        }
+
+        .batiflow-logo-text{
+            font-size:22px;
+            line-height:1;
+            font-weight:900;
+            letter-spacing:1.5px;
+            white-space:nowrap;
+        }
+
+        .batiflow-logo-text .bati{
+            color:#fff;
+        }
+
+        .batiflow-logo-text .flow{
+            color:#f59e0b;
+        }
+
+        .batiflow-logo-subtitle{
+            position:absolute;
+            left:59px;
+            bottom:-12px;
+            color:#64748b;
+            font-size:7px;
+            font-weight:700;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            white-space:nowrap;
+        }
+
+        /* =====================================================
+           MENU
+        ===================================================== */
+
+        .menu{
+            padding:18px 12px;
+        }
+
+        .menu-title{
+            color:#64748b;
+            font-size:10px;
+            font-weight:800;
+            letter-spacing:1.5px;
+            text-transform:uppercase;
+            padding:12px 12px 8px;
+        }
+
+        .menu a{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            min-height:45px;
+            padding:10px 13px;
+            margin-bottom:5px;
+            border-radius:10px;
+            color:#cbd5e1;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:600;
+            transition:.2s ease;
+        }
+
+        .menu a:hover{
+            background:rgba(255,255,255,.07);
+            color:#fff;
+        }
+
+        .menu a.active{
+            background:linear-gradient(
+                135deg,
+                #f59e0b,
+                #d97706
+            );
+            color:#fff;
+            box-shadow:0 7px 18px rgba(245,158,11,.18);
+        }
+
+        .menu-icon{
+            width:22px;
+            text-align:center;
+            font-size:17px;
+        }
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main{
+            margin-left:260px;
+            min-height:100vh;
+        }
+
+        .topbar{
+            height:76px;
+            background:#fff;
+            border-bottom:1px solid #e5e7eb;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 30px;
+            position:sticky;
+            top:0;
+            z-index:500;
+        }
+
+        .topbar-left{
+            display:flex;
+            align-items:center;
+            gap:15px;
+        }
+
+        .mobile-menu{
+            display:none;
+            width:42px;
+            height:42px;
+            border:none;
+            border-radius:10px;
+            background:#f1f5f9;
+            font-size:20px;
+        }
+
+        .page-title{
+            font-size:23px;
+            font-weight:850;
+            color:#111827;
+        }
+
+        .page-subtitle{
+            margin-top:3px;
+            color:#64748b;
+            font-size:12px;
+        }
+
+        .topbar-user{
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+
+        .avatar{
+            width:40px;
+            height:40px;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:#fff7ed;
+            color:#d97706;
+            font-weight:800;
+            border:1px solid #fed7aa;
+        }
+
+        .user-name{
+            font-size:13px;
+            font-weight:700;
+            color:#334155;
+        }
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content{
+            padding:30px;
+            max-width:1500px;
+            margin:auto;
+        }
+
+        .breadcrumb{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            margin-bottom:20px;
+            font-size:12px;
+            color:#64748b;
+        }
+
+        .breadcrumb a{
+            color:#64748b;
+            text-decoration:none;
+        }
+
+        .breadcrumb a:hover{
+            color:#f59e0b;
+        }
+
+        /* =====================================================
+           CARDS
+        ===================================================== */
+
+        .card{
+            background:#fff;
+            border:1px solid #e5e7eb;
+            border-radius:16px;
+            box-shadow:0 5px 20px rgba(15,23,42,.04);
+            margin-bottom:20px;
+            overflow:hidden;
+        }
+
+        .card-header{
+            padding:20px 22px;
+            border-bottom:1px solid #edf0f4;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:15px;
+        }
+
+        .card-title{
+            font-size:16px;
+            font-weight:800;
+            color:#111827;
+        }
+
+        .card-description{
+            color:#64748b;
+            font-size:12px;
+            margin-top:4px;
+        }
+
+        .card-body{
+            padding:22px;
+        }
+
+        /* =====================================================
+           FORMULAIRE
+        ===================================================== */
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:
+                repeat(3, minmax(0,1fr));
+            gap:18px;
+        }
+
+        .form-group{
+            display:flex;
+            flex-direction:column;
+            gap:7px;
+        }
+
+        .form-group.full{
+            grid-column:1/-1;
+        }
+
+        .form-label{
+            font-size:12px;
+            font-weight:750;
+            color:#334155;
+        }
+
+        .required{
+            color:#ef4444;
+        }
+
+        .form-control{
+            width:100%;
+            height:44px;
+            border:1px solid #dbe1e8;
+            border-radius:9px;
+            padding:0 13px;
+            outline:none;
+            background:#fff;
+            color:#172033;
+            transition:.2s ease;
+        }
+
+        .form-control:focus{
+            border-color:#f59e0b;
+            box-shadow:0 0 0 3px rgba(245,158,11,.10);
+        }
+
+        textarea.form-control{
+            height:90px;
+            padding:12px 13px;
+            resize:vertical;
+        }
+
+        /* =====================================================
+           TABLE DQE
+        ===================================================== */
+
+        .table-wrapper{
+            width:100%;
+            overflow-x:auto;
+        }
+
+        .dqe-table{
+            width:100%;
+            border-collapse:collapse;
+            min-width:1000px;
+        }
+
+        .dqe-table th{
+            background:#f8fafc;
+            color:#475569;
+            font-size:11px;
+            font-weight:800;
+            text-transform:uppercase;
+            letter-spacing:.4px;
+            padding:13px 10px;
+            border-bottom:1px solid #e2e8f0;
+            text-align:left;
+            white-space:nowrap;
+        }
+
+        .dqe-table td{
+            padding:9px 8px;
+            border-bottom:1px solid #eef2f7;
+            vertical-align:middle;
+        }
+
+        .dqe-table tbody tr:hover{
+            background:#fafcff;
+        }
+
+        .table-input{
+            width:100%;
+            height:38px;
+            border:1px solid #dbe1e8;
+            border-radius:7px;
+            padding:0 9px;
+            outline:none;
+            color:#172033;
+            background:#fff;
+        }
+
+        .table-input:focus{
+            border-color:#f59e0b;
+            box-shadow:0 0 0 2px rgba(245,158,11,.08);
+        }
+
+        .table-select{
+            width:100%;
+            height:38px;
+            border:1px solid #dbe1e8;
+            border-radius:7px;
+            padding:0 8px;
+            outline:none;
+            background:#fff;
+            color:#172033;
+        }
+
+        .table-amount{
+            min-width:125px;
+            text-align:right;
+            font-weight:750;
+            color:#172033;
+        }
+
+        .delete-row{
+            width:35px;
+            height:35px;
+            border:none;
+            border-radius:8px;
+            background:#fef2f2;
+            color:#dc2626;
+            font-size:16px;
+            transition:.2s ease;
+        }
+
+        .delete-row:hover{
+            background:#fee2e2;
+        }
+
+        .add-row{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            margin-top:18px;
+            border:none;
+            background:#fff7ed;
+            color:#d97706;
+            border:1px solid #fed7aa;
+            border-radius:9px;
+            padding:10px 15px;
+            font-weight:750;
+            font-size:13px;
+            transition:.2s ease;
+        }
+
+        .add-row:hover{
+            background:#ffedd5;
+        }
+
+        /* =====================================================
+           TOTAUX
+        ===================================================== */
+
+        .totals{
+            display:flex;
+            justify-content:flex-end;
+            margin-top:22px;
+        }
+
+        .totals-box{
+            width:380px;
+            max-width:100%;
+            border:1px solid #e2e8f0;
+            border-radius:12px;
+            overflow:hidden;
+        }
+
+        .total-line{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:12px 15px;
+            border-bottom:1px solid #eef2f7;
+            font-size:13px;
+        }
+
+        .total-line span:first-child{
+            color:#64748b;
+        }
+
+        .total-line strong{
+            color:#172033;
+        }
+
+        .total-final{
+            background:#0f172a;
+            color:#fff;
+            padding:17px 15px;
+            font-size:16px;
+        }
+
+        .total-final span:first-child{
+            color:#fff;
+            font-weight:800;
+        }
+
+        .total-final strong{
+            color:#f59e0b;
+            font-size:19px;
+        }
+
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
+
+        .actions{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:15px;
+            flex-wrap:wrap;
+        }
+
+        .actions-left,
+        .actions-right{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            min-height:44px;
+            border:none;
+            border-radius:9px;
+            padding:0 17px;
+            font-size:13px;
+            font-weight:750;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:8px;
+            text-decoration:none;
+            transition:.2s ease;
+        }
+
+        .btn-primary{
+            background:linear-gradient(
+                135deg,
+                #f59e0b,
+                #d97706
+            );
+            color:#fff;
+            box-shadow:0 6px 16px rgba(245,158,11,.18);
+        }
+
+        .btn-primary:hover{
+            transform:translateY(-1px);
+            box-shadow:0 9px 20px rgba(245,158,11,.25);
+        }
+
+        .btn-secondary{
+            background:#f1f5f9;
+            color:#334155;
+        }
+
+        .btn-secondary:hover{
+            background:#e2e8f0;
+        }
+
+        .btn-success{
+            background:#16a34a;
+            color:#fff;
+        }
+
+        .btn-success:hover{
+            background:#15803d;
+        }
+
+        /* =====================================================
+           BADGES
+        ===================================================== */
+
+        .badge{
+            display:inline-flex;
+            align-items:center;
+            padding:6px 9px;
+            border-radius:999px;
+            background:#fff7ed;
+            color:#c2410c;
+            font-size:10px;
+            font-weight:800;
+            text-transform:uppercase;
+            letter-spacing:.5px;
+        }
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        .toast{
+            position:fixed;
+            right:25px;
+            bottom:25px;
+            min-width:280px;
+            max-width:420px;
+            padding:15px 18px;
+            border-radius:11px;
+            background:#0f172a;
+            color:#fff;
+            box-shadow:0 12px 30px rgba(15,23,42,.25);
+            transform:translateY(30px);
+            opacity:0;
+            pointer-events:none;
+            transition:.3s ease;
+            z-index:5000;
+            font-size:13px;
+        }
+
+        .toast.show{
+            transform:translateY(0);
+            opacity:1;
+        }
+
+        .toast.success{
+            border-left:4px solid #22c55e;
+        }
+
+        .toast.error{
+            border-left:4px solid #ef4444;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width:1000px){
+
+            .sidebar{
+                transform:translateX(-100%);
+                transition:.25s ease;
+            }
+
+            .sidebar.open{
+                transform:translateX(0);
+            }
+
+            .main{
+                margin-left:0;
+            }
+
+            .mobile-menu{
+                display:block;
+            }
+
+            .form-grid{
+                grid-template-columns:
+                    repeat(2,minmax(0,1fr));
+            }
+
+        }
+
+        @media(max-width:700px){
+
+            .topbar{
+                padding:0 15px;
+            }
+
+            .page-title{
+                font-size:19px;
+            }
+
+            .user-name{
+                display:none;
+            }
+
+            .content{
+                padding:18px 14px;
+            }
+
+            .card-body{
+                padding:16px;
+            }
+
+            .card-header{
+                padding:17px 16px;
+            }
+
+            .form-grid{
+                grid-template-columns:1fr;
+            }
+
+            .form-group.full{
+                grid-column:auto;
+            }
+
+            .actions{
+                align-items:stretch;
+            }
+
+            .actions-left,
+            .actions-right{
+                width:100%;
+            }
+
+            .btn{
+                flex:1;
+            }
+
+            .totals{
+                justify-content:stretch;
+            }
+
+            .totals-box{
+                width:100%;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <a
+            href="dashboard.html"
+            class="batiflow-logo"
+            aria-label="BATIFLOW - Tableau de bord">
+
+            <svg
+                class="batiflow-logo-icon"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true">
+
+                <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    fill="#111827"
+                    stroke="#F59E0B"
+                    stroke-width="2.5"/>
+
+                <path
+                    d="M25 69V39L50 22L75 39V69"
+                    fill="none"
+                    stroke="#FFFFFF"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+
+                <path
+                    d="M50 30V69"
+                    fill="none"
+                    stroke="#F59E0B"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+                <path
+                    d="M30 56C39 49 45 61 54 54C61 49 66 43 72 47"
+                    fill="none"
+                    stroke="#F59E0B"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+                <circle
+                    cx="72"
+                    cy="47"
+                    r="4"
+                    fill="#F59E0B"/>
+
+                <path
+                    d="M22 72H78"
+                    fill="none"
+                    stroke="#FFFFFF"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <span class="batiflow-logo-text">
+                <span class="bati">BATI</span><span class="flow">FLOW</span>
+            </span>
+
+            <span class="batiflow-logo-subtitle">
+                CONSTRUCTION MANAGEMENT
+            </span>
+
+        </a>
+
+    </div>
+
+    <nav class="menu">
+
+        <div class="menu-title">
+            Principal
+        </div>
+
+        <a href="dashboard.html">
+            <span class="menu-icon">⌂</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="chantiers.html">
+            <span class="menu-icon">🏗️</span>
+            <span>Chantiers</span>
+        </a>
+
+        <a href="dqe.html" class="active">
+            <span class="menu-icon">📐</span>
+            <span>DQE & Métré</span>
+        </a>
+
+        <a href="#">
+            <span class="menu-icon">💰</span>
+            <span>Devis</span>
+        </a>
+
+        <a href="#">
+            <span class="menu-icon">👥</span>
+            <span>Clients</span>
+        </a>
+
+        <div class="menu-title">
+            Gestion
+        </div>
+
+        <a href="#">
+            <span class="menu-icon">🧱</span>
+            <span>Matériaux</span>
+        </a>
+
+        <a href="#">
+            <span class="menu-icon">📄</span>
+            <span>Documents</span>
+        </a>
+
+        <a href="calculator.html">
+            <span class="menu-icon">🧮</span>
+            <span>Calculateur BTP</span>
+        </a>
+
+        <a href="mortar.html">
+            <span class="menu-icon">🧱</span>
+            <span>Mortier</span>
+        </a>
+
+        <a href="masonry.html">
+            <span class="menu-icon">🏠</span>
+            <span>Maçonnerie</span>
+        </a>
+
+        <a href="slab.html">
+            <span class="menu-icon">🏢</span>
+            <span>Dalle</span>
+        </a>
+
+        <div class="menu-title">
+            Système
+        </div>
+
+        <a href="#">
+            <span class="menu-icon">⚙️</span>
+            <span>Paramètres</span>
+        </a>
+
+        <a href="login.html">
+            <span class="menu-icon">↪</span>
+            <span>Déconnexion</span>
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+                aria-label="Ouvrir le menu">
+                ☰
+            </button>
+
+            <div>
+                <div class="page-title">
+                    DQE & Métré
+                </div>
+
+                <div class="page-subtitle">
+                    Quantitatif, estimatif et calcul des travaux
+                </div>
+            </div>
+
+        </div>
+
+        <div class="topbar-user">
+
+            <div class="avatar" id="avatar">
+                B
+            </div>
+
+            <span
+                class="user-name"
+                id="userName">
+                Utilisateur
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+
+    <section class="content">
+
+        <div class="breadcrumb">
+
+            <a href="dashboard.html">
+                Tableau de bord
+            </a>
+
+            <span>›</span>
+
+            <span>
+                DQE & Métré
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             INFORMATIONS DU DQE
+        ================================================== -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+                    <div class="card-title">
+                        Informations du DQE
+                    </div>
+
+                    <div class="card-description">
+                        Identifiez le chantier et renseignez les informations générales.
+                    </div>
+                </div>
+
+                <span class="badge">
+                    Nouveau DQE
+                </span>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Chantier <span class="required">*</span>
+                        </label>
+
+                        <select
+                            id="chantier"
+                            class="form-control">
+
+                            <option value="">
+                                Sélectionner un chantier
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Référence DQE
+                        </label>
+
+                        <input
+                            type="text"
+                            id="reference"
+                            class="form-control"
+                            placeholder="Ex : DQE-2026-001">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="dateDqe"
+                            class="form-control">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Client
+                        </label>
+
+                        <input
+                            type="text"
+                            id="client"
+                            class="form-control"
+                            placeholder="Nom du client">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Téléphone
+                        </label>
+
+                        <input
+                            type="text"
+                            id="telephone"
+                            class="form-control"
+                            placeholder="+228 XX XX XX XX">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            TVA (%)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="tva"
+                            class="form-control"
+                            value="18"
+                            min="0"
+                            step="0.01">
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label class="form-label">
+                            Observations
+                        </label>
+
+                        <textarea
+                            id="observations"
+                            class="form-control"
+                            placeholder="Observations ou informations complémentaires..."></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLEAU DQE
+        ================================================== -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <div class="card-title">
+                        Détail des travaux
+                    </div>
+
+                    <div class="card-description">
+                        Ajoutez les différents postes de travaux du chantier.
+                    </div>
+
+                </div>
+
+                <span class="badge">
+                    Quantitatif
+                </span>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-wrapper">
+
+                    <table class="dqe-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th style="width:55px;">
+                                    N°
+                                </th>
+
+                                <th style="min-width:280px;">
+                                    Désignation
+                                </th>
+
+                                <th style="min-width:130px;">
+                                    Catégorie
+                                </th>
+
+                                <th style="min-width:110px;">
+                                    Unité
+                                </th>
+
+                                <th style="width:120px;">
+                                    Quantité
+                                </th>
+
+                                <th style="width:150px;">
+                                    Prix unitaire
+                                </th>
+
+                                <th style="width:150px;text-align:right;">
+                                    Montant
+                                </th>
+
+                                <th style="width:60px;">
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="dqeBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="add-row"
+                    id="addRow">
+
+                    <span>＋</span>
+                    Ajouter un poste
+
+                </button>
+
+
+                <!-- TOTAUX -->
+
+                <div class="totals">
+
+                    <div class="totals-box">
+
+                        <div class="total-line">
+
+                            <span>
+                                Total HT
+                            </span>
+
+                            <strong id="totalHT">
+                                0 FCFA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="total-line">
+
+                            <span>
+                                TVA
+                            </span>
+
+                            <strong id="montantTVA">
+                                0 FCFA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="total-line total-final">
+
+                            <span>
+                                TOTAL TTC
+                            </span>
+
+                            <strong id="totalTTC">
+                                0 FCFA
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="actions">
+
+                    <div class="actions-left">
+
+                        <a
+                            href="dashboard.html"
+                            class="btn btn-secondary">
+
+                            ← Retour
+
+                        </a>
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            id="resetBtn">
+
+                            ↻ Réinitialiser
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="actions-right">
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="saveBtn">
+
+                            💾 Enregistrer le DQE
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /* =====================================================
+       CONFIGURATION
+    ===================================================== */
+
+    const CHANTIERS_KEY = "batiflowChantiers";
+    const DQE_KEY = "batiflowDQE";
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const sidebar = document.getElementById("sidebar");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    const chantierSelect =
+        document.getElementById("chantier");
+
+    const referenceInput =
+        document.getElementById("reference");
+
+    const dateInput =
+        document.getElementById("dateDqe");
+
+    const clientInput =
+        document.getElementById("client");
+
+    const telephoneInput =
+        document.getElementById("telephone");
+
+    const tvaInput =
+        document.getElementById("tva");
+
+    const observationsInput =
+        document.getElementById("observations");
+
+    const dqeBody =
+        document.getElementById("dqeBody");
+
+    const totalHTElement =
+        document.getElementById("totalHT");
+
+    const montantTVAElement =
+        document.getElementById("montantTVA");
+
+    const totalTTCElement =
+        document.getElementById("totalTTC");
+
+    const addRowButton =
+        document.getElementById("addRow");
+
+    const saveButton =
+        document.getElementById("saveBtn");
+
+    const resetButton =
+        document.getElementById("resetBtn");
+
+    const toast =
+        document.getElementById("toast");
+
+
+    /* =====================================================
+       INITIALISATION
+    ===================================================== */
+
+    document.addEventListener("DOMContentLoaded", function(){
+
+        initialiserDate();
+
+        chargerUtilisateur();
+
+        chargerChantiers();
+
+        ajouterLigne();
+
+        genererReference();
+
+        calculerTotaux();
+
+    });
+
+
+    /* =====================================================
+       MENU MOBILE
+    ===================================================== */
+
+    mobileMenu.addEventListener("click", function(){
+
+        sidebar.classList.toggle("open");
+
+    });
+
+
+    /* =====================================================
+       UTILISATEUR
+    ===================================================== */
+
+    function chargerUtilisateur(){
+
+        const nom =
+            localStorage.getItem("userName") ||
+            "Utilisateur";
+
+        const userName =
+            document.getElementById("userName");
+
+        const avatar =
+            document.getElementById("avatar");
+
+        userName.textContent = nom;
+
+        avatar.textContent =
+            nom.trim().charAt(0).toUpperCase() || "B";
+
+    }
+
+
+    /* =====================================================
+       DATE
+    ===================================================== */
+
+    function initialiserDate(){
+
+        const maintenant = new Date();
+
+        const annee =
+            maintenant.getFullYear();
+
+        const mois =
+            String(
+                maintenant.getMonth() + 1
+            ).padStart(2,"0");
+
+        const jour =
+            String(
+                maintenant.getDate()
+            ).padStart(2,"0");
+
+        dateInput.value =
+            `${annee}-${mois}-${jour}`;
+
+    }
+
+
+    /* =====================================================
+       REFERENCE
+    ===================================================== */
+
+    function genererReference(){
+
+        const maintenant = new Date();
+
+        const annee =
+            maintenant.getFullYear();
+
+        const numero =
+            String(
+                Math.floor(
+                    Math.random() * 999
+                ) + 1
+            ).padStart(3,"0");
+
+        referenceInput.value =
+            `DQE-${annee}-${numero}`;
+
+    }
+
+
+    /* =====================================================
+       CHANTIERS
+    ===================================================== */
+
+    function chargerChantiers(){
+
+        chantierSelect.innerHTML = `
+            <option value="">
+                Sélectionner un chantier
+            </option>
+        `;
+
+        let chantiers = [];
+
+        try{
+
+            chantiers =
+                JSON.parse(
+                    localStorage.getItem(
+                        CHANTIERS_KEY
+                    )
+                ) || [];
+
+        }catch(error){
+
+            chantiers = [];
+
+        }
+
+
+        if(!Array.isArray(chantiers)){
+            chantiers = [];
+        }
+
+
+        chantiers.forEach(function(chantier){
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                chantier.id || chantier.nom || "";
+
+            option.textContent =
+                chantier.nom ||
+                chantier.name ||
+                "Chantier sans nom";
+
+            option.dataset.client =
+                chantier.client || "";
+
+            option.dataset.telephone =
+                chantier.telephone ||
+                chantier.phone ||
+                "";
+
+            chantierSelect.appendChild(option);
+
+        });
+
+    }
+
+
+    /* =====================================================
+       SELECTION CHANTIER
+    ===================================================== */
+
+    chantierSelect.addEventListener(
+        "change",
+        function(){
+
+            const option =
+                chantierSelect.options[
+                    chantierSelect.selectedIndex
+                ];
+
+            if(!option){
+                return;
+            }
+
+            if(option.dataset.client){
+
+                clientInput.value =
+                    option.dataset.client;
+
+            }
+
+            if(option.dataset.telephone){
+
+                telephoneInput.value =
+                    option.dataset.telephone;
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       AJOUT LIGNE
+    ===================================================== */
+
+    addRowButton.addEventListener(
+        "click",
+        function(){
+
+            ajouterLigne();
+
+            calculerTotaux();
+
+        }
+    );
+
+
+    function ajouterLigne(data = {}){
+
+        const ligne =
+            document.createElement("tr");
+
+        ligne.innerHTML = `
+
+            <td class="numero">
+                1
+            </td>
+
+            <td>
+
+                <input
+                    type="text"
+                    class="table-input designation"
+                    placeholder="Ex : Fondation en béton armé"
+                    value="${echapper(
+                        data.designation || ""
+                    )}">
+
+            </td>
+
+            <td>
+
+                <select
+                    class="table-select categorie">
+
+                    <option value="Gros œuvre"
+                        ${data.categorie === "Gros œuvre" ? "selected" : ""}>
+                        Gros œuvre
+                    </option>
+
+                    <option value="Fondation"
+                        ${data.categorie === "Fondation" ? "selected" : ""}>
+                        Fondation
+                    </option>
+
+                    <option value="Élévation"
+                        ${data.categorie === "Élévation" ? "selected" : ""}>
+                        Élévation
+                    </option>
+
+                    <option value="Toiture"
+                        ${data.categorie === "Toiture" ? "selected" : ""}>
+                        Toiture
+                    </option>
+
+                    <option value="Finition"
+                        ${data.categorie === "Finition" ? "selected" : ""}>
+                        Finition
+                    </option>
+
+                    <option value="Électricité"
+                        ${data.categorie === "Électricité" ? "selected" : ""}>
+                        Électricité
+                    </option>
+
+                    <option value="Plomberie"
+                        ${data.categorie === "Plomberie" ? "selected" : ""}>
+                        Plomberie
+                    </option>
+
+                    <option value="Main-d'œuvre"
+                        ${data.categorie === "Main-d'œuvre" ? "selected" : ""}>
+                        Main-d'œuvre
+                    </option>
+
+                    <option value="Autre"
+                        ${data.categorie === "Autre" ? "selected" : ""}>
+                        Autre
+                    </option>
+
+                </select>
+
+            </td>
+
+            <td>
+
+                <select
+                    class="table-select unite">
+
+                    <option value="m²"
+                        ${data.unite === "m²" ? "selected" : ""}>
+                        m²
+                    </option>
+
+                    <option value="m³"
+                        ${data.unite === "m³" ? "selected" : ""}>
+                        m³
+                    </option>
+
+                    <option value="ml"
+                        ${data.unite === "ml" ? "selected" : ""}>
+                        ml
+                    </option>
+
+                    <option value="u"
+                        ${data.unite === "u" ? "selected" : ""}>
+                        u
+                    </option>
+
+                    <option value="kg"
+                        ${data.unite === "kg" ? "selected" : ""}>
+                        kg
+                    </option>
+
+                    <option value="t"
+                        ${data.unite === "t" ? "selected" : ""}>
+                        t
+                    </option>
+
+                    <option value="sac"
+                        ${data.unite === "sac" ? "selected" : ""}>
+                        sac
+                    </option>
+
+                    <option value="forfait"
+                        ${data.unite === "forfait" ? "selected" : ""}>
+                        forfait
+                    </option>
+
+                </select>
+
+            </td>
+
+            <td>
+
+                <input
+                    type="number"
+                    class="table-input quantite"
+                    min="0"
+                    step="0.01"
+                    placeholder="0"
+                    value="${data.quantite || ""}">
+
+            </td>
+
+            <td>
+
+                <input
+                    type="number"
+                    class="table-input prix"
+                    min="0"
+                    step="1"
+                    placeholder="0"
+                    value="${data.prix || ""}">
+
+            </td>
+
+            <td class="table-amount montant">
+                0 FCFA
+            </td>
+
+            <td>
+
+                <button
+                    type="button"
+                    class="delete-row"
+                    title="Supprimer">
+
+                    ×
+
+                </button>
+
+            </td>
+
+        `;
+
+
+        dqeBody.appendChild(ligne);
+
+        mettreAJourNumeros();
+
+        connecterLigne(ligne);
+
+        calculerLigne(ligne);
+
+    }
+
+
+    /* =====================================================
+       CONNECTER UNE LIGNE
+    ===================================================== */
+
+    function connecterLigne(ligne){
+
+        const quantite =
+            ligne.querySelector(".quantite");
+
+        const prix =
+            ligne.querySelector(".prix");
+
+        const deleteButton =
+            ligne.querySelector(".delete-row");
+
+
+        quantite.addEventListener(
+            "input",
+            function(){
+
+                calculerLigne(ligne);
+
+                calculerTotaux();
+
+            }
+        );
+
+
+        prix.addEventListener(
+            "input",
+            function(){
+
+                calculerLigne(ligne);
+
+                calculerTotaux();
+
+            }
+        );
+
+
+        deleteButton.addEventListener(
+            "click",
+            function(){
+
+                if(
+                    dqeBody.querySelectorAll("tr")
+                    .length <= 1
+                ){
+
+                    afficherToast(
+                        "Le DQE doit conserver au moins une ligne.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+                ligne.remove();
+
+                mettreAJourNumeros();
+
+                calculerTotaux();
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CALCUL LIGNE
+    ===================================================== */
+
+    function calculerLigne(ligne){
+
+        const quantite =
+            parseFloat(
+                ligne.querySelector(".quantite").value
+            ) || 0;
+
+        const prix =
+            parseFloat(
+                ligne.querySelector(".prix").value
+            ) || 0;
+
+        const montant =
+            quantite * prix;
+
+        ligne.querySelector(".montant")
+            .textContent =
+            formaterMontant(montant) + " FCFA";
+
+    }
+
+
+    /* =====================================================
+       CALCUL TOTAUX
+    ===================================================== */
+
+    function calculerTotaux(){
+
+        let totalHT = 0;
+
+        const lignes =
+            dqeBody.querySelectorAll("tr");
+
+
+        lignes.forEach(function(ligne){
+
+            const quantite =
+                parseFloat(
+                    ligne.querySelector(".quantite").value
+                ) || 0;
+
+            const prix =
+                parseFloat(
+                    ligne.querySelector(".prix").value
+                ) || 0;
+
+            totalHT +=
+                quantite * prix;
+
+            calculerLigne(ligne);
+
+        });
+
+
+        const tauxTVA =
+            parseFloat(
+                tvaInput.value
+            ) || 0;
+
+
+        const montantTVA =
+            totalHT * tauxTVA / 100;
+
+
+        const totalTTC =
+            totalHT + montantTVA;
+
+
+        totalHTElement.textContent =
+            formaterMontant(totalHT) +
+            " FCFA";
+
+
+        montantTVAElement.textContent =
+            formaterMontant(montantTVA) +
+            " FCFA";
+
+
+        totalTTCElement.textContent =
+            formaterMontant(totalTTC) +
+            " FCFA";
+
+    }
+
+
+    tvaInput.addEventListener(
+        "input",
+        calculerTotaux
+    );
+
+
+    /* =====================================================
+       NUMEROTATION
+    ===================================================== */
+
+    function mettreAJourNumeros(){
+
+        const lignes =
+            dqeBody.querySelectorAll("tr");
+
+        lignes.forEach(
+            function(ligne,index){
+
+                ligne.querySelector(
+                    ".numero"
+                ).textContent =
+                    index + 1;
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       ENREGISTREMENT
+    ===================================================== */
+
+    saveButton.addEventListener(
+        "click",
+        function(){
+
+            enregistrerDQE();
+
+        }
+    );
+
+
+    function enregistrerDQE(){
+
+        if(!chantierSelect.value){
+
+            afficherToast(
+                "Veuillez sélectionner un chantier.",
+                "error"
+            );
+
+            chantierSelect.focus();
+
+            return;
+
+        }
+
+
+        const lignes =
+            dqeBody.querySelectorAll("tr");
+
+        const postes = [];
+
+
+        lignes.forEach(function(ligne){
+
+            const designation =
+                ligne.querySelector(
+                    ".designation"
+                ).value.trim();
+
+            const categorie =
+                ligne.querySelector(
+                    ".categorie"
+                ).value;
+
+            const unite =
+                ligne.querySelector(
+                    ".unite"
+                ).value;
+
+            const quantite =
+                parseFloat(
+                    ligne.querySelector(
+                        ".quantite"
+                    ).value
+                ) || 0;
+
+            const prix =
+                parseFloat(
+                    ligne.querySelector(
+                        ".prix"
+                    ).value
+                ) || 0;
+
+
+            if(
+                designation ||
+                quantite > 0 ||
+                prix > 0
+            ){
+
+                postes.push({
+
+                    designation,
+                    categorie,
+                    unite,
+                    quantite,
+                    prix,
+                    montant:
+                        quantite * prix
+
+                });
+
+            }
+
+        });
+
+
+        if(postes.length === 0){
+
+            afficherToast(
+                "Ajoutez au moins un poste de travaux.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const totalHT =
+            postes.reduce(
+                function(total,poste){
+
+                    return total + poste.montant;
+
+                },
+                0
+            );
+
+
+        const tauxTVA =
+            parseFloat(
+                tvaInput.value
+            ) || 0;
+
+
+        const montantTVA =
+            totalHT * tauxTVA / 100;
+
+
+        const totalTTC =
+            totalHT + montantTVA;
+
+
+        const option =
+            chantierSelect.options[
+                chantierSelect.selectedIndex
+            ];
+
+
+        const nouveauDQE = {
+
+            id:
+                "DQE-" +
+                Date.now(),
+
+            reference:
+                referenceInput.value.trim(),
+
+            date:
+                dateInput.value,
+
+            chantierId:
+                chantierSelect.value,
+
+            chantier:
+                option
+                    ? option.textContent
+                    : "",
+
+            client:
+                clientInput.value.trim(),
+
+            telephone:
+                telephoneInput.value.trim(),
+
+            tva:
+                tauxTVA,
+
+            observations:
+                observationsInput.value.trim(),
+
+            postes,
+
+            totalHT,
+
+            montantTVA,
+
+            totalTTC,
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        let dqeList = [];
+
+
+        try{
+
+            dqeList =
+                JSON.parse(
+                    localStorage.getItem(
+                        DQE_KEY
+                    )
+                ) || [];
+
+        }catch(error){
+
+            dqeList = [];
+
+        }
+
+
+        if(!Array.isArray(dqeList)){
+
+            dqeList = [];
+
+        }
+
+
+        dqeList.push(nouveauDQE);
+
+
+        localStorage.setItem(
+            DQE_KEY,
+            JSON.stringify(dqeList)
+        );
+
+
+        afficherToast(
+            "DQE enregistré avec succès.",
+            "success"
+        );
+
+
+        setTimeout(function(){
+
+            // Pour l'instant, on reste sur la page.
+            // Le module de liste des DQE sera ajouté ensuite.
+
+        },500);
+
+    }
+
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    resetButton.addEventListener(
+        "click",
+        function(){
+
+            const confirmation =
+                confirm(
+                    "Voulez-vous vraiment réinitialiser ce DQE ?"
+                );
+
+
+            if(!confirmation){
+
+                return;
+
+            }
+
+
+            chantierSelect.value = "";
+
+            clientInput.value = "";
+
+            telephoneInput.value = "";
+
+            observationsInput.value = "";
+
+            tvaInput.value = "18";
+
+            initialiserDate();
+
+            genererReference();
+
+
+            dqeBody.innerHTML = "";
+
+            ajouterLigne();
+
+            calculerTotaux();
+
+
+            afficherToast(
+                "Le formulaire a été réinitialisé.",
+                "success"
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       FORMATAGE FCFA
+    ===================================================== */
+
+    function formaterMontant(nombre){
+
+        return new Intl.NumberFormat(
+            "fr-FR",
+            {
+                maximumFractionDigits:0
+            }
+        ).format(
+            Number(nombre) || 0
+        );
+
+    }
+
+
+    /* =====================================================
+       PROTECTION HTML
+    ===================================================== */
+
+    function echapper(valeur){
+
+        return String(valeur)
+            .replace(/&/g,"&amp;")
+            .replace(/</g,"&lt;")
+            .replace(/>/g,"&gt;")
+            .replace(/"/g,"&quot;")
+            .replace(/'/g,"&#039;");
+
+    }
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    let toastTimer = null;
+
+
+    function afficherToast(
+        message,
+        type = "success"
+    ){
+
+        toast.textContent = message;
+
+        toast.className =
+            "toast show " + type;
+
+
+        clearTimeout(toastTimer);
+
+
+        toastTimer =
+            setTimeout(
+                function(){
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                3500
+            );
+
+    }
+
+
+    /* =====================================================
+       MISE A JOUR SI LES CHANTIERS CHANGENT
+    ===================================================== */
+
+    window.addEventListener(
+        "storage",
+        function(event){
+
+            if(
+                event.key === CHANTIERS_KEY
+            ){
+
+                chargerChantiers();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
