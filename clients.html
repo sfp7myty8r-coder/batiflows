@@ -2404,80 +2404,85 @@
            SUPPRESSION
         ===================================================== */
 
-        function supprimerClient(id) {
+       function supprimerClient(id) {
 
-            const clients =
-                obtenirClients();
+    const clients = obtenirClients();
 
-            const client =
-                clients.find(
-                    item =>
-                        String(item.id) ===
-                        String(id)
-                );
+    const client = clients.find(
+        item =>
+            String(item.id) ===
+            String(id)
+    );
 
+    if (!client) {
 
-            if (!client) {
+        afficherToast(
+            "❌ Client introuvable.",
+            "error"
+        );
 
-                afficherToast(
-                    "❌ Client introuvable.",
-                    "error"
-                );
+        return;
+    }
 
-                return;
-            }
+    const chantiers =
+        nombreChantiersClient(client);
 
+    const dqes =
+        nombreDQEsClient(client);
 
-            const chantiers =
-                nombreChantiersClient(
-                    client
-                );
+    let message =
+        "Voulez-vous vraiment supprimer le client « " +
+        client.nom +
+        " » ?";
 
-            const dqes =
-                nombreDQEsClient(
-                    client
-                );
+    if (chantiers > 0 || dqes > 0) {
 
+        message +=
+            "\n\n⚠️ Attention : ce client est lié à " +
+            chantiers +
+            " chantier(s) et " +
+            dqes +
+            " DQE(s).";
 
-            let message =
-                "Voulez-vous vraiment supprimer le client « " +
-                client.nom +
-                " » ?";
+    }
 
+    if (!confirm(message)) {
+        return;
+    }
 
-            if (chantiers > 0 || dqes > 0) {
+    const nouveauxClients =
+        clients.filter(
+            item =>
+                String(item.id) !==
+                String(id)
+        );
 
-                message +=
-                    "\n\nAttention : ce client est lié à " +
-                    chantiers +
-                    " chantier(s) et " +
-                    dqes +
-                    " DQE(s).";
+    const sauvegardeOK =
+        sauvegarderClients(
+            nouveauxClients
+        );
 
-            }
+    if (!sauvegardeOK) {
+        return;
+    }
 
+    // Fermer le formulaire et revenir à "Nouveau client"
+    nouveauClient();
 
-            if (!confirm(message)) {
-                return;
-            }
+    // Actualiser les statistiques
+    actualiserStatistiques();
 
+    // Actualiser la liste
+    afficherClients();
 
-            const nouveauxClients =
-                clients.filter(
-                    item =>
-                        String(item.id) !==
-                        String(id)
-                );
+    // Fermer le modal s'il était ouvert
+    fermerModal();
 
-sauvegarderClients(nouveauxClients);
-
-afficherClients();
-
-afficherToast(
-    "✅ Client supprimé.",
-    "success"
-);
-
+    afficherToast(
+        "✅ Client supprimé avec succès.",
+        "success"
+    );
+}
                 nouveauClient();
 
                 actualiserStatistiques();
