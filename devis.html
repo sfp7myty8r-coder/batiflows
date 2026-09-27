@@ -2,105 +2,1639 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>BATIFLOW — Devis</title>
+<title>BATIFLOW — Devis</title>
 
-    <meta
-        name="description"
-        content="BATIFLOW — Création et gestion professionnelle des devis BTP."
-    >
+<style>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f1f5f9;
+    color:#0f172a;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:240px;
+    height:100vh;
+    background:#0f172a;
+    color:white;
+    padding:20px 15px;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    margin-bottom:25px;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    background:#f59e0b;
+    color:#0f172a;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:20px;
+}
+
+.logo-text{
+    font-size:21px;
+    font-weight:900;
+}
+
+.logo-text span{
+    color:#f59e0b;
+}
+
+.menu-title{
+    font-size:10px;
+    color:#94a3b8;
+    margin:18px 10px 8px;
+    text-transform:uppercase;
+    font-weight:bold;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.nav a{
+    display:block;
+    color:#cbd5e1;
+    text-decoration:none;
+    padding:12px;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.nav a:hover{
+    background:#1e293b;
+    color:white;
+}
+
+.nav a.active{
+    background:#1e293b;
+    color:white;
+    border-left:3px solid #f59e0b;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:240px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:70px;
+    background:white;
+    border-bottom:1px solid #e2e8f0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+}
+
+.page-title{
+    font-size:21px;
+    font-weight:800;
+}
+
+.page-subtitle{
+    color:#64748b;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    background:#0f172a;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.user{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.content{
+    padding:25px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:none;
+    border-radius:8px;
+    padding:11px 17px;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.btn:hover{
+    opacity:.85;
+}
+
+.btn-primary{
+    background:#f59e0b;
+    color:#0f172a;
+}
+
+.btn-dark{
+    background:#0f172a;
+    color:white;
+}
+
+.btn-light{
+    background:white;
+    border:1px solid #e2e8f0;
+    color:#0f172a;
+}
+
+.btn-danger{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    background:white;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.card-title{
+    font-size:15px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.full{
+    grid-column:1 / -1;
+}
+
+label{
+    font-size:12px;
+    font-weight:bold;
+    color:#64748b;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:11px;
+    border:1px solid #cbd5e1;
+    border-radius:7px;
+    outline:none;
+    font-family:Arial;
+    font-size:13px;
+    background:white;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#f59e0b;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+/* =========================
+   HEADER DEVIS
+========================= */
+
+.quote-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.company{
+    background:#0f172a;
+    color:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+.company h2{
+    font-size:25px;
+}
+
+.company h2 span{
+    color:#f59e0b;
+}
+
+.company p{
+    margin-top:7px;
+    color:#cbd5e1;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.quote-info{
+    text-align:right;
+}
+
+.quote-info h1{
+    font-size:24px;
+}
+
+.quote-info p{
+    color:#64748b;
+    margin-top:6px;
+    font-size:13px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-card{
+    background:white;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+.table-header{
+    padding:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.table-header strong{
+    font-size:15px;
+}
+
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+
+th{
+    background:#f8fafc;
+    padding:12px;
+    text-align:left;
+    font-size:11px;
+    color:#475569;
+}
+
+td{
+    padding:9px;
+    border-top:1px solid #f1f5f9;
+}
+
+td input,
+td select{
+    padding:9px;
+}
+
+.total-line{
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.delete-btn{
+    border:none;
+    width:32px;
+    height:32px;
+    border-radius:6px;
+    background:#fee2e2;
+    color:#dc2626;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.delete-btn:hover{
+    background:#fecaca;
+}
+
+/* =========================
+   TOTALS
+========================= */
+
+.bottom{
+    display:grid;
+    grid-template-columns:1fr 380px;
+    gap:20px;
+}
+
+.total-card{
+    background:white;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:20px;
+}
+
+.total-row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #f1f5f9;
+    font-size:13px;
+}
+
+.total-final{
+    margin-top:15px;
+    padding-top:15px;
+    border-top:2px solid #0f172a;
+    display:flex;
+    justify-content:space-between;
+    font-size:20px;
+    font-weight:900;
+}
+
+.total-final span:last-child{
+    color:#d97706;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#0f172a;
+    color:white;
+    padding:14px 18px;
+    border-radius:8px;
+    display:none;
+    z-index:9999;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .nav{
+        flex-direction:row;
+        overflow-x:auto;
+    }
+
+    .grid,
+    .bottom{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .quote-header{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .quote-info{
+        text-align:left;
+    }
+
+}
+
+/* =========================
+   IMPRESSION
+========================= */
+
+@media print{
+
+    .sidebar,
+    .topbar,
+    .actions,
+    .table-header button,
+    .delete-btn{
+        display:none !important;
+    }
+
+    .main{
+        margin:0;
+    }
+
+    .content{
+        padding:0;
+    }
+
+    body{
+        background:white;
+    }
+
+    .card,
+    .table-card,
+    .total-card{
+        border:none;
+        box-shadow:none;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <div class="logo-icon">B</div>
+        <div class="logo-text">
+            BATI<span>FLOW</span>
+        </div>
+    </div>
+
+    <div class="menu-title">
+        Menu principal
+    </div>
+
+    <nav class="nav">
+
+        <a href="dashboard.html">
+            🏠 Tableau de bord
+        </a>
+
+        <a href="chantiers.html">
+            🏗️ Chantiers
+        </a>
+
+        <a href="devis.html" class="active">
+            📄 Devis
+        </a>
+
+        <a href="dqe.html">
+            📊 DQE
+        </a>
+
+        <a href="stocks.html">
+            📦 Stocks
+        </a>
+
+        <a href="documents.html">
+            📁 Documents
+        </a>
+
+    </nav>
+
+    <div class="menu-title">
+        Outils
+    </div>
+
+    <nav class="nav">
+
+        <a href="calculateur.html">
+            🧮 Calculateur BTP
+        </a>
+
+        <a href="parametres.html">
+            ⚙️ Paramètres
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div>
+            <div class="page-title">
+                Gestion des devis
+            </div>
+
+            <div class="page-subtitle">
+                Créez vos devis BTP
+            </div>
+        </div>
+
+        <div class="user">
+
+            <strong>
+                Administrateur
+            </strong>
+
+            <div class="avatar">
+                A
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <div class="content">
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+            <button
+                class="btn btn-light"
+                id="btnNouveau">
+                🔄 Nouveau devis
+            </button>
+
+            <button
+                class="btn btn-dark"
+                id="btnEnregistrer">
+                💾 Enregistrer
+            </button>
+
+            <button
+                class="btn btn-primary"
+                id="btnImprimer">
+                🖨️ Imprimer / PDF
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             ENTETE
+        ========================= -->
+
+        <div class="card">
+
+            <div class="quote-header">
+
+                <div class="company">
+
+                    <h2>
+                        BATI<span>FLOW</span>
+                    </h2>
+
+                    <p>
+                        Gestion professionnelle BTP
+                        <br>
+                        Devis • DQE • Chantiers • Stocks
+                    </p>
+
+                </div>
+
+                <div class="quote-info">
+
+                    <h1>
+                        DEVIS
+                    </h1>
+
+                    <p>
+                        N° :
+                        <strong id="numeroDevis">
+                            DF-2026-001
+                        </strong>
+                    </p>
+
+                    <p>
+                        Date :
+                        <strong id="dateAffichee">
+                        </strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             CLIENT / CHANTIER
+        ========================= -->
+
+        <div class="grid">
+
+            <div class="card">
+
+                <div class="card-title">
+                    👤 Informations client
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+
+                        <label>
+                            Nom / Entreprise
+                        </label>
+
+                        <input
+                            id="clientNom"
+                            type="text"
+                            placeholder="Nom du client">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Téléphone
+                        </label>
+
+                        <input
+                            id="clientTel"
+                            type="text"
+                            placeholder="+228...">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            id="clientEmail"
+                            type="email"
+                            placeholder="client@email.com">
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Adresse
+                        </label>
+
+                        <input
+                            id="clientAdresse"
+                            type="text"
+                            placeholder="Adresse">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    🏗️ Informations chantier
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+
+                        <label>
+                            Nom du chantier
+                        </label>
+
+                        <input
+                            id="chantierNom"
+                            type="text"
+                            placeholder="Ex : Villa R+1">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Localisation
+                        </label>
+
+                        <input
+                            id="chantierLieu"
+                            type="text"
+                            placeholder="Lomé">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Référence
+                        </label>
+
+                        <input
+                            id="chantierRef"
+                            type="text"
+                            placeholder="CH-001">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date
+                        </label>
+
+                        <input
+                            id="dateDevis"
+                            type="date">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Validité
+                        </label>
+
+                        <select id="validite">
+
+                            <option value="15">
+                                15 jours
+                            </option>
+
+                            <option value="30" selected>
+                                30 jours
+                            </option>
+
+                            <option value="60">
+                                60 jours
+                            </option>
+
+                            <option value="90">
+                                90 jours
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             LIGNES
+        ========================= -->
+
+        <div class="table-card">
+
+            <div class="table-header">
+
+                <strong>
+                    📋 Détail du devis
+                </strong>
+
+                <button
+                    class="btn btn-primary"
+                    id="btnAjouter">
+                    ➕ Ajouter une ligne
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Désignation
+                            </th>
+
+                            <th>
+                                Unité
+                            </th>
+
+                            <th>
+                                Quantité
+                            </th>
+
+                            <th>
+                                Prix unitaire
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="lignes">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             BAS
+        ========================= -->
+
+        <div class="bottom">
+
+            <div class="card">
+
+                <div class="card-title">
+                    📝 Notes et conditions
+                </div>
+
+                <textarea
+                    id="notes"
+                    placeholder="Conditions de paiement, observations, délais, etc."></textarea>
+
+            </div>
+
+
+            <div class="total-card">
+
+                <div class="card-title">
+                    💰 Récapitulatif
+                </div>
+
+
+                <div class="total-row">
+
+                    <span>
+                        Sous-total
+                    </span>
+
+                    <strong>
+                        <span id="sousTotal">
+                            0
+                        </span>
+                        FCFA
+                    </strong>
+
+                </div>
+
+
+                <div class="total-row">
+
+                    <span>
+                        Remise (%)
+                    </span>
+
+                    <input
+                        id="remise"
+                        type="number"
+                        value="0"
+                        min="0"
+                        max="100"
+                        style="width:80px;"
+                    >
+
+                </div>
+
+
+                <div class="total-row">
+
+                    <span>
+                        TVA (%)
+                    </span>
+
+                    <input
+                        id="tva"
+                        type="number"
+                        value="18"
+                        min="0"
+                        max="100"
+                        style="width:80px;"
+                    >
+
+                </div>
+
+
+                <div class="total-row">
+
+                    <span>
+                        Total HT
+                    </span>
+
+                    <strong>
+                        <span id="totalHT">
+                            0
+                        </span>
+                        FCFA
+                    </strong>
+
+                </div>
+
+
+                <div class="total-row">
+
+                    <span>
+                        TVA
+                    </span>
+
+                    <strong>
+                        <span id="montantTVA">
+                            0
+                        </span>
+                        FCFA
+                    </strong>
+
+                </div>
+
+
+                <div class="total-final">
+
+                    <span>
+                        TOTAL TTC
+                    </span>
+
+                    <span>
+                        <span id="totalTTC">
+                            0
+                        </span>
+                        FCFA
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<script>
+
+/* =====================================================
+   BATIFLOW — DEVIS
+   JAVASCRIPT
+===================================================== */
+
+
+/* FORMAT FCFA */
+
+function fcfa(nombre){
+
+    return Number(nombre || 0).toLocaleString("fr-FR");
+
+}
+
+
+/* MESSAGE */
+
+function message(texte){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = texte;
+
+    toast.style.display = "block";
+
+    setTimeout(function(){
+
+        toast.style.display = "none";
+
+    },2500);
+
+}
+
+
+/* DATE */
+
+function initialiserDate(){
+
+    const maintenant = new Date();
+
+    const iso =
+        maintenant.toISOString().split("T")[0];
+
+    document.getElementById(
+        "dateDevis"
+    ).value = iso;
+
+    document.getElementById(
+        "dateAffichee"
+    ).textContent =
+        maintenant.toLocaleDateString("fr-FR");
+
+}
+
+
+/* NUMERO */
+
+function nouveauNumero(){
+
+    let numero =
+        localStorage.getItem(
+            "batiflow_numero_devis"
+        );
+
+    if(!numero){
+
+        numero = 1;
+
+    }else{
+
+        numero =
+            parseInt(numero) + 1;
+
+    }
+
+    localStorage.setItem(
+        "batiflow_numero_devis",
+        numero
+    );
+
+    const annee =
+        new Date().getFullYear();
+
+    document.getElementById(
+        "numeroDevis"
+    ).textContent =
+        "DF-" +
+        annee +
+        "-" +
+        String(numero).padStart(3,"0");
+
+}
+
+
+/* =====================================================
+   AJOUTER UNE LIGNE
+===================================================== */
+
+function ajouterLigne(){
+
+    const tbody =
+        document.getElementById("lignes");
+
+    const tr =
+        document.createElement("tr");
+
+    tr.innerHTML = `
+
+        <td>
+
+            <input
+                type="text"
+                class="designation"
+                placeholder="Ex : Béton armé">
+
+        </td>
+
+        <td>
+
+            <select class="unite">
+
+                <option>u</option>
+                <option>m</option>
+                <option>m²</option>
+                <option>m³</option>
+                <option>kg</option>
+                <option>forfait</option>
+
+            </select>
+
+        </td>
+
+        <td>
+
+            <input
+                type="number"
+                class="quantite"
+                value="1"
+                min="0"
+                step="0.01">
+
+        </td>
+
+        <td>
+
+            <input
+                type="number"
+                class="prix"
+                value="0"
+                min="0"
+                step="1">
+
+        </td>
+
+        <td>
+
+            <span class="total-ligne">
+                0 FCFA
+            </span>
+
+        </td>
+
+        <td>
+
+            <button
+                type="button"
+                class="delete-btn">
+                ×
+            </button>
+
+        </td>
+
+    `;
+
+
+    tbody.appendChild(tr);
+
+
+    /* EVENEMENTS */
+
+    tr.querySelector(
+        ".quantite"
+    ).addEventListener(
+        "input",
+        calculer
+    );
+
+    tr.querySelector(
+        ".prix"
+    ).addEventListener(
+        "input",
+        calculer
+    );
+
+
+    tr.querySelector(
+        ".delete-btn"
+    ).addEventListener(
+        "click",
+        function(){
+
+            tr.remove();
+
+            calculer();
+
         }
+    );
 
-        :root {
-            --primary: #0f172a;
-            --primary-light: #1e293b;
-            --accent: #f59e0b;
-            --accent-dark: #d97706;
-            --success: #16a34a;
-            --danger: #dc2626;
-            --bg: #f1f5f9;
-            --white: #ffffff;
-            --border: #e2e8f0;
-            --text: #0f172a;
-            --muted: #64748b;
-        }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-        }
+    calculer();
 
-        /* =========================
-           SIDEBAR
-        ========================= */
+}
 
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 250px;
-            height: 100vh;
-            background: var(--primary);
-            color: white;
-            padding: 22px 15px;
-            z-index: 1000;
-        }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 10px 28px;
-        }
+/* =====================================================
+   CALCUL
+===================================================== */
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: var(--accent);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 19px;
-        }
+function calculer(){
 
-        .logo-text {
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: .5px;
-        }
+    let sousTotal = 0;
 
-        .logo-text span {
-            color: var(--accent);
-        }
 
-        .menu-title {
-            color: #94a3b8;
-            font-size: 11px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin: 10px 12px;
-        }
+    document
+        .querySelectorAll("#lignes tr")
+        .forEach(function(tr){
 
-        .nav {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+            const quantite =
+                parseFloat(
+                    tr.querySelector(
+                        ".quantite"
+                    ).value
+                ) || 0;
 
-        .nav a {
-            color: #cbd5e1;
-            text-decoration: none;
-            padding: 12px 13px;
+
+            const prix =
+                parseFloat(
+                    tr.querySelector(
+                        ".prix"
+                    ).value
+                ) || 0;
+
+
+            const total =
+                quantite * prix;
+
+
+            tr.querySelector(
+                ".total-ligne"
+            ).textContent =
+                fcfa(total) +
+                " FCFA";
+
+
+            sousTotal += total;
+
+        });
+
+
+    const remise =
+        parseFloat(
+            document.getElementById(
+                "remise"
+            ).value
+        ) || 0;
+
+
+    const tva =
+        parseFloat(
+            document.getElementById(
+                "tva"
+            ).value
+        ) || 0;
+
+
+    const montantRemise =
+        sousTotal * remise / 100;
+
+
+    const totalHT =
+        sousTotal - montantRemise;
+
+
+    const montantTVA =
+        totalHT * tva / 100;
+
+
+    const totalTTC =
+        totalHT + montantTVA;
+
+
+    document.getElementById(
+        "sousTotal"
+    ).textContent =
+        fcfa(sousTotal);
+
+
+    document.getElementById(
+        "totalHT"
+    ).textContent =
+        fcfa(totalHT);
+
+
+    document.getElementById(
+        "montantTVA"
+    ).textContent =
+        fcfa(montantTVA);
+
+
+    document.getElementById(
+        "totalTTC"
+    ).textContent =
+        fcfa(totalTTC);
+
+}
+
+
+/* =====================================================
+   SAUVEGARDER
+===================================================== */
+
+function enregistrer(){
+
+    const devis = {
+
+        clientNom:
+            document.getElementById(
+                "clientNom"
+            ).value,
+
+        clientTel:
+            document.getElementById(
+                "clientTel"
+            ).value,
+
+        clientEmail:
+            document.getElementById(
+                "clientEmail"
+            ).value,
+
+        clientAdresse:
+            document.getElementById(
+                "clientAdresse"
+            ).value,
+
+        chantierNom:
+            document.getElementById(
+                "chantierNom"
+            ).value,
+
+        chantierLieu:
+            document.getElementById(
+                "chantierLieu"
+            ).value,
+
+        chantierRef:
+            document.getElementById(
+                "chantierRef"
+            ).value,
+
+        date:
+            document.getElementById(
+                "dateDevis"
+            ).value,
+
+        notes:
+            document.getElementById(
+                "notes"
+            ).value,
+
+        remise:
+            document.getElementById(
+                "remise"
+            ).value,
+
+        tva:
+            document.getElementById(
+                "tva"
+            ).value
+
+    };
+
+
+    localStorage.setItem(
+        "batiflow_devis",
+        JSON.stringify(devis)
+    );
+
+
+    message(
+        "✅ Devis enregistré"
+    );
+
+}
+
+
+/* =====================================================
+   NOUVEAU
+===================================================== */
+
+function nouveauDevis(){
+
+    const confirmer =
+        confirm(
+            "Créer un nouveau devis ?"
+        );
+
+    if(!confirmer){
+
+        return;
+
+    }
+
+
+    document
+        .querySelectorAll(
+            "input[type=text], input[type=email], textarea"
+        )
+        .forEach(function(element){
+
+            element.value = "";
+
+        });
+
+
+    document.getElementById(
+        "remise"
+    ).value = 0;
+
+
+    document.getElementById(
+        "tva"
+    ).value = 18;
+
+
+    document.getElementById(
+        "lignes"
+    ).innerHTML = "";
+
+
+    nouveauNumero();
+
+    initialiserDate();
+
+    ajouterLigne();
+
+    calculer();
+
+
+    message(
+        "Nouveau devis créé"
+    );
+
+}
+
+
+/* =====================================================
+   IMPRESSION
+===================================================== */
+
+function imprimer(){
+
+    calculer();
+
+    window.print();
+
+}
+
+
+/* =====================================================
+   EVENEMENTS BOUTONS
+===================================================== */
+
+document
+    .getElementById(
+        "btnAjouter"
+    )
+    .addEventListener(
+        "click",
+        ajouterLigne
+    );
+
+
+document
+    .getElementById(
+        "btnEnregistrer"
+    )
+    .addEventListener(
+        "click",
+        enregistrer
+    );
+
+
+document
+    .getElementById(
+        "btnNouveau"
+    )
+    .addEventListener(
+        "click",
+        nouveauDevis
+    );
+
+
+document
+    .getElementById(
+        "btnImprimer"
+    )
+    .addEventListener(
+        "click",
+        imprimer
+    );
+
+
+document
+    .getElementById(
+        "remise"
+    )
+    .addEventListener(
+        "input",
+        calculer
+    );
+
+
+document
+    .getElementById(
+        "tva"
+    )
+    .addEventListener(
+        "input",
+        calculer
+    );
+
+
+/* =====================================================
+   DEMARRAGE
+===================================================== */
+
+initialiserDate();
+
+nouveauNumero();
+
+ajouterLigne();
+
+calculer();
+
+</script>
+
+</body>
+</html>
 ```
