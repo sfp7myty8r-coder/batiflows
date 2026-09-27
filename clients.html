@@ -1,0 +1,2760 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BATIFLOW — Clients</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #f4f7fb;
+            --card: #ffffff;
+            --dark: #111827;
+            --dark-2: #1f2937;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --green: #16a34a;
+            --orange: #f59e0b;
+            --red: #dc2626;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --sidebar-width: 260px;
+            --shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(180deg, #111827 0%, #0f172a 100%);
+            color: white;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .logo-area {
+            height: 82px;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #3b82f6;
+        }
+
+        .menu-title {
+            padding: 25px 24px 10px;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu {
+            padding: 0 12px;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 12px 14px;
+            margin-bottom: 5px;
+            border-radius: 9px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .menu a:hover {
+            background: rgba(255,255,255,0.07);
+            color: white;
+        }
+
+        .menu a.active {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 5px 15px rgba(37,99,235,0.25);
+        }
+
+        .menu-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 82px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-title h1 {
+            font-size: 23px;
+            margin-bottom: 4px;
+        }
+
+        .page-title p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .user-info strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .user-info span {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .content {
+            padding: 30px;
+            max-width: 1600px;
+            margin: auto;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .stat-value {
+            font-size: 27px;
+            font-weight: 800;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .green {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .orange {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .purple {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: 390px 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-header h2 {
+            font-size: 17px;
+        }
+
+        .card-header p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 11px 12px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn {
+            border-radius: 8px;
+            padding: 11px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-danger {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .btn-danger:hover {
+            background: #fecaca;
+        }
+
+        .btn-success {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .btn-small {
+            padding: 7px 10px;
+            font-size: 12px;
+        }
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .search-box {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-box input {
+            padding-left: 38px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            pointer-events: none;
+        }
+
+        /* =========================
+           CLIENT CARDS
+        ========================= */
+
+        .clients-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .client-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 17px;
+            transition: 0.2s;
+            background: #fff;
+        }
+
+        .client-card:hover {
+            border-color: #bfdbfe;
+            box-shadow: 0 5px 18px rgba(37,99,235,0.08);
+            transform: translateY(-1px);
+        }
+
+        .client-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 13px;
+        }
+
+        .client-main {
+            display: flex;
+            gap: 11px;
+            align-items: center;
+        }
+
+        .client-avatar {
+            width: 43px;
+            height: 43px;
+            border-radius: 50%;
+            background: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .client-name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .client-company {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .client-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin: 12px 0;
+        }
+
+        .contact-line {
+            font-size: 12px;
+            color: #475569;
+            word-break: break-word;
+        }
+
+        .client-stats {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .mini-stat {
+            flex: 1;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 9px;
+            text-align: center;
+        }
+
+        .mini-stat strong {
+            display: block;
+            font-size: 15px;
+        }
+
+        .mini-stat span {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .client-actions {
+            display: flex;
+            gap: 7px;
+            margin-top: 13px;
+            padding-top: 13px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .client-actions button {
+            flex: 1;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 55px 20px;
+            color: var(--muted);
+            grid-column: 1 / -1;
+        }
+
+        .empty-icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .empty h3 {
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,0.60);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-header h2 {
+            font-size: 18px;
+        }
+
+        .close-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            font-size: 20px;
+            color: #475569;
+        }
+
+        .modal-body {
+            padding: 22px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .detail-item {
+            padding: 13px;
+            background: #f8fafc;
+            border-radius: 9px;
+        }
+
+        .detail-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .detail-item label {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .detail-item div {
+            font-size: 14px;
+            color: #1e293b;
+            word-break: break-word;
+        }
+
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast-container {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            z-index: 5000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            min-width: 280px;
+            max-width: 380px;
+            background: #111827;
+            color: white;
+            padding: 14px 17px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.20);
+            font-size: 13px;
+            animation: toastIn 0.25s ease;
+        }
+
+        .toast.success {
+            border-left: 4px solid #22c55e;
+        }
+
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .toast.info {
+            border-left: 4px solid #3b82f6;
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        .mobile-menu {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            font-size: 20px;
+        }
+
+        @media (max-width: 1200px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .clients-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: 0.25s;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .content {
+                padding: 18px;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .clients-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .two-columns,
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-item.full {
+                grid-column: auto;
+            }
+
+            .page-title h1 {
+                font-size: 18px;
+            }
+
+            .page-title p {
+                display: none;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+
+            .client-actions {
+                flex-wrap: wrap;
+            }
+
+            .client-actions button {
+                min-width: calc(50% - 4px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo-area">
+            <div class="logo">
+                BATI<span>FLOW</span>
+            </div>
+        </div>
+
+        <div class="menu-title">Navigation</div>
+
+        <nav class="menu">
+
+            <a href="dashboard.html">
+                <span class="menu-icon">📊</span>
+                Tableau de bord
+            </a>
+
+            <a href="chantiers.html">
+                <span class="menu-icon">🏗️</span>
+                Chantiers
+            </a>
+
+            <a href="dqe.html">
+                <span class="menu-icon">📋</span>
+                DQE
+            </a>
+
+            <a href="#" onclick="return false;">
+                <span class="menu-icon">💰</span>
+                Devis
+            </a>
+
+            <a href="clients.html" class="active">
+                <span class="menu-icon">👥</span>
+                Clients
+            </a>
+
+            <a href="#" onclick="return false;">
+                <span class="menu-icon">🧱</span>
+                Matériaux
+            </a>
+
+            <a href="#" onclick="return false;">
+                <span class="menu-icon">📁</span>
+                Documents
+            </a>
+
+            <a href="#" onclick="return false;">
+                <span class="menu-icon">⚙️</span>
+                Paramètres
+            </a>
+
+            <div class="menu-title">Outils BTP</div>
+
+            <a href="calculator.html">
+                <span class="menu-icon">🧮</span>
+                Calculateur BTP
+            </a>
+
+            <a href="mortar.html">
+                <span class="menu-icon">🧱</span>
+                Mortier
+            </a>
+
+            <a href="masonry.html">
+                <span class="menu-icon">🏠</span>
+                Maçonnerie
+            </a>
+
+            <a href="slab.html">
+                <span class="menu-icon">🏢</span>
+                Dalle
+            </a>
+
+            <div style="height:15px;"></div>
+
+            <a href="login.html">
+                <span class="menu-icon">🚪</span>
+                Déconnexion
+            </a>
+
+        </nav>
+    </aside>
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="mobile-menu" onclick="toggleSidebar()">
+                    ☰
+                </button>
+
+                <div class="page-title">
+                    <h1>Gestion des clients</h1>
+                    <p>Gérez vos clients et leurs informations</p>
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="user-box">
+
+                    <div class="avatar" id="userAvatar">
+                        U
+                    </div>
+
+                    <div class="user-info">
+                        <strong id="userName">
+                            Utilisateur
+                        </strong>
+                        <span>
+                            Compte BATIFLOW
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <section class="content">
+
+            <!-- =========================
+                 STATS
+            ========================== -->
+
+            <div class="stats">
+
+                <div class="stat-card">
+
+                    <div>
+                        <div class="stat-label">
+                            Total clients
+                        </div>
+
+                        <div class="stat-value" id="statTotal">
+                            0
+                        </div>
+                    </div>
+
+                    <div class="stat-icon blue">
+                        👥
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div>
+                        <div class="stat-label">
+                            Particuliers
+                        </div>
+
+                        <div class="stat-value" id="statParticuliers">
+                            0
+                        </div>
+                    </div>
+
+                    <div class="stat-icon green">
+                        👤
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div>
+                        <div class="stat-label">
+                            Entreprises
+                        </div>
+
+                        <div class="stat-value" id="statEntreprises">
+                            0
+                        </div>
+                    </div>
+
+                    <div class="stat-icon orange">
+                        🏢
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div>
+                        <div class="stat-label">
+                            Chantiers liés
+                        </div>
+
+                        <div class="stat-value" id="statChantiers">
+                            0
+                        </div>
+                    </div>
+
+                    <div class="stat-icon purple">
+                        🏗️
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- =========================
+                 CONTENT GRID
+            ========================== -->
+
+            <div class="grid">
+
+                <!-- =========================
+                     FORMULAIRE
+                ========================== -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h2 id="formTitle">
+                                Nouveau client
+                            </h2>
+
+                            <p>
+                                Ajoutez un client à BATIFLOW
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <input
+                            type="hidden"
+                            id="clientId"
+                        >
+
+                        <div class="form-group">
+
+                            <label>
+                                Nom complet
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nom"
+                                placeholder="Ex. Jean Dupont"
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Entreprise
+                            </label>
+
+                            <input
+                                type="text"
+                                id="entreprise"
+                                placeholder="Ex. ABC Construction SARL"
+                            >
+
+                        </div>
+
+                        <div class="two-columns">
+
+                            <div class="form-group">
+
+                                <label>
+                                    Téléphone
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="telephone"
+                                    placeholder="+228 XX XX XX XX"
+                                >
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+                                    WhatsApp
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="whatsapp"
+                                    placeholder="+228 XX XX XX XX"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="client@email.com"
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Adresse
+                            </label>
+
+                            <input
+                                type="text"
+                                id="adresse"
+                                placeholder="Ex. Lomé, Agoè-Nyivé"
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Notes
+                            </label>
+
+                            <textarea
+                                id="notes"
+                                placeholder="Informations complémentaires..."
+                            ></textarea>
+
+                        </div>
+
+                        <div class="form-actions">
+
+                            <button
+                                class="btn btn-primary"
+                                onclick="enregistrerClient()"
+                            >
+                                💾 Enregistrer
+                            </button>
+
+                            <button
+                                class="btn btn-secondary"
+                                onclick="nouveauClient()"
+                            >
+                                ＋ Nouveau
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- =========================
+                     LISTE CLIENTS
+                ========================== -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h2>
+                                Mes clients
+                            </h2>
+
+                            <p id="clientCountText">
+                                0 client
+                            </p>
+                        </div>
+
+                        <button
+                            class="btn btn-primary btn-small"
+                            onclick="nouveauClient()"
+                        >
+                            ＋ Ajouter
+                        </button>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="toolbar">
+
+                            <div class="search-box">
+
+                                <span class="search-icon">
+                                    🔎
+                                </span>
+
+                                <input
+                                    type="text"
+                                    id="searchClient"
+                                    placeholder="Rechercher un client..."
+                                    oninput="afficherClients()"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="clients-list"
+                            id="clientsList"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- =========================
+         MODAL CLIENT
+    ========================== -->
+
+    <div
+        class="modal-overlay"
+        id="clientModal"
+        onclick="fermerModalExterne(event)"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h2>
+                    Informations du client
+                </h2>
+
+                <button
+                    class="close-btn"
+                    onclick="fermerModal()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div
+                class="modal-body"
+                id="modalBody"
+            >
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="fermerModal()"
+                >
+                    Fermer
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    id="modalEditButton"
+                    onclick="modifierDepuisModal()"
+                >
+                    ✏️ Modifier
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+         TOAST
+    ========================== -->
+
+    <div
+        class="toast-container"
+        id="toastContainer"
+    >
+    </div>
+
+    <script>
+
+        /* =====================================================
+           CONFIGURATION
+        ===================================================== */
+
+        const CLIENT_STORAGE_KEY = "batiflowClients";
+        const CHANTIER_STORAGE_KEY = "batiflowChantiers";
+        const DQE_STORAGE_KEY = "batiflowDQEs";
+
+        let clientModalId = null;
+
+
+        /* =====================================================
+           UTILITAIRES
+        ===================================================== */
+
+        function obtenirClients() {
+
+            try {
+
+                const data =
+                    localStorage.getItem(CLIENT_STORAGE_KEY);
+
+                if (!data) {
+                    return [];
+                }
+
+                const clients = JSON.parse(data);
+
+                return Array.isArray(clients)
+                    ? clients
+                    : [];
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur lecture clients :",
+                    error
+                );
+
+                return [];
+            }
+        }
+
+
+        function sauvegarderClients(clients) {
+
+            try {
+
+                localStorage.setItem(
+                    CLIENT_STORAGE_KEY,
+                    JSON.stringify(clients)
+                );
+
+                return true;
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur sauvegarde clients :",
+                    error
+                );
+
+                afficherToast(
+                    "❌ Impossible de sauvegarder les clients.",
+                    "error"
+                );
+
+                return false;
+            }
+        }
+
+
+        function obtenirChantiers() {
+
+            try {
+
+                const data =
+                    localStorage.getItem(
+                        CHANTIER_STORAGE_KEY
+                    );
+
+                if (!data) {
+                    return [];
+                }
+
+                const chantiers = JSON.parse(data);
+
+                return Array.isArray(chantiers)
+                    ? chantiers
+                    : [];
+
+            } catch (error) {
+
+                return [];
+            }
+        }
+
+
+        function obtenirDQEs() {
+
+            try {
+
+                const data =
+                    localStorage.getItem(
+                        DQE_STORAGE_KEY
+                    );
+
+                if (!data) {
+                    return [];
+                }
+
+                const dqes = JSON.parse(data);
+
+                return Array.isArray(dqes)
+                    ? dqes
+                    : [];
+
+            } catch (error) {
+
+                return [];
+            }
+        }
+
+
+        function genererId() {
+
+            return (
+                "client_" +
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .substring(2, 8)
+            );
+        }
+
+
+        function echapper(value) {
+
+            if (value === null || value === undefined) {
+                return "";
+            }
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        function obtenirInitiales(nom) {
+
+            if (!nom) {
+                return "CL";
+            }
+
+            const morceaux =
+                String(nom)
+                    .trim()
+                    .split(/\s+/)
+                    .filter(Boolean);
+
+            if (morceaux.length === 1) {
+
+                return morceaux[0]
+                    .substring(0, 2)
+                    .toUpperCase();
+
+            }
+
+            return (
+                morceaux[0][0] +
+                morceaux[morceaux.length - 1][0]
+            ).toUpperCase();
+        }
+
+
+        function dateLisible(date) {
+
+            if (!date) {
+                return "—";
+            }
+
+            try {
+
+                return new Date(date)
+                    .toLocaleDateString(
+                        "fr-FR",
+                        {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric"
+                        }
+                    );
+
+            } catch (error) {
+
+                return "—";
+            }
+        }
+
+
+        /* =====================================================
+           RELATIONS CLIENTS
+        ===================================================== */
+
+        function nombreChantiersClient(client) {
+
+            const chantiers =
+                obtenirChantiers();
+
+            return chantiers.filter(
+                chantier => {
+
+                    const idMatch =
+                        chantier.clientId &&
+                        String(chantier.clientId) ===
+                        String(client.id);
+
+                    const nomClient =
+                        chantier.client ||
+                        chantier.clientNom ||
+                        chantier.nomClient;
+
+                    const nomMatch =
+                        nomClient &&
+                        client.nom &&
+                        String(nomClient)
+                            .trim()
+                            .toLowerCase() ===
+                        String(client.nom)
+                            .trim()
+                            .toLowerCase();
+
+                    return idMatch || nomMatch;
+
+                }
+            ).length;
+        }
+
+
+        function nombreDQEsClient(client) {
+
+            const dqes =
+                obtenirDQEs();
+
+            return dqes.filter(
+                dqe => {
+
+                    const idMatch =
+                        dqe.clientId &&
+                        String(dqe.clientId) ===
+                        String(client.id);
+
+                    const nomClient =
+                        dqe.client ||
+                        dqe.clientNom;
+
+                    const nomMatch =
+                        nomClient &&
+                        client.nom &&
+                        String(nomClient)
+                            .trim()
+                            .toLowerCase() ===
+                        String(client.nom)
+                            .trim()
+                            .toLowerCase();
+
+                    return idMatch || nomMatch;
+
+                }
+            ).length;
+        }
+
+
+        /* =====================================================
+           FORMULAIRE
+        ===================================================== */
+
+        function viderFormulaire() {
+
+            document.getElementById("clientId").value = "";
+            document.getElementById("nom").value = "";
+            document.getElementById("entreprise").value = "";
+            document.getElementById("telephone").value = "";
+            document.getElementById("whatsapp").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("adresse").value = "";
+            document.getElementById("notes").value = "";
+
+        }
+
+
+        function nouveauClient() {
+
+            viderFormulaire();
+
+            document.getElementById(
+                "formTitle"
+            ).textContent = "Nouveau client";
+
+            document.getElementById("nom").focus();
+
+        }
+
+
+        function chargerClientDansFormulaire(client) {
+
+            document.getElementById(
+                "clientId"
+            ).value = client.id || "";
+
+            document.getElementById(
+                "nom"
+            ).value = client.nom || "";
+
+            document.getElementById(
+                "entreprise"
+            ).value = client.entreprise || "";
+
+            document.getElementById(
+                "telephone"
+            ).value = client.telephone || "";
+
+            document.getElementById(
+                "whatsapp"
+            ).value = client.whatsapp || "";
+
+            document.getElementById(
+                "email"
+            ).value = client.email || "";
+
+            document.getElementById(
+                "adresse"
+            ).value = client.adresse || "";
+
+            document.getElementById(
+                "notes"
+            ).value = client.notes || "";
+
+            document.getElementById(
+                "formTitle"
+            ).textContent = "Modifier le client";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function enregistrerClient() {
+
+            const id =
+                document.getElementById(
+                    "clientId"
+                ).value.trim();
+
+            const nom =
+                document.getElementById(
+                    "nom"
+                ).value.trim();
+
+            const entreprise =
+                document.getElementById(
+                    "entreprise"
+                ).value.trim();
+
+            const telephone =
+                document.getElementById(
+                    "telephone"
+                ).value.trim();
+
+            const whatsapp =
+                document.getElementById(
+                    "whatsapp"
+                ).value.trim();
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim();
+
+            const adresse =
+                document.getElementById(
+                    "adresse"
+                ).value.trim();
+
+            const notes =
+                document.getElementById(
+                    "notes"
+                ).value.trim();
+
+
+            if (!nom) {
+
+                afficherToast(
+                    "⚠️ Veuillez saisir le nom du client.",
+                    "error"
+                );
+
+                document.getElementById(
+                    "nom"
+                ).focus();
+
+                return;
+            }
+
+
+            const clients =
+                obtenirClients();
+
+            const maintenant =
+                new Date().toISOString();
+
+
+            if (id) {
+
+                const index =
+                    clients.findIndex(
+                        client =>
+                            String(client.id) ===
+                            String(id)
+                    );
+
+                if (index === -1) {
+
+                    afficherToast(
+                        "❌ Client introuvable.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                clients[index] = {
+
+                    ...clients[index],
+
+                    nom,
+                    entreprise,
+                    telephone,
+                    whatsapp,
+                    email,
+                    adresse,
+                    notes,
+                    updatedAt: maintenant
+
+                };
+
+
+                if (
+                    sauvegarderClients(clients)
+                ) {
+
+                    afficherToast(
+                        "✅ Client modifié avec succès.",
+                        "success"
+                    );
+
+                }
+
+            } else {
+
+                const nouveau = {
+
+                    id: genererId(),
+
+                    nom,
+                    entreprise,
+                    telephone,
+                    whatsapp,
+                    email,
+                    adresse,
+                    notes,
+
+                    createdAt: maintenant,
+                    updatedAt: maintenant
+
+                };
+
+
+                clients.unshift(nouveau);
+
+
+                if (
+                    sauvegarderClients(clients)
+                ) {
+
+                    afficherToast(
+                        "✅ Client ajouté avec succès.",
+                        "success"
+                    );
+
+                }
+
+            }
+
+
+            nouveauClient();
+
+            actualiserStatistiques();
+
+            afficherClients();
+
+        }
+
+
+        /* =====================================================
+           AFFICHAGE CLIENTS
+        ===================================================== */
+
+        function afficherClients() {
+
+            const container =
+                document.getElementById(
+                    "clientsList"
+                );
+
+            const recherche =
+                document.getElementById(
+                    "searchClient"
+                ).value
+                .trim()
+                .toLowerCase();
+
+
+            const clients =
+                obtenirClients();
+
+
+            const filtres =
+                clients.filter(
+                    client => {
+
+                        if (!recherche) {
+                            return true;
+                        }
+
+                        const texte = [
+
+                            client.nom,
+                            client.entreprise,
+                            client.telephone,
+                            client.whatsapp,
+                            client.email,
+                            client.adresse
+
+                        ]
+                        .filter(Boolean)
+                        .join(" ")
+                        .toLowerCase();
+
+                        return texte.includes(
+                            recherche
+                        );
+
+                    }
+                );
+
+
+            document.getElementById(
+                "clientCountText"
+            ).textContent =
+                filtres.length +
+                (
+                    filtres.length > 1
+                        ? " clients"
+                        : " client"
+                );
+
+
+            if (!filtres.length) {
+
+                container.innerHTML = `
+
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            👥
+                        </div>
+
+                        <h3>
+                            ${
+                                recherche
+                                    ? "Aucun client trouvé"
+                                    : "Aucun client enregistré"
+                            }
+                        </h3>
+
+                        <p>
+                            ${
+                                recherche
+                                    ? "Essayez une autre recherche."
+                                    : "Commencez par ajouter votre premier client."
+                            }
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+            }
+
+
+            container.innerHTML =
+                filtres
+                    .map(
+                        creerCarteClient
+                    )
+                    .join("");
+
+        }
+
+
+        function creerCarteClient(client) {
+
+            const chantiers =
+                nombreChantiersClient(
+                    client
+                );
+
+            const dqes =
+                nombreDQEsClient(
+                    client
+                );
+
+
+            const nom =
+                echapper(
+                    client.nom ||
+                    "Client sans nom"
+                );
+
+            const entreprise =
+                echapper(
+                    client.entreprise ||
+                    "Particulier"
+                );
+
+
+            let contact = "";
+
+
+            if (client.telephone) {
+
+                contact += `
+                    <div class="contact-line">
+                        📞 ${echapper(client.telephone)}
+                    </div>
+                `;
+
+            }
+
+
+            if (client.whatsapp) {
+
+                contact += `
+                    <div class="contact-line">
+                        💬 ${echapper(client.whatsapp)}
+                    </div>
+                `;
+
+            }
+
+
+            if (client.email) {
+
+                contact += `
+                    <div class="contact-line">
+                        📧 ${echapper(client.email)}
+                    </div>
+                `;
+
+            }
+
+
+            if (client.adresse) {
+
+                contact += `
+                    <div class="contact-line">
+                        📍 ${echapper(client.adresse)}
+                    </div>
+                `;
+
+            }
+
+
+            if (!contact) {
+
+                contact = `
+                    <div class="contact-line">
+                        Aucun contact renseigné
+                    </div>
+                `;
+
+            }
+
+
+            return `
+
+                <div class="client-card">
+
+                    <div class="client-top">
+
+                        <div class="client-main">
+
+                            <div class="client-avatar">
+                                ${obtenirInitiales(client.nom)}
+                            </div>
+
+                            <div>
+
+                                <div class="client-name">
+                                    ${nom}
+                                </div>
+
+                                <div class="client-company">
+                                    ${entreprise}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="client-contact">
+
+                        ${contact}
+
+                    </div>
+
+
+                    <div class="client-stats">
+
+                        <div class="mini-stat">
+
+                            <strong>
+                                ${chantiers}
+                            </strong>
+
+                            <span>
+                                Chantier${chantiers > 1 ? "s" : ""}
+                            </span>
+
+                        </div>
+
+
+                        <div class="mini-stat">
+
+                            <strong>
+                                ${dqes}
+                            </strong>
+
+                            <span>
+                                DQE
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="client-actions">
+
+                        <button
+                            class="btn btn-secondary btn-small"
+                            onclick="consulterClient('${client.id}')"
+                        >
+                            👁️ Voir
+                        </button>
+
+                        <button
+                            class="btn btn-primary btn-small"
+                            onclick="modifierClient('${client.id}')"
+                        >
+                            ✏️ Modifier
+                        </button>
+
+                        <button
+                            class="btn btn-danger btn-small"
+                            onclick="supprimerClient('${client.id}')"
+                        >
+                            🗑️
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           MODIFICATION
+        ===================================================== */
+
+        function modifierClient(id) {
+
+            const clients =
+                obtenirClients();
+
+            const client =
+                clients.find(
+                    item =>
+                        String(item.id) ===
+                        String(id)
+                );
+
+
+            if (!client) {
+
+                afficherToast(
+                    "❌ Client introuvable.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            chargerClientDansFormulaire(
+                client
+            );
+
+        }
+
+
+        /* =====================================================
+           CONSULTATION
+        ===================================================== */
+
+        function consulterClient(id) {
+
+            const clients =
+                obtenirClients();
+
+            const client =
+                clients.find(
+                    item =>
+                        String(item.id) ===
+                        String(id)
+                );
+
+
+            if (!client) {
+
+                afficherToast(
+                    "❌ Client introuvable.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            clientModalId =
+                client.id;
+
+
+            const chantiers =
+                nombreChantiersClient(
+                    client
+                );
+
+            const dqes =
+                nombreDQEsClient(
+                    client
+                );
+
+
+            document.getElementById(
+                "modalBody"
+            ).innerHTML = `
+
+                <div class="detail-grid">
+
+                    <div class="detail-item">
+
+                        <label>
+                            Nom
+                        </label>
+
+                        <div>
+                            ${echapper(client.nom || "—")}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Entreprise
+                        </label>
+
+                        <div>
+                            ${echapper(client.entreprise || "Particulier")}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Téléphone
+                        </label>
+
+                        <div>
+                            ${echapper(client.telephone || "—")}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            WhatsApp
+                        </label>
+
+                        <div>
+                            ${echapper(client.whatsapp || "—")}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <div>
+                            ${echapper(client.email || "—")}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Adresse
+                        </label>
+
+                        <div>
+                            ${echapper(client.adresse || "—")}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Chantiers liés
+                        </label>
+
+                        <div>
+                            🏗️ ${chantiers}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            DQE liés
+                        </label>
+
+                        <div>
+                            📋 ${dqes}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Créé le
+                        </label>
+
+                        <div>
+                            ${dateLisible(client.createdAt)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <label>
+                            Modifié le
+                        </label>
+
+                        <div>
+                            ${dateLisible(client.updatedAt)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-item full">
+
+                        <label>
+                            Notes
+                        </label>
+
+                        <div>
+                            ${echapper(client.notes || "Aucune note.")}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "clientModal"
+            ).classList.add("show");
+
+        }
+
+
+        function fermerModal() {
+
+            document.getElementById(
+                "clientModal"
+            ).classList.remove("show");
+
+            clientModalId = null;
+
+        }
+
+
+        function fermerModalExterne(event) {
+
+            if (
+                event.target ===
+                document.getElementById(
+                    "clientModal"
+                )
+            ) {
+
+                fermerModal();
+
+            }
+
+        }
+
+
+        function modifierDepuisModal() {
+
+            if (!clientModalId) {
+                return;
+            }
+
+            const id =
+                clientModalId;
+
+            fermerModal();
+
+            modifierClient(id);
+
+        }
+
+
+        /* =====================================================
+           SUPPRESSION
+        ===================================================== */
+
+        function supprimerClient(id) {
+
+            const clients =
+                obtenirClients();
+
+            const client =
+                clients.find(
+                    item =>
+                        String(item.id) ===
+                        String(id)
+                );
+
+
+            if (!client) {
+
+                afficherToast(
+                    "❌ Client introuvable.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            const chantiers =
+                nombreChantiersClient(
+                    client
+                );
+
+            const dqes =
+                nombreDQEsClient(
+                    client
+                );
+
+
+            let message =
+                "Voulez-vous vraiment supprimer le client « " +
+                client.nom +
+                " » ?";
+
+
+            if (chantiers > 0 || dqes > 0) {
+
+                message +=
+                    "\n\nAttention : ce client est lié à " +
+                    chantiers +
+                    " chantier(s) et " +
+                    dqes +
+                    " DQE(s).";
+
+            }
+
+
+            if (!confirm(message)) {
+                return;
+            }
+
+
+            const nouveauxClients =
+                clients.filter(
+                    item =>
+                        String(item.id) !==
+                        String(id)
+                );
+
+
+            if (
+                sauvegarderClients(
+                    nouveauxClients
+                )
+            {
+
+                afficherToast(
+                    "✅ Client supprimé.",
+                    "success"
+                );
+
+                nouveauClient();
+
+                actualiserStatistiques();
+
+                afficherClients();
+
+            }
+
+        }
+
+
+        /* =====================================================
+           STATISTIQUES
+        ===================================================== */
+
+        function actualiserStatistiques() {
+
+            const clients =
+                obtenirClients();
+
+            const chantiers =
+                obtenirChantiers();
+
+
+            const entreprises =
+                clients.filter(
+                    client =>
+                        client.entreprise &&
+                        client.entreprise.trim()
+                ).length;
+
+
+            const particuliers =
+                clients.length -
+                entreprises;
+
+
+            document.getElementById(
+                "statTotal"
+            ).textContent =
+                clients.length;
+
+
+            document.getElementById(
+                "statEntreprises"
+            ).textContent =
+                entreprises;
+
+
+            document.getElementById(
+                "statParticuliers"
+            ).textContent =
+                particuliers;
+
+
+            let chantiersLies = 0;
+
+
+            clients.forEach(
+                client => {
+
+                    chantiersLies +=
+                        nombreChantiersClient(
+                            client
+                        );
+
+                }
+            );
+
+
+            /*
+                Si aucun chantier n'est encore
+                relié à un client, on garde 0.
+            */
+
+            document.getElementById(
+                "statChantiers"
+            ).textContent =
+                chantiersLies;
+
+        }
+
+
+        /* =====================================================
+           UTILISATEUR
+        ===================================================== */
+
+        function chargerUtilisateur() {
+
+            let nom =
+                localStorage.getItem(
+                    "batiflowUserName"
+                );
+
+
+            if (!nom) {
+
+                try {
+
+                    const user =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "batiflowUser"
+                            )
+                        );
+
+                    if (user) {
+
+                        nom =
+                            user.name ||
+                            user.nom ||
+                            user.username ||
+                            user.email;
+
+                    }
+
+                } catch (error) {}
+
+            }
+
+
+            if (!nom) {
+                nom = "Utilisateur";
+            }
+
+
+            document.getElementById(
+                "userName"
+            ).textContent =
+                nom;
+
+
+            document.getElementById(
+                "userAvatar"
+            ).textContent =
+                obtenirInitiales(nom);
+
+        }
+
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        function afficherToast(
+            message,
+            type = "info"
+        ) {
+
+            const container =
+                document.getElementById(
+                    "toastContainer"
+                );
+
+
+            const toast =
+                document.createElement(
+                    "div"
+                );
+
+
+            toast.className =
+                "toast " + type;
+
+            toast.textContent =
+                message;
+
+
+            container.appendChild(
+                toast
+            );
+
+
+            setTimeout(
+                () => {
+
+                    toast.style.opacity =
+                        "0";
+
+                    toast.style.transform =
+                        "translateY(10px)";
+
+                    setTimeout(
+                        () => {
+
+                            toast.remove();
+
+                        },
+                        250
+                    );
+
+                },
+                3500
+            );
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        function toggleSidebar() {
+
+            document.getElementById(
+                "sidebar"
+            ).classList.toggle(
+                "open"
+            );
+
+        }
+
+
+        /* =====================================================
+           SYNCHRONISATION
+        ===================================================== */
+
+        window.addEventListener(
+            "storage",
+            function(event) {
+
+                if (
+                    event.key ===
+                    CLIENT_STORAGE_KEY ||
+                    event.key ===
+                    CHANTIER_STORAGE_KEY ||
+                    event.key ===
+                    DQE_STORAGE_KEY
+                ) {
+
+                    actualiserStatistiques();
+
+                    afficherClients();
+
+                }
+
+            }
+        );
+
+
+        window.addEventListener(
+            "pageshow",
+            function() {
+
+                chargerUtilisateur();
+
+                actualiserStatistiques();
+
+                afficherClients();
+
+            }
+        );
+
+
+        /* =====================================================
+           INITIALISATION
+        ===================================================== */
+
+        function initialiser() {
+
+            chargerUtilisateur();
+
+            nouveauClient();
+
+            actualiserStatistiques();
+
+            afficherClients();
+
+        }
+
+
+        initialiser();
+
+    </script>
+
+</body>
+</html>
