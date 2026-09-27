@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -308,6 +307,14 @@ textarea{
     font-size:15px;
 }
 
+input:focus,
+select:focus,
+textarea:focus{
+    outline:none;
+    border-color:#f59e0b;
+    box-shadow:0 0 0 3px rgba(245,158,11,.12);
+}
+
 textarea{
     min-height:100px;
     resize:vertical;
@@ -328,6 +335,10 @@ textarea{
     cursor:pointer;
 }
 
+.secondary-button:hover{
+    background:#f8fafc;
+}
+
 .submit-button{
     border:none;
     background:#0f172a;
@@ -338,6 +349,85 @@ textarea{
     font-weight:bold;
 }
 
+.submit-button:hover{
+    background:#1e293b;
+}
+
+.client-helper{
+    margin-top:8px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.client-helper-text{
+    font-size:11px;
+    color:#6b7280;
+}
+
+.client-link{
+    color:#2563eb;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.client-link:hover{
+    text-decoration:underline;
+}
+
+.no-client-message{
+    padding:10px 12px;
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    border-radius:7px;
+    color:#9a3412;
+    font-size:12px;
+    margin-top:8px;
+}
+
+/* TOAST */
+
+.toast-container{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:20000;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.toast{
+    background:#0f172a;
+    color:white;
+    padding:14px 18px;
+    border-radius:8px;
+    box-shadow:0 8px 25px rgba(0,0,0,.20);
+    font-size:13px;
+    animation:toastIn .25s ease;
+}
+
+.toast.success{
+    border-left:4px solid #22c55e;
+}
+
+.toast.error{
+    border-left:4px solid #ef4444;
+}
+
+@keyframes toastIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
 @media(max-width:800px){
     .chantiers-list{
         grid-template-columns:1fr;
@@ -345,6 +435,7 @@ textarea{
 }
 
 @media(max-width:700px){
+
     .top{
         flex-direction:column;
         align-items:stretch;
@@ -365,6 +456,18 @@ textarea{
     .container{
         padding:0 14px;
     }
+
+    .modal-content{
+        padding:20px;
+    }
+
+    .form-actions{
+        flex-direction:column;
+    }
+
+    .form-actions button{
+        width:100%;
+    }
 }
 </style>
 
@@ -374,7 +477,6 @@ textarea{
 
 <header class="header">
 
-```
 <a href="dashboard.html" class="logo">
     BATI<span>FLOW</span>
 </a>
@@ -382,13 +484,12 @@ textarea{
 <a href="dashboard.html">
     ← Tableau de bord
 </a>
-```
 
 </header>
 
+
 <main class="container">
 
-```
 <div class="top">
 
     <div>
@@ -404,6 +505,7 @@ textarea{
     </button>
 
 </div>
+
 
 <section id="emptyState" class="empty">
 
@@ -422,20 +524,22 @@ textarea{
 
 </section>
 
+
 <section
     id="chantiersList"
     class="chantiers-list"
     style="display:none;">
 </section>
-```
 
 </main>
 
-<!-- MODALE -->
+
+<!-- ===============================
+     MODALE CHANTIER
+================================ -->
 
 <div class="modal" id="chantierModal">
 
-```
 <div class="modal-content">
 
     <div class="modal-header">
@@ -453,9 +557,13 @@ textarea{
 
     </div>
 
+
     <form id="chantierForm">
 
         <div class="form-grid">
+
+
+            <!-- NOM -->
 
             <div class="form-group full">
 
@@ -471,19 +579,34 @@ textarea{
 
             </div>
 
+
+            <!-- CLIENT -->
+
             <div class="form-group">
 
-                <label for="client">
+                <label for="clientId">
                     Client *
                 </label>
 
-                <input
-                    type="text"
-                    id="client"
-                    placeholder="Nom du client"
+                <select
+                    id="clientId"
                     required>
 
+                    <option value="">
+                        -- Sélectionner un client --
+                    </option>
+
+                </select>
+
+                <div
+                    id="clientHelper"
+                    class="client-helper">
+                </div>
+
             </div>
+
+
+            <!-- LOCALISATION -->
 
             <div class="form-group">
 
@@ -499,6 +622,9 @@ textarea{
 
             </div>
 
+
+            <!-- DATE DEBUT -->
+
             <div class="form-group">
 
                 <label for="dateDebut">
@@ -511,6 +637,9 @@ textarea{
 
             </div>
 
+
+            <!-- DATE FIN -->
+
             <div class="form-group">
 
                 <label for="dateFin">
@@ -522,6 +651,9 @@ textarea{
                     id="dateFin">
 
             </div>
+
+
+            <!-- BUDGET -->
 
             <div class="form-group">
 
@@ -537,6 +669,9 @@ textarea{
 
             </div>
 
+
+            <!-- AVANCEMENT -->
+
             <div class="form-group">
 
                 <label for="avancement">
@@ -551,6 +686,9 @@ textarea{
                     value="0">
 
             </div>
+
+
+            <!-- STATUT -->
 
             <div class="form-group">
 
@@ -580,6 +718,9 @@ textarea{
 
             </div>
 
+
+            <!-- NOTES -->
+
             <div class="form-group full">
 
                 <label for="notes">
@@ -592,7 +733,9 @@ textarea{
 
             </div>
 
+
         </div>
+
 
         <div class="form-actions">
 
@@ -614,62 +757,124 @@ textarea{
     </form>
 
 </div>
-```
 
 </div>
 
+
+<!-- TOAST -->
+
+<div
+    id="toastContainer"
+    class="toast-container">
+</div>
+
+
 <script>
 
-const STORAGE_KEY = "batiflowChantiers";
+/* =====================================================
+   STOCKAGE BATIFLOW
+===================================================== */
+
+const STORAGE_KEY =
+    "batiflowChantiers";
+
+const CLIENT_STORAGE_KEY =
+    "batiflowClients";
+
 
 let chantierEnModification = null;
 
 
-/* ===============================
+/* =====================================================
    ELEMENTS
-================================ */
+===================================================== */
 
 const nouveauBtn =
-    document.getElementById("nouveauChantierBtn");
+    document.getElementById(
+        "nouveauChantierBtn"
+    );
 
 const emptyBtn =
-    document.getElementById("emptyButton");
+    document.getElementById(
+        "emptyButton"
+    );
 
 const modal =
-    document.getElementById("chantierModal");
+    document.getElementById(
+        "chantierModal"
+    );
 
 const closeBtn =
-    document.getElementById("closeModal");
+    document.getElementById(
+        "closeModal"
+    );
 
 const cancelBtn =
-    document.getElementById("cancelButton");
+    document.getElementById(
+        "cancelButton"
+    );
 
 const formulaire =
-    document.getElementById("chantierForm");
+    document.getElementById(
+        "chantierForm"
+    );
 
 const liste =
-    document.getElementById("chantiersList");
+    document.getElementById(
+        "chantiersList"
+    );
 
 const emptyState =
-    document.getElementById("emptyState");
+    document.getElementById(
+        "emptyState"
+    );
 
 const modalTitle =
-    document.getElementById("modalTitle");
+    document.getElementById(
+        "modalTitle"
+    );
+
+const clientSelect =
+    document.getElementById(
+        "clientId"
+    );
+
+const clientHelper =
+    document.getElementById(
+        "clientHelper"
+    );
 
 
-/* ===============================
-   STOCKAGE
-================================ */
+/* =====================================================
+   OBTENIR CLIENTS
+===================================================== */
 
-function obtenirChantiers(){
+function obtenirClients(){
 
     try{
 
-        return JSON.parse(
-            localStorage.getItem(STORAGE_KEY)
-        ) || [];
+        const data =
+            localStorage.getItem(
+                CLIENT_STORAGE_KEY
+            );
+
+        if(!data){
+            return [];
+        }
+
+        const clients =
+            JSON.parse(data);
+
+        return Array.isArray(clients)
+            ? clients
+            : [];
 
     }catch(error){
+
+        console.error(
+            "Erreur lecture clients :",
+            error
+        );
 
         return [];
 
@@ -678,7 +883,51 @@ function obtenirChantiers(){
 }
 
 
-function sauvegarderChantiers(chantiers){
+/* =====================================================
+   OBTENIR CHANTIERS
+===================================================== */
+
+function obtenirChantiers(){
+
+    try{
+
+        const data =
+            localStorage.getItem(
+                STORAGE_KEY
+            );
+
+        if(!data){
+            return [];
+        }
+
+        const chantiers =
+            JSON.parse(data);
+
+        return Array.isArray(chantiers)
+            ? chantiers
+            : [];
+
+    }catch(error){
+
+        console.error(
+            "Erreur lecture chantiers :",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   SAUVEGARDER CHANTIERS
+===================================================== */
+
+function sauvegarderChantiers(
+    chantiers
+){
 
     localStorage.setItem(
         STORAGE_KEY,
@@ -688,308 +937,847 @@ function sauvegarderChantiers(chantiers){
 }
 
 
-/* ===============================
-   MODALE
-================================ */
+/* =====================================================
+   GENERER ID
+===================================================== */
+
+function genererId(){
+
+    return (
+        "chantier_" +
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2,8)
+    );
+
+}
+
+
+/* =====================================================
+   ECHAPPER HTML
+===================================================== */
+
+function echapper(
+    texte
+){
+
+    return String(
+        texte || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   INITIALISATION LISTE CLIENTS
+===================================================== */
+
+function chargerClients(){
+
+    const clients =
+        obtenirClients();
+
+    const ancienneValeur =
+        clientSelect.value;
+
+
+    clientSelect.innerHTML = `
+        <option value="">
+            -- Sélectionner un client --
+        </option>
+    `;
+
+
+    if(
+        clients.length === 0
+    ){
+
+        clientSelect.innerHTML += `
+            <option value="" disabled>
+                Aucun client enregistré
+            </option>
+        `;
+
+        clientHelper.innerHTML = `
+            <div class="no-client-message">
+                ⚠️ Aucun client enregistré.
+                <a
+                    href="clients.html"
+                    class="client-link">
+                    Créer un client
+                </a>
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    clients.forEach(
+        function(client){
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                client.id;
+
+            let texte =
+                client.nom ||
+                "Client sans nom";
+
+            if(
+                client.entreprise &&
+                client.entreprise.trim()
+            ){
+
+                texte +=
+                    " — " +
+                    client.entreprise;
+
+            }
+
+            option.textContent =
+                texte;
+
+            clientSelect.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    clientHelper.innerHTML = `
+        <span class="client-helper-text">
+            ${clients.length}
+            client${clients.length > 1 ? "s" : ""}
+            disponible${clients.length > 1 ? "s" : ""}
+        </span>
+
+        <a
+            href="clients.html"
+            class="client-link">
+            + Nouveau client
+        </a>
+    `;
+
+
+    if(ancienneValeur){
+
+        const existe =
+            clients.some(
+                client =>
+                    String(client.id) ===
+                    String(ancienneValeur)
+            );
+
+        if(existe){
+
+            clientSelect.value =
+                ancienneValeur;
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   OBTENIR CLIENT SELECTIONNE
+===================================================== */
+
+function obtenirClientSelectionne(){
+
+    const clientId =
+        clientSelect.value;
+
+    if(!clientId){
+        return null;
+    }
+
+    const clients =
+        obtenirClients();
+
+    return clients.find(
+        client =>
+            String(client.id) ===
+            String(clientId)
+    ) || null;
+
+}
+
+
+/* =====================================================
+   TROUVER CLIENT PAR NOM
+   POUR ANCIENS CHANTIERS
+===================================================== */
+
+function trouverClientParNom(
+    nom
+){
+
+    if(!nom){
+        return null;
+    }
+
+    const clients =
+        obtenirClients();
+
+    const recherche =
+        String(nom)
+            .trim()
+            .toLowerCase();
+
+
+    return clients.find(
+        client => {
+
+            return (
+                client.nom &&
+                String(client.nom)
+                    .trim()
+                    .toLowerCase() ===
+                recherche
+            );
+
+        }
+    ) || null;
+
+}
+
+
+/* =====================================================
+   OUVRIR NOUVEAU CHANTIER
+===================================================== */
 
 function ouvrirChantier(){
 
-    chantierEnModification = null;
+    chantierEnModification =
+        null;
 
     modalTitle.textContent =
         "Nouveau chantier";
 
     formulaire.reset();
 
-    document.getElementById("avancement").value = 0;
+    document.getElementById(
+        "avancement"
+    ).value = 0;
 
-    modal.classList.add("active");
+    chargerClients();
+
+    modal.classList.add(
+        "active"
+    );
 
 }
 
+
+/* =====================================================
+   FERMER
+===================================================== */
 
 function fermerChantier(){
 
-    modal.classList.remove("active");
+    modal.classList.remove(
+        "active"
+    );
 
-    chantierEnModification = null;
-
-}
-
-
-/* ===============================
-   FORMATAGE
-================================ */
-
-function formaterMontant(montant){
-
-    if(!montant) return "Non défini";
-
-    return Number(montant).toLocaleString("fr-FR") + " FCFA";
+    chantierEnModification =
+        null;
 
 }
 
 
-function statutTexte(statut){
+/* =====================================================
+   FORMATAGE MONTANT
+===================================================== */
+
+function formaterMontant(
+    montant
+){
+
+    if(
+        montant === null ||
+        montant === undefined ||
+        montant === "" ||
+        Number(montant) === 0
+    ){
+
+        return "Non défini";
+
+    }
+
+    return Number(
+        montant
+    ).toLocaleString(
+        "fr-FR"
+    ) + " FCFA";
+
+}
+
+
+/* =====================================================
+   STATUT
+===================================================== */
+
+function statutTexte(
+    statut
+){
 
     const statuts = {
 
-        "a-demarrer":"À démarrer",
+        "a-demarrer":
+            "À démarrer",
 
-        "en-cours":"En cours",
+        "en-cours":
+            "En cours",
 
-        "pause":"En pause",
+        "pause":
+            "En pause",
 
-        "termine":"Terminé"
+        "termine":
+            "Terminé"
 
     };
 
-    return statuts[statut] || statut;
+    return (
+        statuts[statut] ||
+        statut ||
+        "À démarrer"
+    );
 
 }
 
 
-function formaterDate(date){
+/* =====================================================
+   DATE
+===================================================== */
 
-    if(!date) return "Non définie";
+function formaterDate(
+    date
+){
 
-    const d = new Date(date + "T00:00:00");
+    if(!date){
+        return "Non définie";
+    }
 
-    return d.toLocaleDateString("fr-FR");
+    try{
+
+        const d =
+            new Date(
+                date + "T00:00:00"
+            );
+
+        return d.toLocaleDateString(
+            "fr-FR"
+        );
+
+    }catch(error){
+
+        return "Non définie";
+
+    }
 
 }
 
 
-/* ===============================
-   AFFICHER LES CHANTIERS
-================================ */
+/* =====================================================
+   AFFICHER CHANTIERS
+===================================================== */
 
 function afficherChantiers(){
 
-    const chantiers = obtenirChantiers();
+    const chantiers =
+        obtenirChantiers();
 
-    if(chantiers.length === 0){
 
-        emptyState.style.display = "block";
+    if(
+        chantiers.length === 0
+    ){
 
-        liste.style.display = "none";
+        emptyState.style.display =
+            "block";
 
-        liste.innerHTML = "";
+        liste.style.display =
+            "none";
+
+        liste.innerHTML =
+            "";
 
         return;
 
     }
 
-    emptyState.style.display = "none";
 
-    liste.style.display = "grid";
+    emptyState.style.display =
+        "none";
 
-    liste.innerHTML = "";
+    liste.style.display =
+        "grid";
 
-    chantiers.forEach(function(chantier){
+    liste.innerHTML =
+        "";
 
-        const card =
-            document.createElement("article");
 
-        card.className = "chantier-card";
+    chantiers.forEach(
+        function(chantier){
 
-        const avancement =
-            Math.max(
-                0,
-                Math.min(
-                    100,
-                    Number(chantier.avancement) || 0
-                )
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+            card.className =
+                "chantier-card";
+
+
+            const avancement =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        Number(
+                            chantier.avancement
+                        ) || 0
+                    )
+                );
+
+
+            const client =
+                trouverClientPourChantier(
+                    chantier
+                );
+
+
+            let nomClient =
+                chantier.client ||
+                "Client non renseigné";
+
+
+            if(client){
+
+                nomClient =
+                    client.nom ||
+                    nomClient;
+
+            }
+
+
+            card.innerHTML = `
+
+                <div class="chantier-header">
+
+                    <div>
+
+                        <h3>
+                            ${echapper(
+                                chantier.nom
+                            )}
+                        </h3>
+
+                        <div class="chantier-client">
+                            👤 ${echapper(
+                                nomClient
+                            )}
+                        </div>
+
+                    </div>
+
+                    <span class="status ${
+                        echapper(
+                            chantier.statut ||
+                            "a-demarrer"
+                        )
+                    }">
+
+                        ${echapper(
+                            statutTexte(
+                                chantier.statut
+                            )
+                        )}
+
+                    </span>
+
+                </div>
+
+
+                <div class="info-grid">
+
+                    <div class="info">
+
+                        <small>
+                            📍 Localisation
+                        </small>
+
+                        <strong>
+                            ${echapper(
+                                chantier.localisation
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <small>
+                            💰 Budget
+                        </small>
+
+                        <strong>
+                            ${formaterMontant(
+                                chantier.budget
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <small>
+                            📅 Début
+                        </small>
+
+                        <strong>
+                            ${formaterDate(
+                                chantier.dateDebut
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <small>
+                            🏁 Fin prévue
+                        </small>
+
+                        <strong>
+                            ${formaterDate(
+                                chantier.dateFin
+                            )}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress-area">
+
+                    <div class="progress-top">
+
+                        <span>
+                            Avancement
+                        </span>
+
+                        <strong>
+                            ${avancement}%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width:${avancement}%">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-actions">
+
+                    <button
+                        class="action-button edit"
+                        onclick="modifierChantier('${echapper(
+                            chantier.id
+                        )}')">
+
+                        ✏️ Modifier
+
+                    </button>
+
+
+                    <button
+                        class="action-button delete"
+                        onclick="supprimerChantier('${echapper(
+                            chantier.id
+                        )}')">
+
+                        🗑️ Supprimer
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            liste.appendChild(
+                card
             );
 
-        card.innerHTML = `
-
-            <div class="chantier-header">
-
-                <div>
-
-                    <h3>
-                        ${echapper(chantier.nom)}
-                    </h3>
-
-                    <div class="chantier-client">
-                        👤 ${echapper(chantier.client)}
-                    </div>
-
-                </div>
-
-                <span class="status ${chantier.statut}">
-                    ${statutTexte(chantier.statut)}
-                </span>
-
-            </div>
-
-            <div class="info-grid">
-
-                <div class="info">
-                    <small>📍 Localisation</small>
-                    <strong>
-                        ${echapper(chantier.localisation)}
-                    </strong>
-                </div>
-
-                <div class="info">
-                    <small>💰 Budget</small>
-                    <strong>
-                        ${formaterMontant(chantier.budget)}
-                    </strong>
-                </div>
-
-                <div class="info">
-                    <small>📅 Début</small>
-                    <strong>
-                        ${formaterDate(chantier.dateDebut)}
-                    </strong>
-                </div>
-
-                <div class="info">
-                    <small>🏁 Fin prévue</small>
-                    <strong>
-                        ${formaterDate(chantier.dateFin)}
-                    </strong>
-                </div>
-
-            </div>
-
-            <div class="progress-area">
-
-                <div class="progress-top">
-
-                    <span>Avancement</span>
-
-                    <strong>${avancement}%</strong>
-
-                </div>
-
-                <div class="progress">
-
-                    <div
-                        class="progress-bar"
-                        style="width:${avancement}%">
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="card-actions">
-
-                <button
-                    class="action-button edit"
-                    onclick="modifierChantier('${chantier.id}')">
-                    ✏️ Modifier
-                </button>
-
-                <button
-                    class="action-button delete"
-                    onclick="supprimerChantier('${chantier.id}')">
-                    🗑️ Supprimer
-                </button>
-
-            </div>
-
-        `;
-
-        liste.appendChild(card);
-
-    });
+        }
+    );
 
 }
 
 
-/* ===============================
-   SECURITE HTML
-================================ */
+/* =====================================================
+   TROUVER CLIENT POUR CHANTIER
+===================================================== */
 
-function echapper(texte){
+function trouverClientPourChantier(
+    chantier
+){
 
-    return String(texte || "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    const clients =
+        obtenirClients();
+
+
+    if(
+        chantier.clientId
+    ){
+
+        const parId =
+            clients.find(
+                client =>
+                    String(client.id) ===
+                    String(
+                        chantier.clientId
+                    )
+            );
+
+        if(parId){
+            return parId;
+        }
+
+    }
+
+
+    if(
+        chantier.client
+    ){
+
+        const parNom =
+            trouverClientParNom(
+                chantier.client
+            );
+
+        if(parNom){
+            return parNom;
+        }
+
+    }
+
+
+    return null;
 
 }
 
 
-/* ===============================
-   MODIFIER
-================================ */
+/* =====================================================
+   MODIFIER CHANTIER
+===================================================== */
 
-function modifierChantier(id){
+function modifierChantier(
+    id
+){
 
     const chantiers =
         obtenirChantiers();
 
+
     const chantier =
-        chantiers.find(function(item){
+        chantiers.find(
+            function(item){
 
-            return item.id === id;
+                return String(item.id) ===
+                    String(id);
 
-        });
+            }
+        );
 
-    if(!chantier) return;
 
-    chantierEnModification = id;
+    if(!chantier){
+
+        afficherToast(
+            "❌ Chantier introuvable.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    chantierEnModification =
+        chantier.id;
+
 
     modalTitle.textContent =
         "Modifier le chantier";
 
-    document.getElementById("nom").value =
+
+    chargerClients();
+
+
+    document.getElementById(
+        "nom"
+    ).value =
         chantier.nom || "";
 
-    document.getElementById("client").value =
-        chantier.client || "";
 
-    document.getElementById("localisation").value =
+    let clientId =
+        chantier.clientId ||
+        "";
+
+
+    /*
+       Compatibilité avec les anciens
+       chantiers qui n'avaient pas clientId.
+    */
+
+    if(!clientId){
+
+        const ancienClient =
+            trouverClientParNom(
+                chantier.client
+            );
+
+        if(ancienClient){
+
+            clientId =
+                ancienClient.id;
+
+        }
+
+    }
+
+
+    clientSelect.value =
+        clientId;
+
+
+    document.getElementById(
+        "localisation"
+    ).value =
         chantier.localisation || "";
 
-    document.getElementById("dateDebut").value =
+
+    document.getElementById(
+        "dateDebut"
+    ).value =
         chantier.dateDebut || "";
 
-    document.getElementById("dateFin").value =
+
+    document.getElementById(
+        "dateFin"
+    ).value =
         chantier.dateFin || "";
 
-    document.getElementById("budget").value =
+
+    document.getElementById(
+        "budget"
+    ).value =
         chantier.budget || "";
 
-    document.getElementById("avancement").value =
+
+    document.getElementById(
+        "avancement"
+    ).value =
         chantier.avancement || 0;
 
-    document.getElementById("statut").value =
-        chantier.statut || "a-demarrer";
 
-    document.getElementById("notes").value =
+    document.getElementById(
+        "statut"
+    ).value =
+        chantier.statut ||
+        "a-demarrer";
+
+
+    document.getElementById(
+        "notes"
+    ).value =
         chantier.notes || "";
 
-    modal.classList.add("active");
+
+    modal.classList.add(
+        "active"
+    );
 
 }
 
 
-/* ===============================
+/* =====================================================
    SUPPRIMER
-================================ */
+===================================================== */
 
-function supprimerChantier(id){
+function supprimerChantier(
+    id
+){
 
     const chantiers =
         obtenirChantiers();
 
+
     const chantier =
-        chantiers.find(function(item){
+        chantiers.find(
+            function(item){
 
-            return item.id === id;
+                return String(item.id) ===
+                    String(id);
 
-        });
+            }
+        );
 
-    if(!chantier) return;
+
+    if(!chantier){
+
+        afficherToast(
+            "❌ Chantier introuvable.",
+            "error"
+        );
+
+        return;
+
+    }
+
 
     const confirmation =
         confirm(
@@ -998,53 +1786,334 @@ function supprimerChantier(id){
             " » ?"
         );
 
-    if(!confirmation) return;
+
+    if(!confirmation){
+        return;
+    }
+
 
     const nouveauxChantiers =
-        chantiers.filter(function(item){
+        chantiers.filter(
+            function(item){
 
-            return item.id !== id;
+                return String(item.id) !==
+                    String(id);
 
-        });
+            }
+        );
+
 
     sauvegarderChantiers(
         nouveauxChantiers
     );
 
+
     afficherChantiers();
+
+
+    afficherToast(
+        "✅ Chantier supprimé.",
+        "success"
+    );
 
 }
 
 
-/* ===============================
+/* =====================================================
+   ENREGISTREMENT
+===================================================== */
+
+formulaire.addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+
+        const chantiers =
+            obtenirChantiers();
+
+
+        const client =
+            obtenirClientSelectionne();
+
+
+        if(!client){
+
+            afficherToast(
+                "⚠️ Veuillez sélectionner un client.",
+                "error"
+            );
+
+            clientSelect.focus();
+
+            return;
+
+        }
+
+
+        const nom =
+            document.getElementById(
+                "nom"
+            ).value.trim();
+
+
+        const localisation =
+            document.getElementById(
+                "localisation"
+            ).value.trim();
+
+
+        if(!nom){
+
+            afficherToast(
+                "⚠️ Veuillez saisir le nom du chantier.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(!localisation){
+
+            afficherToast(
+                "⚠️ Veuillez saisir la localisation.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /*
+           Si modification :
+           on conserve la date de création
+           existante.
+        */
+
+        let ancienChantier =
+            null;
+
+
+        if(
+            chantierEnModification
+        ){
+
+            ancienChantier =
+                chantiers.find(
+                    item =>
+                        String(item.id) ===
+                        String(
+                            chantierEnModification
+                        )
+                );
+
+        }
+
+
+        const maintenant =
+            new Date().toISOString();
+
+
+        const chantier = {
+
+            id:
+                chantierEnModification ||
+                genererId(),
+
+            nom:
+
+                nom,
+
+            /*
+               IMPORTANT :
+               clientId permet maintenant
+               de relier réellement le
+               chantier au client.
+            */
+
+            clientId:
+                client.id,
+
+            /*
+               On conserve également
+               le nom pour compatibilité
+               avec l'ancien BATIFLOW.
+            */
+
+            client:
+                client.nom || "",
+
+            clientNom:
+                client.nom || "",
+
+            entrepriseClient:
+                client.entreprise || "",
+
+            localisation:
+
+                localisation,
+
+            dateDebut:
+
+                document.getElementById(
+                    "dateDebut"
+                ).value,
+
+            dateFin:
+
+                document.getElementById(
+                    "dateFin"
+                ).value,
+
+            budget:
+
+                document.getElementById(
+                    "budget"
+                ).value,
+
+            avancement:
+
+                document.getElementById(
+                    "avancement"
+                ).value,
+
+            statut:
+
+                document.getElementById(
+                    "statut"
+                ).value,
+
+            notes:
+
+                document.getElementById(
+                    "notes"
+                ).value.trim(),
+
+            dateCreation:
+
+                ancienChantier &&
+                ancienChantier.dateCreation
+
+                    ? ancienChantier.dateCreation
+
+                    : maintenant,
+
+            updatedAt:
+
+                maintenant
+
+        };
+
+
+        if(
+            chantierEnModification
+        ){
+
+            const index =
+                chantiers.findIndex(
+                    function(item){
+
+                        return String(item.id) ===
+                            String(
+                                chantierEnModification
+                            );
+
+                    }
+                );
+
+
+            if(index !== -1){
+
+                chantiers[index] =
+                    chantier;
+
+            }
+
+
+            sauvegarderChantiers(
+                chantiers
+            );
+
+
+            afficherChantiers();
+
+            fermerChantier();
+
+
+            afficherToast(
+                "✅ Chantier modifié avec succès.",
+                "success"
+            );
+
+
+        }else{
+
+            chantiers.unshift(
+                chantier
+            );
+
+
+            sauvegarderChantiers(
+                chantiers
+            );
+
+
+            afficherChantiers();
+
+            fermerChantier();
+
+
+            afficherToast(
+                "✅ Chantier enregistré avec succès.",
+                "success"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
    EVENEMENTS
-================================ */
+===================================================== */
 
 nouveauBtn.addEventListener(
     "click",
     ouvrirChantier
 );
 
+
 emptyBtn.addEventListener(
     "click",
     ouvrirChantier
 );
+
 
 closeBtn.addEventListener(
     "click",
     fermerChantier
 );
 
+
 cancelBtn.addEventListener(
     "click",
     fermerChantier
 );
 
+
 modal.addEventListener(
     "click",
     function(event){
 
-        if(event.target === modal){
+        if(
+            event.target ===
+            modal
+        ){
 
             fermerChantier();
 
@@ -1054,101 +2123,53 @@ modal.addEventListener(
 );
 
 
-/* ===============================
-   ENREGISTREMENT
-================================ */
+/* =====================================================
+   SYNCHRONISATION CLIENTS
+===================================================== */
 
-formulaire.addEventListener(
-    "submit",
+window.addEventListener(
+    "storage",
     function(event){
 
-        event.preventDefault();
+        if(
+            event.key ===
+            CLIENT_STORAGE_KEY
+        ){
 
-        const chantiers =
-            obtenirChantiers();
+            chargerClients();
 
-        const chantier = {
-
-            id:
-                chantierEnModification ||
-                Date.now().toString(),
-
-            nom:
-                document.getElementById("nom").value.trim(),
-
-            client:
-                document.getElementById("client").value.trim(),
-
-            localisation:
-                document.getElementById("localisation").value.trim(),
-
-            dateDebut:
-                document.getElementById("dateDebut").value,
-
-            dateFin:
-                document.getElementById("dateFin").value,
-
-            budget:
-                document.getElementById("budget").value,
-
-            avancement:
-                document.getElementById("avancement").value,
-
-            statut:
-                document.getElementById("statut").value,
-
-            notes:
-                document.getElementById("notes").value.trim(),
-
-            dateCreation:
-                new Date().toISOString()
-
-        };
-
-
-        if(chantierEnModification){
-
-            const index =
-                chantiers.findIndex(function(item){
-
-                    return item.id === chantierEnModification;
-
-                });
-
-            if(index !== -1){
-
-                chantiers[index] = chantier;
-
-            }
-
-        }else{
-
-            chantiers.unshift(chantier);
+            afficherChantiers();
 
         }
 
 
-        sauvegarderChantiers(chantiers);
+        if(
+            event.key ===
+            STORAGE_KEY
+        ){
 
-        afficherChantiers();
+            afficherChantiers();
 
-        fermerChantier();
-
-        alert(
-            chantierEnModification
-            ? "✅ Chantier modifié avec succès !"
-            : "✅ Chantier enregistré avec succès !"
-        );
+        }
 
     }
 );
 
 
-/* ===============================
-   CHARGEMENT
-================================ */
+/* =====================================================
+   INITIALISATION
+===================================================== */
 
-afficherChantiers();
+function initialiser(){
+
+    chargerClients();
+
+    afficherChantiers();
+
+}
+
+
+initialiser();
 
 </script>
 
