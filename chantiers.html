@@ -1,25 +1,660 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chantiers — BATIFLOW</title>
+
+    <title>Chantiers - BATIFLOW</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #172033;
+        }
+
+        .header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .top h1 {
+            margin: 0;
+        }
+
+        .primary-button {
+            border: none;
+            background: #f59e0b;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .primary-button:hover {
+            opacity: 0.9;
+        }
+
+        .empty {
+            background: white;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .empty h2 {
+            margin-bottom: 10px;
+        }
+
+        /* MODALE */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 9999;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 14px;
+            padding: 30px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .close {
+            border: none;
+            background: transparent;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .secondary-button {
+            border: 1px solid #d1d5db;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .submit-button {
+            border: none;
+            background: #0f172a;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+
+            .top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+        }
+
+    </style>
 </head>
 
 <body>
 
-    <h1>BATIFLOW</h1>
+    <header class="header">
 
-    <h2>Gestion des chantiers</h2>
+        <div class="logo">
+            BATI<span>FLOW</span>
+        </div>
 
-    <p>La page fonctionne correctement.</p>
+        <div>
+            Gestion des chantiers
+        </div>
 
-    <button type="button" onclick="alert('ÇA MARCHE !')">
-        NOUVEAU CHANTIER
-    </button>
+    </header>
+
+
+    <main class="container">
+
+        <div class="top">
+
+            <div>
+                <h1>Mes chantiers</h1>
+                <p>Suivez vos projets de construction.</p>
+            </div>
+
+            <button
+                type="button"
+                class="primary-button"
+                id="nouveauChantierBtn"
+            >
+                + Nouveau chantier
+            </button>
+
+        </div>
+
+
+        <section class="empty">
+
+            <h2>Aucun chantier</h2>
+
+            <p>
+                Commencez par créer votre premier chantier.
+            </p>
+
+            <button
+                type="button"
+                class="primary-button"
+                id="emptyButton"
+            >
+                + Créer un chantier
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- MODALE NOUVEAU CHANTIER -->
+
+    <div
+        class="modal"
+        id="chantierModal"
+    >
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Nouveau chantier</h2>
+
+                <button
+                    type="button"
+                    class="close"
+                    id="closeModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="chantierForm">
+
+                <div class="form-grid">
+
+
+                    <div class="form-group full">
+
+                        <label for="nom">
+                            Nom du chantier *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nom"
+                            placeholder="Ex : Construction maison R+1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="client">
+                            Client *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="client"
+                            placeholder="Nom du client"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="localisation">
+                            Localisation *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="localisation"
+                            placeholder="Ex : Lomé, Agoè"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="dateDebut">
+                            Date de début
+                        </label>
+
+                        <input
+                            type="date"
+                            id="dateDebut"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="dateFin">
+                            Fin prévue
+                        </label>
+
+                        <input
+                            type="date"
+                            id="dateFin"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="budget">
+                            Budget (FCFA)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="budget"
+                            min="0"
+                            placeholder="Ex : 15000000"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="avancement">
+                            Avancement (%)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="avancement"
+                            min="0"
+                            max="100"
+                            value="0"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="statut">
+                            Statut
+                        </label>
+
+                        <select id="statut">
+
+                            <option value="a-demarrer">
+                                À démarrer
+                            </option>
+
+                            <option value="en-cours">
+                                En cours
+                            </option>
+
+                            <option value="pause">
+                                En pause
+                            </option>
+
+                            <option value="termine">
+                                Terminé
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label for="notes">
+                            Notes
+                        </label>
+
+                        <textarea
+                            id="notes"
+                            placeholder="Informations complémentaires..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancelButton"
+                    >
+                        Annuler
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
+                        Enregistrer le chantier
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* ================================
+           OUVRIR LA FENÊTRE
+        ================================= */
+
+        const nouveauBtn =
+            document.getElementById(
+                "nouveauChantierBtn"
+            );
+
+        const emptyBtn =
+            document.getElementById(
+                "emptyButton"
+            );
+
+        const modal =
+            document.getElementById(
+                "chantierModal"
+            );
+
+        const closeBtn =
+            document.getElementById(
+                "closeModal"
+            );
+
+        const cancelBtn =
+            document.getElementById(
+                "cancelButton"
+            );
+
+
+        function ouvrirChantier() {
+
+            modal.classList.add("active");
+
+        }
+
+
+        function fermerChantier() {
+
+            modal.classList.remove("active");
+
+        }
+
+
+        nouveauBtn.addEventListener(
+            "click",
+            ouvrirChantier
+        );
+
+
+        emptyBtn.addEventListener(
+            "click",
+            ouvrirChantier
+        );
+
+
+        closeBtn.addEventListener(
+            "click",
+            fermerChantier
+        );
+
+
+        cancelBtn.addEventListener(
+            "click",
+            fermerChantier
+        );
+
+
+        /* Fermer en cliquant à l'extérieur */
+
+        modal.addEventListener(
+            "click",
+            function(event) {
+
+                if (event.target === modal) {
+
+                    fermerChantier();
+
+                }
+
+            }
+        );
+
+
+        /* ================================
+           ENREGISTRER
+        ================================= */
+
+        const formulaire =
+            document.getElementById(
+                "chantierForm"
+            );
+
+
+        formulaire.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const chantier = {
+
+                    nom:
+                        document.getElementById(
+                            "nom"
+                        ).value,
+
+                    client:
+                        document.getElementById(
+                            "client"
+                        ).value,
+
+                    localisation:
+                        document.getElementById(
+                            "localisation"
+                        ).value,
+
+                    dateDebut:
+                        document.getElementById(
+                            "dateDebut"
+                        ).value,
+
+                    dateFin:
+                        document.getElementById(
+                            "dateFin"
+                        ).value,
+
+                    budget:
+                        document.getElementById(
+                            "budget"
+                        ).value,
+
+                    avancement:
+                        document.getElementById(
+                            "avancement"
+                        ).value,
+
+                    statut:
+                        document.getElementById(
+                            "statut"
+                        ).value,
+
+                    notes:
+                        document.getElementById(
+                            "notes"
+                        ).value
+
+                };
+
+
+                /* Sauvegarde */
+
+                localStorage.setItem(
+                    "batiflowDernierChantier",
+                    JSON.stringify(chantier)
+                );
+
+
+                alert(
+                    "✅ Chantier enregistré avec succès !"
+                );
+
+
+                fermerChantier();
+
+
+                formulaire.reset();
+
+
+                document.getElementById(
+                    "avancement"
+                ).value = 0;
+
+            }
+        );
+
+    </script>
 
 </body>
 </html>
-
-
-
+```
