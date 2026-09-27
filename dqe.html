@@ -3,221 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BATIFLOW — DQE & Métré</title>
+<title>BATIFLOW — DQE</title>
 
 <style>
-
-:root{
-    --primary:#f59e0b;
-    --primary-dark:#d97706;
-    --dark:#101827;
-    --dark-2:#182235;
-    --dark-3:#202d42;
-    --bg:#f4f7fb;
-    --white:#ffffff;
-    --text:#172033;
-    --muted:#64748b;
-    --border:#e2e8f0;
-    --success:#16a34a;
-    --danger:#dc2626;
-    --info:#2563eb;
-    --shadow:0 10px 30px rgba(15,23,42,.08);
-    --radius:16px;
-}
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
-html{
-    scroll-behavior:smooth;
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --dark:#111827;
+    --dark2:#1f2937;
+    --primary:#2563eb;
+    --primary2:#1d4ed8;
+    --success:#16a34a;
+    --warning:#d97706;
+    --danger:#dc2626;
+    --text:#172033;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+    --shadow:0 8px 30px rgba(15,23,42,.07);
 }
 
 body{
-    font-family:
-        Inter,
-        "Segoe UI",
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
     background:var(--bg);
     color:var(--text);
-    min-height:100vh;
 }
 
-button,
-input,
-select,
-textarea{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-/* =========================
-   SIDEBAR
-========================= */
-
+/* SIDEBAR */
 .sidebar{
     position:fixed;
     left:0;
     top:0;
-    bottom:0;
-    width:260px;
-    background:var(--dark);
-    color:white;
+    width:250px;
+    height:100vh;
+    background:#111827;
+    color:#fff;
+    padding:20px 15px;
     z-index:1000;
     overflow-y:auto;
 }
 
-.sidebar-logo{
-    height:82px;
+.logo{
     display:flex;
     align-items:center;
-    padding:0 20px;
-    border-bottom:1px solid rgba(255,255,255,.08);
+    gap:10px;
+    padding:5px 10px 25px;
+    font-size:23px;
+    font-weight:800;
 }
 
-.batiflow-logo{
+.logo-mark{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:#2563eb;
     display:flex;
     align-items:center;
-    gap:11px;
-    text-decoration:none;
-    width:max-content;
-    position:relative;
-    transition:transform .25s ease;
-}
-
-.batiflow-logo:hover{
-    transform:translateY(-1px);
-}
-
-.batiflow-logo-icon{
-    width:48px;
-    height:48px;
-    flex:none;
-    filter:
-        drop-shadow(0 4px 8px rgba(0,0,0,.35))
-        drop-shadow(0 0 8px rgba(245,158,11,.12));
-}
-
-.batiflow-logo-text{
-    font-size:22px;
-    line-height:1;
+    justify-content:center;
     font-weight:900;
-    letter-spacing:1.5px;
-    white-space:nowrap;
 }
 
-.batiflow-logo-text .bati{
-    color:#ffffff;
-}
-
-.batiflow-logo-text .flow{
-    color:#f59e0b;
-}
-
-.batiflow-logo-subtitle{
-    position:absolute;
-    left:59px;
-    bottom:-12px;
-    color:#64748b;
-    font-size:7px;
-    font-weight:700;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    white-space:nowrap;
-}
-
-.nav{
-    padding:18px 12px;
+.logo small{
+    display:block;
+    font-size:10px;
+    color:#9ca3af;
+    font-weight:500;
 }
 
 .nav-title{
-    color:#64748b;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:1.5px;
-    padding:10px 12px;
+    color:#6b7280;
+    font-size:11px;
     text-transform:uppercase;
+    padding:15px 12px 8px;
+    letter-spacing:1px;
 }
 
 .nav-link{
     display:flex;
     align-items:center;
     gap:12px;
-    padding:12px 14px;
-    margin:4px 0;
-    border-radius:10px;
     color:#cbd5e1;
+    text-decoration:none;
+    padding:11px 12px;
+    margin:3px 0;
+    border-radius:9px;
     font-size:14px;
-    font-weight:600;
     transition:.2s;
 }
 
-.nav-link span{
-    width:23px;
-    text-align:center;
-    font-size:17px;
-}
-
-.nav-link:hover{
-    background:rgba(255,255,255,.06);
+.nav-link:hover,
+.nav-link.active{
+    background:#1e40af;
     color:#fff;
 }
 
-.nav-link.active{
-    background:rgba(245,158,11,.13);
-    color:#f59e0b;
-}
-
-.nav-separator{
-    height:1px;
-    background:rgba(255,255,255,.07);
-    margin:15px 8px;
+.nav-icon{
+    width:22px;
+    text-align:center;
 }
 
 .logout{
-    margin-top:15px;
+    margin-top:20px;
+    border-top:1px solid #374151;
+    padding-top:15px;
 }
 
-/* =========================
-   MAIN
-========================= */
-
+/* MAIN */
 .main{
-    margin-left:260px;
+    margin-left:250px;
     min-height:100vh;
 }
 
 .topbar{
-    height:76px;
+    height:70px;
     background:#fff;
     border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 30px;
+    padding:0 28px;
     position:sticky;
     top:0;
-    z-index:900;
-}
-
-.menu-btn{
-    display:none;
-    border:0;
-    background:none;
-    font-size:25px;
+    z-index:100;
 }
 
 .topbar-left{
@@ -228,34 +140,15 @@ a{
 
 .page-title{
     font-size:20px;
-    font-weight:800;
+    font-weight:750;
 }
 
-.page-subtitle{
+.autosave{
     font-size:12px;
-    color:var(--muted);
-    margin-top:2px;
-}
-
-.topbar-right{
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
-
-.save-indicator{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    font-size:12px;
-    color:var(--muted);
-}
-
-.save-dot{
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:var(--success);
+    color:var(--success);
+    background:#ecfdf3;
+    padding:6px 10px;
+    border-radius:20px;
 }
 
 .user{
@@ -267,78 +160,27 @@ a{
 .avatar{
     width:38px;
     height:38px;
-    background:var(--dark);
+    background:#2563eb;
     color:#fff;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-weight:800;
-}
-
-.user-name{
-    font-size:13px;
     font-weight:700;
 }
 
-/* =========================
-   CONTENT
-========================= */
-
 .content{
-    padding:30px;
-    max-width:1600px;
-    margin:auto;
+    padding:25px;
 }
 
-.page-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:20px;
-    margin-bottom:25px;
-}
-
-.eyebrow{
-    color:var(--primary-dark);
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:1.6px;
-    text-transform:uppercase;
-    margin-bottom:6px;
-}
-
-.page-header h1{
-    font-size:30px;
-    line-height:1.15;
-    margin-bottom:7px;
-}
-
-.page-header p{
-    color:var(--muted);
-    font-size:14px;
-}
-
-.header-actions{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
+/* BUTTONS */
 .btn{
     border:0;
-    border-radius:10px;
-    padding:11px 16px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
+    border-radius:8px;
+    padding:10px 15px;
+    cursor:pointer;
     font-size:13px;
-    font-weight:800;
+    font-weight:650;
     transition:.2s;
 }
 
@@ -348,22 +190,21 @@ a{
 
 .btn-primary{
     background:var(--primary);
-    color:#111827;
-}
-
-.btn-primary:hover{
-    background:#fbbf24;
-}
-
-.btn-dark{
-    background:var(--dark);
     color:#fff;
 }
 
-.btn-light{
-    background:#fff;
-    color:var(--text);
-    border:1px solid var(--border);
+.btn-primary:hover{
+    background:var(--primary2);
+}
+
+.btn-secondary{
+    background:#eef2f7;
+    color:#374151;
+}
+
+.btn-success{
+    background:var(--success);
+    color:#fff;
 }
 
 .btn-danger{
@@ -371,431 +212,232 @@ a{
     color:#b91c1c;
 }
 
-.btn-success{
-    background:#dcfce7;
-    color:#15803d;
-}
-
-.btn-info{
-    background:#dbeafe;
-    color:#1d4ed8;
+.btn-warning{
+    background:#fff7ed;
+    color:#c2410c;
 }
 
 .btn-small{
-    padding:8px 11px;
+    padding:7px 10px;
     font-size:12px;
 }
 
-/* =========================
-   STATS
-========================= */
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
 
+/* STATS */
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:16px;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
-.stat-card{
+.stat{
     background:#fff;
     border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:20px;
+    border-radius:12px;
+    padding:18px;
     box-shadow:var(--shadow);
-}
-
-.stat-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:12px;
 }
 
 .stat-label{
     color:var(--muted);
     font-size:12px;
-    font-weight:700;
-}
-
-.stat-icon{
-    width:38px;
-    height:38px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:10px;
-    background:#fff7ed;
-    font-size:19px;
+    margin-bottom:7px;
 }
 
 .stat-value{
-    font-size:28px;
-    font-weight:900;
+    font-size:25px;
+    font-weight:800;
 }
 
-.stat-foot{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:4px;
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
+/* GRID */
 .grid{
     display:grid;
-    grid-template-columns:minmax(0,1.5fr) minmax(330px,.8fr);
+    grid-template-columns:1fr 380px;
     gap:20px;
 }
 
-.panel{
+.card{
     background:#fff;
     border:1px solid var(--border);
-    border-radius:var(--radius);
+    border-radius:13px;
     box-shadow:var(--shadow);
+    margin-bottom:20px;
     overflow:hidden;
 }
 
-.panel-header{
-    padding:19px 20px;
+.card-header{
+    padding:17px 20px;
     border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
+    gap:10px;
 }
 
-.panel-header h2{
-    font-size:17px;
+.card-title{
+    font-size:16px;
+    font-weight:750;
 }
 
-.panel-header p{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:3px;
-}
-
-.panel-body{
+.card-body{
     padding:20px;
 }
 
-/* =========================
-   FORM
-========================= */
-
+/* FORM */
 .form-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:16px;
+    gap:15px;
 }
 
 .form-group{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
+    margin-bottom:2px;
 }
 
 .form-group.full{
-    grid-column:1 / -1;
+    grid-column:1/-1;
 }
 
-.form-group label{
+label{
+    display:block;
     font-size:12px;
-    font-weight:800;
-    color:#334155;
+    font-weight:650;
+    color:#374151;
+    margin-bottom:6px;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea{
+input,
+select,
+textarea{
     width:100%;
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:11px 12px;
-    background:#fff;
-    color:var(--text);
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    padding:10px 11px;
+    font-family:inherit;
+    font-size:13px;
     outline:none;
-    transition:.2s;
+    background:#fff;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-    border-color:var(--primary);
-    box-shadow:0 0 0 3px rgba(245,158,11,.12);
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.08);
 }
 
 textarea{
-    resize:vertical;
     min-height:90px;
+    resize:vertical;
 }
 
-.section-title{
-    font-size:15px;
-    font-weight:900;
-    margin:25px 0 13px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.section-title span{
-    color:var(--muted);
-    font-size:11px;
-    font-weight:600;
-}
-
-/* =========================
-   DQE TABLE
-========================= */
-
-.table-wrapper{
+/* TABLE */
+.table-wrap{
     overflow-x:auto;
-    border:1px solid var(--border);
-    border-radius:12px;
 }
 
-.dqe-table{
+table{
     width:100%;
-    min-width:950px;
     border-collapse:collapse;
+    min-width:720px;
 }
 
-.dqe-table th{
+th{
     background:#f8fafc;
-    color:#475569;
+    color:#64748b;
     font-size:11px;
     text-transform:uppercase;
-    letter-spacing:.4px;
     padding:11px 8px;
     border-bottom:1px solid var(--border);
     text-align:left;
 }
 
-.dqe-table td{
+td{
     padding:8px;
     border-bottom:1px solid #eef2f7;
     vertical-align:middle;
 }
 
-.dqe-table input,
-.dqe-table select{
-    width:100%;
-    border:1px solid #e2e8f0;
-    border-radius:7px;
+td input,
+td select{
     padding:8px;
-    background:#fff;
-    outline:none;
     font-size:12px;
 }
 
-.dqe-table input:focus,
-.dqe-table select:focus{
-    border-color:var(--primary);
-}
-
-.col-num{
-    width:45px;
-    text-align:center!important;
-}
-
-.col-designation{
-    min-width:270px;
-}
-
-.col-unit{
-    width:90px;
-}
-
-.col-qty{
-    width:90px;
-}
-
-.col-price{
-    width:125px;
-}
-
-.col-total{
-    width:140px;
-}
-
-.col-action{
-    width:50px;
-}
-
-.line-total{
-    font-weight:800;
-    white-space:nowrap;
-}
-
-.remove-line{
-    width:30px;
-    height:30px;
-    border:0;
-    border-radius:7px;
-    background:#fee2e2;
-    color:#dc2626;
-    font-weight:900;
-}
-
-/* =========================
-   TOTALS
-========================= */
-
-.totals{
-    margin-top:20px;
+.total-box{
+    margin-top:18px;
     margin-left:auto;
-    max-width:420px;
-    border:1px solid var(--border);
-    border-radius:12px;
-    overflow:hidden;
+    max-width:360px;
 }
 
 .total-row{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    padding:12px 15px;
-    border-bottom:1px solid var(--border);
+    padding:8px 0;
     font-size:13px;
 }
 
-.total-row:last-child{
-    border-bottom:0;
+.total-row.grand{
+    border-top:2px solid #111827;
+    margin-top:6px;
+    padding-top:12px;
+    font-size:18px;
+    font-weight:800;
 }
 
-.total-row span:first-child{
-    color:var(--muted);
+/* DQE LIST */
+.search{
+    max-width:300px;
 }
-
-.total-row strong{
-    font-size:15px;
-}
-
-.total-row.final{
-    background:#fff7ed;
-}
-
-.total-row.final strong{
-    font-size:20px;
-    color:#b45309;
-}
-
-.tva-input{
-    width:65px!important;
-    padding:5px 7px!important;
-    margin-right:5px;
-}
-
-/* =========================
-   SEARCH
-========================= */
-
-.search-box{
-    position:relative;
-    margin-bottom:15px;
-}
-
-.search-box input{
-    width:100%;
-    padding:13px 15px 13px 42px;
-    border:1px solid var(--border);
-    border-radius:11px;
-    background:#fff;
-    outline:none;
-}
-
-.search-icon{
-    position:absolute;
-    left:14px;
-    top:50%;
-    transform:translateY(-50%);
-    color:var(--muted);
-}
-
-/* =========================
-   DQE LIST
-========================= */
 
 .dqe-list{
     display:flex;
     flex-direction:column;
     gap:10px;
-    max-height:640px;
-    overflow-y:auto;
 }
 
-.dqe-card{
+.dqe-item{
     border:1px solid var(--border);
-    border-radius:12px;
+    border-radius:10px;
     padding:15px;
-    background:#fff;
-    transition:.2s;
-}
-
-.dqe-card:hover{
-    border-color:#cbd5e1;
-    box-shadow:0 5px 18px rgba(15,23,42,.06);
-}
-
-.dqe-card-top{
     display:flex;
     justify-content:space-between;
-    gap:12px;
-    align-items:flex-start;
+    align-items:center;
+    gap:15px;
 }
 
-.dqe-reference{
-    color:var(--primary-dark);
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:.8px;
+.dqe-main{
+    min-width:0;
 }
 
-.dqe-card h3{
-    font-size:14px;
-    margin:3px 0;
-}
-
-.dqe-client{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.dqe-amount{
-    font-size:15px;
-    font-weight:900;
-    white-space:nowrap;
+.dqe-name{
+    font-weight:750;
+    margin-bottom:5px;
 }
 
 .dqe-meta{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:11px;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.6;
 }
 
-.meta-badge{
-    background:#f8fafc;
-    color:#64748b;
-    border-radius:7px;
-    padding:5px 8px;
+.status{
+    display:inline-block;
+    border-radius:20px;
+    padding:4px 9px;
     font-size:10px;
     font-weight:700;
 }
 
-.status{
-    padding:5px 8px;
-    border-radius:7px;
-    font-size:10px;
-    font-weight:800;
-}
-
 .status-brouillon{
-    background:#f1f5f9;
-    color:#475569;
+    background:#f3f4f6;
+    color:#4b5563;
 }
 
 .status-valide{
@@ -803,53 +445,21 @@ textarea{
     color:#15803d;
 }
 
-.status-envoye{
-    background:#dbeafe;
-    color:#1d4ed8;
+.status-annule{
+    background:#fee2e2;
+    color:#b91c1c;
 }
 
-.status-archive{
-    background:#f3e8ff;
-    color:#7e22ce;
-}
-
-.dqe-actions{
-    display:flex;
-    gap:6px;
-    flex-wrap:wrap;
-    margin-top:12px;
-}
-
-.empty{
-    padding:40px 20px;
-    text-align:center;
-    color:var(--muted);
-}
-
-.empty-icon{
-    font-size:35px;
-    margin-bottom:10px;
-}
-
-.empty h3{
-    color:var(--text);
-    margin-bottom:5px;
-}
-
-/* =========================
-   MODAL
-========================= */
-
+/* MODAL */
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(15,23,42,.65);
-    backdrop-filter:blur(5px);
+    background:rgba(15,23,42,.55);
     display:none;
     align-items:center;
     justify-content:center;
     padding:20px;
-    z-index:3000;
+    z-index:2000;
 }
 
 .modal.show{
@@ -859,143 +469,72 @@ textarea{
 .modal-box{
     width:min(900px,100%);
     max-height:90vh;
-    overflow-y:auto;
+    overflow:auto;
     background:#fff;
-    border-radius:18px;
-    box-shadow:0 25px 70px rgba(0,0,0,.25);
+    border-radius:14px;
 }
 
 .modal-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:20px;
+    padding:18px 20px;
     border-bottom:1px solid var(--border);
-}
-
-.modal-header h2{
-    font-size:19px;
-}
-
-.close-modal{
-    border:0;
-    background:#f1f5f9;
-    width:35px;
-    height:35px;
-    border-radius:9px;
-    font-size:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .modal-body{
     padding:20px;
 }
 
-.detail-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-bottom:20px;
+.close{
+    border:0;
+    background:#f3f4f6;
+    width:34px;
+    height:34px;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-.detail-box{
-    background:#f8fafc;
-    border-radius:10px;
-    padding:13px;
-}
-
-.detail-box small{
-    display:block;
-    color:var(--muted);
-    font-size:10px;
-    margin-bottom:4px;
-}
-
-.detail-box strong{
-    font-size:13px;
-}
-
-/* =========================
-   TOAST
-========================= */
-
+/* TOAST */
 .toast{
     position:fixed;
-    right:25px;
-    bottom:25px;
-    background:#101827;
+    right:20px;
+    bottom:20px;
+    background:#111827;
     color:#fff;
-    padding:13px 17px;
-    border-radius:10px;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-    display:flex;
-    align-items:center;
-    gap:9px;
-    opacity:0;
-    transform:translateY(20px);
-    pointer-events:none;
-    transition:.25s;
-    z-index:5000;
+    padding:13px 18px;
+    border-radius:9px;
     font-size:13px;
-    font-weight:700;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    transform:translateY(100px);
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:3000;
 }
 
 .toast.show{
-    opacity:1;
     transform:translateY(0);
+    opacity:1;
 }
 
-.toast.success::before{
-    content:"✓";
-    color:#4ade80;
+/* MOBILE */
+.menu-btn{
+    display:none;
+    border:0;
+    background:#eef2f7;
+    border-radius:8px;
+    padding:8px 11px;
+    cursor:pointer;
 }
-
-.toast.error::before{
-    content:"!";
-    color:#f87171;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.form-footer{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-top:22px;
-    padding-top:18px;
-    border-top:1px solid var(--border);
-}
-
-.form-footer-left{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.form-footer-actions{
-    display:flex;
-    gap:9px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media(max-width:1100px){
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
     .grid{
         grid-template-columns:1fr;
     }
-
 }
 
-@media(max-width:800px){
-
+@media(max-width:850px){
     .sidebar{
         transform:translateX(-100%);
         transition:.25s;
@@ -1013,20 +552,8 @@ textarea{
         display:block;
     }
 
-    .topbar{
-        padding:0 15px;
-    }
-
-    .user-name{
-        display:none;
-    }
-
-    .content{
-        padding:20px 15px;
-    }
-
-    .page-header{
-        flex-direction:column;
+    .stats{
+        grid-template-columns:repeat(2,1fr);
     }
 
     .form-grid{
@@ -1037,881 +564,527 @@ textarea{
         grid-column:auto;
     }
 
+    .content{
+        padding:15px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
 }
 
-@media(max-width:560px){
-
+@media(max-width:550px){
     .stats{
         grid-template-columns:1fr;
     }
 
-    .page-header h1{
-        font-size:24px;
-    }
-
-    .header-actions{
-        width:100%;
-    }
-
-    .header-actions .btn{
-        flex:1;
-    }
-
-    .form-footer{
+    .dqe-item{
         flex-direction:column;
-        align-items:stretch;
+        align-items:flex-start;
     }
 
-    .form-footer-actions{
+    .actions{
         width:100%;
     }
 
-    .form-footer-actions .btn{
+    .actions .btn{
         flex:1;
     }
 
-    .detail-grid{
-        grid-template-columns:1fr;
+    .user-name{
+        display:none;
     }
-
 }
 
+/* IMPRESSION */
+.print-only{
+    display:none;
+}
+
+@media print{
+    body{
+        background:#fff;
+    }
+
+    .sidebar,
+    .topbar,
+    .no-print,
+    .modal{
+        display:none!important;
+    }
+
+    .main{
+        margin:0;
+    }
+
+    .content{
+        padding:0;
+    }
+
+    .print-only{
+        display:block;
+    }
+
+    .card{
+        box-shadow:none;
+        border:0;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     SIDEBAR
-========================= -->
-
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
 
-    <div class="sidebar-logo">
-
-        <a href="dashboard.html"
-           class="batiflow-logo"
-           aria-label="BATIFLOW - Tableau de bord">
-
-            <svg
-                class="batiflow-logo-icon"
-                viewBox="0 0 100 100"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true">
-
-                <circle
-                    cx="50"
-                    cy="50"
-                    r="45"
-                    fill="#111827"
-                    stroke="#F59E0B"
-                    stroke-width="2.5"/>
-
-                <path
-                    d="M25 69V39L50 22L75 39V69"
-                    fill="none"
-                    stroke="#FFFFFF"
-                    stroke-width="6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"/>
-
-                <path
-                    d="M50 30V69"
-                    fill="none"
-                    stroke="#F59E0B"
-                    stroke-width="5"
-                    stroke-linecap="round"/>
-
-                <path
-                    d="M30 56C39 49 45 61 54 54C61 49 66 43 72 47"
-                    fill="none"
-                    stroke="#F59E0B"
-                    stroke-width="5"
-                    stroke-linecap="round"/>
-
-                <circle
-                    cx="72"
-                    cy="47"
-                    r="4"
-                    fill="#F59E0B"/>
-
-                <path
-                    d="M22 72H78"
-                    fill="none"
-                    stroke="#FFFFFF"
-                    stroke-width="5"
-                    stroke-linecap="round"/>
-
-            </svg>
-
-            <span class="batiflow-logo-text">
-                <span class="bati">BATI</span><span class="flow">FLOW</span>
-            </span>
-
-            <span class="batiflow-logo-subtitle">
-                CONSTRUCTION MANAGEMENT
-            </span>
-
-        </a>
-
+    <div class="logo">
+        <div class="logo-mark">B</div>
+        <div>
+            BATIFLOW
+            <small>GESTION BTP</small>
+        </div>
     </div>
 
-    <nav class="nav">
+    <div class="nav-title">Principal</div>
 
-        <div class="nav-title">Principal</div>
+    <a href="dashboard.html" class="nav-link">
+        <span class="nav-icon">⌂</span>
+        Tableau de bord
+    </a>
 
-        <a href="dashboard.html" class="nav-link">
-            <span>🏠</span>
-            Tableau de bord
-        </a>
+    <a href="chantiers.html" class="nav-link">
+        <span class="nav-icon">🏗</span>
+        Chantiers
+    </a>
 
-        <a href="chantiers.html" class="nav-link">
-            <span>🏗️</span>
-            Chantiers
-        </a>
+    <a href="dqe.html" class="nav-link active">
+        <span class="nav-icon">📋</span>
+        DQE
+    </a>
 
-        <a href="dqe.html" class="nav-link active">
-            <span>📋</span>
-            DQE &amp; Métré
-        </a>
+    <a href="#" class="nav-link" onclick="return false;">
+        <span class="nav-icon">💰</span>
+        Devis
+    </a>
 
-        <a href="#" class="nav-link">
-            <span>💰</span>
-            Devis
-        </a>
+    <a href="#" class="nav-link" onclick="return false;">
+        <span class="nav-icon">👥</span>
+        Clients
+    </a>
 
-        <div class="nav-separator"></div>
+    <a href="#" class="nav-link" onclick="return false;">
+        <span class="nav-icon">🧱</span>
+        Matériaux
+    </a>
 
-        <div class="nav-title">Outils BTP</div>
+    <a href="#" class="nav-link" onclick="return false;">
+        <span class="nav-icon">📁</span>
+        Documents
+    </a>
 
-        <a href="calculator.html" class="nav-link">
-            <span>🧮</span>
-            Calculateur BTP
-        </a>
+    <div class="nav-title">Outils BTP</div>
 
-        <a href="mortar.html" class="nav-link">
-            <span>🧱</span>
-            Mortier
-        </a>
+    <a href="calculator.html" class="nav-link">
+        <span class="nav-icon">🧮</span>
+        Calculateur BTP
+    </a>
 
-        <a href="masonry.html" class="nav-link">
-            <span>🏠</span>
-            Maçonnerie
-        </a>
+    <a href="mortar.html" class="nav-link">
+        <span class="nav-icon">▦</span>
+        Mortier
+    </a>
 
-        <a href="slab.html" class="nav-link">
-            <span>📐</span>
-            Dalle
-        </a>
+    <a href="masonry.html" class="nav-link">
+        <span class="nav-icon">▤</span>
+        Maçonnerie
+    </a>
 
-        <div class="nav-separator"></div>
+    <a href="slab.html" class="nav-link">
+        <span class="nav-icon">▥</span>
+        Dalle
+    </a>
 
-        <div class="nav-title">Gestion</div>
-
-        <a href="#" class="nav-link">
-            <span>👥</span>
-            Clients
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>📦</span>
-            Matériaux
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>📁</span>
-            Documents
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>⚙️</span>
-            Paramètres
-        </a>
-
-        <a href="login.html" class="nav-link logout">
-            <span>🚪</span>
+    <div class="logout">
+        <a href="login.html" class="nav-link">
+            <span class="nav-icon">↪</span>
             Déconnexion
         </a>
-
-    </nav>
+    </div>
 
 </aside>
 
-
-<!-- =========================
-     MAIN
-========================= -->
-
+<!-- MAIN -->
 <main class="main">
 
     <header class="topbar">
 
         <div class="topbar-left">
-
-            <button
-                class="menu-btn"
-                id="menuBtn"
-                type="button">
-                ☰
-            </button>
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
             <div>
-                <div class="page-title">DQE &amp; Métré</div>
-                <div class="page-subtitle">
-                    Devis Quantitatif et Estimatif
-                </div>
+                <div class="page-title">DQE — Devis Quantitatif Estimatif</div>
             </div>
 
+            <span class="autosave" id="autosaveStatus">
+                ● Prêt
+            </span>
         </div>
 
-        <div class="topbar-right">
-
-            <div class="save-indicator">
-                <span class="save-dot"></span>
-                <span id="saveStatus">Sauvegarde automatique</span>
+        <div class="user">
+            <div>
+                <div class="user-name" id="userName">Utilisateur</div>
             </div>
-
-            <div class="user">
-
-                <div class="avatar" id="userAvatar">U</div>
-
-                <div class="user-name" id="userName">
-                    Utilisateur
-                </div>
-
-            </div>
-
+            <div class="avatar" id="userAvatar">U</div>
         </div>
 
     </header>
 
-
     <div class="content">
 
-        <!-- =========================
-             HEADER
-        ========================= -->
-
-        <div class="page-header">
-
-            <div>
-
-                <div class="eyebrow">
-                    ÉTUDES &amp; MÉTRÉS
-                </div>
-
-                <h1>DQE &amp; Métré</h1>
-
-                <p>
-                    Créez, calculez, sauvegardez et gérez vos DQE de chantier.
-                </p>
-
-            </div>
-
-            <div class="header-actions">
-
-                <button
-                    class="btn btn-light"
-                    type="button"
-                    onclick="nouveauDQE()">
-                    ↻ Nouveau
-                </button>
-
-                <button
-                    class="btn btn-dark"
-                    type="button"
-                    onclick="imprimerDQE()">
-                    🖨 Préparer PDF
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             STATS
-        ========================= -->
-
+        <!-- STATS -->
         <section class="stats">
 
-            <div class="stat-card">
-
-                <div class="stat-top">
-                    <span class="stat-label">DQE enregistrés</span>
-                    <span class="stat-icon">📋</span>
-                </div>
-
-                <div class="stat-value" id="statTotal">
-                    0
-                </div>
-
-                <div class="stat-foot">
-                    Total dans BATIFLOW
-                </div>
-
+            <div class="stat">
+                <div class="stat-label">TOTAL DQE</div>
+                <div class="stat-value" id="statTotal">0</div>
             </div>
 
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-                    <span class="stat-label">Brouillons</span>
-                    <span class="stat-icon">📝</span>
-                </div>
-
-                <div class="stat-value" id="statBrouillons">
-                    0
-                </div>
-
-                <div class="stat-foot">
-                    DQE en préparation
-                </div>
-
+            <div class="stat">
+                <div class="stat-label">BROUILLONS</div>
+                <div class="stat-value" id="statBrouillons">0</div>
             </div>
 
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-                    <span class="stat-label">Validés</span>
-                    <span class="stat-icon">✅</span>
-                </div>
-
-                <div class="stat-value" id="statValides">
-                    0
-                </div>
-
-                <div class="stat-foot">
-                    DQE finalisés
-                </div>
-
+            <div class="stat">
+                <div class="stat-label">VALIDÉS</div>
+                <div class="stat-value" id="statValides">0</div>
             </div>
 
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-                    <span class="stat-label">Montant TTC</span>
-                    <span class="stat-icon">💰</span>
-                </div>
-
-                <div class="stat-value" id="statTTC">
-                    0 FCFA
-                </div>
-
-                <div class="stat-foot">
-                    Total cumulé
-                </div>
-
+            <div class="stat">
+                <div class="stat-label">TOTAL TTC</div>
+                <div class="stat-value" id="statTTC">0 FCFA</div>
             </div>
 
         </section>
 
-
-        <!-- =========================
-             MAIN GRID
-        ========================= -->
-
         <div class="grid">
 
+            <!-- FORMULAIRE -->
+            <div>
 
-            <!-- =====================
-                 FORMULAIRE DQE
-            ====================== -->
+                <section class="card">
 
-            <section class="panel">
+                    <div class="card-header">
 
-                <div class="panel-header">
-
-                    <div>
-                        <h2 id="formTitle">
+                        <div class="card-title" id="formTitle">
                             Nouveau DQE
-                        </h2>
-
-                        <p id="formReference">
-                            Référence automatique
-                        </p>
-                    </div>
-
-                    <span
-                        class="status status-brouillon"
-                        id="currentStatus">
-                        Brouillon
-                    </span>
-
-                </div>
-
-
-                <div class="panel-body">
-
-                    <form id="dqeForm">
-
-                        <input
-                            type="hidden"
-                            id="dqeId">
-
-
-                        <div class="form-grid">
-
-                            <div class="form-group">
-
-                                <label for="reference">
-                                    Référence DQE
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="reference"
-                                    placeholder="DQE-2026-001">
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="date">
-                                    Date
-                                </label>
-
-                                <input
-                                    type="date"
-                                    id="date">
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="nom">
-                                    Nom du DQE *
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="nom"
-                                    placeholder="Ex : Construction villa R+1"
-                                    required>
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="statut">
-                                    Statut
-                                </label>
-
-                                <select id="statut">
-
-                                    <option value="brouillon">
-                                        Brouillon
-                                    </option>
-
-                                    <option value="valide">
-                                        Validé
-                                    </option>
-
-                                    <option value="envoye">
-                                        Envoyé
-                                    </option>
-
-                                    <option value="archive">
-                                        Archivé
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="client">
-                                    Client
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="client"
-                                    placeholder="Nom du client">
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="chantier">
-                                    Chantier lié
-                                </label>
-
-                                <select id="chantier">
-
-                                    <option value="">
-                                        — Aucun chantier —
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="localisation">
-                                    Localisation
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="localisation"
-                                    placeholder="Ville / quartier">
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="duree">
-                                    Durée estimative
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="duree"
-                                    placeholder="Ex : 6 mois">
-
-                            </div>
-
-
-                            <div class="form-group full">
-
-                                <label for="objet">
-                                    Objet / description
-                                </label>
-
-                                <textarea
-                                    id="objet"
-                                    placeholder="Description du projet, travaux compris, observations..."></textarea>
-
-                            </div>
-
                         </div>
 
+                        <div class="actions no-print">
 
-                        <!-- =====================
-                             LIGNES
-                        ====================== -->
+                            <button class="btn btn-secondary btn-small"
+                                    onclick="nouveauDQE()">
+                                + Nouveau
+                            </button>
 
-                        <div class="section-title">
-
-                            <div>
-                                Détail du DQE
-                            </div>
-
-                            <button
-                                type="button"
-                                class="btn btn-primary btn-small"
-                                onclick="ajouterLigne()">
-                                + Ajouter une ligne
+                            <button class="btn btn-success btn-small"
+                                    onclick="enregistrerDQE(true)">
+                                💾 Enregistrer
                             </button>
 
                         </div>
 
+                    </div>
 
-                        <div class="table-wrapper">
+                    <div class="card-body">
 
-                            <table class="dqe-table">
+                        <input type="hidden" id="dqeId">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Référence</label>
+                                <input type="text" id="reference"
+                                       placeholder="DQE-2026-0001">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" id="date">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nom du DQE *</label>
+                                <input type="text" id="nom"
+                                       placeholder="Ex : Construction villa R+1">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Statut</label>
+
+                                <select id="statut">
+                                    <option value="brouillon">Brouillon</option>
+                                    <option value="valide">Validé</option>
+                                    <option value="annule">Annulé</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>Client</label>
+                                <input type="text" id="client"
+                                       placeholder="Nom du client">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Chantier lié</label>
+
+                                <select id="chantierId">
+                                    <option value="">-- Aucun chantier --</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>Localisation</label>
+                                <input type="text" id="localisation"
+                                       placeholder="Lomé, Agoè, Adétikopé...">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Durée prévue</label>
+                                <input type="text" id="duree"
+                                       placeholder="Ex : 6 mois">
+                            </div>
+
+                            <div class="form-group full">
+                                <label>Objet / Description</label>
+                                <textarea id="objet"
+                                          placeholder="Description du projet ou objet du DQE..."></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- LIGNES DQE -->
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+                            Détail quantitatif et estimatif
+                        </div>
+
+                        <button class="btn btn-primary btn-small no-print"
+                                onclick="ajouterLigne()">
+                            + Ajouter une ligne
+                        </button>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-wrap">
+
+                            <table>
 
                                 <thead>
 
-                                    <tr>
-
-                                        <th class="col-num">
-                                            N°
-                                        </th>
-
-                                        <th class="col-designation">
-                                            Désignation
-                                        </th>
-
-                                        <th class="col-unit">
-                                            Unité
-                                        </th>
-
-                                        <th class="col-qty">
-                                            Quantité
-                                        </th>
-
-                                        <th class="col-price">
-                                            Prix unitaire
-                                        </th>
-
-                                        <th class="col-total">
-                                            Montant HT
-                                        </th>
-
-                                        <th class="col-action">
-                                        </th>
-
-                                    </tr>
+                                <tr>
+                                    <th style="width:45px">N°</th>
+                                    <th>Désignation</th>
+                                    <th style="width:90px">Unité</th>
+                                    <th style="width:100px">Quantité</th>
+                                    <th style="width:130px">Prix unitaire</th>
+                                    <th style="width:140px">Montant</th>
+                                    <th style="width:45px"></th>
+                                </tr>
 
                                 </thead>
 
-                                <tbody id="lignesBody">
-                                </tbody>
+                                <tbody id="lignesBody"></tbody>
 
                             </table>
 
                         </div>
 
 
-                        <!-- =====================
-                             TOTALS
-                        ====================== -->
-
-                        <div class="totals">
+                        <div class="total-box">
 
                             <div class="total-row">
-
-                                <span>
-                                    Total HT
-                                </span>
-
-                                <strong id="totalHT">
-                                    0 FCFA
-                                </strong>
-
+                                <span>Total HT</span>
+                                <strong id="totalHT">0 FCFA</strong>
                             </div>
-
 
                             <div class="total-row">
 
                                 <span>
                                     TVA
-                                </span>
-
-                                <strong>
-
                                     <input
-                                        class="tva-input"
-                                        type="number"
                                         id="tva"
+                                        type="number"
                                         value="18"
                                         min="0"
                                         max="100"
-                                        step="0.01"
-                                        onchange="calculerTotaux()">
-
+                                        style="width:60px;display:inline-block;padding:5px;"
+                                        oninput="calculerTotaux()">
                                     %
+                                </span>
 
-                                </strong>
+                                <strong id="montantTVA">0 FCFA</strong>
 
                             </div>
 
-
-                            <div class="total-row">
-
-                                <span>
-                                    Montant TVA
-                                </span>
-
-                                <strong id="montantTVA">
-                                    0 FCFA
-                                </strong>
-
-                            </div>
-
-
-                            <div class="total-row final">
-
-                                <span>
-                                    TOTAL TTC
-                                </span>
-
-                                <strong id="totalTTC">
-                                    0 FCFA
-                                </strong>
-
+                            <div class="total-row grand">
+                                <span>Total TTC</span>
+                                <strong id="totalTTC">0 FCFA</strong>
                             </div>
 
                         </div>
 
-
-                        <!-- =====================
-                             FOOTER FORM
-                        ====================== -->
-
-                        <div class="form-footer">
-
-                            <div
-                                class="form-footer-left"
-                                id="lastSaved">
-                                Prêt à enregistrer
-                            </div>
-
-                            <div class="form-footer-actions">
-
-                                <button
-                                    type="button"
-                                    class="btn btn-light"
-                                    onclick="nouveauDQE()">
-                                    Annuler
-                                </button>
-
-                                <button
-                                    type="submit"
-                                    class="btn btn-primary">
-                                    💾 Enregistrer le DQE
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </form>
-
-                </div>
-
-            </section>
-
-
-            <!-- =====================
-                 LISTE DQE
-            ====================== -->
-
-            <section class="panel">
-
-                <div class="panel-header">
-
-                    <div>
-                        <h2>Mes DQE</h2>
-                        <p>Recherchez et gérez vos études</p>
                     </div>
 
-                    <span
-                        class="status status-brouillon"
-                        id="listCount">
-                        0
-                    </span>
-
-                </div>
+                </section>
 
 
-                <div class="panel-body">
+                <!-- ACTIONS -->
+                <section class="card no-print">
 
-                    <div class="search-box">
+                    <div class="card-body">
 
-                        <span class="search-icon">
-                            🔎
-                        </span>
+                        <div class="actions">
+
+                            <button class="btn btn-primary"
+                                    onclick="enregistrerDQE(true)">
+                                💾 Enregistrer le DQE
+                            </button>
+
+                            <button class="btn btn-secondary"
+                                    onclick="imprimerDQE()">
+                                🖨 Imprimer / PDF
+                            </button>
+
+                            <button class="btn btn-secondary"
+                                    onclick="nouveauDQE()">
+                                ↻ Nouveau DQE
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- COLONNE DROITE -->
+            <div>
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+                            Mes DQE
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
 
                         <input
                             type="search"
                             id="searchDQE"
-                            placeholder="Rechercher un DQE, client, chantier...">
+                            class="search"
+                            placeholder="🔎 Rechercher..."
+                            oninput="afficherListeDQEs()">
+
+                        <div style="height:15px"></div>
+
+                        <div class="dqe-list" id="dqeList"></div>
 
                     </div>
 
+                </section>
 
-                    <div
-                        class="dqe-list"
-                        id="dqeList">
-                    </div>
-
-                </div>
-
-            </section>
+            </div>
 
         </div>
+
+
+        <!-- IMPRESSION -->
+        <div class="print-only" id="printArea"></div>
 
     </div>
 
 </main>
 
 
-<!-- =========================
-     MODAL CONSULTATION
-========================= -->
-
-<div
-    class="modal"
-    id="detailModal">
+<!-- MODAL CONSULTATION -->
+<div class="modal" id="detailModal">
 
     <div class="modal-box">
 
         <div class="modal-header">
 
-            <div>
-                <h2 id="detailTitle">
-                    Détail du DQE
-                </h2>
-            </div>
+            <strong id="modalTitle">
+                Détail du DQE
+            </strong>
 
-            <button
-                class="close-modal"
-                type="button"
-                onclick="fermerModal()">
-                ×
+            <button class="close" onclick="fermerModal()">
+                ✕
             </button>
 
         </div>
 
-
-        <div
-            class="modal-body"
-            id="detailBody">
-        </div>
+        <div class="modal-body" id="modalContent"></div>
 
     </div>
 
 </div>
 
 
-<!-- =========================
-     TOAST
-========================= -->
-
-<div
-    class="toast"
-    id="toast">
-    <span id="toastMessage">
-        Opération effectuée
-    </span>
-</div>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 
 <script>
 
-/* ==========================================================
-   BATIFLOW — DQE V2
-========================================================== */
+/* =========================================================
+   BATIFLOW — DQE
+   STOCKAGE
+========================================================= */
 
 const DQE_STORAGE_KEY = "batiflowDQEs";
 const CHANTIER_STORAGE_KEY = "batiflowChantiers";
 
-let dqeActuel = null;
 let sauvegardeTimer = null;
 
 
-/* ==========================================================
+/* =========================================================
    OUTILS
-========================================================== */
+========================================================= */
 
 function obtenirDQEs(){
 
     try{
 
-        const data =
-            JSON.parse(
-                localStorage.getItem(DQE_STORAGE_KEY) || "[]"
-            );
+        const data = localStorage.getItem(DQE_STORAGE_KEY);
 
-        return Array.isArray(data) ? data : [];
+        if(!data) return [];
+
+        const parsed = JSON.parse(data);
+
+        return Array.isArray(parsed) ? parsed : [];
 
     }catch(error){
 
-        console.error("Erreur DQE :", error);
+        console.error("Erreur lecture DQE :",error);
 
         return [];
 
@@ -1934,16 +1107,19 @@ function obtenirChantiers(){
 
     try{
 
-        const data =
-            JSON.parse(
-                localStorage.getItem(CHANTIER_STORAGE_KEY) || "[]"
-            );
+        const data = localStorage.getItem(
+            CHANTIER_STORAGE_KEY
+        );
 
-        return Array.isArray(data) ? data : [];
+        if(!data) return [];
+
+        const parsed = JSON.parse(data);
+
+        return Array.isArray(parsed) ? parsed : [];
 
     }catch(error){
 
-        console.error("Erreur chantiers :", error);
+        console.error(error);
 
         return [];
 
@@ -1966,25 +1142,20 @@ function genererId(){
 
 function genererReference(){
 
-    const annee =
-        new Date().getFullYear();
+    const annee = new Date().getFullYear();
 
-    const dqes =
-        obtenirDQEs();
+    const dqes = obtenirDQEs();
 
-    let numero =
-        dqes.length + 1;
+    let numero = dqes.length + 1;
 
     let reference =
         "DQE-" +
         annee +
         "-" +
-        String(numero).padStart(3,"0");
+        String(numero).padStart(4,"0");
 
     while(
-        dqes.some(
-            dqe => dqe.reference === reference
-        )
+        dqes.some(d => d.reference === reference)
     ){
 
         numero++;
@@ -1993,7 +1164,7 @@ function genererReference(){
             "DQE-" +
             annee +
             "-" +
-            String(numero).padStart(3,"0");
+            String(numero).padStart(4,"0");
 
     }
 
@@ -2004,32 +1175,22 @@ function genererReference(){
 
 function formaterMontant(nombre){
 
-    const valeur =
-        Number(nombre) || 0;
-
-    return valeur.toLocaleString(
-        "fr-FR"
-    ) + " FCFA";
+    return Number(nombre || 0)
+        .toLocaleString("fr-FR") +
+        " FCFA";
 
 }
 
 
 function formaterDate(date){
 
-    if(!date){
-        return "Date non définie";
-    }
+    if(!date) return "—";
 
-    const d =
-        new Date(date);
+    const d = new Date(date);
 
-    if(isNaN(d.getTime())){
-        return date;
-    }
+    if(isNaN(d.getTime())) return date;
 
-    return d.toLocaleDateString(
-        "fr-FR"
-    );
+    return d.toLocaleDateString("fr-FR");
 
 }
 
@@ -2046,78 +1207,97 @@ function echapper(texte){
 }
 
 
-/* ==========================================================
+/* =========================================================
    UTILISATEUR
-========================================================== */
+========================================================= */
 
 function chargerUtilisateur(){
 
+    let utilisateur = null;
+
+    try{
+
+        utilisateur =
+            JSON.parse(
+                localStorage.getItem("batiflowUser")
+            );
+
+    }catch(e){}
+
     const nom =
-        localStorage.getItem("userName") ||
+        utilisateur?.nom ||
+        utilisateur?.name ||
         localStorage.getItem("batiflowUserName") ||
         "Utilisateur";
 
-    document.getElementById(
-        "userName"
-    ).textContent = nom;
+    document.getElementById("userName").textContent =
+        nom;
 
-    const initiale =
-        nom
-            .trim()
-            .charAt(0)
-            .toUpperCase();
-
-    document.getElementById(
-        "userAvatar"
-    ).textContent =
-        initiale || "U";
+    document.getElementById("userAvatar").textContent =
+        nom.charAt(0).toUpperCase();
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    CHANTIERS
-========================================================== */
+========================================================= */
 
 function chargerChantiers(){
 
     const select =
-        document.getElementById("chantier");
+        document.getElementById("chantierId");
 
-    const chantiers =
-        obtenirChantiers();
+    if(!select) return;
+
+    const ancienneValeur = select.value;
 
     select.innerHTML =
-        `<option value="">— Aucun chantier —</option>`;
+        '<option value="">-- Aucun chantier --</option>';
+
+    const chantiers = obtenirChantiers();
 
     chantiers.forEach(chantier => {
 
-        const option =
-            document.createElement("option");
-
-        option.value =
+        const id =
             chantier.id ||
             chantier.reference ||
             chantier.nom;
 
-        option.textContent =
+        const nom =
             chantier.nom ||
-            chantier.nomChantier ||
+            chantier.titre ||
             chantier.reference ||
-            "Chantier sans nom";
+            "Chantier";
+
+        const option =
+            document.createElement("option");
+
+        option.value = id;
+
+        option.textContent = nom;
 
         select.appendChild(option);
 
     });
 
+    if(
+        [...select.options]
+        .some(option => option.value === ancienneValeur)
+    ){
+
+        select.value = ancienneValeur;
+
+    }
+
 }
 
 
-/* ==========================================================
-   LIGNES DQE
-========================================================== */
+/* =========================================================
+   LIGNES
+========================================================= */
 
-function ajouterLigne(ligne = null){
+function ajouterLigne(data = {}){
 
     const tbody =
         document.getElementById("lignesBody");
@@ -2125,44 +1305,26 @@ function ajouterLigne(ligne = null){
     const tr =
         document.createElement("tr");
 
-    const designation =
-        ligne?.designation || "";
-
-    const unite =
-        ligne?.unite || "u";
-
-    const quantite =
-        ligne?.quantite ?? 1;
-
-    const prixUnitaire =
-        ligne?.prixUnitaire ?? 0;
-
     tr.innerHTML = `
 
-        <td class="col-num">
-            <span class="numero-ligne"></span>
-        </td>
+        <td class="numero-ligne"></td>
 
         <td>
             <input
                 type="text"
                 class="designation"
-                placeholder="Ex : Fouille en rigole"
-                value="${echapper(designation)}">
+                placeholder="Ex : Béton dosé à 350 kg/m³"
+                value="${echapper(data.designation || "")}"
+                oninput="calculerTotaux(); programmerSauvegarde();">
         </td>
 
         <td>
-            <select class="unite">
-
-                <option value="u" ${unite==="u"?"selected":""}>u</option>
-                <option value="m" ${unite==="m"?"selected":""}>m</option>
-                <option value="m²" ${unite==="m²"?"selected":""}>m²</option>
-                <option value="m³" ${unite==="m³"?"selected":""}>m³</option>
-                <option value="kg" ${unite==="kg"?"selected":""}>kg</option>
-                <option value="t" ${unite==="t"?"selected":""}>t</option>
-                <option value="forfait" ${unite==="forfait"?"selected":""}>Forfait</option>
-
-            </select>
+            <input
+                type="text"
+                class="unite"
+                placeholder="m³"
+                value="${echapper(data.unite || "")}"
+                oninput="programmerSauvegarde();">
         </td>
 
         <td>
@@ -2170,89 +1332,41 @@ function ajouterLigne(ligne = null){
                 type="number"
                 class="quantite"
                 min="0"
-                step="0.001"
-                value="${quantite}">
+                step="0.01"
+                value="${data.quantite ?? ""}"
+                oninput="calculerTotaux(); programmerSauvegarde();">
         </td>
 
         <td>
             <input
                 type="number"
-                class="prix-unitaire"
+                class="prix"
                 min="0"
                 step="1"
-                value="${prixUnitaire}">
+                value="${data.prixUnitaire ?? data.prix ?? ""}"
+                oninput="calculerTotaux(); programmerSauvegarde();">
         </td>
 
         <td>
-            <span class="line-total">
+            <strong class="montant-ligne">
                 0 FCFA
-            </span>
+            </strong>
         </td>
 
         <td>
+
             <button
                 type="button"
-                class="remove-line"
-                title="Supprimer la ligne">
+                class="btn btn-danger btn-small no-print"
+                onclick="supprimerLigne(this)">
                 ×
             </button>
+
         </td>
 
     `;
 
     tbody.appendChild(tr);
-
-    const inputs =
-        tr.querySelectorAll(
-            ".quantite, .prix-unitaire"
-        );
-
-    inputs.forEach(input => {
-
-        input.addEventListener(
-            "input",
-            () => {
-
-                calculerTotaux();
-
-                programmerSauvegarde();
-
-            }
-        );
-
-    });
-
-
-    tr.querySelector(".designation")
-        .addEventListener(
-            "input",
-            programmerSauvegarde
-        );
-
-
-    tr.querySelector(".unite")
-        .addEventListener(
-            "change",
-            programmerSauvegarde
-        );
-
-
-    tr.querySelector(".remove-line")
-        .addEventListener(
-            "click",
-            () => {
-
-                tr.remove();
-
-                renumeroterLignes();
-
-                calculerTotaux();
-
-                programmerSauvegarde();
-
-            }
-        );
-
 
     renumeroterLignes();
 
@@ -2261,82 +1375,84 @@ function ajouterLigne(ligne = null){
 }
 
 
+function supprimerLigne(button){
+
+    const tr =
+        button.closest("tr");
+
+    if(tr){
+
+        tr.remove();
+
+        renumeroterLignes();
+
+        calculerTotaux();
+
+        programmerSauvegarde();
+
+    }
+
+}
+
+
 function renumeroterLignes(){
 
-    const lignes =
-        document.querySelectorAll(
-            "#lignesBody tr"
-        );
-
-    lignes.forEach(
-        (ligne,index) => {
+    document
+        .querySelectorAll("#lignesBody tr")
+        .forEach((tr,index)=>{
 
             const numero =
-                ligne.querySelector(
-                    ".numero-ligne"
-                );
+                tr.querySelector(".numero-ligne");
 
             if(numero){
+
                 numero.textContent =
                     index + 1;
+
             }
 
-        }
-    );
+        });
 
 }
 
 
 function obtenirLignes(){
 
-    const lignes =
-        [];
+    const lignes = [];
 
     document
-        .querySelectorAll(
-            "#lignesBody tr"
-        )
+        .querySelectorAll("#lignesBody tr")
         .forEach(tr => {
 
             const designation =
-                tr.querySelector(
-                    ".designation"
-                )?.value.trim() || "";
+                tr.querySelector(".designation")?.value
+                || "";
 
             const unite =
-                tr.querySelector(
-                    ".unite"
-                )?.value || "u";
+                tr.querySelector(".unite")?.value
+                || "";
 
             const quantite =
                 Number(
-                    tr.querySelector(
-                        ".quantite"
-                    )?.value
-                ) || 0;
+                    tr.querySelector(".quantite")?.value
+                    || 0
+                );
 
             const prixUnitaire =
                 Number(
-                    tr.querySelector(
-                        ".prix-unitaire"
-                    )?.value
-                ) || 0;
-
-            const montant =
-                quantite *
-                prixUnitaire;
+                    tr.querySelector(".prix")?.value
+                    || 0
+                );
 
             lignes.push({
 
                 designation,
-
                 unite,
-
                 quantite,
-
                 prixUnitaire,
 
-                montant
+                montant:
+                    quantite * prixUnitaire
 
             });
 
@@ -2347,194 +1463,130 @@ function obtenirLignes(){
 }
 
 
-/* ==========================================================
+/* =========================================================
    CALCULS
-========================================================== */
+========================================================= */
 
 function calculerTotaux(){
 
-    const lignes =
-        obtenirLignes();
-
     let totalHT = 0;
 
-    lignes.forEach(
-        ligne => {
-
-            totalHT +=
-                ligne.quantite *
-                ligne.prixUnitaire;
-
-        }
-    );
-
-
-    const tauxTVA =
-        Number(
-            document.getElementById(
-                "tva"
-            ).value
-        ) || 0;
-
-
-    const montantTVA =
-        totalHT *
-        tauxTVA /
-        100;
-
-
-    const totalTTC =
-        totalHT +
-        montantTVA;
-
-
-    document.getElementById(
-        "totalHT"
-    ).textContent =
-        formaterMontant(totalHT);
-
-
-    document.getElementById(
-        "montantTVA"
-    ).textContent =
-        formaterMontant(montantTVA);
-
-
-    document.getElementById(
-        "totalTTC"
-    ).textContent =
-        formaterMontant(totalTTC);
-
-
     document
-        .querySelectorAll(
-            "#lignesBody tr"
-        )
+        .querySelectorAll("#lignesBody tr")
         .forEach(tr => {
 
-            const q =
+            const quantite =
                 Number(
-                    tr.querySelector(
-                        ".quantite"
-                    )?.value
-                ) || 0;
-
-            const p =
-                Number(
-                    tr.querySelector(
-                        ".prix-unitaire"
-                    )?.value
-                ) || 0;
-
-            const total =
-                q * p;
-
-            const element =
-                tr.querySelector(
-                    ".line-total"
+                    tr.querySelector(".quantite")?.value
+                    || 0
                 );
 
-            if(element){
+            const prix =
+                Number(
+                    tr.querySelector(".prix")?.value
+                    || 0
+                );
 
-                element.textContent =
-                    formaterMontant(total);
+            const montant =
+                quantite * prix;
+
+            totalHT += montant;
+
+            const affichage =
+                tr.querySelector(".montant-ligne");
+
+            if(affichage){
+
+                affichage.textContent =
+                    formaterMontant(montant);
 
             }
 
         });
 
+    const tva =
+        Number(
+            document.getElementById("tva").value
+            || 0
+        );
+
+    const montantTVA =
+        totalHT * tva / 100;
+
+    const totalTTC =
+        totalHT + montantTVA;
+
+    document.getElementById("totalHT").textContent =
+        formaterMontant(totalHT);
+
+    document.getElementById("montantTVA").textContent =
+        formaterMontant(montantTVA);
+
+    document.getElementById("totalTTC").textContent =
+        formaterMontant(totalTTC);
+
+    return {
+        totalHT,
+        montantTVA,
+        totalTTC,
+        tva
+    };
+
 }
 
 
-function calculerDepuisLignes(lignes = []){
-
-    let totalHT = 0;
-
-    lignes.forEach(ligne => {
-
-        totalHT +=
-            (Number(ligne.quantite) || 0) *
-            (Number(ligne.prixUnitaire) || 0);
-
-    });
-
-    return totalHT;
-
-}
-
-
-/* ==========================================================
-   CREATION / MODIFICATION
-========================================================== */
+/* =========================================================
+   NOUVEAU DQE
+========================================================= */
 
 function nouveauDQE(){
 
-    dqeActuel = null;
+    document.getElementById("dqeId").value =
+        genererId();
 
-    document.getElementById(
-        "dqeForm"
-    ).reset();
-
-    document.getElementById(
-        "dqeId"
-    ).value = "";
-
-    document.getElementById(
-        "reference"
-    ).value =
+    document.getElementById("reference").value =
         genererReference();
 
-    document.getElementById(
-        "date"
-    ).value =
-        new Date()
-            .toISOString()
-            .split("T")[0];
+    document.getElementById("date").value =
+        new Date().toISOString().split("T")[0];
 
-    document.getElementById(
-        "statut"
-    ).value =
+    document.getElementById("nom").value = "";
+
+    document.getElementById("statut").value =
         "brouillon";
 
-    document.getElementById(
-        "tva"
-    ).value =
-        "18";
+    document.getElementById("client").value = "";
 
-    document.getElementById(
-        "lignesBody"
-    ).innerHTML = "";
+    document.getElementById("chantierId").value = "";
+
+    document.getElementById("localisation").value = "";
+
+    document.getElementById("duree").value = "";
+
+    document.getElementById("objet").value = "";
+
+    document.getElementById("tva").value = 18;
+
+    document.getElementById("lignesBody").innerHTML = "";
 
     ajouterLigne();
 
     ajouterLigne();
 
-    document.getElementById(
-        "formTitle"
-    ).textContent =
+    document.getElementById("formTitle").textContent =
         "Nouveau DQE";
 
-    document.getElementById(
-        "formReference"
-    ).textContent =
-        document.getElementById(
-            "reference"
-        ).value;
+    document.getElementById("autosaveStatus").textContent =
+        "● Nouveau DQE";
 
-    actualiserBadgeStatut();
-
-    document.getElementById(
-        "lastSaved"
-    ).textContent =
-        "Nouveau DQE non encore enregistré";
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+    calculerTotaux();
 
 }
 
+
+/* =========================================================
+   CHARGER DQE
+========================================================= */
 
 function modifierDQE(id){
 
@@ -2543,97 +1595,85 @@ function modifierDQE(id){
 
     const dqe =
         dqes.find(
-            item => item.id === id
+            item => String(item.id) === String(id)
         );
 
     if(!dqe){
 
         afficherToast(
-            "DQE introuvable",
-            "error"
+            "DQE introuvable."
         );
 
-        return;
+        return false;
 
     }
 
-    dqeActuel = dqe;
-
-    document.getElementById(
-        "dqeId"
-    ).value =
+    document.getElementById("dqeId").value =
         dqe.id;
 
-    document.getElementById(
-        "reference"
-    ).value =
+    document.getElementById("reference").value =
         dqe.reference || "";
 
-    document.getElementById(
-        "date"
-    ).value =
+    document.getElementById("date").value =
         dqe.date || "";
 
-    document.getElementById(
-        "nom"
-    ).value =
+    document.getElementById("nom").value =
         dqe.nom || "";
 
-    document.getElementById(
-        "statut"
-    ).value =
+    document.getElementById("statut").value =
         dqe.statut || "brouillon";
 
-    document.getElementById(
-        "client"
-    ).value =
+    document.getElementById("client").value =
         dqe.client || "";
 
-    document.getElementById(
-        "chantier"
-    ).value =
-        dqe.chantierId || "";
-
-    document.getElementById(
-        "localisation"
-    ).value =
+    document.getElementById("localisation").value =
         dqe.localisation || "";
 
-    document.getElementById(
-        "duree"
-    ).value =
+    document.getElementById("duree").value =
         dqe.duree || "";
 
-    document.getElementById(
-        "objet"
-    ).value =
+    document.getElementById("objet").value =
         dqe.objet || "";
 
-    document.getElementById(
-        "tva"
-    ).value =
+    document.getElementById("tva").value =
         dqe.tva ?? 18;
 
+    chargerChantiers();
+
+    document.getElementById("chantierId").value =
+        dqe.chantierId || "";
 
     const tbody =
-        document.getElementById(
-            "lignesBody"
-        );
+        document.getElementById("lignesBody");
 
     tbody.innerHTML = "";
 
+    if(
+        Array.isArray(dqe.lignes) &&
+        dqe.lignes.length
+    ){
 
-    const lignes =
-        Array.isArray(dqe.lignes)
-            ? dqe.lignes
-            : [];
+        dqe.lignes.forEach(ligne => {
 
+            ajouterLigne({
 
-    if(lignes.length){
+                designation:
+                    ligne.designation || "",
 
-        lignes.forEach(
-            ligne => ajouterLigne(ligne)
-        );
+                unite:
+                    ligne.unite || "",
+
+                quantite:
+                    ligne.quantite ?? 0,
+
+                prixUnitaire:
+                    ligne.prixUnitaire ??
+                    ligne.prix ??
+                    0
+
+            });
+
+        });
 
     }else{
 
@@ -2641,509 +1681,352 @@ function modifierDQE(id){
 
     }
 
-
-    document.getElementById(
-        "formTitle"
-    ).textContent =
-        "Modifier le DQE";
-
-    document.getElementById(
-        "formReference"
-    ).textContent =
-        dqe.reference || "";
-
-    document.getElementById(
-        "lastSaved"
-    ).textContent =
-        "Dernière sauvegarde : " +
-        formaterDate(
-            dqe.updatedAt ||
-            dqe.createdAt
-        );
-
-    actualiserBadgeStatut();
+    renumeroterLignes();
 
     calculerTotaux();
+
+    document.getElementById("formTitle").textContent =
+        "Modifier : " +
+        (dqe.nom || dqe.reference);
+
+    document.getElementById("autosaveStatus").textContent =
+        "● DQE chargé";
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
 
-    afficherToast(
-        "DQE chargé pour modification",
-        "success"
-    );
+    return true;
 
 }
 
 
-/* ==========================================================
-   COLLECTE DU FORMULAIRE
-========================================================== */
+/* =========================================================
+   COLLECTER FORMULAIRE
+========================================================= */
 
 function collecterFormulaire(){
 
-    const lignes =
-        obtenirLignes();
+    const totaux =
+        calculerTotaux();
 
-    const tauxTVA =
-        Number(
-            document.getElementById(
-                "tva"
-            ).value
-        ) || 0;
-
-    const totalHT =
-        calculerDepuisLignes(
-            lignes
-        );
-
-    const montantTVA =
-        totalHT *
-        tauxTVA /
-        100;
-
-    const totalTTC =
-        totalHT +
-        montantTVA;
-
-
-    const chantierSelect =
-        document.getElementById(
-            "chantier"
-        );
+    const id =
+        document.getElementById("dqeId").value ||
+        genererId();
 
     const chantierId =
-        chantierSelect.value;
+        document.getElementById("chantierId").value;
 
-    const chantierNom =
-        chantierSelect.options[
-            chantierSelect.selectedIndex
-        ]?.textContent || "";
+    const chantiers =
+        obtenirChantiers();
 
+    const chantier =
+        chantiers.find(
+            c =>
+                String(
+                    c.id ||
+                    c.reference ||
+                    c.nom
+                ) === String(chantierId)
+        );
 
     return {
 
-        id:
-            document.getElementById(
-                "dqeId"
-            ).value ||
-            genererId(),
+        id,
 
         reference:
-            document.getElementById(
-                "reference"
-            ).value.trim() ||
-            genererReference(),
+            document.getElementById("reference").value.trim(),
 
         nom:
-            document.getElementById(
-                "nom"
-            ).value.trim(),
+            document.getElementById("nom").value.trim(),
 
         date:
-            document.getElementById(
-                "date"
-            ).value,
+            document.getElementById("date").value,
 
         statut:
-            document.getElementById(
-                "statut"
-            ).value,
+            document.getElementById("statut").value,
 
         client:
-            document.getElementById(
-                "client"
-            ).value.trim(),
+            document.getElementById("client").value.trim(),
 
         chantierId,
 
         chantier:
-            chantierNom !== "— Aucun chantier —"
-                ? chantierNom
-                : "",
+            chantier?.nom ||
+            chantier?.titre ||
+            chantier?.reference ||
+            "",
 
         localisation:
-            document.getElementById(
-                "localisation"
-            ).value.trim(),
+            document.getElementById("localisation").value.trim(),
 
         duree:
-            document.getElementById(
-                "duree"
-            ).value.trim(),
+            document.getElementById("duree").value.trim(),
 
         objet:
-            document.getElementById(
-                "objet"
-            ).value.trim(),
+            document.getElementById("objet").value.trim(),
 
         tva:
-            tauxTVA,
+            totaux.tva,
 
-        lignes,
+        lignes:
+            obtenirLignes(),
 
-        totalHT,
+        totalHT:
+            totaux.totalHT,
 
-        montantTVA,
+        montantTVA:
+            totaux.montantTVA,
 
-        totalTTC,
-
-        createdAt:
-            dqeActuel?.createdAt ||
-            new Date().toISOString(),
-
-        updatedAt:
-            new Date().toISOString(),
-
-        version:
-            "BATIFLOW-DQE-V2"
+        totalTTC:
+            totaux.totalTTC
 
     };
 
 }
 
 
-/* ==========================================================
-   ENREGISTREMENT
-========================================================== */
+/* =========================================================
+   ENREGISTRER
+========================================================= */
 
-function enregistrerDQE(){
-
-    const nom =
-        document.getElementById(
-            "nom"
-        ).value.trim();
-
-    if(!nom){
-
-        afficherToast(
-            "Veuillez renseigner le nom du DQE",
-            "error"
-        );
-
-        document.getElementById(
-            "nom"
-        ).focus();
-
-        return null;
-
-    }
-
+function enregistrerDQE(notifier = false){
 
     const dqe =
         collecterFormulaire();
+
+    if(!dqe.nom){
+
+        if(notifier){
+
+            afficherToast(
+                "⚠️ Donne un nom au DQE avant d'enregistrer."
+            );
+
+        }
+
+        return false;
+
+    }
 
     const dqes =
         obtenirDQEs();
 
     const index =
         dqes.findIndex(
-            item => item.id === dqe.id
+            item =>
+                String(item.id) === String(dqe.id)
         );
 
+    const maintenant =
+        new Date().toISOString();
 
-    if(index >= 0){
+    if(index === -1){
 
         dqe.createdAt =
-            dqes[index].createdAt ||
-            dqe.createdAt;
+            maintenant;
 
-        dqes[index] =
-            dqe;
+        dqe.updatedAt =
+            maintenant;
+
+        dqe.version =
+            "BATIFLOW-DQE-V2";
+
+        dqes.unshift(dqe);
 
     }else{
 
-        dqes.unshift(
-            dqe
-        );
+        dqe.createdAt =
+            dqes[index].createdAt ||
+            maintenant;
+
+        dqe.updatedAt =
+            maintenant;
+
+        dqe.version =
+            "BATIFLOW-DQE-V2";
+
+        dqes[index] = {
+            ...dqes[index],
+            ...dqe
+        };
 
     }
 
-
     sauvegarderDQEs(dqes);
-
-    dqeActuel = dqe;
-
-
-    document.getElementById(
-        "dqeId"
-    ).value =
-        dqe.id;
-
-
-    document.getElementById(
-        "reference"
-    ).value =
-        dqe.reference;
-
-
-    document.getElementById(
-        "formReference"
-    ).textContent =
-        dqe.reference;
-
-
-    document.getElementById(
-        "lastSaved"
-    ).textContent =
-        "Enregistré le " +
-        formaterDate(
-            dqe.updatedAt
-        );
-
-
-    document.getElementById(
-        "saveStatus"
-    ).textContent =
-        "Sauvegardé automatiquement";
-
 
     actualiserStatistiques();
 
     afficherListeDQEs();
 
-    actualiserBadgeStatut();
+    document.getElementById("autosaveStatus").textContent =
+        "● Enregistré";
 
+    if(notifier){
 
-    afficherToast(
-        index >= 0
-            ? "DQE modifié avec succès"
-            : "DQE enregistré avec succès",
-        "success"
-    );
+        afficherToast(
+            "✅ DQE enregistré avec succès."
+        );
 
+    }
 
-    return dqe;
+    return true;
 
 }
 
 
-/* ==========================================================
-   FORM SUBMIT
-========================================================== */
-
-document
-    .getElementById("dqeForm")
-    .addEventListener(
-        "submit",
-        function(event){
-
-            event.preventDefault();
-
-            enregistrerDQE();
-
-        }
-    );
-
-
-/* ==========================================================
-   SAUVEGARDE AUTOMATIQUE
-========================================================== */
+/* =========================================================
+   AUTOSAVE
+========================================================= */
 
 function programmerSauvegarde(){
 
-    clearTimeout(
-        sauvegardeTimer
-    );
+    clearTimeout(sauvegardeTimer);
 
-    document.getElementById(
-        "saveStatus"
-    ).textContent =
-        "Modifications en cours...";
-
+    document.getElementById("autosaveStatus").textContent =
+        "● Modification...";
 
     sauvegardeTimer =
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                const nom =
-                    document.getElementById(
-                        "nom"
-                    ).value.trim();
+            const nom =
+                document.getElementById("nom")?.value
+                ?.trim();
 
-                /*
-                 * On ne crée pas automatiquement
-                 * un DQE vide.
-                 */
+            if(nom){
 
-                if(!nom){
+                enregistrerDQE(false);
 
-                    document.getElementById(
-                        "saveStatus"
-                    ).textContent =
-                        "Sauvegarde automatique";
+            }
 
-                    return;
-
-                }
-
-
-                enregistrerDQE();
-
-            },
-            1200
-        );
+        },1200);
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    STATISTIQUES
-========================================================== */
+========================================================= */
 
 function actualiserStatistiques(){
 
     const dqes =
         obtenirDQEs();
 
-    const total =
-        dqes.length;
-
     const brouillons =
         dqes.filter(
-            dqe =>
-                dqe.statut === "brouillon"
+            d => d.statut === "brouillon"
         ).length;
 
     const valides =
         dqes.filter(
-            dqe =>
-                dqe.statut === "valide"
+            d => d.statut === "valide"
         ).length;
 
     const totalTTC =
         dqes.reduce(
-            (somme,dqe) =>
-                somme +
-                (Number(dqe.totalTTC) || 0),
+            (total,d) =>
+                total +
+                Number(
+                    d.totalTTC ??
+                    d.ttc ??
+                    d.montantTTC ??
+                    0
+                ),
             0
         );
 
+    document.getElementById("statTotal").textContent =
+        dqes.length;
 
-    document.getElementById(
-        "statTotal"
-    ).textContent =
-        total;
-
-    document.getElementById(
-        "statBrouillons"
-    ).textContent =
+    document.getElementById("statBrouillons").textContent =
         brouillons;
 
-    document.getElementById(
-        "statValides"
-    ).textContent =
+    document.getElementById("statValides").textContent =
         valides;
 
-    document.getElementById(
-        "statTTC"
-    ).textContent =
-        formaterMontant(
-            totalTTC
-        );
+    document.getElementById("statTTC").textContent =
+        formaterMontant(totalTTC);
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    LISTE DQE
-========================================================== */
+========================================================= */
 
 function afficherListeDQEs(){
 
     const container =
-        document.getElementById(
-            "dqeList"
-        );
+        document.getElementById("dqeList");
 
     const recherche =
-        document.getElementById(
-            "searchDQE"
-        ).value
-        .trim()
-        .toLowerCase();
-
+        (
+            document.getElementById("searchDQE")
+            ?.value ||
+            ""
+        )
+        .toLowerCase()
+        .trim();
 
     let dqes =
         obtenirDQEs();
-
 
     dqes.sort(
         (a,b) =>
             new Date(
                 b.updatedAt ||
                 b.createdAt ||
+                b.date ||
                 0
             ) -
             new Date(
                 a.updatedAt ||
                 a.createdAt ||
+                a.date ||
                 0
             )
     );
 
-
     if(recherche){
 
         dqes =
-            dqes.filter(
-                dqe => {
+            dqes.filter(dqe => {
 
-                    const texte =
-                        [
-                            dqe.reference,
-                            dqe.nom,
-                            dqe.client,
-                            dqe.chantier,
-                            dqe.localisation,
-                            dqe.statut
-                        ]
-                        .join(" ")
-                        .toLowerCase();
+                const texte =
+                    [
+                        dqe.nom,
+                        dqe.reference,
+                        dqe.client,
+                        dqe.chantier,
+                        dqe.localisation
+                    ]
+                    .join(" ")
+                    .toLowerCase();
 
-                    return texte.includes(
-                        recherche
-                    );
+                return texte.includes(recherche);
 
-                }
-            );
+            });
 
     }
-
-
-    document.getElementById(
-        "listCount"
-    ).textContent =
-        dqes.length;
-
 
     if(!dqes.length){
 
         container.innerHTML = `
 
-            <div class="empty">
+            <div style="
+                text-align:center;
+                padding:30px 10px;
+                color:#6b7280;
+                font-size:13px;
+            ">
 
-                <div class="empty-icon">
+                <div style="font-size:30px;margin-bottom:8px">
                     📋
                 </div>
 
-                <h3>
-                    ${
-                        recherche
-                        ? "Aucun résultat"
-                        : "Aucun DQE enregistré"
-                    }
-                </h3>
-
-                <p>
-                    ${
-                        recherche
-                        ? "Essayez une autre recherche."
-                        : "Créez votre premier DQE."
-                    }
-                </p>
+                Aucun DQE trouvé.
 
             </div>
 
@@ -3153,132 +2036,112 @@ function afficherListeDQEs(){
 
     }
 
-
     container.innerHTML =
-        dqes.map(
-            dqe =>
-                creerCarteDQE(dqe)
-        ).join("");
+        dqes.map(creerCarteDQE).join("");
 
 }
 
 
 function creerCarteDQE(dqe){
 
-    const statut =
-        dqe.statut ||
-        "brouillon";
-
-
     const nom =
         dqe.nom ||
+        dqe.titre ||
         "DQE sans nom";
 
+    const reference =
+        dqe.reference ||
+        "Sans référence";
 
     const client =
         dqe.client ||
         "Client non renseigné";
 
-
-    const montant =
+    const total =
         Number(
-            dqe.totalTTC
-        ) || 0;
+            dqe.totalTTC ??
+            dqe.ttc ??
+            dqe.montantTTC ??
+            dqe.montant ??
+            0
+        );
 
+    const statut =
+        dqe.statut ||
+        "brouillon";
 
     return `
 
-        <article class="dqe-card">
+        <div class="dqe-item">
 
-            <div class="dqe-card-top">
+            <div class="dqe-main">
 
-                <div>
-
-                    <div class="dqe-reference">
-                        ${echapper(
-                            dqe.reference ||
-                            "SANS RÉFÉRENCE"
-                        )}
-                    </div>
-
-                    <h3>
-                        ${echapper(nom)}
-                    </h3>
-
-                    <div class="dqe-client">
-                        ${echapper(client)}
-                    </div>
-
+                <div class="dqe-name">
+                    ${echapper(nom)}
                 </div>
 
-                <div class="dqe-amount">
-                    ${formaterMontant(montant)}
-                </div>
+                <div class="dqe-meta">
 
-            </div>
+                    ${echapper(reference)}
+                    <br>
 
+                    Client :
+                    ${echapper(client)}
+                    <br>
 
-            <div class="dqe-meta">
-
-                <span class="status status-${echapper(statut)}">
-                    ${texteStatut(statut)}
-                </span>
-
-                <span class="meta-badge">
-                    📅 ${formaterDate(
-                        dqe.date ||
-                        dqe.createdAt
+                    ${formaterDate(
+                        dqe.updatedAt ||
+                        dqe.createdAt ||
+                        dqe.date
                     )}
-                </span>
 
-                ${
-                    dqe.chantier
-                    ? `
-                    <span class="meta-badge">
-                        🏗️ ${echapper(
-                            dqe.chantier
-                        )}
+                    <br>
+
+                    <strong>
+                        ${formaterMontant(total)}
+                    </strong>
+
+                </div>
+
+                <div style="margin-top:7px">
+
+                    <span class="status status-${echapper(statut)}">
+                        ${texteStatut(statut)}
                     </span>
-                    `
-                    : ""
-                }
+
+                </div>
 
             </div>
 
-
-            <div class="dqe-actions">
+            <div class="actions no-print">
 
                 <button
-                    class="btn btn-light btn-small"
-                    type="button"
+                    class="btn btn-secondary btn-small"
                     onclick="consulterDQE('${dqe.id}')">
-                    👁 Voir
+                    Voir
                 </button>
 
                 <button
-                    class="btn btn-info btn-small"
-                    type="button"
+                    class="btn btn-primary btn-small"
                     onclick="modifierDQE('${dqe.id}')">
-                    ✏ Modifier
+                    Modifier
                 </button>
 
                 <button
-                    class="btn btn-success btn-small"
-                    type="button"
+                    class="btn btn-warning btn-small"
                     onclick="dupliquerDQE('${dqe.id}')">
-                    ⧉ Dupliquer
+                    Copier
                 </button>
 
                 <button
                     class="btn btn-danger btn-small"
-                    type="button"
                     onclick="supprimerDQE('${dqe.id}')">
-                    🗑 Supprimer
+                    Supprimer
                 </button>
 
             </div>
 
-        </article>
+        </div>
 
     `;
 
@@ -3293,232 +2156,172 @@ function texteStatut(statut){
 
         valide:"Validé",
 
-        envoye:"Envoyé",
-
-        archive:"Archivé"
+        annule:"Annulé"
 
     };
 
-    return textes[statut] ||
-        "Brouillon";
+    return textes[statut] || statut;
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    CONSULTATION
-========================================================== */
+========================================================= */
 
 function consulterDQE(id){
 
+    const dqes =
+        obtenirDQEs();
+
     const dqe =
-        obtenirDQEs()
-            .find(
-                item =>
-                    item.id === id
-            );
+        dqes.find(
+            item =>
+                String(item.id) === String(id)
+        );
 
     if(!dqe){
 
         afficherToast(
-            "DQE introuvable",
-            "error"
+            "DQE introuvable."
         );
 
         return;
 
     }
 
-
-    document.getElementById(
-        "detailTitle"
-    ).textContent =
-        dqe.nom ||
-        "Détail du DQE";
-
-
     const lignes =
         Array.isArray(dqe.lignes)
-            ? dqe.lignes
-            : [];
-
+        ? dqe.lignes
+        : [];
 
     const lignesHTML =
-        lignes.map(
-            (ligne,index) => {
+        lignes.map((ligne,index)=>`
 
-                const montant =
-                    (
-                        Number(ligne.quantite) ||
+            <tr>
+
+                <td>${index + 1}</td>
+
+                <td>
+                    ${echapper(
+                        ligne.designation || ""
+                    )}
+                </td>
+
+                <td>
+                    ${echapper(
+                        ligne.unite || ""
+                    )}
+                </td>
+
+                <td>
+                    ${Number(
+                        ligne.quantite || 0
+                    )}
+                </td>
+
+                <td>
+                    ${formaterMontant(
+                        ligne.prixUnitaire ||
+                        ligne.prix ||
                         0
-                    ) *
-                    (
-                        Number(ligne.prixUnitaire) ||
-                        0
-                    );
-
-
-                return `
-
-                    <tr>
-
-                        <td>${index + 1}</td>
-
-                        <td>
-                            ${echapper(
-                                ligne.designation ||
-                                ""
-                            )}
-                        </td>
-
-                        <td>
-                            ${echapper(
-                                ligne.unite ||
-                                ""
-                            )}
-                        </td>
-
-                        <td>
-                            ${Number(
-                                ligne.quantite
-                            ).toLocaleString(
-                                "fr-FR"
-                            )}
-                        </td>
-
-                        <td>
-                            ${formaterMontant(
-                                ligne.prixUnitaire
-                            )}
-                        </td>
-
-                        <td>
-                            <strong>
-                                ${formaterMontant(
-                                    montant
-                                )}
-                            </strong>
-                        </td>
-
-                    </tr>
-
-                `;
-
-            }
-        ).join("");
-
-
-    document.getElementById(
-        "detailBody"
-    ).innerHTML = `
-
-        <div class="detail-grid">
-
-            <div class="detail-box">
-                <small>Référence</small>
-                <strong>
-                    ${echapper(
-                        dqe.reference || "-"
                     )}
-                </strong>
+                </td>
+
+                <td>
+                    ${formaterMontant(
+                        ligne.montant ??
+                        (
+                            Number(
+                                ligne.quantite || 0
+                            ) *
+                            Number(
+                                ligne.prixUnitaire ||
+                                ligne.prix ||
+                                0
+                            )
+                        )
+                    )}
+                </td>
+
+            </tr>
+
+        `).join("");
+
+    document.getElementById("modalTitle").textContent =
+        dqe.nom ||
+        dqe.reference ||
+        "Détail du DQE";
+
+    document.getElementById("modalContent").innerHTML = `
+
+        <div class="form-grid">
+
+            <div>
+                <strong>Référence</strong>
+                <p>${echapper(dqe.reference || "—")}</p>
             </div>
 
-            <div class="detail-box">
-                <small>Date</small>
-                <strong>
-                    ${formaterDate(dqe.date)}
-                </strong>
+            <div>
+                <strong>Date</strong>
+                <p>${formaterDate(dqe.date)}</p>
             </div>
 
-            <div class="detail-box">
-                <small>Statut</small>
-                <strong>
-                    ${texteStatut(
-                        dqe.statut
-                    )}
-                </strong>
+            <div>
+                <strong>Client</strong>
+                <p>${echapper(dqe.client || "—")}</p>
             </div>
 
-            <div class="detail-box">
-                <small>Client</small>
-                <strong>
-                    ${echapper(
-                        dqe.client ||
-                        "Non renseigné"
-                    )}
-                </strong>
+            <div>
+                <strong>Chantier</strong>
+                <p>${echapper(dqe.chantier || "—")}</p>
             </div>
 
-            <div class="detail-box">
-                <small>Chantier</small>
-                <strong>
-                    ${echapper(
-                        dqe.chantier ||
-                        "Aucun"
-                    )}
-                </strong>
+            <div>
+                <strong>Localisation</strong>
+                <p>${echapper(dqe.localisation || "—")}</p>
             </div>
 
-            <div class="detail-box">
-                <small>Localisation</small>
-                <strong>
-                    ${echapper(
-                        dqe.localisation ||
-                        "Non renseignée"
-                    )}
-                </strong>
+            <div>
+                <strong>Durée</strong>
+                <p>${echapper(dqe.duree || "—")}</p>
+            </div>
+
+            <div class="form-group full">
+                <strong>Objet</strong>
+                <p style="margin-top:6px">
+                    ${echapper(dqe.objet || "—")}
+                </p>
             </div>
 
         </div>
 
+        <hr style="
+            border:0;
+            border-top:1px solid #e5e7eb;
+            margin:20px 0;
+        ">
 
-        ${
-            dqe.objet
-            ? `
-            <div class="detail-box"
-                 style="margin-bottom:20px;">
-                <small>Objet / description</small>
-                <strong>
-                    ${echapper(dqe.objet)}
-                </strong>
-            </div>
-            `
-            : ""
-        }
+        <div class="table-wrap">
 
-
-        <div class="table-wrapper">
-
-            <table class="dqe-table">
+            <table>
 
                 <thead>
 
                     <tr>
-
                         <th>N°</th>
                         <th>Désignation</th>
                         <th>Unité</th>
                         <th>Qté</th>
-                        <th>PU HT</th>
-                        <th>Total HT</th>
-
+                        <th>PU</th>
+                        <th>Montant</th>
                     </tr>
 
                 </thead>
 
                 <tbody>
 
-                    ${
-                        lignesHTML ||
-                        `
-                        <tr>
-                            <td colspan="6"
-                                style="text-align:center;">
-                                Aucune ligne
-                            </td>
-                        </tr>
-                        `
-                    }
+                    ${lignesHTML}
 
                 </tbody>
 
@@ -3526,104 +2329,68 @@ function consulterDQE(id){
 
         </div>
 
-
-        <div class="totals">
+        <div class="total-box">
 
             <div class="total-row">
-
                 <span>Total HT</span>
-
                 <strong>
-                    ${formaterMontant(
-                        dqe.totalHT
-                    )}
+                    ${formaterMontant(dqe.totalHT)}
                 </strong>
-
             </div>
 
             <div class="total-row">
-
-                <span>
-                    TVA (${dqe.tva || 0}%)
-                </span>
-
+                <span>TVA (${dqe.tva ?? 18}%)</span>
                 <strong>
-                    ${formaterMontant(
-                        dqe.montantTVA
-                    )}
+                    ${formaterMontant(dqe.montantTVA)}
                 </strong>
-
             </div>
 
-            <div class="total-row final">
-
+            <div class="total-row grand">
                 <span>Total TTC</span>
-
                 <strong>
-                    ${formaterMontant(
-                        dqe.totalTTC
-                    )}
+                    ${formaterMontant(dqe.totalTTC)}
                 </strong>
-
             </div>
 
         </div>
 
-
-        <div
-            style="
-                margin-top:20px;
-                display:flex;
-                justify-content:flex-end;
-                gap:8px;
-                flex-wrap:wrap;
-            ">
+        <div class="actions no-print" style="margin-top:20px">
 
             <button
-                type="button"
-                class="btn btn-light"
-                onclick="fermerModal()">
-                Fermer
+                class="btn btn-primary"
+                onclick="modifierDQE('${dqe.id}'); fermerModal();">
+                Modifier
             </button>
 
             <button
-                type="button"
-                class="btn btn-success"
-                onclick="dupliquerDQE('${dqe.id}'); fermerModal();">
-                ⧉ Dupliquer
-            </button>
-
-            <button
-                type="button"
-                class="btn btn-dark"
+                class="btn btn-secondary"
                 onclick="imprimerDQE('${dqe.id}')">
-                🖨 Préparer PDF
+                🖨 Imprimer
             </button>
 
         </div>
 
     `;
 
-
-    document.getElementById(
-        "detailModal"
-    ).classList.add("show");
+    document
+        .getElementById("detailModal")
+        .classList.add("show");
 
 }
 
 
 function fermerModal(){
 
-    document.getElementById(
-        "detailModal"
-    ).classList.remove("show");
+    document
+        .getElementById("detailModal")
+        .classList.remove("show");
 
 }
 
 
-/* ==========================================================
-   MODIFICATION
-========================================================== */
+/* =========================================================
+   DUPLICATION
+========================================================= */
 
 function dupliquerDQE(id){
 
@@ -3632,79 +2399,66 @@ function dupliquerDQE(id){
 
     const original =
         dqes.find(
-            dqe => dqe.id === id
+            item =>
+                String(item.id) === String(id)
         );
 
     if(!original){
 
         afficherToast(
-            "DQE introuvable",
-            "error"
+            "DQE introuvable."
         );
 
         return;
 
     }
 
-
-    const copie =
-        JSON.parse(
-            JSON.stringify(original)
-        );
-
-
-    copie.id =
-        genererId();
-
-    copie.reference =
-        genererReference();
-
-    copie.nom =
-        "Copie - " +
-        (
-            original.nom ||
-            "DQE"
-        );
-
-    copie.statut =
-        "brouillon";
-
-    copie.createdAt =
+    const maintenant =
         new Date().toISOString();
 
-    copie.updatedAt =
-        new Date().toISOString();
+    const copie = {
 
+        ...original,
 
-    dqes.unshift(
-        copie
-    );
+        id:
+            genererId(),
 
-    sauvegarderDQEs(
-        dqes
-    );
+        reference:
+            genererReference(),
 
+        nom:
+            "Copie - " +
+            (original.nom || "DQE"),
+
+        statut:
+            "brouillon",
+
+        createdAt:
+            maintenant,
+
+        updatedAt:
+            maintenant
+
+    };
+
+    dqes.unshift(copie);
+
+    sauvegarderDQEs(dqes);
 
     actualiserStatistiques();
 
     afficherListeDQEs();
 
-    modifierDQE(
-        copie.id
-    );
-
-
     afficherToast(
-        "DQE dupliqué avec succès",
-        "success"
+        "✅ DQE dupliqué."
     );
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    SUPPRESSION
-========================================================== */
+========================================================= */
 
 function supprimerDQE(id){
 
@@ -3713,316 +2467,142 @@ function supprimerDQE(id){
 
     const dqe =
         dqes.find(
-            item => item.id === id
+            item =>
+                String(item.id) === String(id)
         );
 
-    if(!dqe){
-
-        afficherToast(
-            "DQE introuvable",
-            "error"
-        );
-
-        return;
-
-    }
-
+    if(!dqe) return;
 
     const confirmation =
         confirm(
-            "Supprimer définitivement le DQE \"" +
-            (
-                dqe.nom ||
-                dqe.reference ||
-                "sans nom"
-            ) +
-            "\" ?\n\nCette action est irréversible."
+            "Supprimer le DQE « " +
+            (dqe.nom || dqe.reference) +
+            " » ?\n\nCette action est irréversible."
         );
 
+    if(!confirmation) return;
 
-    if(!confirmation){
-        return;
-    }
-
-
-    const nouveauxDQEs =
+    const nouveaux =
         dqes.filter(
             item =>
-                item.id !== id
+                String(item.id) !== String(id)
         );
 
-
-    sauvegarderDQEs(
-        nouveauxDQEs
-    );
-
-
-    if(
-        dqeActuel &&
-        dqeActuel.id === id
-    ){
-
-        nouveauDQE();
-
-    }
-
+    sauvegarderDQEs(nouveaux);
 
     actualiserStatistiques();
 
     afficherListeDQEs();
 
-
     afficherToast(
-        "DQE supprimé",
-        "success"
+        "🗑 DQE supprimé."
     );
 
 }
 
 
-/* ==========================================================
-   BADGE STATUT
-========================================================== */
-
-function actualiserBadgeStatut(){
-
-    const statut =
-        document.getElementById(
-            "statut"
-        ).value;
-
-
-    const badge =
-        document.getElementById(
-            "currentStatus"
-        );
-
-
-    badge.className =
-        "status status-" +
-        statut;
-
-    badge.textContent =
-        texteStatut(
-            statut
-        );
-
-}
-
-
-/* ==========================================================
-   RECHERCHE
-========================================================== */
-
-document
-    .getElementById("searchDQE")
-    .addEventListener(
-        "input",
-        afficherListeDQEs
-    );
-
-
-document
-    .getElementById("statut")
-    .addEventListener(
-        "change",
-        () => {
-
-            actualiserBadgeStatut();
-
-            programmerSauvegarde();
-
-        }
-    );
-
-
-/* ==========================================================
-   AUTO-SAVE SUR FORMULAIRE
-========================================================== */
-
-document
-    .getElementById("dqeForm")
-    .addEventListener(
-        "input",
-        event => {
-
-            if(
-                event.target.id !==
-                "searchDQE"
-            ){
-
-                programmerSauvegarde();
-
-            }
-
-        }
-    );
-
-
-/* ==========================================================
-   PREPARATION PDF
-========================================================== */
+/* =========================================================
+   IMPRESSION
+========================================================= */
 
 function imprimerDQE(id = null){
 
-    let dqe = null;
-
+    let dqe;
 
     if(id){
 
+        const dqes =
+            obtenirDQEs();
+
         dqe =
-            obtenirDQEs()
-                .find(
-                    item =>
-                        item.id === id
-                );
-
-    }else{
-
-        const nom =
-            document.getElementById(
-                "nom"
-            ).value.trim();
-
-
-        if(!nom){
-
-            afficherToast(
-                "Enregistrez d'abord le DQE",
-                "error"
+            dqes.find(
+                item =>
+                    String(item.id) === String(id)
             );
 
-            return;
-
-        }
-
+    }else{
 
         dqe =
             collecterFormulaire();
 
     }
 
-
-    if(!dqe){
+    if(!dqe || !dqe.nom){
 
         afficherToast(
-            "Impossible de préparer le PDF",
-            "error"
+            "Veuillez renseigner le nom du DQE."
         );
 
         return;
 
     }
-
-
-    /*
-     * Architecture préparée pour le futur
-     * générateur PDF professionnel.
-     *
-     * Les données sont déjà normalisées :
-     * référence
-     * client
-     * chantier
-     * lignes
-     * HT
-     * TVA
-     * TTC
-     * statut
-     * date
-     *
-     * Pour l'instant, on utilise l'impression
-     * navigateur comme prévisualisation.
-     */
-
-    const fenetre =
-        window.open(
-            "",
-            "_blank"
-        );
-
-
-    if(!fenetre){
-
-        afficherToast(
-            "Autorisez les fenêtres pop-up pour préparer le PDF",
-            "error"
-        );
-
-        return;
-
-    }
-
 
     const lignes =
         Array.isArray(dqe.lignes)
-            ? dqe.lignes
-            : [];
-
+        ? dqe.lignes
+        : [];
 
     const lignesHTML =
-        lignes.map(
-            (ligne,index) => {
+        lignes.map((ligne,index)=>`
 
-                const montant =
-                    (
-                        Number(ligne.quantite) || 0
-                    ) *
-                    (
-                        Number(ligne.prixUnitaire) || 0
-                    );
+            <tr>
 
+                <td>${index + 1}</td>
 
-                return `
+                <td>
+                    ${echapper(ligne.designation || "")}
+                </td>
 
-                    <tr>
+                <td>
+                    ${echapper(ligne.unite || "")}
+                </td>
 
-                        <td>
-                            ${index + 1}
-                        </td>
+                <td>
+                    ${Number(ligne.quantite || 0)}
+                </td>
 
-                        <td>
-                            ${echapper(
-                                ligne.designation ||
-                                ""
-                            )}
-                        </td>
+                <td>
+                    ${formaterMontant(
+                        ligne.prixUnitaire ||
+                        ligne.prix ||
+                        0
+                    )}
+                </td>
 
-                        <td>
-                            ${echapper(
-                                ligne.unite ||
-                                ""
-                            )}
-                        </td>
+                <td>
+                    ${formaterMontant(
+                        ligne.montant ??
+                        Number(ligne.quantite || 0) *
+                        Number(
+                            ligne.prixUnitaire ||
+                            ligne.prix ||
+                            0
+                        )
+                    )}
+                </td>
 
-                        <td>
-                            ${Number(
-                                ligne.quantite
-                            ).toLocaleString(
-                                "fr-FR"
-                            )}
-                        </td>
+            </tr>
 
-                        <td>
-                            ${formaterMontant(
-                                ligne.prixUnitaire
-                            )}
-                        </td>
+        `).join("");
 
-                        <td>
-                            ${formaterMontant(
-                                montant
-                            )}
-                        </td>
+    const win =
+        window.open(
+            "",
+            "_blank",
+            "width=1100,height=800"
+        );
 
-                    </tr>
+    if(!win){
 
-                `;
+        afficherToast(
+            "Autorisez les fenêtres popup du navigateur."
+        );
 
-            }
-        ).join("");
+        return;
 
+    }
 
-    fenetre.document.write(`
+    win.document.write(`
 
         <!DOCTYPE html>
 
@@ -4033,136 +2613,95 @@ function imprimerDQE(id = null){
             <meta charset="UTF-8">
 
             <title>
-                ${echapper(
-                    dqe.reference ||
-                    "DQE"
-                )}
+                ${echapper(dqe.reference || dqe.nom)}
             </title>
 
             <style>
 
-                *{
-                    box-sizing:border-box;
-                }
-
                 body{
-                    font-family:Arial,Helvetica,sans-serif;
-                    color:#172033;
-                    padding:35px;
-                    font-size:12px;
+                    font-family:Arial,sans-serif;
+                    margin:35px;
+                    color:#111827;
                 }
 
                 .header{
                     display:flex;
                     justify-content:space-between;
-                    align-items:flex-start;
-                    border-bottom:3px solid #f59e0b;
-                    padding-bottom:18px;
+                    border-bottom:3px solid #111827;
+                    padding-bottom:15px;
                     margin-bottom:25px;
-                }
-
-                .logo{
-                    font-size:25px;
-                    font-weight:900;
-                    letter-spacing:1px;
-                }
-
-                .logo span{
-                    color:#f59e0b;
-                }
-
-                .reference{
-                    text-align:right;
-                }
-
-                .reference strong{
-                    display:block;
-                    font-size:18px;
                 }
 
                 h1{
-                    font-size:24px;
-                    margin:0 0 8px;
+                    margin:0;
+                    font-size:25px;
                 }
 
-                .subtitle{
-                    color:#64748b;
-                }
-
-                .infos{
-                    display:grid;
-                    grid-template-columns:repeat(3,1fr);
-                    gap:12px;
-                    margin-bottom:25px;
+                h2{
+                    margin-top:25px;
+                    font-size:18px;
                 }
 
                 .info{
-                    background:#f8fafc;
-                    padding:12px;
-                    border-radius:7px;
+                    display:grid;
+                    grid-template-columns:1fr 1fr;
+                    gap:10px;
+                    margin-bottom:25px;
                 }
 
-                .info small{
-                    display:block;
-                    color:#64748b;
-                    margin-bottom:4px;
+                .info div{
+                    border:1px solid #ddd;
+                    padding:10px;
                 }
 
                 table{
                     width:100%;
                     border-collapse:collapse;
-                    margin-top:20px;
+                    margin-top:15px;
+                }
+
+                th,
+                td{
+                    border:1px solid #ccc;
+                    padding:9px;
+                    font-size:12px;
                 }
 
                 th{
-                    background:#111827;
-                    color:white;
-                    padding:10px;
+                    background:#f1f5f9;
                     text-align:left;
-                }
-
-                td{
-                    padding:9px;
-                    border:1px solid #e2e8f0;
                 }
 
                 .totaux{
                     margin-left:auto;
-                    width:330px;
+                    width:320px;
                     margin-top:20px;
                 }
 
-                .total{
+                .ligne{
                     display:flex;
                     justify-content:space-between;
-                    padding:9px;
-                    border-bottom:1px solid #e2e8f0;
+                    padding:7px 0;
                 }
 
                 .ttc{
-                    background:#fff7ed;
-                    font-size:16px;
-                    font-weight:900;
+                    border-top:2px solid #111;
+                    font-size:18px;
+                    font-weight:bold;
+                    padding-top:10px;
                 }
 
                 .footer{
-                    margin-top:50px;
-                    border-top:1px solid #e2e8f0;
-                    padding-top:15px;
-                    color:#64748b;
-                    font-size:10px;
+                    margin-top:45px;
+                    text-align:center;
+                    font-size:11px;
+                    color:#777;
                 }
 
                 @media print{
-
                     body{
-                        padding:15mm;
+                        margin:15mm;
                     }
-
-                    .no-print{
-                        display:none;
-                    }
-
                 }
 
             </style>
@@ -4175,76 +2714,72 @@ function imprimerDQE(id = null){
 
                 <div>
 
-                    <div class="logo">
-                        BATI<span>FLOW</span>
-                    </div>
+                    <h1>BATIFLOW</h1>
 
-                    <div class="subtitle">
-                        CONSTRUCTION MANAGEMENT
+                    <div>
+                        Gestion BTP
                     </div>
 
                 </div>
 
-                <div class="reference">
+                <div style="text-align:right">
 
                     <strong>
                         DQE
                     </strong>
 
-                    ${echapper(
-                        dqe.reference ||
-                        ""
-                    )}
+                    <br>
+
+                    ${echapper(dqe.reference || "")}
+
+                    <br>
+
+                    ${formaterDate(dqe.date)}
 
                 </div>
 
             </div>
 
 
-            <h1>
-                ${echapper(
-                    dqe.nom ||
-                    "Devis Quantitatif et Estimatif"
-                )}
-            </h1>
-
-            <div class="subtitle">
-                Devis Quantitatif et Estimatif
-            </div>
+            <h2>
+                ${echapper(dqe.nom)}
+            </h2>
 
 
-            <div class="infos">
+            <div class="info">
 
-                <div class="info">
-                    <small>Client</small>
-                    <strong>
-                        ${echapper(
-                            dqe.client ||
-                            "Non renseigné"
-                        )}
-                    </strong>
+                <div>
+                    <strong>Client</strong><br>
+                    ${echapper(dqe.client || "—")}
                 </div>
 
-                <div class="info">
-                    <small>Chantier</small>
-                    <strong>
-                        ${echapper(
-                            dqe.chantier ||
-                            "Non renseigné"
-                        )}
-                    </strong>
+                <div>
+                    <strong>Chantier</strong><br>
+                    ${echapper(dqe.chantier || "—")}
                 </div>
 
-                <div class="info">
-                    <small>Date</small>
-                    <strong>
-                        ${formaterDate(
-                            dqe.date
-                        )}
-                    </strong>
+                <div>
+                    <strong>Localisation</strong><br>
+                    ${echapper(dqe.localisation || "—")}
+                </div>
+
+                <div>
+                    <strong>Durée</strong><br>
+                    ${echapper(dqe.duree || "—")}
                 </div>
 
             </div>
+
+
+            <p>
+                <strong>Objet :</strong>
+                ${echapper(dqe.objet || "—")}
+            </p>
+
+
+            <h2>
+                Détail quantitatif et estimatif
+            </h2>
 
 
             <table>
@@ -4259,11 +2794,11 @@ function imprimerDQE(id = null){
 
                         <th>Unité</th>
 
-                        <th>Qté</th>
+                        <th>Quantité</th>
 
-                        <th>PU HT</th>
+                        <th>Prix unitaire</th>
 
-                        <th>Total HT</th>
+                        <th>Montant</th>
 
                     </tr>
 
@@ -4280,44 +2815,36 @@ function imprimerDQE(id = null){
 
             <div class="totaux">
 
-                <div class="total">
+                <div class="ligne">
 
-                    <span>
-                        Total HT
-                    </span>
+                    <span>Total HT</span>
 
                     <strong>
-                        ${formaterMontant(
-                            dqe.totalHT
-                        )}
+                        ${formaterMontant(dqe.totalHT)}
                     </strong>
 
                 </div>
 
-                <div class="total">
+                <div class="ligne">
 
                     <span>
-                        TVA (${dqe.tva || 0}%)
+                        TVA (${dqe.tva ?? 18}%)
                     </span>
 
                     <strong>
-                        ${formaterMontant(
-                            dqe.montantTVA
-                        )}
+                        ${formaterMontant(dqe.montantTVA)}
                     </strong>
 
                 </div>
 
-                <div class="total ttc">
+                <div class="ligne ttc">
 
                     <span>
                         TOTAL TTC
                     </span>
 
                     <strong>
-                        ${formaterMontant(
-                            dqe.totalTTC
-                        )}
+                        ${formaterMontant(dqe.totalTTC)}
                     </strong>
 
                 </div>
@@ -4325,42 +2852,9 @@ function imprimerDQE(id = null){
             </div>
 
 
-            ${
-                dqe.objet
-                ? `
-                <div
-                    style="
-                        margin-top:30px;
-                        padding:15px;
-                        background:#f8fafc;
-                    ">
-
-                    <strong>
-                        Observations / objet
-                    </strong>
-
-                    <p style="margin-top:7px;">
-                        ${echapper(
-                            dqe.objet
-                        )}
-                    </p>
-
-                </div>
-                `
-                : ""
-            }
-
-
             <div class="footer">
 
-                Document préparé avec BATIFLOW —
-                Construction Management.
-
-                <br>
-
-                Ce document constitue une prévisualisation.
-                Le générateur PDF professionnel BATIFLOW
-                sera intégré ultérieurement.
+                BATIFLOW — Solution de gestion BTP
 
             </div>
 
@@ -4369,12 +2863,7 @@ function imprimerDQE(id = null){
 
                 window.onload = function(){
 
-                    setTimeout(
-                        function(){
-                            window.print();
-                        },
-                        500
-                    );
+                    window.print();
 
                 };
 
@@ -4386,94 +2875,198 @@ function imprimerDQE(id = null){
 
     `);
 
-
-    fenetre.document.close();
+    win.document.close();
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    TOAST
-========================================================== */
+========================================================= */
 
-let toastTimer = null;
-
-
-function afficherToast(message,type="success"){
+function afficherToast(message){
 
     const toast =
-        document.getElementById(
-            "toast"
-        );
+        document.getElementById("toast");
 
-    document.getElementById(
-        "toastMessage"
-    ).textContent =
+    toast.textContent =
         message;
 
+    toast.classList.add("show");
 
-    toast.className =
-        "toast " +
-        type +
-        " show";
+    setTimeout(() => {
 
+        toast.classList.remove("show");
 
-    clearTimeout(
-        toastTimer
-    );
-
-
-    toastTimer =
-        setTimeout(
-            () => {
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            3000
-        );
+    },3000);
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    MENU MOBILE
-========================================================== */
+========================================================= */
 
-document
-    .getElementById("menuBtn")
-    .addEventListener(
-        "click",
-        () => {
+function toggleMenu(){
 
-            document
-                .getElementById(
-                    "sidebar"
-                )
-                .classList.toggle(
-                    "open"
-                );
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   PARAMÈTRES URL
+   IMPORTANT POUR LE DASHBOARD
+========================================================= */
+
+function traiterParametresURL(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const voirId =
+        params.get("voir");
+
+    const modifierId =
+        params.get("modifier");
+
+
+    /*
+       PRIORITÉ À MODIFIER
+    */
+
+    if(modifierId){
+
+        const trouve =
+            modifierDQE(modifierId);
+
+        if(!trouve){
+
+            afficherToast(
+                "⚠️ Le DQE demandé n'existe plus."
+            );
 
         }
-    );
+
+        nettoyerURL();
+
+        return;
+
+    }
 
 
-/* ==========================================================
-   FERMETURE MODAL
-========================================================== */
+    /*
+       MODE CONSULTATION
+    */
+
+    if(voirId){
+
+        const dqes =
+            obtenirDQEs();
+
+        const existe =
+            dqes.some(
+                item =>
+                    String(item.id) === String(voirId)
+            );
+
+        if(existe){
+
+            consulterDQE(voirId);
+
+        }else{
+
+            afficherToast(
+                "⚠️ Le DQE demandé n'existe plus."
+            );
+
+        }
+
+        nettoyerURL();
+
+    }
+
+}
+
+
+/* =========================================================
+   NETTOYER URL
+========================================================= */
+
+function nettoyerURL(){
+
+    if(
+        window.history &&
+        window.history.replaceState
+    ){
+
+        const url =
+            new URL(
+                window.location.href
+            );
+
+        url.searchParams.delete("voir");
+
+        url.searchParams.delete("modifier");
+
+        window.history.replaceState(
+            {},
+            document.title,
+            url.pathname +
+            url.search +
+            url.hash
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SYNCHRONISATION LOCALSTORAGE
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key === DQE_STORAGE_KEY
+        ){
+
+            actualiserStatistiques();
+
+            afficherListeDQEs();
+
+        }
+
+        if(
+            event.key === CHANTIER_STORAGE_KEY
+        ){
+
+            chargerChantiers();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   FERMER MODAL EN CLIQUANT À CÔTÉ
+========================================================= */
 
 document
     .getElementById("detailModal")
     .addEventListener(
         "click",
-        event => {
+        function(event){
 
-            if(
-                event.target.id ===
-                "detailModal"
-            ){
+            if(event.target === this){
 
                 fermerModal();
 
@@ -4483,9 +3076,13 @@ document
     );
 
 
+/* =========================================================
+   RACCOURCI ÉCHAP
+========================================================= */
+
 document.addEventListener(
     "keydown",
-    event => {
+    function(event){
 
         if(event.key === "Escape"){
 
@@ -4497,42 +3094,9 @@ document.addEventListener(
 );
 
 
-/* ==========================================================
-   SYNCHRONISATION LOCALSTORAGE
-========================================================== */
-
-window.addEventListener(
-    "storage",
-    event => {
-
-        if(
-            event.key ===
-            DQE_STORAGE_KEY
-        ){
-
-            actualiserStatistiques();
-
-            afficherListeDQEs();
-
-        }
-
-
-        if(
-            event.key ===
-            CHANTIER_STORAGE_KEY
-        ){
-
-            chargerChantiers();
-
-        }
-
-    }
-);
-
-
-/* ==========================================================
+/* =========================================================
    INITIALISATION
-========================================================== */
+========================================================= */
 
 function initialiser(){
 
@@ -4546,8 +3110,20 @@ function initialiser(){
 
     afficherListeDQEs();
 
+    /*
+       IMPORTANT :
+       On traite APRÈS le chargement
+       du formulaire.
+    */
+
+    traiterParametresURL();
+
 }
 
+
+/* =========================================================
+   LANCEMENT
+========================================================= */
 
 initialiser();
 
