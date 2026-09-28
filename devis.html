@@ -6,38 +6,30 @@
 
 <title>BATIFLOW — Devis</title>
 
-<meta
-    name="description"
-    content="BATIFLOW — Création et gestion des devis BTP"
-/>
-
 <style>
-
 :root{
-    --dark:#101827;
-    --dark2:#151f32;
-    --orange:#F59E0B;
-    --orange2:#F28C28;
-    --bg:#f5f7fb;
+    --bg:#f4f7fb;
     --card:#ffffff;
-    --text:#111827;
+    --dark:#101827;
+    --orange:#f59e0b;
+    --orange2:#f28c28;
+    --orange-dark:#d97706;
+    --text:#172033;
     --muted:#64748b;
-    --border:#e5e7eb;
-    --green:#16a34a;
-    --red:#dc2626;
+    --border:#e2e8f0;
+    --success:#16a34a;
+    --danger:#dc2626;
     --blue:#2563eb;
-    --shadow:0 8px 25px rgba(15,23,42,.07);
+    --shadow:0 8px 25px rgba(15,23,42,.08);
 }
 
 *{
     box-sizing:border-box;
 }
 
-html,
 body{
     margin:0;
-    padding:0;
-    font-family:Inter,Segoe UI,Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:var(--bg);
     color:var(--text);
 }
@@ -46,7 +38,7 @@ button,
 input,
 select,
 textarea{
-    font:inherit;
+    font-family:inherit;
 }
 
 button{
@@ -61,101 +53,75 @@ button{
     position:fixed;
     left:0;
     top:0;
-    bottom:0;
     width:260px;
+    height:100vh;
     background:var(--dark);
-    color:#fff;
-    z-index:1000;
+    color:white;
+    padding:22px 15px;
     overflow-y:auto;
+    z-index:1000;
 }
 
 .logo{
     display:flex;
     align-items:center;
     gap:10px;
-    padding:22px 20px 18px;
-    text-decoration:none;
-    color:#fff;
+    font-size:24px;
+    font-weight:800;
+    padding:0 10px 25px;
 }
 
 .logo-icon{
-    width:42px;
-    height:42px;
-    flex:none;
-}
-
-.logo-text{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#f59e0b,#f28c28);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
     font-weight:900;
-    font-size:21px;
-    letter-spacing:.4px;
 }
 
-.logo-text .flow{
-    color:var(--orange);
+.logo span{
+    color:#f28c28;
 }
 
-.logo-sub{
-    display:block;
-    font-size:8px;
-    letter-spacing:1.1px;
-    color:#94a3b8;
-    margin-top:2px;
-}
-
-.nav-title{
-    padding:18px 20px 8px;
+.menu-title{
     color:#64748b;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:1.2px;
+    font-size:11px;
     text-transform:uppercase;
+    font-weight:700;
+    margin:18px 10px 8px;
 }
 
-.nav a{
+.menu a{
     display:flex;
     align-items:center;
     gap:12px;
-    margin:4px 12px;
-    padding:11px 12px;
-    border-radius:10px;
+    padding:11px 13px;
     color:#cbd5e1;
     text-decoration:none;
+    border-radius:9px;
+    margin-bottom:4px;
     font-size:14px;
-    font-weight:600;
     transition:.2s;
 }
 
-.nav a:hover{
-    background:#1d293d;
-    color:#fff;
+.menu a:hover{
+    background:#1e293b;
+    color:white;
 }
 
-.nav a.active{
-    background:rgba(245,158,11,.14);
-    color:#fff;
+.menu a.active{
+    background:rgba(245,158,11,.15);
+    color:#f59e0b;
+    font-weight:700;
 }
 
-.nav a.active .nav-icon{
-    background:var(--orange);
-    color:#111827;
-}
-
-.nav-icon{
-    width:30px;
-    height:30px;
-    border-radius:8px;
-    display:grid;
-    place-items:center;
-    background:#1c2739;
-    font-size:15px;
-    flex:none;
-}
-
-.logout{
-    margin-top:12px!important;
-    border-top:1px solid #253044;
-    border-radius:0!important;
-    padding-top:18px!important;
+.menu-icon{
+    width:22px;
+    text-align:center;
 }
 
 /* =========================
@@ -168,8 +134,8 @@ button{
 }
 
 .topbar{
-    height:72px;
-    background:#fff;
+    height:70px;
+    background:white;
     border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
@@ -177,110 +143,82 @@ button{
     padding:0 28px;
     position:sticky;
     top:0;
-    z-index:900;
+    z-index:500;
 }
 
-.page-title{
-    font-size:20px;
+.topbar-title{
+    font-size:22px;
     font-weight:800;
 }
 
-.page-sub{
-    font-size:12px;
-    color:var(--muted);
-    margin-top:3px;
-}
-
-.top-right{
+.user-area{
     display:flex;
     align-items:center;
-    gap:18px;
+    gap:12px;
 }
 
-.search{
-    width:270px;
-    height:40px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:0 13px;
-    outline:none;
-    background:#f8fafc;
-}
-
-.search:focus{
-    border-color:var(--orange);
-    background:#fff;
-}
-
-.avatar{
+.user-avatar{
     width:38px;
     height:38px;
     border-radius:50%;
-    display:grid;
-    place-items:center;
-    background:var(--orange);
-    color:#111827;
-    font-weight:900;
+    background:#f59e0b;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
 }
 
 .user-name{
-    font-size:13px;
+    font-size:14px;
     font-weight:700;
 }
 
-.menu-btn{
-    display:none;
-    background:none;
-    border:0;
-    font-size:24px;
+.content{
+    padding:28px;
+    max-width:1500px;
+    margin:auto;
 }
 
 /* =========================
-   CONTENT
+   HEADER
 ========================= */
 
-.content{
-    padding:28px;
-}
-
-.page-head{
+.page-header{
     display:flex;
     justify-content:space-between;
-    align-items:flex-start;
-    gap:15px;
-    margin-bottom:22px;
+    align-items:center;
+    gap:20px;
+    margin-bottom:25px;
 }
 
-.eyebrow{
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:1.2px;
-    color:var(--orange2);
-}
-
-h1{
-    font-size:28px;
-    margin:5px 0 6px;
-}
-
-.page-head p{
+.page-title{
     margin:0;
+    font-size:28px;
+}
+
+.page-subtitle{
+    margin:7px 0 0;
     color:var(--muted);
     font-size:14px;
 }
 
 .actions{
     display:flex;
-    gap:9px;
+    gap:10px;
     flex-wrap:wrap;
 }
 
+/* =========================
+   BUTTONS
+========================= */
+
 .btn{
     border:0;
-    border-radius:9px;
-    padding:10px 15px;
-    font-weight:800;
-    font-size:13px;
+    border-radius:8px;
+    padding:11px 16px;
+    font-weight:700;
+    font-size:14px;
     display:inline-flex;
     align-items:center;
     justify-content:center;
@@ -294,60 +232,94 @@ h1{
 
 .btn-primary{
     background:var(--orange);
-    color:#111827;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:var(--orange-dark);
 }
 
 .btn-dark{
     background:var(--dark);
-    color:#fff;
+    color:white;
 }
 
-.btn-light{
-    background:#fff;
-    border:1px solid var(--border);
-    color:#334155;
+.btn-success{
+    background:var(--success);
+    color:white;
 }
 
 .btn-danger{
-    background:#fee2e2;
-    color:#991b1b;
+    background:var(--danger);
+    color:white;
 }
 
-.btn-green{
-    background:#dcfce7;
-    color:#166534;
+.btn-light{
+    background:#f8fafc;
+    color:var(--text);
+    border:1px solid var(--border);
+}
+
+.btn-blue{
+    background:var(--blue);
+    color:white;
 }
 
 /* =========================
-   GRID
+   SOURCE DQE
 ========================= */
 
-.grid{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) 330px;
-    gap:20px;
-}
-
-.card{
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:14px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
+.source-box{
+    display:none;
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    border-left:5px solid var(--orange);
+    border-radius:10px;
+    padding:14px 16px;
     margin-bottom:20px;
 }
 
-.card-head{
-    padding:17px 20px;
+.source-box.active{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.source-title{
+    font-weight:800;
+    color:#9a3412;
+}
+
+.source-text{
+    color:#7c2d12;
+    font-size:13px;
+    margin-top:4px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    margin-bottom:22px;
+}
+
+.card-header{
+    padding:18px 20px;
     border-bottom:1px solid var(--border);
     display:flex;
     justify-content:space-between;
     align-items:center;
 }
 
-.card-head h2{
-    font-size:15px;
-    margin:0;
+.card-title{
+    font-size:17px;
+    font-weight:800;
 }
 
 .card-body{
@@ -360,272 +332,164 @@ h1{
 
 .form-grid{
     display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:15px;
+    grid-template-columns:repeat(4,1fr);
+    gap:17px;
 }
 
-.field.full{
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
     grid-column:1/-1;
 }
 
-label{
-    display:block;
-    font-size:12px;
-    font-weight:800;
+.form-group label{
+    font-size:13px;
+    font-weight:700;
     color:#334155;
-    margin-bottom:6px;
 }
 
-input,
-select,
-textarea{
+.form-control{
     width:100%;
-    border:1px solid #dbe1ea;
+    border:1px solid var(--border);
+    background:white;
     border-radius:8px;
-    padding:10px 11px;
+    padding:11px 12px;
+    font-size:14px;
+    color:var(--text);
     outline:none;
-    background:#fff;
-    color:#111827;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
+.form-control:focus{
     border-color:var(--orange);
     box-shadow:0 0 0 3px rgba(245,158,11,.12);
 }
 
-textarea{
-    min-height:85px;
+textarea.form-control{
+    min-height:90px;
     resize:vertical;
-}
-
-/* =========================
-   CLIENT / CHANTIER
-========================= */
-
-.select-info{
-    font-size:10px;
-    color:#64748b;
-    margin-top:5px;
-}
-
-.quick-link{
-    display:inline-block;
-    margin-top:5px;
-    color:#b45309;
-    font-size:11px;
-    font-weight:800;
-    text-decoration:none;
-}
-
-.quick-link:hover{
-    text-decoration:underline;
 }
 
 /* =========================
    TABLE
 ========================= */
 
-.table-wrap{
-    overflow:auto;
+.table-wrapper{
+    overflow-x:auto;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:780px;
+    min-width:850px;
 }
 
-th{
+thead th{
     background:#f8fafc;
-    text-align:left;
-    padding:11px 9px;
-    font-size:11px;
-    color:#64748b;
+    color:#475569;
+    font-size:12px;
     text-transform:uppercase;
+    letter-spacing:.3px;
+    padding:12px 10px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
 }
 
-td{
-    padding:9px;
-    border-top:1px solid var(--border);
+tbody td{
+    padding:9px 8px;
+    border-bottom:1px solid #edf1f5;
     vertical-align:middle;
 }
 
-td input,
-td select{
-    padding:8px;
-    font-size:12px;
+.line-input{
+    width:100%;
+    border:1px solid var(--border);
+    border-radius:7px;
+    padding:9px;
+    outline:none;
+    font-size:13px;
 }
 
-.col-num{
-    width:42px;
-    text-align:center;
-    color:#64748b;
-    font-weight:800;
-}
-
-.col-action{
-    width:52px;
+.line-input:focus{
+    border-color:var(--orange);
 }
 
 .amount{
-    font-weight:800;
-    text-align:right;
+    font-weight:700;
     white-space:nowrap;
 }
 
 .delete-line{
-    width:32px;
-    height:32px;
     border:0;
-    border-radius:7px;
     background:#fee2e2;
-    color:#991b1b;
-    font-weight:900;
-}
-
-.add-line{
-    margin-top:12px;
-    border:1px dashed #cbd5e1;
-    background:#f8fafc;
-    color:#475569;
-    width:100%;
-    padding:10px;
-    border-radius:8px;
-    font-weight:800;
-}
-
-.add-line:hover{
-    border-color:var(--orange);
-    color:#92400e;
-    background:#fffaf0;
+    color:#dc2626;
+    width:34px;
+    height:34px;
+    border-radius:7px;
+    font-size:16px;
 }
 
 /* =========================
-   SUMMARY
+   TOTALS
 ========================= */
 
+.bottom-grid{
+    display:grid;
+    grid-template-columns:1fr 390px;
+    gap:22px;
+}
+
+.notes{
+    min-height:150px;
+}
+
 .summary{
-    position:sticky;
-    top:92px;
+    background:#f8fafc;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px;
 }
 
 .summary-row{
     display:flex;
     justify-content:space-between;
-    gap:15px;
-    padding:10px 0;
-    font-size:13px;
-}
-
-.summary-row strong{
+    align-items:center;
+    padding:9px 0;
     font-size:14px;
 }
 
 .summary-row.total{
-    border-top:2px solid var(--dark);
-    margin-top:8px;
-    padding-top:15px;
-}
-
-.summary-row.total strong{
-    font-size:21px;
-    color:#111827;
-}
-
-.summary-actions{
-    display:grid;
-    gap:9px;
-    margin-top:15px;
-}
-
-.info{
-    background:#fffbeb;
-    border:1px solid #fde68a;
-    border-radius:10px;
-    padding:11px 12px;
-    font-size:11px;
-    color:#854d0e;
-    line-height:1.5;
-}
-
-.status{
-    display:inline-flex;
-    padding:5px 9px;
-    border-radius:999px;
-    background:#dcfce7;
-    color:#166534;
-    font-size:10px;
+    margin-top:10px;
+    padding-top:16px;
+    border-top:2px solid var(--border);
+    font-size:20px;
     font-weight:900;
 }
 
-/* =========================
-   HISTORIQUE
-========================= */
-
-.devis-list{
-    display:grid;
-    gap:10px;
+.summary-label{
+    color:#475569;
 }
 
-.devis-item{
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:12px;
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    align-items:center;
-    background:#fff;
-}
-
-.devis-main strong{
-    display:block;
-    font-size:13px;
-}
-
-.devis-main span{
-    display:block;
-    font-size:11px;
-    color:var(--muted);
-    margin-top:3px;
-}
-
-.devis-total{
-    font-weight:900;
-    color:#111827;
-    white-space:nowrap;
-}
-
-.devis-actions{
-    display:flex;
-    gap:6px;
-}
-
-.small-btn{
-    border:0;
-    border-radius:7px;
-    padding:7px 9px;
-    font-size:11px;
+.summary-value{
     font-weight:800;
 }
 
-.small-edit{
-    background:#eff6ff;
-    color:#1d4ed8;
+.total-ttc{
+    color:var(--orange-dark);
 }
 
-.small-delete{
-    background:#fee2e2;
-    color:#991b1b;
-}
+/* =========================
+   FOOTER
+========================= */
 
-.empty{
+.footer{
     text-align:center;
-    padding:25px;
-    color:#64748b;
-    font-size:13px;
+    color:#94a3b8;
+    font-size:12px;
+    padding:20px;
 }
 
 /* =========================
@@ -634,18 +498,19 @@ td select{
 
 .toast{
     position:fixed;
-    right:22px;
-    bottom:22px;
-    background:#111827;
-    color:#fff;
-    padding:12px 16px;
-    border-radius:10px;
-    box-shadow:var(--shadow);
+    right:25px;
+    bottom:25px;
+    background:var(--dark);
+    color:white;
+    padding:14px 18px;
+    border-radius:9px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    z-index:9999;
     opacity:0;
+    transform:translateY(20px);
     pointer-events:none;
-    transform:translateY(10px);
-    transition:.25s;
-    z-index:3000;
+    transition:.3s;
+    font-size:14px;
 }
 
 .toast.show{
@@ -657,16 +522,25 @@ td select{
    RESPONSIVE
 ========================= */
 
-@media(max-width:1000px){
+.mobile-menu{
+    display:none;
+    border:0;
+    background:var(--dark);
+    color:white;
+    width:40px;
+    height:40px;
+    border-radius:8px;
+    font-size:20px;
+}
 
-    .grid{
+@media(max-width:1100px){
+    .form-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .bottom-grid{
         grid-template-columns:1fr;
     }
-
-    .summary{
-        position:static;
-    }
-
 }
 
 @media(max-width:800px){
@@ -684,7 +558,7 @@ td select{
         margin-left:0;
     }
 
-    .menu-btn{
+    .mobile-menu{
         display:block;
     }
 
@@ -692,67 +566,76 @@ td select{
         padding:0 15px;
     }
 
-    .search,
-    .user-name{
-        display:none;
+    .content{
+        padding:18px 12px;
     }
 
-    .content{
-        padding:18px 14px;
+    .page-header{
+        align-items:flex-start;
+        flex-direction:column;
     }
 
     .form-grid{
         grid-template-columns:1fr;
     }
 
-    .field.full{
-        grid-column:auto;
+    .user-name{
+        display:none;
     }
-
-    .page-head{
-        flex-direction:column;
-    }
-
 }
+
+/* =========================
+   PRINT
+========================= */
 
 @media print{
 
     .sidebar,
     .topbar,
+    .page-header .actions,
+    .source-box,
     .no-print,
     .delete-line,
-    .add-line,
-    .summary-actions,
-    .historique{
-        display:none!important;
+    .footer{
+        display:none !important;
     }
 
     .main{
         margin:0;
     }
 
+    body{
+        background:white;
+    }
+
     .content{
         padding:0;
+        max-width:none;
     }
 
     .card{
         box-shadow:none;
-        border:1px solid #ddd;
-    }
-
-    body{
-        background:#fff;
-    }
-
-    input,
-    select,
-    textarea{
         border:0;
-        padding:0;
     }
 
-}
+    .card-header{
+        border-bottom:1px solid #ddd;
+    }
 
+    .form-control,
+    .line-input{
+        border:0;
+        padding:4px 0;
+    }
+
+    table{
+        min-width:0;
+    }
+
+    .bottom-grid{
+        grid-template-columns:1fr 350px;
+    }
+}
 </style>
 </head>
 
@@ -764,164 +647,89 @@ td select{
 
 <aside class="sidebar" id="sidebar">
 
-    <a href="dashboard.html" class="logo">
-
-        <svg class="logo-icon"
-             viewBox="0 0 100 100"
-             xmlns="http://www.w3.org/2000/svg">
-
-            <circle
-                cx="50"
-                cy="50"
-                r="45"
-                fill="#111827"
-                stroke="#F59E0B"
-                stroke-width="2.5"
-            />
-
-            <path
-                d="M25 69V39L50 22L75 39V69"
-                fill="none"
-                stroke="#fff"
-                stroke-width="6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
-            <path
-                d="M50 30V69"
-                fill="none"
-                stroke="#F59E0B"
-                stroke-width="5"
-                stroke-linecap="round"
-            />
-
-            <path
-                d="M30 56C39 49 45 61 54 54C61 49 66 43 72 47"
-                fill="none"
-                stroke="#F59E0B"
-                stroke-width="5"
-                stroke-linecap="round"
-            />
-
-            <circle
-                cx="72"
-                cy="47"
-                r="4"
-                fill="#F59E0B"
-            />
-
-            <path
-                d="M22 72H78"
-                fill="none"
-                stroke="#fff"
-                stroke-width="5"
-                stroke-linecap="round"
-            />
-
-        </svg>
-
-        <span>
-
-            <span class="logo-text">
-                BATI<span class="flow">FLOW</span>
-            </span>
-
-            <span class="logo-sub">
-                CONSTRUCTION MANAGEMENT
-            </span>
-
-        </span>
-
-    </a>
-
-
-    <div class="nav-title">
-        Principal
+    <div class="logo">
+        <div class="logo-icon">B</div>
+        BATI<span>FLOW</span>
     </div>
 
-    <nav class="nav">
+    <div class="menu-title">Principal</div>
+
+    <nav class="menu">
 
         <a href="dashboard.html">
-            <span class="nav-icon">⌂</span>
+            <span class="menu-icon">📊</span>
             Tableau de bord
         </a>
 
         <a href="chantiers.html">
-            <span class="nav-icon">🏗️</span>
+            <span class="menu-icon">🏗️</span>
             Chantiers
         </a>
 
-        <a href="clients.html">
-            <span class="nav-icon">👥</span>
-            Clients
-        </a>
-
-    </nav>
-
-
-    <div class="nav-title">
-        Outils BTP
-    </div>
-
-    <nav class="nav">
-
         <a href="dqe.html">
-            <span class="nav-icon">📋</span>
-            DQE &amp; Métré
+            <span class="menu-icon">📐</span>
+            DQE & Métré
         </a>
 
         <a href="devis.html" class="active">
-            <span class="nav-icon">💰</span>
+            <span class="menu-icon">💰</span>
             Devis
         </a>
 
+        <a href="clients.html">
+            <span class="menu-icon">👥</span>
+            Clients
+        </a>
+
         <a href="calculator.html">
-            <span class="nav-icon">🧮</span>
+            <span class="menu-icon">🧮</span>
             Calculateur BTP
         </a>
 
         <a href="mortar.html">
-            <span class="nav-icon">🧱</span>
+            <span class="menu-icon">🧱</span>
             Mortier
         </a>
 
         <a href="masonry.html">
-            <span class="nav-icon">🧱</span>
+            <span class="menu-icon">🏠</span>
             Maçonnerie
         </a>
 
         <a href="slab.html">
-            <span class="nav-icon">🏢</span>
+            <span class="menu-icon">🏢</span>
             Dalle
         </a>
 
     </nav>
 
+    <div class="menu-title">Gestion</div>
 
-    <div class="nav-title">
-        Gestion
-    </div>
-
-    <nav class="nav">
+    <nav class="menu">
 
         <a href="stocks.html">
-            <span class="nav-icon">📦</span>
-            Stocks
+            <span class="menu-icon">📦</span>
+            Matériaux / Stocks
         </a>
 
         <a href="documents.html">
-            <span class="nav-icon">📁</span>
+            <span class="menu-icon">📁</span>
             Documents
         </a>
 
         <a href="parametres.html">
-            <span class="nav-icon">⚙️</span>
+            <span class="menu-icon">⚙️</span>
             Paramètres
         </a>
 
-        <a href="login.html" class="logout">
-            <span class="nav-icon">↪</span>
+    </nav>
+
+    <div class="menu-title">Compte</div>
+
+    <nav class="menu">
+
+        <a href="login.html">
+            <span class="menu-icon">🚪</span>
             Déconnexion
         </a>
 
@@ -929,651 +737,500 @@ td select{
 
 </aside>
 
-
 <!-- =========================
      MAIN
 ========================= -->
 
 <main class="main">
 
-<header class="topbar">
+    <header class="topbar">
 
-    <div style="display:flex;align-items:center;gap:12px">
+        <div style="display:flex;align-items:center;gap:12px;">
 
-        <button
-            class="menu-btn"
-            type="button"
-            onclick="toggleMenu()"
-        >
-            ☰
-        </button>
+            <button
+                class="mobile-menu"
+                onclick="toggleMenu()">
+                ☰
+            </button>
 
-        <div>
-
-            <div class="page-title">
+            <div class="topbar-title">
                 Devis
             </div>
 
-            <div class="page-sub">
-                Création et gestion des offres BTP
+        </div>
+
+        <div class="user-area">
+
+            <div>
+                <div class="user-name" id="userName">
+                    Utilisateur
+                </div>
+            </div>
+
+            <div class="user-avatar" id="userAvatar">
+                U
             </div>
 
         </div>
 
-    </div>
+    </header>
 
+    <div class="content">
 
-    <div class="top-right">
+        <!-- HEADER -->
 
-        <input
-            class="search"
-            id="search"
-            type="search"
-            placeholder="Rechercher un devis..."
-            oninput="rechercherDevis()"
-        >
+        <div class="page-header">
 
-        <span>🔔</span>
+            <div>
+                <h1 class="page-title">
+                    Gestion des devis
+                </h1>
 
-        <div
-            class="avatar"
-            id="avatar"
-        >
-            U
-        </div>
+                <p class="page-subtitle">
+                    Créez vos devis professionnels à partir d'un DQE ou manuellement.
+                </p>
+            </div>
 
-        <div
-            class="user-name"
-            id="userName"
-        >
-            Utilisateur
-        </div>
+            <div class="actions">
 
-    </div>
+                <button
+                    class="btn btn-light"
+                    onclick="nouveauDevis()">
+                    ➕ Nouveau
+                </button>
 
-</header>
+                <button
+                    class="btn btn-dark"
+                    onclick="enregistrerDevis()">
+                    💾 Enregistrer
+                </button>
 
-
-<div class="content">
-
-<!-- =========================
-     PAGE HEADER
-========================= -->
-
-<div class="page-head">
-
-    <div>
-
-        <div class="eyebrow">
-            GESTION COMMERCIALE
-        </div>
-
-        <h1>
-            Nouveau devis
-        </h1>
-
-        <p>
-            Préparez une offre professionnelle pour votre client.
-        </p>
-
-    </div>
-
-
-    <div class="actions no-print">
-
-        <button
-            class="btn btn-light"
-            type="button"
-            onclick="nouveauDevis()"
-        >
-            ＋ Nouveau
-        </button>
-
-        <button
-            class="btn btn-dark"
-            type="button"
-            onclick="enregistrerDevis()"
-        >
-            💾 Enregistrer
-        </button>
-
-        <button
-            class="btn btn-primary"
-            type="button"
-            onclick="imprimerDevis()"
-        >
-            🖨️ Imprimer / PDF
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     MAIN GRID
-========================= -->
-
-<div class="grid">
-
-<div>
-
-<!-- INFORMATIONS -->
-
-<section class="card">
-
-    <div class="card-head">
-
-        <h2>
-            Informations du devis
-        </h2>
-
-        <span
-            class="status"
-            id="status"
-        >
-            Nouveau
-        </span>
-
-    </div>
-
-
-    <div class="card-body">
-
-        <div class="form-grid">
-
-            <div class="field">
-
-                <label for="reference">
-                    Référence du devis
-                </label>
-
-                <input
-                    id="reference"
-                    placeholder="DEV-2026-001"
-                >
+                <button
+                    class="btn btn-primary"
+                    onclick="imprimerDevis()">
+                    🖨️ Imprimer / PDF
+                </button>
 
             </div>
 
+        </div>
 
-            <div class="field">
+        <!-- SOURCE DQE -->
 
-                <label for="date">
-                    Date
-                </label>
+        <div class="source-box" id="sourceBox">
 
-                <input
-                    id="date"
-                    type="date"
-                >
+            <div>
 
-            </div>
-
-
-            <div class="field">
-
-                <label for="client">
-                    Client
-                </label>
-
-                <select id="client">
-                    <option value="">
-                        Sélectionner un client
-                    </option>
-                </select>
-
-                <div class="select-info">
-                    Les clients sont récupérés depuis BATIFLOW.
+                <div class="source-title">
+                    📐 Devis créé depuis un DQE
                 </div>
 
-                <a
-                    href="clients.html"
-                    class="quick-link"
-                >
-                    + Ajouter un client
-                </a>
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="chantier">
-                    Chantier
-                </label>
-
-                <select id="chantier">
-
-                    <option value="">
-                        Sélectionner un chantier
-                    </option>
-
-                </select>
-
-                <div class="select-info">
-                    Le chantier peut être lié au client sélectionné.
+                <div class="source-text" id="sourceText">
+                    Les lignes ont été importées automatiquement depuis le DQE.
                 </div>
 
-                <a
-                    href="chantiers.html"
-                    class="quick-link"
-                >
-                    + Gérer les chantiers
-                </a>
-
             </div>
-
-
-            <div class="field">
-
-                <label for="telephone">
-                    Téléphone
-                </label>
-
-                <input
-                    id="telephone"
-                    placeholder="+228 ..."
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="duree">
-                    Validité
-                </label>
-
-                <input
-                    id="duree"
-                    value="30 jours"
-                >
-
-            </div>
-
-
-            <div class="field full">
-
-                <label for="objet">
-                    Objet du devis
-                </label>
-
-                <textarea
-                    id="objet"
-                    placeholder="Ex. Travaux de gros œuvre d'une villa R+1..."
-                ></textarea>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- PRESTATIONS -->
-
-<section class="card">
-
-    <div class="card-head">
-
-        <h2>
-            Détail des prestations
-        </h2>
-
-        <span
-            style="font-size:12px;color:#64748b"
-        >
-            Prix en FCFA
-        </span>
-
-    </div>
-
-
-    <div class="card-body">
-
-        <div class="table-wrap">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th class="col-num">
-                            N°
-                        </th>
-
-                        <th>
-                            Désignation
-                        </th>
-
-                        <th style="width:100px">
-                            Unité
-                        </th>
-
-                        <th style="width:115px">
-                            Quantité
-                        </th>
-
-                        <th style="width:145px">
-                            Prix unitaire
-                        </th>
-
-                        <th
-                            style="width:150px;text-align:right"
-                        >
-                            Montant
-                        </th>
-
-                        <th class="col-action"></th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="lines"></tbody>
-
-            </table>
-
-        </div>
-
-
-        <button
-            class="add-line no-print"
-            type="button"
-            onclick="ajouterLigne()"
-        >
-            ＋ Ajouter une ligne
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- NOTES -->
-
-<section class="card">
-
-    <div class="card-head">
-
-        <h2>
-            Conditions et notes
-        </h2>
-
-    </div>
-
-    <div class="card-body">
-
-        <textarea
-            id="notes"
-            placeholder="Conditions de paiement, délai d'exécution, observations..."
-        ></textarea>
-
-    </div>
-
-</section>
-
-
-<!-- HISTORIQUE -->
-
-<section class="card historique">
-
-    <div class="card-head">
-
-        <h2>
-            Historique des devis
-        </h2>
-
-        <span
-            style="font-size:11px;color:#64748b"
-            id="historiqueCount"
-        >
-            0 devis
-        </span>
-
-    </div>
-
-    <div class="card-body">
-
-        <div
-            id="historique"
-            class="devis-list"
-        ></div>
-
-    </div>
-
-</section>
-
-</div>
-
-
-<!-- =========================
-     SUMMARY
-========================= -->
-
-<aside>
-
-<section class="card summary">
-
-    <div class="card-head">
-
-        <h2>
-            Résumé du devis
-        </h2>
-
-    </div>
-
-
-    <div class="card-body">
-
-        <div class="summary-row">
-
-            <span>
-                Total HT
-            </span>
-
-            <strong id="totalHT">
-                0 FCFA
-            </strong>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <span>
-                Remise
-            </span>
-
-            <div
-                style="display:flex;gap:6px;align-items:center"
-            >
-
-                <input
-                    id="remise"
-                    type="number"
-                    min="0"
-                    max="100"
-                    step="0.01"
-                    value="0"
-                    style="width:75px;text-align:right"
-                    oninput="calculer()"
-                >
-
-                <span>%</span>
-
-            </div>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <span>
-                Montant remise
-            </span>
-
-            <strong id="montantRemise">
-                0 FCFA
-            </strong>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <span>
-                TVA
-            </span>
-
-            <div
-                style="display:flex;gap:6px;align-items:center"
-            >
-
-                <input
-                    id="tva"
-                    type="number"
-                    min="0"
-                    max="100"
-                    step="0.01"
-                    value="18"
-                    style="width:75px;text-align:right"
-                    oninput="calculer()"
-                >
-
-                <span>%</span>
-
-            </div>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <span>
-                Montant TVA
-            </span>
-
-            <strong id="montantTVA">
-                0 FCFA
-            </strong>
-
-        </div>
-
-
-        <div class="summary-row total">
-
-            <span>
-                TOTAL TTC
-            </span>
-
-            <strong id="totalTTC">
-                0 FCFA
-            </strong>
-
-        </div>
-
-
-        <div class="summary-actions no-print">
-
-            <button
-                class="btn btn-dark"
-                type="button"
-                onclick="enregistrerDevis()"
-            >
-                💾 Enregistrer le devis
-            </button>
-
-
-            <button
-                class="btn btn-primary"
-                type="button"
-                onclick="imprimerDevis()"
-            >
-                🖨️ Générer le PDF
-            </button>
-
 
             <button
                 class="btn btn-light"
-                type="button"
-                onclick="nouveauDevis()"
-            >
-                ↻ Réinitialiser
+                onclick="allerAuDQE()">
+                Voir le DQE
             </button>
 
         </div>
 
+        <!-- INFORMATIONS -->
 
-        <div
-            class="info"
-            style="margin-top:15px"
-        >
+        <section class="card">
 
-            Les données sont enregistrées dans le navigateur
-            avec BATIFLOW.
+            <div class="card-header">
 
-            <br><br>
+                <div class="card-title">
+                    Informations du devis
+                </div>
 
-            Vous pouvez imprimer le devis ou choisir
-            <strong>« Enregistrer au format PDF »</strong>
-            dans la fenêtre d'impression.
+            </div>
+
+            <div class="card-body">
+
+                <input
+                    type="hidden"
+                    id="devisId">
+
+                <input
+                    type="hidden"
+                    id="clientId">
+
+                <input
+                    type="hidden"
+                    id="chantierId">
+
+                <input
+                    type="hidden"
+                    id="dqeId">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Référence
+                        </label>
+
+                        <input
+                            class="form-control"
+                            id="reference"
+                            placeholder="DEV-2026-001">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            id="date">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Client
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="client"
+                            placeholder="Nom du client">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Téléphone
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="telephone"
+                            placeholder="+228 ...">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Chantier
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="chantier"
+                            placeholder="Nom du chantier">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Durée des travaux
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="duree"
+                            placeholder="Ex : 3 mois">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Remise (%)
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="remise"
+                            value="0"
+                            min="0"
+                            step="0.01"
+                            oninput="calculer()">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            TVA (%)
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="tva"
+                            value="18"
+                            min="0"
+                            step="0.01"
+                            oninput="calculer()">
+
+                    </div>
+
+                    <div class="form-group full">
+
+                        <label>
+                            Objet du devis
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="objet"
+                            placeholder="Ex : Travaux de construction d'une villa">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- LIGNES -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <div class="card-title">
+                    Détail du devis
+                </div>
+
+                <button
+                    class="btn btn-primary no-print"
+                    onclick="ajouterLigne()">
+                    ➕ Ajouter une ligne
+                </button>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th style="width:45px;">
+                                    N°
+                                </th>
+
+                                <th>
+                                    Désignation
+                                </th>
+
+                                <th style="width:100px;">
+                                    Unité
+                                </th>
+
+                                <th style="width:120px;">
+                                    Quantité
+                                </th>
+
+                                <th style="width:150px;">
+                                    Prix unitaire
+                                </th>
+
+                                <th style="width:160px;">
+                                    Montant
+                                </th>
+
+                                <th
+                                    style="width:50px;"
+                                    class="no-print">
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="lines">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- NOTES + TOTAL -->
+
+        <div class="bottom-grid">
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <div class="card-title">
+                        Notes et conditions
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <textarea
+                        class="form-control notes"
+                        id="notes"
+                        placeholder="Conditions de paiement, délai, observations, validité du devis..."></textarea>
+
+                </div>
+
+            </section>
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <div class="card-title">
+                        Récapitulatif
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="summary">
+
+                        <div class="summary-row">
+
+                            <span class="summary-label">
+                                Total HT
+                            </span>
+
+                            <span
+                                class="summary-value"
+                                id="totalHT">
+                                0 FCFA
+                            </span>
+
+                        </div>
+
+                        <div class="summary-row">
+
+                            <span class="summary-label">
+                                Remise
+                            </span>
+
+                            <span
+                                class="summary-value"
+                                id="montantRemise">
+                                0 FCFA
+                            </span>
+
+                        </div>
+
+                        <div class="summary-row">
+
+                            <span class="summary-label">
+                                Base TVA
+                            </span>
+
+                            <span
+                                class="summary-value"
+                                id="baseTVA">
+                                0 FCFA
+                            </span>
+
+                        </div>
+
+                        <div class="summary-row">
+
+                            <span class="summary-label">
+                                TVA
+                            </span>
+
+                            <span
+                                class="summary-value"
+                                id="montantTVA">
+                                0 FCFA
+                            </span>
+
+                        </div>
+
+                        <div class="summary-row total">
+
+                            <span>
+                                TOTAL TTC
+                            </span>
+
+                            <span
+                                class="summary-value total-ttc"
+                                id="totalTTC">
+                                0 FCFA
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
 
         </div>
 
     </div>
 
-</section>
-
-</aside>
-
-</div>
-
-</div>
+    <div class="footer">
+        BATIFLOW — Gestion professionnelle du BTP · V1.0
+    </div>
 
 </main>
 
-
-<div
-    class="toast"
-    id="toast"
-></div>
+<div class="toast" id="toast"></div>
 
 
 <script>
 
-/* ==========================================================
+/* =========================================================
    CONFIGURATION
-========================================================== */
+========================================================= */
 
-const DEVIS_STORAGE_KEY = "batiflowDevis";
-
+const STORAGE_KEY = "batiflowDevis";
+const DQE_STORAGE_KEY = "batiflowDQEs";
 const CLIENT_STORAGE_KEY = "batiflowClients";
-
 const CHANTIER_STORAGE_KEY = "batiflowChantiers";
 
-const SELECTED_CHANTIER_KEY =
-    "batiflowChantierSelectionne";
+let currentDQE = null;
 
 
-let devisId = null;
-
-
-/* ==========================================================
+/* =========================================================
    OUTILS
-========================================================== */
+========================================================= */
 
-function money(nombre){
+function money(value){
 
-    return (
-        Number(nombre || 0)
-        .toLocaleString("fr-FR")
-        + " FCFA"
-    );
+    const n = Number(value) || 0;
 
+    return n.toLocaleString("fr-FR") + " FCFA";
 }
 
 
@@ -1581,81 +1238,46 @@ function today(){
 
     const d = new Date();
 
-    return d.toISOString().slice(0,10);
+    const year = d.getFullYear();
 
-}
+    const month = String(d.getMonth()+1).padStart(2,"0");
 
+    const day = String(d.getDate()).padStart(2,"0");
 
-function escapeHtml(value){
-
-    return String(value ?? "")
-        .replace(/[&<>"']/g,function(match){
-
-            return {
-
-                "&":"&amp;",
-                "<":"&lt;",
-                ">":"&gt;",
-                '"':"&quot;",
-                "'":"&#039;"
-
-            }[match];
-
-        });
-
+    return `${year}-${month}-${day}`;
 }
 
 
 function toast(message){
 
-    const el =
-        document.getElementById("toast");
+    const element = document.getElementById("toast");
 
-    el.textContent = message;
+    element.textContent = message;
 
-    el.classList.add("show");
+    element.classList.add("show");
 
-    clearTimeout(window._toast);
+    setTimeout(() => {
 
-    window._toast =
-        setTimeout(function(){
+        element.classList.remove("show");
 
-            el.classList.remove("show");
-
-        },2800);
-
+    },3000);
 }
 
-
-/* ==========================================================
-   MENU MOBILE
-========================================================== */
 
 function toggleMenu(){
 
-    document
-        .getElementById("sidebar")
-        .classList.toggle("open");
+    document.getElementById("sidebar").classList.toggle("open");
 
 }
 
 
-/* ==========================================================
-   STORAGE
-========================================================== */
-
-function getStorage(key){
+function getData(){
 
     try{
 
-        const data =
-            JSON.parse(
-                localStorage.getItem(key) || "[]"
-            );
-
-        return Array.isArray(data)
-            ? data
-            : [];
+        return JSON.parse(
+            localStorage.getItem(STORAGE_KEY)
+        ) || [];
 
     }catch(error){
 
@@ -1666,335 +1288,209 @@ function getStorage(key){
 }
 
 
-function setStorage(key,data){
+function setData(data){
 
     localStorage.setItem(
-        key,
+        STORAGE_KEY,
         JSON.stringify(data)
     );
 
 }
 
 
-/* ==========================================================
+function obtenirDQEs(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(DQE_STORAGE_KEY)
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function obtenirClients(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(CLIENT_STORAGE_KEY)
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function obtenirChantiers(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(CHANTIER_STORAGE_KEY)
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================================
    UTILISATEUR
-========================================================== */
+========================================================= */
 
 function chargerUtilisateur(){
 
-    const name =
-        localStorage.getItem("userName")
-        ||
-        localStorage.getItem("batiflowUserName")
-        ||
-        "Utilisateur";
+    let utilisateur = null;
 
-    document.getElementById("userName")
-        .textContent = name;
+    try{
 
-    document.getElementById("avatar")
-        .textContent =
-        (name.trim()[0] || "U").toUpperCase();
+        utilisateur = JSON.parse(
+            localStorage.getItem("batiflowUser")
+        );
 
-}
+    }catch(error){
 
+        utilisateur = null;
 
-/* ==========================================================
-   CLIENTS
-========================================================== */
+    }
 
-function chargerClients(){
+    if(!utilisateur){
 
-    const select =
-        document.getElementById("client");
+        try{
 
-    const clients =
-        getStorage(CLIENT_STORAGE_KEY);
+            utilisateur = JSON.parse(
+                localStorage.getItem("user")
+            );
 
-    select.innerHTML = `
-        <option value="">
-            Sélectionner un client
-        </option>
-    `;
+        }catch(error){
 
-    clients.forEach(function(client){
-
-        const option =
-            document.createElement("option");
-
-        option.value =
-            client.id;
-
-        option.textContent =
-            client.entreprise
-                ? `${client.nom || "Client"} — ${client.entreprise}`
-                : (client.nom || "Client");
-
-        option.dataset.nom =
-            client.nom || "";
-
-        option.dataset.telephone =
-            client.telephone || "";
-
-        option.dataset.whatsapp =
-            client.whatsapp || "";
-
-        select.appendChild(option);
-
-    });
-
-}
-
-
-/* ==========================================================
-   CHARGER CHANTIERS
-========================================================== */
-
-function chargerChantiers(){
-
-    const select =
-        document.getElementById("chantier");
-
-    const chantiers =
-        getStorage(CHANTIER_STORAGE_KEY);
-
-    const clientSelect =
-        document.getElementById("client");
-
-    const clientId =
-        clientSelect.value;
-
-    select.innerHTML = `
-        <option value="">
-            Sélectionner un chantier
-        </option>
-    `;
-
-    chantiers.forEach(function(chantier){
-
-        const chantierClientId =
-            chantier.clientId != null
-                ? String(chantier.clientId)
-                : "";
-
-        if(
-            clientId &&
-            chantierClientId &&
-            chantierClientId !== String(clientId)
-        ){
-
-            return;
+            utilisateur = null;
 
         }
 
-        const option =
-            document.createElement("option");
+    }
 
-        option.value =
-            chantier.id;
+    const nom =
+        utilisateur?.nom ||
+        utilisateur?.name ||
+        utilisateur?.prenom ||
+        utilisateur?.email ||
+        "Utilisateur";
 
-        option.textContent =
-            chantier.nom
-            ||
-            chantier.nomChantier
-            ||
-            chantier.titre
-            ||
-            "Chantier sans nom";
+    document.getElementById("userName").textContent = nom;
 
-        option.dataset.clientId =
-            chantier.clientId || "";
+    document.getElementById("userAvatar").textContent =
+        nom.charAt(0).toUpperCase();
 
-        option.dataset.adresse =
-            chantier.adresse || "";
+}
 
-        select.appendChild(option);
+
+/* =========================================================
+   REFERENCE
+========================================================= */
+
+function numeroter(){
+
+    const devis = getData();
+
+    const annee = new Date().getFullYear();
+
+    let max = 0;
+
+    devis.forEach(item => {
+
+        const ref = String(item.reference || "");
+
+        const match = ref.match(/DEV-\d{4}-(\d+)/);
+
+        if(match){
+
+            max = Math.max(
+                max,
+                Number(match[1])
+            );
+
+        }
 
     });
 
-}
-
-
-/* ==========================================================
-   CLIENT SELECTIONNE
-========================================================== */
-
-function clientSelectionne(){
-
-    const select =
-        document.getElementById("client");
-
-    const clientId =
-        select.value;
-
-    if(!clientId){
-
-        document.getElementById("telephone").value = "";
-
-        chargerChantiers();
-
-        return;
-
-    }
-
-    const clients =
-        getStorage(CLIENT_STORAGE_KEY);
-
-    const client =
-        clients.find(function(c){
-
-            return String(c.id) === String(clientId);
-
-        });
-
-    if(!client){
-
-        chargerChantiers();
-
-        return;
-
-    }
-
-    document.getElementById("telephone").value =
-        client.telephone
-        ||
-        client.whatsapp
-        ||
-        "";
-
-    chargerChantiers();
+    return `DEV-${annee}-${String(max+1).padStart(3,"0")}`;
 
 }
 
 
-/* ==========================================================
-   CHANTIER SELECTIONNE
-========================================================== */
-
-function chantierSelectionne(){
-
-    const select =
-        document.getElementById("chantier");
-
-    const chantierId =
-        select.value;
-
-    if(!chantierId){
-
-        return;
-
-    }
-
-    localStorage.setItem(
-        SELECTED_CHANTIER_KEY,
-        String(chantierId)
-    );
-
-}
-
-
-/* ==========================================================
-   NUMERO DE DEVIS
-========================================================== */
-
-function genererReference(){
-
-    const devis =
-        getStorage(DEVIS_STORAGE_KEY);
-
-    const annee =
-        new Date().getFullYear();
-
-    let numero =
-        devis.length + 1;
-
-    let reference =
-        "DEV-" +
-        annee +
-        "-" +
-        String(numero).padStart(3,"0");
-
-    const references =
-        devis.map(function(d){
-
-            return d.reference;
-
-        });
-
-    while(references.includes(reference)){
-
-        numero++;
-
-        reference =
-            "DEV-" +
-            annee +
-            "-" +
-            String(numero).padStart(3,"0");
-
-    }
-
-    return reference;
-
-}
-
-
-/* ==========================================================
-   AJOUT LIGNE
-========================================================== */
+/* =========================================================
+   AJOUTER UNE LIGNE
+========================================================= */
 
 function ajouterLigne(data = {}){
 
-    const tbody =
-        document.getElementById("lines");
+    const tbody = document.getElementById("lines");
 
-    const tr =
-        document.createElement("tr");
+    const tr = document.createElement("tr");
 
     tr.innerHTML = `
 
-        <td class="col-num"></td>
+        <td class="numero">
+            1
+        </td>
 
         <td>
 
             <input
-                class="designation"
-                value="${escapeHtml(data.designation || "")}"
-                placeholder="Ex. Béton armé, maçonnerie..."
-            >
+                class="line-input designation"
+                type="text"
+                placeholder="Désignation"
+                value="${escapeHtml(data.designation || "")}">
 
         </td>
 
         <td>
 
             <input
-                class="unite"
-                value="${escapeHtml(data.unite || "U")}"
-                placeholder="m²"
-            >
+                class="line-input unite"
+                type="text"
+                placeholder="U"
+                value="${escapeHtml(data.unite || "")}">
 
         </td>
 
         <td>
 
             <input
-                class="quantite"
+                class="line-input quantite"
                 type="number"
                 min="0"
-                step="0.001"
-                value="${data.quantite ?? 1}"
-            >
+                step="0.01"
+                value="${data.quantite ?? ""}"
+                oninput="calculer()">
 
         </td>
 
         <td>
 
             <input
-                class="pu"
+                class="line-input pu"
                 type="number"
                 min="0"
                 step="1"
-                value="${data.pu ?? 0}"
-            >
+                value="${data.prixUnitaire ?? data.prix ?? ""}"
+                oninput="calculer()">
 
         </td>
 
@@ -2002,13 +1498,12 @@ function ajouterLigne(data = {}){
             0 FCFA
         </td>
 
-        <td class="col-action">
+        <td class="no-print">
 
             <button
-                class="delete-line no-print"
+                class="delete-line"
                 type="button"
-                onclick="supprimerLigne(this)"
-            >
+                onclick="supprimerLigne(this)">
                 ×
             </button>
 
@@ -2018,603 +1513,577 @@ function ajouterLigne(data = {}){
 
     tbody.appendChild(tr);
 
-    tr.querySelectorAll("input")
-        .forEach(function(input){
-
-            input.addEventListener(
-                "input",
-                calculer
-            );
-
-        });
-
-    numeroter();
+    renumeroterLignes();
 
     calculer();
 
 }
 
 
-/* ==========================================================
-   SUPPRIMER LIGNE
-========================================================== */
+/* =========================================================
+   SUPPRIMER UNE LIGNE
+========================================================= */
 
 function supprimerLigne(button){
+
+    const tr = button.closest("tr");
+
+    if(tr){
+
+        tr.remove();
+
+    }
+
+    renumeroterLignes();
+
+    calculer();
+
+}
+
+
+/* =========================================================
+   NUMEROTER LIGNES
+========================================================= */
+
+function renumeroterLignes(){
 
     const rows =
         document.querySelectorAll("#lines tr");
 
-    if(rows.length <= 1){
+    rows.forEach((row,index) => {
 
-        const row = rows[0];
+        const number =
+            row.querySelector(".numero");
 
-        row.querySelector(".designation").value = "";
+        if(number){
 
-        row.querySelector(".quantite").value = 1;
+            number.textContent = index + 1;
 
-        row.querySelector(".pu").value = 0;
+        }
 
-    }else{
-
-        button
-            .closest("tr")
-            .remove();
-
-    }
-
-    numeroter();
-
-    calculer();
+    });
 
 }
 
 
-/* ==========================================================
-   NUMEROTER
-========================================================== */
-
-function numeroter(){
-
-    document
-        .querySelectorAll("#lines tr")
-        .forEach(function(tr,index){
-
-            tr.querySelector(".col-num")
-                .textContent = index + 1;
-
-        });
-
-}
-
-
-/* ==========================================================
+/* =========================================================
    CALCUL
-========================================================== */
+========================================================= */
 
 function calculer(){
 
-    let ht = 0;
+    let totalHT = 0;
 
-    document
-        .querySelectorAll("#lines tr")
-        .forEach(function(tr){
+    const rows =
+        document.querySelectorAll("#lines tr");
 
-            const q =
-                Number(
-                    tr.querySelector(".quantite")?.value
-                ) || 0;
+    rows.forEach(row => {
 
-            const pu =
-                Number(
-                    tr.querySelector(".pu")?.value
-                ) || 0;
+        const quantite =
+            Number(
+                row.querySelector(".quantite")?.value
+            ) || 0;
 
-            const montant =
-                q * pu;
+        const pu =
+            Number(
+                row.querySelector(".pu")?.value
+            ) || 0;
 
-            ht += montant;
+        const montant = quantite * pu;
 
-            const amount =
-                tr.querySelector(".amount");
+        totalHT += montant;
 
-            if(amount){
+        const amount =
+            row.querySelector(".amount");
 
-                amount.textContent =
-                    money(montant);
+        if(amount){
 
-            }
+            amount.textContent =
+                money(montant);
 
-        });
+        }
 
+    });
 
-    let remisePct =
+    const remisePct =
         Number(
             document.getElementById("remise").value
         ) || 0;
 
-
-    let tvaPct =
+    const tvaPct =
         Number(
             document.getElementById("tva").value
         ) || 0;
 
+    const montantRemise =
+        totalHT * remisePct / 100;
 
-    if(remisePct < 0){
-        remisePct = 0;
-    }
+    const baseTVA =
+        totalHT - montantRemise;
 
-    if(remisePct > 100){
-        remisePct = 100;
-    }
+    const montantTVA =
+        baseTVA * tvaPct / 100;
 
-    if(tvaPct < 0){
-        tvaPct = 0;
-    }
-
-    if(tvaPct > 100){
-        tvaPct = 100;
-    }
+    const totalTTC =
+        baseTVA + montantTVA;
 
 
-    const remise =
-        ht * remisePct / 100;
+    document.getElementById("totalHT").textContent =
+        money(totalHT);
 
-    const base =
-        ht - remise;
+    document.getElementById("montantRemise").textContent =
+        money(montantRemise);
 
-    const tva =
-        base * tvaPct / 100;
+    document.getElementById("baseTVA").textContent =
+        money(baseTVA);
 
-    const ttc =
-        base + tva;
+    document.getElementById("montantTVA").textContent =
+        money(montantTVA);
 
-
-    document.getElementById("totalHT")
-        .textContent = money(ht);
-
-    document.getElementById("montantRemise")
-        .textContent = money(remise);
-
-    document.getElementById("montantTVA")
-        .textContent = money(tva);
-
-    document.getElementById("totalTTC")
-        .textContent = money(ttc);
-
-
-    return {
-
-        ht:ht,
-
-        remise:remise,
-
-        base:base,
-
-        tva:tva,
-
-        ttc:ttc,
-
-        remisePct:remisePct,
-
-        tvaPct:tvaPct
-
-    };
+    document.getElementById("totalTTC").textContent =
+        money(totalTTC);
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    COLLECTER LE DEVIS
-========================================================== */
+========================================================= */
 
-function collectDevis(){
+function collect(){
 
-    const totals =
-        calculer();
+    const rows =
+        document.querySelectorAll("#lines tr");
+
+    const lignes = [];
+
+    rows.forEach(row => {
+
+        const designation =
+            row.querySelector(".designation")?.value.trim() || "";
+
+        const unite =
+            row.querySelector(".unite")?.value.trim() || "";
+
+        const quantite =
+            Number(
+                row.querySelector(".quantite")?.value
+            ) || 0;
+
+        const prixUnitaire =
+            Number(
+                row.querySelector(".pu")?.value
+            ) || 0;
+
+        const montant =
+            quantite * prixUnitaire;
+
+        if(
+            designation ||
+            quantite ||
+            prixUnitaire
+        ){
+
+            lignes.push({
+
+                designation,
+                unite,
+                quantite,
+                prixUnitaire,
+                montant
+
+            });
+
+        }
+
+    });
 
 
-    const clientSelect =
-        document.getElementById("client");
+    const totalHT =
+        lignes.reduce(
+            (sum,line) =>
+                sum + Number(line.montant || 0),
+            0
+        );
 
-    const chantierSelect =
-        document.getElementById("chantier");
+    const remise =
+        Number(
+            document.getElementById("remise").value
+        ) || 0;
 
+    const tva =
+        Number(
+            document.getElementById("tva").value
+        ) || 0;
 
-    const clientId =
-        clientSelect.value || null;
+    const montantRemise =
+        totalHT * remise / 100;
 
-    const chantierId =
-        chantierSelect.value || null;
+    const baseTVA =
+        totalHT - montantRemise;
 
+    const montantTVA =
+        baseTVA * tva / 100;
 
-    const clientOption =
-        clientSelect.options[
-            clientSelect.selectedIndex
-        ];
-
-
-    const chantierOption =
-        chantierSelect.options[
-            chantierSelect.selectedIndex
-        ];
-
-
-    const lignes =
-        [
-            ...document.querySelectorAll("#lines tr")
-        ]
-        .map(function(tr){
-
-            return {
-
-                designation:
-                    tr.querySelector(".designation")
-                    .value
-                    .trim(),
-
-                unite:
-                    tr.querySelector(".unite")
-                    .value
-                    .trim(),
-
-                quantite:
-                    Number(
-                        tr.querySelector(".quantite")
-                        .value
-                    ) || 0,
-
-                pu:
-                    Number(
-                        tr.querySelector(".pu")
-                        .value
-                    ) || 0
-
-            };
-
-        });
+    const totalTTC =
+        baseTVA + montantTVA;
 
 
     return {
 
         id:
-            devisId
-            ||
-            ("DEV-" + Date.now()),
+            document.getElementById("devisId").value ||
+            crypto.randomUUID(),
 
         reference:
-            document
-                .getElementById("reference")
-                .value
-                .trim(),
+            document.getElementById("reference").value.trim(),
 
         date:
-            document
-                .getElementById("date")
-                .value,
-
-        clientId:
-            clientId,
+            document.getElementById("date").value,
 
         client:
-            clientOption?.textContent || "",
+            document.getElementById("client").value.trim(),
 
-        clientNom:
-            clientOption?.dataset.nom || "",
-
-        chantierId:
-            chantierId,
+        clientId:
+            document.getElementById("clientId").value || "",
 
         chantier:
-            chantierOption?.textContent || "",
+            document.getElementById("chantier").value.trim(),
+
+        chantierId:
+            document.getElementById("chantierId").value || "",
 
         telephone:
-            document
-                .getElementById("telephone")
-                .value
-                .trim(),
+            document.getElementById("telephone").value.trim(),
 
         duree:
-            document
-                .getElementById("duree")
-                .value
-                .trim(),
+            document.getElementById("duree").value.trim(),
 
         objet:
-            document
-                .getElementById("objet")
-                .value
-                .trim(),
+            document.getElementById("objet").value.trim(),
+
+        lignes,
 
         notes:
-            document
-                .getElementById("notes")
-                .value
-                .trim(),
+            document.getElementById("notes").value.trim(),
 
-        remise:
-            totals.remisePct,
+        remise,
 
-        montantRemise:
-            totals.remise,
+        montantRemise,
 
-        tvaPct:
-            totals.tvaPct,
+        tva,
 
-        montantTVA:
-            totals.tva,
+        totalHT,
 
-        totalHT:
-            totals.ht,
+        baseTVA,
 
-        totalTTC:
-            totals.ttc,
+        montantTVA,
 
-        lignes:
-            lignes,
+        totalTTC,
 
-        createdAt:
-            devisId
-            ? undefined
-            : new Date().toISOString(),
+        dqeId:
+            document.getElementById("dqeId").value || "",
+
+        dqeReference:
+            currentDQE?.reference || "",
+
+        source:
+            currentDQE ? "DQE" : "MANUEL",
 
         updatedAt:
-            new Date().toISOString()
+            new Date().toISOString(),
+
+        version:
+            "BATIFLOW-DEVIS-V2"
 
     };
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    ENREGISTRER
-========================================================== */
+========================================================= */
 
 function enregistrerDevis(){
 
-    const devis =
-        collectDevis();
+    const devis = collect();
 
+    if(!devis.reference){
 
-    if(
-        !devis.clientId &&
-        !devis.chantierId &&
-        !devis.objet
-    ){
+        toast("Veuillez renseigner la référence du devis.");
 
-        toast(
-            "⚠️ Sélectionne un client, un chantier ou renseigne l'objet."
-        );
+        return;
+
+    }
+
+    if(!devis.client){
+
+        toast("Veuillez renseigner le client.");
+
+        return;
+
+    }
+
+    if(!devis.lignes.length){
+
+        toast("Ajoutez au moins une ligne au devis.");
 
         return;
 
     }
 
 
-    const all =
-        getStorage(DEVIS_STORAGE_KEY);
-
+    const data = getData();
 
     const index =
-        all.findIndex(function(item){
-
-            return String(item.id)
-                === String(devis.id);
-
-        });
+        data.findIndex(
+            item =>
+                String(item.id) ===
+                String(devis.id)
+        );
 
 
     if(index >= 0){
 
-        if(!devis.createdAt){
-
-            devis.createdAt =
-                all[index].createdAt
-                ||
-                new Date().toISOString();
-
-        }
-
-        all[index] = devis;
+        data[index] = {
+            ...data[index],
+            ...devis
+        };
 
     }else{
 
-        all.unshift(devis);
+        devis.createdAt =
+            new Date().toISOString();
+
+        data.push(devis);
 
     }
 
 
-    setStorage(
-        DEVIS_STORAGE_KEY,
-        all
-    );
+    setData(data);
 
-
-    devisId =
+    document.getElementById("devisId").value =
         devis.id;
 
-
-    document.getElementById("status")
-        .textContent = "Enregistré";
-
-
-    afficherHistorique();
-
-
-    toast(
-        "✅ Devis enregistré avec succès."
-    );
+    toast("✅ Devis enregistré avec succès.");
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    NOUVEAU DEVIS
-========================================================== */
+========================================================= */
 
 function nouveauDevis(){
 
-    devisId = null;
+    currentDQE = null;
+
+    document.getElementById("devisId").value = "";
+
+    document.getElementById("clientId").value = "";
+
+    document.getElementById("chantierId").value = "";
+
+    document.getElementById("dqeId").value = "";
+
+    document.getElementById("reference").value =
+        numeroter();
+
+    document.getElementById("date").value =
+        today();
+
+    document.getElementById("client").value = "";
+
+    document.getElementById("chantier").value = "";
+
+    document.getElementById("telephone").value = "";
+
+    document.getElementById("duree").value = "";
+
+    document.getElementById("objet").value = "";
+
+    document.getElementById("notes").value = "";
+
+    document.getElementById("remise").value = "0";
+
+    document.getElementById("tva").value = "18";
 
 
-    document.getElementById("reference")
-        .value = genererReference();
-
-
-    document.getElementById("date")
-        .value = today();
-
-
-    document.getElementById("client")
-        .value = "";
-
-
-    chargerChantiers();
-
-
-    document.getElementById("chantier")
-        .value = "";
-
-
-    document.getElementById("telephone")
-        .value = "";
-
-
-    document.getElementById("duree")
-        .value = "30 jours";
-
-
-    document.getElementById("objet")
-        .value = "";
-
-
-    document.getElementById("notes")
-        .value = "";
-
-
-    document.getElementById("remise")
-        .value = 0;
-
-
-    document.getElementById("tva")
-        .value = 18;
-
-
-    document.getElementById("lines")
-        .innerHTML = "";
-
+    document.getElementById("lines").innerHTML = "";
 
     ajouterLigne();
 
 
-    document.getElementById("status")
-        .textContent = "Nouveau";
+    document.getElementById("sourceBox")
+        .classList.remove("active");
 
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    if(params.has("dqeId")){
+
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+
+    }
 
     calculer();
 
 }
 
 
-/* ==========================================================
-   CHARGER UN DEVIS
-========================================================== */
+/* =========================================================
+   IMPORTER DQE
+========================================================= */
 
-function chargerDevis(id){
+function importerDQE(id){
 
-    const devis =
-        getStorage(DEVIS_STORAGE_KEY)
-        .find(function(d){
+    const dqes = obtenirDQEs();
 
-            return String(d.id)
-                === String(id);
+    const dqe =
+        dqes.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
 
-        });
+    if(!dqe){
 
-
-    if(!devis){
-
-        toast("❌ Devis introuvable.");
+        toast("❌ DQE introuvable.");
 
         return;
 
     }
 
-
-    devisId =
-        devis.id;
+    currentDQE = dqe;
 
 
-    chargerClients();
+    /* ID */
 
-    chargerChantiers();
-
-
-    document.getElementById("reference")
-        .value =
-        devis.reference || "";
+    document.getElementById("dqeId").value =
+        dqe.id;
 
 
-    document.getElementById("date")
-        .value =
-        devis.date || today();
+    /* REFERENCE DEVIS */
+
+    document.getElementById("devisId").value = "";
+
+    document.getElementById("reference").value =
+        numeroter();
+
+    document.getElementById("date").value =
+        today();
 
 
-    document.getElementById("client")
-        .value =
-        devis.clientId || "";
+    /* CLIENT */
+
+    const clientNom =
+        dqe.clientNom ||
+        dqe.client ||
+        "";
+
+    document.getElementById("client").value =
+        clientNom;
+
+    document.getElementById("clientId").value =
+        dqe.clientId || "";
 
 
-    chargerChantiers();
+    /* TELEPHONE */
+
+    document.getElementById("telephone").value =
+        dqe.clientTelephone ||
+        dqe.telephone ||
+        "";
 
 
-    document.getElementById("chantier")
-        .value =
-        devis.chantierId || "";
+    /* CHANTIER */
+
+    const chantierNom =
+        dqe.chantier ||
+        "";
+
+    document.getElementById("chantier").value =
+        chantierNom;
+
+    document.getElementById("chantierId").value =
+        dqe.chantierId || "";
 
 
-    document.getElementById("telephone")
-        .value =
-        devis.telephone || "";
+    /* DUREE */
+
+    document.getElementById("duree").value =
+        dqe.duree || "";
 
 
-    document.getElementById("duree")
-        .value =
-        devis.duree || "30 jours";
+    /* OBJET */
+
+    document.getElementById("objet").value =
+        dqe.objet ||
+        dqe.nom ||
+        "";
 
 
-    document.getElementById("objet")
-        .value =
-        devis.objet || "";
+    /* TVA */
+
+    document.getElementById("tva").value =
+        dqe.tva !== undefined
+            ? dqe.tva
+            : 18;
 
 
-    document.getElementById("notes")
-        .value =
-        devis.notes || "";
+    /* NOTES */
+
+    const ancienneNote =
+        document.getElementById("notes").value.trim();
+
+    const source =
+        `Source DQE : ${dqe.reference || dqe.id}`;
+
+    document.getElementById("notes").value =
+        ancienneNote
+            ? ancienneNote + "\n" + source
+            : source;
 
 
-    document.getElementById("remise")
-        .value =
-        devis.remise ?? 0;
+    /* LIGNES */
+
+    document.getElementById("lines").innerHTML = "";
+
+    const lignes =
+        Array.isArray(dqe.lignes)
+            ? dqe.lignes
+            : [];
 
 
-    document.getElementById("tva")
-        .value =
-        devis.tvaPct ?? 18;
+    if(lignes.length){
 
+        lignes.forEach(ligne => {
 
-    document.getElementById("lines")
-        .innerHTML = "";
+            ajouterLigne({
 
+                designation:
+                    ligne.designation || "",
 
-    if(
-        Array.isArray(devis.lignes)
-        &&
-        devis.lignes.length
-    ){
+                unite:
+                    ligne.unite || "",
 
-        devis.lignes.forEach(function(ligne){
+                quantite:
+                    ligne.quantite ?? 0,
 
-            ajouterLigne(ligne);
+                prixUnitaire:
+                    ligne.prixUnitaire ??
+                    ligne.prix ??
+                    0
+
+            });
 
         });
 
@@ -2625,308 +2094,131 @@ function chargerDevis(id){
     }
 
 
-    document.getElementById("status")
-        .textContent = "Enregistré";
+    /* SOURCE */
+
+    document.getElementById("sourceBox")
+        .classList.add("active");
+
+    document.getElementById("sourceText").textContent =
+        `Les ${lignes.length} ligne(s) du DQE ${dqe.reference || ""} ont été importées automatiquement dans ce devis.`;
 
 
     calculer();
 
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-
     toast(
-        "📄 Devis chargé."
+        "✅ DQE importé automatiquement dans le devis."
     );
 
 }
 
 
-/* ==========================================================
-   SUPPRIMER DEVIS
-========================================================== */
+/* =========================================================
+   ALLER AU DQE
+========================================================= */
 
-function supprimerDevis(id){
+function allerAuDQE(){
 
-    const confirmer =
-        confirm(
-            "Voulez-vous vraiment supprimer ce devis ?"
-        );
-
-
-    if(!confirmer){
+    if(!currentDQE){
 
         return;
 
     }
 
-
-    const all =
-        getStorage(DEVIS_STORAGE_KEY);
-
-
-    const filtered =
-        all.filter(function(d){
-
-            return String(d.id)
-                !== String(id);
-
-        });
-
-
-    setStorage(
-        DEVIS_STORAGE_KEY,
-        filtered
-    );
-
-
-    if(String(devisId) === String(id)){
-
-        nouveauDevis();
-
-    }
-
-
-    afficherHistorique();
-
-
-    toast(
-        "🗑️ Devis supprimé."
-    );
+    window.location.href =
+        "dqe.html?voir=" +
+        encodeURIComponent(currentDQE.id);
 
 }
 
 
-/* ==========================================================
-   HISTORIQUE
-========================================================== */
+/* =========================================================
+   ECHAPPEMENT HTML
+========================================================= */
 
-function afficherHistorique(){
+function escapeHtml(value){
 
-    const container =
-        document.getElementById("historique");
-
-
-    const devis =
-        getStorage(DEVIS_STORAGE_KEY);
-
-
-    document.getElementById("historiqueCount")
-        .textContent =
-        devis.length +
-        (
-            devis.length > 1
-                ? " devis"
-                : " devis"
-        );
-
-
-    if(!devis.length){
-
-        container.innerHTML = `
-            <div class="empty">
-                Aucun devis enregistré pour le moment.
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    container.innerHTML = "";
-
-
-    devis.forEach(function(d){
-
-        const item =
-            document.createElement("div");
-
-        item.className =
-            "devis-item";
-
-
-        item.innerHTML = `
-
-            <div class="devis-main">
-
-                <strong>
-                    ${escapeHtml(
-                        d.reference || "Devis"
-                    )}
-                </strong>
-
-                <span>
-                    ${escapeHtml(
-                        d.client
-                        ||
-                        d.clientNom
-                        ||
-                        "Client non renseigné"
-                    )}
-                </span>
-
-                <span>
-                    ${escapeHtml(
-                        d.chantier
-                        ||
-                        "Chantier non renseigné"
-                    )}
-                </span>
-
-            </div>
-
-
-            <div>
-
-                <div class="devis-total">
-                    ${money(d.totalTTC || 0)}
-                </div>
-
-                <div class="devis-actions">
-
-                    <button
-                        class="small-btn small-edit"
-                        onclick="chargerDevis('${escapeHtml(d.id)}')"
-                    >
-                        Ouvrir
-                    </button>
-
-                    <button
-                        class="small-btn small-delete"
-                        onclick="supprimerDevis('${escapeHtml(d.id)}')"
-                    >
-                        Supprimer
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        container.appendChild(item);
-
-    });
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
 
-/* ==========================================================
-   RECHERCHE
-========================================================== */
-
-function rechercherDevis(){
-
-    const search =
-        document.getElementById("search")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-    const items =
-        document.querySelectorAll(".devis-item");
-
-
-    items.forEach(function(item){
-
-        const text =
-            item.textContent
-                .toLowerCase();
-
-
-        item.style.display =
-            !search || text.includes(search)
-                ? "flex"
-                : "none";
-
-    });
-
-}
-
-
-/* ==========================================================
+/* =========================================================
    IMPRESSION / PDF
-========================================================== */
+========================================================= */
 
 function imprimerDevis(){
 
-    const d =
-        collectDevis();
+    const devis = collect();
 
+    if(!devis.client){
 
-    const rows =
-        d.lignes
-        .map(function(ligne,index){
+        toast("Veuillez renseigner le client.");
 
-            return `
+        return;
 
-                <tr>
+    }
 
-                    <td>
-                        ${index + 1}
-                    </td>
+    if(!devis.lignes.length){
 
-                    <td>
-                        ${escapeHtml(
-                            ligne.designation || "—"
-                        )}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(
-                            ligne.unite || "—"
-                        )}
-                    </td>
-
-                    <td>
-                        ${ligne.quantite}
-                    </td>
-
-                    <td>
-                        ${money(ligne.pu)}
-                    </td>
-
-                    <td>
-                        ${money(
-                            ligne.quantite *
-                            ligne.pu
-                        )}
-                    </td>
-
-                </tr>
-
-            `;
-
-        })
-        .join("");
-
-
-    const win =
-        window.open(
-            "",
-            "_blank",
-            "width=1000,height=800"
-        );
-
-
-    if(!win){
-
-        toast(
-            "⚠️ Autorise les fenêtres pop-up pour imprimer."
-        );
+        toast("Le devis ne contient aucune ligne.");
 
         return;
 
     }
 
 
-    win.document.write(`
+    let lignesHTML = "";
+
+    devis.lignes.forEach((ligne,index) => {
+
+        lignesHTML += `
+
+            <tr>
+
+                <td>
+                    ${index+1}
+                </td>
+
+                <td>
+                    ${escapeHtml(ligne.designation)}
+                </td>
+
+                <td>
+                    ${escapeHtml(ligne.unite)}
+                </td>
+
+                <td>
+                    ${ligne.quantite}
+                </td>
+
+                <td>
+                    ${Number(ligne.prixUnitaire || 0).toLocaleString("fr-FR")}
+                </td>
+
+                <td>
+                    ${Number(ligne.montant || 0).toLocaleString("fr-FR")}
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    const printWindow =
+        window.open(
+            "",
+            "_blank"
+        );
+
+
+    printWindow.document.write(`
 
 <!DOCTYPE html>
 
@@ -2936,61 +2228,49 @@ function imprimerDevis(){
 
 <meta charset="UTF-8">
 
-<title>
-${escapeHtml(
-    d.reference || "Devis BATIFLOW"
-)}
-</title>
+<title>${escapeHtml(devis.reference)}</title>
 
 <style>
 
-*{
-    box-sizing:border-box;
-}
-
 body{
-    font-family:Arial,sans-serif;
-    color:#111;
+    font-family:Arial,Helvetica,sans-serif;
     margin:35px;
-    font-size:12px;
+    color:#172033;
 }
 
-.head{
+.header{
     display:flex;
     justify-content:space-between;
     border-bottom:3px solid #f59e0b;
-    padding-bottom:15px;
+    padding-bottom:20px;
+    margin-bottom:25px;
+}
+
+.brand{
+    font-size:30px;
+    font-weight:900;
+}
+
+.brand span{
+    color:#f59e0b;
 }
 
 h1{
-    margin:0;
     font-size:25px;
+    margin:0 0 10px;
 }
 
-.orange{
-    color:#d97706;
-}
-
-.muted{
-    color:#64748b;
-}
-
-.infos{
+.info{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin:22px 0;
+    gap:20px;
+    margin-bottom:25px;
 }
 
 .box{
     border:1px solid #ddd;
-    padding:12px;
-    border-radius:6px;
-}
-
-.box strong{
-    display:block;
-    margin-bottom:5px;
+    padding:15px;
+    border-radius:8px;
 }
 
 table{
@@ -3000,64 +2280,41 @@ table{
 }
 
 th{
-    background:#111827;
-    color:#fff;
-}
-
-th,
-td{
-    padding:9px;
-    border:1px solid #ddd;
+    background:#101827;
+    color:white;
+    padding:10px;
     text-align:left;
 }
 
-td:nth-child(4),
-td:nth-child(5),
-td:nth-child(6){
-    text-align:right;
+td{
+    padding:9px;
+    border:1px solid #ddd;
 }
 
-.totaux{
-    margin:20px 0 0 auto;
-    width:330px;
+.totals{
+    width:400px;
+    margin-left:auto;
+    margin-top:25px;
 }
 
-.r{
+.total-line{
     display:flex;
     justify-content:space-between;
-    padding:7px 0;
-    border-bottom:1px solid #eee;
+    padding:9px 0;
 }
 
-.grand{
-    font-size:17px;
-    font-weight:bold;
-    border-top:2px solid #111;
-    border-bottom:0;
-    margin-top:5px;
-    padding-top:10px;
+.total{
+    border-top:2px solid #101827;
+    font-size:20px;
+    font-weight:900;
+    padding-top:15px;
 }
 
-.notes{
-    margin-top:25px;
-    border:1px solid #ddd;
-    padding:12px;
-    min-height:70px;
-}
-
-.foot{
+.footer{
+    margin-top:50px;
     text-align:center;
-    margin-top:40px;
+    font-size:12px;
     color:#777;
-    font-size:10px;
-}
-
-@media print{
-
-    body{
-        margin:15mm;
-    }
-
 }
 
 </style>
@@ -3066,104 +2323,75 @@ td:nth-child(6){
 
 <body>
 
-
-<div class="head">
+<div class="header">
 
     <div>
 
-        <h1>
-            BATI<span class="orange">FLOW</span>
-        </h1>
+        <div class="brand">
+            BATI<span>FLOW</span>
+        </div>
 
-        <div class="muted">
-            CONSTRUCTION MANAGEMENT
+        <div>
+            Gestion professionnelle du BTP
         </div>
 
     </div>
 
+    <div>
 
-    <div style="text-align:right">
+        <h1>DEVIS</h1>
 
         <strong>
-            DEVIS
+            ${escapeHtml(devis.reference)}
         </strong>
 
         <br>
 
-        ${escapeHtml(
-            d.reference || "—"
-        )}
-
-        <br>
-
-        ${escapeHtml(
-            d.date || "—"
-        )}
+        Date :
+        ${escapeHtml(devis.date)}
 
     </div>
 
 </div>
 
 
-<div class="infos">
+<div class="info">
 
     <div class="box">
 
-        <strong>
-            Client
-        </strong>
+        <strong>CLIENT</strong>
 
-        ${escapeHtml(
-            d.clientNom ||
-            d.client ||
-            "—"
-        )}
+        <br><br>
+
+        ${escapeHtml(devis.client)}
 
         <br>
 
-        ${escapeHtml(
-            d.telephone || ""
-        )}
+        ${escapeHtml(devis.telephone)}
 
     </div>
 
 
     <div class="box">
 
-        <strong>
-            Chantier
-        </strong>
+        <strong>CHANTIER</strong>
 
-        ${escapeHtml(
-            d.chantier || "—"
-        )}
+        <br><br>
+
+        ${escapeHtml(devis.chantier)}
 
         <br>
 
-        Validité :
-        ${escapeHtml(
-            d.duree || "—"
-        )}
-
-    </div>
-
-
-    <div
-        class="box"
-        style="grid-column:1/-1"
-    >
-
-        <strong>
-            Objet
-        </strong>
-
-        ${escapeHtml(
-            d.objet || "—"
-        )}
+        ${escapeHtml(devis.objet)}
 
     </div>
 
 </div>
+
+
+<h3>
+    ${escapeHtml(devis.objet)}
+</h3>
 
 
 <table>
@@ -3172,91 +2400,80 @@ td:nth-child(6){
 
 <tr>
 
-    <th>N°</th>
+<th>N°</th>
 
-    <th>
-        Désignation
-    </th>
+<th>Désignation</th>
 
-    <th>
-        Unité
-    </th>
+<th>Unité</th>
 
-    <th>
-        Qté
-    </th>
+<th>Qté</th>
 
-    <th>
-        Prix unitaire
-    </th>
+<th>Prix unitaire</th>
 
-    <th>
-        Montant
-    </th>
+<th>Montant</th>
 
 </tr>
 
 </thead>
 
-
 <tbody>
 
-${rows}
+${lignesHTML}
 
 </tbody>
 
 </table>
 
 
-<div class="totaux">
+<div class="totals">
 
-    <div class="r">
+    <div class="total-line">
 
         <span>
             Total HT
         </span>
 
         <strong>
-            ${money(d.totalHT)}
+            ${Number(devis.totalHT).toLocaleString("fr-FR")} FCFA
         </strong>
 
     </div>
 
 
-    <div class="r">
+    <div class="total-line">
 
         <span>
-            Remise (${d.remise}%)
+            Remise (${devis.remise}%)
         </span>
 
         <strong>
-            ${money(d.montantRemise)}
+            ${Number(devis.montantRemise).toLocaleString("fr-FR")} FCFA
         </strong>
 
     </div>
 
 
-    <div class="r">
+    <div class="total-line">
 
         <span>
-            TVA (${d.tvaPct}%)
+            TVA (${devis.tva}%)
         </span>
 
         <strong>
-            ${money(d.montantTVA)}
+            ${Number(devis.montantTVA).toLocaleString("fr-FR")} FCFA
         </strong>
 
     </div>
 
 
-    <div class="r grand">
+    <div class="total-line total">
 
         <span>
             TOTAL TTC
         </span>
 
         <strong>
-            ${money(d.totalTTC)}
+            ${Number(devis.totalTTC).toLocaleString("fr-FR")} FCFA
         </strong>
 
     </div>
@@ -3264,26 +2481,22 @@ ${rows}
 </div>
 
 
-<div class="notes">
+<div style="margin-top:35px;">
 
     <strong>
-        Conditions / notes
+        Notes / Conditions
     </strong>
 
-    <br>
-    <br>
-
-    ${escapeHtml(
-        d.notes || "—"
-    )}
+    <p>
+        ${escapeHtml(devis.notes).replace(/\n/g,"<br>")}
+    </p>
 
 </div>
 
 
-<div class="foot">
+<div class="footer">
 
-    BATIFLOW —
-    Solution professionnelle de gestion BTP
+    BATIFLOW — Gestion professionnelle du BTP
 
 </div>
 
@@ -3298,22 +2511,20 @@ window.onload = function(){
 
 <\/script>
 
-
 </body>
 
 </html>
 
-`);
+    `);
 
-
-    win.document.close();
+    printWindow.document.close();
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    INITIALISATION
-========================================================== */
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -3321,55 +2532,21 @@ document.addEventListener(
 
         chargerUtilisateur();
 
-        chargerClients();
-
-        chargerChantiers();
-
-        document
-            .getElementById("client")
-            .addEventListener(
-                "change",
-                clientSelectionne
-            );
-
-
-        document
-            .getElementById("chantier")
-            .addEventListener(
-                "change",
-                chantierSelectionne
-            );
-
-
         nouveauDevis();
 
-        afficherHistorique();
 
-    }
-);
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const dqeId =
+            params.get("dqeId");
 
 
-/* ==========================================================
-   SYNCHRONISATION LOCALSTORAGE
-========================================================== */
+        if(dqeId){
 
-window.addEventListener(
-    "storage",
-    function(event){
-
-        if(
-            event.key === CLIENT_STORAGE_KEY
-            ||
-            event.key === CHANTIER_STORAGE_KEY
-            ||
-            event.key === DEVIS_STORAGE_KEY
-        ){
-
-            chargerClients();
-
-            chargerChantiers();
-
-            afficherHistorique();
+            importerDQE(dqeId);
 
         }
 
