@@ -4,82 +4,41 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>BATIFLOW — Tableau de bord</title>
 
 <meta
     name="description"
-    content="BATIFLOW — Gestion professionnelle des chantiers et activités BTP."
+    content="BATIFLOW — Plateforme professionnelle de gestion BTP."
 >
-
-<!-- CSS existants -->
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/dashboard.css">
 
 <style>
 
 /* ==========================================================
-   BATIFLOW — DASHBOARD ÉTAPE 17
-   CSS AUTONOME
+   RESET
 ========================================================== */
-
-:root{
-    --bf-dark:#101827;
-    --bf-dark-2:#172033;
-    --bf-orange:#f28c28;
-    --bf-orange-dark:#e8790c;
-    --bf-bg:#f5f7fb;
-    --bf-card:#ffffff;
-    --bf-border:#e7ebf2;
-    --bf-text:#172033;
-    --bf-muted:#718096;
-    --bf-green:#16a34a;
-    --bf-red:#dc2626;
-    --bf-blue:#2563eb;
-    --bf-purple:#7c3aed;
-    --bf-shadow:0 8px 25px rgba(15,23,42,.06);
-}
 
 *{
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
+html,
 body{
     margin:0;
     padding:0;
-    background:var(--bf-bg);
-    color:var(--bf-text);
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    min-height:100%;
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f9;
+    color:#172033;
 }
-
-button,
-input{
-    font-family:inherit;
-}
-
 
 /* ==========================================================
-   LAYOUT
+   SIDEBAR
 ========================================================== */
-
-.dashboard-body{
-    min-height:100vh;
-    background:var(--bf-bg);
-}
 
 .sidebar{
     position:fixed;
@@ -87,118 +46,237 @@ input{
     top:0;
     bottom:0;
     width:260px;
-    background:var(--bf-dark);
+    background:#101827;
     z-index:1000;
     overflow-y:auto;
     overflow-x:hidden;
     box-shadow:4px 0 20px rgba(0,0,0,.08);
 }
 
-.main-content{
-    margin-left:260px;
-    min-height:100vh;
-    width:calc(100% - 260px);
-}
-
-
-/* ==========================================================
-   LOGO
-========================================================== */
-
 .sidebar-header{
     height:92px;
-    padding:20px 20px;
+    padding:18px 18px;
     display:flex;
     align-items:center;
-    border-bottom:1px solid rgba(255,255,255,.07);
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
+
+/* ==========================================================
+   LOGO BATIFLOW
+========================================================== */
 
 .logo-batiflow{
     width:100%;
     display:flex;
     align-items:center;
     gap:10px;
+    text-decoration:none;
 }
 
 .logo-batiflow svg{
     width:42px;
     height:42px;
-    flex-shrink:0;
+    flex:0 0 42px;
 }
 
 .logo-text{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
     line-height:1;
 }
 
 .logo-text-main{
+    display:block;
     font-size:22px;
-    font-weight:800;
-    letter-spacing:.5px;
+    font-weight:900;
+    line-height:22px;
+    letter-spacing:.4px;
 }
 
 .logo-text-main .bati{
-    color:#fff;
+    color:#ffffff;
 }
 
 .logo-text-main .flow{
-    color:var(--bf-orange);
+    color:#f28c28;
 }
 
 .logo-subtitle{
     margin-top:5px;
     color:#94a3b8;
     font-size:7px;
-    letter-spacing:1.7px;
+    font-weight:600;
+    line-height:8px;
+    letter-spacing:1.5px;
+    white-space:nowrap;
 }
 
-
 /* ==========================================================
-   SIDEBAR NAVIGATION
+   NAVIGATION
 ========================================================== */
 
 .sidebar-nav{
-    padding:15px 12px 25px;
+    padding:14px 12px 25px;
 }
 
-.nav-link{
+.sidebar-nav .nav-link{
+    width:100%;
+    min-height:46px;
+
     display:flex;
     align-items:center;
+    justify-content:flex-start;
+
     gap:12px;
-    min-height:45px;
-    padding:11px 13px;
-    margin-bottom:4px;
-    color:#aeb8c8;
+
+    padding:10px 13px;
+    margin:3px 0;
+
     border-radius:9px;
-    font-size:14px;
-    font-weight:500;
-    transition:.2s ease;
+
+    color:#cbd5e1;
+    background:transparent;
+
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:13px;
+    font-weight:700;
+    line-height:1;
+
+    white-space:nowrap;
+    text-decoration:none;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
 }
 
-.nav-link span:first-child{
-    width:22px;
-    text-align:center;
-    font-size:16px;
+/* ICÔNE */
+
+.nav-icon{
+    width:25px;
+    min-width:25px;
+    height:25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#94a3b8;
+
     flex-shrink:0;
 }
 
-.nav-link:hover{
-    background:rgba(255,255,255,.07);
-    color:#fff;
+.nav-icon svg{
+    width:19px;
+    height:19px;
+
+    display:block;
+
+    stroke:currentColor;
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+
+    fill:none;
 }
 
-.nav-link.active{
-    background:var(--bf-orange);
-    color:#fff;
+/* TEXTE */
+
+.nav-label{
+    flex:1;
+
+    display:block;
+
+    color:inherit;
+
+    font-size:13px;
     font-weight:700;
-    box-shadow:0 5px 15px rgba(242,140,40,.18);
+
+    line-height:18px;
+
+    text-align:left;
+
+    white-space:nowrap;
 }
+
+/* HOVER */
+
+.sidebar-nav .nav-link:hover{
+    background:#1b2638;
+    color:#ffffff;
+    transform:translateX(2px);
+}
+
+.sidebar-nav .nav-link:hover .nav-icon{
+    color:#f28c28;
+}
+
+/* ACTIVE */
+
+.sidebar-nav .nav-link.active{
+    background:#f28c28;
+    color:#ffffff;
+
+    font-weight:800;
+
+    box-shadow:
+        0 5px 15px rgba(242,140,40,.20);
+}
+
+.sidebar-nav .nav-link.active .nav-icon{
+    color:#ffffff;
+}
+
+.sidebar-nav .nav-link.active .nav-label{
+    color:#ffffff;
+    font-weight:800;
+}
+
+/* SEPARATEUR */
 
 .nav-separator{
+    width:calc(100% - 10px);
     height:1px;
-    background:rgba(255,255,255,.08);
+
     margin:13px 5px;
+
+    padding:0;
+
+    background:rgba(255,255,255,.09);
+
+    border:0;
 }
 
+/* SCROLL */
+
+.sidebar::-webkit-scrollbar{
+    width:5px;
+}
+
+.sidebar::-webkit-scrollbar-track{
+    background:#101827;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+    background:#293548;
+    border-radius:10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover{
+    background:#3b4a60;
+}
+
+/* ==========================================================
+   MAIN
+========================================================== */
+
+.main{
+    margin-left:260px;
+    min-height:100vh;
+}
 
 /* ==========================================================
    TOPBAR
@@ -206,69 +284,129 @@ input{
 
 .topbar{
     height:72px;
-    background:#fff;
-    border-bottom:1px solid var(--bf-border);
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     padding:0 28px;
+
+    background:#ffffff;
+
+    border-bottom:1px solid #e5e7eb;
+
     position:sticky;
     top:0;
+
     z-index:900;
 }
 
-.topbar-search{
-    width:420px;
-    max-width:48%;
-    height:42px;
-    background:#f7f8fa;
-    border:1px solid #e9edf3;
-    border-radius:10px;
+.topbar-left{
     display:flex;
     align-items:center;
-    gap:9px;
+    gap:15px;
+}
+
+.mobile-menu{
+    display:none;
+
+    width:40px;
+    height:40px;
+
+    border:0;
+    border-radius:8px;
+
+    background:#f3f4f6;
+
+    cursor:pointer;
+
+    font-size:21px;
+}
+
+.search-box{
+    width:350px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+
     padding:0 13px;
+
+    border:1px solid #e5e7eb;
+    border-radius:9px;
+
+    background:#f8fafc;
 }
 
-.topbar-search span{
-    font-size:16px;
-    opacity:.65;
+.search-box svg{
+    width:18px;
+    height:18px;
+
+    color:#94a3b8;
+
+    margin-right:9px;
 }
 
-.topbar-search input{
+.search-box input{
     width:100%;
-    border:none;
-    outline:none;
-    background:transparent;
-    color:var(--bf-text);
-    font-size:13px;
-}
 
-.topbar-search input::placeholder{
-    color:#9aa4b2;
+    border:0;
+    outline:0;
+
+    background:transparent;
+
+    color:#172033;
+
+    font-size:13px;
 }
 
 .topbar-right{
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:18px;
 }
 
-.notification-btn{
+.notification{
     width:38px;
     height:38px;
-    border:1px solid var(--bf-border);
-    background:#fff;
-    border-radius:9px;
+
+    border:1px solid #e5e7eb;
+
+    background:#ffffff;
+
+    border-radius:8px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     cursor:pointer;
-    font-size:17px;
+
+    color:#475569;
+
+    position:relative;
 }
 
-.notification-btn:hover{
-    background:#f8fafc;
+.notification svg{
+    width:19px;
+    height:19px;
 }
 
-.user-profile{
+.notification-dot{
+    position:absolute;
+
+    top:7px;
+    right:7px;
+
+    width:7px;
+    height:7px;
+
+    background:#f28c28;
+
+    border-radius:50%;
+}
+
+.user-box{
     display:flex;
     align-items:center;
     gap:10px;
@@ -277,682 +415,754 @@ input{
 .user-avatar{
     width:38px;
     height:38px;
-    background:var(--bf-orange);
-    color:#fff;
+
     border-radius:50%;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
+    background:#f28c28;
+
+    color:#ffffff;
+
     font-weight:800;
+
+    font-size:14px;
 }
 
 .user-info{
     display:flex;
     flex-direction:column;
-    gap:3px;
 }
 
-.user-info strong{
+.user-name{
     font-size:13px;
-    color:var(--bf-text);
+    font-weight:800;
+    color:#172033;
 }
 
-.user-info small{
-    color:var(--bf-muted);
-    font-size:11px;
-}
+.user-role{
+    margin-top:2px;
 
-.mobile-menu-btn{
-    display:none;
-    border:none;
-    background:transparent;
-    font-size:24px;
-    cursor:pointer;
+    font-size:10px;
+    color:#94a3b8;
 }
-
 
 /* ==========================================================
-   CONTENU
+   CONTENT
 ========================================================== */
 
-.dashboard-content{
-    padding:30px;
-    max-width:1600px;
-    margin:0 auto;
+.content{
+    padding:28px;
 }
-
 
 /* ==========================================================
    WELCOME
 ========================================================== */
 
-.welcome-section{
+.welcome{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:20px;
+
     margin-bottom:25px;
 }
 
-.welcome-section h1{
+.welcome h1{
     margin:0;
-    color:var(--bf-text);
-    font-size:26px;
-    font-weight:800;
+
+    font-size:25px;
+
+    color:#101827;
 }
 
-.welcome-section p{
+.welcome p{
     margin:7px 0 0;
-    color:var(--bf-muted);
-    font-size:14px;
+
+    color:#64748b;
+
+    font-size:13px;
 }
 
-.btn{
+.primary-btn{
     display:inline-flex;
     align-items:center;
-    justify-content:center;
-    gap:6px;
-    min-height:38px;
-    padding:8px 14px;
+    gap:8px;
+
+    padding:12px 17px;
+
+    background:#f28c28;
+    color:#ffffff;
+
+    border:0;
     border-radius:8px;
-    border:1px solid var(--bf-border);
-    background:#fff;
-    color:var(--bf-text);
-    font-size:12px;
-    font-weight:700;
+
+    font-size:13px;
+    font-weight:800;
+
+    text-decoration:none;
+
     cursor:pointer;
-    transition:.2s ease;
+
+    box-shadow:0 5px 12px rgba(242,140,40,.18);
+
+    transition:.2s;
 }
 
-.btn:hover{
+.primary-btn:hover{
+    background:#e57d17;
     transform:translateY(-1px);
-    box-shadow:0 4px 12px rgba(15,23,42,.08);
 }
 
-.btn-primary{
-    background:var(--bf-orange);
-    color:#fff;
-    border-color:var(--bf-orange);
-    padding:11px 17px;
+.primary-btn svg{
+    width:17px;
+    height:17px;
 }
-
-.btn-primary:hover{
-    background:var(--bf-orange-dark);
-}
-
-.btn-sm{
-    min-height:31px;
-    padding:6px 10px;
-    font-size:11px;
-}
-
 
 /* ==========================================================
-   STATISTIQUES
+   STATS
 ========================================================== */
 
 .stats-grid{
     display:grid;
+
     grid-template-columns:
         repeat(4,minmax(0,1fr));
+
     gap:18px;
-    margin-bottom:22px;
+
+    margin-bottom:25px;
 }
 
 .stat-card{
-    background:#fff;
-    border:1px solid var(--bf-border);
-    border-radius:13px;
+    background:#ffffff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
     padding:19px;
+
+    box-shadow:0 3px 12px rgba(15,23,42,.035);
+}
+
+.stat-top{
     display:flex;
     align-items:center;
-    gap:15px;
-    box-shadow:var(--bf-shadow);
+    justify-content:space-between;
+}
+
+.stat-title{
+    font-size:12px;
+    color:#64748b;
+    font-weight:700;
 }
 
 .stat-icon{
-    width:48px;
-    height:48px;
-    border-radius:11px;
+    width:38px;
+    height:38px;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:22px;
-    flex-shrink:0;
+
+    border-radius:9px;
+
+    background:#fff4e8;
+    color:#f28c28;
 }
 
-.stat-icon.orange{
-    background:#fff1e6;
+.stat-icon svg{
+    width:20px;
+    height:20px;
 }
 
-.stat-icon.green{
-    background:#ecfdf3;
+.stat-number{
+    margin-top:13px;
+
+    font-size:27px;
+    font-weight:900;
+
+    color:#101827;
 }
 
-.stat-icon.blue{
-    background:#eff6ff;
-}
+.stat-bottom{
+    margin-top:5px;
 
-.stat-icon.purple{
-    background:#f5f3ff;
+    font-size:10px;
+    color:#94a3b8;
 }
-
-.stat-info{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    min-width:0;
-}
-
-.stat-info span{
-    color:var(--bf-muted);
-    font-size:12px;
-}
-
-.stat-info strong{
-    color:var(--bf-text);
-    font-size:25px;
-}
-
 
 /* ==========================================================
-   DASHBOARD GRID
+   GRID PRINCIPALE
 ========================================================== */
 
 .dashboard-grid{
     display:grid;
+
     grid-template-columns:
-        minmax(0,1.55fr)
-        minmax(300px,1fr);
+        minmax(0,1.45fr)
+        minmax(320px,.9fr);
+
     gap:20px;
+
+    margin-bottom:20px;
 }
 
-.dashboard-card{
-    background:#fff;
-    border:1px solid var(--bf-border);
-    border-radius:14px;
-    box-shadow:var(--bf-shadow);
+/* ==========================================================
+   CARD
+========================================================== */
+
+.card{
+    background:#ffffff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+    box-shadow:0 3px 12px rgba(15,23,42,.035);
+
     overflow:hidden;
 }
 
-.dashboard-section-spacing{
-    margin-top:20px;
-}
-
 .card-header{
-    min-height:72px;
-    padding:18px 20px;
-    border-bottom:1px solid #edf0f4;
+    min-height:62px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
+
+    padding:15px 18px;
+
+    border-bottom:1px solid #eef0f3;
 }
 
-.card-header h2{
+.card-title{
     margin:0;
-    font-size:17px;
-    color:var(--bf-text);
+
+    font-size:14px;
+
+    font-weight:900;
+
+    color:#172033;
 }
 
-.card-header p{
-    margin:5px 0 0;
-    font-size:12px;
-    color:var(--bf-muted);
+.card-link{
+    font-size:11px;
+
+    color:#f28c28;
+
+    font-weight:800;
+
+    text-decoration:none;
 }
 
-.card-header > a{
-    color:var(--bf-orange-dark);
-    font-size:12px;
-    font-weight:700;
-    white-space:nowrap;
+.card-body{
+    padding:18px;
 }
-
 
 /* ==========================================================
    CHANTIERS
 ========================================================== */
 
-.recent-chantiers{
-    padding:4px 20px 10px;
-}
-
 .chantier-item{
-    padding:16px 0;
-    border-bottom:1px solid #edf0f4;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    gap:20px;
+
+    gap:13px;
+
+    padding:13px 0;
+
+    border-bottom:1px solid #f0f2f5;
 }
 
 .chantier-item:last-child{
-    border-bottom:none;
-}
-
-.chantier-main{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    min-width:0;
+    border-bottom:0;
 }
 
 .chantier-icon{
     width:42px;
     height:42px;
-    border-radius:10px;
-    background:#fff4e9;
+
+    min-width:42px;
+
+    border-radius:9px;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    flex-shrink:0;
-    font-size:19px;
+
+    background:#f1f5f9;
+    color:#475569;
+}
+
+.chantier-icon svg{
+    width:20px;
+    height:20px;
 }
 
 .chantier-info{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
     min-width:0;
+    flex:1;
 }
 
-.chantier-info strong{
+.chantier-name{
     font-size:13px;
-    color:var(--bf-text);
+    font-weight:800;
+    color:#172033;
+
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
 }
 
-.chantier-info span{
-    font-size:11px;
-    color:var(--bf-muted);
-}
+.chantier-location{
+    margin-top:4px;
 
-.chantier-info small{
     font-size:10px;
     color:#94a3b8;
-}
 
-.chantier-progress{
-    width:170px;
-    flex-shrink:0;
-}
-
-.progress-info{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:7px;
-    margin-bottom:7px;
-}
-
-.progress-info > span:first-child{
-    font-size:11px;
-    font-weight:700;
-    color:var(--bf-text);
-}
-
-.progress-bar{
-    width:100%;
-    height:6px;
-    border-radius:10px;
-    background:#edf0f4;
+    white-space:nowrap;
     overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-.progress-fill{
-    height:100%;
-    border-radius:10px;
-    background:var(--bf-orange);
-    transition:width .3s ease;
-}
+.status{
+    padding:5px 8px;
 
-.status-badge{
-    display:inline-flex;
-    align-items:center;
-    padding:4px 7px;
     border-radius:20px;
+
     font-size:9px;
-    font-weight:700;
+
+    font-weight:800;
+
     white-space:nowrap;
 }
 
-.status-badge.active{
-    background:#ecfdf3;
-    color:#15803d;
+.status-en-cours{
+    background:#fff4e8;
+    color:#d97706;
 }
 
-.status-badge.success{
-    background:#ecfdf3;
-    color:#15803d;
+.status-termine{
+    background:#ecfdf5;
+    color:#059669;
 }
 
-.status-badge.warning{
-    background:#fffbeb;
-    color:#b45309;
+.status-attente{
+    background:#f1f5f9;
+    color:#64748b;
 }
-
-.status-badge.danger{
-    background:#fef2f2;
-    color:#b91c1c;
-}
-
 
 /* ==========================================================
    ACTIONS RAPIDES
 ========================================================== */
 
 .quick-actions{
-    padding:20px;
     display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:11px;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:10px;
 }
 
 .quick-action{
-    min-height:72px;
-    padding:12px;
-    border:1px solid #edf0f4;
-    background:#fafbfc;
-    border-radius:10px;
+    min-height:82px;
+
+    padding:13px;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:9px;
+
+    background:#ffffff;
+
     display:flex;
-    align-items:center;
-    gap:10px;
-    color:var(--bf-text);
-    font-size:12px;
-    font-weight:700;
-    transition:.2s ease;
+    flex-direction:column;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    transition:.2s;
 }
 
 .quick-action:hover{
-    border-color:#f6c58d;
-    background:#fffaf5;
-    transform:translateY(-1px);
+    border-color:#f28c28;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 5px 15px rgba(15,23,42,.06);
 }
 
-.quick-action-icon{
-    width:36px;
-    height:36px;
-    border-radius:8px;
-    background:#fff1e6;
+.quick-icon{
+    width:29px;
+    height:29px;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:17px;
-    flex-shrink:0;
+
+    color:#f28c28;
 }
 
+.quick-icon svg{
+    width:20px;
+    height:20px;
+}
+
+.quick-title{
+    margin-top:7px;
+
+    font-size:11px;
+
+    color:#172033;
+
+    font-weight:800;
+}
 
 /* ==========================================================
-   EMPTY STATE
+   DQE
 ========================================================== */
 
-.empty-state{
-    padding:35px 15px;
-    text-align:center;
-    color:#94a3b8;
-    font-size:13px;
-}
-
-
-/* ==========================================================
-   ÉTAPE 17 — FINANCES + INDICATEURS
-========================================================== */
-
-.dashboard-advanced-grid{
-    display:grid;
-    grid-template-columns:
-        minmax(0,1fr)
-        minmax(0,1fr);
-    gap:20px;
-    margin-top:20px;
-}
-
-.dashboard-advanced-card{
-    background:#fff;
-    border:1px solid var(--bf-border);
-    border-radius:14px;
-    box-shadow:var(--bf-shadow);
-    padding:20px;
-}
-
-.dashboard-advanced-card h3{
-    margin:0 0 17px;
-    font-size:16px;
-    color:var(--bf-text);
+.dqe-item{
     display:flex;
     align-items:center;
-    gap:8px;
+
+    gap:12px;
+
+    padding:12px 0;
+
+    border-bottom:1px solid #f0f2f5;
 }
 
-.finance-mini-grid{
-    display:grid;
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
-    gap:10px;
+.dqe-item:last-child{
+    border-bottom:0;
 }
 
-.finance-mini{
+.dqe-icon{
+    width:40px;
+    height:40px;
+
+    border-radius:8px;
+
+    background:#fff4e8;
+
+    color:#f28c28;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.dqe-icon svg{
+    width:19px;
+    height:19px;
+}
+
+.dqe-info{
+    flex:1;
     min-width:0;
-    background:#f8fafc;
-    border:1px solid #edf0f4;
-    border-radius:10px;
-    padding:13px;
 }
 
-.finance-mini-label{
-    color:var(--bf-muted);
-    font-size:10px;
-    margin-bottom:7px;
-}
-
-.finance-mini-value{
-    font-size:15px;
+.dqe-ref{
+    font-size:12px;
     font-weight:800;
-    color:var(--bf-text);
-    word-break:break-word;
+    color:#172033;
 }
 
-.finance-mini-value.positive{
-    color:var(--bf-green);
+.dqe-name{
+    margin-top:3px;
+
+    font-size:10px;
+    color:#94a3b8;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-.finance-mini-value.negative{
-    color:var(--bf-red);
+.dqe-total{
+    font-size:12px;
+    font-weight:900;
+    color:#172033;
 }
 
-.indicator-grid{
+/* ==========================================================
+   FINANCES
+========================================================== */
+
+.finance-grid{
     display:grid;
+
     grid-template-columns:
         repeat(3,minmax(0,1fr));
-    gap:10px;
+
+    gap:12px;
 }
 
-.indicator-item{
+.finance-box{
+    padding:15px;
+
+    border-radius:9px;
+
     background:#f8fafc;
-    border:1px solid #edf0f4;
-    border-radius:10px;
-    padding:13px 8px;
-    text-align:center;
 }
 
-.indicator-icon{
-    font-size:20px;
-    margin-bottom:5px;
-}
-
-.indicator-value{
-    font-size:20px;
-    font-weight:800;
-    color:var(--bf-text);
-}
-
-.indicator-label{
-    color:var(--bf-muted);
+.finance-label{
     font-size:10px;
-    margin-top:4px;
+
+    color:#64748b;
+
+    font-weight:700;
 }
 
+.finance-value{
+    margin-top:7px;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    color:#172033;
+}
+
+.finance-value.recette{
+    color:#059669;
+}
+
+.finance-value.depense{
+    color:#dc2626;
+}
+
+.finance-value.solde{
+    color:#f28c28;
+}
+
+/* ==========================================================
+   INDICATEURS
+========================================================== */
+
+.indicators{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:14px;
+}
+
+.indicator{
+    padding:15px;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:9px;
+
+    background:#ffffff;
+}
+
+.indicator-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.indicator-title{
+    font-size:11px;
+    font-weight:800;
+    color:#475569;
+}
+
+.indicator-number{
+    margin-top:9px;
+
+    font-size:20px;
+
+    font-weight:900;
+
+    color:#172033;
+}
 
 /* ==========================================================
    ALERTES
 ========================================================== */
 
-.dashboard-alerts{
-    margin-top:20px;
-    background:#fff;
-    border:1px solid var(--bf-border);
-    border-radius:14px;
-    box-shadow:var(--bf-shadow);
-    padding:20px;
-}
-
-.dashboard-alerts h3{
-    margin:0 0 15px;
-    font-size:16px;
-    color:var(--bf-text);
-}
-
-.alert-list{
+.alert{
     display:flex;
-    flex-direction:column;
-    gap:9px;
+
+    align-items:flex-start;
+
+    gap:11px;
+
+    padding:12px;
+
+    margin-bottom:9px;
+
+    border-radius:8px;
+
+    background:#fff7ed;
+
+    border:1px solid #fed7aa;
 }
 
-.dashboard-alert{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    padding:11px 13px;
-    border-radius:9px;
-    background:#fffbeb;
-    border:1px solid #fde68a;
+.alert:last-child{
+    margin-bottom:0;
 }
 
-.dashboard-alert.danger{
-    background:#fef2f2;
-    border-color:#fecaca;
+.alert-icon{
+    color:#ea580c;
+
+    width:20px;
+    min-width:20px;
 }
 
-.dashboard-alert.warning{
-    background:#fffbeb;
-    border-color:#fde68a;
+.alert-icon svg{
+    width:18px;
+    height:18px;
 }
 
-.dashboard-alert-left{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    min-width:0;
-}
+.alert-text{
+    font-size:11px;
 
-.dashboard-alert-icon{
-    font-size:18px;
-}
+    color:#7c2d12;
 
-.dashboard-alert-title{
-    font-size:12px;
-    font-weight:700;
-    color:var(--bf-text);
+    line-height:16px;
 }
-
-.dashboard-alert-text{
-    margin-top:3px;
-    font-size:10px;
-    color:var(--bf-muted);
-}
-
-.dashboard-alert-empty{
-    padding:13px;
-    background:#f0fdf4;
-    color:#166534;
-    border:1px solid #bbf7d0;
-    border-radius:9px;
-    font-size:12px;
-    text-align:center;
-}
-
 
 /* ==========================================================
    ACTIVITÉ
 ========================================================== */
 
-.activity-list{
-    padding:5px 20px 10px;
-}
-
 .activity-item{
     display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px 0;
-    border-bottom:1px solid #edf0f4;
+
+    gap:11px;
+
+    padding:11px 0;
+
+    border-bottom:1px solid #f0f2f5;
 }
 
 .activity-item:last-child{
-    border-bottom:none;
+    border-bottom:0;
 }
 
-.activity-icon{
-    width:38px;
-    height:38px;
-    border-radius:9px;
-    background:#f8fafc;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-    font-size:17px;
+.activity-dot{
+    width:9px;
+    height:9px;
+
+    min-width:9px;
+
+    margin-top:5px;
+
+    border-radius:50%;
+
+    background:#f28c28;
 }
 
-.activity-content{
-    flex:1;
-    min-width:0;
-}
+.activity-text{
+    font-size:11px;
 
-.activity-content strong{
-    display:block;
-    font-size:12px;
-    color:var(--bf-text);
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-}
+    color:#475569;
 
-.activity-item-extra{
-    margin-top:4px;
-    color:var(--bf-muted);
-    font-size:10px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+    line-height:16px;
 }
 
 .activity-date{
+    display:block;
+
+    margin-top:3px;
+
     color:#94a3b8;
-    font-size:10px;
-    white-space:nowrap;
+
+    font-size:9px;
 }
 
+/* ==========================================================
+   EMPTY
+========================================================== */
+
+.empty{
+    text-align:center;
+
+    padding:30px 15px;
+
+    color:#94a3b8;
+
+    font-size:12px;
+}
+
+.empty svg{
+    width:34px;
+    height:34px;
+
+    margin-bottom:8px;
+
+    color:#cbd5e1;
+}
 
 /* ==========================================================
    FOOTER
 ========================================================== */
 
-.dashboard-footer{
-    padding:25px 30px;
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
+.footer{
+    padding:25px 0 10px;
+
+    text-align:center;
+
     color:#94a3b8;
+
     font-size:10px;
 }
 
+/* ==========================================================
+   TOAST
+========================================================== */
+
+.toast{
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    z-index:2000;
+
+    min-width:250px;
+
+    padding:13px 16px;
+
+    background:#101827;
+
+    color:#ffffff;
+
+    border-radius:8px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:translateY(0);
+}
 
 /* ==========================================================
-   RESPONSIVE TABLET
+   RESPONSIVE
 ========================================================== */
 
 @media(max-width:1100px){
@@ -966,138 +1176,81 @@ input{
         grid-template-columns:1fr;
     }
 
-    .topbar-search{
-        width:320px;
-    }
-
 }
-
-
-/* ==========================================================
-   RESPONSIVE MOBILE
-========================================================== */
 
 @media(max-width:800px){
 
     .sidebar{
         transform:translateX(-100%);
-        transition:.25s ease;
+
+        transition:transform .25s ease;
     }
 
     .sidebar.open{
         transform:translateX(0);
     }
 
-    .main-content{
+    .main{
         margin-left:0;
-        width:100%;
     }
 
-    .mobile-menu-btn{
-        display:block;
-        width:40px;
-        height:40px;
-        flex-shrink:0;
+    .mobile-menu{
+        display:flex;
+
+        align-items:center;
+        justify-content:center;
     }
 
-    .topbar{
-        padding:0 15px;
-        gap:10px;
-    }
-
-    .topbar-search{
-        max-width:none;
-        width:auto;
-        flex:1;
+    .search-box{
+        width:250px;
     }
 
     .user-info{
         display:none;
     }
 
-    .dashboard-content{
-        padding:20px 15px;
-    }
-
-    .welcome-section{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .welcome-section h1{
-        font-size:22px;
-    }
-
-    .stats-grid{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-    }
-
-    .stat-card{
-        padding:13px;
-        gap:9px;
-    }
-
-    .stat-icon{
-        width:40px;
-        height:40px;
-        font-size:18px;
-    }
-
-    .stat-info strong{
-        font-size:21px;
-    }
-
-    .dashboard-advanced-grid{
-        grid-template-columns:1fr;
+    .content{
+        padding:20px;
     }
 
 }
 
+@media(max-width:600px){
 
-/* ==========================================================
-   PETIT MOBILE
-========================================================== */
-
-@media(max-width:520px){
-
-    .topbar-right{
-        gap:5px;
+    .topbar{
+        padding:0 15px;
     }
 
-    .notification-btn{
-        display:none;
+    .search-box{
+        width:150px;
     }
 
     .stats-grid{
         grid-template-columns:1fr;
     }
 
-    .chantier-item{
-        align-items:flex-start;
-        flex-direction:column;
+    .finance-grid{
+        grid-template-columns:1fr;
     }
 
-    .chantier-progress{
-        width:100%;
+    .indicators{
+        grid-template-columns:1fr;
+    }
+
+    .welcome{
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:15px;
+    }
+
+    .welcome h1{
+        font-size:21px;
     }
 
     .quick-actions{
         grid-template-columns:1fr;
-    }
-
-    .finance-mini-grid,
-    .indicator-grid{
-        grid-template-columns:1fr;
-    }
-
-    .dashboard-alert{
-        align-items:flex-start;
-    }
-
-    .dashboard-footer{
-        flex-direction:column;
-        padding:20px 15px;
     }
 
 }
@@ -1106,83 +1259,63 @@ input{
 
 </head>
 
+<body>
 
-<body class="dashboard-body">
-
-
-<!-- ==========================================================
+<!-- ========================================================
      SIDEBAR
-========================================================== -->
+========================================================= -->
 
 <aside class="sidebar" id="sidebar">
-
 
     <div class="sidebar-header">
 
         <a href="dashboard.html" class="logo-batiflow">
 
-            <svg
-                width="42"
-                height="42"
-                viewBox="0 0 42 42"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg viewBox="0 0 64 64" fill="none">
 
                 <circle
-                    cx="21"
-                    cy="21"
-                    r="20"
+                    cx="32"
+                    cy="32"
+                    r="29"
                     stroke="#f28c28"
-                    stroke-width="2"
+                    stroke-width="2.5"
                 />
 
                 <path
-                    d="M10 20.5L21 11L32 20.5"
+                    d="M15 31L32 17L49 31"
                     stroke="#ffffff"
-                    stroke-width="2.5"
+                    stroke-width="4"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                 />
 
                 <path
-                    d="M13.5 19.5V30H28.5V19.5"
+                    d="M20 29V45H44V29"
                     stroke="#ffffff"
-                    stroke-width="2.5"
+                    stroke-width="3"
                     stroke-linejoin="round"
                 />
 
                 <path
-                    d="M18 30V22H24V30"
+                    d="M28 45V35H36V45"
                     stroke="#f28c28"
-                    stroke-width="2.5"
-                    stroke-linejoin="round"
+                    stroke-width="3"
                 />
 
                 <path
-                    d="M8 32.5H34"
+                    d="M14 49H50"
                     stroke="#f28c28"
-                    stroke-width="2"
+                    stroke-width="4"
                     stroke-linecap="round"
                 />
 
             </svg>
 
-
             <div class="logo-text">
 
                 <div class="logo-text-main">
-
-                    <span class="bati">
-                        BATI
-                    </span>
-
-                    <span class="flow">
-                        FLOW
-                    </span>
-
+                    <span class="bati">BATI</span><span class="flow">FLOW</span>
                 </div>
-
 
                 <div class="logo-subtitle">
                     CONSTRUCTION MANAGEMENT
@@ -1197,157 +1330,453 @@ input{
 
     <nav class="sidebar-nav">
 
+        <!-- DASHBOARD -->
 
-        <a
-            href="dashboard.html"
-            class="nav-link active"
-        >
-            <span>📊</span>
-            <span>Tableau de bord</span>
+        <a href="dashboard.html" class="nav-link active">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Tableau de bord
+            </span>
+
         </a>
 
 
-        <a
-            href="chantiers.html"
-            class="nav-link"
-        >
-            <span>🏗️</span>
-            <span>Chantiers</span>
+        <!-- CHANTIERS -->
+
+        <a href="chantiers.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M3 21h18"></path>
+
+                    <path d="M5 21V9l7-5 7 5v12"></path>
+
+                    <path d="M9 21v-6h6v6"></path>
+
+                    <path d="M9 10h.01"></path>
+
+                    <path d="M15 10h.01"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Chantiers
+            </span>
+
         </a>
 
 
-        <a
-            href="dqe.html"
-            class="nav-link"
-        >
-            <span>📐</span>
-            <span>DQE & Métré</span>
+        <!-- DQE -->
+
+        <a href="dqe.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M4 4h16v16H4z"></path>
+
+                    <path d="M8 8h8"></path>
+
+                    <path d="M8 12h8"></path>
+
+                    <path d="M8 16h5"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                DQE & Métré
+            </span>
+
         </a>
 
 
-        <a
-            href="devis.html"
-            class="nav-link"
-        >
-            <span>🧾</span>
-            <span>Devis</span>
-        </a>
+        <!-- DEVIS -->
 
+        <a href="devis.html" class="nav-link">
 
-        <div class="nav-separator"></div>
+            <span class="nav-icon">
 
+                <svg viewBox="0 0 24 24">
 
-        <a
-            href="calculator.html"
-            class="nav-link"
-        >
-            <span>🧮</span>
-            <span>Calculateur BTP</span>
-        </a>
+                    <path d="M6 3h12v18H6z"></path>
 
+                    <path d="M9 7h6"></path>
 
-        <a
-            href="mortar.html"
-            class="nav-link"
-        >
-            <span>🧱</span>
-            <span>Mortier</span>
-        </a>
+                    <path d="M9 11h6"></path>
 
+                    <path d="M9 15h4"></path>
 
-        <a
-            href="masonry.html"
-            class="nav-link"
-        >
-            <span>🧱</span>
-            <span>Maçonnerie</span>
-        </a>
+                </svg>
 
+            </span>
 
-        <a
-            href="slab.html"
-            class="nav-link"
-        >
-            <span>🏠</span>
-            <span>Dalle</span>
-        </a>
+            <span class="nav-label">
+                Devis
+            </span>
 
-
-        <a
-            href="poteaux-poutres.html"
-            class="nav-link"
-        >
-            <span>🏗️</span>
-            <span>Poteaux & Poutres</span>
-        </a>
-
-
-        <div class="nav-separator"></div>
-
-
-        <a
-            href="clients.html"
-            class="nav-link"
-        >
-            <span>👥</span>
-            <span>Clients</span>
-        </a>
-
-
-        <a
-            href="materiaux.html"
-            class="nav-link"
-        >
-            <span>📦</span>
-            <span>Matériaux</span>
-        </a>
-
-
-        <a
-            href="documents.html"
-            class="nav-link"
-        >
-            <span>📁</span>
-            <span>Documents</span>
-        </a>
-
-
-        <a
-            href="equipe.html"
-            class="nav-link"
-        >
-            <span>👷</span>
-            <span>Équipe & Personnel</span>
-        </a>
-
-
-        <a
-            href="finances.html"
-            class="nav-link"
-        >
-            <span>💰</span>
-            <span>Finances</span>
-        </a>
-
-
-        <a
-            href="parametres.html"
-            class="nav-link"
-        >
-            <span>⚙️</span>
-            <span>Paramètres</span>
         </a>
 
 
         <div class="nav-separator"></div>
 
 
-        <a
-            href="login.html"
-            class="nav-link"
-        >
-            <span>🚪</span>
-            <span>Déconnexion</span>
+        <!-- CALCULATEUR -->
+
+        <a href="calculator.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <rect x="5" y="2" width="14" height="20" rx="2"></rect>
+
+                    <path d="M8 6h8"></path>
+
+                    <path d="M8 10h.01"></path>
+                    <path d="M12 10h.01"></path>
+                    <path d="M16 10h.01"></path>
+
+                    <path d="M8 14h.01"></path>
+                    <path d="M12 14h.01"></path>
+                    <path d="M16 14h.01"></path>
+
+                    <path d="M8 18h.01"></path>
+                    <path d="M12 18h.01"></path>
+                    <path d="M16 18h.01"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Calculateur BTP
+            </span>
+
+        </a>
+
+
+        <!-- MORTIER -->
+
+        <a href="mortar.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M4 7h16"></path>
+
+                    <path d="M4 12h16"></path>
+
+                    <path d="M4 17h16"></path>
+
+                    <path d="M7 3v4"></path>
+
+                    <path d="M15 7v5"></path>
+
+                    <path d="M9 12v5"></path>
+
+                    <path d="M18 17v4"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Mortier
+            </span>
+
+        </a>
+
+
+        <!-- MACONNERIE -->
+
+        <a href="masonry.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M3 6h8v5H3z"></path>
+
+                    <path d="M13 6h8v5h-8z"></path>
+
+                    <path d="M3 13h5v5H3z"></path>
+
+                    <path d="M10 13h11v5H10z"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Maçonnerie
+            </span>
+
+        </a>
+
+
+        <!-- DALLE -->
+
+        <a href="slab.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M3 18h18"></path>
+
+                    <path d="M5 18v-5h14v5"></path>
+
+                    <path d="M7 13V8h10v5"></path>
+
+                    <path d="M9 8V5h6v3"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Dalle
+            </span>
+
+        </a>
+
+
+        <!-- POTEAUX POUTRES -->
+
+        <a href="poteaux-poutres.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M5 4h14"></path>
+
+                    <path d="M7 4v16"></path>
+
+                    <path d="M17 4v16"></path>
+
+                    <path d="M5 20h14"></path>
+
+                    <path d="M7 9h10"></path>
+
+                    <path d="M7 15h10"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Poteaux & Poutres
+            </span>
+
+        </a>
+
+
+        <div class="nav-separator"></div>
+
+
+        <!-- CLIENTS -->
+
+        <a href="clients.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+
+                    <circle cx="9" cy="7" r="4"></circle>
+
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Clients
+            </span>
+
+        </a>
+
+
+        <!-- MATERIAUX -->
+
+        <a href="materiaux.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M21 8l-9-5-9 5 9 5 9-5z"></path>
+
+                    <path d="M3 8v8l9 5 9-5V8"></path>
+
+                    <path d="M12 13v8"></path>
+
+                    <path d="M7.5 5.5l9 5"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Matériaux
+            </span>
+
+        </a>
+
+
+        <!-- DOCUMENTS -->
+
+        <a href="documents.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+
+                    <polyline points="14 2 14 8 20 8"></polyline>
+
+                    <line x1="8" y1="13" x2="16" y2="13"></line>
+
+                    <line x1="8" y1="17" x2="16" y2="17"></line>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Documents
+            </span>
+
+        </a>
+
+
+        <!-- EQUIPE -->
+
+        <a href="equipe.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+
+                    <circle cx="9" cy="7" r="4"></circle>
+
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Équipe & Personnel
+            </span>
+
+        </a>
+
+
+        <!-- FINANCES -->
+
+        <a href="finances.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <rect x="2" y="5" width="20" height="15" rx="2"></rect>
+
+                    <path d="M16 12h.01"></path>
+
+                    <path d="M2 10h20"></path>
+
+                    <path d="M6 15h4"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Finances
+            </span>
+
+        </a>
+
+
+        <!-- PARAMETRES -->
+
+        <a href="parametres.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle cx="12" cy="12" r="3"></circle>
+
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06-1.42 1.42-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21h-2v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06-1.42-1.42.06-.06A1.65 1.65 0 0 0 9.6 15a1.65 1.65 0 0 0-1.51-1H8v-2h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06 1.42-1.42.06.06a1.65 1.65 0 0 0 1.82.33h.01A1.65 1.65 0 0 0 13.5 6.6V6h2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06 1.42 1.42-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21v2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Paramètres
+            </span>
+
+        </a>
+
+
+        <div class="nav-separator"></div>
+
+
+        <!-- DECONNEXION -->
+
+        <a href="login.html" class="nav-link">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+
+                    <polyline points="16 17 21 12 16 7"></polyline>
+
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Déconnexion
+            </span>
+
         </a>
 
     </nav>
@@ -1355,71 +1784,95 @@ input{
 </aside>
 
 
-<!-- ==========================================================
+<!-- ========================================================
      MAIN
-========================================================== -->
+========================================================= -->
 
-<main class="main-content">
+<main class="main">
 
 
     <!-- TOPBAR -->
 
     <header class="topbar">
 
+        <div class="topbar-left">
 
-        <button
-            type="button"
-            class="mobile-menu-btn"
-            id="mobileMenuBtn"
-        >
-            ☰
-        </button>
-
-
-        <div class="topbar-search">
-
-            <span>🔎</span>
-
-            <input
-                type="text"
-                id="searchChantier"
-                placeholder="Rechercher un chantier..."
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+                type="button"
             >
+                ☰
+            </button>
+
+
+            <div class="search-box">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <path d="M20 20l-4-4"></path>
+                </svg>
+
+                <input
+                    type="text"
+                    id="searchChantier"
+                    placeholder="Rechercher un chantier..."
+                >
+
+            </div>
 
         </div>
 
 
         <div class="topbar-right">
 
-
             <button
+                class="notification"
                 type="button"
-                class="notification-btn"
-                title="Notifications"
+                onclick="afficherToast('Aucune nouvelle notification')"
             >
-                🔔
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
+                    <path d="M10 21h4"></path>
+                </svg>
+
+                <span class="notification-dot"></span>
+
             </button>
 
 
-            <div class="user-profile">
+            <div class="user-box">
 
                 <div
                     class="user-avatar"
                     id="userAvatar"
                 >
-                    U
+                    ML
                 </div>
-
 
                 <div class="user-info">
 
-                    <strong id="userName">
-                        Utilisateur
-                    </strong>
+                    <div
+                        class="user-name"
+                        id="userName"
+                    >
+                        Maruis Lare
+                    </div>
 
-                    <small>
+                    <div class="user-role">
                         Administrateur
-                    </small>
+                    </div>
 
                 </div>
 
@@ -1430,29 +1883,23 @@ input{
     </header>
 
 
-    <!-- ======================================================
-         DASHBOARD
-    ======================================================= -->
+    <!-- CONTENT -->
 
-    <section class="dashboard-content">
+    <section class="content">
 
 
-        <!-- BIENVENUE -->
+        <!-- WELCOME -->
 
-        <div class="welcome-section">
+        <div class="welcome">
 
             <div>
 
                 <h1>
-                    Bonjour,
-                    <span id="welcomeName">
-                        Utilisateur
-                    </span>
-                    👋
+                    Bonjour <span id="welcomeName">Maruis</span> 👋
                 </h1>
 
                 <p>
-                    Voici un aperçu de votre activité BTP.
+                    Voici un aperçu de votre activité BATIFLOW.
                 </p>
 
             </div>
@@ -1460,37 +1907,65 @@ input{
 
             <a
                 href="chantiers.html"
-                class="btn btn-primary"
+                class="primary-btn"
             >
-                + Nouveau chantier
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+
+                Nouveau chantier
+
             </a>
 
         </div>
 
 
-        <!-- ==================================================
-             STATISTIQUES
-        =================================================== -->
+        <!-- STATS -->
 
         <div class="stats-grid">
 
 
             <div class="stat-card">
 
-                <div class="stat-icon orange">
-                    🏗️
+                <div class="stat-top">
+
+                    <div class="stat-title">
+                        Chantiers
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M3 21h18"></path>
+                            <path d="M5 21V9l7-5 7 5v12"></path>
+                            <path d="M9 21v-6h6v6"></path>
+                        </svg>
+
+                    </div>
+
                 </div>
 
-                <div class="stat-info">
+                <div
+                    class="stat-number"
+                    id="statChantiers"
+                >
+                    0
+                </div>
 
-                    <span>
-                        Chantiers actifs
-                    </span>
-
-                    <strong id="statChantiers">
-                        0
-                    </strong>
-
+                <div class="stat-bottom">
+                    Projets enregistrés
                 </div>
 
             </div>
@@ -1498,20 +1973,39 @@ input{
 
             <div class="stat-card">
 
-                <div class="stat-icon green">
-                    🧾
-                </div>
+                <div class="stat-top">
 
-                <div class="stat-info">
-
-                    <span>
+                    <div class="stat-title">
                         Devis
-                    </span>
+                    </div>
 
-                    <strong id="statDevis">
-                        0
-                    </strong>
+                    <div class="stat-icon">
 
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M6 3h12v18H6z"></path>
+                            <path d="M9 7h6"></path>
+                            <path d="M9 11h6"></path>
+                            <path d="M9 15h4"></path>
+                        </svg>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="statDevis"
+                >
+                    0
+                </div>
+
+                <div class="stat-bottom">
+                    Devis enregistrés
                 </div>
 
             </div>
@@ -1519,20 +2013,38 @@ input{
 
             <div class="stat-card">
 
-                <div class="stat-icon blue">
-                    👥
-                </div>
+                <div class="stat-top">
 
-                <div class="stat-info">
-
-                    <span>
+                    <div class="stat-title">
                         Clients
-                    </span>
+                    </div>
 
-                    <strong id="statClients">
-                        0
-                    </strong>
+                    <div class="stat-icon">
 
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                        </svg>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="statClients"
+                >
+                    0
+                </div>
+
+                <div class="stat-bottom">
+                    Clients enregistrés
                 </div>
 
             </div>
@@ -1540,20 +2052,39 @@ input{
 
             <div class="stat-card">
 
-                <div class="stat-icon purple">
-                    📐
+                <div class="stat-top">
+
+                    <div class="stat-title">
+                        DQE
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M4 4h16v16H4z"></path>
+                            <path d="M8 8h8"></path>
+                            <path d="M8 12h8"></path>
+                            <path d="M8 16h5"></path>
+                        </svg>
+
+                    </div>
+
                 </div>
 
-                <div class="stat-info">
+                <div
+                    class="stat-number"
+                    id="statDQE"
+                >
+                    0
+                </div>
 
-                    <span>
-                        DQE
-                    </span>
-
-                    <strong id="statDQE">
-                        0
-                    </strong>
-
+                <div class="stat-bottom">
+                    DQE enregistrés
                 </div>
 
             </div>
@@ -1561,48 +2092,37 @@ input{
         </div>
 
 
-        <!-- ==================================================
-             CHANTIERS + ACTIONS
-        =================================================== -->
+        <!-- PREMIERE LIGNE -->
 
         <div class="dashboard-grid">
 
 
             <!-- CHANTIERS -->
 
-            <div class="dashboard-card">
+            <div class="card">
 
                 <div class="card-header">
 
-                    <div>
+                    <h2 class="card-title">
+                        Chantiers récents
+                    </h2>
 
-                        <h2>
-                            Chantiers récents
-                        </h2>
-
-                        <p>
-                            Vos derniers projets
-                        </p>
-
-                    </div>
-
-
-                    <a href="chantiers.html">
-                        Voir tout →
+                    <a
+                        href="chantiers.html"
+                        class="card-link"
+                    >
+                        Voir tous
                     </a>
 
                 </div>
 
-
                 <div
+                    class="card-body"
                     id="recentChantiers"
-                    class="recent-chantiers"
                 >
-
-                    <div class="empty-state">
+                    <div class="empty">
                         Aucun chantier enregistré.
                     </div>
-
                 </div>
 
             </div>
@@ -1610,312 +2130,249 @@ input{
 
             <!-- ACTIONS -->
 
-            <div class="dashboard-card">
+            <div class="card">
 
                 <div class="card-header">
 
-                    <div>
+                    <h2 class="card-title">
+                        Actions rapides
+                    </h2>
 
-                        <h2>
-                            Actions rapides
-                        </h2>
+                </div>
 
-                        <p>
-                            Accès rapide aux outils
-                        </p>
+                <div class="card-body">
+
+                    <div class="quick-actions">
+
+
+                        <a
+                            href="chantiers.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path d="M3 21h18"></path>
+                                    <path d="M5 21V9l7-5 7 5v12"></path>
+                                    <path d="M9 21v-6h6v6"></path>
+                                </svg>
+
+                            </div>
+
+                            <div class="quick-title">
+                                Nouveau chantier
+                            </div>
+
+                        </a>
+
+
+                        <a
+                            href="dqe.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path d="M4 4h16v16H4z"></path>
+                                    <path d="M8 8h8"></path>
+                                    <path d="M8 12h8"></path>
+                                    <path d="M8 16h5"></path>
+                                </svg>
+
+                            </div>
+
+                            <div class="quick-title">
+                                Nouveau DQE
+                            </div>
+
+                        </a>
+
+
+                        <a
+                            href="devis.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path d="M6 3h12v18H6z"></path>
+                                    <path d="M9 7h6"></path>
+                                    <path d="M9 11h6"></path>
+                                </svg>
+
+                            </div>
+
+                            <div class="quick-title">
+                                Nouveau devis
+                            </div>
+
+                        </a>
+
+
+                        <a
+                            href="clients.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M2 21a7 7 0 0 1 14 0"></path>
+                                    <path d="M19 8v6"></path>
+                                    <path d="M16 11h6"></path>
+                                </svg>
+
+                            </div>
+
+                            <div class="quick-title">
+                                Nouveau client
+                            </div>
+
+                        </a>
+
 
                     </div>
 
                 </div>
 
-
-                <div class="quick-actions">
-
-
-                    <a
-                        href="chantiers.html"
-                        class="quick-action"
-                    >
-
-                        <span class="quick-action-icon">
-                            🏗️
-                        </span>
-
-                        <span>
-                            Nouveau chantier
-                        </span>
-
-                    </a>
-
-
-                    <a
-                        href="dqe.html"
-                        class="quick-action"
-                    >
-
-                        <span class="quick-action-icon">
-                            📐
-                        </span>
-
-                        <span>
-                            Nouveau DQE
-                        </span>
-
-                    </a>
-
-
-                    <a
-                        href="devis.html"
-                        class="quick-action"
-                    >
-
-                        <span class="quick-action-icon">
-                            🧾
-                        </span>
-
-                        <span>
-                            Nouveau devis
-                        </span>
-
-                    </a>
-
-
-                    <a
-                        href="clients.html"
-                        class="quick-action"
-                    >
-
-                        <span class="quick-action-icon">
-                            👤
-                        </span>
-
-                        <span>
-                            Nouveau client
-                        </span>
-
-                    </a>
-
-
-                    <a
-                        href="documents.html"
-                        class="quick-action"
-                    >
-
-                        <span class="quick-action-icon">
-                            📁
-                        </span>
-
-                        <span>
-                            Documents
-                        </span>
-
-                    </a>
-
-
-                    <a
-                        href="finances.html"
-                        class="quick-action"
-                    >
-
-                        <span class="quick-action-icon">
-                            💰
-                        </span>
-
-                        <span>
-                            Finances
-                        </span>
-
-                    </a>
-
-                </div>
-
             </div>
 
         </div>
 
 
-        <!-- ==================================================
-             DQE
-        =================================================== -->
+        <!-- DQE + FINANCES -->
 
-        <div class="dashboard-card dashboard-section-spacing">
+        <div class="dashboard-grid">
 
 
-            <div class="card-header">
+            <!-- DQE -->
 
-                <div>
+            <div class="card">
 
-                    <h2>
+                <div class="card-header">
+
+                    <h2 class="card-title">
                         DQE récents
                     </h2>
 
-                    <p>
-                        Derniers devis quantitatifs estimatifs
-                    </p>
+                    <a
+                        href="dqe.html"
+                        class="card-link"
+                    >
+                        Voir tous
+                    </a>
 
                 </div>
 
+                <div
+                    class="card-body"
+                    id="recentDQEs"
+                >
 
-                <a href="dqe.html">
-                    Voir tout →
-                </a>
+                    <div class="empty">
+                        Aucun DQE enregistré.
+                    </div>
 
-            </div>
-
-
-            <div
-                id="recentDQEs"
-                class="recent-chantiers"
-            >
-
-                <div class="empty-state">
-                    Aucun DQE enregistré.
                 </div>
 
             </div>
-
-        </div>
-
-
-        <!-- ==================================================
-             FINANCES + INDICATEURS
-        =================================================== -->
-
-        <div class="dashboard-advanced-grid">
 
 
             <!-- FINANCES -->
 
-            <div class="dashboard-advanced-card">
+            <div class="card">
 
-                <h3>
-                    💰 Situation financière
-                </h3>
+                <div class="card-header">
 
+                    <h2 class="card-title">
+                        Situation financière
+                    </h2>
 
-                <div class="finance-mini-grid">
-
-
-                    <div class="finance-mini">
-
-                        <div class="finance-mini-label">
-                            Recettes
-                        </div>
-
-                        <div
-                            id="financeRecettes"
-                            class="finance-mini-value positive"
-                        >
-                            0 FCFA
-                        </div>
-
-                    </div>
-
-
-                    <div class="finance-mini">
-
-                        <div class="finance-mini-label">
-                            Dépenses
-                        </div>
-
-                        <div
-                            id="financeDepenses"
-                            class="finance-mini-value negative"
-                        >
-                            0 FCFA
-                        </div>
-
-                    </div>
-
-
-                    <div class="finance-mini">
-
-                        <div class="finance-mini-label">
-                            Solde
-                        </div>
-
-                        <div
-                            id="financeSolde"
-                            class="finance-mini-value"
-                        >
-                            0 FCFA
-                        </div>
-
-                    </div>
+                    <a
+                        href="finances.html"
+                        class="card-link"
+                    >
+                        Détails
+                    </a>
 
                 </div>
 
-            </div>
+                <div class="card-body">
+
+                    <div class="finance-grid">
 
 
-            <!-- INDICATEURS -->
+                        <div class="finance-box">
 
-            <div class="dashboard-advanced-card">
+                            <div class="finance-label">
+                                Recettes
+                            </div>
 
-                <h3>
-                    📊 Indicateurs BATIFLOW
-                </h3>
+                            <div
+                                class="finance-value recette"
+                                id="financeRecettes"
+                            >
+                                0 FCFA
+                            </div>
 
-
-                <div class="indicator-grid">
-
-
-                    <div class="indicator-item">
-
-                        <div class="indicator-icon">
-                            👷
                         </div>
 
-                        <div
-                            id="indicatorEquipe"
-                            class="indicator-value"
-                        >
-                            0
+
+                        <div class="finance-box">
+
+                            <div class="finance-label">
+                                Dépenses
+                            </div>
+
+                            <div
+                                class="finance-value depense"
+                                id="financeDepenses"
+                            >
+                                0 FCFA
+                            </div>
+
                         </div>
 
-                        <div class="indicator-label">
-                            Équipe active
+
+                        <div class="finance-box">
+
+                            <div class="finance-label">
+                                Solde
+                            </div>
+
+                            <div
+                                class="finance-value solde"
+                                id="financeSolde"
+                            >
+                                0 FCFA
+                            </div>
+
                         </div>
 
-                    </div>
-
-
-                    <div class="indicator-item">
-
-                        <div class="indicator-icon">
-                            📁
-                        </div>
-
-                        <div
-                            id="indicatorDocuments"
-                            class="indicator-value"
-                        >
-                            0
-                        </div>
-
-                        <div class="indicator-label">
-                            Documents
-                        </div>
-
-                    </div>
-
-
-                    <div class="indicator-item">
-
-                        <div class="indicator-icon">
-                            📦
-                        </div>
-
-                        <div
-                            id="indicatorStocks"
-                            class="indicator-value"
-                        >
-                            0
-                        </div>
-
-                        <div class="indicator-label">
-                            Articles stock
-                        </div>
 
                     </div>
 
@@ -1926,149 +2383,233 @@ input{
         </div>
 
 
-        <!-- ==================================================
-             ALERTES
-        =================================================== -->
+        <!-- INDICATEURS -->
 
-        <div class="dashboard-alerts">
-
-
-            <h3>
-                ⚠️ Alertes & vigilance
-            </h3>
-
-
-            <div
-                id="dashboardAlerts"
-                class="alert-list"
-            >
-
-                <div class="dashboard-alert-empty">
-                    Aucun stock sous le seuil d'alerte.
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ==================================================
-             ACTIVITÉ
-        =================================================== -->
-
-        <div class="dashboard-card dashboard-section-spacing">
-
+        <div class="card" style="margin-bottom:20px;">
 
             <div class="card-header">
 
-                <div>
+                <h2 class="card-title">
+                    Indicateurs BATIFLOW
+                </h2>
 
-                    <h2>
+            </div>
+
+            <div class="card-body">
+
+                <div class="indicators">
+
+
+                    <div class="indicator">
+
+                        <div class="indicator-top">
+
+                            <div class="indicator-title">
+                                Équipe & Personnel
+                            </div>
+
+                            <div class="quick-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M2 21a7 7 0 0 1 14 0"></path>
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="indicator-number"
+                            id="indicatorEquipe"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+
+                    <div class="indicator">
+
+                        <div class="indicator-top">
+
+                            <div class="indicator-title">
+                                Documents
+                            </div>
+
+                            <div class="quick-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="indicator-number"
+                            id="indicatorDocuments"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+
+                    <div class="indicator">
+
+                        <div class="indicator-top">
+
+                            <div class="indicator-title">
+                                Matériaux / Stocks
+                            </div>
+
+                            <div class="quick-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path d="M21 8l-9-5-9 5 9 5 9-5z"></path>
+                                    <path d="M3 8v8l9 5 9-5V8"></path>
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="indicator-number"
+                            id="indicatorStocks"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ALERTES + ACTIVITE -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- ALERTES -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h2 class="card-title">
+                        Alertes
+                    </h2>
+
+                </div>
+
+                <div
+                    class="card-body"
+                    id="dashboardAlerts"
+                >
+
+                    <div class="empty">
+                        Aucune alerte.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIVITE -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h2 class="card-title">
                         Activité récente
                     </h2>
 
-                    <p>
-                        Dernières opérations enregistrées
-                    </p>
+                </div>
+
+                <div
+                    class="card-body"
+                    id="activityContainer"
+                >
+
+                    <div class="empty">
+                        Aucune activité récente.
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <div
-                id="activityContainer"
-                class="activity-list"
-            >
+        </div>
 
-                <div class="empty-state">
-                    Aucune activité récente.
-                </div>
 
-            </div>
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            BATIFLOW V1.0 — Construction Management
 
         </div>
 
 
     </section>
 
-
-    <!-- FOOTER -->
-
-    <footer class="dashboard-footer">
-
-        <span>
-            BATIFLOW V1.0
-        </span>
-
-        <span>
-            © 2026 — Construction Management
-        </span>
-
-    </footer>
-
-
 </main>
 
 
-<script src="js/dashboard.js"></script>
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
 
 
 <script>
 
 /* ==========================================================
-   BATIFLOW — JAVASCRIPT ÉTAPE 17
-========================================================== */
-
-"use strict";
-
-
-const STORAGE_KEY =
-    "batiflowChantiers";
-
-const DQE_STORAGE_KEY =
-    "batiflowDQEs";
-
-const DEVIS_STORAGE_KEY =
-    "batiflowDevis";
-
-const CLIENTS_STORAGE_KEY =
-    "batiflowClients";
-
-const FINANCES_STORAGE_KEY =
-    "batiflowFinances";
-
-const EQUIPE_STORAGE_KEY =
-    "batiflowEquipe";
-
-const DOCUMENTS_STORAGE_KEY =
-    "batiflowDocuments";
-
-const STOCKS_STORAGE_KEY =
-    "batiflowStocks";
-
-
-/* ==========================================================
-   LOCAL STORAGE
+   UTILITAIRES
 ========================================================== */
 
 function lireStorage(cle){
 
     try{
 
-        const valeur =
-            localStorage.getItem(cle);
+        const data = localStorage.getItem(cle);
 
-        if(!valeur){
+        if(!data){
             return [];
         }
 
-        const data =
-            JSON.parse(valeur);
+        const parsed = JSON.parse(data);
 
-        return Array.isArray(data)
-            ? data
-            : [];
+        return Array.isArray(parsed) ? parsed : [];
 
     }catch(error){
 
@@ -2085,53 +2626,25 @@ function lireStorage(cle){
 }
 
 
-function obtenirChantiers(){
-    return lireStorage(STORAGE_KEY);
+function formatFCFA(valeur){
+
+    const nombre =
+        Number(valeur) || 0;
+
+    return nombre.toLocaleString(
+        "fr-FR"
+    ) + " FCFA";
+
 }
 
 
-function obtenirDQEs(){
-    return lireStorage(DQE_STORAGE_KEY);
-}
+function escapeHTML(texte){
 
+    if(texte === null || texte === undefined){
+        return "";
+    }
 
-function obtenirDevis(){
-    return lireStorage(DEVIS_STORAGE_KEY);
-}
-
-
-function obtenirClients(){
-    return lireStorage(CLIENTS_STORAGE_KEY);
-}
-
-
-function obtenirFinances(){
-    return lireStorage(FINANCES_STORAGE_KEY);
-}
-
-
-function obtenirEquipe(){
-    return lireStorage(EQUIPE_STORAGE_KEY);
-}
-
-
-function obtenirDocuments(){
-    return lireStorage(DOCUMENTS_STORAGE_KEY);
-}
-
-
-function obtenirStocks(){
-    return lireStorage(STOCKS_STORAGE_KEY);
-}
-
-
-/* ==========================================================
-   UTILITAIRES
-========================================================== */
-
-function echapper(value){
-
-    return String(value ?? "")
+    return String(texte)
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -2141,300 +2654,20 @@ function echapper(value){
 }
 
 
-function formaterMontant(value){
+function afficherToast(message){
 
-    const nombre =
-        Number(value) || 0;
+    const toast =
+        document.getElementById("toast");
 
-    return (
-        nombre.toLocaleString("fr-FR")
-        + " FCFA"
-    );
+    toast.textContent = message;
 
-}
+    toast.classList.add("show");
 
+    setTimeout(function(){
 
-function formaterDate(value){
+        toast.classList.remove("show");
 
-    if(!value){
-        return "";
-    }
-
-    const date =
-        new Date(value);
-
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
-        return "";
-    }
-
-    return date.toLocaleDateString(
-        "fr-FR"
-    );
-
-}
-
-
-function dateElement(element){
-
-    if(!element){
-        return 0;
-    }
-
-    const value =
-        element.updatedAt ||
-        element.dateModification ||
-        element.date ||
-        element.createdAt ||
-        element.updated_at ||
-        element.created_at;
-
-
-    if(!value){
-        return 0;
-    }
-
-
-    const time =
-        new Date(value).getTime();
-
-
-    return Number.isNaN(time)
-        ? 0
-        : time;
-
-}
-
-
-function nomChantier(item){
-
-    return (
-        item?.nom ||
-        item?.nomChantier ||
-        item?.titre ||
-        item?.projet ||
-        item?.reference ||
-        "Chantier sans nom"
-    );
-
-}
-
-
-function clientChantier(item){
-
-    return (
-        item?.client ||
-        item?.nomClient ||
-        item?.clientNom ||
-        "Client non renseigné"
-    );
-
-}
-
-
-function progressionChantier(item){
-
-    let value =
-        item?.progression ??
-        item?.avancement ??
-        item?.progress ??
-        item?.pourcentage ??
-        0;
-
-
-    value =
-        parseFloat(value);
-
-
-    if(
-        Number.isNaN(value)
-    ){
-        value = 0;
-    }
-
-
-    return Math.max(
-        0,
-        Math.min(100,value)
-    );
-
-}
-
-
-/* ==========================================================
-   UTILISATEUR
-========================================================== */
-
-function chargerUtilisateur(){
-
-    let nom =
-        localStorage.getItem("userName") ||
-        localStorage.getItem("batiflowUserName") ||
-        "Utilisateur";
-
-
-    nom =
-        String(nom).trim() ||
-        "Utilisateur";
-
-
-    const userName =
-        document.getElementById(
-            "userName"
-        );
-
-
-    const welcomeName =
-        document.getElementById(
-            "welcomeName"
-        );
-
-
-    const avatar =
-        document.getElementById(
-            "userAvatar"
-        );
-
-
-    if(userName){
-        userName.textContent =
-            nom;
-    }
-
-
-    if(welcomeName){
-        welcomeName.textContent =
-            nom;
-    }
-
-
-    if(avatar){
-        avatar.textContent =
-            nom.charAt(0).toUpperCase();
-    }
-
-}
-
-
-/* ==========================================================
-   STATISTIQUES
-========================================================== */
-
-function afficherStatistiques(){
-
-    const chantiers =
-        obtenirChantiers();
-
-    const devis =
-        obtenirDevis();
-
-    const clients =
-        obtenirClients();
-
-    const dqes =
-        obtenirDQEs();
-
-
-    const actifs =
-        chantiers.filter(
-            chantier => {
-
-                const statut =
-                    String(
-                        chantier.statut ||
-                        chantier.status ||
-                        ""
-                    )
-                    .toLowerCase()
-                    .trim();
-
-
-                return ![
-                    "terminé",
-                    "termine",
-                    "terminée",
-                    "terminee",
-                    "clos",
-                    "clôturé",
-                    "cloture",
-                    "annulé",
-                    "annule"
-                ].includes(statut);
-
-            }
-        );
-
-
-    let nombreClients =
-        clients.length;
-
-
-    if(
-        nombreClients === 0
-    ){
-
-        const uniques =
-            new Set();
-
-
-        chantiers.forEach(
-            chantier => {
-
-                const client =
-                    clientChantier(
-                        chantier
-                    );
-
-
-                if(
-                    client &&
-                    client !==
-                        "Client non renseigné"
-                ){
-
-                    uniques.add(
-                        client
-                            .trim()
-                            .toLowerCase()
-                    );
-
-                }
-
-            }
-        );
-
-
-        nombreClients =
-            uniques.size;
-
-    }
-
-
-    document.getElementById(
-        "statChantiers"
-    ).textContent =
-        actifs.length;
-
-
-    document.getElementById(
-        "statDevis"
-    ).textContent =
-        devis.length;
-
-
-    document.getElementById(
-        "statClients"
-    ).textContent =
-        nombreClients;
-
-
-    document.getElementById(
-        "statDQE"
-    ).textContent =
-        dqes.length;
+    },2500);
 
 }
 
@@ -2443,173 +2676,157 @@ function afficherStatistiques(){
    CHANTIERS
 ========================================================== */
 
-function afficherChantiers(){
+function chargerChantiers(){
+
+    const chantiers =
+        lireStorage("batiflowChantiers");
 
     const container =
         document.getElementById(
             "recentChantiers"
         );
 
+    document.getElementById(
+        "statChantiers"
+    ).textContent = chantiers.length;
 
-    const chantiers =
-        obtenirChantiers();
 
-
-    if(
-        chantiers.length === 0
-    ){
+    if(!chantiers.length){
 
         container.innerHTML = `
-            <div class="empty-state">
+            <div class="empty">
                 Aucun chantier enregistré.
             </div>
         `;
 
         return;
-
     }
 
 
-    const liste =
-        [...chantiers]
-        .sort(
-            (a,b) =>
-                dateElement(b) -
-                dateElement(a)
-        )
-        .slice(0,5);
+    const derniers =
+        chantiers.slice(-5).reverse();
 
 
     container.innerHTML =
-        liste.map(
-            chantier => {
+        derniers.map(function(chantier){
 
-                const nom =
-                    nomChantier(
-                        chantier
-                    );
+            const nom =
+                chantier.nom ||
+                chantier.name ||
+                chantier.titre ||
+                "Chantier sans nom";
 
+            const localisation =
+                chantier.localisation ||
+                chantier.adresse ||
+                chantier.ville ||
+                "Localisation non renseignée";
 
-                const client =
-                    clientChantier(
-                        chantier
-                    );
-
-
-                const progression =
-                    progressionChantier(
-                        chantier
-                    );
-
-
-                const statut =
-                    chantier.statut ||
-                    chantier.status ||
-                    "Actif";
+            const statut =
+                chantier.statut ||
+                chantier.status ||
+                "En cours";
 
 
-                const statutNormalise =
-                    String(statut)
-                        .toLowerCase();
+            let classe =
+                "status-en-cours";
 
 
-                let classe =
-                    "active";
+            const statutLower =
+                String(statut).toLowerCase();
 
 
-                if(
-                    statutNormalise
-                        .includes("termin")
-                ){
-                    classe =
-                        "success";
-                }
+            if(
+                statutLower.includes("termin") ||
+                statutLower.includes("fini")
+            ){
+
+                classe =
+                    "status-termine";
+
+            }else if(
+                statutLower.includes("attente") ||
+                statutLower.includes("pause")
+            ){
+
+                classe =
+                    "status-attente";
+
+            }
 
 
-                if(
-                    statutNormalise
-                        .includes("attente") ||
-                    statutNormalise
-                        .includes("pause")
-                ){
-                    classe =
-                        "warning";
-                }
+            return `
 
+                <div class="chantier-item">
 
-                if(
-                    statutNormalise
-                        .includes("annul")
-                ){
-                    classe =
-                        "danger";
-                }
+                    <div class="chantier-icon">
 
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M3 21h18"></path>
+                            <path d="M5 21V9l7-5 7 5v12"></path>
+                            <path d="M9 21v-6h6v6"></path>
+                        </svg>
 
-                return `
+                    </div>
 
-                <div
-                    class="chantier-item dashboard-chantier"
-                    data-search="${echapper(
-                        nom + " " + client
-                    )}"
-                >
+                    <div class="chantier-info">
 
-                    <div class="chantier-main">
-
-                        <div class="chantier-icon">
-                            🏗️
+                        <div class="chantier-name">
+                            ${escapeHTML(nom)}
                         </div>
 
-                        <div class="chantier-info">
-
-                            <strong>
-                                ${echapper(nom)}
-                            </strong>
-
-                            <span>
-                                ${echapper(client)}
-                            </span>
-
+                        <div class="chantier-location">
+                            ${escapeHTML(localisation)}
                         </div>
 
                     </div>
 
-
-                    <div class="chantier-progress">
-
-                        <div class="progress-info">
-
-                            <span>
-                                ${progression}%
-                            </span>
-
-                            <span
-                                class="status-badge ${classe}"
-                            >
-                                ${echapper(statut)}
-                            </span>
-
-                        </div>
-
-
-                        <div class="progress-bar">
-
-                            <div
-                                class="progress-fill"
-                                style="width:${progression}%"
-                            ></div>
-
-                        </div>
-
+                    <div class="status ${classe}">
+                        ${escapeHTML(statut)}
                     </div>
 
                 </div>
 
-                `;
+            `;
 
-            }
-        ).join("");
+        }).join("");
+
+}
+
+
+/* ==========================================================
+   CLIENTS
+========================================================== */
+
+function chargerClients(){
+
+    const clients =
+        lireStorage("batiflowClients");
+
+    document.getElementById(
+        "statClients"
+    ).textContent = clients.length;
+
+}
+
+
+/* ==========================================================
+   DEVIS
+========================================================== */
+
+function chargerDevis(){
+
+    const devis =
+        lireStorage("batiflowDevis");
+
+    document.getElementById(
+        "statDevis"
+    ).textContent = devis.length;
 
 }
 
@@ -2618,7 +2835,15 @@ function afficherChantiers(){
    DQE
 ========================================================== */
 
-function afficherDQEs(){
+function chargerDQE(){
+
+    const dqes =
+        lireStorage("batiflowDQEs");
+
+    document.getElementById(
+        "statDQE"
+    ).textContent = dqes.length;
+
 
     const container =
         document.getElementById(
@@ -2626,150 +2851,81 @@ function afficherDQEs(){
         );
 
 
-    const dqes =
-        obtenirDQEs();
-
-
-    if(
-        dqes.length === 0
-    ){
+    if(!dqes.length){
 
         container.innerHTML = `
-            <div class="empty-state">
+            <div class="empty">
                 Aucun DQE enregistré.
             </div>
         `;
 
         return;
-
     }
 
 
-    const liste =
-        [...dqes]
-        .sort(
-            (a,b) =>
-                dateElement(b) -
-                dateElement(a)
-        )
-        .slice(0,5);
+    const derniers =
+        dqes.slice(-5).reverse();
 
 
     container.innerHTML =
-        liste.map(
-            dqe => {
+        derniers.map(function(dqe){
 
-                const reference =
-                    dqe.reference ||
-                    dqe.numero ||
-                    "DQE";
+            const reference =
+                dqe.reference ||
+                "DQE";
 
+            const nom =
+                dqe.nom ||
+                dqe.objet ||
+                "DQE sans nom";
 
-                const nom =
-                    dqe.nom ||
-                    dqe.objet ||
-                    dqe.chantier ||
-                    "DQE";
-
-
-                const client =
-                    dqe.clientNom ||
-                    dqe.client ||
-                    "Client non renseigné";
+            const total =
+                dqe.totalTTC ||
+                dqe.totalHT ||
+                0;
 
 
-                const total =
-                    dqe.totalTTC ??
-                    dqe.totalHT ??
-                    0;
+            return `
 
+                <div class="dqe-item">
 
-                const statut =
-                    dqe.statut ||
-                    "Brouillon";
+                    <div class="dqe-icon">
 
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M4 4h16v16H4z"></path>
+                            <path d="M8 8h8"></path>
+                            <path d="M8 12h8"></path>
+                            <path d="M8 16h5"></path>
+                        </svg>
 
-                return `
+                    </div>
 
-                <div class="chantier-item">
+                    <div class="dqe-info">
 
-                    <div class="chantier-main">
-
-                        <div class="chantier-icon">
-                            📐
+                        <div class="dqe-ref">
+                            ${escapeHTML(reference)}
                         </div>
 
-                        <div class="chantier-info">
-
-                            <strong>
-                                ${echapper(reference)}
-                            </strong>
-
-                            <span>
-                                ${echapper(nom)}
-                            </span>
-
-                            <small>
-                                ${echapper(client)}
-                            </small>
-
+                        <div class="dqe-name">
+                            ${escapeHTML(nom)}
                         </div>
 
                     </div>
 
-
-                    <div class="chantier-progress">
-
-                        <div class="progress-info">
-
-                            <span>
-                                ${formaterMontant(total)}
-                            </span>
-
-                            <span class="status-badge active">
-                                ${echapper(statut)}
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            style="
-                                display:flex;
-                                gap:6px;
-                                justify-content:flex-end;
-                                margin-top:8px;
-                            "
-                        >
-
-                            <a
-                                href="dqe.html?voir=${encodeURIComponent(
-                                    dqe.id
-                                )}"
-                                class="btn btn-sm"
-                            >
-                                Voir
-                            </a>
-
-                            <a
-                                href="dqe.html?modifier=${encodeURIComponent(
-                                    dqe.id
-                                )}"
-                                class="btn btn-sm"
-                            >
-                                Modifier
-                            </a>
-
-                        </div>
-
+                    <div class="dqe-total">
+                        ${formatFCFA(total)}
                     </div>
 
                 </div>
 
-                `;
+            `;
 
-            }
-        ).join("");
+        }).join("");
 
 }
 
@@ -2778,108 +2934,75 @@ function afficherDQEs(){
    FINANCES
 ========================================================== */
 
-function afficherFinances(){
+function chargerFinances(){
 
     const finances =
-        obtenirFinances();
+        lireStorage(
+            "batiflowFinances"
+        );
 
 
     let recettes = 0;
-
     let depenses = 0;
 
 
-    finances.forEach(
-        operation => {
+    finances.forEach(function(item){
 
-            const montant =
-                Number(
-                    operation.montant ??
-                    operation.amount ??
-                    0
-                ) || 0;
-
-
-            const type =
-                String(
-                    operation.type ||
-                    ""
-                )
-                .toLowerCase()
-                .trim();
+        const montant =
+            Number(
+                item.montant ||
+                item.amount ||
+                item.valeur ||
+                0
+            );
 
 
-            if(
-                type === "recette" ||
-                type === "entrée" ||
-                type === "entree" ||
-                type === "revenu" ||
-                type === "encaissement"
-            ){
+        const type =
+            String(
+                item.type ||
+                item.categorie ||
+                ""
+            ).toLowerCase();
 
-                recettes += montant;
 
-            }else{
+        if(
+            type.includes("recette") ||
+            type.includes("revenu") ||
+            type.includes("entrée") ||
+            type.includes("entree")
+        ){
 
-                depenses += montant;
+            recettes += montant;
 
-            }
+        }else{
+
+            depenses += montant;
 
         }
-    );
+
+    });
 
 
     const solde =
         recettes - depenses;
 
 
-    const recettesElement =
-        document.getElementById(
-            "financeRecettes"
-        );
+    document.getElementById(
+        "financeRecettes"
+    ).textContent =
+        formatFCFA(recettes);
 
 
-    const depensesElement =
-        document.getElementById(
-            "financeDepenses"
-        );
+    document.getElementById(
+        "financeDepenses"
+    ).textContent =
+        formatFCFA(depenses);
 
 
-    const soldeElement =
-        document.getElementById(
-            "financeSolde"
-        );
-
-
-    recettesElement.textContent =
-        formaterMontant(
-            recettes
-        );
-
-
-    depensesElement.textContent =
-        formaterMontant(
-            depenses
-        );
-
-
-    soldeElement.textContent =
-        formaterMontant(
-            solde
-        );
-
-
-    soldeElement.classList.remove(
-        "positive",
-        "negative"
-    );
-
-
-    soldeElement.classList.add(
-        solde >= 0
-            ? "positive"
-            : "negative"
-    );
+    document.getElementById(
+        "financeSolde"
+    ).textContent =
+        formatFCFA(solde);
 
 }
 
@@ -2888,45 +3011,28 @@ function afficherFinances(){
    INDICATEURS
 ========================================================== */
 
-function afficherIndicateurs(){
+function chargerIndicateurs(){
 
     const equipe =
-        obtenirEquipe();
+        lireStorage(
+            "batiflowEquipe"
+        );
 
     const documents =
-        obtenirDocuments();
+        lireStorage(
+            "batiflowDocuments"
+        );
 
     const stocks =
-        obtenirStocks();
-
-
-    const actifs =
-        equipe.filter(
-            personne => {
-
-                const statut =
-                    String(
-                        personne.statut ||
-                        ""
-                    )
-                    .toLowerCase()
-                    .trim();
-
-
-                return (
-                    !statut ||
-                    statut === "actif" ||
-                    statut === "active"
-                );
-
-            }
-        ).length;
+        lireStorage(
+            "batiflowStocks"
+        );
 
 
     document.getElementById(
         "indicatorEquipe"
     ).textContent =
-        actifs;
+        equipe.length;
 
 
     document.getElementById(
@@ -2944,10 +3050,10 @@ function afficherIndicateurs(){
 
 
 /* ==========================================================
-   ALERTES STOCK
+   ALERTES
 ========================================================== */
 
-function afficherAlertes(){
+function chargerAlertes(){
 
     const container =
         document.getElementById(
@@ -2955,70 +3061,103 @@ function afficherAlertes(){
         );
 
 
+    const chantiers =
+        lireStorage(
+            "batiflowChantiers"
+        );
+
     const stocks =
-        obtenirStocks();
+        lireStorage(
+            "batiflowStocks"
+        );
 
 
     const alertes = [];
 
 
-    stocks.forEach(
-        stock => {
+    /* chantier en retard */
 
-            const quantite =
-                Number(
-                    stock.quantite ??
-                    stock.stock ??
-                    stock.stockActuel ??
-                    stock.quantiteStock ??
-                    0
-                ) || 0;
+    chantiers.forEach(function(chantier){
 
-
-            const seuil =
-                Number(
-                    stock.stockMin ??
-                    stock.seuil ??
-                    stock.seuilAlerte ??
-                    stock.minimum ??
-                    0
-                ) || 0;
+        const progression =
+            Number(
+                chantier.progression ||
+                chantier.avancement ||
+                chantier.pourcentage ||
+                0
+            );
 
 
-            const nom =
-                stock.nom ||
-                stock.designation ||
-                stock.article ||
-                stock.materiau ||
-                stock.matériau ||
-                "Matériau";
+        const retard =
+            chantier.retard === true ||
+            chantier.enRetard === true;
 
 
-            if(
-                seuil > 0 &&
-                quantite <= seuil
-            ){
+        if(retard){
 
-                alertes.push({
-                    nom,
-                    quantite,
-                    seuil
-                });
-
-            }
+            alertes.push(
+                "Le chantier " +
+                (
+                    chantier.nom ||
+                    "sans nom"
+                ) +
+                " est signalé en retard."
+            );
 
         }
-    );
+
+    });
 
 
-    if(
-        alertes.length === 0
-    ){
+    /* stock faible */
+
+    stocks.forEach(function(stock){
+
+        const quantite =
+            Number(
+                stock.quantite ||
+                stock.stock ||
+                0
+            );
+
+
+        const minimum =
+            Number(
+                stock.stockMinimum ||
+                stock.minimum ||
+                0
+            );
+
+
+        if(
+            minimum > 0 &&
+            quantite <= minimum
+        ){
+
+            alertes.push(
+                "Stock faible : " +
+                (
+                    stock.nom ||
+                    stock.designation ||
+                    "matériau"
+                )
+            );
+
+        }
+
+    });
+
+
+    if(!alertes.length){
 
         container.innerHTML = `
-            <div class="dashboard-alert-empty">
-                ✅ Aucun stock sous le seuil d'alerte.
+
+            <div class="empty">
+
+                Aucune alerte actuellement.
+
             </div>
+
         `;
 
         return;
@@ -3027,76 +3166,48 @@ function afficherAlertes(){
 
 
     container.innerHTML =
-        alertes
-        .slice(0,8)
-        .map(
-            alerte => {
+        alertes.slice(0,5)
+        .map(function(message){
 
-                const critique =
-                    alerte.quantite <=
-                    alerte.seuil / 2;
+            return `
 
+                <div class="alert">
 
-                return `
+                    <div class="alert-icon">
 
-                <div
-                    class="dashboard-alert ${
-                        critique
-                            ? "danger"
-                            : "warning"
-                    }"
-                >
-
-                    <div class="dashboard-alert-left">
-
-                        <div class="dashboard-alert-icon">
-                            ${critique ? "🚨" : "⚠️"}
-                        </div>
-
-                        <div>
-
-                            <div class="dashboard-alert-title">
-                                ${echapper(
-                                    alerte.nom
-                                )}
-                            </div>
-
-                            <div class="dashboard-alert-text">
-                                Stock :
-                                ${alerte.quantite}
-                                —
-                                Seuil :
-                                ${alerte.seuil}
-                            </div>
-
-                        </div>
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
 
                     </div>
 
+                    <div class="alert-text">
 
-                    <a
-                        href="materiaux.html"
-                        class="btn btn-sm"
-                    >
-                        Voir
-                    </a>
+                        ${escapeHTML(message)}
+
+                    </div>
 
                 </div>
 
-                `;
+            `;
 
-            }
-        )
-        .join("");
+        }).join("");
 
 }
 
 
 /* ==========================================================
-   ACTIVITÉ
+   ACTIVITE
 ========================================================== */
 
-function afficherActivite(){
+function chargerActivite(){
 
     const container =
         document.getElementById(
@@ -3107,208 +3218,87 @@ function afficherActivite(){
     const activites = [];
 
 
-    /* CHANTIERS */
+    const chantiers =
+        lireStorage(
+            "batiflowChantiers"
+        );
 
-    obtenirChantiers()
-    .forEach(
-        item => {
+    const dqes =
+        lireStorage(
+            "batiflowDQEs"
+        );
 
-            activites.push({
+    const devis =
+        lireStorage(
+            "batiflowDevis"
+        );
 
-                icon:"🏗️",
-
-                titre:
-                    "Chantier : " +
-                    nomChantier(item),
-
-                description:
-                    clientChantier(item),
-
-                date:
-                    dateElement(item)
-
-            });
-
-        }
-    );
+    const clients =
+        lireStorage(
+            "batiflowClients"
+        );
 
 
-    /* DQE */
+    if(chantiers.length){
 
-    obtenirDQEs()
-    .forEach(
-        item => {
+        activites.push({
+            texte:
+                chantiers.length +
+                " chantier(s) enregistré(s)",
+            date:
+                "Module Chantiers"
+        });
 
-            activites.push({
-
-                icon:"📐",
-
-                titre:
-                    "DQE : " +
-                    (
-                        item.reference ||
-                        item.numero ||
-                        item.nom ||
-                        "Nouveau DQE"
-                    ),
-
-                description:
-                    item.clientNom ||
-                    item.client ||
-                    item.objet ||
-                    "DQE enregistré",
-
-                date:
-                    dateElement(item)
-
-            });
-
-        }
-    );
+    }
 
 
-    /* DEVIS */
+    if(dqes.length){
 
-    obtenirDevis()
-    .forEach(
-        item => {
+        activites.push({
+            texte:
+                dqes.length +
+                " DQE disponible(s)",
+            date:
+                "Module DQE & Métré"
+        });
 
-            const total =
-                item.totalTTC ??
-                item.totalHT ??
-                item.montant ??
-                0;
-
-
-            activites.push({
-
-                icon:"🧾",
-
-                titre:
-                    "Devis : " +
-                    (
-                        item.reference ||
-                        item.numero ||
-                        "Nouveau devis"
-                    ),
-
-                description:
-                    (
-                        item.client ||
-                        item.clientNom ||
-                        "Client"
-                    ) +
-                    " — " +
-                    formaterMontant(
-                        total
-                    ),
-
-                date:
-                    dateElement(item)
-
-            });
-
-        }
-    );
+    }
 
 
-    /* FINANCES */
+    if(devis.length){
 
-    obtenirFinances()
-    .forEach(
-        item => {
+        activites.push({
+            texte:
+                devis.length +
+                " devis enregistré(s)",
+            date:
+                "Module Devis"
+        });
 
-            const montant =
-                Number(
-                    item.montant ||
-                    0
-                ) || 0;
-
-
-            activites.push({
-
-                icon:
-                    String(
-                        item.type ||
-                        ""
-                    )
-                    .toLowerCase()
-                    .includes("recette")
-                        ? "💰"
-                        : "💸",
-
-                titre:
-                    item.libelle ||
-                    "Opération financière",
-
-                description:
-                    (
-                        item.type ||
-                        "Opération"
-                    ) +
-                    " — " +
-                    formaterMontant(
-                        montant
-                    ),
-
-                date:
-                    dateElement(item)
-
-            });
-
-        }
-    );
+    }
 
 
-    /* DOCUMENTS */
+    if(clients.length){
 
-    obtenirDocuments()
-    .forEach(
-        item => {
+        activites.push({
+            texte:
+                clients.length +
+                " client(s) enregistré(s)",
+            date:
+                "Module Clients"
+        });
 
-            activites.push({
-
-                icon:"📁",
-
-                titre:
-                    "Document : " +
-                    (
-                        item.nom ||
-                        item.name ||
-                        "Document"
-                    ),
-
-                description:
-                    item.categorie ||
-                    "Document ajouté",
-
-                date:
-                    dateElement(item)
-
-            });
-
-        }
-    );
+    }
 
 
-    activites.sort(
-        (a,b) =>
-            b.date - a.date
-    );
-
-
-    const recentes =
-        activites.slice(0,8);
-
-
-    if(
-        recentes.length === 0
-    ){
+    if(!activites.length){
 
         container.innerHTML = `
-            <div class="empty-state">
+
+            <div class="empty">
                 Aucune activité récente.
             </div>
+
         `;
 
         return;
@@ -3317,66 +3307,116 @@ function afficherActivite(){
 
 
     container.innerHTML =
-        recentes.map(
-            item => {
+        activites.slice(0,5)
+        .map(function(item){
 
-                return `
+            return `
 
                 <div class="activity-item">
 
-                    <div class="activity-icon">
-                        ${item.icon}
-                    </div>
+                    <div class="activity-dot"></div>
 
+                    <div class="activity-text">
 
-                    <div class="activity-content">
+                        ${escapeHTML(item.texte)}
 
-                        <strong>
-                            ${echapper(
-                                item.titre
-                            )}
-                        </strong>
+                        <span class="activity-date">
+                            ${escapeHTML(item.date)}
+                        </span>
 
-                        <div class="activity-item-extra">
-                            ${echapper(
-                                item.description
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="activity-date">
-                        ${formaterDate(
-                            item.date
-                        )}
                     </div>
 
                 </div>
 
-                `;
+            `;
 
-            }
-        ).join("");
+        }).join("");
 
 }
 
 
 /* ==========================================================
-   RECHERCHE
+   UTILISATEUR
 ========================================================== */
 
-function initialiserRecherche(){
+function chargerUtilisateur(){
+
+    try{
+
+        const utilisateur =
+            JSON.parse(
+                localStorage.getItem(
+                    "batiflowUtilisateur"
+                ) || "null"
+            );
+
+
+        if(
+            utilisateur &&
+            (
+                utilisateur.nom ||
+                utilisateur.name
+            )
+        ){
+
+            const nom =
+                utilisateur.nom ||
+                utilisateur.name;
+
+
+            document.getElementById(
+                "userName"
+            ).textContent = nom;
+
+
+            document.getElementById(
+                "welcomeName"
+            ).textContent =
+                String(nom)
+                .split(" ")[0];
+
+
+            const initiales =
+                String(nom)
+                .split(" ")
+                .filter(Boolean)
+                .slice(0,2)
+                .map(
+                    mot =>
+                        mot.charAt(0)
+                )
+                .join("")
+                .toUpperCase();
+
+
+            document.getElementById(
+                "userAvatar"
+            ).textContent =
+                initiales || "BF";
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "Utilisateur par défaut."
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   RECHERCHE CHANTIER
+========================================================== */
+
+function activerRecherche(){
 
     const input =
         document.getElementById(
             "searchChantier"
         );
-
-
-    if(!input){
-        return;
-    }
 
 
     input.addEventListener(
@@ -3385,38 +3425,125 @@ function initialiserRecherche(){
 
             const recherche =
                 this.value
-                .toLowerCase()
-                .trim();
+                .trim()
+                .toLowerCase();
 
 
-            document
-                .querySelectorAll(
-                    ".dashboard-chantier"
-                )
-                .forEach(
-                    element => {
-
-                        const texte =
-                            (
-                                element.textContent +
-                                " " +
-                                (
-                                    element.dataset.search ||
-                                    ""
-                                )
-                            )
-                            .toLowerCase();
+            const chantiers =
+                lireStorage(
+                    "batiflowChantiers"
+                );
 
 
-                        element.style.display =
-                            texte.includes(
-                                recherche
-                            )
-                                ? ""
-                                : "none";
+            if(!recherche){
+
+                chargerChantiers();
+
+                return;
+
+            }
+
+
+            const resultats =
+                chantiers.filter(
+                    function(chantier){
+
+                        const texte = (
+
+                            chantier.nom ||
+                            "" +
+
+                            " " +
+
+                            chantier.localisation ||
+                            "" +
+
+                            " " +
+
+                            chantier.client ||
+                            ""
+
+                        ).toLowerCase();
+
+
+                        return texte.includes(
+                            recherche
+                        );
 
                     }
                 );
+
+
+            const container =
+                document.getElementById(
+                    "recentChantiers"
+                );
+
+
+            if(!resultats.length){
+
+                container.innerHTML = `
+
+                    <div class="empty">
+                        Aucun chantier trouvé.
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            container.innerHTML =
+                resultats
+                .slice(0,5)
+                .map(function(chantier){
+
+                    return `
+
+                        <div class="chantier-item">
+
+                            <div class="chantier-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path d="M3 21h18"></path>
+                                    <path d="M5 21V9l7-5 7 5v12"></path>
+                                    <path d="M9 21v-6h6v6"></path>
+                                </svg>
+
+                            </div>
+
+                            <div class="chantier-info">
+
+                                <div class="chantier-name">
+                                    ${escapeHTML(
+                                        chantier.nom ||
+                                        chantier.titre ||
+                                        "Chantier"
+                                    )}
+                                </div>
+
+                                <div class="chantier-location">
+                                    ${escapeHTML(
+                                        chantier.localisation ||
+                                        chantier.adresse ||
+                                        ""
+                                    )}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }).join("");
 
         }
     );
@@ -3428,26 +3555,17 @@ function initialiserRecherche(){
    MENU MOBILE
 ========================================================== */
 
-function initialiserMenuMobile(){
+function activerMenuMobile(){
 
     const bouton =
         document.getElementById(
-            "mobileMenuBtn"
+            "mobileMenu"
         );
-
 
     const sidebar =
         document.getElementById(
             "sidebar"
         );
-
-
-    if(
-        !bouton ||
-        !sidebar
-    ){
-        return;
-    }
 
 
     bouton.addEventListener(
@@ -3461,32 +3579,72 @@ function initialiserMenuMobile(){
         }
     );
 
+
+    document
+        .querySelectorAll(
+            ".sidebar .nav-link"
+        )
+        .forEach(function(lien){
+
+            lien.addEventListener(
+                "click",
+                function(){
+
+                    sidebar.classList.remove(
+                        "open"
+                    );
+
+                }
+            );
+
+        });
+
 }
 
 
 /* ==========================================================
-   ACTUALISATION
+   INITIALISATION
 ========================================================== */
 
-function actualiserDashboard(){
+function chargerDashboard(){
 
     chargerUtilisateur();
 
-    afficherStatistiques();
+    chargerChantiers();
 
-    afficherChantiers();
+    chargerClients();
 
-    afficherDQEs();
+    chargerDevis();
 
-    afficherFinances();
+    chargerDQE();
 
-    afficherIndicateurs();
+    chargerFinances();
 
-    afficherAlertes();
+    chargerIndicateurs();
 
-    afficherActivite();
+    chargerAlertes();
+
+    chargerActivite();
 
 }
+
+
+/* ==========================================================
+   LANCEMENT
+========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        chargerDashboard();
+
+        activerRecherche();
+
+        activerMenuMobile();
+
+    }
+);
 
 
 /* ==========================================================
@@ -3495,68 +3653,24 @@ function actualiserDashboard(){
 
 window.addEventListener(
     "storage",
-    function(event){
+    function(){
 
-        const cles = [
-
-            STORAGE_KEY,
-            DQE_STORAGE_KEY,
-            DEVIS_STORAGE_KEY,
-            CLIENTS_STORAGE_KEY,
-            FINANCES_STORAGE_KEY,
-            EQUIPE_STORAGE_KEY,
-            DOCUMENTS_STORAGE_KEY,
-            STOCKS_STORAGE_KEY
-
-        ];
-
-
-        if(
-            !event.key ||
-            cles.includes(event.key)
-        ){
-
-            actualiserDashboard();
-
-        }
+        chargerDashboard();
 
     }
 );
 
-
-/* ==========================================================
-   RETOUR SUR LA PAGE
-========================================================== */
 
 window.addEventListener(
     "pageshow",
     function(){
 
-        actualiserDashboard();
-
-    }
-);
-
-
-/* ==========================================================
-   DÉMARRAGE
-========================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        initialiserRecherche();
-
-        initialiserMenuMobile();
-
-        actualiserDashboard();
+        chargerDashboard();
 
     }
 );
 
 </script>
-
 
 </body>
 
