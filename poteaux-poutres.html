@@ -1,1 +1,2100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>BATIFLOW — Poteaux & Poutres</title>
+
+    <meta
+        name="description"
+        content="Calculateur BTP de quantités pour poteaux et poutres — BATIFLOW"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: #101827;
+            color: white;
+            padding: 22px 15px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            padding: 5px 12px 25px;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #f28c28;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #8792a5;
+            text-transform: uppercase;
+            margin: 18px 12px 8px;
+            font-weight: bold;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+            color: #cbd5e1;
+            padding: 11px 12px;
+            margin: 3px 0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .menu a:hover {
+            background: #1b2638;
+            color: white;
+        }
+
+        .menu a.active {
+            background: #f28c28;
+            color: white;
+            font-weight: bold;
+        }
+
+        .menu-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 260px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 500;
+        }
+
+        .topbar h1 {
+            font-size: 22px;
+            color: #111827;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .badge {
+            background: #fff3e6;
+            color: #f28c28;
+            padding: 8px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .intro {
+            margin-bottom: 25px;
+        }
+
+        .intro h2 {
+            font-size: 25px;
+            margin-bottom: 7px;
+            color: #111827;
+        }
+
+        .intro p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* =========================
+           TABS
+        ========================= */
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            border: none;
+            background: white;
+            color: #475569;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            border: 1px solid #e5e7eb;
+            transition: 0.2s;
+        }
+
+        .tab-btn:hover {
+            border-color: #f28c28;
+        }
+
+        .tab-btn.active {
+            background: #f28c28;
+            color: white;
+            border-color: #f28c28;
+        }
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: minmax(320px, 1fr) minmax(350px, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+            border: 1px solid #e9edf2;
+        }
+
+        .card h3 {
+            margin-bottom: 18px;
+            color: #111827;
+            font-size: 18px;
+        }
+
+        .section-title {
+            margin: 22px 0 12px;
+            font-size: 14px;
+            color: #f28c28;
+            font-weight: bold;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #475569;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #d9dee7;
+            border-radius: 7px;
+            outline: none;
+            font-size: 14px;
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #f28c28;
+            box-shadow: 0 0 0 2px rgba(242, 140, 40, 0.1);
+        }
+
+        .unit {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .btn {
+            border: none;
+            padding: 11px 17px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .btn-primary {
+            background: #f28c28;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #df7817;
+        }
+
+        .btn-secondary {
+            background: #eef2f7;
+            color: #334155;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-dark {
+            background: #101827;
+            color: white;
+        }
+
+        /* =========================
+           RESULTS
+        ========================= */
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .result-box {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 9px;
+            padding: 15px;
+        }
+
+        .result-box.highlight {
+            background: #fff6eb;
+            border-color: #f7c58d;
+        }
+
+        .result-label {
+            color: #64748b;
+            font-size: 11px;
+            margin-bottom: 7px;
+        }
+
+        .result-value {
+            color: #111827;
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .result-unit {
+            color: #64748b;
+            font-size: 11px;
+            margin-left: 3px;
+        }
+
+        .total-box {
+            margin-top: 18px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #101827;
+            color: white;
+        }
+
+        .total-box small {
+            color: #cbd5e1;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .total-box strong {
+            color: #f28c28;
+            font-size: 28px;
+        }
+
+        .calculation-note {
+            margin-top: 18px;
+            padding: 13px;
+            background: #f8fafc;
+            border-left: 4px solid #f28c28;
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 18px;
+        }
+
+        .summary-table th,
+        .summary-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .summary-table th {
+            color: #64748b;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        .mobile-menu {
+            display: none;
+            background: #101827;
+            color: white;
+            border: none;
+            padding: 8px 11px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 950px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: 0.3s;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .content {
+                padding: 18px 14px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar h1 {
+                font-size: 17px;
+            }
+
+            .badge {
+                display: none;
+            }
+        }
+
+        /* =========================
+           PRINT
+        ========================= */
+
+        @media print {
+
+            .sidebar,
+            .topbar,
+            .tabs,
+            .actions {
+                display: none !important;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            body {
+                background: white;
+            }
+
+            .content {
+                padding: 0;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        BATI<span>FLOW</span>
+    </div>
+
+    <div class="menu">
+
+        <div class="menu-title">Principal</div>
+
+        <a href="dashboard.html">
+            <span class="menu-icon">📊</span>
+            Tableau de bord
+        </a>
+
+        <a href="chantiers.html">
+            <span class="menu-icon">🏗️</span>
+            Chantiers
+        </a>
+
+        <a href="dqe.html">
+            <span class="menu-icon">📐</span>
+            DQE & Métré
+        </a>
+
+        <a href="devis.html">
+            <span class="menu-icon">🧾</span>
+            Devis
+        </a>
+
+        <a href="clients.html">
+            <span class="menu-icon">👥</span>
+            Clients
+        </a>
+
+        <div class="menu-title">Outils BTP</div>
+
+        <a href="calculator.html">
+            <span class="menu-icon">🧮</span>
+            Calculateur BTP
+        </a>
+
+        <a href="poteaux-poutres.html" class="active">
+            <span class="menu-icon">🏛️</span>
+            Poteaux & Poutres
+        </a>
+
+        <a href="mortar.html">
+            <span class="menu-icon">🧱</span>
+            Mortier
+        </a>
+
+        <a href="masonry.html">
+            <span class="menu-icon">🧱</span>
+            Maçonnerie
+        </a>
+
+        <a href="slab.html">
+            <span class="menu-icon">🏢</span>
+            Dalle
+        </a>
+
+        <div class="menu-title">Gestion</div>
+
+        <a href="#">
+            <span class="menu-icon">📦</span>
+            Matériaux
+        </a>
+
+        <a href="#">
+            <span class="menu-icon">📁</span>
+            Documents
+        </a>
+
+        <a href="#">
+            <span class="menu-icon">⚙️</span>
+            Paramètres
+        </a>
+
+        <div class="menu-title">Compte</div>
+
+        <a href="login.html">
+            <span class="menu-icon">🚪</span>
+            Déconnexion
+        </a>
+
+    </div>
+
+</aside>
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div style="display:flex;align-items:center;gap:12px;">
+            <button
+                class="mobile-menu"
+                onclick="toggleSidebar()"
+            >
+                ☰
+            </button>
+
+            <h1>Calculateur Poteaux & Poutres</h1>
+        </div>
+
+        <div class="topbar-right">
+            <div class="badge">
+                BATIFLOW BTP
+            </div>
+        </div>
+
+    </header>
+
+    <section class="content">
+
+        <div class="intro">
+
+            <h2>Calculateur Poteaux & Poutres</h2>
+
+            <p>
+                Estimez rapidement les volumes de béton,
+                les quantités d'acier et les coûts associés.
+            </p>
+
+        </div>
+
+        <!-- TABS -->
+
+        <div class="tabs">
+
+            <button
+                class="tab-btn active"
+                id="tabPoteau"
+                onclick="changerType('poteau')"
+            >
+                🏛️ Poteaux
+            </button>
+
+            <button
+                class="tab-btn"
+                id="tabPoutre"
+                onclick="changerType('poutre')"
+            >
+                🏗️ Poutres
+            </button>
+
+        </div>
+
+        <div class="calculator-grid">
+
+            <!-- =========================
+                 FORMULAIRE
+            ========================= -->
+
+            <div class="card">
+
+                <h3 id="formTitle">
+                    Paramètres du poteau
+                </h3>
+
+                <!-- Poteau -->
+
+                <div id="poteauForm">
+
+                    <div class="section-title">
+                        Dimensions
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Largeur
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pLargeur"
+                                value="20"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                cm
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Profondeur
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pProfondeur"
+                                value="20"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                cm
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Hauteur
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pHauteur"
+                                value="3"
+                                min="0.1"
+                                step="0.1"
+                            >
+
+                            <span class="unit">
+                                m
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Nombre de poteaux
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pNombre"
+                                value="10"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                unités
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="section-title">
+                        Ferraillage longitudinal
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Diamètre
+                            </label>
+
+                            <select id="pDiametre">
+
+                                <option value="8">HA8</option>
+                                <option value="10">HA10</option>
+                                <option value="12" selected>HA12</option>
+                                <option value="14">HA14</option>
+                                <option value="16">HA16</option>
+                                <option value="20">HA20</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Nombre de barres
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pBarres"
+                                value="4"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                barres / poteau
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="section-title">
+                        Étriers / cadres
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Diamètre des cadres
+                            </label>
+
+                            <select id="pCadreDiametre">
+
+                                <option value="6" selected>RL6 / HA6</option>
+                                <option value="8">HA8</option>
+                                <option value="10">HA10</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Espacement
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pEspacement"
+                                value="15"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                cm
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Enrobage
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pEnrobage"
+                                value="3"
+                                min="0"
+                                step="0.5"
+                            >
+
+                            <span class="unit">
+                                cm
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="section-title">
+                        Prix
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Béton
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pPrixBeton"
+                                value="85000"
+                                min="0"
+                                step="1000"
+                            >
+
+                            <span class="unit">
+                                FCFA / m³
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Acier
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pPrixAcier"
+                                value="650"
+                                min="0"
+                                step="10"
+                            >
+
+                            <span class="unit">
+                                FCFA / kg
+                            </span>
+
+                        </div>
+
+                        <div class="form-group full">
+
+                            <label>
+                                Main-d'œuvre
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pMainOeuvre"
+                                value="15"
+                                min="0"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                % du coût béton + acier
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Poutre -->
+
+                <div id="poutreForm" style="display:none;">
+
+                    <div class="section-title">
+                        Dimensions
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Largeur
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bLargeur"
+                                value="20"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                cm
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Hauteur
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bHauteur"
+                                value="40"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                cm
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Longueur
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bLongueur"
+                                value="5"
+                                min="0.1"
+                                step="0.1"
+                            >
+
+                            <span class="unit">
+                                m
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Nombre de poutres
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bNombre"
+                                value="5"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                unités
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="section-title">
+                        Armatures principales
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Barres inférieures
+                            </label>
+
+                            <select id="bBasDiametre">
+
+                                <option value="8">HA8</option>
+                                <option value="10">HA10</option>
+                                <option value="12" selected>HA12</option>
+                                <option value="14">HA14</option>
+                                <option value="16">HA16</option>
+                                <option value="20">HA20</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Nombre barres inférieures
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bBasNombre"
+                                value="4"
+                                min="1"
+                                step="1"
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Barres supérieures
+                            </label>
+
+                            <select id="bHautDiametre">
+
+                                <option value="8">HA8</option>
+                                <option value="10" selected>HA10</option>
+                                <option value="12">HA12</option>
+                                <option value="14">HA14</option>
+                                <option value="16">HA16</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Nombre barres supérieures
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bHautNombre"
+                                value="2"
+                                min="1"
+                                step="1"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="section-title">
+                        Étriers / cadres
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Diamètre
+                            </label>
+
+                            <select id="bCadreDiametre">
+
+                                <option value="6" selected>RL6 / HA6</option>
+                                <option value="8">HA8</option>
+                                <option value="10">HA10</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Espacement
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bEspacement"
+                                value="15"
+                                min="1"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                cm
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Enrobage
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bEnrobage"
+                                value="3"
+                                min="0"
+                                step="0.5"
+                            >
+
+                            <span class="unit">
+                                cm
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="section-title">
+                        Prix
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Béton
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bPrixBeton"
+                                value="85000"
+                                min="0"
+                                step="1000"
+                            >
+
+                            <span class="unit">
+                                FCFA / m³
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Acier
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bPrixAcier"
+                                value="650"
+                                min="0"
+                                step="10"
+                            >
+
+                            <span class="unit">
+                                FCFA / kg
+                            </span>
+
+                        </div>
+
+                        <div class="form-group full">
+
+                            <label>
+                                Main-d'œuvre
+                            </label>
+
+                            <input
+                                type="number"
+                                id="bMainOeuvre"
+                                value="15"
+                                min="0"
+                                step="1"
+                            >
+
+                            <span class="unit">
+                                % du coût béton + acier
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="actions">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="calculer()"
+                    >
+                        🧮 Calculer
+                    </button>
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="reinitialiser()"
+                    >
+                        🔄 Réinitialiser
+                    </button>
+
+                    <button
+                        class="btn btn-dark"
+                        onclick="window.print()"
+                    >
+                        🖨️ Imprimer
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- =========================
+                 RESULTATS
+            ========================= -->
+
+            <div class="card">
+
+                <h3>
+                    Résultats
+                </h3>
+
+                <div class="result-grid">
+
+                    <div class="result-box highlight">
+
+                        <div class="result-label">
+                            Volume béton
+                        </div>
+
+                        <div class="result-value">
+                            <span id="volumeBeton">0.00</span>
+                            <span class="result-unit">m³</span>
+                        </div>
+
+                    </div>
+
+                    <div class="result-box">
+
+                        <div class="result-label">
+                            Acier total
+                        </div>
+
+                        <div class="result-value">
+                            <span id="acierTotal">0.00</span>
+                            <span class="result-unit">kg</span>
+                        </div>
+
+                    </div>
+
+                    <div class="result-box">
+
+                        <div class="result-label">
+                            Armatures principales
+                        </div>
+
+                        <div class="result-value">
+                            <span id="acierPrincipal">0.00</span>
+                            <span class="result-unit">kg</span>
+                        </div>
+
+                    </div>
+
+                    <div class="result-box">
+
+                        <div class="result-label">
+                            Étriers / cadres
+                        </div>
+
+                        <div class="result-value">
+                            <span id="acierCadres">0.00</span>
+                            <span class="result-unit">kg</span>
+                        </div>
+
+                    </div>
+
+                    <div class="result-box">
+
+                        <div class="result-label">
+                            Coût béton
+                        </div>
+
+                        <div class="result-value">
+                            <span id="coutBeton">0</span>
+                            <span class="result-unit">FCFA</span>
+                        </div>
+
+                    </div>
+
+                    <div class="result-box">
+
+                        <div class="result-label">
+                            Coût acier
+                        </div>
+
+                        <div class="result-value">
+                            <span id="coutAcier">0</span>
+                            <span class="result-unit">FCFA</span>
+                        </div>
+
+                    </div>
+
+                    <div class="result-box">
+
+                        <div class="result-label">
+                            Main-d'œuvre
+                        </div>
+
+                        <div class="result-value">
+                            <span id="coutMainOeuvre">0</span>
+                            <span class="result-unit">FCFA</span>
+                        </div>
+
+                    </div>
+
+                    <div class="result-box highlight">
+
+                        <div class="result-label">
+                            Nombre d'éléments
+                        </div>
+
+                        <div class="result-value">
+                            <span id="nombreElements">0</span>
+                            <span class="result-unit">unités</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="total-box">
+
+                    <small>
+                        COÛT TOTAL ESTIMATIF
+                    </small>
+
+                    <strong id="coutTotal">
+                        0 FCFA
+                    </strong>
+
+                </div>
+
+                <div class="calculation-note" id="noteCalcul">
+
+                    Sélectionnez les paramètres puis cliquez sur
+                    <strong>Calculer</strong>.
+
+                </div>
+
+                <table class="summary-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Élément</th>
+                            <th>Quantité</th>
+                            <th>Unité</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="summaryBody">
+
+                        <tr>
+                            <td>Béton</td>
+                            <td>0.00</td>
+                            <td>m³</td>
+                        </tr>
+
+                        <tr>
+                            <td>Acier</td>
+                            <td>0.00</td>
+                            <td>kg</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+
+    let typeActuel = "poteau";
+
+    /* =========================
+       UTILITAIRES
+    ========================= */
+
+    function valeur(id) {
+
+        const element = document.getElementById(id);
+
+        if (!element) {
+            return 0;
+        }
+
+        return parseFloat(element.value) || 0;
+    }
+
+
+    function poidsAcier(diametre) {
+
+        /*
+         * Poids théorique :
+         * kg/m = d² / 162
+         */
+
+        return (diametre * diametre) / 162;
+    }
+
+
+    function formatNombre(nombre, decimals = 2) {
+
+        return Number(nombre || 0).toLocaleString(
+            "fr-FR",
+            {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            }
+        );
+
+    }
+
+
+    function formatFCFA(nombre) {
+
+        return Number(nombre || 0).toLocaleString(
+            "fr-FR",
+            {
+                maximumFractionDigits: 0
+            }
+        ) + " FCFA";
+
+    }
+
+
+    /* =========================
+       CHANGEMENT DE MODULE
+    ========================= */
+
+    function changerType(type) {
+
+        typeActuel = type;
+
+        const poteauForm = document.getElementById("poteauForm");
+        const poutreForm = document.getElementById("poutreForm");
+
+        const tabPoteau = document.getElementById("tabPoteau");
+        const tabPoutre = document.getElementById("tabPoutre");
+
+        const formTitle = document.getElementById("formTitle");
+
+        if (type === "poteau") {
+
+            poteauForm.style.display = "block";
+            poutreForm.style.display = "none";
+
+            tabPoteau.classList.add("active");
+            tabPoutre.classList.remove("active");
+
+            formTitle.textContent =
+                "Paramètres du poteau";
+
+        } else {
+
+            poteauForm.style.display = "none";
+            poutreForm.style.display = "block";
+
+            tabPoteau.classList.remove("active");
+            tabPoutre.classList.add("active");
+
+            formTitle.textContent =
+                "Paramètres de la poutre";
+        }
+
+        calculer();
+
+    }
+
+
+    /* =========================
+       CALCUL POTEAU
+    ========================= */
+
+    function calculerPoteau() {
+
+        const largeur = valeur("pLargeur") / 100;
+        const profondeur = valeur("pProfondeur") / 100;
+        const hauteur = valeur("pHauteur");
+        const nombre = valeur("pNombre");
+
+        const diametre = valeur("pDiametre");
+        const nbBarres = valeur("pBarres");
+
+        const diametreCadre = valeur("pCadreDiametre");
+        const espacement = valeur("pEspacement");
+        const enrobage = valeur("pEnrobage");
+
+        const prixBeton = valeur("pPrixBeton");
+        const prixAcier = valeur("pPrixAcier");
+        const mainOeuvrePct = valeur("pMainOeuvre");
+
+        /* Béton */
+
+        const volumeUnitaire =
+            largeur *
+            profondeur *
+            hauteur;
+
+        const volumeTotal =
+            volumeUnitaire *
+            nombre;
+
+
+        /* Armatures longitudinales */
+
+        const longueurPrincipale =
+            nbBarres *
+            hauteur *
+            nombre;
+
+        const kgPrincipal =
+            longueurPrincipale *
+            poidsAcier(diametre);
+
+
+        /* Cadres */
+
+        const nbCadresUnitaire =
+            Math.floor(
+                (hauteur * 100) / espacement
+            ) + 1;
+
+        const nbCadresTotal =
+            nbCadresUnitaire *
+            nombre;
+
+        const largeurInterieure =
+            Math.max(
+                0,
+                valeur("pLargeur") -
+                (2 * enrobage)
+            );
+
+        const profondeurInterieure =
+            Math.max(
+                0,
+                valeur("pProfondeur") -
+                (2 * enrobage)
+            );
+
+        /*
+         * Longueur approximative d'un cadre.
+         * Une petite longueur supplémentaire est
+         * ajoutée pour les crochets.
+         */
+
+        const longueurCadreCm =
+            (
+                2 *
+                (
+                    largeurInterieure +
+                    profondeurInterieure
+                )
+            ) + 20;
+
+        const longueurCadresM =
+            (longueurCadreCm / 100) *
+            nbCadresTotal;
+
+        const kgCadres =
+            longueurCadresM *
+            poidsAcier(diametreCadre);
+
+
+        const acierTotal =
+            kgPrincipal +
+            kgCadres;
+
+
+        /* Coûts */
+
+        const coutBeton =
+            volumeTotal *
+            prixBeton;
+
+        const coutAcier =
+            acierTotal *
+            prixAcier;
+
+        const coutMainOeuvre =
+            (coutBeton + coutAcier) *
+            (mainOeuvrePct / 100);
+
+        const coutTotal =
+            coutBeton +
+            coutAcier +
+            coutMainOeuvre;
+
+
+        afficherResultats(
+            volumeTotal,
+            acierTotal,
+            kgPrincipal,
+            kgCadres,
+            coutBeton,
+            coutAcier,
+            coutMainOeuvre,
+            coutTotal,
+            nombre
+        );
+
+
+        document.getElementById("noteCalcul").innerHTML =
+            "Calcul du poteau : " +
+            `<strong>${formatNombre(valeur("pLargeur"), 0)} × ` +
+            `${formatNombre(valeur("pProfondeur"), 0)} cm</strong>, ` +
+            `hauteur ${formatNombre(hauteur)} m. ` +
+            `Les étriers sont estimés avec un espacement de ` +
+            `<strong>${formatNombre(espacement, 0)} cm</strong>. ` +
+            "Les longueurs d'ancrage, recouvrements et dispositions constructives " +
+            "ne sont pas automatiquement dimensionnés.";
+
+
+        mettreAJourTableau([
+            ["Béton", volumeTotal, "m³"],
+            ["Acier longitudinal", kgPrincipal, "kg"],
+            ["Étriers / cadres", kgCadres, "kg"],
+            ["Acier total", acierTotal, "kg"],
+            ["Coût total", coutTotal, "FCFA"]
+        ]);
+
+    }
+
+
+    /* =========================
+       CALCUL POUTRE
+    ========================= */
+
+    function calculerPoutre() {
+
+        const largeur = valeur("bLargeur") / 100;
+        const hauteur = valeur("bHauteur") / 100;
+        const longueur = valeur("bLongueur");
+        const nombre = valeur("bNombre");
+
+        const basDiametre = valeur("bBasDiametre");
+        const basNombre = valeur("bBasNombre");
+
+        const hautDiametre = valeur("bHautDiametre");
+        const hautNombre = valeur("bHautNombre");
+
+        const cadreDiametre = valeur("bCadreDiametre");
+        const espacement = valeur("bEspacement");
+        const enrobage = valeur("bEnrobage");
+
+        const prixBeton = valeur("bPrixBeton");
+        const prixAcier = valeur("bPrixAcier");
+        const mainOeuvrePct = valeur("bMainOeuvre");
+
+
+        /* Béton */
+
+        const volumeUnitaire =
+            largeur *
+            hauteur *
+            longueur;
+
+        const volumeTotal =
+            volumeUnitaire *
+            nombre;
+
+
+        /* Barres inférieures */
+
+        const longueurBas =
+            basNombre *
+            longueur *
+            nombre;
+
+        const kgBas =
+            longueurBas *
+            poidsAcier(basDiametre);
+
+
+        /* Barres supérieures */
+
+        const longueurHaut =
+            hautNombre *
+            longueur *
+            nombre;
+
+        const kgHaut =
+            longueurHaut *
+            poidsAcier(hautDiametre);
+
+
+        const kgPrincipal =
+            kgBas +
+            kgHaut;
+
+
+        /* Cadres */
+
+        const nbCadresUnitaire =
+            Math.floor(
+                (longueur * 100) /
+                espacement
+            ) + 1;
+
+        const nbCadresTotal =
+            nbCadresUnitaire *
+            nombre;
+
+
+        const largeurInterieure =
+            Math.max(
+                0,
+                valeur("bLargeur") -
+                (2 * enrobage)
+            );
+
+        const hauteurInterieure =
+            Math.max(
+                0,
+                valeur("bHauteur") -
+                (2 * enrobage)
+            );
+
+        const longueurCadreCm =
+            (
+                2 *
+                (
+                    largeurInterieure +
+                    hauteurInterieure
+                )
+            ) + 20;
+
+        const longueurCadresM =
+            (longueurCadreCm / 100) *
+            nbCadresTotal;
+
+        const kgCadres =
+            longueurCadresM *
+            poidsAcier(cadreDiametre);
+
+
+        const acierTotal =
+            kgPrincipal +
+            kgCadres;
+
+
+        /* Coûts */
+
+        const coutBeton =
+            volumeTotal *
+            prixBeton;
+
+        const coutAcier =
+            acierTotal *
+            prixAcier;
+
+        const coutMainOeuvre =
+            (coutBeton + coutAcier) *
+            (mainOeuvrePct / 100);
+
+        const coutTotal =
+            coutBeton +
+            coutAcier +
+            coutMainOeuvre;
+
+
+        afficherResultats(
+            volumeTotal,
+            acierTotal,
+            kgPrincipal,
+            kgCadres,
+            coutBeton,
+            coutAcier,
+            coutMainOeuvre,
+            coutTotal,
+            nombre
+        );
+
+
+        document.getElementById("noteCalcul").innerHTML =
+            "Calcul de la poutre : " +
+            `<strong>${formatNombre(valeur("bLargeur"), 0)} × ` +
+            `${formatNombre(valeur("bHauteur"), 0)} cm</strong>, ` +
+            `longueur ${formatNombre(longueur)} m. ` +
+            `Étriers estimés avec un espacement de ` +
+            `<strong>${formatNombre(espacement, 0)} cm</strong>. ` +
+            "Les ancrages, recouvrements et dispositions particulières " +
+            "doivent être vérifiés dans le dimensionnement structurel.";
+
+
+        mettreAJourTableau([
+            ["Béton", volumeTotal, "m³"],
+            ["Acier principal", kgPrincipal, "kg"],
+            ["Étriers / cadres", kgCadres, "kg"],
+            ["Acier total", acierTotal, "kg"],
+            ["Coût total", coutTotal, "FCFA"]
+        ]);
+
+    }
+
+
+    /* =========================
+       CALCUL PRINCIPAL
+    ========================= */
+
+    function calculer() {
+
+        if (typeActuel === "poteau") {
+
+            calculerPoteau();
+
+        } else {
+
+            calculerPoutre();
+
+        }
+
+    }
+
+
+    /* =========================
+       AFFICHAGE
+    ========================= */
+
+    function afficherResultats(
+        volume,
+        acier,
+        acierPrincipal,
+        acierCadres,
+        coutBeton,
+        coutAcier,
+        coutMainOeuvre,
+        coutTotal,
+        nombre
+    ) {
+
+        document.getElementById("volumeBeton").textContent =
+            formatNombre(volume);
+
+        document.getElementById("acierTotal").textContent =
+            formatNombre(acier);
+
+        document.getElementById("acierPrincipal").textContent =
+            formatNombre(acierPrincipal);
+
+        document.getElementById("acierCadres").textContent =
+            formatNombre(acierCadres);
+
+        document.getElementById("coutBeton").textContent =
+            formatNombre(coutBeton, 0);
+
+        document.getElementById("coutAcier").textContent =
+            formatNombre(coutAcier, 0);
+
+        document.getElementById("coutMainOeuvre").textContent =
+            formatNombre(coutMainOeuvre, 0);
+
+        document.getElementById("coutTotal").textContent =
+            formatFCFA(coutTotal);
+
+        document.getElementById("nombreElements").textContent =
+            formatNombre(nombre, 0);
+
+    }
+
+
+    function mettreAJourTableau(lignes) {
+
+        const tbody =
+            document.getElementById("summaryBody");
+
+        tbody.innerHTML = "";
+
+        lignes.forEach(function(ligne) {
+
+            const tr =
+                document.createElement("tr");
+
+            const tdNom =
+                document.createElement("td");
+
+            const tdQuantite =
+                document.createElement("td");
+
+            const tdUnite =
+                document.createElement("td");
+
+            tdNom.textContent = ligne[0];
+
+            if (ligne[2] === "FCFA") {
+
+                tdQuantite.textContent =
+                    formatFCFA(ligne[1]);
+
+            } else {
+
+                tdQuantite.textContent =
+                    formatNombre(ligne[1]);
+
+            }
+
+            tdUnite.textContent =
+                ligne[2];
+
+            tr.appendChild(tdNom);
+            tr.appendChild(tdQuantite);
+            tr.appendChild(tdUnite);
+
+            tbody.appendChild(tr);
+
+        });
+
+    }
+
+
+    /* =========================
+       RESET
+    ========================= */
+
+    function reinitialiser() {
+
+        if (typeActuel === "poteau") {
+
+            document.getElementById("pLargeur").value = 20;
+            document.getElementById("pProfondeur").value = 20;
+            document.getElementById("pHauteur").value = 3;
+            document.getElementById("pNombre").value = 10;
+
+            document.getElementById("pDiametre").value = 12;
+            document.getElementById("pBarres").value = 4;
+
+            document.getElementById("pCadreDiametre").value = 6;
+            document.getElementById("pEspacement").value = 15;
+            document.getElementById("pEnrobage").value = 3;
+
+            document.getElementById("pPrixBeton").value = 85000;
+            document.getElementById("pPrixAcier").value = 650;
+            document.getElementById("pMainOeuvre").value = 15;
+
+        } else {
+
+            document.getElementById("bLargeur").value = 20;
+            document.getElementById("bHauteur").value = 40;
+            document.getElementById("bLongueur").value = 5;
+            document.getElementById("bNombre").value = 5;
+
+            document.getElementById("bBasDiametre").value = 12;
+            document.getElementById("bBasNombre").value = 4;
+
+            document.getElementById("bHautDiametre").value = 10;
+            document.getElementById("bHautNombre").value = 2;
+
+            document.getElementById("bCadreDiametre").value = 6;
+            document.getElementById("bEspacement").value = 15;
+            document.getElementById("bEnrobage").value = 3;
+
+            document.getElementById("bPrixBeton").value = 85000;
+            document.getElementById("bPrixAcier").value = 650;
+            document.getElementById("bMainOeuvre").value = 15;
+
+        }
+
+        calculer();
+
+    }
+
+
+    /* =========================
+       SIDEBAR MOBILE
+    ========================= */
+
+    function toggleSidebar() {
+
+        document
+            .getElementById("sidebar")
+            .classList
+            .toggle("open");
+
+    }
+
+
+    /* =========================
+       CALCUL AUTOMATIQUE
+    ========================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            const champs =
+                document.querySelectorAll(
+                    "input, select"
+                );
+
+            champs.forEach(function(champ) {
+
+                champ.addEventListener(
+                    "input",
+                    calculer
+                );
+
+                champ.addEventListener(
+                    "change",
+                    calculer
+                );
+
+            });
+
+            calculer();
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
