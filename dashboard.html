@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -211,5 +212,3354 @@ input{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 28
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:900;
+}
 
+.topbar-search{
+    width:420px;
+    max-width:48%;
+    height:42px;
+    background:#f7f8fa;
+    border:1px solid #e9edf3;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding:0 13px;
+}
+
+.topbar-search span{
+    font-size:16px;
+    opacity:.65;
+}
+
+.topbar-search input{
+    width:100%;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:var(--bf-text);
+    font-size:13px;
+}
+
+.topbar-search input::placeholder{
+    color:#9aa4b2;
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.notification-btn{
+    width:38px;
+    height:38px;
+    border:1px solid var(--bf-border);
+    background:#fff;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:17px;
+}
+
+.notification-btn:hover{
+    background:#f8fafc;
+}
+
+.user-profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.user-avatar{
+    width:38px;
+    height:38px;
+    background:var(--bf-orange);
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+}
+
+.user-info{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+}
+
+.user-info strong{
+    font-size:13px;
+    color:var(--bf-text);
+}
+
+.user-info small{
+    color:var(--bf-muted);
+    font-size:11px;
+}
+
+.mobile-menu-btn{
+    display:none;
+    border:none;
+    background:transparent;
+    font-size:24px;
+    cursor:pointer;
+}
+
+
+/* ==========================================================
+   CONTENU
+========================================================== */
+
+.dashboard-content{
+    padding:30px;
+    max-width:1600px;
+    margin:0 auto;
+}
+
+
+/* ==========================================================
+   WELCOME
+========================================================== */
+
+.welcome-section{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.welcome-section h1{
+    margin:0;
+    color:var(--bf-text);
+    font-size:26px;
+    font-weight:800;
+}
+
+.welcome-section p{
+    margin:7px 0 0;
+    color:var(--bf-muted);
+    font-size:14px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    min-height:38px;
+    padding:8px 14px;
+    border-radius:8px;
+    border:1px solid var(--bf-border);
+    background:#fff;
+    color:var(--bf-text);
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 4px 12px rgba(15,23,42,.08);
+}
+
+.btn-primary{
+    background:var(--bf-orange);
+    color:#fff;
+    border-color:var(--bf-orange);
+    padding:11px 17px;
+}
+
+.btn-primary:hover{
+    background:var(--bf-orange-dark);
+}
+
+.btn-sm{
+    min-height:31px;
+    padding:6px 10px;
+    font-size:11px;
+}
+
+
+/* ==========================================================
+   STATISTIQUES
+========================================================== */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+    gap:18px;
+    margin-bottom:22px;
+}
+
+.stat-card{
+    background:#fff;
+    border:1px solid var(--bf-border);
+    border-radius:13px;
+    padding:19px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    box-shadow:var(--bf-shadow);
+}
+
+.stat-icon{
+    width:48px;
+    height:48px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    flex-shrink:0;
+}
+
+.stat-icon.orange{
+    background:#fff1e6;
+}
+
+.stat-icon.green{
+    background:#ecfdf3;
+}
+
+.stat-icon.blue{
+    background:#eff6ff;
+}
+
+.stat-icon.purple{
+    background:#f5f3ff;
+}
+
+.stat-info{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    min-width:0;
+}
+
+.stat-info span{
+    color:var(--bf-muted);
+    font-size:12px;
+}
+
+.stat-info strong{
+    color:var(--bf-text);
+    font-size:25px;
+}
+
+
+/* ==========================================================
+   DASHBOARD GRID
+========================================================== */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:
+        minmax(0,1.55fr)
+        minmax(300px,1fr);
+    gap:20px;
+}
+
+.dashboard-card{
+    background:#fff;
+    border:1px solid var(--bf-border);
+    border-radius:14px;
+    box-shadow:var(--bf-shadow);
+    overflow:hidden;
+}
+
+.dashboard-section-spacing{
+    margin-top:20px;
+}
+
+.card-header{
+    min-height:72px;
+    padding:18px 20px;
+    border-bottom:1px solid #edf0f4;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.card-header h2{
+    margin:0;
+    font-size:17px;
+    color:var(--bf-text);
+}
+
+.card-header p{
+    margin:5px 0 0;
+    font-size:12px;
+    color:var(--bf-muted);
+}
+
+.card-header > a{
+    color:var(--bf-orange-dark);
+    font-size:12px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+
+/* ==========================================================
+   CHANTIERS
+========================================================== */
+
+.recent-chantiers{
+    padding:4px 20px 10px;
+}
+
+.chantier-item{
+    padding:16px 0;
+    border-bottom:1px solid #edf0f4;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.chantier-item:last-child{
+    border-bottom:none;
+}
+
+.chantier-main{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+}
+
+.chantier-icon{
+    width:42px;
+    height:42px;
+    border-radius:10px;
+    background:#fff4e9;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    font-size:19px;
+}
+
+.chantier-info{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    min-width:0;
+}
+
+.chantier-info strong{
+    font-size:13px;
+    color:var(--bf-text);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.chantier-info span{
+    font-size:11px;
+    color:var(--bf-muted);
+}
+
+.chantier-info small{
+    font-size:10px;
+    color:#94a3b8;
+}
+
+.chantier-progress{
+    width:170px;
+    flex-shrink:0;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:7px;
+    margin-bottom:7px;
+}
+
+.progress-info > span:first-child{
+    font-size:11px;
+    font-weight:700;
+    color:var(--bf-text);
+}
+
+.progress-bar{
+    width:100%;
+    height:6px;
+    border-radius:10px;
+    background:#edf0f4;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    border-radius:10px;
+    background:var(--bf-orange);
+    transition:width .3s ease;
+}
+
+.status-badge{
+    display:inline-flex;
+    align-items:center;
+    padding:4px 7px;
+    border-radius:20px;
+    font-size:9px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.status-badge.active{
+    background:#ecfdf3;
+    color:#15803d;
+}
+
+.status-badge.success{
+    background:#ecfdf3;
+    color:#15803d;
+}
+
+.status-badge.warning{
+    background:#fffbeb;
+    color:#b45309;
+}
+
+.status-badge.danger{
+    background:#fef2f2;
+    color:#b91c1c;
+}
+
+
+/* ==========================================================
+   ACTIONS RAPIDES
+========================================================== */
+
+.quick-actions{
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:11px;
+}
+
+.quick-action{
+    min-height:72px;
+    padding:12px;
+    border:1px solid #edf0f4;
+    background:#fafbfc;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--bf-text);
+    font-size:12px;
+    font-weight:700;
+    transition:.2s ease;
+}
+
+.quick-action:hover{
+    border-color:#f6c58d;
+    background:#fffaf5;
+    transform:translateY(-1px);
+}
+
+.quick-action-icon{
+    width:36px;
+    height:36px;
+    border-radius:8px;
+    background:#fff1e6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+    flex-shrink:0;
+}
+
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.empty-state{
+    padding:35px 15px;
+    text-align:center;
+    color:#94a3b8;
+    font-size:13px;
+}
+
+
+/* ==========================================================
+   ÉTAPE 17 — FINANCES + INDICATEURS
+========================================================== */
+
+.dashboard-advanced-grid{
+    display:grid;
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(0,1fr);
+    gap:20px;
+    margin-top:20px;
+}
+
+.dashboard-advanced-card{
+    background:#fff;
+    border:1px solid var(--bf-border);
+    border-radius:14px;
+    box-shadow:var(--bf-shadow);
+    padding:20px;
+}
+
+.dashboard-advanced-card h3{
+    margin:0 0 17px;
+    font-size:16px;
+    color:var(--bf-text);
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.finance-mini-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+    gap:10px;
+}
+
+.finance-mini{
+    min-width:0;
+    background:#f8fafc;
+    border:1px solid #edf0f4;
+    border-radius:10px;
+    padding:13px;
+}
+
+.finance-mini-label{
+    color:var(--bf-muted);
+    font-size:10px;
+    margin-bottom:7px;
+}
+
+.finance-mini-value{
+    font-size:15px;
+    font-weight:800;
+    color:var(--bf-text);
+    word-break:break-word;
+}
+
+.finance-mini-value.positive{
+    color:var(--bf-green);
+}
+
+.finance-mini-value.negative{
+    color:var(--bf-red);
+}
+
+.indicator-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+    gap:10px;
+}
+
+.indicator-item{
+    background:#f8fafc;
+    border:1px solid #edf0f4;
+    border-radius:10px;
+    padding:13px 8px;
+    text-align:center;
+}
+
+.indicator-icon{
+    font-size:20px;
+    margin-bottom:5px;
+}
+
+.indicator-value{
+    font-size:20px;
+    font-weight:800;
+    color:var(--bf-text);
+}
+
+.indicator-label{
+    color:var(--bf-muted);
+    font-size:10px;
+    margin-top:4px;
+}
+
+
+/* ==========================================================
+   ALERTES
+========================================================== */
+
+.dashboard-alerts{
+    margin-top:20px;
+    background:#fff;
+    border:1px solid var(--bf-border);
+    border-radius:14px;
+    box-shadow:var(--bf-shadow);
+    padding:20px;
+}
+
+.dashboard-alerts h3{
+    margin:0 0 15px;
+    font-size:16px;
+    color:var(--bf-text);
+}
+
+.alert-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.dashboard-alert{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:11px 13px;
+    border-radius:9px;
+    background:#fffbeb;
+    border:1px solid #fde68a;
+}
+
+.dashboard-alert.danger{
+    background:#fef2f2;
+    border-color:#fecaca;
+}
+
+.dashboard-alert.warning{
+    background:#fffbeb;
+    border-color:#fde68a;
+}
+
+.dashboard-alert-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+}
+
+.dashboard-alert-icon{
+    font-size:18px;
+}
+
+.dashboard-alert-title{
+    font-size:12px;
+    font-weight:700;
+    color:var(--bf-text);
+}
+
+.dashboard-alert-text{
+    margin-top:3px;
+    font-size:10px;
+    color:var(--bf-muted);
+}
+
+.dashboard-alert-empty{
+    padding:13px;
+    background:#f0fdf4;
+    color:#166534;
+    border:1px solid #bbf7d0;
+    border-radius:9px;
+    font-size:12px;
+    text-align:center;
+}
+
+
+/* ==========================================================
+   ACTIVITÉ
+========================================================== */
+
+.activity-list{
+    padding:5px 20px 10px;
+}
+
+.activity-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1px solid #edf0f4;
+}
+
+.activity-item:last-child{
+    border-bottom:none;
+}
+
+.activity-icon{
+    width:38px;
+    height:38px;
+    border-radius:9px;
+    background:#f8fafc;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    font-size:17px;
+}
+
+.activity-content{
+    flex:1;
+    min-width:0;
+}
+
+.activity-content strong{
+    display:block;
+    font-size:12px;
+    color:var(--bf-text);
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.activity-item-extra{
+    margin-top:4px;
+    color:var(--bf-muted);
+    font-size:10px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.activity-date{
+    color:#94a3b8;
+    font-size:10px;
+    white-space:nowrap;
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.dashboard-footer{
+    padding:25px 30px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    color:#94a3b8;
+    font-size:10px;
+}
+
+
+/* ==========================================================
+   RESPONSIVE TABLET
+========================================================== */
+
+@media(max-width:1100px){
+
+    .stats-grid{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .topbar-search{
+        width:320px;
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE MOBILE
+========================================================== */
+
+@media(max-width:800px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.25s ease;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main-content{
+        margin-left:0;
+        width:100%;
+    }
+
+    .mobile-menu-btn{
+        display:block;
+        width:40px;
+        height:40px;
+        flex-shrink:0;
+    }
+
+    .topbar{
+        padding:0 15px;
+        gap:10px;
+    }
+
+    .topbar-search{
+        max-width:none;
+        width:auto;
+        flex:1;
+    }
+
+    .user-info{
+        display:none;
+    }
+
+    .dashboard-content{
+        padding:20px 15px;
+    }
+
+    .welcome-section{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .welcome-section h1{
+        font-size:22px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:13px;
+        gap:9px;
+    }
+
+    .stat-icon{
+        width:40px;
+        height:40px;
+        font-size:18px;
+    }
+
+    .stat-info strong{
+        font-size:21px;
+    }
+
+    .dashboard-advanced-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+/* ==========================================================
+   PETIT MOBILE
+========================================================== */
+
+@media(max-width:520px){
+
+    .topbar-right{
+        gap:5px;
+    }
+
+    .notification-btn{
+        display:none;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .chantier-item{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .chantier-progress{
+        width:100%;
+    }
+
+    .quick-actions{
+        grid-template-columns:1fr;
+    }
+
+    .finance-mini-grid,
+    .indicator-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-alert{
+        align-items:flex-start;
+    }
+
+    .dashboard-footer{
+        flex-direction:column;
+        padding:20px 15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+<!-- ==========================================================
+     SIDEBAR
+========================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+
+    <div class="sidebar-header">
+
+        <a href="dashboard.html" class="logo-batiflow">
+
+            <svg
+                width="42"
+                height="42"
+                viewBox="0 0 42 42"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+
+                <circle
+                    cx="21"
+                    cy="21"
+                    r="20"
+                    stroke="#f28c28"
+                    stroke-width="2"
+                />
+
+                <path
+                    d="M10 20.5L21 11L32 20.5"
+                    stroke="#ffffff"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+                <path
+                    d="M13.5 19.5V30H28.5V19.5"
+                    stroke="#ffffff"
+                    stroke-width="2.5"
+                    stroke-linejoin="round"
+                />
+
+                <path
+                    d="M18 30V22H24V30"
+                    stroke="#f28c28"
+                    stroke-width="2.5"
+                    stroke-linejoin="round"
+                />
+
+                <path
+                    d="M8 32.5H34"
+                    stroke="#f28c28"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                />
+
+            </svg>
+
+
+            <div class="logo-text">
+
+                <div class="logo-text-main">
+
+                    <span class="bati">
+                        BATI
+                    </span>
+
+                    <span class="flow">
+                        FLOW
+                    </span>
+
+                </div>
+
+
+                <div class="logo-subtitle">
+                    CONSTRUCTION MANAGEMENT
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+
+        <a
+            href="dashboard.html"
+            class="nav-link active"
+        >
+            <span>📊</span>
+            <span>Tableau de bord</span>
+        </a>
+
+
+        <a
+            href="chantiers.html"
+            class="nav-link"
+        >
+            <span>🏗️</span>
+            <span>Chantiers</span>
+        </a>
+
+
+        <a
+            href="dqe.html"
+            class="nav-link"
+        >
+            <span>📐</span>
+            <span>DQE & Métré</span>
+        </a>
+
+
+        <a
+            href="devis.html"
+            class="nav-link"
+        >
+            <span>🧾</span>
+            <span>Devis</span>
+        </a>
+
+
+        <div class="nav-separator"></div>
+
+
+        <a
+            href="calculator.html"
+            class="nav-link"
+        >
+            <span>🧮</span>
+            <span>Calculateur BTP</span>
+        </a>
+
+
+        <a
+            href="mortar.html"
+            class="nav-link"
+        >
+            <span>🧱</span>
+            <span>Mortier</span>
+        </a>
+
+
+        <a
+            href="masonry.html"
+            class="nav-link"
+        >
+            <span>🧱</span>
+            <span>Maçonnerie</span>
+        </a>
+
+
+        <a
+            href="slab.html"
+            class="nav-link"
+        >
+            <span>🏠</span>
+            <span>Dalle</span>
+        </a>
+
+
+        <a
+            href="poteaux-poutres.html"
+            class="nav-link"
+        >
+            <span>🏗️</span>
+            <span>Poteaux & Poutres</span>
+        </a>
+
+
+        <div class="nav-separator"></div>
+
+
+        <a
+            href="clients.html"
+            class="nav-link"
+        >
+            <span>👥</span>
+            <span>Clients</span>
+        </a>
+
+
+        <a
+            href="materiaux.html"
+            class="nav-link"
+        >
+            <span>📦</span>
+            <span>Matériaux</span>
+        </a>
+
+
+        <a
+            href="documents.html"
+            class="nav-link"
+        >
+            <span>📁</span>
+            <span>Documents</span>
+        </a>
+
+
+        <a
+            href="equipe.html"
+            class="nav-link"
+        >
+            <span>👷</span>
+            <span>Équipe & Personnel</span>
+        </a>
+
+
+        <a
+            href="finances.html"
+            class="nav-link"
+        >
+            <span>💰</span>
+            <span>Finances</span>
+        </a>
+
+
+        <a
+            href="parametres.html"
+            class="nav-link"
+        >
+            <span>⚙️</span>
+            <span>Paramètres</span>
+        </a>
+
+
+        <div class="nav-separator"></div>
+
+
+        <a
+            href="login.html"
+            class="nav-link"
+        >
+            <span>🚪</span>
+            <span>Déconnexion</span>
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- ==========================================================
+     MAIN
+========================================================== -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+
+        <button
+            type="button"
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+        >
+            ☰
+        </button>
+
+
+        <div class="topbar-search">
+
+            <span>🔎</span>
+
+            <input
+                type="text"
+                id="searchChantier"
+                placeholder="Rechercher un chantier..."
+            >
+
+        </div>
+
+
+        <div class="topbar-right">
+
+
+            <button
+                type="button"
+                class="notification-btn"
+                title="Notifications"
+            >
+                🔔
+            </button>
+
+
+            <div class="user-profile">
+
+                <div
+                    class="user-avatar"
+                    id="userAvatar"
+                >
+                    U
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong id="userName">
+                        Utilisateur
+                    </strong>
+
+                    <small>
+                        Administrateur
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ======================================================
+         DASHBOARD
+    ======================================================= -->
+
+    <section class="dashboard-content">
+
+
+        <!-- BIENVENUE -->
+
+        <div class="welcome-section">
+
+            <div>
+
+                <h1>
+                    Bonjour,
+                    <span id="welcomeName">
+                        Utilisateur
+                    </span>
+                    👋
+                </h1>
+
+                <p>
+                    Voici un aperçu de votre activité BTP.
+                </p>
+
+            </div>
+
+
+            <a
+                href="chantiers.html"
+                class="btn btn-primary"
+            >
+                + Nouveau chantier
+            </a>
+
+        </div>
+
+
+        <!-- ==================================================
+             STATISTIQUES
+        =================================================== -->
+
+        <div class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    🏗️
+                </div>
+
+                <div class="stat-info">
+
+                    <span>
+                        Chantiers actifs
+                    </span>
+
+                    <strong id="statChantiers">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    🧾
+                </div>
+
+                <div class="stat-info">
+
+                    <span>
+                        Devis
+                    </span>
+
+                    <strong id="statDevis">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    👥
+                </div>
+
+                <div class="stat-info">
+
+                    <span>
+                        Clients
+                    </span>
+
+                    <strong id="statClients">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    📐
+                </div>
+
+                <div class="stat-info">
+
+                    <span>
+                        DQE
+                    </span>
+
+                    <strong id="statDQE">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             CHANTIERS + ACTIONS
+        =================================================== -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- CHANTIERS -->
+
+            <div class="dashboard-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Chantiers récents
+                        </h2>
+
+                        <p>
+                            Vos derniers projets
+                        </p>
+
+                    </div>
+
+
+                    <a href="chantiers.html">
+                        Voir tout →
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="recentChantiers"
+                    class="recent-chantiers"
+                >
+
+                    <div class="empty-state">
+                        Aucun chantier enregistré.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="dashboard-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Actions rapides
+                        </h2>
+
+                        <p>
+                            Accès rapide aux outils
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <a
+                        href="chantiers.html"
+                        class="quick-action"
+                    >
+
+                        <span class="quick-action-icon">
+                            🏗️
+                        </span>
+
+                        <span>
+                            Nouveau chantier
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="dqe.html"
+                        class="quick-action"
+                    >
+
+                        <span class="quick-action-icon">
+                            📐
+                        </span>
+
+                        <span>
+                            Nouveau DQE
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="devis.html"
+                        class="quick-action"
+                    >
+
+                        <span class="quick-action-icon">
+                            🧾
+                        </span>
+
+                        <span>
+                            Nouveau devis
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="clients.html"
+                        class="quick-action"
+                    >
+
+                        <span class="quick-action-icon">
+                            👤
+                        </span>
+
+                        <span>
+                            Nouveau client
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="documents.html"
+                        class="quick-action"
+                    >
+
+                        <span class="quick-action-icon">
+                            📁
+                        </span>
+
+                        <span>
+                            Documents
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="finances.html"
+                        class="quick-action"
+                    >
+
+                        <span class="quick-action-icon">
+                            💰
+                        </span>
+
+                        <span>
+                            Finances
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             DQE
+        =================================================== -->
+
+        <div class="dashboard-card dashboard-section-spacing">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        DQE récents
+                    </h2>
+
+                    <p>
+                        Derniers devis quantitatifs estimatifs
+                    </p>
+
+                </div>
+
+
+                <a href="dqe.html">
+                    Voir tout →
+                </a>
+
+            </div>
+
+
+            <div
+                id="recentDQEs"
+                class="recent-chantiers"
+            >
+
+                <div class="empty-state">
+                    Aucun DQE enregistré.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             FINANCES + INDICATEURS
+        =================================================== -->
+
+        <div class="dashboard-advanced-grid">
+
+
+            <!-- FINANCES -->
+
+            <div class="dashboard-advanced-card">
+
+                <h3>
+                    💰 Situation financière
+                </h3>
+
+
+                <div class="finance-mini-grid">
+
+
+                    <div class="finance-mini">
+
+                        <div class="finance-mini-label">
+                            Recettes
+                        </div>
+
+                        <div
+                            id="financeRecettes"
+                            class="finance-mini-value positive"
+                        >
+                            0 FCFA
+                        </div>
+
+                    </div>
+
+
+                    <div class="finance-mini">
+
+                        <div class="finance-mini-label">
+                            Dépenses
+                        </div>
+
+                        <div
+                            id="financeDepenses"
+                            class="finance-mini-value negative"
+                        >
+                            0 FCFA
+                        </div>
+
+                    </div>
+
+
+                    <div class="finance-mini">
+
+                        <div class="finance-mini-label">
+                            Solde
+                        </div>
+
+                        <div
+                            id="financeSolde"
+                            class="finance-mini-value"
+                        >
+                            0 FCFA
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- INDICATEURS -->
+
+            <div class="dashboard-advanced-card">
+
+                <h3>
+                    📊 Indicateurs BATIFLOW
+                </h3>
+
+
+                <div class="indicator-grid">
+
+
+                    <div class="indicator-item">
+
+                        <div class="indicator-icon">
+                            👷
+                        </div>
+
+                        <div
+                            id="indicatorEquipe"
+                            class="indicator-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="indicator-label">
+                            Équipe active
+                        </div>
+
+                    </div>
+
+
+                    <div class="indicator-item">
+
+                        <div class="indicator-icon">
+                            📁
+                        </div>
+
+                        <div
+                            id="indicatorDocuments"
+                            class="indicator-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="indicator-label">
+                            Documents
+                        </div>
+
+                    </div>
+
+
+                    <div class="indicator-item">
+
+                        <div class="indicator-icon">
+                            📦
+                        </div>
+
+                        <div
+                            id="indicatorStocks"
+                            class="indicator-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="indicator-label">
+                            Articles stock
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             ALERTES
+        =================================================== -->
+
+        <div class="dashboard-alerts">
+
+
+            <h3>
+                ⚠️ Alertes & vigilance
+            </h3>
+
+
+            <div
+                id="dashboardAlerts"
+                class="alert-list"
+            >
+
+                <div class="dashboard-alert-empty">
+                    Aucun stock sous le seuil d'alerte.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             ACTIVITÉ
+        =================================================== -->
+
+        <div class="dashboard-card dashboard-section-spacing">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Activité récente
+                    </h2>
+
+                    <p>
+                        Dernières opérations enregistrées
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="activityContainer"
+                class="activity-list"
+            >
+
+                <div class="empty-state">
+                    Aucune activité récente.
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="dashboard-footer">
+
+        <span>
+            BATIFLOW V1.0
+        </span>
+
+        <span>
+            © 2026 — Construction Management
+        </span>
+
+    </footer>
+
+
+</main>
+
+
+<script src="js/dashboard.js"></script>
+
+
+<script>
+
+/* ==========================================================
+   BATIFLOW — JAVASCRIPT ÉTAPE 17
+========================================================== */
+
+"use strict";
+
+
+const STORAGE_KEY =
+    "batiflowChantiers";
+
+const DQE_STORAGE_KEY =
+    "batiflowDQEs";
+
+const DEVIS_STORAGE_KEY =
+    "batiflowDevis";
+
+const CLIENTS_STORAGE_KEY =
+    "batiflowClients";
+
+const FINANCES_STORAGE_KEY =
+    "batiflowFinances";
+
+const EQUIPE_STORAGE_KEY =
+    "batiflowEquipe";
+
+const DOCUMENTS_STORAGE_KEY =
+    "batiflowDocuments";
+
+const STOCKS_STORAGE_KEY =
+    "batiflowStocks";
+
+
+/* ==========================================================
+   LOCAL STORAGE
+========================================================== */
+
+function lireStorage(cle){
+
+    try{
+
+        const valeur =
+            localStorage.getItem(cle);
+
+        if(!valeur){
+            return [];
+        }
+
+        const data =
+            JSON.parse(valeur);
+
+        return Array.isArray(data)
+            ? data
+            : [];
+
+    }catch(error){
+
+        console.error(
+            "Erreur localStorage :",
+            cle,
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+function obtenirChantiers(){
+    return lireStorage(STORAGE_KEY);
+}
+
+
+function obtenirDQEs(){
+    return lireStorage(DQE_STORAGE_KEY);
+}
+
+
+function obtenirDevis(){
+    return lireStorage(DEVIS_STORAGE_KEY);
+}
+
+
+function obtenirClients(){
+    return lireStorage(CLIENTS_STORAGE_KEY);
+}
+
+
+function obtenirFinances(){
+    return lireStorage(FINANCES_STORAGE_KEY);
+}
+
+
+function obtenirEquipe(){
+    return lireStorage(EQUIPE_STORAGE_KEY);
+}
+
+
+function obtenirDocuments(){
+    return lireStorage(DOCUMENTS_STORAGE_KEY);
+}
+
+
+function obtenirStocks(){
+    return lireStorage(STOCKS_STORAGE_KEY);
+}
+
+
+/* ==========================================================
+   UTILITAIRES
+========================================================== */
+
+function echapper(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function formaterMontant(value){
+
+    const nombre =
+        Number(value) || 0;
+
+    return (
+        nombre.toLocaleString("fr-FR")
+        + " FCFA"
+    );
+
+}
+
+
+function formaterDate(value){
+
+    if(!value){
+        return "";
+    }
+
+    const date =
+        new Date(value);
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+        return "";
+    }
+
+    return date.toLocaleDateString(
+        "fr-FR"
+    );
+
+}
+
+
+function dateElement(element){
+
+    if(!element){
+        return 0;
+    }
+
+    const value =
+        element.updatedAt ||
+        element.dateModification ||
+        element.date ||
+        element.createdAt ||
+        element.updated_at ||
+        element.created_at;
+
+
+    if(!value){
+        return 0;
+    }
+
+
+    const time =
+        new Date(value).getTime();
+
+
+    return Number.isNaN(time)
+        ? 0
+        : time;
+
+}
+
+
+function nomChantier(item){
+
+    return (
+        item?.nom ||
+        item?.nomChantier ||
+        item?.titre ||
+        item?.projet ||
+        item?.reference ||
+        "Chantier sans nom"
+    );
+
+}
+
+
+function clientChantier(item){
+
+    return (
+        item?.client ||
+        item?.nomClient ||
+        item?.clientNom ||
+        "Client non renseigné"
+    );
+
+}
+
+
+function progressionChantier(item){
+
+    let value =
+        item?.progression ??
+        item?.avancement ??
+        item?.progress ??
+        item?.pourcentage ??
+        0;
+
+
+    value =
+        parseFloat(value);
+
+
+    if(
+        Number.isNaN(value)
+    ){
+        value = 0;
+    }
+
+
+    return Math.max(
+        0,
+        Math.min(100,value)
+    );
+
+}
+
+
+/* ==========================================================
+   UTILISATEUR
+========================================================== */
+
+function chargerUtilisateur(){
+
+    let nom =
+        localStorage.getItem("userName") ||
+        localStorage.getItem("batiflowUserName") ||
+        "Utilisateur";
+
+
+    nom =
+        String(nom).trim() ||
+        "Utilisateur";
+
+
+    const userName =
+        document.getElementById(
+            "userName"
+        );
+
+
+    const welcomeName =
+        document.getElementById(
+            "welcomeName"
+        );
+
+
+    const avatar =
+        document.getElementById(
+            "userAvatar"
+        );
+
+
+    if(userName){
+        userName.textContent =
+            nom;
+    }
+
+
+    if(welcomeName){
+        welcomeName.textContent =
+            nom;
+    }
+
+
+    if(avatar){
+        avatar.textContent =
+            nom.charAt(0).toUpperCase();
+    }
+
+}
+
+
+/* ==========================================================
+   STATISTIQUES
+========================================================== */
+
+function afficherStatistiques(){
+
+    const chantiers =
+        obtenirChantiers();
+
+    const devis =
+        obtenirDevis();
+
+    const clients =
+        obtenirClients();
+
+    const dqes =
+        obtenirDQEs();
+
+
+    const actifs =
+        chantiers.filter(
+            chantier => {
+
+                const statut =
+                    String(
+                        chantier.statut ||
+                        chantier.status ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .trim();
+
+
+                return ![
+                    "terminé",
+                    "termine",
+                    "terminée",
+                    "terminee",
+                    "clos",
+                    "clôturé",
+                    "cloture",
+                    "annulé",
+                    "annule"
+                ].includes(statut);
+
+            }
+        );
+
+
+    let nombreClients =
+        clients.length;
+
+
+    if(
+        nombreClients === 0
+    ){
+
+        const uniques =
+            new Set();
+
+
+        chantiers.forEach(
+            chantier => {
+
+                const client =
+                    clientChantier(
+                        chantier
+                    );
+
+
+                if(
+                    client &&
+                    client !==
+                        "Client non renseigné"
+                ){
+
+                    uniques.add(
+                        client
+                            .trim()
+                            .toLowerCase()
+                    );
+
+                }
+
+            }
+        );
+
+
+        nombreClients =
+            uniques.size;
+
+    }
+
+
+    document.getElementById(
+        "statChantiers"
+    ).textContent =
+        actifs.length;
+
+
+    document.getElementById(
+        "statDevis"
+    ).textContent =
+        devis.length;
+
+
+    document.getElementById(
+        "statClients"
+    ).textContent =
+        nombreClients;
+
+
+    document.getElementById(
+        "statDQE"
+    ).textContent =
+        dqes.length;
+
+}
+
+
+/* ==========================================================
+   CHANTIERS
+========================================================== */
+
+function afficherChantiers(){
+
+    const container =
+        document.getElementById(
+            "recentChantiers"
+        );
+
+
+    const chantiers =
+        obtenirChantiers();
+
+
+    if(
+        chantiers.length === 0
+    ){
+
+        container.innerHTML = `
+            <div class="empty-state">
+                Aucun chantier enregistré.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    const liste =
+        [...chantiers]
+        .sort(
+            (a,b) =>
+                dateElement(b) -
+                dateElement(a)
+        )
+        .slice(0,5);
+
+
+    container.innerHTML =
+        liste.map(
+            chantier => {
+
+                const nom =
+                    nomChantier(
+                        chantier
+                    );
+
+
+                const client =
+                    clientChantier(
+                        chantier
+                    );
+
+
+                const progression =
+                    progressionChantier(
+                        chantier
+                    );
+
+
+                const statut =
+                    chantier.statut ||
+                    chantier.status ||
+                    "Actif";
+
+
+                const statutNormalise =
+                    String(statut)
+                        .toLowerCase();
+
+
+                let classe =
+                    "active";
+
+
+                if(
+                    statutNormalise
+                        .includes("termin")
+                ){
+                    classe =
+                        "success";
+                }
+
+
+                if(
+                    statutNormalise
+                        .includes("attente") ||
+                    statutNormalise
+                        .includes("pause")
+                ){
+                    classe =
+                        "warning";
+                }
+
+
+                if(
+                    statutNormalise
+                        .includes("annul")
+                ){
+                    classe =
+                        "danger";
+                }
+
+
+                return `
+
+                <div
+                    class="chantier-item dashboard-chantier"
+                    data-search="${echapper(
+                        nom + " " + client
+                    )}"
+                >
+
+                    <div class="chantier-main">
+
+                        <div class="chantier-icon">
+                            🏗️
+                        </div>
+
+                        <div class="chantier-info">
+
+                            <strong>
+                                ${echapper(nom)}
+                            </strong>
+
+                            <span>
+                                ${echapper(client)}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="chantier-progress">
+
+                        <div class="progress-info">
+
+                            <span>
+                                ${progression}%
+                            </span>
+
+                            <span
+                                class="status-badge ${classe}"
+                            >
+                                ${echapper(statut)}
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill"
+                                style="width:${progression}%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ==========================================================
+   DQE
+========================================================== */
+
+function afficherDQEs(){
+
+    const container =
+        document.getElementById(
+            "recentDQEs"
+        );
+
+
+    const dqes =
+        obtenirDQEs();
+
+
+    if(
+        dqes.length === 0
+    ){
+
+        container.innerHTML = `
+            <div class="empty-state">
+                Aucun DQE enregistré.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    const liste =
+        [...dqes]
+        .sort(
+            (a,b) =>
+                dateElement(b) -
+                dateElement(a)
+        )
+        .slice(0,5);
+
+
+    container.innerHTML =
+        liste.map(
+            dqe => {
+
+                const reference =
+                    dqe.reference ||
+                    dqe.numero ||
+                    "DQE";
+
+
+                const nom =
+                    dqe.nom ||
+                    dqe.objet ||
+                    dqe.chantier ||
+                    "DQE";
+
+
+                const client =
+                    dqe.clientNom ||
+                    dqe.client ||
+                    "Client non renseigné";
+
+
+                const total =
+                    dqe.totalTTC ??
+                    dqe.totalHT ??
+                    0;
+
+
+                const statut =
+                    dqe.statut ||
+                    "Brouillon";
+
+
+                return `
+
+                <div class="chantier-item">
+
+                    <div class="chantier-main">
+
+                        <div class="chantier-icon">
+                            📐
+                        </div>
+
+                        <div class="chantier-info">
+
+                            <strong>
+                                ${echapper(reference)}
+                            </strong>
+
+                            <span>
+                                ${echapper(nom)}
+                            </span>
+
+                            <small>
+                                ${echapper(client)}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="chantier-progress">
+
+                        <div class="progress-info">
+
+                            <span>
+                                ${formaterMontant(total)}
+                            </span>
+
+                            <span class="status-badge active">
+                                ${echapper(statut)}
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            style="
+                                display:flex;
+                                gap:6px;
+                                justify-content:flex-end;
+                                margin-top:8px;
+                            "
+                        >
+
+                            <a
+                                href="dqe.html?voir=${encodeURIComponent(
+                                    dqe.id
+                                )}"
+                                class="btn btn-sm"
+                            >
+                                Voir
+                            </a>
+
+                            <a
+                                href="dqe.html?modifier=${encodeURIComponent(
+                                    dqe.id
+                                )}"
+                                class="btn btn-sm"
+                            >
+                                Modifier
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ==========================================================
+   FINANCES
+========================================================== */
+
+function afficherFinances(){
+
+    const finances =
+        obtenirFinances();
+
+
+    let recettes = 0;
+
+    let depenses = 0;
+
+
+    finances.forEach(
+        operation => {
+
+            const montant =
+                Number(
+                    operation.montant ??
+                    operation.amount ??
+                    0
+                ) || 0;
+
+
+            const type =
+                String(
+                    operation.type ||
+                    ""
+                )
+                .toLowerCase()
+                .trim();
+
+
+            if(
+                type === "recette" ||
+                type === "entrée" ||
+                type === "entree" ||
+                type === "revenu" ||
+                type === "encaissement"
+            ){
+
+                recettes += montant;
+
+            }else{
+
+                depenses += montant;
+
+            }
+
+        }
+    );
+
+
+    const solde =
+        recettes - depenses;
+
+
+    const recettesElement =
+        document.getElementById(
+            "financeRecettes"
+        );
+
+
+    const depensesElement =
+        document.getElementById(
+            "financeDepenses"
+        );
+
+
+    const soldeElement =
+        document.getElementById(
+            "financeSolde"
+        );
+
+
+    recettesElement.textContent =
+        formaterMontant(
+            recettes
+        );
+
+
+    depensesElement.textContent =
+        formaterMontant(
+            depenses
+        );
+
+
+    soldeElement.textContent =
+        formaterMontant(
+            solde
+        );
+
+
+    soldeElement.classList.remove(
+        "positive",
+        "negative"
+    );
+
+
+    soldeElement.classList.add(
+        solde >= 0
+            ? "positive"
+            : "negative"
+    );
+
+}
+
+
+/* ==========================================================
+   INDICATEURS
+========================================================== */
+
+function afficherIndicateurs(){
+
+    const equipe =
+        obtenirEquipe();
+
+    const documents =
+        obtenirDocuments();
+
+    const stocks =
+        obtenirStocks();
+
+
+    const actifs =
+        equipe.filter(
+            personne => {
+
+                const statut =
+                    String(
+                        personne.statut ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .trim();
+
+
+                return (
+                    !statut ||
+                    statut === "actif" ||
+                    statut === "active"
+                );
+
+            }
+        ).length;
+
+
+    document.getElementById(
+        "indicatorEquipe"
+    ).textContent =
+        actifs;
+
+
+    document.getElementById(
+        "indicatorDocuments"
+    ).textContent =
+        documents.length;
+
+
+    document.getElementById(
+        "indicatorStocks"
+    ).textContent =
+        stocks.length;
+
+}
+
+
+/* ==========================================================
+   ALERTES STOCK
+========================================================== */
+
+function afficherAlertes(){
+
+    const container =
+        document.getElementById(
+            "dashboardAlerts"
+        );
+
+
+    const stocks =
+        obtenirStocks();
+
+
+    const alertes = [];
+
+
+    stocks.forEach(
+        stock => {
+
+            const quantite =
+                Number(
+                    stock.quantite ??
+                    stock.stock ??
+                    stock.stockActuel ??
+                    stock.quantiteStock ??
+                    0
+                ) || 0;
+
+
+            const seuil =
+                Number(
+                    stock.stockMin ??
+                    stock.seuil ??
+                    stock.seuilAlerte ??
+                    stock.minimum ??
+                    0
+                ) || 0;
+
+
+            const nom =
+                stock.nom ||
+                stock.designation ||
+                stock.article ||
+                stock.materiau ||
+                stock.matériau ||
+                "Matériau";
+
+
+            if(
+                seuil > 0 &&
+                quantite <= seuil
+            ){
+
+                alertes.push({
+                    nom,
+                    quantite,
+                    seuil
+                });
+
+            }
+
+        }
+    );
+
+
+    if(
+        alertes.length === 0
+    ){
+
+        container.innerHTML = `
+            <div class="dashboard-alert-empty">
+                ✅ Aucun stock sous le seuil d'alerte.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        alertes
+        .slice(0,8)
+        .map(
+            alerte => {
+
+                const critique =
+                    alerte.quantite <=
+                    alerte.seuil / 2;
+
+
+                return `
+
+                <div
+                    class="dashboard-alert ${
+                        critique
+                            ? "danger"
+                            : "warning"
+                    }"
+                >
+
+                    <div class="dashboard-alert-left">
+
+                        <div class="dashboard-alert-icon">
+                            ${critique ? "🚨" : "⚠️"}
+                        </div>
+
+                        <div>
+
+                            <div class="dashboard-alert-title">
+                                ${echapper(
+                                    alerte.nom
+                                )}
+                            </div>
+
+                            <div class="dashboard-alert-text">
+                                Stock :
+                                ${alerte.quantite}
+                                —
+                                Seuil :
+                                ${alerte.seuil}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="materiaux.html"
+                        class="btn btn-sm"
+                    >
+                        Voir
+                    </a>
+
+                </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* ==========================================================
+   ACTIVITÉ
+========================================================== */
+
+function afficherActivite(){
+
+    const container =
+        document.getElementById(
+            "activityContainer"
+        );
+
+
+    const activites = [];
+
+
+    /* CHANTIERS */
+
+    obtenirChantiers()
+    .forEach(
+        item => {
+
+            activites.push({
+
+                icon:"🏗️",
+
+                titre:
+                    "Chantier : " +
+                    nomChantier(item),
+
+                description:
+                    clientChantier(item),
+
+                date:
+                    dateElement(item)
+
+            });
+
+        }
+    );
+
+
+    /* DQE */
+
+    obtenirDQEs()
+    .forEach(
+        item => {
+
+            activites.push({
+
+                icon:"📐",
+
+                titre:
+                    "DQE : " +
+                    (
+                        item.reference ||
+                        item.numero ||
+                        item.nom ||
+                        "Nouveau DQE"
+                    ),
+
+                description:
+                    item.clientNom ||
+                    item.client ||
+                    item.objet ||
+                    "DQE enregistré",
+
+                date:
+                    dateElement(item)
+
+            });
+
+        }
+    );
+
+
+    /* DEVIS */
+
+    obtenirDevis()
+    .forEach(
+        item => {
+
+            const total =
+                item.totalTTC ??
+                item.totalHT ??
+                item.montant ??
+                0;
+
+
+            activites.push({
+
+                icon:"🧾",
+
+                titre:
+                    "Devis : " +
+                    (
+                        item.reference ||
+                        item.numero ||
+                        "Nouveau devis"
+                    ),
+
+                description:
+                    (
+                        item.client ||
+                        item.clientNom ||
+                        "Client"
+                    ) +
+                    " — " +
+                    formaterMontant(
+                        total
+                    ),
+
+                date:
+                    dateElement(item)
+
+            });
+
+        }
+    );
+
+
+    /* FINANCES */
+
+    obtenirFinances()
+    .forEach(
+        item => {
+
+            const montant =
+                Number(
+                    item.montant ||
+                    0
+                ) || 0;
+
+
+            activites.push({
+
+                icon:
+                    String(
+                        item.type ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .includes("recette")
+                        ? "💰"
+                        : "💸",
+
+                titre:
+                    item.libelle ||
+                    "Opération financière",
+
+                description:
+                    (
+                        item.type ||
+                        "Opération"
+                    ) +
+                    " — " +
+                    formaterMontant(
+                        montant
+                    ),
+
+                date:
+                    dateElement(item)
+
+            });
+
+        }
+    );
+
+
+    /* DOCUMENTS */
+
+    obtenirDocuments()
+    .forEach(
+        item => {
+
+            activites.push({
+
+                icon:"📁",
+
+                titre:
+                    "Document : " +
+                    (
+                        item.nom ||
+                        item.name ||
+                        "Document"
+                    ),
+
+                description:
+                    item.categorie ||
+                    "Document ajouté",
+
+                date:
+                    dateElement(item)
+
+            });
+
+        }
+    );
+
+
+    activites.sort(
+        (a,b) =>
+            b.date - a.date
+    );
+
+
+    const recentes =
+        activites.slice(0,8);
+
+
+    if(
+        recentes.length === 0
+    ){
+
+        container.innerHTML = `
+            <div class="empty-state">
+                Aucune activité récente.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        recentes.map(
+            item => {
+
+                return `
+
+                <div class="activity-item">
+
+                    <div class="activity-icon">
+                        ${item.icon}
+                    </div>
+
+
+                    <div class="activity-content">
+
+                        <strong>
+                            ${echapper(
+                                item.titre
+                            )}
+                        </strong>
+
+                        <div class="activity-item-extra">
+                            ${echapper(
+                                item.description
+                            )}
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-date">
+                        ${formaterDate(
+                            item.date
+                        )}
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ==========================================================
+   RECHERCHE
+========================================================== */
+
+function initialiserRecherche(){
+
+    const input =
+        document.getElementById(
+            "searchChantier"
+        );
+
+
+    if(!input){
+        return;
+    }
+
+
+    input.addEventListener(
+        "input",
+        function(){
+
+            const recherche =
+                this.value
+                .toLowerCase()
+                .trim();
+
+
+            document
+                .querySelectorAll(
+                    ".dashboard-chantier"
+                )
+                .forEach(
+                    element => {
+
+                        const texte =
+                            (
+                                element.textContent +
+                                " " +
+                                (
+                                    element.dataset.search ||
+                                    ""
+                                )
+                            )
+                            .toLowerCase();
+
+
+                        element.style.display =
+                            texte.includes(
+                                recherche
+                            )
+                                ? ""
+                                : "none";
+
+                    }
+                );
+
+        }
+    );
+
+}
+
+
+/* ==========================================================
+   MENU MOBILE
+========================================================== */
+
+function initialiserMenuMobile(){
+
+    const bouton =
+        document.getElementById(
+            "mobileMenuBtn"
+        );
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    if(
+        !bouton ||
+        !sidebar
+    ){
+        return;
+    }
+
+
+    bouton.addEventListener(
+        "click",
+        function(){
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================================
+   ACTUALISATION
+========================================================== */
+
+function actualiserDashboard(){
+
+    chargerUtilisateur();
+
+    afficherStatistiques();
+
+    afficherChantiers();
+
+    afficherDQEs();
+
+    afficherFinances();
+
+    afficherIndicateurs();
+
+    afficherAlertes();
+
+    afficherActivite();
+
+}
+
+
+/* ==========================================================
+   SYNCHRONISATION ENTRE LES PAGES
+========================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        const cles = [
+
+            STORAGE_KEY,
+            DQE_STORAGE_KEY,
+            DEVIS_STORAGE_KEY,
+            CLIENTS_STORAGE_KEY,
+            FINANCES_STORAGE_KEY,
+            EQUIPE_STORAGE_KEY,
+            DOCUMENTS_STORAGE_KEY,
+            STOCKS_STORAGE_KEY
+
+        ];
+
+
+        if(
+            !event.key ||
+            cles.includes(event.key)
+        ){
+
+            actualiserDashboard();
+
+        }
+
+    }
+);
+
+
+/* ==========================================================
+   RETOUR SUR LA PAGE
+========================================================== */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        actualiserDashboard();
+
+    }
+);
+
+
+/* ==========================================================
+   DÉMARRAGE
+========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        initialiserRecherche();
+
+        initialiserMenuMobile();
+
+        actualiserDashboard();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
+```
