@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BATIFLOW — Matériaux</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f9;
+    color:#172033;
+}
+
+/* SIDEBAR */
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    background:#101827;
+    color:white;
+    padding:22px 16px;
+    overflow-y:auto;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:800;
+    margin-bottom:30px;
+    padding-left:12px;
+}
+
+.logo span{
+    color:#f28c28;
+}
+
+.menu-title{
+    font-size:11px;
+    color:#8993a5;
+    margin:20px 12px 8px;
+    text-transform:uppercase;
+}
+
+.sidebar a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color:#c8cfda;
+    padding:12px 14px;
+    margin:4px 0;
+    border-radius:9px;
+    font-size:14px;
+    transition:.2s;
+}
+
+.sidebar a:hover{
+    background:#1b2638;
+    color:white;
+}
+
+.sidebar a.active{
+    background:#f28c28;
+    color:white;
+    font-weight:600;
+}
+
+.icon{
+    width:20px;
+    text-align:center;
+}
+
+/* MAIN */
+.main{
+    margin-left:260px;
+    min-height:100vh;
+}
+
+/* HEADER */
+.header{
+    height:72px;
+    background:white;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+}
+
+.header h1{
+    font-size:22px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.user{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#f28c28;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* CONTENT */
+.content{
+    padding:30px;
+}
+
+.page-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.page-title h2{
+    font-size:25px;
+}
+
+.page-title p{
+    color:#6b7280;
+    margin-top:6px;
+}
+
+/* BUTTON */
+.btn{
+    border:none;
+    border-radius:8px;
+    padding:11px 17px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:14px;
+}
+
+.btn-primary{
+    background:#f28c28;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#dc7417;
+}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    border:1px solid #e5e7eb;
+}
+
+.stat-label{
+    color:#6b7280;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.stat-value{
+    font-size:25px;
+    font-weight:700;
+}
+
+/* CARD */
+.card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.card-header{
+    padding:18px 20px;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.card-header h3{
+    font-size:17px;
+}
+
+/* SEARCH */
+.search{
+    width:260px;
+    padding:10px 13px;
+    border:1px solid #d9dee7;
+    border-radius:8px;
+    outline:none;
+}
+
+.search:focus{
+    border-color:#f28c28;
+}
+
+/* TABLE */
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#f8fafc;
+    text-align:left;
+    padding:14px 16px;
+    font-size:12px;
+    color:#64748b;
+    text-transform:uppercase;
+}
+
+td{
+    padding:15px 16px;
+    border-top:1px solid #edf0f4;
+    font-size:14px;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    background:#fff3e6;
+    color:#c96812;
+    font-size:12px;
+    font-weight:600;
+}
+
+.stock-ok{
+    color:#15803d;
+    font-weight:600;
+}
+
+.stock-low{
+    color:#dc2626;
+    font-weight:600;
+}
+
+.actions button{
+    border:none;
+    background:none;
+    cursor:pointer;
+    margin-right:8px;
+    font-size:16px;
+}
+
+/* EMPTY */
+.empty{
+    text-align:center;
+    padding:45px 20px;
+    color:#6b7280;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:500px;
+    max-width:94%;
+    background:white;
+    border-radius:14px;
+    padding:25px;
+}
+
+.modal-box h3{
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+.form-group label{
+    font-size:13px;
+    font-weight:600;
+}
+
+.form-group input,
+.form-group select{
+    padding:11px;
+    border:1px solid #d9dee7;
+    border-radius:8px;
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:#f28c28;
+}
+
+.modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:22px;
+}
+
+.btn-secondary{
+    background:#e9edf2;
+    color:#263244;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:25px;
+    color:#8a93a3;
+    font-size:12px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .sidebar{
+        width:220px;
+    }
+
+    .main{
+        margin-left:220px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .header{
+        padding:0 15px;
+    }
+
+    .content{
+        padding:18px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .page-title{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .search{
+        width:100%;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="logo">
+        BATI<span>FLOW</span>
+    </div>
+
+    <div class="menu-title">Principal</div>
+
+    <a href="dashboard.html">
+        <span class="icon">📊</span>
+        Tableau de bord
+    </a>
+
+    <a href="chantiers.html">
+        <span class="icon">🏗️</span>
+        Chantiers
+    </a>
+
+    <a href="dqe.html">
+        <span class="icon">📐</span>
+        DQE & Métré
+    </a>
+
+    <a href="devis.html">
+        <span class="icon">🧾</span>
+        Devis
+    </a>
+
+    <a href="clients.html">
+        <span class="icon">👥</span>
+        Clients
+    </a>
+
+    <div class="menu-title">Calcul BTP</div>
+
+    <a href="calculator.html">
+        <span class="icon">🧮</span>
+        Calculateur BTP
+    </a>
+
+    <a href="mortar.html">
+        <span class="icon">🧱</span>
+        Mortier
+    </a>
+
+    <a href="masonry.html">
+        <span class="icon">🏠</span>
+        Maçonnerie
+    </a>
+
+    <a href="slab.html">
+        <span class="icon">▦</span>
+        Dalle
+    </a>
+
+    <a href="poteaux-poutres.html">
+        <span class="icon">🏢</span>
+        Poteaux & Poutres
+    </a>
+
+    <div class="menu-title">Gestion</div>
+
+    <a href="materiaux.html" class="active">
+        <span class="icon">🧱</span>
+        Matériaux
+    </a>
+
+    <a href="documents.html">
+        <span class="icon">📁</span>
+        Documents
+    </a>
+
+    <a href="parametres.html">
+        <span class="icon">⚙️</span>
+        Paramètres
+    </a>
+
+    <div class="menu-title">Compte</div>
+
+    <a href="login.html">
+        <span class="icon">↪️</span>
+        Déconnexion
+    </a>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+    <header class="header">
+        <h1>Matériaux</h1>
+
+        <div class="header-right">
+            <span>Gestion des matériaux</span>
+            <div class="user">M</div>
+        </div>
+    </header>
+
+
+    <section class="content">
+
+        <div class="page-title">
+            <div>
+                <h2>Matériaux</h2>
+                <p>Gérez les matériaux et leurs prix pour vos projets BTP.</p>
+            </div>
+
+            <button class="btn btn-primary" onclick="ouvrirModal()">
+                + Ajouter un matériau
+            </button>
+        </div>
+
+
+        <!-- STATS -->
+        <div class="stats">
+
+            <div class="stat-card">
+                <div class="stat-label">Matériaux</div>
+                <div class="stat-value" id="totalMateriaux">0</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Catégories</div>
+                <div class="stat-value" id="totalCategories">0</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Stock disponible</div>
+                <div class="stat-value" id="stockDisponible">0</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Stock faible</div>
+                <div class="stat-value" id="stockFaible">0</div>
+            </div>
+
+        </div>
+
+
+        <!-- TABLE -->
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Liste des matériaux</h3>
+
+                <input
+                    type="text"
+                    class="search"
+                    id="recherche"
+                    placeholder="Rechercher un matériau..."
+                    oninput="afficherMateriaux()"
+                >
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Matériau</th>
+                            <th>Catégorie</th>
+                            <th>Unité</th>
+                            <th>Prix unitaire</th>
+                            <th>Stock</th>
+                            <th>Seuil</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tableMateriaux"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="footer">
+        BATIFLOW V1.0 — Gestion professionnelle BTP
+    </div>
+
+</main>
+
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <h3 id="modalTitre">Ajouter un matériau</h3>
+
+        <div class="form-grid">
+
+            <div class="form-group full">
+                <label>Nom du matériau</label>
+                <input type="text" id="nom" placeholder="Ex : Ciment CPJ 35">
+            </div>
+
+            <div class="form-group">
+                <label>Catégorie</label>
+
+                <select id="categorie">
+                    <option value="Ciment">Ciment</option>
+                    <option value="Acier">Acier</option>
+                    <option value="Sable">Sable</option>
+                    <option value="Gravier">Gravier</option>
+                    <option value="Brique">Brique</option>
+                    <option value="Bois">Bois</option>
+                    <option value="Peinture">Peinture</option>
+                    <option value="Électricité">Électricité</option>
+                    <option value="Plomberie">Plomberie</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Unité</label>
+
+                <select id="unite">
+                    <option value="sac">Sac</option>
+                    <option value="kg">kg</option>
+                    <option value="m³">m³</option>
+                    <option value="m²">m²</option>
+                    <option value="ml">ml</option>
+                    <option value="unité">Unité</option>
+                    <option value="litre">Litre</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Prix unitaire (FCFA)</label>
+                <input type="number" id="prix" min="0" placeholder="Ex : 5000">
+            </div>
+
+            <div class="form-group">
+                <label>Stock</label>
+                <input type="number" id="stock" min="0" placeholder="Ex : 100">
+            </div>
+
+            <div class="form-group">
+                <label>Seuil d'alerte</label>
+                <input type="number" id="seuil" min="0" placeholder="Ex : 20">
+            </div>
+
+        </div>
+
+        <div class="modal-actions">
+
+            <button class="btn btn-secondary" onclick="fermerModal()">
+                Annuler
+            </button>
+
+            <button class="btn btn-primary" onclick="enregistrerMateriau()">
+                Enregistrer
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let materiaux = JSON.parse(
+    localStorage.getItem("batiflowMateriaux")
+) || [];
+
+let indexModification = -1;
+
+
+/* OUVRIR */
+function ouvrirModal(index = -1){
+
+    indexModification = index;
+
+    document.getElementById("modal").classList.add("show");
+
+    if(index >= 0){
+
+        const m = materiaux[index];
+
+        document.getElementById("modalTitre").textContent =
+            "Modifier le matériau";
+
+        document.getElementById("nom").value = m.nom;
+        document.getElementById("categorie").value = m.categorie;
+        document.getElementById("unite").value = m.unite;
+        document.getElementById("prix").value = m.prix;
+        document.getElementById("stock").value = m.stock;
+        document.getElementById("seuil").value = m.seuil;
+
+    }else{
+
+        document.getElementById("modalTitre").textContent =
+            "Ajouter un matériau";
+
+        document.getElementById("nom").value = "";
+        document.getElementById("prix").value = "";
+        document.getElementById("stock").value = "";
+        document.getElementById("seuil").value = "";
+
+    }
+}
+
+
+/* FERMER */
+function fermerModal(){
+
+    document.getElementById("modal").classList.remove("show");
+
+    indexModification = -1;
+}
+
+
+/* ENREGISTRER */
+function enregistrerMateriau(){
+
+    const nom =
+        document.getElementById("nom").value.trim();
+
+    const categorie =
+        document.getElementById("categorie").value;
+
+    const unite =
+        document.getElementById("unite").value;
+
+    const prix =
+        Number(document.getElementById("prix").value);
+
+    const stock =
+        Number(document.getElementById("stock").value);
+
+    const seuil =
+        Number(document.getElementById("seuil").value);
+
+
+    if(!nom){
+
+        alert("Veuillez saisir le nom du matériau.");
+
+        return;
+    }
+
+
+    const materiau = {
+        nom,
+        categorie,
+        unite,
+        prix,
+        stock,
+        seuil
+    };
+
+
+    if(indexModification >= 0){
+
+        materiaux[indexModification] = materiau;
+
+    }else{
+
+        materiaux.push(materiau);
+
+    }
+
+
+    localStorage.setItem(
+        "batiflowMateriaux",
+        JSON.stringify(materiaux)
+    );
+
+
+    fermerModal();
+
+    afficherMateriaux();
+}
+
+
+/* AFFICHER */
+function afficherMateriaux(){
+
+    const tbody =
+        document.getElementById("tableMateriaux");
+
+    const recherche =
+        document.getElementById("recherche")
+        .value
+        .toLowerCase();
+
+
+    const filtres = materiaux.filter(m =>
+        m.nom.toLowerCase().includes(recherche) ||
+        m.categorie.toLowerCase().includes(recherche)
+    );
+
+
+    tbody.innerHTML = "";
+
+
+    if(filtres.length === 0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="7">
+                    <div class="empty">
+                        Aucun matériau trouvé.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+    }else{
+
+        filtres.forEach((m) => {
+
+            const index = materiaux.indexOf(m);
+
+            const stockClass =
+                Number(m.stock) <= Number(m.seuil)
+                ? "stock-low"
+                : "stock-ok";
+
+
+            tbody.innerHTML += `
+
+                <tr>
+
+                    <td>
+                        <strong>${echapper(m.nom)}</strong>
+                    </td>
+
+                    <td>
+                        <span class="badge">
+                            ${echapper(m.categorie)}
+                        </span>
+                    </td>
+
+                    <td>${echapper(m.unite)}</td>
+
+                    <td>
+                        ${Number(m.prix).toLocaleString("fr-FR")}
+                        FCFA
+                    </td>
+
+                    <td class="${stockClass}">
+                        ${m.stock}
+                    </td>
+
+                    <td>
+                        ${m.seuil}
+                    </td>
+
+                    <td class="actions">
+
+                        <button
+                            title="Modifier"
+                            onclick="ouvrirModal(${index})">
+                            ✏️
+                        </button>
+
+                        <button
+                            title="Supprimer"
+                            onclick="supprimerMateriau(${index})">
+                            🗑️
+                        </button>
+
+                    </td>
+
+                </tr>
+            `;
+        });
+    }
+
+
+    mettreAJourStats();
+}
+
+
+/* SUPPRIMER */
+function supprimerMateriau(index){
+
+    if(
+        !confirm(
+            "Voulez-vous supprimer ce matériau ?"
+        )
+    ){
+        return;
+    }
+
+
+    materiaux.splice(index,1);
+
+
+    localStorage.setItem(
+        "batiflowMateriaux",
+        JSON.stringify(materiaux)
+    );
+
+
+    afficherMateriaux();
+}
+
+
+/* STATISTIQUES */
+function mettreAJourStats(){
+
+    document.getElementById("totalMateriaux")
+        .textContent = materiaux.length;
+
+
+    const categories =
+        new Set(
+            materiaux.map(m => m.categorie)
+        );
+
+    document.getElementById("totalCategories")
+        .textContent = categories.size;
+
+
+    const stock =
+        materiaux.reduce(
+            (total,m) =>
+                total + Number(m.stock || 0),
+            0
+        );
+
+    document.getElementById("stockDisponible")
+        .textContent = stock;
+
+
+    const faible =
+        materiaux.filter(
+            m => Number(m.stock) <= Number(m.seuil)
+        ).length;
+
+    document.getElementById("stockFaible")
+        .textContent = faible;
+}
+
+
+/* PROTECTION AFFICHAGE */
+function echapper(texte){
+
+    return String(texte)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+/* INITIALISATION */
+afficherMateriaux();
+
+</script>
+
+</body>
+</html>
