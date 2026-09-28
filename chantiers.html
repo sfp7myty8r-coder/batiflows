@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -515,6 +516,21 @@ button,
 }
 
 
+/* DEVIS */
+
+.action-button.devis{
+    background:#fff7ed;
+    border-color:#fed7aa;
+    color:#c2410c;
+}
+
+.action-button.devis:hover{
+    background:#f28c28;
+    color:white;
+    border-color:#f28c28;
+}
+
+
 /* SUPPRIMER */
 
 .action-button.delete{
@@ -863,7 +879,7 @@ footer{
 
 
 <!-- =====================================================
-     MODAL NOUVEAU / MODIFICATION
+     MODAL
 ===================================================== -->
 
 <div
@@ -1110,6 +1126,15 @@ const FINANCE_STORAGE_KEY =
 const SUIVI_STORAGE_KEY =
     "batiflowSuivisChantiers";
 
+const PLANNING_STORAGE_KEY =
+    "batiflowPlanning";
+
+const DEVIS_STORAGE_KEY =
+    "batiflowDevis";
+
+const DQE_STORAGE_KEY =
+    "batiflowDQEs";
+
 
 let chantierEnModification = null;
 
@@ -1222,6 +1247,73 @@ function sauvegarderSuivis(suivis){
         SUIVI_STORAGE_KEY,
         JSON.stringify(suivis)
     );
+
+}
+
+
+function obtenirPlanning(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                PLANNING_STORAGE_KEY
+            )
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function sauvegarderPlanning(planning){
+
+    localStorage.setItem(
+        PLANNING_STORAGE_KEY,
+        JSON.stringify(planning)
+    );
+
+}
+
+
+function obtenirDevis(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                DEVIS_STORAGE_KEY
+            )
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function obtenirDQEs(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                DQE_STORAGE_KEY
+            )
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
 
 }
 
@@ -1456,6 +1548,9 @@ function initialiserSuivi(
             chantierId:
                 chantier.id,
 
+            chantier:
+                chantier.nom,
+
             responsable:
                 "",
 
@@ -1497,6 +1592,66 @@ function initialiserSuivi(
 
 
 /* =====================================================
+   CHANTIER ACTIF
+===================================================== */
+
+function preparerChantier(id){
+
+    const chantier =
+        obtenirChantierParId(id);
+
+
+    if(!chantier){
+
+        alert(
+            "Chantier introuvable."
+        );
+
+        return null;
+
+    }
+
+
+    localStorage.setItem(
+        "chantierSelectionne",
+        JSON.stringify(
+            chantier
+        )
+    );
+
+
+    localStorage.setItem(
+        "batiflowChantierActif",
+        String(
+            chantier.id
+        )
+    );
+
+
+    return chantier;
+
+}
+
+
+function obtenirChantierParId(id){
+
+    const chantiers =
+        obtenirChantiers();
+
+
+    return chantiers.find(
+        chantier =>
+            String(
+                chantier.id
+            )
+            ===
+            String(id)
+    );
+
+}
+
+
+/* =====================================================
    AFFICHAGE
 ===================================================== */
 
@@ -1512,7 +1667,9 @@ function afficherChantiers(){
         );
 
 
-    /* STATS */
+    /* =================================================
+       STATS
+    ================================================= */
 
     const total =
         chantiers.length;
@@ -1564,7 +1721,9 @@ function afficherChantiers(){
         moyenne + " %";
 
 
-    /* AUCUN CHANTIER */
+    /* =================================================
+       AUCUN CHANTIER
+    ================================================= */
 
     if(!chantiers.length){
 
@@ -1689,40 +1848,82 @@ function afficherChantiers(){
                     }
 
 
-                    /* FINANCES */
+                    /* =================================================
+                       FINANCES
+                    ================================================= */
 
                     const operations =
                         finances.filter(
-                            operation =>
-                                String(
+                            operation => {
+
+                                const operationChantier =
                                     operation.chantierId
+                                    ??
+                                    operation.projectId
+                                    ??
+                                    operation.idChantier;
+
+                                return String(
+                                    operationChantier
                                 )
                                 ===
                                 String(
                                     chantier.id
-                                )
+                                );
+
+                            }
                         );
 
 
                     const depenses =
                         operations
                         .filter(
-                            operation =>
-                                operation.type
-                                ===
-                                "depense"
+                            operation => {
+
+                                const type =
+                                    String(
+                                        operation.type
+                                        ??
+                                        operation.nature
+                                        ??
+                                        operation.operation
+                                        ??
+                                        ""
+                                    ).toLowerCase();
+
+                                return (
+                                    type === "depense"
+                                    ||
+                                    type === "dépense"
+                                );
+
+                            }
                         )
                         .reduce(
                             (
                                 total,
                                 operation
-                            ) =>
-                                total +
-                                (
-                                    Number(
-                                        operation.montant
-                                    ) || 0
-                                ),
+                            ) => {
+
+                                const montant =
+                                    operation.montant
+                                    ??
+                                    operation.amount
+                                    ??
+                                    operation.prix
+                                    ??
+                                    operation.total
+                                    ??
+                                    operation.valeur;
+
+                                return total +
+                                    (
+                                        Number(
+                                            montant
+                                        ) || 0
+                                    );
+
+                            },
                             0
                         );
 
@@ -1730,22 +1931,54 @@ function afficherChantiers(){
                     const recettes =
                         operations
                         .filter(
-                            operation =>
-                                operation.type
-                                ===
-                                "recette"
+                            operation => {
+
+                                const type =
+                                    String(
+                                        operation.type
+                                        ??
+                                        operation.nature
+                                        ??
+                                        operation.operation
+                                        ??
+                                        ""
+                                    ).toLowerCase();
+
+                                return (
+                                    type === "recette"
+                                    ||
+                                    type === "entrée"
+                                    ||
+                                    type === "entree"
+                                );
+
+                            }
                         )
                         .reduce(
                             (
                                 total,
                                 operation
-                            ) =>
-                                total +
-                                (
-                                    Number(
-                                        operation.montant
-                                    ) || 0
-                                ),
+                            ) => {
+
+                                const montant =
+                                    operation.montant
+                                    ??
+                                    operation.amount
+                                    ??
+                                    operation.prix
+                                    ??
+                                    operation.total
+                                    ??
+                                    operation.valeur;
+
+                                return total +
+                                    (
+                                        Number(
+                                            montant
+                                        ) || 0
+                                    );
+
+                            },
                             0
                         );
 
@@ -2096,6 +2329,16 @@ function afficherChantiers(){
                                 </button>
 
 
+                                <!-- DEVIS -->
+
+                                <button
+                                    class="action-button devis"
+                                    onclick="ouvrirDevis('${chantier.id}')"
+                                >
+                                    📄 Devis
+                                </button>
+
+
                                 <!-- SUPPRIMER -->
 
                                 <button
@@ -2207,6 +2450,11 @@ function modifierChantier(id){
 
     chantierEnModification =
         chantier.id;
+
+
+    preparerChantier(
+        chantier.id
+    );
 
 
     chargerClients();
@@ -2341,7 +2589,7 @@ document.getElementById(
             ) || 0;
 
 
-        const statut =
+        let statut =
             document.getElementById(
                 "statut"
             ).value;
@@ -2383,6 +2631,20 @@ document.getElementById(
                     avancement
                 )
             );
+
+
+        /*
+         * Si avancement atteint 100 %,
+         * le chantier passe automatiquement
+         * en Terminé.
+         */
+
+        if(avancement >= 100){
+
+            statut =
+                "Terminé";
+
+        }
 
 
         const client =
@@ -2468,7 +2730,15 @@ document.getElementById(
 
                 budget,
 
+            budgetPrevu:
+
+                budget,
+
             avancement:
+
+                avancement,
+
+            avancementPhysique:
 
                 avancement,
 
@@ -2527,8 +2797,44 @@ document.getElementById(
 
 
         /*
-         * Le chantier devient immédiatement
-         * le chantier actif.
+         * Synchronisation du suivi
+         */
+
+        const suivis =
+            obtenirSuivis();
+
+
+        const suiviIndex =
+            suivis.findIndex(
+                suivi =>
+                    String(
+                        suivi.chantierId
+                    )
+                    ===
+                    String(
+                        chantier.id
+                    )
+            );
+
+
+        if(suiviIndex !== -1){
+
+            suivis[suiviIndex].avancement =
+                avancement;
+
+            suivis[suiviIndex].updatedAt =
+                new Date().toISOString();
+
+            sauvegarderSuivis(
+                suivis
+            );
+
+        }
+
+
+        /*
+         * Le chantier devient
+         * immédiatement actif.
          */
 
         preparerChantier(
@@ -2550,74 +2856,6 @@ document.getElementById(
 
     }
 );
-
-
-/* =====================================================
-   ⭐ CHANTIER ACTIF
-===================================================== */
-
-function preparerChantier(id){
-
-    const chantier =
-        obtenirChantierParId(id);
-
-
-    if(!chantier){
-
-        alert(
-            "Chantier introuvable."
-        );
-
-        return null;
-
-    }
-
-
-    /*
-     * Objet complet
-     */
-
-    localStorage.setItem(
-        "chantierSelectionne",
-        JSON.stringify(
-            chantier
-        )
-    );
-
-
-    /*
-     * ID uniquement
-     */
-
-    localStorage.setItem(
-        "batiflowChantierActif",
-        String(
-            chantier.id
-        )
-    );
-
-
-    return chantier;
-
-}
-
-
-function obtenirChantierParId(id){
-
-    const chantiers =
-        obtenirChantiers();
-
-
-    return chantiers.find(
-        chantier =>
-            String(
-                chantier.id
-            )
-            ===
-            String(id)
-    );
-
-}
 
 
 /* =====================================================
@@ -2783,6 +3021,38 @@ function ouvrirRentabilite(id){
 
 
 /* =====================================================
+   📄 DEVIS
+===================================================== */
+
+function ouvrirDevis(id){
+
+    const chantier =
+        preparerChantier(id);
+
+
+    if(!chantier){
+
+        return;
+
+    }
+
+
+    /*
+     * On envoie le chantier sélectionné
+     * directement vers le module Devis.
+     */
+
+    window.location.href =
+        "devis.html?chantierId="
+        +
+        encodeURIComponent(
+            chantier.id
+        );
+
+}
+
+
+/* =====================================================
    🗑️ SUPPRESSION
 ===================================================== */
 
@@ -2816,9 +3086,11 @@ function supprimerChantier(id){
             +
             " » ?\n\n"
             +
-            "Son suivi et ses opérations financières "
+            "Le chantier, son suivi, son planning "
             +
-            "seront également supprimés."
+            "et ses opérations financières seront supprimés.\n\n"
+            +
+            "Les devis associés seront conservés."
         );
 
 
@@ -2829,7 +3101,9 @@ function supprimerChantier(id){
     }
 
 
-    /* SUPPRESSION CHANTIER */
+    /* =================================================
+       SUPPRESSION CHANTIER
+    ================================================= */
 
     sauvegarderChantiers(
         chantiers.filter(
@@ -2841,7 +3115,9 @@ function supprimerChantier(id){
     );
 
 
-    /* SUPPRESSION FINANCES */
+    /* =================================================
+       SUPPRESSION FINANCES
+    ================================================= */
 
     const finances =
         obtenirFinances();
@@ -2849,17 +3125,29 @@ function supprimerChantier(id){
 
     sauvegarderFinances(
         finances.filter(
-            operation =>
-                String(
+            operation => {
+
+                const operationChantier =
                     operation.chantierId
+                    ??
+                    operation.projectId
+                    ??
+                    operation.idChantier;
+
+                return String(
+                    operationChantier
                 )
                 !==
-                String(id)
+                String(id);
+
+            }
         )
     );
 
 
-    /* SUPPRESSION SUIVI */
+    /* =================================================
+       SUPPRESSION SUIVI
+    ================================================= */
 
     const suivis =
         obtenirSuivis();
@@ -2877,7 +3165,39 @@ function supprimerChantier(id){
     );
 
 
-    /* NETTOYAGE CHANTIER ACTIF */
+    /* =================================================
+       SUPPRESSION PLANNING
+    ================================================= */
+
+    const planning =
+        obtenirPlanning();
+
+
+    sauvegarderPlanning(
+        planning.filter(
+            tache => {
+
+                const tacheChantier =
+                    tache.chantierId
+                    ??
+                    tache.projectId
+                    ??
+                    tache.idChantier;
+
+                return String(
+                    tacheChantier
+                )
+                !==
+                String(id);
+
+            }
+        )
+    );
+
+
+    /* =================================================
+       NETTOYAGE CHANTIER ACTIF
+    ================================================= */
 
     const actif =
         localStorage.getItem(
@@ -2932,6 +3252,27 @@ document.getElementById(
 
 
 /* =====================================================
+   ESCAPE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            fermerModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
    SYNCHRONISATION
 ===================================================== */
 
@@ -2975,4 +3316,4 @@ afficherChantiers();
 
 </body>
 </html>
-
+```
