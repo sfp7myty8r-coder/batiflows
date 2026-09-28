@@ -585,6 +585,117 @@ tbody td{
 }
 
 /* =========================
+   HISTORIQUE DES DEVIS
+========================= */
+
+.history-toolbar{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+}
+
+.history-search{
+    flex:1;
+    min-width:240px;
+}
+
+.history-table-wrapper{
+    overflow-x:auto;
+}
+
+.history-table{
+    width:100%;
+    min-width:900px;
+    border-collapse:collapse;
+}
+
+.history-table th{
+    background:#f8fafc;
+    color:#475569;
+    padding:12px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+    font-size:12px;
+}
+
+.history-table td{
+    padding:11px 10px;
+    border-bottom:1px solid #edf1f5;
+    font-size:13px;
+}
+
+.history-actions{
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
+}
+
+.history-btn{
+    border:0;
+    border-radius:6px;
+    padding:7px 9px;
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.history-btn.view{
+    background:#e0f2fe;
+    color:#0369a1;
+}
+
+.history-btn.edit{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.history-btn.copy{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.history-btn.print{
+    background:#ede9fe;
+    color:#6d28d9;
+}
+
+.history-btn.delete{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    padding:5px 8px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.badge-dqe{
+    background:#fff7ed;
+    color:#c2410c;
+}
+
+.badge-manuel{
+    background:#f1f5f9;
+    color:#475569;
+}
+
+.empty-history{
+    text-align:center;
+    padding:40px 20px;
+    color:var(--muted);
+}
+
+.history-count{
+    font-size:13px;
+    color:var(--muted);
+}
+    
+/* =========================
    PRINT
 ========================= */
 
@@ -1199,6 +1310,101 @@ tbody td{
 
     </div>
 
+    <!-- =========================
+     HISTORIQUE DES DEVIS
+========================= -->
+
+<section class="card no-print">
+
+    <div class="card-header">
+
+        <div>
+            <div class="card-title">
+                📋 Historique des devis
+            </div>
+
+            <div class="history-count" id="historyCount">
+                0 devis
+            </div>
+        </div>
+
+        <button
+            class="btn btn-light"
+            onclick="afficherHistoriqueDevis()">
+            🔄 Actualiser
+        </button>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="history-toolbar">
+
+            <div class="history-search">
+
+                <input
+                    type="text"
+                    class="form-control"
+                    id="searchDevis"
+                    placeholder="🔎 Rechercher par référence, client ou chantier..."
+                    oninput="afficherHistoriqueDevis()">
+
+            </div>
+
+        </div>
+
+        <div class="history-table-wrapper">
+
+            <table class="history-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Référence
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Client
+                        </th>
+
+                        <th>
+                            Chantier
+                        </th>
+
+                        <th>
+                            Source
+                        </th>
+
+                        <th>
+                            Total TTC
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="historyBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+    
     <div class="footer">
         BATIFLOW — Gestion professionnelle du BTP · V1.0
     </div>
@@ -2526,6 +2732,576 @@ window.onload = function(){
    INITIALISATION
 ========================================================= */
 
+/* =========================================================
+   HISTORIQUE DES DEVIS
+========================================================= */
+
+function afficherHistoriqueDevis(){
+
+    const devis = getData();
+
+    const recherche =
+        (
+            document.getElementById("searchDevis")?.value ||
+            ""
+        )
+        .toLowerCase()
+        .trim();
+
+    const body =
+        document.getElementById("historyBody");
+
+    const count =
+        document.getElementById("historyCount");
+
+    if(!body){
+
+        return;
+
+    }
+
+    let resultat = devis.filter(devis => {
+
+        const texte = [
+
+            devis.reference,
+
+            devis.client,
+
+            devis.chantier,
+
+            devis.objet,
+
+            devis.dqeReference
+
+        ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+        return texte.includes(recherche);
+
+    });
+
+
+    /* Plus récent en premier */
+
+    resultat.sort((a,b) => {
+
+        const dateA =
+            new Date(
+                a.updatedAt ||
+                a.createdAt ||
+                a.date ||
+                0
+            );
+
+        const dateB =
+            new Date(
+                b.updatedAt ||
+                b.createdAt ||
+                b.date ||
+                0
+            );
+
+        return dateB - dateA;
+
+    });
+
+
+    count.textContent =
+        `${resultat.length} devis`;
+
+
+    if(!resultat.length){
+
+        body.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="empty-history">
+
+                    📭 Aucun devis trouvé.
+
+                    <br><br>
+
+                    Crée ton premier devis ou importe un DQE.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    body.innerHTML =
+        resultat.map(devis => {
+
+            const source =
+                devis.source === "DQE"
+                    ? `
+                        <span class="badge badge-dqe">
+                            📐 DQE
+                        </span>
+                    `
+                    : `
+                        <span class="badge badge-manuel">
+                            ✍️ Manuel
+                        </span>
+                    `;
+
+
+            return `
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+                            ${escapeHtml(
+                                devis.reference || "-"
+                            )}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            devis.date || "-"
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            devis.client || "-"
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            devis.chantier || "-"
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${source}
+
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            ${money(
+                                devis.totalTTC || 0
+                            )}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="history-actions">
+
+                            <button
+                                class="history-btn view"
+                                onclick="voirDevis('${devis.id}')"
+                                title="Voir">
+
+                                👁️
+
+                            </button>
+
+
+                            <button
+                                class="history-btn edit"
+                                onclick="modifierDevis('${devis.id}')"
+                                title="Modifier">
+
+                                ✏️
+
+                            </button>
+
+
+                            <button
+                                class="history-btn copy"
+                                onclick="dupliquerDevis('${devis.id}')"
+                                title="Dupliquer">
+
+                                📋
+
+                            </button>
+
+
+                            <button
+                                class="history-btn print"
+                                onclick="imprimerDevisHistorique('${devis.id}')"
+                                title="Imprimer">
+
+                                🖨️
+
+                            </button>
+
+
+                            <button
+                                class="history-btn delete"
+                                onclick="supprimerDevis('${devis.id}')"
+                                title="Supprimer">
+
+                                🗑️
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   MODIFIER DEVIS
+========================================================= */
+
+function modifierDevis(id){
+
+    const devis = getData().find(
+        item =>
+            String(item.id) === String(id)
+    );
+
+    if(!devis){
+
+        toast("❌ Devis introuvable.");
+
+        return;
+
+    }
+
+
+    currentDQE = null;
+
+
+    document.getElementById("devisId").value =
+        devis.id || "";
+
+    document.getElementById("reference").value =
+        devis.reference || "";
+
+    document.getElementById("date").value =
+        devis.date || today();
+
+    document.getElementById("client").value =
+        devis.client || "";
+
+    document.getElementById("clientId").value =
+        devis.clientId || "";
+
+    document.getElementById("telephone").value =
+        devis.telephone || "";
+
+    document.getElementById("chantier").value =
+        devis.chantier || "";
+
+    document.getElementById("chantierId").value =
+        devis.chantierId || "";
+
+    document.getElementById("duree").value =
+        devis.duree || "";
+
+    document.getElementById("objet").value =
+        devis.objet || "";
+
+    document.getElementById("notes").value =
+        devis.notes || "";
+
+    document.getElementById("remise").value =
+        devis.remise || 0;
+
+    document.getElementById("tva").value =
+        devis.tva ?? 18;
+
+    document.getElementById("dqeId").value =
+        devis.dqeId || "";
+
+
+    document.getElementById("lines").innerHTML = "";
+
+
+    if(
+        Array.isArray(devis.lignes) &&
+        devis.lignes.length
+    ){
+
+        devis.lignes.forEach(ligne => {
+
+            ajouterLigne({
+
+                designation:
+                    ligne.designation || "",
+
+                unite:
+                    ligne.unite || "",
+
+                quantite:
+                    ligne.quantite || 0,
+
+                prixUnitaire:
+                    ligne.prixUnitaire ||
+                    ligne.prix ||
+                    0
+
+            });
+
+        });
+
+    }else{
+
+        ajouterLigne();
+
+    }
+
+
+    if(devis.dqeId){
+
+        const dqe =
+            obtenirDQEs().find(
+                item =>
+                    String(item.id) ===
+                    String(devis.dqeId)
+            );
+
+        if(dqe){
+
+            currentDQE = dqe;
+
+            document.getElementById("sourceBox")
+                .classList.add("active");
+
+            document.getElementById("sourceText")
+                .textContent =
+                `Ce devis provient du DQE ${dqe.reference || ""}.`;
+
+        }
+
+    }else{
+
+        document.getElementById("sourceBox")
+            .classList.remove("active");
+
+    }
+
+
+    calculer();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+
+    toast("✏️ Devis chargé pour modification.");
+
+}
+
+
+/* =========================================================
+   VOIR DEVIS
+========================================================= */
+
+function voirDevis(id){
+
+    const devis = getData().find(
+        item =>
+            String(item.id) === String(id)
+    );
+
+    if(!devis){
+
+        toast("❌ Devis introuvable.");
+
+        return;
+
+    }
+
+
+    modifierDevis(id);
+
+
+    setTimeout(() => {
+
+        imprimerDevis();
+
+    },300);
+
+}
+
+
+/* =========================================================
+   DUPLIQUER DEVIS
+========================================================= */
+
+function dupliquerDevis(id){
+
+    const devis = getData().find(
+        item =>
+            String(item.id) === String(id)
+    );
+
+    if(!devis){
+
+        toast("❌ Devis introuvable.");
+
+        return;
+
+    }
+
+
+    const copie = JSON.parse(
+        JSON.stringify(devis)
+    );
+
+
+    copie.id =
+        crypto.randomUUID();
+
+    copie.reference =
+        numeroter();
+
+    copie.date =
+        today();
+
+    copie.createdAt =
+        new Date().toISOString();
+
+    copie.updatedAt =
+        new Date().toISOString();
+
+
+    const data = getData();
+
+    data.push(copie);
+
+    setData(data);
+
+
+    afficherHistoriqueDevis();
+
+
+    toast(
+        `✅ Devis ${devis.reference} dupliqué sous ${copie.reference}.`
+    );
+
+}
+
+
+/* =========================================================
+   SUPPRIMER DEVIS
+========================================================= */
+
+function supprimerDevis(id){
+
+    const devis = getData().find(
+        item =>
+            String(item.id) === String(id)
+    );
+
+    if(!devis){
+
+        toast("❌ Devis introuvable.");
+
+        return;
+
+    }
+
+
+    const confirmation =
+        confirm(
+            `Supprimer le devis ${devis.reference} ?\n\nCette action est irréversible.`
+        );
+
+
+    if(!confirmation){
+
+        return;
+
+    }
+
+
+    const data =
+        getData().filter(
+            item =>
+                String(item.id) !== String(id)
+        );
+
+
+    setData(data);
+
+
+    afficherHistoriqueDevis();
+
+
+    toast("🗑️ Devis supprimé.");
+
+}
+
+
+/* =========================================================
+   IMPRIMER UN DEVIS DE L'HISTORIQUE
+========================================================= */
+
+function imprimerDevisHistorique(id){
+
+    const devis = getData().find(
+        item =>
+            String(item.id) === String(id)
+    );
+
+    if(!devis){
+
+        toast("❌ Devis introuvable.");
+
+        return;
+
+    }
+
+
+    modifierDevis(id);
+
+
+    setTimeout(() => {
+
+        imprimerDevis();
+
+    },250);
+
+}
+    
 document.addEventListener(
     "DOMContentLoaded",
     function(){
@@ -2550,10 +3326,10 @@ document.addEventListener(
 
         }
 
+
+        /* Charger l'historique */
+
+        afficherHistoriqueDevis();
+
     }
 );
-
-</script>
-
-</body>
-</html>
