@@ -1,878 +1,599 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pilotage financier — BATIFLOW</title>
-
-<meta
-    name="description"
-    content="BATIFLOW — Pilotage financier des chantiers BTP"
-/>
+<title>BATIFLOW — Pilotage financier</title>
 
 <style>
+
+/* =====================================================
+   BASE
+===================================================== */
+
 *{
     box-sizing:border-box;
 }
 
-html,
 body{
     margin:0;
-    padding:0;
     font-family:Arial,Helvetica,sans-serif;
-    background:#f5f7fb;
+    background:#f4f6f8;
     color:#172033;
 }
 
-body{
-    min-height:100vh;
+button,
+input,
+select{
+    font-family:inherit;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
+button{
+    cursor:pointer;
+}
 
-.sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    width:260px;
-    height:100vh;
-    background:#101827;
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+    background:#0f172a;
     color:white;
-    z-index:1000;
-    display:flex;
-    flex-direction:column;
-    overflow-y:auto;
+    padding:18px 25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
 }
 
-.sidebar-header{
-    height:92px;
+.header-inner{
+    max-width:1300px;
+    margin:auto;
     display:flex;
     align-items:center;
-    padding:18px 22px;
-    border-bottom:1px solid rgba(255,255,255,.07);
+    justify-content:space-between;
+    gap:20px;
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    color:white;
-    text-decoration:none;
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:1px;
 }
 
-.logo-mark{
-    width:43px;
-    height:43px;
-    border-radius:12px;
-    background:#f28c28;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-}
-
-.logo-mark svg{
-    width:27px;
-    height:27px;
-}
-
-.logo-text{
-    font-size:22px;
-    font-weight:900;
-    letter-spacing:.4px;
-}
-
-.logo-text span{
+.logo span{
     color:#f28c28;
 }
 
-.nav{
-    padding:18px 12px 30px;
+.header-title{
+    margin-top:4px;
+    color:#cbd5e1;
+    font-size:14px;
 }
 
-.nav-section{
-    color:#7f8ba1;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1.2px;
-    font-weight:800;
-    padding:12px 13px 8px;
-}
-
-.nav-link{
+.header-actions{
     display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.button{
+    border:none;
+    border-radius:8px;
+    padding:10px 15px;
+    display:inline-flex;
     align-items:center;
-    gap:13px;
-    width:100%;
-    min-height:45px;
-    padding:10px 13px;
-    margin-bottom:3px;
-    color:#c8d0dc;
+    justify-content:center;
+    gap:7px;
     text-decoration:none;
-    border-radius:9px;
     font-size:13px;
     font-weight:700;
-    transition:.2s;
 }
 
-.nav-link:hover{
-    background:#182234;
+.button-primary{
+    background:#f28c28;
     color:white;
 }
 
-.nav-link.active{
-    background:rgba(242,140,40,.14);
-    color:#f28c28;
+.button-primary:hover{
+    background:#d97706;
 }
 
-.nav-icon{
-    width:24px;
-    height:24px;
+.button-secondary{
+    background:rgba(255,255,255,.08);
+    color:white;
+    border:1px solid rgba(255,255,255,.2);
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+    max-width:1300px;
+    margin:30px auto;
+    padding:0 20px 50px;
+}
+
+.page-header{
     display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-}
-
-.nav-icon svg{
-    width:19px;
-    height:19px;
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.8;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-}
-
-.nav-label{
-    line-height:1.2;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main{
-    margin-left:260px;
-    min-height:100vh;
-}
-
-/* =========================
-   TOPBAR
-========================= */
-
-.topbar{
-    height:72px;
-    background:white;
-    border-bottom:1px solid #e7ebf1;
-    display:flex;
-    align-items:center;
     justify-content:space-between;
-    padding:0 28px;
-    position:sticky;
-    top:0;
-    z-index:900;
-}
-
-.topbar-left{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.mobile-menu{
-    display:none;
-    border:0;
-    background:#f4f6f9;
-    width:42px;
-    height:42px;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-.mobile-menu svg{
-    width:22px;
-    height:22px;
-    stroke:#172033;
-}
-
-.search-box{
-    width:350px;
-    height:42px;
-    background:#f6f8fb;
-    border:1px solid #e9edf3;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    padding:0 13px;
-    gap:10px;
-}
-
-.search-box svg{
-    width:18px;
-    height:18px;
-    stroke:#7b8798;
-}
-
-.search-box input{
-    border:0;
-    outline:none;
-    background:transparent;
-    width:100%;
-    font-size:13px;
-    color:#172033;
-}
-
-.topbar-right{
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
-
-.notification{
-    width:40px;
-    height:40px;
-    border:0;
-    background:#f6f8fb;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    position:relative;
-}
-
-.notification svg{
-    width:19px;
-    height:19px;
-    stroke:#455268;
-}
-
-.notification-dot{
-    position:absolute;
-    top:8px;
-    right:8px;
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#f28c28;
-}
-
-.user-box{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.avatar{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:#f28c28;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:800;
-    font-size:13px;
-}
-
-.user-info{
-    line-height:1.2;
-}
-
-.user-name{
-    font-size:13px;
-    font-weight:800;
-}
-
-.user-role{
-    font-size:11px;
-    color:#8994a5;
-    margin-top:3px;
-}
-
-/* =========================
-   CONTENT
-========================= */
-
-.content{
-    padding:28px;
-}
-
-.page-head{
-    display:flex;
     align-items:flex-start;
-    justify-content:space-between;
     gap:20px;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 .page-title{
     margin:0;
-    font-size:27px;
-    font-weight:900;
-    color:#172033;
+    color:#0f172a;
+    font-size:28px;
 }
 
 .page-subtitle{
-    margin:7px 0 0;
-    color:#7b8798;
-    font-size:13px;
+    margin-top:7px;
+    color:#64748b;
+    font-size:14px;
 }
 
-.head-actions{
-    display:flex;
-    gap:10px;
-}
 
-.btn{
-    border:0;
-    border-radius:9px;
-    padding:11px 16px;
-    font-size:13px;
-    font-weight:800;
-    cursor:pointer;
-    text-decoration:none;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-}
+/* =====================================================
+   CHANTIER
+===================================================== */
 
-.btn-primary{
-    background:#f28c28;
-    color:white;
-}
-
-.btn-primary:hover{
-    background:#df7817;
-}
-
-.btn-secondary{
+.chantier-card{
     background:white;
-    color:#344054;
-    border:1px solid #e0e5ec;
-}
-
-.btn svg{
-    width:17px;
-    height:17px;
-}
-
-/* =========================
-   SELECTEUR CHANTIER
-========================= */
-
-.project-selector{
-    background:white;
-    border:1px solid #e6eaf0;
+    border:1px solid #e5e7eb;
     border-radius:14px;
-    padding:18px;
-    margin-bottom:22px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    box-shadow:0 3px 12px rgba(16,24,39,.03);
+    padding:18px 20px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(15,23,42,.05);
 }
 
-.project-selector-left{
-    display:flex;
-    align-items:center;
-    gap:13px;
+.chantier-name{
+    font-size:20px;
+    font-weight:800;
+    color:#0f172a;
 }
 
-.project-icon{
-    width:46px;
-    height:46px;
-    border-radius:11px;
-    background:#fff3e6;
-    color:#f28c28;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.project-icon svg{
-    width:23px;
-    height:23px;
-}
-
-.project-label{
-    font-size:11px;
-    color:#8994a5;
-    font-weight:700;
-    margin-bottom:4px;
-}
-
-.project-name{
-    font-size:16px;
-    font-weight:900;
-}
-
-.project-select{
-    min-width:280px;
-    height:42px;
-    border:1px solid #dce2ea;
-    border-radius:9px;
-    padding:0 12px;
-    background:white;
-    outline:none;
-    color:#172033;
+.chantier-info{
+    margin-top:6px;
+    color:#64748b;
     font-size:13px;
-    font-weight:700;
 }
 
-/* =========================
+
+/* =====================================================
    KPI
-========================= */
+===================================================== */
 
 .kpi-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:17px;
-    margin-bottom:22px;
+    gap:15px;
+    margin-bottom:20px;
 }
 
-.kpi-card{
+.kpi{
     background:white;
-    border:1px solid #e6eaf0;
+    border:1px solid #e5e7eb;
     border-radius:14px;
-    padding:19px;
-    box-shadow:0 3px 12px rgba(16,24,39,.03);
+    padding:18px;
+    box-shadow:0 3px 12px rgba(15,23,42,.05);
+    position:relative;
+    overflow:hidden;
 }
 
-.kpi-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:10px;
+.kpi::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:4px;
+    background:#f28c28;
 }
 
-.kpi-icon{
-    width:40px;
-    height:40px;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.kpi-blue::before{
+    background:#2563eb;
 }
 
-.kpi-icon svg{
-    width:20px;
-    height:20px;
+.kpi-red::before{
+    background:#dc2626;
 }
 
-.icon-orange{
-    background:#fff1e3;
-    color:#f28c28;
+.kpi-green::before{
+    background:#16a34a;
 }
 
-.icon-blue{
-    background:#edf5ff;
-    color:#3b82f6;
+.kpi-orange::before{
+    background:#f28c28;
 }
 
-.icon-green{
-    background:#ebf9f1;
-    color:#16a05d;
+.kpi-purple::before{
+    background:#7c3aed;
 }
 
-.icon-red{
-    background:#fff0f0;
-    color:#dc4b4b;
-}
-
-.kpi-title{
-    color:#7d8899;
-    font-size:12px;
-    font-weight:700;
-    margin-top:15px;
+.kpi-label{
+    color:#64748b;
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
 }
 
 .kpi-value{
+    margin-top:9px;
+    color:#0f172a;
     font-size:23px;
-    font-weight:900;
-    margin-top:6px;
-    color:#172033;
-    word-break:break-word;
+    font-weight:800;
 }
 
-.kpi-foot{
-    margin-top:8px;
-    font-size:11px;
-    color:#8b95a5;
+.kpi-note{
+    margin-top:5px;
+    color:#94a3b8;
+    font-size:10px;
 }
 
-/* =========================
-   GRID
-========================= */
 
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:1.35fr .85fr;
-    gap:20px;
-    margin-bottom:22px;
+/* =====================================================
+   ALERT
+===================================================== */
+
+.alert{
+    display:none;
+    border-radius:12px;
+    padding:15px 18px;
+    margin-bottom:20px;
+    font-size:13px;
+    font-weight:700;
 }
+
+.alert.show{
+    display:block;
+}
+
+.alert-warning{
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    color:#9a3412;
+}
+
+.alert-danger{
+    background:#fef2f2;
+    border:1px solid #fecaca;
+    color:#991b1b;
+}
+
+.alert-success{
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
+    color:#166534;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
 
 .card{
     background:white;
-    border:1px solid #e6eaf0;
+    border:1px solid #e5e7eb;
     border-radius:14px;
-    box-shadow:0 3px 12px rgba(16,24,39,.03);
-}
-
-.card-header{
-    padding:18px 20px;
-    border-bottom:1px solid #edf0f4;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(15,23,42,.05);
 }
 
 .card-title{
     margin:0;
-    font-size:15px;
-    font-weight:900;
+    color:#0f172a;
+    font-size:18px;
 }
 
 .card-subtitle{
-    margin:4px 0 0;
-    color:#8994a5;
+    margin-top:5px;
+    color:#94a3b8;
     font-size:11px;
 }
 
-.card-body{
-    padding:20px;
-}
 
-/* =========================
+/* =====================================================
    PROGRESS
-========================= */
+===================================================== */
 
-.progress-row{
-    margin-bottom:20px;
+.progress-section{
+    margin-top:20px;
 }
 
-.progress-row:last-child{
-    margin-bottom:0;
-}
-
-.progress-head{
+.progress-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:10px;
-    margin-bottom:8px;
+    margin-bottom:7px;
 }
 
 .progress-label{
     font-size:12px;
     font-weight:800;
-    color:#465166;
+    color:#334155;
 }
 
-.progress-value{
+.progress-percent{
     font-size:12px;
-    font-weight:900;
+    font-weight:800;
+    color:#f28c28;
 }
 
-.progress-track{
-    height:11px;
+.progress{
     width:100%;
-    background:#edf0f4;
-    border-radius:20px;
+    height:11px;
+    background:#e2e8f0;
+    border-radius:99px;
     overflow:hidden;
 }
 
-.progress-bar{
+.progress-fill{
     height:100%;
-    border-radius:20px;
-    width:0;
-    transition:width .5s ease;
+    border-radius:99px;
+    transition:.3s;
 }
 
-.progress-budget{
-    background:#f28c28;
+.progress-financial{
+    background:#dc2626;
 }
 
 .progress-physical{
-    background:#3b82f6;
+    background:#16a34a;
 }
 
-.progress-consumption{
-    background:#16a05d;
-}
 
-.progress-danger{
-    background:#dc4b4b;
-}
-
-/* =========================
+/* =====================================================
    COMPARAISON
-========================= */
+===================================================== */
 
-.compare-box{
-    display:flex;
-    flex-direction:column;
-    gap:16px;
+.comparison-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
 }
 
-.compare-line{
-    display:flex;
-    align-items:center;
-    gap:12px;
+.comparison-box{
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:18px;
+    background:#fafafa;
 }
 
-.compare-label{
-    width:115px;
-    font-size:11px;
+.comparison-title{
+    font-size:13px;
+    color:#64748b;
     font-weight:800;
-    color:#667085;
 }
 
-.compare-bar-area{
-    flex:1;
+.comparison-value{
+    margin-top:8px;
+    font-size:28px;
+    font-weight:800;
+    color:#0f172a;
 }
 
-.compare-track{
-    height:22px;
-    background:#edf0f4;
-    border-radius:6px;
-    overflow:hidden;
-}
-
-.compare-fill{
-    height:100%;
-    border-radius:6px;
-    width:0;
-}
-
-.compare-budget{
-    background:#f28c28;
-}
-
-.compare-expense{
-    background:#344054;
-}
-
-.compare-number{
-    width:100px;
-    text-align:right;
+.comparison-note{
+    margin-top:5px;
+    color:#94a3b8;
     font-size:11px;
-    font-weight:900;
 }
 
-/* =========================
-   INDICATEUR ECART
-========================= */
+
+/* =====================================================
+   ECART
+===================================================== */
 
 .ecart-box{
-    border-radius:12px;
-    padding:17px;
-    background:#f7f9fc;
-    border:1px solid #edf0f4;
+    border-radius:14px;
+    padding:20px;
+    margin-top:20px;
+    border:1px solid #e5e7eb;
+}
+
+.ecart-neutral{
+    background:#f8fafc;
+}
+
+.ecart-positive{
+    background:#f0fdf4;
+    border-color:#bbf7d0;
+}
+
+.ecart-negative{
+    background:#fef2f2;
+    border-color:#fecaca;
+}
+
+.ecart-title{
+    font-size:12px;
+    font-weight:800;
+    color:#64748b;
+    text-transform:uppercase;
 }
 
 .ecart-value{
+    margin-top:8px;
     font-size:28px;
-    font-weight:900;
-    margin-top:5px;
-}
-
-.ecart-label{
-    font-size:11px;
-    color:#7b8798;
-    font-weight:700;
+    font-weight:800;
 }
 
 .ecart-description{
-    font-size:11px;
-    color:#7b8798;
-    margin-top:8px;
-    line-height:1.5;
+    margin-top:6px;
+    color:#64748b;
+    font-size:12px;
 }
 
-.status-badge{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:20px;
-    padding:6px 10px;
-    font-size:10px;
-    font-weight:900;
-}
 
-.status-ok{
-    background:#eaf8f0;
-    color:#14804a;
-}
-
-.status-warning{
-    background:#fff6e9;
-    color:#b86b00;
-}
-
-.status-danger{
-    background:#fff0f0;
-    color:#c73838;
-}
-
-/* =========================
-   TABLEAU
-========================= */
+/* =====================================================
+   TABLE
+===================================================== */
 
 .table-card{
-    margin-bottom:22px;
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 3px 12px rgba(15,23,42,.05);
 }
 
-.table-tools{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    flex-wrap:wrap;
+.table-header{
+    padding:18px 20px;
+    border-bottom:1px solid #e5e7eb;
 }
 
-.filter-input,
-.filter-select{
-    height:36px;
-    border:1px solid #dfe4eb;
-    background:#fff;
-    border-radius:8px;
-    padding:0 10px;
-    outline:none;
-    font-size:11px;
-    color:#344054;
-}
-
-.filter-input{
-    width:190px;
-}
-
-.table-wrap{
+.table-wrapper{
     overflow-x:auto;
 }
 
 table{
     width:100%;
+    min-width:750px;
     border-collapse:collapse;
-    min-width:850px;
 }
 
-thead th{
+thead{
+    background:#0f172a;
+    color:white;
+}
+
+th{
+    padding:12px 10px;
     text-align:left;
-    padding:12px 18px;
-    background:#f8fafc;
-    border-bottom:1px solid #e8edf3;
-    color:#7c8798;
     font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:.5px;
 }
 
-tbody td{
-    padding:14px 18px;
-    border-bottom:1px solid #edf0f4;
-    font-size:12px;
-    color:#344054;
+td{
+    padding:12px 10px;
+    border-bottom:1px solid #eef2f7;
+    font-size:11px;
 }
 
 tbody tr:hover{
-    background:#fafbfd;
+    background:#fffaf5;
 }
 
-.amount{
-    font-weight:900;
-    color:#172033;
+.category-name{
+    font-weight:700;
+    color:#334155;
 }
 
-.empty-state{
-    text-align:center;
-    padding:45px 20px;
-    color:#8a95a5;
+.category-amount{
+    font-weight:800;
+    color:#dc2626;
 }
 
-.empty-icon{
-    width:52px;
-    height:52px;
-    border-radius:14px;
-    background:#f3f5f8;
+.category-percent{
+    color:#64748b;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-inline{
     display:flex;
     align-items:center;
-    justify-content:center;
-    margin:0 auto 13px;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
-.empty-icon svg{
-    width:25px;
-    height:25px;
-    stroke:#8a95a5;
+.form-inline input{
+    width:190px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    padding:10px;
+    outline:none;
+}
+
+.form-inline input:focus{
+    border-color:#f28c28;
+}
+
+
+/* =====================================================
+   MODULES
+===================================================== */
+
+.modules{
+    background:#0f172a;
+    border-radius:14px;
+    padding:20px;
+    margin-top:20px;
+}
+
+.modules-title{
+    color:white;
+    font-size:17px;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.module-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:10px;
+}
+
+.module-link{
+    text-decoration:none;
+    color:#e2e8f0;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.06);
+    border-radius:8px;
+    padding:12px 8px;
+    text-align:center;
+    font-size:11px;
+    font-weight:700;
+}
+
+.module-link:hover{
+    background:#f28c28;
+    border-color:#f28c28;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty{
+    text-align:center;
+    padding:50px 20px;
+    color:#94a3b8;
 }
 
 .empty-title{
-    color:#465166;
-    font-weight:900;
-    font-size:14px;
+    color:#334155;
+    font-size:18px;
+    font-weight:800;
+    margin-bottom:7px;
 }
 
-.empty-text{
-    font-size:12px;
-    margin-top:6px;
-}
 
-/* =========================
-   SUMMARY GRID
-========================= */
-
-.summary-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.summary-item{
-    padding:15px;
-    background:#f8fafc;
-    border-radius:10px;
-    border:1px solid #edf0f4;
-}
-
-.summary-label{
-    color:#8994a5;
-    font-size:10px;
-    font-weight:700;
-}
-
-.summary-value{
-    margin-top:6px;
-    font-size:17px;
-    font-weight:900;
-}
-
-/* =========================
+/* =====================================================
    TOAST
-========================= */
+===================================================== */
 
 .toast{
     position:fixed;
-    right:25px;
-    bottom:25px;
-    min-width:260px;
-    max-width:360px;
-    padding:14px 17px;
-    border-radius:10px;
-    background:#101827;
+    right:22px;
+    bottom:22px;
+    z-index:2000;
+    background:#0f172a;
     color:white;
-    box-shadow:0 10px 30px rgba(0,0,0,.18);
-    font-size:12px;
+    padding:13px 17px;
+    border-radius:9px;
+    font-size:13px;
     font-weight:700;
-    z-index:5000;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
     opacity:0;
     transform:translateY(15px);
     pointer-events:none;
@@ -884,2218 +605,2102 @@ tbody tr:hover{
     transform:translateY(0);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
 
-@media(max-width:1200px){
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1050px){
+
     .kpi-grid{
         grid-template-columns:repeat(2,1fr);
     }
+
+    .module-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
 }
 
-@media(max-width:1000px){
-    .dashboard-grid{
-        grid-template-columns:1fr;
-    }
+@media(max-width:700px){
 
-    .search-box{
-        width:270px;
-    }
-}
-
-@media(max-width:800px){
-    .sidebar{
-        transform:translateX(-100%);
-        transition:.25s;
-    }
-
-    .sidebar.open{
-        transform:translateX(0);
-    }
-
-    .main{
-        margin-left:0;
-    }
-
-    .mobile-menu{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-    }
-
-    .page-head{
+    .header-inner{
         flex-direction:column;
+        align-items:flex-start;
     }
 
-    .project-selector{
+    .container{
+        margin-top:20px;
+        padding:0 14px 40px;
+    }
+
+    .page-header{
         flex-direction:column;
-        align-items:stretch;
-    }
-
-    .project-select{
-        width:100%;
-    }
-
-    .summary-grid{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:600px){
-    .content{
-        padding:18px 14px;
-    }
-
-    .topbar{
-        padding:0 14px;
-    }
-
-    .search-box{
-        display:none;
-    }
-
-    .user-info{
-        display:none;
     }
 
     .kpi-grid{
         grid-template-columns:1fr;
     }
 
-    .page-title{
-        font-size:22px;
+    .comparison-grid{
+        grid-template-columns:1fr;
     }
 
-    .head-actions{
-        width:100%;
+    .module-grid{
+        grid-template-columns:1fr 1fr;
     }
 
-    .head-actions .btn{
-        flex:1;
-    }
-
-    .table-tools{
-        width:100%;
-    }
-
-    .filter-input,
-    .filter-select{
-        width:100%;
-    }
-
-    .compare-label{
-        width:90px;
-    }
-
-    .compare-number{
-        width:80px;
-    }
 }
+
+@media(max-width:430px){
+
+    .module-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <!-- =====================================================
-     SIDEBAR
+     HEADER
 ===================================================== -->
 
-<aside class="sidebar" id="sidebar">
+<header>
 
-    <div class="sidebar-header">
-        <a href="dashboard.html" class="logo">
+    <div class="header-inner">
 
-            <div class="logo-mark">
-                <svg viewBox="0 0 40 40">
-                    <path
-                        d="M8 30V10h7v13l5-5 5 5V10h7v20h-7v-7l-5 5-5-5v7H8Z"
-                        fill="white"
-                    />
-                </svg>
-            </div>
+        <div>
 
-            <div class="logo-text">
+            <div class="logo">
                 BATI<span>FLOW</span>
             </div>
 
-        </a>
+            <div class="header-title">
+                Pilotage financier du chantier
+            </div>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <a
+                href="#"
+                class="button button-secondary"
+                onclick="ouvrirFinances();return false;"
+            >
+                ← Finances
+            </a>
+
+            <a
+                href="dashboard.html"
+                class="button button-secondary"
+            >
+                Tableau de bord
+            </a>
+
+        </div>
+
     </div>
 
-    <nav class="nav">
+</header>
 
-        <div class="nav-section">Principal</div>
 
-        <a class="nav-link" href="dashboard.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7"></rect>
-                    <rect x="14" y="3" width="7" height="7"></rect>
-                    <rect x="3" y="14" width="7" height="7"></rect>
-                    <rect x="14" y="14" width="7" height="7"></rect>
-                </svg>
-            </span>
-            <span class="nav-label">Tableau de bord</span>
-        </a>
+<main class="container">
 
-        <a class="nav-link" href="chantiers.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M3 21h18"></path>
-                    <path d="M5 21V9l7-5 7 5v12"></path>
-                    <path d="M9 21v-7h6v7"></path>
-                    <path d="M9 9h6"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Chantiers</span>
-        </a>
-
-        <a class="nav-link" href="suivi-chantier.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M4 19V5"></path>
-                    <path d="M4 5h12l-2 4 2 4H4"></path>
-                    <path d="M19 14v5"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Suivi chantier</span>
-        </a>
-
-        <a class="nav-link" href="planning.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="4" width="18" height="17" rx="2"></rect>
-                    <path d="M7 2v4"></path>
-                    <path d="M17 2v4"></path>
-                    <path d="M3 9h18"></path>
-                    <path d="M7 13h3"></path>
-                    <path d="M14 13h3"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Planning</span>
-        </a>
-
-        <a class="nav-link" href="calendrier.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="4" width="18" height="17" rx="2"></rect>
-                    <path d="M7 2v4"></path>
-                    <path d="M17 2v4"></path>
-                    <path d="M3 9h18"></path>
-                    <path d="M8 13h3"></path>
-                    <path d="M13 13h3"></path>
-                    <path d="M8 17h3"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Calendrier & Gantt</span>
-        </a>
-
-        <a class="nav-link active" href="pilotage-financier.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="4" width="18" height="17" rx="2"></rect>
-                    <path d="M7 17v-4"></path>
-                    <path d="M12 17V8"></path>
-                    <path d="M17 17v-7"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Pilotage financier</span>
-        </a>
-
-        <a class="nav-link" href="rentabilite.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M4 19V5"></path>
-                    <path d="M4 19h17"></path>
-                    <path d="m7 15 4-4 3 2 5-6"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Rentabilité</span>
-        </a>
-
-        <div class="nav-section">Études & Documents</div>
-
-        <a class="nav-link" href="dqe.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 3h12v18H6z"></path>
-                    <path d="M9 7h6"></path>
-                    <path d="M9 11h6"></path>
-                    <path d="M9 15h4"></path>
-                </svg>
-            </span>
-            <span class="nav-label">DQE & Métré</span>
-        </a>
-
-        <a class="nav-link" href="devis.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 3h9l3 3v15H6z"></path>
-                    <path d="M14 3v4h4"></path>
-                    <path d="M9 12h6"></path>
-                    <path d="M9 16h6"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Devis</span>
-        </a>
-
-        <a class="nav-link" href="clients.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="9" cy="8" r="3"></circle>
-                    <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path>
-                    <path d="M16 11c2.8 0 5 2.2 5 5"></path>
-                    <path d="M16 5.5a3 3 0 0 1 0 5"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Clients</span>
-        </a>
-
-        <a class="nav-link" href="documents.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 3h9l3 3v15H6z"></path>
-                    <path d="M14 3v4h4"></path>
-                    <path d="M9 12h6"></path>
-                    <path d="M9 16h4"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Documents BTP</span>
-        </a>
-
-        <div class="nav-section">Gestion</div>
-
-        <a class="nav-link" href="stocks.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M4 7 12 3l8 4-8 4-8-4Z"></path>
-                    <path d="m4 7 8 4 8-4"></path>
-                    <path d="M4 12l8 4 8-4"></path>
-                    <path d="M4 17l8 4 8-4"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Stocks</span>
-        </a>
-
-        <a class="nav-link" href="equipe.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="9" cy="8" r="3"></circle>
-                    <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path>
-                    <path d="M16 11a3 3 0 1 0 0-6"></path>
-                    <path d="M16 14c3 0 5 2 5 5"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Équipe & Personnel</span>
-        </a>
-
-        <a class="nav-link" href="finances.html">
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="5" width="18" height="15" rx="2"></rect>
-                    <path d="M3 9h18"></path>
-                    <path d="M8 15h3"></path>
-                </svg>
-            </span>
-            <span class="nav-label">Finances</span>
-        </a>
-
-    </nav>
-
-</aside>
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main class="main">
-
-    <!-- TOPBAR -->
-
-    <header class="topbar">
-
-        <div class="topbar-left">
-
-            <button class="mobile-menu" id="mobileMenu" aria-label="Menu">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6h16"></path>
-                    <path d="M4 12h16"></path>
-                    <path d="M4 18h16"></path>
-                </svg>
-            </button>
-
-            <div class="search-box">
-
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="7"></circle>
-                    <path d="m20 20-4-4"></path>
-                </svg>
-
-                <input
-                    type="text"
-                    id="globalSearch"
-                    placeholder="Rechercher une dépense..."
-                >
-
-            </div>
-
-        </div>
-
-        <div class="topbar-right">
-
-            <button class="notification" title="Notifications">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
-                    <path d="M10 21h4"></path>
-                </svg>
-
-                <span class="notification-dot"></span>
-            </button>
-
-            <div class="user-box">
-
-                <div class="avatar" id="userAvatar">BL</div>
-
-                <div class="user-info">
-                    <div class="user-name" id="userName">BATIFLOW</div>
-                    <div class="user-role" id="userRole">Administrateur</div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <!-- CONTENT -->
-
-    <section class="content">
-
-        <div class="page-head">
-
-            <div>
-                <h1 class="page-title">Pilotage financier</h1>
-
-                <p class="page-subtitle">
-                    Suivez le budget, les dépenses et la consommation financière de vos chantiers.
-                </p>
-            </div>
-
-            <div class="head-actions">
-
-                <a href="finances.html" class="btn btn-secondary">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                        <path d="M12 3v18"></path>
-                        <path d="M17 7c0-2-2-4-5-4S7 5 7 7s2 3 5 4 5 2 5 4-2 4-5 4-5-2-5-4"></path>
-                    </svg>
-                    Gestion des finances
-                </a>
-
-                <a href="rentabilite.html" class="btn btn-primary">
-                    Voir la rentabilité
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- SELECTEUR -->
-
-        <div class="project-selector">
-
-            <div class="project-selector-left">
-
-                <div class="project-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                        <path d="M3 21h18"></path>
-                        <path d="M5 21V9l7-5 7 5v12"></path>
-                        <path d="M9 21v-7h6v7"></path>
-                    </svg>
-                </div>
-
-                <div>
-                    <div class="project-label">CHANTIER ANALYSÉ</div>
-                    <div class="project-name" id="selectedProjectName">
-                        Tous les chantiers
-                    </div>
-                </div>
-
-            </div>
-
-            <select id="chantierSelect" class="project-select">
-                <option value="ALL">Tous les chantiers</option>
-            </select>
-
-        </div>
-
-
-        <!-- KPI -->
-
-        <div class="kpi-grid">
-
-            <div class="kpi-card">
-
-                <div class="kpi-top">
-                    <div>
-                        <div class="kpi-title">Budget prévu</div>
-                        <div class="kpi-value" id="kpiBudget">0 FCFA</div>
-                        <div class="kpi-foot">Budget total du chantier</div>
-                    </div>
-
-                    <div class="kpi-icon icon-orange">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="3" y="5" width="18" height="15" rx="2"></rect>
-                            <path d="M3 9h18"></path>
-                            <path d="M8 15h3"></path>
-                        </svg>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="kpi-card">
-
-                <div class="kpi-top">
-                    <div>
-                        <div class="kpi-title">Dépenses engagées</div>
-                        <div class="kpi-value" id="kpiExpenses">0 FCFA</div>
-                        <div class="kpi-foot">Dépenses enregistrées</div>
-                    </div>
-
-                    <div class="kpi-icon icon-blue">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2v20"></path>
-                            <path d="M17 6c0-2-2-4-5-4S7 4 7 6s2 3 5 4 5 2 5 4-2 4-5 4-5-2-5-4"></path>
-                        </svg>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="kpi-card">
-
-                <div class="kpi-top">
-                    <div>
-                        <div class="kpi-title">Reste à dépenser</div>
-                        <div class="kpi-value" id="kpiRemaining">0 FCFA</div>
-                        <div class="kpi-foot">Budget disponible</div>
-                    </div>
-
-                    <div class="kpi-icon icon-green">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M20 12a8 8 0 1 1-2.34-5.66"></path>
-                            <path d="M20 4v6h-6"></path>
-                        </svg>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="kpi-card">
-
-                <div class="kpi-top">
-                    <div>
-                        <div class="kpi-title">Consommation</div>
-                        <div class="kpi-value" id="kpiConsumption">0 %</div>
-                        <div class="kpi-foot">Dépenses / budget</div>
-                    </div>
-
-                    <div class="kpi-icon icon-red">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M4 19V5"></path>
-                            <path d="M4 19h17"></path>
-                            <path d="m7 15 4-4 3 2 5-6"></path>
-                        </svg>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- GRILLE PRINCIPALE -->
-
-        <div class="dashboard-grid">
-
-            <!-- AVANCEMENT FINANCIER -->
-
-            <div class="card">
-
-                <div class="card-header">
-
-                    <div>
-                        <h2 class="card-title">Avancement financier</h2>
-
-                        <p class="card-subtitle">
-                            Comparaison entre le budget, les dépenses et l'avancement physique.
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="card-body">
-
-                    <div class="progress-row">
-
-                        <div class="progress-head">
-                            <span class="progress-label">Budget utilisé</span>
-                            <span class="progress-value" id="budgetProgressText">0 %</span>
-                        </div>
-
-                        <div class="progress-track">
-                            <div
-                                class="progress-bar progress-consumption"
-                                id="budgetProgressBar"
-                            ></div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="progress-row">
-
-                        <div class="progress-head">
-                            <span class="progress-label">Avancement physique</span>
-                            <span class="progress-value" id="physicalProgressText">0 %</span>
-                        </div>
-
-                        <div class="progress-track">
-                            <div
-                                class="progress-bar progress-physical"
-                                id="physicalProgressBar"
-                            ></div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="progress-row">
-
-                        <div class="progress-head">
-                            <span class="progress-label">Budget restant</span>
-                            <span class="progress-value" id="remainingProgressText">0 %</span>
-                        </div>
-
-                        <div class="progress-track">
-                            <div
-                                class="progress-bar progress-budget"
-                                id="remainingProgressBar"
-                            ></div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ECART -->
-
-            <div class="card">
-
-                <div class="card-header">
-
-                    <div>
-                        <h2 class="card-title">Analyse de l'écart</h2>
-
-                        <p class="card-subtitle">
-                            Consommation financière comparée à l'avancement.
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="card-body">
-
-                    <div class="ecart-box">
-
-                        <div class="ecart-label">
-                            Écart consommation / avancement
-                        </div>
-
-                        <div class="ecart-value" id="ecartValue">
-                            0 point
-                        </div>
-
-                        <div id="ecartStatus"></div>
-
-                        <div class="ecart-description" id="ecartDescription">
-                            Aucune donnée disponible.
-                        </div>
-
-                    </div>
-
-                    <br>
-
-                    <div class="summary-grid">
-
-                        <div class="summary-item">
-                            <div class="summary-label">
-                                Avancement physique
-                            </div>
-
-                            <div class="summary-value" id="summaryPhysical">
-                                0 %
-                            </div>
-                        </div>
-
-                        <div class="summary-item">
-                            <div class="summary-label">
-                                Consommation financière
-                            </div>
-
-                            <div class="summary-value" id="summaryFinancial">
-                                0 %
-                            </div>
-                        </div>
-
-                        <div class="summary-item">
-                            <div class="summary-label">
-                                Écart budgétaire
-                            </div>
-
-                            <div class="summary-value" id="summaryBudgetGap">
-                                0 FCFA
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- COMPARAISON -->
-
-        <div class="card table-card">
-
-            <div class="card-header">
-
-                <div>
-                    <h2 class="card-title">Budget et dépenses</h2>
-
-                    <p class="card-subtitle">
-                        Visualisation des montants financiers du chantier sélectionné.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="card-body">
-
-                <div class="compare-box">
-
-                    <div class="compare-line">
-
-                        <div class="compare-label">
-                            Budget
-                        </div>
-
-                        <div class="compare-bar-area">
-                            <div class="compare-track">
-                                <div
-                                    class="compare-fill compare-budget"
-                                    id="compareBudget"
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div class="compare-number" id="compareBudgetText">
-                            0 FCFA
-                        </div>
-
-                    </div>
-
-
-                    <div class="compare-line">
-
-                        <div class="compare-label">
-                            Dépenses
-                        </div>
-
-                        <div class="compare-bar-area">
-                            <div class="compare-track">
-                                <div
-                                    class="compare-fill compare-expense"
-                                    id="compareExpenses"
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div class="compare-number" id="compareExpensesText">
-                            0 FCFA
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- DEPENSES -->
-
-        <div class="card table-card">
-
-            <div class="card-header">
-
-                <div>
-                    <h2 class="card-title">Dépenses du chantier</h2>
-
-                    <p class="card-subtitle">
-                        Liste des dépenses enregistrées dans BATIFLOW.
-                    </p>
-                </div>
-
-                <div class="table-tools">
-
-                    <input
-                        type="text"
-                        id="expenseSearch"
-                        class="filter-input"
-                        placeholder="Rechercher..."
-                    >
-
-                    <select id="expenseCategory" class="filter-select">
-                        <option value="ALL">Toutes les catégories</option>
-                    </select>
-
-                </div>
-
-            </div>
-
-            <div class="table-wrap">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Chantier</th>
-                            <th>Désignation</th>
-                            <th>Catégorie</th>
-                            <th>Responsable</th>
-                            <th>Montant</th>
-                            <th>Statut</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="expensesTableBody"></tbody>
-
-                </table>
-
-                <div id="expensesEmpty" class="empty-state" style="display:none;">
-
-                    <div class="empty-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
-                            <path d="M8 9h8"></path>
-                            <path d="M8 13h8"></path>
-                            <path d="M8 17h4"></path>
-                        </svg>
-                    </div>
-
-                    <div class="empty-title">
-                        Aucune dépense trouvée
-                    </div>
-
-                    <div class="empty-text">
-                        Les dépenses enregistrées dans Finances apparaîtront ici.
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- RESUME -->
-
-        <div class="card">
-
-            <div class="card-header">
-
-                <div>
-                    <h2 class="card-title">Résumé financier</h2>
-
-                    <p class="card-subtitle">
-                        Indicateurs calculés automatiquement par BATIFLOW.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="card-body">
-
-                <div class="summary-grid">
-
-                    <div class="summary-item">
-
-                        <div class="summary-label">
-                            Budget prévu
-                        </div>
-
-                        <div class="summary-value" id="summaryBudget">
-                            0 FCFA
-                        </div>
-
-                    </div>
-
-
-                    <div class="summary-item">
-
-                        <div class="summary-label">
-                            Total dépenses
-                        </div>
-
-                        <div class="summary-value" id="summaryExpenses">
-                            0 FCFA
-                        </div>
-
-                    </div>
-
-
-                    <div class="summary-item">
-
-                        <div class="summary-label">
-                            Reste disponible
-                        </div>
-
-                        <div class="summary-value" id="summaryRemaining">
-                            0 FCFA
-                        </div>
-
-                    </div>
-
-
-                    <div class="summary-item">
-
-                        <div class="summary-label">
-                            Avancement physique
-                        </div>
-
-                        <div class="summary-value" id="summaryPhysical2">
-                            0 %
-                        </div>
-
-                    </div>
-
-
-                    <div class="summary-item">
-
-                        <div class="summary-label">
-                            Consommation financière
-                        </div>
-
-                        <div class="summary-value" id="summaryConsumption2">
-                            0 %
-                        </div>
-
-                    </div>
-
-
-                    <div class="summary-item">
-
-                        <div class="summary-label">
-                            Écart
-                        </div>
-
-                        <div class="summary-value" id="summaryGap2">
-                            0 point
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+    <div id="application"></div>
 
 </main>
 
 
-<div class="toast" id="toast"></div>
+<footer
+    style="
+        text-align:center;
+        color:#94a3b8;
+        font-size:12px;
+        padding:20px;
+    "
+>
+    BATIFLOW — Gestion BTP • V1.0
+</footer>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
 
 
 <script>
 
 /* =====================================================
-   BATIFLOW — PILOTAGE FINANCIER
+   CONFIGURATION
 ===================================================== */
 
-const STORAGE_CHANTIERS = "batiflowChantiers";
-const STORAGE_FINANCES = "batiflowFinances";
-const STORAGE_DEVIS = "batiflowDevis";
+const CHANTIERS_KEY =
+    "batiflowChantiers";
+
+const FINANCES_KEY =
+    "batiflowFinances";
+
+const SUIVIS_KEY =
+    "batiflowSuivisChantiers";
+
+const DEVIS_KEY =
+    "batiflowDevis";
 
 
-/* =========================
-   OUTILS
-========================= */
+let chantierActuel = null;
 
-function lireStorage(cle, valeurDefaut){
+let finances = [];
+
+let suiviActuel = null;
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+function lireStorage(key){
 
     try{
 
-        const data = localStorage.getItem(cle);
+        const data =
+            JSON.parse(
+                localStorage.getItem(key)
+            );
 
-        if(!data){
-            return valeurDefaut;
-        }
-
-        const parsed = JSON.parse(data);
-
-        return parsed ?? valeurDefaut;
+        return Array.isArray(data)
+            ? data
+            : [];
 
     }catch(error){
 
-        console.warn("Erreur localStorage :", cle, error);
+        return [];
 
-        return valeurDefaut;
     }
+
 }
 
 
-function formatFCFA(value){
+/* =====================================================
+   UTILITAIRES
+===================================================== */
 
-    const number = Number(value) || 0;
+function echapper(value){
 
-    return new Intl.NumberFormat("fr-FR", {
-        maximumFractionDigits:0
-    }).format(number) + " FCFA";
-}
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
-
-function formatNombre(value){
-
-    const number = Number(value) || 0;
-
-    return new Intl.NumberFormat("fr-FR", {
-        maximumFractionDigits:0
-    }).format(number);
-}
-
-
-function formatPourcentage(value){
-
-    const number = Number(value) || 0;
-
-    return number.toLocaleString("fr-FR", {
-        maximumFractionDigits:1
-    }) + " %";
-}
-
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-
-function normaliserTexte(value){
-
-    return String(value ?? "")
-        .trim()
-        .toLowerCase();
 }
 
 
 function nombre(value){
 
-    if(value === null || value === undefined || value === ""){
-        return 0;
-    }
+    const n =
+        Number(
+            value
+        );
 
-    if(typeof value === "number"){
-        return Number.isFinite(value) ? value : 0;
-    }
+    return Number.isFinite(n)
+        ? n
+        : 0;
 
-    let texte = String(value)
-        .replace(/\s/g,"")
-        .replace(/FCFA/gi,"")
-        .replace(/F.CFA/gi,"")
-        .replace(/,/g,".")
-        .replace(/[^\d.-]/g,"");
+}
 
-    const n = Number(texte);
 
-    return Number.isFinite(n) ? n : 0;
+function formatMontant(value){
+
+    return nombre(
+        value
+    ).toLocaleString(
+        "fr-FR"
+    ) + " FCFA";
+
+}
+
+
+function clamp(
+    value,
+    min,
+    max
+){
+
+    return Math.min(
+        max,
+        Math.max(
+            min,
+            nombre(value)
+        )
+    );
+
 }
 
 
 function afficherToast(message){
 
-    const toast = document.getElementById("toast");
-
-    toast.textContent = message;
-    toast.classList.add("show");
-
-    clearTimeout(window.batiflowToastTimer);
-
-    window.batiflowToastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-    },3000);
-}
-
-
-/* =========================
-   DONNEES
-========================= */
-
-function obtenirChantiers(){
-
-    const data = lireStorage(STORAGE_CHANTIERS, []);
-
-    return Array.isArray(data) ? data : [];
-}
-
-
-function obtenirFinances(){
-
-    const data = lireStorage(STORAGE_FINANCES, []);
-
-    if(Array.isArray(data)){
-        return data;
-    }
-
-    if(data && Array.isArray(data.depenses)){
-        return data.depenses;
-    }
-
-    if(data && Array.isArray(data.transactions)){
-        return data.transactions;
-    }
-
-    return [];
-}
-
-
-function obtenirDevis(){
-
-    const data = lireStorage(STORAGE_DEVIS, []);
-
-    return Array.isArray(data) ? data : [];
-}
-
-
-/* =========================
-   IDENTIFICATION CHANTIER
-========================= */
-
-function chantierId(depense){
-
-    return String(
-        depense?.chantierId ??
-        depense?.projectId ??
-        depense?.idChantier ??
-        ""
-    );
-}
-
-
-function chantierNom(depense){
-
-    return String(
-        depense?.chantier ??
-        depense?.chantierNom ??
-        depense?.project ??
-        depense?.projectName ??
-        ""
-    );
-}
-
-
-function trouverChantier(id){
-
-    const chantiers = obtenirChantiers();
-
-    return chantiers.find(item =>
-        String(item.id) === String(id)
-    );
-}
-
-
-/* =========================
-   BUDGET
-========================= */
-
-function obtenirBudgetChantier(chantier){
-
-    if(!chantier){
-        return 0;
-    }
-
-    const champs = [
-        "budget",
-        "budgetPrevu",
-        "budgetTotal",
-        "budgetInitial",
-        "montantBudget",
-        "montantPrevisionnel"
-    ];
-
-    for(const champ of champs){
-
-        const valeur = nombre(chantier[champ]);
-
-        if(valeur > 0){
-            return valeur;
-        }
-    }
-
-    /*
-       Si le chantier ne possède pas de budget,
-       on cherche éventuellement un devis associé.
-    */
-
-    const devis = obtenirDevis();
-
-    const devisChantier = devis.filter(item =>
-        String(item.chantierId ?? "") === String(chantier.id)
-    );
-
-    if(devisChantier.length){
-
-        const total = devisChantier.reduce((somme,item) => {
-
-            const montant =
-                nombre(item.totalTTC) ||
-                nombre(item.totalHT) ||
-                0;
-
-            return somme + montant;
-
-        },0);
-
-        if(total > 0){
-            return total;
-        }
-    }
-
-    return 0;
-}
-
-
-/* =========================
-   AVANCEMENT
-========================= */
-
-function obtenirAvancement(chantier){
-
-    if(!chantier){
-        return 0;
-    }
-
-    const champs = [
-        "avancement",
-        "progression",
-        "pourcentage",
-        "progress",
-        "tauxAvancement",
-        "avancementPhysique"
-    ];
-
-    for(const champ of champs){
-
-        if(
-            chantier[champ] !== undefined &&
-            chantier[champ] !== null &&
-            chantier[champ] !== ""
-        ){
-
-            let valeur = nombre(chantier[champ]);
-
-            if(valeur > 100){
-                valeur = 100;
-            }
-
-            if(valeur < 0){
-                valeur = 0;
-            }
-
-            return valeur;
-        }
-    }
-
-    return 0;
-}
-
-
-/* =========================
-   MONTANT DEPENSE
-========================= */
-
-function obtenirMontantDepense(depense){
-
-    const champs = [
-        "montant",
-        "amount",
-        "prix",
-        "total",
-        "valeur"
-    ];
-
-    for(const champ of champs){
-
-        const valeur = nombre(depense?.[champ]);
-
-        if(valeur !== 0){
-            return valeur;
-        }
-    }
-
-    return 0;
-}
-
-
-/* =========================
-   DATE
-========================= */
-
-function obtenirDate(depense){
-
-    return (
-        depense?.date ??
-        depense?.dateDepense ??
-        depense?.createdAt ??
-        depense?.datePaiement ??
-        ""
-    );
-}
-
-
-function formaterDate(value){
-
-    if(!value){
-        return "—";
-    }
-
-    const date = new Date(value);
-
-    if(Number.isNaN(date.getTime())){
-        return escapeHTML(String(value));
-    }
-
-    return date.toLocaleDateString("fr-FR");
-}
-
-
-/* =========================
-   CATEGORIE
-========================= */
-
-function obtenirCategorie(depense){
-
-    return String(
-        depense?.categorie ??
-        depense?.category ??
-        depense?.type ??
-        "Autre"
-    );
-}
-
-
-/* =========================
-   DESIGNATION
-========================= */
-
-function obtenirDesignation(depense){
-
-    return String(
-        depense?.description ??
-        depense?.libelle ??
-        depense?.designation ??
-        depense?.motif ??
-        depense?.objet ??
-        "Dépense"
-    );
-}
-
-
-/* =========================
-   RESPONSABLE
-========================= */
-
-function obtenirResponsable(depense){
-
-    return String(
-        depense?.responsable ??
-        depense?.auteur ??
-        depense?.utilisateur ??
-        depense?.user ??
-        "—"
-    );
-}
-
-
-/* =========================
-   STATUT
-========================= */
-
-function obtenirStatut(depense){
-
-    return String(
-        depense?.statut ??
-        depense?.status ??
-        depense?.etat ??
-        "Enregistrée"
-    );
-}
-
-
-/* =========================
-   CALCUL FINANCIER
-========================= */
-
-function calculerFinancier(){
-
-    const chantiers = obtenirChantiers();
-    const finances = obtenirFinances();
-
-    const selected =
-        document.getElementById("chantierSelect").value;
-
-    let budget = 0;
-    let expenses = 0;
-    let physical = 0;
-
-    if(selected === "ALL"){
-
-        budget = chantiers.reduce(
-            (total,chantier) =>
-                total + obtenirBudgetChantier(chantier),
-            0
+    const toast =
+        document.getElementById(
+            "toast"
         );
 
-        physical = chantiers.length
-            ? chantiers.reduce(
-                (total,chantier) =>
-                    total + obtenirAvancement(chantier),
-                0
-            ) / chantiers.length
-            : 0;
+    toast.textContent =
+        message;
 
-        expenses = finances.reduce(
-            (total,depense) =>
-                total + obtenirMontantDepense(depense),
-            0
+    toast.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2200
         );
 
-    }else{
+}
 
-        const chantier = trouverChantier(selected);
 
-        budget = obtenirBudgetChantier(chantier);
+/* =====================================================
+   CHANTIER ID
+===================================================== */
 
-        physical = obtenirAvancement(chantier);
+function obtenirChantierId(){
 
-        expenses = finances
-            .filter(depense => {
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
 
-                const id = chantierId(depense);
-                const nom = chantierNom(depense);
+    const urlId =
+        params.get(
+            "chantierId"
+        );
+
+
+    if(urlId){
+
+        return urlId;
+
+    }
+
+
+    const actif =
+        localStorage.getItem(
+            "batiflowChantierActif"
+        );
+
+
+    if(actif){
+
+        return actif;
+
+    }
+
+
+    const selection =
+        localStorage.getItem(
+            "chantierSelectionne"
+        );
+
+
+    if(selection){
+
+        try{
+
+            const objet =
+                JSON.parse(
+                    selection
+                );
+
+            return objet?.id || null;
+
+        }catch(error){
+
+            return null;
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =====================================================
+   CHARGER CHANTIER
+===================================================== */
+
+function chargerChantier(){
+
+    const id =
+        obtenirChantierId();
+
+
+    const chantiers =
+        lireStorage(
+            CHANTIERS_KEY
+        );
+
+
+    chantierActuel =
+        chantiers.find(
+            chantier =>
+                String(
+                    chantier.id
+                )
+                ===
+                String(id)
+        );
+
+
+    if(chantierActuel){
+
+        localStorage.setItem(
+            "batiflowChantierActif",
+            String(
+                chantierActuel.id
+            )
+        );
+
+
+        localStorage.setItem(
+            "chantierSelectionne",
+            JSON.stringify(
+                chantierActuel
+            )
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CHARGER FINANCES
+===================================================== */
+
+function chargerFinances(){
+
+    const toutes =
+        lireStorage(
+            FINANCES_KEY
+        );
+
+
+    if(!chantierActuel){
+
+        finances = [];
+
+        return;
+
+    }
+
+
+    finances =
+        toutes.filter(
+            operation => {
+
+                const id =
+                    operation.chantierId ??
+                    operation.projectId ??
+                    operation.idChantier;
+
 
                 return (
-                    String(id) === String(selected) ||
-                    (
-                        chantier &&
-                        normaliserTexte(nom) ===
-                        normaliserTexte(
-                            chantier.nom ??
-                            chantier.name ??
-                            chantier.titre ??
-                            ""
-                        )
+                    String(id)
+                    ===
+                    String(
+                        chantierActuel.id
                     )
                 );
 
-            })
-            .reduce(
-                (total,depense) =>
-                    total + obtenirMontantDepense(depense),
-                0
-            );
-    }
+            }
+        );
 
-    const remaining = budget - expenses;
-
-    const consumption =
-        budget > 0
-            ? (expenses / budget) * 100
-            : 0;
-
-    const gap = consumption - physical;
-
-    return {
-        budget,
-        expenses,
-        remaining,
-        physical,
-        consumption,
-        gap
-    };
 }
 
 
-/* =========================
-   KPI
-========================= */
+/* =====================================================
+   CHARGER SUIVI
+===================================================== */
 
-function afficherKPI(){
+function chargerSuivi(){
 
-    const data = calculerFinancier();
-
-    document.getElementById("kpiBudget").textContent =
-        formatFCFA(data.budget);
-
-    document.getElementById("kpiExpenses").textContent =
-        formatFCFA(data.expenses);
-
-    document.getElementById("kpiRemaining").textContent =
-        formatFCFA(data.remaining);
-
-    document.getElementById("kpiConsumption").textContent =
-        formatPourcentage(data.consumption);
+    const suivis =
+        lireStorage(
+            SUIVIS_KEY
+        );
 
 
-    document.getElementById("budgetProgressText").textContent =
-        formatPourcentage(data.consumption);
+    if(!chantierActuel){
 
-    document.getElementById("physicalProgressText").textContent =
-        formatPourcentage(data.physical);
-
-    const remainingPercent =
-        data.budget > 0
-            ? Math.max(0,Math.min(100,(data.remaining / data.budget) * 100))
-            : 0;
-
-    document.getElementById("remainingProgressText").textContent =
-        formatPourcentage(remainingPercent);
-
-
-    document.getElementById("budgetProgressBar").style.width =
-        Math.min(100,Math.max(0,data.consumption)) + "%";
-
-    document.getElementById("physicalProgressBar").style.width =
-        Math.min(100,Math.max(0,data.physical)) + "%";
-
-    document.getElementById("remainingProgressBar").style.width =
-        remainingPercent + "%";
-
-
-    /* Résumé */
-
-    document.getElementById("summaryPhysical").textContent =
-        formatPourcentage(data.physical);
-
-    document.getElementById("summaryFinancial").textContent =
-        formatPourcentage(data.consumption);
-
-    document.getElementById("summaryBudgetGap").textContent =
-        formatFCFA(data.remaining);
-
-
-    document.getElementById("summaryBudget").textContent =
-        formatFCFA(data.budget);
-
-    document.getElementById("summaryExpenses").textContent =
-        formatFCFA(data.expenses);
-
-    document.getElementById("summaryRemaining").textContent =
-        formatFCFA(data.remaining);
-
-    document.getElementById("summaryPhysical2").textContent =
-        formatPourcentage(data.physical);
-
-    document.getElementById("summaryConsumption2").textContent =
-        formatPourcentage(data.consumption);
-
-    document.getElementById("summaryGap2").textContent =
-        formatPourcentage(data.gap);
-
-
-    /* Comparaison */
-
-    document.getElementById("compareBudgetText").textContent =
-        formatFCFA(data.budget);
-
-    document.getElementById("compareExpensesText").textContent =
-        formatFCFA(data.expenses);
-
-    document.getElementById("compareBudget").style.width =
-        data.budget > 0 ? "100%" : "0%";
-
-    document.getElementById("compareExpenses").style.width =
-        data.budget > 0
-            ? Math.min(100,(data.expenses / data.budget) * 100) + "%"
-            : "0%";
-
-
-    afficherEcart(data);
-}
-
-
-/* =========================
-   ECART
-========================= */
-
-function afficherEcart(data){
-
-    const valeur = data.gap;
-
-    const ecartElement =
-        document.getElementById("ecartValue");
-
-    const statusElement =
-        document.getElementById("ecartStatus");
-
-    const descriptionElement =
-        document.getElementById("ecartDescription");
-
-
-    ecartElement.textContent =
-        (valeur > 0 ? "+" : "") +
-        valeur.toLocaleString("fr-FR", {
-            maximumFractionDigits:1
-        }) +
-        " point";
-
-
-    if(data.budget <= 0){
-
-        statusElement.innerHTML =
-            '<span class="status-badge status-warning">Budget non renseigné</span>';
-
-        descriptionElement.textContent =
-            "Ajoutez un budget au chantier pour obtenir une analyse financière complète.";
+        suiviActuel =
+            null;
 
         return;
+
     }
 
 
-    if(valeur <= 5){
+    suiviActuel =
+        suivis.find(
+            suivi =>
+                String(
+                    suivi.chantierId
+                )
+                ===
+                String(
+                    chantierActuel.id
+                )
+        )
+        || null;
 
-        statusElement.innerHTML =
-            '<span class="status-badge status-ok">Écart limité</span>';
-
-        descriptionElement.textContent =
-            "La consommation financière reste relativement proche de l'avancement physique du chantier.";
-
-    }else if(valeur <= 15){
-
-        statusElement.innerHTML =
-            '<span class="status-badge status-warning">Écart à surveiller</span>';
-
-        descriptionElement.textContent =
-            "Les dépenses progressent plus rapidement que l'avancement physique. Une surveillance du budget est recommandée.";
-
-    }else{
-
-        statusElement.innerHTML =
-            '<span class="status-badge status-danger">Écart important</span>';
-
-        descriptionElement.textContent =
-            "La consommation financière dépasse sensiblement l'avancement physique enregistré.";
-    }
-
-
-    if(data.remaining < 0){
-
-        statusElement.innerHTML =
-            '<span class="status-badge status-danger">Budget dépassé</span>';
-
-        descriptionElement.textContent =
-            "Les dépenses enregistrées dépassent le budget prévu.";
-    }
 }
 
 
-/* =========================
-   CHANTIERS SELECT
-========================= */
+/* =====================================================
+   OBTENIR BUDGET
+===================================================== */
 
-function chargerChantiers(){
+function obtenirBudget(){
 
-    const select =
-        document.getElementById("chantierSelect");
+    if(!chantierActuel){
 
-    const chantiers = obtenirChantiers();
+        return 0;
 
-    select.innerHTML =
-        '<option value="ALL">Tous les chantiers</option>';
+    }
 
 
-    chantiers.forEach(chantier => {
+    const champs = [
 
-        const id = String(chantier.id);
+        "budget",
 
-        const nom =
-            chantier.nom ??
-            chantier.name ??
-            chantier.titre ??
-            "Chantier sans nom";
+        "budgetPrevu",
 
-        const option =
-            document.createElement("option");
+        "budgetTotal",
 
-        option.value = id;
-        option.textContent = nom;
+        "budgetInitial",
 
-        select.appendChild(option);
-    });
+        "montantBudget",
+
+        "montantPrevisionnel"
+
+    ];
+
+
+    for(
+        const champ of champs
+    ){
+
+        const valeur =
+            nombre(
+                chantierActuel[
+                    champ
+                ]
+            );
+
+
+        if(
+            valeur > 0
+        ){
+
+            return valeur;
+
+        }
+
+    }
 
 
     /*
-       Si un chantier a été envoyé dans l'URL :
-       pilotage-financier.html?chantierId=123
-    */
+     * Si aucun budget n'est défini
+     * dans le chantier, on cherche
+     * le montant des devis associés.
+     */
 
-    const params = new URLSearchParams(window.location.search);
+    const devis =
+        lireStorage(
+            DEVIs_KEY_CORRECTION()
+        );
 
-    const chantierIdURL =
-        params.get("chantierId");
+
+    return obtenirBudgetDepuisDevis(
+        devis
+    );
+
+}
+
+
+/* =====================================================
+   CORRECTION / DEVIS
+===================================================== */
+
+function DEVIs_KEY_CORRECTION(){
+
+    return DEVIs_STORAGE_KEY();
+
+}
+
+
+function DEVIs_STORAGE_KEY(){
+
+    return DEVIs_KEY_INTERNE();
+
+}
+
+
+function DEVIs_KEY_INTERNE(){
+
+    return DEVIs_KEY_FINAL();
+
+}
+
+
+function DEVIs_KEY_FINAL(){
+
+    return DEVIs_KEY_SIMPLE();
+
+}
+
+
+function DEVIs_KEY_SIMPLE(){
+
+    return DEVIs_KEY_VALUE();
+
+}
+
+
+function DEVIs_KEY_VALUE(){
+
+    return "batiflowDevis";
+
+}
+
+
+/* =====================================================
+   BUDGET DEPUIS DEVIS
+===================================================== */
+
+function obtenirBudgetDepuisDevis(
+    devis
+){
+
+    if(!chantierActuel){
+
+        return 0;
+
+    }
+
+
+    let total = 0;
+
+
+    devis.forEach(
+        devisItem => {
+
+            const id =
+                devisItem.chantierId ??
+                devisItem.projectId;
+
+
+            if(
+                String(id)
+                !==
+                String(
+                    chantierActuel.id
+                )
+            ){
+
+                return;
+
+            }
+
+
+            const montant =
+                nombre(
+                    devisItem.totalTTC ??
+                    devisItem.totalHT ??
+                    devisItem.montant ??
+                    0
+                );
+
+
+            total +=
+                montant;
+
+        }
+    );
+
+
+    return total;
+
+}
+
+
+/* =====================================================
+   TYPE OPÉRATION
+===================================================== */
+
+function obtenirType(
+    operation
+){
+
+    const type =
+        String(
+            operation.type ||
+            operation.categoryType ||
+            ""
+        ).toLowerCase();
 
 
     if(
-        chantierIdURL &&
-        chantiers.some(item =>
-            String(item.id) === String(chantierIdURL)
-        )
+        type === "recette" ||
+        type === "revenue" ||
+        type === "income"
     ){
 
-        select.value = String(chantierIdURL);
+        return "recette";
+
     }
 
 
-    afficherNomChantier();
+    return "depense";
+
 }
 
 
-/* =========================
-   NOM CHANTIER
-========================= */
+/* =====================================================
+   DÉPENSES
+===================================================== */
 
-function afficherNomChantier(){
+function calculerDepenses(){
 
-    const select =
-        document.getElementById("chantierSelect");
-
-    const label =
-        document.getElementById("selectedProjectName");
-
-    if(select.value === "ALL"){
-
-        label.textContent =
-            "Tous les chantiers";
-
-        return;
-    }
-
-    const chantier =
-        trouverChantier(select.value);
-
-    if(!chantier){
-
-        label.textContent =
-            "Chantier sélectionné";
-
-        return;
-    }
-
-    label.textContent =
-        chantier.nom ??
-        chantier.name ??
-        chantier.titre ??
-        "Chantier";
-}
+    let total = 0;
 
 
-/* =========================
-   CATEGORIES
-========================= */
+    finances.forEach(
+        operation => {
 
-function chargerCategories(){
+            if(
+                obtenirType(
+                    operation
+                )
+                !==
+                "depense"
+            ){
 
-    const select =
-        document.getElementById("expenseCategory");
+                return;
 
-    const finances =
-        obtenirFinances();
-
-    const categories = new Set();
-
-    finances.forEach(depense => {
-
-        categories.add(
-            obtenirCategorie(depense)
-        );
-
-    });
+            }
 
 
-    select.innerHTML =
-        '<option value="ALL">Toutes les catégories</option>';
-
-    [...categories]
-        .sort((a,b) =>
-            a.localeCompare(b,"fr")
-        )
-        .forEach(categorie => {
-
-            const option =
-                document.createElement("option");
-
-            option.value = categorie;
-            option.textContent = categorie;
-
-            select.appendChild(option);
-        });
-}
-
-
-/* =========================
-   DEPENSES
-========================= */
-
-function obtenirDepensesFiltrees(){
-
-    const finances =
-        obtenirFinances();
-
-    const selected =
-        document.getElementById("chantierSelect").value;
-
-    const search =
-        normaliserTexte(
-            document.getElementById("expenseSearch").value
-        );
-
-    const category =
-        document.getElementById("expenseCategory").value;
-
-
-    return finances.filter(depense => {
-
-        /* Chantier */
-
-        if(selected !== "ALL"){
-
-            const id = chantierId(depense);
-
-            const chantier =
-                trouverChantier(selected);
-
-            const nom =
-                chantierNom(depense);
-
-            const nomChantier =
-                chantier
-                    ? (
-                        chantier.nom ??
-                        chantier.name ??
-                        chantier.titre ??
-                        ""
-                    )
-                    : "";
-
-            const memeChantier =
-                String(id) === String(selected) ||
-                (
-                    normaliserTexte(nom) !== "" &&
-                    normaliserTexte(nom) ===
-                    normaliserTexte(nomChantier)
+            total +=
+                nombre(
+                    operation.montant ??
+                    operation.amount ??
+                    operation.prix ??
+                    operation.total ??
+                    0
                 );
 
-            if(!memeChantier){
-                return false;
-            }
         }
+    );
 
 
-        /* Catégorie */
+    return total;
 
-        if(
-            category !== "ALL" &&
-            obtenirCategorie(depense) !== category
-        ){
-            return false;
-        }
-
-
-        /* Recherche */
-
-        if(search){
-
-            const texte = (
-
-                obtenirDesignation(depense) +
-                " " +
-                obtenirCategorie(depense) +
-                " " +
-                obtenirResponsable(depense) +
-                " " +
-                chantierNom(depense)
-
-            ).toLowerCase();
-
-            if(!texte.includes(search)){
-                return false;
-            }
-        }
-
-
-        return true;
-    });
 }
 
 
-/* =========================
-   AFFICHAGE TABLE
-========================= */
+/* =====================================================
+   RECETTES
+===================================================== */
 
-function afficherDepenses(){
+function calculerRecettes(){
 
-    const tbody =
-        document.getElementById("expensesTableBody");
+    let total = 0;
 
-    const empty =
-        document.getElementById("expensesEmpty");
+
+    finances.forEach(
+        operation => {
+
+            if(
+                obtenirType(
+                    operation
+                )
+                !==
+                "recette"
+            ){
+
+                return;
+
+            }
+
+
+            total +=
+                nombre(
+                    operation.montant ??
+                    operation.amount ??
+                    operation.prix ??
+                    operation.total ??
+                    0
+                );
+
+        }
+    );
+
+
+    return total;
+
+}
+
+
+/* =====================================================
+   AVANCEMENT PHYSIQUE
+===================================================== */
+
+function obtenirAvancementPhysique(){
+
+    /*
+     * Priorité :
+     * 1. suivi chantier
+     * 2. chantier
+     */
+
+    if(suiviActuel){
+
+        const valeurs = [
+
+            suiviActuel.avancement,
+
+            suiviActuel.progression,
+
+            suiviActuel.pourcentage,
+
+            suiviActuel.avancementPhysique
+
+        ];
+
+
+        for(
+            const valeur of valeurs
+        ){
+
+            const n =
+                nombre(
+                    valeur
+                );
+
+
+            if(
+                n >= 0
+            ){
+
+                return clamp(
+                    n,
+                    0,
+                    100
+                );
+
+            }
+
+        }
+
+    }
+
+
+    if(chantierActuel){
+
+        const valeurs = [
+
+            chantierActuel.avancement,
+
+            chantierActuel.progression,
+
+            chantierActuel.pourcentage,
+
+            chantierActuel.avancementPhysique
+
+        ];
+
+
+        for(
+            const valeur of valeurs
+        ){
+
+            const n =
+                nombre(
+                    valeur
+                );
+
+
+            if(
+                n >= 0
+            ){
+
+                return clamp(
+                    n,
+                    0,
+                    100
+                );
+
+            }
+
+        }
+
+    }
+
+
+    return 0;
+
+}
+
+
+/* =====================================================
+   CONSOMMATION FINANCIÈRE
+===================================================== */
+
+function calculerConsommation(
+    budget,
+    depenses
+){
+
+    if(
+        budget <= 0
+    ){
+
+        return 0;
+
+    }
+
+
+    return (
+        depenses /
+        budget
+    ) * 100;
+
+}
+
+
+/* =====================================================
+   ÉCART FINANCIER
+===================================================== */
+
+function calculerEcart(
+    avancementPhysique,
+    consommationFinanciere
+){
+
+    /*
+     * Écart =
+     * avancement physique
+     * - consommation financière
+     *
+     * Exemple :
+     * physique 60%
+     * financier 45%
+     * écart +15 points
+     */
+
+    return (
+        avancementPhysique -
+        consommationFinanciere
+    );
+
+}
+
+
+/* =====================================================
+   RESTE À ENGAGER
+===================================================== */
+
+function calculerReste(
+    budget,
+    depenses
+){
+
+    return (
+        budget -
+        depenses
+    );
+
+}
+
+
+/* =====================================================
+   CLASSE ÉCART
+===================================================== */
+
+function classeEcart(
+    ecart
+){
+
+    if(
+        ecart > 5
+    ){
+
+        return "ecart-positive";
+
+    }
+
+
+    if(
+        ecart < -5
+    ){
+
+        return "ecart-negative";
+
+    }
+
+
+    return "ecart-neutral";
+
+}
+
+
+/* =====================================================
+   TEXTE ÉCART
+===================================================== */
+
+function texteEcart(
+    ecart
+){
+
+    if(
+        ecart > 5
+    ){
+
+        return "L'avancement physique est supérieur à la consommation financière.";
+
+    }
+
+
+    if(
+        ecart < -5
+    ){
+
+        return "La consommation financière est supérieure à l'avancement physique.";
+
+    }
+
+
+    return "L'avancement physique et financier sont relativement proches.";
+
+}
+
+
+/* =====================================================
+   AFFICHER APPLICATION
+===================================================== */
+
+function afficherApplication(){
+
+    const app =
+        document.getElementById(
+            "application"
+        );
+
+
+    if(!chantierActuel){
+
+        app.innerHTML = `
+
+            <section class="card">
+
+                <div class="empty">
+
+                    <div class="empty-title">
+                        Aucun chantier sélectionné
+                    </div>
+
+                    <p>
+                        Ouvrez le pilotage financier depuis la page Chantiers.
+                    </p>
+
+                    <a
+                        href="chantiers.html"
+                        class="button button-primary"
+                    >
+                        ← Choisir un chantier
+                    </a>
+
+                </div>
+
+            </section>
+
+        `;
+
+        return;
+
+    }
+
+
+    const budget =
+        obtenirBudget();
+
 
     const depenses =
-        obtenirDepensesFiltrees();
+        calculerDepenses();
 
 
-    if(!depenses.length){
-
-        tbody.innerHTML = "";
-
-        empty.style.display =
-            "block";
-
-        return;
-    }
+    const recettes =
+        calculerRecettes();
 
 
-    empty.style.display =
-        "none";
+    const reste =
+        calculerReste(
+            budget,
+            depenses
+        );
 
 
-    const lignes =
-        depenses
-            .slice()
-            .sort((a,b) => {
+    const consommation =
+        calculerConsommation(
+            budget,
+            depenses
+        );
 
-                const da =
-                    new Date(obtenirDate(a)).getTime() || 0;
 
-                const db =
-                    new Date(obtenirDate(b)).getTime() || 0;
+    const consommationAffichee =
+        clamp(
+            consommation,
+            0,
+            100
+        );
 
-                return db - da;
 
-            })
-            .map(depense => {
+    const avancement =
+        obtenirAvancementPhysique();
 
-                const montant =
-                    obtenirMontantDepense(depense);
 
-                const statut =
-                    obtenirStatut(depense);
+    const ecart =
+        calculerEcart(
+            avancement,
+            consommation
+        );
 
-                let badge =
-                    "status-ok";
 
-                const statutNormalise =
-                    normaliserTexte(statut);
+    const ecartClasse =
+        classeEcart(
+            ecart
+        );
 
-                if(
-                    statutNormalise.includes("retard") ||
-                    statutNormalise.includes("impay") ||
-                    statutNormalise.includes("annul")
-                ){
 
-                    badge = "status-danger";
+    const ecartAbs =
+        Math.abs(
+            ecart
+        );
 
-                }else if(
-                    statutNormalise.includes("attente") ||
-                    statutNormalise.includes("partiel")
-                ){
 
-                    badge = "status-warning";
+    app.innerHTML = `
+
+        <!-- ==========================================
+             TITRE
+        =========================================== -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1 class="page-title">
+                    Pilotage financier
+                </h1>
+
+                <div class="page-subtitle">
+                    Analyse financière et avancement physique du chantier.
+                </div>
+
+            </div>
+
+
+            <div class="form-inline">
+
+                <button
+                    class="button button-primary"
+                    onclick="ouvrirFinances()"
+                >
+                    + Gérer les finances
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             CHANTIER
+        =========================================== -->
+
+        <section class="chantier-card">
+
+            <div class="chantier-name">
+                ${echapper(
+                    chantierActuel.nom
+                )}
+            </div>
+
+            <div class="chantier-info">
+
+                ${
+                    chantierActuel.clientNom ||
+                    chantierActuel.client
+                    ? "Client : " +
+                      echapper(
+                          chantierActuel.clientNom ||
+                          chantierActuel.client
+                      )
+                    : ""
                 }
 
+                ${
+                    chantierActuel.localisation
+                    ? " • 📍 " +
+                      echapper(
+                          chantierActuel.localisation
+                      )
+                    : ""
+                }
 
-                return `
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             ALERTES
+        =========================================== -->
+
+        <div
+            id="alertContainer"
+        ></div>
+
+
+        <!-- ==========================================
+             KPI
+        =========================================== -->
+
+        <section class="kpi-grid">
+
+
+            <div class="kpi kpi-blue">
+
+                <div class="kpi-label">
+                    Budget prévu
+                </div>
+
+                <div class="kpi-value">
+                    ${formatMontant(
+                        budget
+                    )}
+                </div>
+
+                <div class="kpi-note">
+                    Budget de référence
+                </div>
+
+            </div>
+
+
+            <div class="kpi kpi-red">
+
+                <div class="kpi-label">
+                    Dépenses réelles
+                </div>
+
+                <div class="kpi-value">
+                    ${formatMontant(
+                        depenses
+                    )}
+                </div>
+
+                <div class="kpi-note">
+                    Total des dépenses enregistrées
+                </div>
+
+            </div>
+
+
+            <div class="kpi kpi-green">
+
+                <div class="kpi-label">
+                    Reste à engager
+                </div>
+
+                <div class="kpi-value">
+                    ${formatMontant(
+                        reste
+                    )}
+                </div>
+
+                <div class="kpi-note">
+                    Budget − dépenses
+                </div>
+
+            </div>
+
+
+            <div class="kpi kpi-orange">
+
+                <div class="kpi-label">
+                    Consommation financière
+                </div>
+
+                <div class="kpi-value">
+                    ${consommation.toFixed(1)} %
+                </div>
+
+                <div class="kpi-note">
+                    Dépenses / budget
+                </div>
+
+            </div>
+
+
+            <div class="kpi kpi-purple">
+
+                <div class="kpi-label">
+                    Avancement physique
+                </div>
+
+                <div class="kpi-value">
+                    ${avancement.toFixed(1)} %
+                </div>
+
+                <div class="kpi-note">
+                    Progression du chantier
+                </div>
+
+            </div>
+
+
+            <div class="kpi kpi-green">
+
+                <div class="kpi-label">
+                    Recettes
+                </div>
+
+                <div class="kpi-value">
+                    ${formatMontant(
+                        recettes
+                    )}
+                </div>
+
+                <div class="kpi-note">
+                    Entrées financières
+                </div>
+
+            </div>
+
+
+            <div class="kpi kpi-orange">
+
+                <div class="kpi-label">
+                    Solde recettes
+                </div>
+
+                <div class="kpi-value">
+                    ${formatMontant(
+                        recettes -
+                        depenses
+                    )}
+                </div>
+
+                <div class="kpi-note">
+                    Recettes − dépenses
+                </div>
+
+            </div>
+
+
+            <div class="kpi kpi-blue">
+
+                <div class="kpi-label">
+                    Écart financier
+                </div>
+
+                <div class="kpi-value">
+                    ${
+                        ecart >= 0
+                        ? "+"
+                        : ""
+                    }${ecart.toFixed(1)} pts
+                </div>
+
+                <div class="kpi-note">
+                    Physique − financier
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             PROGRESSIONS
+        =========================================== -->
+
+        <section class="card">
+
+            <h2 class="card-title">
+                📊 Suivi de la consommation
+            </h2>
+
+            <div class="card-subtitle">
+                Comparaison entre budget consommé et avancement du chantier.
+            </div>
+
+
+            <div class="progress-section">
+
+                <div class="progress-header">
+
+                    <span class="progress-label">
+                        Consommation financière
+                    </span>
+
+                    <span class="progress-percent">
+                        ${consommation.toFixed(1)} %
+                    </span>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div
+                        class="progress-fill progress-financial"
+                        style="
+                            width:${consommationAffichee}%
+                        "
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-section">
+
+                <div class="progress-header">
+
+                    <span class="progress-label">
+                        Avancement physique
+                    </span>
+
+                    <span class="progress-percent">
+                        ${avancement.toFixed(1)} %
+                    </span>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div
+                        class="progress-fill progress-physical"
+                        style="
+                            width:${avancement}%
+                        "
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="
+                ecart-box
+                ${ecartClasse}
+            ">
+
+                <div class="ecart-title">
+                    Écart financier / physique
+                </div>
+
+                <div class="ecart-value">
+
+                    ${
+                        ecart >= 0
+                        ? "+"
+                        : ""
+                    }${ecart.toFixed(1)} points
+
+                </div>
+
+                <div class="ecart-description">
+
+                    ${texteEcart(
+                        ecart
+                    )}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             COMPARAISON
+        =========================================== -->
+
+        <section class="card">
+
+            <h2 class="card-title">
+                ⚖️ Comparaison du chantier
+            </h2>
+
+            <div class="card-subtitle">
+                Lecture synthétique de la situation actuelle.
+            </div>
+
+
+            <div class="comparison-grid"
+                 style="margin-top:18px;"
+            >
+
+                <div class="comparison-box">
+
+                    <div class="comparison-title">
+                        Avancement physique
+                    </div>
+
+                    <div class="comparison-value">
+                        ${avancement.toFixed(1)} %
+                    </div>
+
+                    <div class="comparison-note">
+                        Progression estimée des travaux
+                    </div>
+
+                </div>
+
+
+                <div class="comparison-box">
+
+                    <div class="comparison-title">
+                        Consommation financière
+                    </div>
+
+                    <div class="comparison-value">
+                        ${consommation.toFixed(1)} %
+                    </div>
+
+                    <div class="comparison-note">
+                        Part du budget déjà dépensée
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             CATEGORIES
+        =========================================== -->
+
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <h2 class="card-title">
+                    💳 Dépenses par catégorie
+                </h2>
+
+                <div class="card-subtitle">
+                    Répartition des dépenses réelles du chantier.
+                </div>
+
+            </div>
+
+
+            <div
+                id="categoriesTable"
+            ></div>
+
+        </section>
+
+
+        <!-- ==========================================
+             MODULES
+        =========================================== -->
+
+        <section class="modules">
+
+            <div class="modules-title">
+                🔗 Modules du chantier
+            </div>
+
+
+            <div class="module-grid">
+
+                <a
+                    href="#"
+                    class="module-link"
+                    onclick="ouvrirChantiers();return false;"
+                >
+                    🏗️ Chantiers
+                </a>
+
+
+                <a
+                    href="#"
+                    class="module-link"
+                    onclick="ouvrirSuivi();return false;"
+                >
+                    📊 Suivi
+                </a>
+
+
+                <a
+                    href="#"
+                    class="module-link"
+                    onclick="ouvrirPlanning();return false;"
+                >
+                    📋 Planning
+                </a>
+
+
+                <a
+                    href="#"
+                    class="module-link"
+                    onclick="ouvrirCalendrier();return false;"
+                >
+                    🗓️ Calendrier
+                </a>
+
+
+                <a
+                    href="#"
+                    class="module-link"
+                    onclick="ouvrirFinances();return false;"
+                >
+                    💰 Finances
+                </a>
+
+
+                <a
+                    href="#"
+                    class="module-link"
+                    onclick="ouvrirRentabilite();return false;"
+                >
+                    💹 Rentabilité
+                </a>
+
+            </div>
+
+        </section>
+
+    `;
+
+
+    afficherAlertes(
+        budget,
+        depenses,
+        consommation,
+        avancement,
+        ecart
+    );
+
+
+    afficherCategories(
+        depenses
+    );
+
+}
+
+
+/* =====================================================
+   ALERTES
+===================================================== */
+
+function afficherAlertes(
+    budget,
+    depenses,
+    consommation,
+    avancement,
+    ecart
+){
+
+    const container =
+        document.getElementById(
+            "alertContainer"
+        );
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+    let html = "";
+
+
+    if(
+        budget <= 0
+    ){
+
+        html += `
+
+            <div class="alert alert-warning show">
+
+                ⚠️
+                Aucun budget prévu n'est défini pour ce chantier.
+                Ajoutez un budget dans le module Finances.
+
+            </div>
+
+        `;
+
+    }
+
+
+    if(
+        consommation > 100
+    ){
+
+        html += `
+
+            <div class="alert alert-danger show">
+
+                🚨
+                Les dépenses réelles dépassent le budget prévu de
+                ${formatMontant(
+                    depenses - budget
+                )}.
+
+            </div>
+
+        `;
+
+    }
+
+
+    if(
+        ecart < -10
+    ){
+
+        html += `
+
+            <div class="alert alert-danger show">
+
+                ⚠️
+                La consommation financière est supérieure de
+                ${Math.abs(
+                    ecart
+                ).toFixed(1)}
+                points à l'avancement physique.
+
+            </div>
+
+        `;
+
+    }
+    else if(
+        ecart > 10
+    ){
+
+        html += `
+
+            <div class="alert alert-success show">
+
+                ✓
+                L'avancement physique est supérieur de
+                ${ecart.toFixed(1)}
+                points à la consommation financière.
+
+            </div>
+
+        `;
+
+    }
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+   DÉPENSES PAR CATÉGORIE
+===================================================== */
+
+function afficherCategories(
+    totalDepenses
+){
+
+    const container =
+        document.getElementById(
+            "categoriesTable"
+        );
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+    const categories = {};
+
+
+    finances.forEach(
+        operation => {
+
+            if(
+                obtenirType(
+                    operation
+                )
+                !==
+                "depense"
+            ){
+
+                return;
+
+            }
+
+
+            const categorie =
+                operation.categorie ||
+                operation.category ||
+                "Autre";
+
+
+            const montant =
+                nombre(
+                    operation.montant ??
+                    operation.amount ??
+                    operation.prix ??
+                    operation.total ??
+                    0
+                );
+
+
+            if(
+                !categories[
+                    categorie
+                ]
+            ){
+
+                categories[
+                    categorie
+                ] = 0;
+
+            }
+
+
+            categories[
+                categorie
+            ] += montant;
+
+        }
+    );
+
+
+    const liste =
+        Object.entries(
+            categories
+        )
+        .sort(
+            (a,b) =>
+                b[1] - a[1]
+        );
+
+
+    if(!liste.length){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-title">
+                    Aucune dépense enregistrée
+                </div>
+
+                Ajoutez des dépenses depuis le module Finances.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
                     <tr>
 
-                        <td>
-                            ${formaterDate(obtenirDate(depense))}
-                        </td>
+                        <th>
+                            CATÉGORIE
+                        </th>
 
-                        <td>
-                            ${escapeHTML(
-                                chantierNom(depense) || "—"
-                            )}
-                        </td>
+                        <th>
+                            MONTANT
+                        </th>
 
-                        <td>
-                            <strong>
-                                ${escapeHTML(
-                                    obtenirDesignation(depense)
-                                )}
-                            </strong>
-                        </td>
+                        <th>
+                            PART DES DÉPENSES
+                        </th>
 
-                        <td>
-                            ${escapeHTML(
-                                obtenirCategorie(depense)
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHTML(
-                                obtenirResponsable(depense)
-                            )}
-                        </td>
-
-                        <td class="amount">
-                            ${formatFCFA(montant)}
-                        </td>
-
-                        <td>
-                            <span class="status-badge ${badge}">
-                                ${escapeHTML(statut)}
-                            </span>
-                        </td>
+                        <th>
+                            PROPORTION
+                        </th>
 
                     </tr>
-                `;
 
-            })
-            .join("");
+                </thead>
 
+                <tbody>
 
-    tbody.innerHTML = lignes;
-}
+    `;
 
 
-/* =========================
-   EVENEMENTS
-========================= */
+    liste.forEach(
+        ([categorie,montant]) => {
 
-function activerEvenements(){
-
-    document
-        .getElementById("chantierSelect")
-        .addEventListener("change",() => {
-
-            afficherNomChantier();
-            afficherKPI();
-            afficherDepenses();
-
-        });
+            const pourcentage =
+                totalDepenses > 0
+                ? (
+                    montant /
+                    totalDepenses
+                ) * 100
+                : 0;
 
 
-    document
-        .getElementById("expenseSearch")
-        .addEventListener("input",() => {
+            html += `
 
-            afficherDepenses();
+                <tr>
 
-        });
+                    <td class="category-name">
+                        ${echapper(
+                            categorie
+                        )}
+                    </td>
 
+                    <td class="category-amount">
+                        ${formatMontant(
+                            montant
+                        )}
+                    </td>
 
-    document
-        .getElementById("globalSearch")
-        .addEventListener("input",function(){
+                    <td class="category-percent">
+                        ${pourcentage.toFixed(1)} %
+                    </td>
 
-            document.getElementById("expenseSearch").value =
-                this.value;
+                    <td>
 
-            afficherDepenses();
+                        <div class="progress">
 
-        });
+                            <div
+                                class="progress-fill progress-financial"
+                                style="
+                                    width:${pourcentage}%
+                                "
+                            ></div>
 
+                        </div>
 
-    document
-        .getElementById("expenseCategory")
-        .addEventListener("change",() => {
+                    </td>
 
-            afficherDepenses();
+                </tr>
 
-        });
+            `;
 
-
-    window.addEventListener("storage",() => {
-
-        chargerChantiers();
-        chargerCategories();
-        afficherKPI();
-        afficherDepenses();
-
-    });
-}
-
-
-/* =========================
-   MENU MOBILE
-========================= */
-
-function activerMenuMobile(){
-
-    const button =
-        document.getElementById("mobileMenu");
-
-    const sidebar =
-        document.getElementById("sidebar");
-
-
-    button.addEventListener("click",() => {
-
-        sidebar.classList.toggle("open");
-
-    });
-
-
-    document
-        .querySelectorAll(".nav-link")
-        .forEach(link => {
-
-            link.addEventListener("click",() => {
-
-                sidebar.classList.remove("open");
-
-            });
-
-        });
-}
-
-
-/* =========================
-   UTILISATEUR
-========================= */
-
-function chargerUtilisateur(){
-
-    const sources = [
-        "batiflowUser",
-        "batiflowUtilisateur",
-        "batiflowProfile"
-    ];
-
-    let utilisateur = null;
-
-    for(const cle of sources){
-
-        const data =
-            lireStorage(cle,null);
-
-        if(data){
-
-            utilisateur = data;
-            break;
         }
-    }
+    );
 
 
-    if(!utilisateur){
-        return;
-    }
+    html += `
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    `;
 
 
-    const nom =
-        utilisateur.nom ??
-        utilisateur.name ??
-        utilisateur.prenom ??
-        "BATIFLOW";
-
-
-    const role =
-        utilisateur.role ??
-        utilisateur.fonction ??
-        "Administrateur";
-
-
-    document.getElementById("userName").textContent =
-        nom;
-
-    document.getElementById("userRole").textContent =
-        role;
-
-
-    const initiales =
-        String(nom)
-            .split(" ")
-            .filter(Boolean)
-            .slice(0,2)
-            .map(part => part.charAt(0))
-            .join("")
-            .toUpperCase();
-
-
-    document.getElementById("userAvatar").textContent =
-        initiales || "BF";
-}
-
-
-/* =========================
-   INITIALISATION
-========================= */
-
-function chargerPage(){
-
-    chargerUtilisateur();
-
-    chargerChantiers();
-
-    chargerCategories();
-
-    afficherKPI();
-
-    afficherDepenses();
-
-    activerEvenements();
-
-    activerMenuMobile();
+    container.innerHTML =
+        html;
 
 }
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    chargerPage
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function urlModule(page){
+
+    if(!chantierActuel){
+
+        return page;
+
+    }
+
+
+    return (
+        page +
+        "?chantierId=" +
+        encodeURIComponent(
+            chantierActuel.id
+        )
+    );
+
+}
+
+
+function ouvrirChantiers(){
+
+    window.location.href =
+        "chantiers.html";
+
+}
+
+
+function ouvrirFinances(){
+
+    window.location.href =
+        urlModule(
+            "finances.html"
+        );
+
+}
+
+
+function ouvrirSuivi(){
+
+    window.location.href =
+        urlModule(
+            "suivi-chantier.html"
+        );
+
+}
+
+
+function ouvrirPlanning(){
+
+    window.location.href =
+        urlModule(
+            "planning.html"
+        );
+
+}
+
+
+function ouvrirCalendrier(){
+
+    window.location.href =
+        urlModule(
+            "calendrier.html"
+        );
+
+}
+
+
+function ouvrirRentabilite(){
+
+    window.location.href =
+        urlModule(
+            "rentabilite.html"
+        );
+
+}
+
+
+/* =====================================================
+   REFRESH
+===================================================== */
+
+function chargerEtAfficher(){
+
+    chargerChantier();
+
+    chargerFinances();
+
+    chargerSuivi();
+
+    afficherApplication();
+
+}
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(){
+
+        chargerEtAfficher();
+
+    }
 );
 
 
+/* =====================================================
+   PAGESHOW
+===================================================== */
+
 window.addEventListener(
     "pageshow",
-    () => {
+    function(){
 
-        chargerChantiers();
-        chargerCategories();
-        afficherKPI();
-        afficherDepenses();
+        chargerEtAfficher();
+
+    }
+);
+
+
+/* =====================================================
+   INITIALISATION
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        chargerEtAfficher();
 
     }
 );
@@ -3104,4 +2709,4 @@ window.addEventListener(
 
 </body>
 </html>
-```
+
