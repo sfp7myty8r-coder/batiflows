@@ -3,10 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>BATIFLOW — Devis</title>
-<meta name="description" content="BATIFLOW — Gestion des devis BTP">
+
+<meta
+    name="description"
+    content="BATIFLOW — Création et gestion des devis BTP"
+/>
 
 <style>
+
 :root{
     --dark:#101827;
     --dark2:#151f32;
@@ -19,577 +25,3358 @@
     --border:#e5e7eb;
     --green:#16a34a;
     --red:#dc2626;
+    --blue:#2563eb;
     --shadow:0 8px 25px rgba(15,23,42,.07);
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar{
-    position:fixed;left:0;top:0;bottom:0;width:260px;
-    background:var(--dark);color:#fff;z-index:1000;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:260px;
+    background:var(--dark);
+    color:#fff;
+    z-index:1000;
     overflow-y:auto;
 }
+
 .logo{
-    display:flex;align-items:center;gap:10px;
-    padding:22px 20px 18px;text-decoration:none;color:#fff;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:22px 20px 18px;
+    text-decoration:none;
+    color:#fff;
 }
-.logo-icon{width:42px;height:42px;flex:none}
-.logo-text{font-weight:900;font-size:21px;letter-spacing:.4px}
-.logo-text .flow{color:var(--orange)}
-.logo-sub{display:block;font-size:8px;letter-spacing:1.1px;color:#94a3b8;margin-top:2px}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    flex:none;
+}
+
+.logo-text{
+    font-weight:900;
+    font-size:21px;
+    letter-spacing:.4px;
+}
+
+.logo-text .flow{
+    color:var(--orange);
+}
+
+.logo-sub{
+    display:block;
+    font-size:8px;
+    letter-spacing:1.1px;
+    color:#94a3b8;
+    margin-top:2px;
+}
 
 .nav-title{
-    padding:18px 20px 8px;color:#64748b;font-size:10px;
-    font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+    padding:18px 20px 8px;
+    color:#64748b;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
 }
+
 .nav a{
-    display:flex;align-items:center;gap:12px;
-    margin:4px 12px;padding:11px 12px;border-radius:10px;
-    color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:4px 12px;
+    padding:11px 12px;
+    border-radius:10px;
+    color:#cbd5e1;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
     transition:.2s;
 }
-.nav a:hover{background:#1d293d;color:#fff}
-.nav a.active{background:rgba(245,158,11,.14);color:#fff}
-.nav a.active .nav-icon{background:var(--orange);color:#111827}
+
+.nav a:hover{
+    background:#1d293d;
+    color:#fff;
+}
+
+.nav a.active{
+    background:rgba(245,158,11,.14);
+    color:#fff;
+}
+
+.nav a.active .nav-icon{
+    background:var(--orange);
+    color:#111827;
+}
+
 .nav-icon{
-    width:30px;height:30px;border-radius:8px;
-    display:grid;place-items:center;background:#1c2739;
-    font-size:15px;flex:none;
+    width:30px;
+    height:30px;
+    border-radius:8px;
+    display:grid;
+    place-items:center;
+    background:#1c2739;
+    font-size:15px;
+    flex:none;
 }
-.logout{margin-top:12px!important;border-top:1px solid #253044;border-radius:0!important;padding-top:18px!important}
 
-.main{margin-left:260px;min-height:100vh}
+.logout{
+    margin-top:12px!important;
+    border-top:1px solid #253044;
+    border-radius:0!important;
+    padding-top:18px!important;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:260px;
+    min-height:100vh;
+}
+
 .topbar{
-    height:72px;background:#fff;border-bottom:1px solid var(--border);
-    display:flex;align-items:center;justify-content:space-between;
-    padding:0 28px;position:sticky;top:0;z-index:900;
+    height:72px;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:900;
 }
-.page-title{font-size:20px;font-weight:800}
-.page-sub{font-size:12px;color:var(--muted);margin-top:3px}
-.top-right{display:flex;align-items:center;gap:18px}
+
+.page-title{
+    font-size:20px;
+    font-weight:800;
+}
+
+.page-sub{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
 .search{
-    width:270px;height:40px;border:1px solid var(--border);border-radius:10px;
-    padding:0 13px;outline:none;background:#f8fafc;
+    width:270px;
+    height:40px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:0 13px;
+    outline:none;
+    background:#f8fafc;
 }
-.search:focus{border-color:var(--orange);background:#fff}
+
+.search:focus{
+    border-color:var(--orange);
+    background:#fff;
+}
+
 .avatar{
-    width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
-    background:var(--orange);color:#111827;font-weight:900;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:var(--orange);
+    color:#111827;
+    font-weight:900;
 }
-.user-name{font-size:13px;font-weight:700}
-.menu-btn{display:none;background:none;border:0;font-size:24px}
 
-.content{padding:28px}
+.user-name{
+    font-size:13px;
+    font-weight:700;
+}
+
+.menu-btn{
+    display:none;
+    background:none;
+    border:0;
+    font-size:24px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    padding:28px;
+}
+
 .page-head{
-    display:flex;justify-content:space-between;align-items:flex-start;
-    gap:15px;margin-bottom:22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:22px;
 }
-.eyebrow{font-size:10px;font-weight:900;letter-spacing:1.2px;color:var(--orange2)}
-h1{font-size:28px;margin:5px 0 6px}
-.page-head p{margin:0;color:var(--muted);font-size:14px}
 
-.actions{display:flex;gap:9px;flex-wrap:wrap}
-.btn{
-    border:0;border-radius:9px;padding:10px 15px;font-weight:800;font-size:13px;
-    display:inline-flex;align-items:center;gap:7px;transition:.2s;
+.eyebrow{
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.2px;
+    color:var(--orange2);
 }
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--orange);color:#111827}
-.btn-dark{background:var(--dark);color:#fff}
-.btn-light{background:#fff;border:1px solid var(--border);color:#334155}
-.btn-danger{background:#fee2e2;color:#991b1b}
-.btn-green{background:#dcfce7;color:#166534}
+
+h1{
+    font-size:28px;
+    margin:5px 0 6px;
+}
+
+.page-head p{
+    margin:0;
+    color:var(--muted);
+    font-size:14px;
+}
+
+.actions{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    border-radius:9px;
+    padding:10px 15px;
+    font-weight:800;
+    font-size:13px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:var(--orange);
+    color:#111827;
+}
+
+.btn-dark{
+    background:var(--dark);
+    color:#fff;
+}
+
+.btn-light{
+    background:#fff;
+    border:1px solid var(--border);
+    color:#334155;
+}
+
+.btn-danger{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.btn-green{
+    background:#dcfce7;
+    color:#166534;
+}
+
+/* =========================
+   GRID
+========================= */
 
 .grid{
-    display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:20px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 330px;
+    gap:20px;
 }
+
 .card{
-    background:#fff;border:1px solid var(--border);border-radius:14px;
-    box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    margin-bottom:20px;
 }
+
 .card-head{
-    padding:17px 20px;border-bottom:1px solid var(--border);
-    display:flex;justify-content:space-between;align-items:center;
+    padding:17px 20px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-.card-head h2{font-size:15px;margin:0}
-.card-body{padding:20px}
+
+.card-head h2{
+    font-size:15px;
+    margin:0;
+}
+
+.card-body{
+    padding:20px;
+}
+
+/* =========================
+   FORM
+========================= */
 
 .form-grid{
-    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:15px;
 }
-.field.full{grid-column:1/-1}
-label{display:block;font-size:12px;font-weight:800;color:#334155;margin-bottom:6px}
-input,select,textarea{
-    width:100%;border:1px solid #dbe1ea;border-radius:8px;
-    padding:10px 11px;outline:none;background:#fff;color:#111827;
-}
-input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(245,158,11,.12)}
-textarea{min-height:85px;resize:vertical}
 
-.table-wrap{overflow:auto}
-table{width:100%;border-collapse:collapse;min-width:760px}
-th{
-    background:#f8fafc;text-align:left;padding:11px 9px;
-    font-size:11px;color:#64748b;text-transform:uppercase;
+.field.full{
+    grid-column:1/-1;
 }
-td{padding:9px;border-top:1px solid var(--border);vertical-align:middle}
-td input,td select{padding:8px;font-size:12px}
-.col-num{width:42px;text-align:center;color:#64748b;font-weight:800}
-.col-action{width:52px}
-.amount{font-weight:800;text-align:right;white-space:nowrap}
+
+label{
+    display:block;
+    font-size:12px;
+    font-weight:800;
+    color:#334155;
+    margin-bottom:6px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    border:1px solid #dbe1ea;
+    border-radius:8px;
+    padding:10px 11px;
+    outline:none;
+    background:#fff;
+    color:#111827;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:var(--orange);
+    box-shadow:0 0 0 3px rgba(245,158,11,.12);
+}
+
+textarea{
+    min-height:85px;
+    resize:vertical;
+}
+
+/* =========================
+   CLIENT / CHANTIER
+========================= */
+
+.select-info{
+    font-size:10px;
+    color:#64748b;
+    margin-top:5px;
+}
+
+.quick-link{
+    display:inline-block;
+    margin-top:5px;
+    color:#b45309;
+    font-size:11px;
+    font-weight:800;
+    text-decoration:none;
+}
+
+.quick-link:hover{
+    text-decoration:underline;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:780px;
+}
+
+th{
+    background:#f8fafc;
+    text-align:left;
+    padding:11px 9px;
+    font-size:11px;
+    color:#64748b;
+    text-transform:uppercase;
+}
+
+td{
+    padding:9px;
+    border-top:1px solid var(--border);
+    vertical-align:middle;
+}
+
+td input,
+td select{
+    padding:8px;
+    font-size:12px;
+}
+
+.col-num{
+    width:42px;
+    text-align:center;
+    color:#64748b;
+    font-weight:800;
+}
+
+.col-action{
+    width:52px;
+}
+
+.amount{
+    font-weight:800;
+    text-align:right;
+    white-space:nowrap;
+}
+
 .delete-line{
-    width:32px;height:32px;border:0;border-radius:7px;
-    background:#fee2e2;color:#991b1b;font-weight:900;
+    width:32px;
+    height:32px;
+    border:0;
+    border-radius:7px;
+    background:#fee2e2;
+    color:#991b1b;
+    font-weight:900;
 }
 
 .add-line{
-    margin-top:12px;border:1px dashed #cbd5e1;background:#f8fafc;
-    color:#475569;width:100%;padding:10px;border-radius:8px;font-weight:800;
+    margin-top:12px;
+    border:1px dashed #cbd5e1;
+    background:#f8fafc;
+    color:#475569;
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    font-weight:800;
 }
-.add-line:hover{border-color:var(--orange);color:#92400e;background:#fffaf0}
 
-.summary{position:sticky;top:92px}
+.add-line:hover{
+    border-color:var(--orange);
+    color:#92400e;
+    background:#fffaf0;
+}
+
+/* =========================
+   SUMMARY
+========================= */
+
+.summary{
+    position:sticky;
+    top:92px;
+}
+
 .summary-row{
-    display:flex;justify-content:space-between;gap:15px;
-    padding:10px 0;font-size:13px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:10px 0;
+    font-size:13px;
 }
-.summary-row strong{font-size:14px}
+
+.summary-row strong{
+    font-size:14px;
+}
+
 .summary-row.total{
-    border-top:2px solid var(--dark);margin-top:8px;padding-top:15px;
+    border-top:2px solid var(--dark);
+    margin-top:8px;
+    padding-top:15px;
 }
-.summary-row.total strong{font-size:21px;color:#111827}
-.summary-actions{display:grid;gap:9px;margin-top:15px}
+
+.summary-row.total strong{
+    font-size:21px;
+    color:#111827;
+}
+
+.summary-actions{
+    display:grid;
+    gap:9px;
+    margin-top:15px;
+}
+
 .info{
-    background:#fffbeb;border:1px solid #fde68a;border-radius:10px;
-    padding:11px 12px;font-size:11px;color:#854d0e;line-height:1.5;
+    background:#fffbeb;
+    border:1px solid #fde68a;
+    border-radius:10px;
+    padding:11px 12px;
+    font-size:11px;
+    color:#854d0e;
+    line-height:1.5;
 }
+
 .status{
-    display:inline-flex;padding:5px 9px;border-radius:999px;
-    background:#dcfce7;color:#166534;font-size:10px;font-weight:900;
+    display:inline-flex;
+    padding:5px 9px;
+    border-radius:999px;
+    background:#dcfce7;
+    color:#166534;
+    font-size:10px;
+    font-weight:900;
 }
+
+/* =========================
+   HISTORIQUE
+========================= */
+
+.devis-list{
+    display:grid;
+    gap:10px;
+}
+
+.devis-item{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    align-items:center;
+    background:#fff;
+}
+
+.devis-main strong{
+    display:block;
+    font-size:13px;
+}
+
+.devis-main span{
+    display:block;
+    font-size:11px;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.devis-total{
+    font-weight:900;
+    color:#111827;
+    white-space:nowrap;
+}
+
+.devis-actions{
+    display:flex;
+    gap:6px;
+}
+
+.small-btn{
+    border:0;
+    border-radius:7px;
+    padding:7px 9px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.small-edit{
+    background:#eff6ff;
+    color:#1d4ed8;
+}
+
+.small-delete{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.empty{
+    text-align:center;
+    padding:25px;
+    color:#64748b;
+    font-size:13px;
+}
+
+/* =========================
+   TOAST
+========================= */
 
 .toast{
-    position:fixed;right:22px;bottom:22px;background:#111827;color:#fff;
-    padding:12px 16px;border-radius:10px;box-shadow:var(--shadow);
-    opacity:0;pointer-events:none;transform:translateY(10px);transition:.25s;z-index:3000;
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    background:#111827;
+    color:#fff;
+    padding:12px 16px;
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(10px);
+    transition:.25s;
+    z-index:3000;
 }
-.toast.show{opacity:1;transform:translateY(0)}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:1000px){
-    .grid{grid-template-columns:1fr}
-    .summary{position:static}
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .summary{
+        position:static;
+    }
+
 }
+
 @media(max-width:800px){
-    .sidebar{transform:translateX(-100%);transition:.25s}
-    .sidebar.open{transform:translateX(0)}
-    .main{margin-left:0}
-    .menu-btn{display:block}
-    .topbar{padding:0 15px}
-    .search,.user-name{display:none}
-    .content{padding:18px 14px}
-    .form-grid{grid-template-columns:1fr}
-    .field.full{grid-column:auto}
-    .page-head{flex-direction:column}
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.25s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .search,
+    .user-name{
+        display:none;
+    }
+
+    .content{
+        padding:18px 14px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .page-head{
+        flex-direction:column;
+    }
+
 }
+
 @media print{
-    .sidebar,.topbar,.no-print,.actions,.delete-line,.add-line,.summary-actions{display:none!important}
-    .main{margin:0}
-    .content{padding:0}
-    .card{box-shadow:none;border:1px solid #ddd}
-    body{background:#fff}
-    input,select,textarea{border:0;padding:0}
+
+    .sidebar,
+    .topbar,
+    .no-print,
+    .delete-line,
+    .add-line,
+    .summary-actions,
+    .historique{
+        display:none!important;
+    }
+
+    .main{
+        margin:0;
+    }
+
+    .content{
+        padding:0;
+    }
+
+    .card{
+        box-shadow:none;
+        border:1px solid #ddd;
+    }
+
+    body{
+        background:#fff;
+    }
+
+    input,
+    select,
+    textarea{
+        border:0;
+        padding:0;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     SIDEBAR
+========================= -->
+
 <aside class="sidebar" id="sidebar">
+
     <a href="dashboard.html" class="logo">
-        <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="45" fill="#111827" stroke="#F59E0B" stroke-width="2.5"/>
-            <path d="M25 69V39L50 22L75 39V69" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M50 30V69" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
-            <path d="M30 56C39 49 45 61 54 54C61 49 66 43 72 47" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="72" cy="47" r="4" fill="#F59E0B"/>
-            <path d="M22 72H78" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+
+        <svg class="logo-icon"
+             viewBox="0 0 100 100"
+             xmlns="http://www.w3.org/2000/svg">
+
+            <circle
+                cx="50"
+                cy="50"
+                r="45"
+                fill="#111827"
+                stroke="#F59E0B"
+                stroke-width="2.5"
+            />
+
+            <path
+                d="M25 69V39L50 22L75 39V69"
+                fill="none"
+                stroke="#fff"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+
+            <path
+                d="M50 30V69"
+                fill="none"
+                stroke="#F59E0B"
+                stroke-width="5"
+                stroke-linecap="round"
+            />
+
+            <path
+                d="M30 56C39 49 45 61 54 54C61 49 66 43 72 47"
+                fill="none"
+                stroke="#F59E0B"
+                stroke-width="5"
+                stroke-linecap="round"
+            />
+
+            <circle
+                cx="72"
+                cy="47"
+                r="4"
+                fill="#F59E0B"
+            />
+
+            <path
+                d="M22 72H78"
+                fill="none"
+                stroke="#fff"
+                stroke-width="5"
+                stroke-linecap="round"
+            />
+
         </svg>
+
         <span>
-            <span class="logo-text">BATI<span class="flow">FLOW</span></span>
-            <span class="logo-sub">CONSTRUCTION MANAGEMENT</span>
+
+            <span class="logo-text">
+                BATI<span class="flow">FLOW</span>
+            </span>
+
+            <span class="logo-sub">
+                CONSTRUCTION MANAGEMENT
+            </span>
+
         </span>
+
     </a>
 
-    <div class="nav-title">Principal</div>
+
+    <div class="nav-title">
+        Principal
+    </div>
+
     <nav class="nav">
-        <a href="dashboard.html"><span class="nav-icon">⌂</span>Tableau de bord</a>
-        <a href="chantiers.html"><span class="nav-icon">🏗️</span>Chantiers</a>
-        <a href="clients.html"><span class="nav-icon">👥</span>Clients</a>
+
+        <a href="dashboard.html">
+            <span class="nav-icon">⌂</span>
+            Tableau de bord
+        </a>
+
+        <a href="chantiers.html">
+            <span class="nav-icon">🏗️</span>
+            Chantiers
+        </a>
+
+        <a href="clients.html">
+            <span class="nav-icon">👥</span>
+            Clients
+        </a>
+
     </nav>
 
-    <div class="nav-title">Outils BTP</div>
+
+    <div class="nav-title">
+        Outils BTP
+    </div>
+
     <nav class="nav">
-        <a href="dqe.html"><span class="nav-icon">📋</span>DQE &amp; Métré</a>
-        <a href="devis.html" class="active"><span class="nav-icon">💰</span>Devis</a>
-        <a href="calculator.html"><span class="nav-icon">🧮</span>Calculateur BTP</a>
-        <a href="mortar.html"><span class="nav-icon">🧱</span>Mortier</a>
-        <a href="masonry.html"><span class="nav-icon">🧱</span>Maçonnerie</a>
-        <a href="slab.html"><span class="nav-icon">🏢</span>Dalle</a>
+
+        <a href="dqe.html">
+            <span class="nav-icon">📋</span>
+            DQE &amp; Métré
+        </a>
+
+        <a href="devis.html" class="active">
+            <span class="nav-icon">💰</span>
+            Devis
+        </a>
+
+        <a href="calculator.html">
+            <span class="nav-icon">🧮</span>
+            Calculateur BTP
+        </a>
+
+        <a href="mortar.html">
+            <span class="nav-icon">🧱</span>
+            Mortier
+        </a>
+
+        <a href="masonry.html">
+            <span class="nav-icon">🧱</span>
+            Maçonnerie
+        </a>
+
+        <a href="slab.html">
+            <span class="nav-icon">🏢</span>
+            Dalle
+        </a>
+
     </nav>
 
-    <div class="nav-title">Gestion</div>
+
+    <div class="nav-title">
+        Gestion
+    </div>
+
     <nav class="nav">
-        <a href="stocks.html"><span class="nav-icon">📦</span>Stocks</a>
-        <a href="documents.html"><span class="nav-icon">📁</span>Documents</a>
-        <a href="parametres.html"><span class="nav-icon">⚙️</span>Paramètres</a>
-        <a href="login.html" class="logout"><span class="nav-icon">↪</span>Déconnexion</a>
+
+        <a href="stocks.html">
+            <span class="nav-icon">📦</span>
+            Stocks
+        </a>
+
+        <a href="documents.html">
+            <span class="nav-icon">📁</span>
+            Documents
+        </a>
+
+        <a href="parametres.html">
+            <span class="nav-icon">⚙️</span>
+            Paramètres
+        </a>
+
+        <a href="login.html" class="logout">
+            <span class="nav-icon">↪</span>
+            Déconnexion
+        </a>
+
     </nav>
+
 </aside>
 
+
+<!-- =========================
+     MAIN
+========================= -->
+
 <main class="main">
-    <header class="topbar">
-        <div style="display:flex;align-items:center;gap:12px">
-            <button class="menu-btn" type="button" onclick="toggleMenu()">☰</button>
-            <div>
-                <div class="page-title">Devis</div>
-                <div class="page-sub">Création et gestion des offres BTP</div>
-            </div>
-        </div>
-        <div class="top-right">
-            <input class="search" id="search" type="search" placeholder="Rechercher...">
-            <span>🔔</span>
-            <div class="avatar" id="avatar">U</div>
-            <div class="user-name" id="userName">Utilisateur</div>
-        </div>
-    </header>
 
-    <div class="content">
-        <div class="page-head">
-            <div>
-                <div class="eyebrow">GESTION COMMERCIALE</div>
-                <h1>Nouveau devis</h1>
-                <p>Préparez une offre professionnelle pour votre client.</p>
-            </div>
-            <div class="actions no-print">
-                <button class="btn btn-light" type="button" onclick="nouveauDevis()">＋ Nouveau</button>
-                <button class="btn btn-dark" type="button" onclick="enregistrerDevis()">💾 Enregistrer</button>
-                <button class="btn btn-primary" type="button" onclick="imprimerDevis()">🖨️ Imprimer / PDF</button>
-            </div>
-        </div>
+<header class="topbar">
 
-        <div class="grid">
-            <div>
-                <section class="card">
-                    <div class="card-head">
-                        <h2>Informations du devis</h2>
-                        <span class="status" id="status">Nouveau</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-grid">
-                            <div class="field">
-                                <label for="reference">Référence du devis</label>
-                                <input id="reference" placeholder="DEV-2026-001">
-                            </div>
-                            <div class="field">
-                                <label for="date">Date</label>
-                                <input id="date" type="date">
-                            </div>
-                            <div class="field">
-                                <label for="client">Client</label>
-                                <input id="client" placeholder="Nom du client / entreprise">
-                            </div>
-                            <div class="field">
-                                <label for="chantier">Chantier</label>
-                                <input id="chantier" placeholder="Nom du chantier">
-                            </div>
-                            <div class="field">
-                                <label for="telephone">Téléphone</label>
-                                <input id="telephone" placeholder="+228 ...">
-                            </div>
-                            <div class="field">
-                                <label for="duree">Validité</label>
-                                <input id="duree" value="30 jours">
-                            </div>
-                            <div class="field full">
-                                <label for="objet">Objet du devis</label>
-                                <textarea id="objet" placeholder="Ex. Travaux de gros œuvre d'une villa R+1..."></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+    <div style="display:flex;align-items:center;gap:12px">
 
-                <section class="card">
-                    <div class="card-head">
-                        <h2>Détail des prestations</h2>
-                        <span style="font-size:12px;color:#64748b">Prix en FCFA</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-wrap">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th class="col-num">N°</th>
-                                        <th>Désignation</th>
-                                        <th style="width:100px">Unité</th>
-                                        <th style="width:115px">Quantité</th>
-                                        <th style="width:145px">Prix unitaire</th>
-                                        <th style="width:150px;text-align:right">Montant</th>
-                                        <th class="col-action"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="lines"></tbody>
-                            </table>
-                        </div>
-                        <button class="add-line no-print" type="button" onclick="ajouterLigne()">＋ Ajouter une ligne</button>
-                    </div>
-                </section>
+        <button
+            class="menu-btn"
+            type="button"
+            onclick="toggleMenu()"
+        >
+            ☰
+        </button>
 
-                <section class="card">
-                    <div class="card-head"><h2>Conditions et notes</h2></div>
-                    <div class="card-body">
-                        <textarea id="notes" placeholder="Conditions de paiement, délai d'exécution, observations..."></textarea>
-                    </div>
-                </section>
+        <div>
+
+            <div class="page-title">
+                Devis
             </div>
 
-            <aside>
-                <section class="card summary">
-                    <div class="card-head"><h2>Résumé du devis</h2></div>
-                    <div class="card-body">
-                        <div class="summary-row"><span>Total HT</span><strong id="totalHT">0 FCFA</strong></div>
-                        <div class="summary-row">
-                            <span>Remise</span>
-                            <div style="display:flex;gap:6px;align-items:center">
-                                <input id="remise" type="number" min="0" step="0.01" value="0" style="width:75px;text-align:right" oninput="calculer()">
-                                <span>%</span>
-                            </div>
-                        </div>
-                        <div class="summary-row"><span>Montant remise</span><strong id="montantRemise">0 FCFA</strong></div>
-                        <div class="summary-row">
-                            <span>TVA</span>
-                            <div style="display:flex;gap:6px;align-items:center">
-                                <input id="tva" type="number" min="0" step="0.01" value="18" style="width:75px;text-align:right" oninput="calculer()">
-                                <span>%</span>
-                            </div>
-                        </div>
-                        <div class="summary-row"><span>Montant TVA</span><strong id="montantTVA">0 FCFA</strong></div>
-                        <div class="summary-row total"><span>TOTAL TTC</span><strong id="totalTTC">0 FCFA</strong></div>
+            <div class="page-sub">
+                Création et gestion des offres BTP
+            </div>
 
-                        <div class="summary-actions no-print">
-                            <button class="btn btn-dark" type="button" onclick="enregistrerDevis()">💾 Enregistrer le devis</button>
-                            <button class="btn btn-primary" type="button" onclick="imprimerDevis()">🖨️ Générer le PDF</button>
-                            <button class="btn btn-light" type="button" onclick="nouveauDevis()">↻ Réinitialiser</button>
-                        </div>
-
-                        <div class="info" style="margin-top:15px">
-                            Les données sont enregistrées dans le navigateur avec BATIFLOW. Vous pouvez imprimer le devis ou choisir « Enregistrer au format PDF » dans la fenêtre d'impression.
-                        </div>
-                    </div>
-                </section>
-            </aside>
         </div>
+
     </div>
+
+
+    <div class="top-right">
+
+        <input
+            class="search"
+            id="search"
+            type="search"
+            placeholder="Rechercher un devis..."
+            oninput="rechercherDevis()"
+        >
+
+        <span>🔔</span>
+
+        <div
+            class="avatar"
+            id="avatar"
+        >
+            U
+        </div>
+
+        <div
+            class="user-name"
+            id="userName"
+        >
+            Utilisateur
+        </div>
+
+    </div>
+
+</header>
+
+
+<div class="content">
+
+<!-- =========================
+     PAGE HEADER
+========================= -->
+
+<div class="page-head">
+
+    <div>
+
+        <div class="eyebrow">
+            GESTION COMMERCIALE
+        </div>
+
+        <h1>
+            Nouveau devis
+        </h1>
+
+        <p>
+            Préparez une offre professionnelle pour votre client.
+        </p>
+
+    </div>
+
+
+    <div class="actions no-print">
+
+        <button
+            class="btn btn-light"
+            type="button"
+            onclick="nouveauDevis()"
+        >
+            ＋ Nouveau
+        </button>
+
+        <button
+            class="btn btn-dark"
+            type="button"
+            onclick="enregistrerDevis()"
+        >
+            💾 Enregistrer
+        </button>
+
+        <button
+            class="btn btn-primary"
+            type="button"
+            onclick="imprimerDevis()"
+        >
+            🖨️ Imprimer / PDF
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MAIN GRID
+========================= -->
+
+<div class="grid">
+
+<div>
+
+<!-- INFORMATIONS -->
+
+<section class="card">
+
+    <div class="card-head">
+
+        <h2>
+            Informations du devis
+        </h2>
+
+        <span
+            class="status"
+            id="status"
+        >
+            Nouveau
+        </span>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div class="form-grid">
+
+            <div class="field">
+
+                <label for="reference">
+                    Référence du devis
+                </label>
+
+                <input
+                    id="reference"
+                    placeholder="DEV-2026-001"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="date">
+                    Date
+                </label>
+
+                <input
+                    id="date"
+                    type="date"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="client">
+                    Client
+                </label>
+
+                <select id="client">
+                    <option value="">
+                        Sélectionner un client
+                    </option>
+                </select>
+
+                <div class="select-info">
+                    Les clients sont récupérés depuis BATIFLOW.
+                </div>
+
+                <a
+                    href="clients.html"
+                    class="quick-link"
+                >
+                    + Ajouter un client
+                </a>
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="chantier">
+                    Chantier
+                </label>
+
+                <select id="chantier">
+
+                    <option value="">
+                        Sélectionner un chantier
+                    </option>
+
+                </select>
+
+                <div class="select-info">
+                    Le chantier peut être lié au client sélectionné.
+                </div>
+
+                <a
+                    href="chantiers.html"
+                    class="quick-link"
+                >
+                    + Gérer les chantiers
+                </a>
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="telephone">
+                    Téléphone
+                </label>
+
+                <input
+                    id="telephone"
+                    placeholder="+228 ..."
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="duree">
+                    Validité
+                </label>
+
+                <input
+                    id="duree"
+                    value="30 jours"
+                >
+
+            </div>
+
+
+            <div class="field full">
+
+                <label for="objet">
+                    Objet du devis
+                </label>
+
+                <textarea
+                    id="objet"
+                    placeholder="Ex. Travaux de gros œuvre d'une villa R+1..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRESTATIONS -->
+
+<section class="card">
+
+    <div class="card-head">
+
+        <h2>
+            Détail des prestations
+        </h2>
+
+        <span
+            style="font-size:12px;color:#64748b"
+        >
+            Prix en FCFA
+        </span>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th class="col-num">
+                            N°
+                        </th>
+
+                        <th>
+                            Désignation
+                        </th>
+
+                        <th style="width:100px">
+                            Unité
+                        </th>
+
+                        <th style="width:115px">
+                            Quantité
+                        </th>
+
+                        <th style="width:145px">
+                            Prix unitaire
+                        </th>
+
+                        <th
+                            style="width:150px;text-align:right"
+                        >
+                            Montant
+                        </th>
+
+                        <th class="col-action"></th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="lines"></tbody>
+
+            </table>
+
+        </div>
+
+
+        <button
+            class="add-line no-print"
+            type="button"
+            onclick="ajouterLigne()"
+        >
+            ＋ Ajouter une ligne
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- NOTES -->
+
+<section class="card">
+
+    <div class="card-head">
+
+        <h2>
+            Conditions et notes
+        </h2>
+
+    </div>
+
+    <div class="card-body">
+
+        <textarea
+            id="notes"
+            placeholder="Conditions de paiement, délai d'exécution, observations..."
+        ></textarea>
+
+    </div>
+
+</section>
+
+
+<!-- HISTORIQUE -->
+
+<section class="card historique">
+
+    <div class="card-head">
+
+        <h2>
+            Historique des devis
+        </h2>
+
+        <span
+            style="font-size:11px;color:#64748b"
+            id="historiqueCount"
+        >
+            0 devis
+        </span>
+
+    </div>
+
+    <div class="card-body">
+
+        <div
+            id="historique"
+            class="devis-list"
+        ></div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- =========================
+     SUMMARY
+========================= -->
+
+<aside>
+
+<section class="card summary">
+
+    <div class="card-head">
+
+        <h2>
+            Résumé du devis
+        </h2>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div class="summary-row">
+
+            <span>
+                Total HT
+            </span>
+
+            <strong id="totalHT">
+                0 FCFA
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Remise
+            </span>
+
+            <div
+                style="display:flex;gap:6px;align-items:center"
+            >
+
+                <input
+                    id="remise"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    value="0"
+                    style="width:75px;text-align:right"
+                    oninput="calculer()"
+                >
+
+                <span>%</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Montant remise
+            </span>
+
+            <strong id="montantRemise">
+                0 FCFA
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                TVA
+            </span>
+
+            <div
+                style="display:flex;gap:6px;align-items:center"
+            >
+
+                <input
+                    id="tva"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    value="18"
+                    style="width:75px;text-align:right"
+                    oninput="calculer()"
+                >
+
+                <span>%</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Montant TVA
+            </span>
+
+            <strong id="montantTVA">
+                0 FCFA
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row total">
+
+            <span>
+                TOTAL TTC
+            </span>
+
+            <strong id="totalTTC">
+                0 FCFA
+            </strong>
+
+        </div>
+
+
+        <div class="summary-actions no-print">
+
+            <button
+                class="btn btn-dark"
+                type="button"
+                onclick="enregistrerDevis()"
+            >
+                💾 Enregistrer le devis
+            </button>
+
+
+            <button
+                class="btn btn-primary"
+                type="button"
+                onclick="imprimerDevis()"
+            >
+                🖨️ Générer le PDF
+            </button>
+
+
+            <button
+                class="btn btn-light"
+                type="button"
+                onclick="nouveauDevis()"
+            >
+                ↻ Réinitialiser
+            </button>
+
+        </div>
+
+
+        <div
+            class="info"
+            style="margin-top:15px"
+        >
+
+            Les données sont enregistrées dans le navigateur
+            avec BATIFLOW.
+
+            <br><br>
+
+            Vous pouvez imprimer le devis ou choisir
+            <strong>« Enregistrer au format PDF »</strong>
+            dans la fenêtre d'impression.
+
+        </div>
+
+    </div>
+
+</section>
+
+</aside>
+
+</div>
+
+</div>
+
 </main>
 
-<div class="toast" id="toast"></div>
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
 
 <script>
-const STORAGE_KEY = "batiflowDevis";
+
+/* ==========================================================
+   CONFIGURATION
+========================================================== */
+
+const DEVIS_STORAGE_KEY = "batiflowDevis";
+
+const CLIENT_STORAGE_KEY = "batiflowClients";
+
+const CHANTIER_STORAGE_KEY = "batiflowChantiers";
+
+const SELECTED_CHANTIER_KEY =
+    "batiflowChantierSelectionne";
+
+
 let devisId = null;
 
-function money(n){
-    return (Number(n)||0).toLocaleString("fr-FR") + " FCFA";
+
+/* ==========================================================
+   OUTILS
+========================================================== */
+
+function money(nombre){
+
+    return (
+        Number(nombre || 0)
+        .toLocaleString("fr-FR")
+        + " FCFA"
+    );
+
 }
+
+
 function today(){
+
     const d = new Date();
+
     return d.toISOString().slice(0,10);
+
 }
+
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/[&<>"']/g,function(match){
+
+            return {
+
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#039;"
+
+            }[match];
+
+        });
+
+}
+
+
 function toast(message){
-    const el=document.getElementById("toast");
-    el.textContent=message;
+
+    const el =
+        document.getElementById("toast");
+
+    el.textContent = message;
+
     el.classList.add("show");
+
     clearTimeout(window._toast);
-    window._toast=setTimeout(()=>el.classList.remove("show"),2800);
+
+    window._toast =
+        setTimeout(function(){
+
+            el.classList.remove("show");
+
+        },2800);
+
 }
+
+
+/* ==========================================================
+   MENU MOBILE
+========================================================== */
+
 function toggleMenu(){
-    document.getElementById("sidebar").classList.toggle("open");
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
 }
-function getData(){
+
+
+/* ==========================================================
+   STORAGE
+========================================================== */
+
+function getStorage(key){
+
     try{
-        const x=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
-        return Array.isArray(x)?x:[];
-    }catch(e){return []}
-}
-function setData(data){
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
-}
-function ajouterLigne(data={}){
-    const tbody=document.getElementById("lines");
-    const tr=document.createElement("tr");
-    tr.innerHTML=`
-        <td class="col-num"></td>
-        <td><input class="designation" value="${escapeHtml(data.designation||"")}" placeholder="Ex. Béton armé, maçonnerie..."></td>
-        <td><input class="unite" value="${escapeHtml(data.unite||"U")}" placeholder="m²"></td>
-        <td><input class="quantite" type="number" min="0" step="0.001" value="${data.quantite??1}"></td>
-        <td><input class="pu" type="number" min="0" step="1" value="${data.pu??0}"></td>
-        <td class="amount">0 FCFA</td>
-        <td class="col-action"><button class="delete-line no-print" type="button" onclick="supprimerLigne(this)">×</button></td>
-    `;
-    tbody.appendChild(tr);
-    tr.querySelectorAll("input").forEach(i=>i.addEventListener("input",calculer));
-    calculer();
-}
-function supprimerLigne(btn){
-    const rows=document.querySelectorAll("#lines tr");
-    if(rows.length<=1){
-        rows[0].querySelector(".designation").value="";
-        rows[0].querySelector(".quantite").value=1;
-        rows[0].querySelector(".pu").value=0;
-    }else{
-        btn.closest("tr").remove();
+
+        const data =
+            JSON.parse(
+                localStorage.getItem(key) || "[]"
+            );
+
+        return Array.isArray(data)
+            ? data
+            : [];
+
+    }catch(error){
+
+        return [];
+
     }
-    numeroter();
-    calculer();
+
 }
-function numeroter(){
-    document.querySelectorAll("#lines tr").forEach((tr,i)=>{
-        tr.querySelector(".col-num").textContent=i+1;
-    });
+
+
+function setStorage(key,data){
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(data)
+    );
+
 }
-function calculer(){
-    let ht=0;
-    document.querySelectorAll("#lines tr").forEach(tr=>{
-        const q=Number(tr.querySelector(".quantite")?.value)||0;
-        const pu=Number(tr.querySelector(".pu")?.value)||0;
-        const m=q*pu;
-        ht+=m;
-        const a=tr.querySelector(".amount");
-        if(a)a.textContent=money(m);
-    });
-    const remisePct=Number(document.getElementById("remise").value)||0;
-    const remise=ht*remisePct/100;
-    const base=ht-remise;
-    const tvaPct=Number(document.getElementById("tva").value)||0;
-    const tva=base*tvaPct/100;
-    const ttc=base+tva;
-    document.getElementById("totalHT").textContent=money(ht);
-    document.getElementById("montantRemise").textContent=money(remise);
-    document.getElementById("montantTVA").textContent=money(tva);
-    document.getElementById("totalTTC").textContent=money(ttc);
-    return {ht,remise,base,tva,ttc};
-}
-function collect(){
-    const totals=calculer();
-    return {
-        id:devisId||("DEV-"+Date.now()),
-        reference:document.getElementById("reference").value.trim(),
-        date:document.getElementById("date").value,
-        client:document.getElementById("client").value.trim(),
-        chantier:document.getElementById("chantier").value.trim(),
-        telephone:document.getElementById("telephone").value.trim(),
-        duree:document.getElementById("duree").value.trim(),
-        objet:document.getElementById("objet").value.trim(),
-        notes:document.getElementById("notes").value.trim(),
-        remise:Number(document.getElementById("remise").value)||0,
-        tvaPct:Number(document.getElementById("tva").value)||0,
-        lignes:[...document.querySelectorAll("#lines tr")].map(tr=>({
-            designation:tr.querySelector(".designation").value.trim(),
-            unite:tr.querySelector(".unite").value.trim(),
-            quantite:Number(tr.querySelector(".quantite").value)||0,
-            pu:Number(tr.querySelector(".pu").value)||0
-        })),
-        totalHT:totals.ht,
-        montantRemise:totals.remise,
-        montantTVA:totals.tva,
-        totalTTC:totals.ttc,
-        updatedAt:new Date().toISOString()
-    };
-}
-function enregistrerDevis(){
-    const d=collect();
-    if(!d.client && !d.chantier && !d.objet){
-        toast("⚠️ Remplis au moins le client, le chantier ou l'objet.");
-        return;
-    }
-    const all=getData();
-    const index=all.findIndex(x=>String(x.id)===String(d.id));
-    if(index>=0) all[index]=d; else all.unshift(d);
-    setData(all);
-    devisId=d.id;
-    document.getElementById("status").textContent="Enregistré";
-    toast("✅ Devis enregistré avec succès.");
-}
-function nouveauDevis(){
-    devisId=null;
-    document.getElementById("reference").value="DEV-"+new Date().getFullYear()+"-"+String(getData().length+1).padStart(3,"0");
-    document.getElementById("date").value=today();
-    ["client","chantier","telephone","objet","notes"].forEach(id=>document.getElementById(id).value="");
-    document.getElementById("duree").value="30 jours";
-    document.getElementById("remise").value=0;
-    document.getElementById("tva").value=18;
-    document.getElementById("lines").innerHTML="";
-    ajouterLigne();
-    document.getElementById("status").textContent="Nouveau";
-    toast("Nouveau devis prêt.");
-}
+
+
+/* ==========================================================
+   UTILISATEUR
+========================================================== */
+
 function chargerUtilisateur(){
-    const name=localStorage.getItem("userName")||localStorage.getItem("batiflowUserName")||"Utilisateur";
-    document.getElementById("userName").textContent=name;
-    document.getElementById("avatar").textContent=(name.trim()[0]||"U").toUpperCase();
+
+    const name =
+        localStorage.getItem("userName")
+        ||
+        localStorage.getItem("batiflowUserName")
+        ||
+        "Utilisateur";
+
+    document.getElementById("userName")
+        .textContent = name;
+
+    document.getElementById("avatar")
+        .textContent =
+        (name.trim()[0] || "U").toUpperCase();
+
 }
-function escapeHtml(s){
-    return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+
+
+/* ==========================================================
+   CLIENTS
+========================================================== */
+
+function chargerClients(){
+
+    const select =
+        document.getElementById("client");
+
+    const clients =
+        getStorage(CLIENT_STORAGE_KEY);
+
+    select.innerHTML = `
+        <option value="">
+            Sélectionner un client
+        </option>
+    `;
+
+    clients.forEach(function(client){
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            client.id;
+
+        option.textContent =
+            client.entreprise
+                ? `${client.nom || "Client"} — ${client.entreprise}`
+                : (client.nom || "Client");
+
+        option.dataset.nom =
+            client.nom || "";
+
+        option.dataset.telephone =
+            client.telephone || "";
+
+        option.dataset.whatsapp =
+            client.whatsapp || "";
+
+        select.appendChild(option);
+
+    });
+
 }
+
+
+/* ==========================================================
+   CHARGER CHANTIERS
+========================================================== */
+
+function chargerChantiers(){
+
+    const select =
+        document.getElementById("chantier");
+
+    const chantiers =
+        getStorage(CHANTIER_STORAGE_KEY);
+
+    const clientSelect =
+        document.getElementById("client");
+
+    const clientId =
+        clientSelect.value;
+
+    select.innerHTML = `
+        <option value="">
+            Sélectionner un chantier
+        </option>
+    `;
+
+    chantiers.forEach(function(chantier){
+
+        const chantierClientId =
+            chantier.clientId != null
+                ? String(chantier.clientId)
+                : "";
+
+        if(
+            clientId &&
+            chantierClientId &&
+            chantierClientId !== String(clientId)
+        ){
+
+            return;
+
+        }
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            chantier.id;
+
+        option.textContent =
+            chantier.nom
+            ||
+            chantier.nomChantier
+            ||
+            chantier.titre
+            ||
+            "Chantier sans nom";
+
+        option.dataset.clientId =
+            chantier.clientId || "";
+
+        option.dataset.adresse =
+            chantier.adresse || "";
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+/* ==========================================================
+   CLIENT SELECTIONNE
+========================================================== */
+
+function clientSelectionne(){
+
+    const select =
+        document.getElementById("client");
+
+    const clientId =
+        select.value;
+
+    if(!clientId){
+
+        document.getElementById("telephone").value = "";
+
+        chargerChantiers();
+
+        return;
+
+    }
+
+    const clients =
+        getStorage(CLIENT_STORAGE_KEY);
+
+    const client =
+        clients.find(function(c){
+
+            return String(c.id) === String(clientId);
+
+        });
+
+    if(!client){
+
+        chargerChantiers();
+
+        return;
+
+    }
+
+    document.getElementById("telephone").value =
+        client.telephone
+        ||
+        client.whatsapp
+        ||
+        "";
+
+    chargerChantiers();
+
+}
+
+
+/* ==========================================================
+   CHANTIER SELECTIONNE
+========================================================== */
+
+function chantierSelectionne(){
+
+    const select =
+        document.getElementById("chantier");
+
+    const chantierId =
+        select.value;
+
+    if(!chantierId){
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        SELECTED_CHANTIER_KEY,
+        String(chantierId)
+    );
+
+}
+
+
+/* ==========================================================
+   NUMERO DE DEVIS
+========================================================== */
+
+function genererReference(){
+
+    const devis =
+        getStorage(DEVIS_STORAGE_KEY);
+
+    const annee =
+        new Date().getFullYear();
+
+    let numero =
+        devis.length + 1;
+
+    let reference =
+        "DEV-" +
+        annee +
+        "-" +
+        String(numero).padStart(3,"0");
+
+    const references =
+        devis.map(function(d){
+
+            return d.reference;
+
+        });
+
+    while(references.includes(reference)){
+
+        numero++;
+
+        reference =
+            "DEV-" +
+            annee +
+            "-" +
+            String(numero).padStart(3,"0");
+
+    }
+
+    return reference;
+
+}
+
+
+/* ==========================================================
+   AJOUT LIGNE
+========================================================== */
+
+function ajouterLigne(data = {}){
+
+    const tbody =
+        document.getElementById("lines");
+
+    const tr =
+        document.createElement("tr");
+
+    tr.innerHTML = `
+
+        <td class="col-num"></td>
+
+        <td>
+
+            <input
+                class="designation"
+                value="${escapeHtml(data.designation || "")}"
+                placeholder="Ex. Béton armé, maçonnerie..."
+            >
+
+        </td>
+
+        <td>
+
+            <input
+                class="unite"
+                value="${escapeHtml(data.unite || "U")}"
+                placeholder="m²"
+            >
+
+        </td>
+
+        <td>
+
+            <input
+                class="quantite"
+                type="number"
+                min="0"
+                step="0.001"
+                value="${data.quantite ?? 1}"
+            >
+
+        </td>
+
+        <td>
+
+            <input
+                class="pu"
+                type="number"
+                min="0"
+                step="1"
+                value="${data.pu ?? 0}"
+            >
+
+        </td>
+
+        <td class="amount">
+            0 FCFA
+        </td>
+
+        <td class="col-action">
+
+            <button
+                class="delete-line no-print"
+                type="button"
+                onclick="supprimerLigne(this)"
+            >
+                ×
+            </button>
+
+        </td>
+
+    `;
+
+    tbody.appendChild(tr);
+
+    tr.querySelectorAll("input")
+        .forEach(function(input){
+
+            input.addEventListener(
+                "input",
+                calculer
+            );
+
+        });
+
+    numeroter();
+
+    calculer();
+
+}
+
+
+/* ==========================================================
+   SUPPRIMER LIGNE
+========================================================== */
+
+function supprimerLigne(button){
+
+    const rows =
+        document.querySelectorAll("#lines tr");
+
+    if(rows.length <= 1){
+
+        const row = rows[0];
+
+        row.querySelector(".designation").value = "";
+
+        row.querySelector(".quantite").value = 1;
+
+        row.querySelector(".pu").value = 0;
+
+    }else{
+
+        button
+            .closest("tr")
+            .remove();
+
+    }
+
+    numeroter();
+
+    calculer();
+
+}
+
+
+/* ==========================================================
+   NUMEROTER
+========================================================== */
+
+function numeroter(){
+
+    document
+        .querySelectorAll("#lines tr")
+        .forEach(function(tr,index){
+
+            tr.querySelector(".col-num")
+                .textContent = index + 1;
+
+        });
+
+}
+
+
+/* ==========================================================
+   CALCUL
+========================================================== */
+
+function calculer(){
+
+    let ht = 0;
+
+    document
+        .querySelectorAll("#lines tr")
+        .forEach(function(tr){
+
+            const q =
+                Number(
+                    tr.querySelector(".quantite")?.value
+                ) || 0;
+
+            const pu =
+                Number(
+                    tr.querySelector(".pu")?.value
+                ) || 0;
+
+            const montant =
+                q * pu;
+
+            ht += montant;
+
+            const amount =
+                tr.querySelector(".amount");
+
+            if(amount){
+
+                amount.textContent =
+                    money(montant);
+
+            }
+
+        });
+
+
+    let remisePct =
+        Number(
+            document.getElementById("remise").value
+        ) || 0;
+
+
+    let tvaPct =
+        Number(
+            document.getElementById("tva").value
+        ) || 0;
+
+
+    if(remisePct < 0){
+        remisePct = 0;
+    }
+
+    if(remisePct > 100){
+        remisePct = 100;
+    }
+
+    if(tvaPct < 0){
+        tvaPct = 0;
+    }
+
+    if(tvaPct > 100){
+        tvaPct = 100;
+    }
+
+
+    const remise =
+        ht * remisePct / 100;
+
+    const base =
+        ht - remise;
+
+    const tva =
+        base * tvaPct / 100;
+
+    const ttc =
+        base + tva;
+
+
+    document.getElementById("totalHT")
+        .textContent = money(ht);
+
+    document.getElementById("montantRemise")
+        .textContent = money(remise);
+
+    document.getElementById("montantTVA")
+        .textContent = money(tva);
+
+    document.getElementById("totalTTC")
+        .textContent = money(ttc);
+
+
+    return {
+
+        ht:ht,
+
+        remise:remise,
+
+        base:base,
+
+        tva:tva,
+
+        ttc:ttc,
+
+        remisePct:remisePct,
+
+        tvaPct:tvaPct
+
+    };
+
+}
+
+
+/* ==========================================================
+   COLLECTER LE DEVIS
+========================================================== */
+
+function collectDevis(){
+
+    const totals =
+        calculer();
+
+
+    const clientSelect =
+        document.getElementById("client");
+
+    const chantierSelect =
+        document.getElementById("chantier");
+
+
+    const clientId =
+        clientSelect.value || null;
+
+    const chantierId =
+        chantierSelect.value || null;
+
+
+    const clientOption =
+        clientSelect.options[
+            clientSelect.selectedIndex
+        ];
+
+
+    const chantierOption =
+        chantierSelect.options[
+            chantierSelect.selectedIndex
+        ];
+
+
+    const lignes =
+        [
+            ...document.querySelectorAll("#lines tr")
+        ]
+        .map(function(tr){
+
+            return {
+
+                designation:
+                    tr.querySelector(".designation")
+                    .value
+                    .trim(),
+
+                unite:
+                    tr.querySelector(".unite")
+                    .value
+                    .trim(),
+
+                quantite:
+                    Number(
+                        tr.querySelector(".quantite")
+                        .value
+                    ) || 0,
+
+                pu:
+                    Number(
+                        tr.querySelector(".pu")
+                        .value
+                    ) || 0
+
+            };
+
+        });
+
+
+    return {
+
+        id:
+            devisId
+            ||
+            ("DEV-" + Date.now()),
+
+        reference:
+            document
+                .getElementById("reference")
+                .value
+                .trim(),
+
+        date:
+            document
+                .getElementById("date")
+                .value,
+
+        clientId:
+            clientId,
+
+        client:
+            clientOption?.textContent || "",
+
+        clientNom:
+            clientOption?.dataset.nom || "",
+
+        chantierId:
+            chantierId,
+
+        chantier:
+            chantierOption?.textContent || "",
+
+        telephone:
+            document
+                .getElementById("telephone")
+                .value
+                .trim(),
+
+        duree:
+            document
+                .getElementById("duree")
+                .value
+                .trim(),
+
+        objet:
+            document
+                .getElementById("objet")
+                .value
+                .trim(),
+
+        notes:
+            document
+                .getElementById("notes")
+                .value
+                .trim(),
+
+        remise:
+            totals.remisePct,
+
+        montantRemise:
+            totals.remise,
+
+        tvaPct:
+            totals.tvaPct,
+
+        montantTVA:
+            totals.tva,
+
+        totalHT:
+            totals.ht,
+
+        totalTTC:
+            totals.ttc,
+
+        lignes:
+            lignes,
+
+        createdAt:
+            devisId
+            ? undefined
+            : new Date().toISOString(),
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
+}
+
+
+/* ==========================================================
+   ENREGISTRER
+========================================================== */
+
+function enregistrerDevis(){
+
+    const devis =
+        collectDevis();
+
+
+    if(
+        !devis.clientId &&
+        !devis.chantierId &&
+        !devis.objet
+    ){
+
+        toast(
+            "⚠️ Sélectionne un client, un chantier ou renseigne l'objet."
+        );
+
+        return;
+
+    }
+
+
+    const all =
+        getStorage(DEVIS_STORAGE_KEY);
+
+
+    const index =
+        all.findIndex(function(item){
+
+            return String(item.id)
+                === String(devis.id);
+
+        });
+
+
+    if(index >= 0){
+
+        if(!devis.createdAt){
+
+            devis.createdAt =
+                all[index].createdAt
+                ||
+                new Date().toISOString();
+
+        }
+
+        all[index] = devis;
+
+    }else{
+
+        all.unshift(devis);
+
+    }
+
+
+    setStorage(
+        DEVIS_STORAGE_KEY,
+        all
+    );
+
+
+    devisId =
+        devis.id;
+
+
+    document.getElementById("status")
+        .textContent = "Enregistré";
+
+
+    afficherHistorique();
+
+
+    toast(
+        "✅ Devis enregistré avec succès."
+    );
+
+}
+
+
+/* ==========================================================
+   NOUVEAU DEVIS
+========================================================== */
+
+function nouveauDevis(){
+
+    devisId = null;
+
+
+    document.getElementById("reference")
+        .value = genererReference();
+
+
+    document.getElementById("date")
+        .value = today();
+
+
+    document.getElementById("client")
+        .value = "";
+
+
+    chargerChantiers();
+
+
+    document.getElementById("chantier")
+        .value = "";
+
+
+    document.getElementById("telephone")
+        .value = "";
+
+
+    document.getElementById("duree")
+        .value = "30 jours";
+
+
+    document.getElementById("objet")
+        .value = "";
+
+
+    document.getElementById("notes")
+        .value = "";
+
+
+    document.getElementById("remise")
+        .value = 0;
+
+
+    document.getElementById("tva")
+        .value = 18;
+
+
+    document.getElementById("lines")
+        .innerHTML = "";
+
+
+    ajouterLigne();
+
+
+    document.getElementById("status")
+        .textContent = "Nouveau";
+
+
+    calculer();
+
+}
+
+
+/* ==========================================================
+   CHARGER UN DEVIS
+========================================================== */
+
+function chargerDevis(id){
+
+    const devis =
+        getStorage(DEVIS_STORAGE_KEY)
+        .find(function(d){
+
+            return String(d.id)
+                === String(id);
+
+        });
+
+
+    if(!devis){
+
+        toast("❌ Devis introuvable.");
+
+        return;
+
+    }
+
+
+    devisId =
+        devis.id;
+
+
+    chargerClients();
+
+    chargerChantiers();
+
+
+    document.getElementById("reference")
+        .value =
+        devis.reference || "";
+
+
+    document.getElementById("date")
+        .value =
+        devis.date || today();
+
+
+    document.getElementById("client")
+        .value =
+        devis.clientId || "";
+
+
+    chargerChantiers();
+
+
+    document.getElementById("chantier")
+        .value =
+        devis.chantierId || "";
+
+
+    document.getElementById("telephone")
+        .value =
+        devis.telephone || "";
+
+
+    document.getElementById("duree")
+        .value =
+        devis.duree || "30 jours";
+
+
+    document.getElementById("objet")
+        .value =
+        devis.objet || "";
+
+
+    document.getElementById("notes")
+        .value =
+        devis.notes || "";
+
+
+    document.getElementById("remise")
+        .value =
+        devis.remise ?? 0;
+
+
+    document.getElementById("tva")
+        .value =
+        devis.tvaPct ?? 18;
+
+
+    document.getElementById("lines")
+        .innerHTML = "";
+
+
+    if(
+        Array.isArray(devis.lignes)
+        &&
+        devis.lignes.length
+    ){
+
+        devis.lignes.forEach(function(ligne){
+
+            ajouterLigne(ligne);
+
+        });
+
+    }else{
+
+        ajouterLigne();
+
+    }
+
+
+    document.getElementById("status")
+        .textContent = "Enregistré";
+
+
+    calculer();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+
+    toast(
+        "📄 Devis chargé."
+    );
+
+}
+
+
+/* ==========================================================
+   SUPPRIMER DEVIS
+========================================================== */
+
+function supprimerDevis(id){
+
+    const confirmer =
+        confirm(
+            "Voulez-vous vraiment supprimer ce devis ?"
+        );
+
+
+    if(!confirmer){
+
+        return;
+
+    }
+
+
+    const all =
+        getStorage(DEVIS_STORAGE_KEY);
+
+
+    const filtered =
+        all.filter(function(d){
+
+            return String(d.id)
+                !== String(id);
+
+        });
+
+
+    setStorage(
+        DEVIS_STORAGE_KEY,
+        filtered
+    );
+
+
+    if(String(devisId) === String(id)){
+
+        nouveauDevis();
+
+    }
+
+
+    afficherHistorique();
+
+
+    toast(
+        "🗑️ Devis supprimé."
+    );
+
+}
+
+
+/* ==========================================================
+   HISTORIQUE
+========================================================== */
+
+function afficherHistorique(){
+
+    const container =
+        document.getElementById("historique");
+
+
+    const devis =
+        getStorage(DEVIS_STORAGE_KEY);
+
+
+    document.getElementById("historiqueCount")
+        .textContent =
+        devis.length +
+        (
+            devis.length > 1
+                ? " devis"
+                : " devis"
+        );
+
+
+    if(!devis.length){
+
+        container.innerHTML = `
+            <div class="empty">
+                Aucun devis enregistré pour le moment.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    devis.forEach(function(d){
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "devis-item";
+
+
+        item.innerHTML = `
+
+            <div class="devis-main">
+
+                <strong>
+                    ${escapeHtml(
+                        d.reference || "Devis"
+                    )}
+                </strong>
+
+                <span>
+                    ${escapeHtml(
+                        d.client
+                        ||
+                        d.clientNom
+                        ||
+                        "Client non renseigné"
+                    )}
+                </span>
+
+                <span>
+                    ${escapeHtml(
+                        d.chantier
+                        ||
+                        "Chantier non renseigné"
+                    )}
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <div class="devis-total">
+                    ${money(d.totalTTC || 0)}
+                </div>
+
+                <div class="devis-actions">
+
+                    <button
+                        class="small-btn small-edit"
+                        onclick="chargerDevis('${escapeHtml(d.id)}')"
+                    >
+                        Ouvrir
+                    </button>
+
+                    <button
+                        class="small-btn small-delete"
+                        onclick="supprimerDevis('${escapeHtml(d.id)}')"
+                    >
+                        Supprimer
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(item);
+
+    });
+
+}
+
+
+/* ==========================================================
+   RECHERCHE
+========================================================== */
+
+function rechercherDevis(){
+
+    const search =
+        document.getElementById("search")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const items =
+        document.querySelectorAll(".devis-item");
+
+
+    items.forEach(function(item){
+
+        const text =
+            item.textContent
+                .toLowerCase();
+
+
+        item.style.display =
+            !search || text.includes(search)
+                ? "flex"
+                : "none";
+
+    });
+
+}
+
+
+/* ==========================================================
+   IMPRESSION / PDF
+========================================================== */
+
 function imprimerDevis(){
-    const d=collect();
-    const rows=d.lignes.map((l,i)=>`
-        <tr>
-            <td>${i+1}</td><td>${escapeHtml(l.designation||"—")}</td>
-            <td>${escapeHtml(l.unite||"—")}</td><td>${l.quantite}</td>
-            <td>${money(l.pu)}</td><td>${money(l.quantite*l.pu)}</td>
-        </tr>`).join("");
-    const win=window.open("","_blank","width=1000,height=800");
-    if(!win){toast("⚠️ Autorise les fenêtres pop-up pour imprimer.");return;}
-    win.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>${escapeHtml(d.reference||"Devis BATIFLOW")}</title>
-    <style>
-    *{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#111;margin:35px;font-size:12px}
-    .head{display:flex;justify-content:space-between;border-bottom:3px solid #f59e0b;padding-bottom:15px}
-    h1{margin:0;font-size:25px}.orange{color:#d97706}.muted{color:#64748b}
-    .infos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}
-    .box{border:1px solid #ddd;padding:12px;border-radius:6px}.box strong{display:block;margin-bottom:5px}
-    table{width:100%;border-collapse:collapse;margin-top:20px}th{background:#111827;color:#fff}
-    th,td{padding:9px;border:1px solid #ddd;text-align:left}td:nth-child(4),td:nth-child(5),td:nth-child(6){text-align:right}
-    .totaux{margin:20px 0 0 auto;width:330px}.r{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee}
-    .grand{font-size:17px;font-weight:bold;border-top:2px solid #111;border-bottom:0;margin-top:5px;padding-top:10px}
-    .notes{margin-top:25px;border:1px solid #ddd;padding:12px;min-height:70px}.foot{text-align:center;margin-top:40px;color:#777;font-size:10px}
-    @media print{body{margin:15mm}}
-    </style></head><body>
-    <div class="head"><div><h1>BATI<span class="orange">FLOW</span></h1><div class="muted">CONSTRUCTION MANAGEMENT</div></div>
-    <div style="text-align:right"><strong>DEVIS</strong><br>${escapeHtml(d.reference||"—")}<br>${escapeHtml(d.date||"—")}</div></div>
-    <div class="infos">
-      <div class="box"><strong>Client</strong>${escapeHtml(d.client||"—")}<br>${escapeHtml(d.telephone||"")}</div>
-      <div class="box"><strong>Chantier</strong>${escapeHtml(d.chantier||"—")}<br>Validité : ${escapeHtml(d.duree||"—")}</div>
-      <div class="box" style="grid-column:1/-1"><strong>Objet</strong>${escapeHtml(d.objet||"—")}</div>
-    </div>
-    <table><thead><tr><th>N°</th><th>Désignation</th><th>Unité</th><th>Qté</th><th>Prix unitaire</th><th>Montant</th></tr></thead><tbody>${rows}</tbody></table>
-    <div class="totaux">
-      <div class="r"><span>Total HT</span><strong>${money(d.totalHT)}</strong></div>
-      <div class="r"><span>Remise (${d.remise}%)</span><strong>${money(d.montantRemise)}</strong></div>
-      <div class="r"><span>TVA (${d.tvaPct}%)</span><strong>${money(d.montantTVA)}</strong></div>
-      <div class="r grand"><span>TOTAL TTC</span><strong>${money(d.totalTTC)}</strong></div>
-    </div>
-    <div class="notes"><strong>Conditions / notes</strong><br><br>${escapeHtml(d.notes||"—")}</div>
-    <div class="foot">BATIFLOW — Solution professionnelle de gestion BTP</div>
-    <script>window.onload=()=>window.print();<\/script></body></html>`);
-    win.document.close();
+
+    const d =
+        collectDevis();
+
+
+    const rows =
+        d.lignes
+        .map(function(ligne,index){
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            ligne.designation || "—"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            ligne.unite || "—"
+                        )}
+                    </td>
+
+                    <td>
+                        ${ligne.quantite}
+                    </td>
+
+                    <td>
+                        ${money(ligne.pu)}
+                    </td>
+
+                    <td>
+                        ${money(
+                            ligne.quantite *
+                            ligne.pu
+                        )}
+                    </td>
+
+                </tr>
+
+            `;
+
+        })
+        .join("");
+
+
+    const win =
+        window.open(
+            "",
+            "_blank",
+            "width=1000,height=800"
+        );
+
+
+    if(!win){
+
+        toast(
+            "⚠️ Autorise les fenêtres pop-up pour imprimer."
+        );
+
+        return;
+
+    }
+
+
+    win.document.write(`
+
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+${escapeHtml(
+    d.reference || "Devis BATIFLOW"
+)}
+</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
 }
-document.addEventListener("DOMContentLoaded",()=>{
-    chargerUtilisateur();
-    nouveauDevis();
-});
-</script>
+
+body{
+    font-family:Arial,sans-serif;
+    color:#111;
+    margin:35px;
+    font-size:12px;
+}
+
+.head{
+    display:flex;
+    justify-content:space-between;
+    border-bottom:3px solid #f59e0b;
+    padding-bottom:15px;
+}
+
+h1{
+    margin:0;
+    font-size:25px;
+}
+
+.orange{
+    color:#d97706;
+}
+
+.muted{
+    color:#64748b;
+}
+
+.infos{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:22px 0;
+}
+
+.box{
+    border:1px solid #ddd;
+    padding:12px;
+    border-radius:6px;
+}
+
+.box strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th{
+    background:#111827;
+    color:#fff;
+}
+
+th,
+td{
+    padding:9px;
+    border:1px solid #ddd;
+    text-align:left;
+}
+
+td:nth-child(4),
+td:nth-child(5),
+td:nth-child(6){
+    text-align:right;
+}
+
+.totaux{
+    margin:20px 0 0 auto;
+    width:330px;
+}
+
+.r{
+    display:flex;
+    justify-content:space-between;
+    padding:7px 0;
+    border-bottom:1px solid #eee;
+}
+
+.grand{
+    font-size:17px;
+    font-weight:bold;
+    border-top:2px solid #111;
+    border-bottom:0;
+    margin-top:5px;
+    padding-top:10px;
+}
+
+.notes{
+    margin-top:25px;
+    border:1px solid #ddd;
+    padding:12px;
+    min-height:70px;
+}
+
+.foot{
+    text-align:center;
+    margin-top:40px;
+    color:#777;
+    font-size:10px;
+}
+
+@media print{
+
+    body{
+        margin:15mm;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="head">
+
+    <div>
+
+        <h1>
+            BATI<span class="orange">FLOW</span>
+        </h1>
+
+        <div class="muted">
+            CONSTRUCTION MANAGEMENT
+        </div>
+
+    </div>
+
+
+    <div style="text-align:right">
+
+        <strong>
+            DEVIS
+        </strong>
+
+        <br>
+
+        ${escapeHtml(
+            d.reference || "—"
+        )}
+
+        <br>
+
+        ${escapeHtml(
+            d.date || "—"
+        )}
+
+    </div>
+
+</div>
+
+
+<div class="infos">
+
+    <div class="box">
+
+        <strong>
+            Client
+        </strong>
+
+        ${escapeHtml(
+            d.clientNom ||
+            d.client ||
+            "—"
+        )}
+
+        <br>
+
+        ${escapeHtml(
+            d.telephone || ""
+        )}
+
+    </div>
+
+
+    <div class="box">
+
+        <strong>
+            Chantier
+        </strong>
+
+        ${escapeHtml(
+            d.chantier || "—"
+        )}
+
+        <br>
+
+        Validité :
+        ${escapeHtml(
+            d.duree || "—"
+        )}
+
+    </div>
+
+
+    <div
+        class="box"
+        style="grid-column:1/-1"
+    >
+
+        <strong>
+            Objet
+        </strong>
+
+        ${escapeHtml(
+            d.objet || "—"
+        )}
+
+    </div>
+
+</div>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>N°</th>
+
+    <th>
+        Désignation
+    </th>
+
+    <th>
+        Unité
+    </th>
+
+    <th>
+        Qté
+    </th>
+
+    <th>
+        Prix unitaire
+    </th>
+
+    <th>
+        Montant
+    </th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+${rows}
+
+</tbody>
+
+</table>
+
+
+<div class="totaux">
+
+    <div class="r">
+
+        <span>
+            Total HT
+        </span>
+
+        <strong>
+            ${money(d.totalHT)}
+        </strong>
+
+    </div>
+
+
+    <div class="r">
+
+        <span>
+            Remise (${d.remise}%)
+        </span>
+
+        <strong>
+            ${money(d.montantRemise)}
+        </strong>
+
+    </div>
+
+
+    <div class="r">
+
+        <span>
+            TVA (${d.tvaPct}%)
+        </span>
+
+        <strong>
+            ${money(d.montantTVA)}
+        </strong>
+
+    </div>
+
+
+    <div class="r grand">
+
+        <span>
+            TOTAL TTC
+        </span>
+
+        <strong>
+            ${money(d.totalTTC)}
+        </strong>
+
+    </div>
+
+</div>
+
+
+<div class="notes">
+
+    <strong>
+        Conditions / notes
+    </strong>
+
+    <br>
+    <br>
+
+    ${escapeHtml(
+        d.notes || "—"
+    )}
+
+</div>
+
+
+<div class="foot">
+
+    BATIFLOW —
+    Solution professionnelle de gestion BTP
+
+</div>
+
+
+<script>
+
+window.onload = function(){
+
+    window.print();
+
+};
+
+<\/script>
+
+
 </body>
+
 </html>
 
+`);
+
+
+    win.document.close();
+
+}
+
+
+/* ==========================================================
+   INITIALISATION
+========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        chargerUtilisateur();
+
+        chargerClients();
+
+        chargerChantiers();
+
+        document
+            .getElementById("client")
+            .addEventListener(
+                "change",
+                clientSelectionne
+            );
+
+
+        document
+            .getElementById("chantier")
+            .addEventListener(
+                "change",
+                chantierSelectionne
+            );
+
+
+        nouveauDevis();
+
+        afficherHistorique();
+
+    }
+);
+
+
+/* ==========================================================
+   SYNCHRONISATION LOCALSTORAGE
+========================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key === CLIENT_STORAGE_KEY
+            ||
+            event.key === CHANTIER_STORAGE_KEY
+            ||
+            event.key === DEVIS_STORAGE_KEY
+        ){
+
+            chargerClients();
+
+            chargerChantiers();
+
+            afficherHistorique();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
