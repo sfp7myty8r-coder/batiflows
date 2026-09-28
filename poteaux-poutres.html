@@ -111,6 +111,12 @@
             z-index: 500;
         }
 
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .topbar h1 {
             font-size: 22px;
             color: #111827;
@@ -133,7 +139,7 @@
 
         .content {
             padding: 30px;
-            max-width: 1400px;
+            max-width: 1450px;
             margin: auto;
         }
 
@@ -186,12 +192,12 @@
         }
 
         /* =========================
-           LAYOUT
+           GRID
         ========================= */
 
         .calculator-grid {
             display: grid;
-            grid-template-columns: minmax(320px, 1fr) minmax(350px, 1fr);
+            grid-template-columns: minmax(350px, 1fr) minmax(380px, 1fr);
             gap: 22px;
         }
 
@@ -219,7 +225,7 @@
         }
 
         /* =========================
-           FORM
+           FORMULAIRE
         ========================= */
 
         .form-grid {
@@ -267,7 +273,7 @@
         }
 
         /* =========================
-           BUTTONS
+           BOUTONS
         ========================= */
 
         .actions {
@@ -277,10 +283,6 @@
             margin-top: 22px;
         }
 
-        button {
-            font-family: inherit;
-        }
-
         .btn {
             border: none;
             padding: 11px 17px;
@@ -288,6 +290,7 @@
             cursor: pointer;
             font-weight: bold;
             font-size: 13px;
+            transition: 0.2s;
         }
 
         .btn-primary {
@@ -313,8 +316,21 @@
             color: white;
         }
 
+        .btn-dark:hover {
+            background: #1c293c;
+        }
+
+        .btn-dqe {
+            background: #16a34a;
+            color: white;
+        }
+
+        .btn-dqe:hover {
+            background: #15803d;
+        }
+
         /* =========================
-           RESULTS
+           RESULTATS
         ========================= */
 
         .result-grid {
@@ -383,7 +399,7 @@
         }
 
         /* =========================
-           TABLE
+           TABLEAU
         ========================= */
 
         .summary-table {
@@ -407,6 +423,64 @@
         }
 
         /* =========================
+           INFO DQE
+        ========================= */
+
+        .dqe-info {
+            margin-top: 18px;
+            padding: 15px;
+            border-radius: 9px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+
+        .dqe-info h4 {
+            color: #15803d;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .dqe-info p {
+            color: #166534;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: #101827;
+            color: white;
+            padding: 14px 18px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            font-size: 13px;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            border-left: 4px solid #22c55e;
+        }
+
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        /* =========================
            MOBILE
         ========================= */
 
@@ -421,6 +495,7 @@
         }
 
         @media (max-width: 950px) {
+
             .calculator-grid {
                 grid-template-columns: 1fr;
             }
@@ -472,10 +547,18 @@
             .badge {
                 display: none;
             }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .actions .btn {
+                width: 100%;
+            }
         }
 
         /* =========================
-           PRINT
+           IMPRESSION
         ========================= */
 
         @media print {
@@ -483,7 +566,8 @@
             .sidebar,
             .topbar,
             .tabs,
-            .actions {
+            .actions,
+            .dqe-info {
                 display: none !important;
             }
 
@@ -509,9 +593,9 @@
 
 <body>
 
-<!-- =========================
+<!-- ==================================================
      SIDEBAR
-========================= -->
+================================================== -->
 
 <aside class="sidebar" id="sidebar">
 
@@ -603,15 +687,17 @@
 
 </aside>
 
-<!-- =========================
+
+<!-- ==================================================
      MAIN
-========================= -->
+================================================== -->
 
 <main class="main">
 
     <header class="topbar">
 
-        <div style="display:flex;align-items:center;gap:12px;">
+        <div class="topbar-left">
+
             <button
                 class="mobile-menu"
                 onclick="toggleSidebar()"
@@ -619,31 +705,42 @@
                 ☰
             </button>
 
-            <h1>Calculateur Poteaux & Poutres</h1>
+            <h1>
+                Calculateur Poteaux & Poutres
+            </h1>
+
         </div>
 
         <div class="topbar-right">
+
             <div class="badge">
                 BATIFLOW BTP
             </div>
+
         </div>
 
     </header>
+
 
     <section class="content">
 
         <div class="intro">
 
-            <h2>Calculateur Poteaux & Poutres</h2>
+            <h2>
+                Calculateur Poteaux & Poutres
+            </h2>
 
             <p>
-                Estimez rapidement les volumes de béton,
-                les quantités d'acier et les coûts associés.
+                Calculez les quantités de béton, d'acier et les
+                coûts estimatifs de vos éléments en béton armé.
             </p>
 
         </div>
 
-        <!-- TABS -->
+
+        <!-- ==================================================
+             TABS
+        ================================================== -->
 
         <div class="tabs">
 
@@ -665,11 +762,13 @@
 
         </div>
 
+
         <div class="calculator-grid">
 
-            <!-- =========================
+
+            <!-- ==================================================
                  FORMULAIRE
-            ========================= -->
+            ================================================== -->
 
             <div class="card">
 
@@ -677,7 +776,10 @@
                     Paramètres du poteau
                 </h3>
 
-                <!-- Poteau -->
+
+                <!-- ==================================================
+                     POTEAU
+                ================================================== -->
 
                 <div id="poteauForm">
 
@@ -707,6 +809,7 @@
 
                         </div>
 
+
                         <div class="form-group">
 
                             <label>
@@ -727,6 +830,7 @@
 
                         </div>
 
+
                         <div class="form-group">
 
                             <label>
@@ -746,6 +850,7 @@
                             </span>
 
                         </div>
+
 
                         <div class="form-group">
 
@@ -769,6 +874,7 @@
 
                     </div>
 
+
                     <div class="section-title">
                         Ferraillage longitudinal
                     </div>
@@ -778,21 +884,39 @@
                         <div class="form-group">
 
                             <label>
-                                Diamètre
+                                Diamètre des barres
                             </label>
 
                             <select id="pDiametre">
 
-                                <option value="8">HA8</option>
-                                <option value="10">HA10</option>
-                                <option value="12" selected>HA12</option>
-                                <option value="14">HA14</option>
-                                <option value="16">HA16</option>
-                                <option value="20">HA20</option>
+                                <option value="8">
+                                    HA8
+                                </option>
+
+                                <option value="10">
+                                    HA10
+                                </option>
+
+                                <option value="12" selected>
+                                    HA12
+                                </option>
+
+                                <option value="14">
+                                    HA14
+                                </option>
+
+                                <option value="16">
+                                    HA16
+                                </option>
+
+                                <option value="20">
+                                    HA20
+                                </option>
 
                             </select>
 
                         </div>
+
 
                         <div class="form-group">
 
@@ -816,6 +940,7 @@
 
                     </div>
 
+
                     <div class="section-title">
                         Étriers / cadres
                     </div>
@@ -830,13 +955,22 @@
 
                             <select id="pCadreDiametre">
 
-                                <option value="6" selected>RL6 / HA6</option>
-                                <option value="8">HA8</option>
-                                <option value="10">HA10</option>
+                                <option value="6" selected>
+                                    RL6 / HA6
+                                </option>
+
+                                <option value="8">
+                                    HA8
+                                </option>
+
+                                <option value="10">
+                                    HA10
+                                </option>
 
                             </select>
 
                         </div>
+
 
                         <div class="form-group">
 
@@ -857,6 +991,7 @@
                             </span>
 
                         </div>
+
 
                         <div class="form-group">
 
@@ -880,6 +1015,7 @@
 
                     </div>
 
+
                     <div class="section-title">
                         Prix
                     </div>
@@ -889,7 +1025,7 @@
                         <div class="form-group">
 
                             <label>
-                                Béton
+                                Prix béton
                             </label>
 
                             <input
@@ -906,10 +1042,11 @@
 
                         </div>
 
+
                         <div class="form-group">
 
                             <label>
-                                Acier
+                                Prix acier
                             </label>
 
                             <input
@@ -925,6 +1062,7 @@
                             </span>
 
                         </div>
+
 
                         <div class="form-group full">
 
@@ -950,9 +1088,15 @@
 
                 </div>
 
-                <!-- Poutre -->
 
-                <div id="poutreForm" style="display:none;">
+                <!-- ==================================================
+                     POUTRE
+                ================================================== -->
+
+                <div
+                    id="poutreForm"
+                    style="display:none;"
+                >
 
                     <div class="section-title">
                         Dimensions
@@ -980,6 +1124,7 @@
 
                         </div>
 
+
                         <div class="form-group">
 
                             <label>
@@ -1000,6 +1145,7 @@
 
                         </div>
 
+
                         <div class="form-group">
 
                             <label>
@@ -1019,6 +1165,7 @@
                             </span>
 
                         </div>
+
 
                         <div class="form-group">
 
@@ -1042,6 +1189,7 @@
 
                     </div>
 
+
                     <div class="section-title">
                         Armatures principales
                     </div>
@@ -1056,21 +1204,39 @@
 
                             <select id="bBasDiametre">
 
-                                <option value="8">HA8</option>
-                                <option value="10">HA10</option>
-                                <option value="12" selected>HA12</option>
-                                <option value="14">HA14</option>
-                                <option value="16">HA16</option>
-                                <option value="20">HA20</option>
+                                <option value="8">
+                                    HA8
+                                </option>
+
+                                <option value="10">
+                                    HA10
+                                </option>
+
+                                <option value="12" selected>
+                                    HA12
+                                </option>
+
+                                <option value="14">
+                                    HA14
+                                </option>
+
+                                <option value="16">
+                                    HA16
+                                </option>
+
+                                <option value="20">
+                                    HA20
+                                </option>
 
                             </select>
 
                         </div>
 
+
                         <div class="form-group">
 
                             <label>
-                                Nombre barres inférieures
+                                Nombre inférieur
                             </label>
 
                             <input
@@ -1081,7 +1247,12 @@
                                 step="1"
                             >
 
+                            <span class="unit">
+                                barres / poutre
+                            </span>
+
                         </div>
+
 
                         <div class="form-group">
 
@@ -1091,20 +1262,35 @@
 
                             <select id="bHautDiametre">
 
-                                <option value="8">HA8</option>
-                                <option value="10" selected>HA10</option>
-                                <option value="12">HA12</option>
-                                <option value="14">HA14</option>
-                                <option value="16">HA16</option>
+                                <option value="8">
+                                    HA8
+                                </option>
+
+                                <option value="10" selected>
+                                    HA10
+                                </option>
+
+                                <option value="12">
+                                    HA12
+                                </option>
+
+                                <option value="14">
+                                    HA14
+                                </option>
+
+                                <option value="16">
+                                    HA16
+                                </option>
 
                             </select>
 
                         </div>
 
+
                         <div class="form-group">
 
                             <label>
-                                Nombre barres supérieures
+                                Nombre supérieur
                             </label>
 
                             <input
@@ -1115,9 +1301,14 @@
                                 step="1"
                             >
 
+                            <span class="unit">
+                                barres / poutre
+                            </span>
+
                         </div>
 
                     </div>
+
 
                     <div class="section-title">
                         Étriers / cadres
@@ -1133,13 +1324,22 @@
 
                             <select id="bCadreDiametre">
 
-                                <option value="6" selected>RL6 / HA6</option>
-                                <option value="8">HA8</option>
-                                <option value="10">HA10</option>
+                                <option value="6" selected>
+                                    RL6 / HA6
+                                </option>
+
+                                <option value="8">
+                                    HA8
+                                </option>
+
+                                <option value="10">
+                                    HA10
+                                </option>
 
                             </select>
 
                         </div>
+
 
                         <div class="form-group">
 
@@ -1160,6 +1360,7 @@
                             </span>
 
                         </div>
+
 
                         <div class="form-group">
 
@@ -1183,6 +1384,7 @@
 
                     </div>
 
+
                     <div class="section-title">
                         Prix
                     </div>
@@ -1192,7 +1394,7 @@
                         <div class="form-group">
 
                             <label>
-                                Béton
+                                Prix béton
                             </label>
 
                             <input
@@ -1209,10 +1411,11 @@
 
                         </div>
 
+
                         <div class="form-group">
 
                             <label>
-                                Acier
+                                Prix acier
                             </label>
 
                             <input
@@ -1228,6 +1431,7 @@
                             </span>
 
                         </div>
+
 
                         <div class="form-group full">
 
@@ -1253,6 +1457,11 @@
 
                 </div>
 
+
+                <!-- ==================================================
+                     ACTIONS
+                ================================================== -->
+
                 <div class="actions">
 
                     <button
@@ -1260,6 +1469,13 @@
                         onclick="calculer()"
                     >
                         🧮 Calculer
+                    </button>
+
+                    <button
+                        class="btn btn-dqe"
+                        onclick="ajouterAuDQE()"
+                    >
+                        ➕ Ajouter au DQE
                     </button>
 
                     <button
@@ -1280,15 +1496,17 @@
 
             </div>
 
-            <!-- =========================
+
+            <!-- ==================================================
                  RESULTATS
-            ========================= -->
+            ================================================== -->
 
             <div class="card">
 
                 <h3>
-                    Résultats
+                    Résultats du calcul
                 </h3>
+
 
                 <div class="result-grid">
 
@@ -1299,11 +1517,19 @@
                         </div>
 
                         <div class="result-value">
-                            <span id="volumeBeton">0.00</span>
-                            <span class="result-unit">m³</span>
+
+                            <span id="volumeBeton">
+                                0.00
+                            </span>
+
+                            <span class="result-unit">
+                                m³
+                            </span>
+
                         </div>
 
                     </div>
+
 
                     <div class="result-box">
 
@@ -1312,11 +1538,19 @@
                         </div>
 
                         <div class="result-value">
-                            <span id="acierTotal">0.00</span>
-                            <span class="result-unit">kg</span>
+
+                            <span id="acierTotal">
+                                0.00
+                            </span>
+
+                            <span class="result-unit">
+                                kg
+                            </span>
+
                         </div>
 
                     </div>
+
 
                     <div class="result-box">
 
@@ -1325,11 +1559,19 @@
                         </div>
 
                         <div class="result-value">
-                            <span id="acierPrincipal">0.00</span>
-                            <span class="result-unit">kg</span>
+
+                            <span id="acierPrincipal">
+                                0.00
+                            </span>
+
+                            <span class="result-unit">
+                                kg
+                            </span>
+
                         </div>
 
                     </div>
+
 
                     <div class="result-box">
 
@@ -1338,11 +1580,19 @@
                         </div>
 
                         <div class="result-value">
-                            <span id="acierCadres">0.00</span>
-                            <span class="result-unit">kg</span>
+
+                            <span id="acierCadres">
+                                0.00
+                            </span>
+
+                            <span class="result-unit">
+                                kg
+                            </span>
+
                         </div>
 
                     </div>
+
 
                     <div class="result-box">
 
@@ -1351,11 +1601,19 @@
                         </div>
 
                         <div class="result-value">
-                            <span id="coutBeton">0</span>
-                            <span class="result-unit">FCFA</span>
+
+                            <span id="coutBeton">
+                                0
+                            </span>
+
+                            <span class="result-unit">
+                                FCFA
+                            </span>
+
                         </div>
 
                     </div>
+
 
                     <div class="result-box">
 
@@ -1364,11 +1622,19 @@
                         </div>
 
                         <div class="result-value">
-                            <span id="coutAcier">0</span>
-                            <span class="result-unit">FCFA</span>
+
+                            <span id="coutAcier">
+                                0
+                            </span>
+
+                            <span class="result-unit">
+                                FCFA
+                            </span>
+
                         </div>
 
                     </div>
+
 
                     <div class="result-box">
 
@@ -1377,11 +1643,19 @@
                         </div>
 
                         <div class="result-value">
-                            <span id="coutMainOeuvre">0</span>
-                            <span class="result-unit">FCFA</span>
+
+                            <span id="coutMainOeuvre">
+                                0
+                            </span>
+
+                            <span class="result-unit">
+                                FCFA
+                            </span>
+
                         </div>
 
                     </div>
+
 
                     <div class="result-box highlight">
 
@@ -1390,13 +1664,23 @@
                         </div>
 
                         <div class="result-value">
-                            <span id="nombreElements">0</span>
-                            <span class="result-unit">unités</span>
+
+                            <span id="nombreElements">
+                                0
+                            </span>
+
+                            <span class="result-unit">
+                                unités
+                            </span>
+
                         </div>
 
                     </div>
 
                 </div>
+
+
+                <!-- TOTAL -->
 
                 <div class="total-box">
 
@@ -1410,21 +1694,55 @@
 
                 </div>
 
-                <div class="calculation-note" id="noteCalcul">
 
-                    Sélectionnez les paramètres puis cliquez sur
-                    <strong>Calculer</strong>.
+                <!-- NOTE -->
+
+                <div
+                    class="calculation-note"
+                    id="noteCalcul"
+                >
+                    Sélectionnez vos paramètres puis cliquez
+                    sur <strong>Calculer</strong>.
+                </div>
+
+
+                <!-- INFO DQE -->
+
+                <div class="dqe-info">
+
+                    <h4>
+                        📐 Intégration DQE
+                    </h4>
+
+                    <p>
+                        Cliquez sur « Ajouter au DQE » après le calcul.
+                        BATIFLOW enregistrera les quantités calculées
+                        pour pouvoir les récupérer dans le module DQE.
+                    </p>
 
                 </div>
+
+
+                <!-- TABLEAU -->
 
                 <table class="summary-table">
 
                     <thead>
 
                         <tr>
-                            <th>Élément</th>
-                            <th>Quantité</th>
-                            <th>Unité</th>
+
+                            <th>
+                                Élément
+                            </th>
+
+                            <th>
+                                Quantité
+                            </th>
+
+                            <th>
+                                Unité
+                            </th>
+
                         </tr>
 
                     </thead>
@@ -1432,15 +1750,35 @@
                     <tbody id="summaryBody">
 
                         <tr>
-                            <td>Béton</td>
-                            <td>0.00</td>
-                            <td>m³</td>
+
+                            <td>
+                                Béton
+                            </td>
+
+                            <td>
+                                0.00
+                            </td>
+
+                            <td>
+                                m³
+                            </td>
+
                         </tr>
 
                         <tr>
-                            <td>Acier</td>
-                            <td>0.00</td>
-                            <td>kg</td>
+
+                            <td>
+                                Acier
+                            </td>
+
+                            <td>
+                                0.00
+                            </td>
+
+                            <td>
+                                kg
+                            </td>
+
                         </tr>
 
                     </tbody>
@@ -1455,17 +1793,35 @@
 
 </main>
 
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+>
+</div>
+
+
 <script>
+
+    /* ==================================================
+       VARIABLES
+    ================================================== */
 
     let typeActuel = "poteau";
 
-    /* =========================
+    let dernierCalcul = null;
+
+
+    /* ==================================================
        UTILITAIRES
-    ========================= */
+    ================================================== */
 
     function valeur(id) {
 
-        const element = document.getElementById(id);
+        const element =
+            document.getElementById(id);
 
         if (!element) {
             return 0;
@@ -1478,17 +1834,27 @@
     function poidsAcier(diametre) {
 
         /*
-         * Poids théorique :
+         * Poids théorique de l'acier :
+         *
          * kg/m = d² / 162
          */
 
-        return (diametre * diametre) / 162;
+        return (
+            diametre *
+            diametre
+        ) / 162;
+
     }
 
 
-    function formatNombre(nombre, decimals = 2) {
+    function formatNombre(
+        nombre,
+        decimals = 2
+    ) {
 
-        return Number(nombre || 0).toLocaleString(
+        return Number(
+            nombre || 0
+        ).toLocaleString(
             "fr-FR",
             {
                 minimumFractionDigits: decimals,
@@ -1501,7 +1867,9 @@
 
     function formatFCFA(nombre) {
 
-        return Number(nombre || 0).toLocaleString(
+        return Number(
+            nombre || 0
+        ).toLocaleString(
             "fr-FR",
             {
                 maximumFractionDigits: 0
@@ -1511,43 +1879,108 @@
     }
 
 
-    /* =========================
-       CHANGEMENT DE MODULE
-    ========================= */
+    /* ==================================================
+       TOAST
+    ================================================== */
+
+    function afficherToast(
+        message,
+        type = "success"
+    ) {
+
+        const toast =
+            document.getElementById("toast");
+
+        toast.textContent = message;
+
+        toast.className =
+            "toast show " + type;
+
+        setTimeout(
+            function() {
+
+                toast.className =
+                    "toast";
+
+            },
+            3000
+        );
+
+    }
+
+
+    /* ==================================================
+       CHANGEMENT POTEAU / POUTRE
+    ================================================== */
 
     function changerType(type) {
 
         typeActuel = type;
 
-        const poteauForm = document.getElementById("poteauForm");
-        const poutreForm = document.getElementById("poutreForm");
+        const poteauForm =
+            document.getElementById(
+                "poteauForm"
+            );
 
-        const tabPoteau = document.getElementById("tabPoteau");
-        const tabPoutre = document.getElementById("tabPoutre");
+        const poutreForm =
+            document.getElementById(
+                "poutreForm"
+            );
 
-        const formTitle = document.getElementById("formTitle");
+        const tabPoteau =
+            document.getElementById(
+                "tabPoteau"
+            );
+
+        const tabPoutre =
+            document.getElementById(
+                "tabPoutre"
+            );
+
+        const formTitle =
+            document.getElementById(
+                "formTitle"
+            );
+
 
         if (type === "poteau") {
 
-            poteauForm.style.display = "block";
-            poutreForm.style.display = "none";
+            poteauForm.style.display =
+                "block";
 
-            tabPoteau.classList.add("active");
-            tabPoutre.classList.remove("active");
+            poutreForm.style.display =
+                "none";
+
+            tabPoteau.classList.add(
+                "active"
+            );
+
+            tabPoutre.classList.remove(
+                "active"
+            );
 
             formTitle.textContent =
                 "Paramètres du poteau";
 
         } else {
 
-            poteauForm.style.display = "none";
-            poutreForm.style.display = "block";
+            poteauForm.style.display =
+                "none";
 
-            tabPoteau.classList.remove("active");
-            tabPoutre.classList.add("active");
+            poutreForm.style.display =
+                "block";
+
+            tabPoteau.classList.remove(
+                "active"
+            );
+
+            tabPoutre.classList.add(
+                "active"
+            );
 
             formTitle.textContent =
                 "Paramètres de la poutre";
+
         }
 
         calculer();
@@ -1555,29 +1988,52 @@
     }
 
 
-    /* =========================
+    /* ==================================================
        CALCUL POTEAU
-    ========================= */
+    ================================================== */
 
     function calculerPoteau() {
 
-        const largeur = valeur("pLargeur") / 100;
-        const profondeur = valeur("pProfondeur") / 100;
-        const hauteur = valeur("pHauteur");
-        const nombre = valeur("pNombre");
+        const largeur =
+            valeur("pLargeur") / 100;
 
-        const diametre = valeur("pDiametre");
-        const nbBarres = valeur("pBarres");
+        const profondeur =
+            valeur("pProfondeur") / 100;
 
-        const diametreCadre = valeur("pCadreDiametre");
-        const espacement = valeur("pEspacement");
-        const enrobage = valeur("pEnrobage");
+        const hauteur =
+            valeur("pHauteur");
 
-        const prixBeton = valeur("pPrixBeton");
-        const prixAcier = valeur("pPrixAcier");
-        const mainOeuvrePct = valeur("pMainOeuvre");
+        const nombre =
+            valeur("pNombre");
 
-        /* Béton */
+        const diametre =
+            valeur("pDiametre");
+
+        const nbBarres =
+            valeur("pBarres");
+
+        const diametreCadre =
+            valeur("pCadreDiametre");
+
+        const espacement =
+            valeur("pEspacement");
+
+        const enrobage =
+            valeur("pEnrobage");
+
+        const prixBeton =
+            valeur("pPrixBeton");
+
+        const prixAcier =
+            valeur("pPrixAcier");
+
+        const mainOeuvrePct =
+            valeur("pMainOeuvre");
+
+
+        /* =========================
+           BETON
+        ========================= */
 
         const volumeUnitaire =
             largeur *
@@ -1589,7 +2045,9 @@
             nombre;
 
 
-        /* Armatures longitudinales */
+        /* =========================
+           ACIER PRINCIPAL
+        ========================= */
 
         const longueurPrincipale =
             nbBarres *
@@ -1598,190 +2056,20 @@
 
         const kgPrincipal =
             longueurPrincipale *
-            poidsAcier(diametre);
+            poidsAcier(
+                diametre
+            );
 
 
-        /* Cadres */
+        /* =========================
+           CADRES
+        ========================= */
 
         const nbCadresUnitaire =
             Math.floor(
-                (hauteur * 100) / espacement
-            ) + 1;
-
-        const nbCadresTotal =
-            nbCadresUnitaire *
-            nombre;
-
-        const largeurInterieure =
-            Math.max(
-                0,
-                valeur("pLargeur") -
-                (2 * enrobage)
-            );
-
-        const profondeurInterieure =
-            Math.max(
-                0,
-                valeur("pProfondeur") -
-                (2 * enrobage)
-            );
-
-        /*
-         * Longueur approximative d'un cadre.
-         * Une petite longueur supplémentaire est
-         * ajoutée pour les crochets.
-         */
-
-        const longueurCadreCm =
-            (
-                2 *
                 (
-                    largeurInterieure +
-                    profondeurInterieure
-                )
-            ) + 20;
-
-        const longueurCadresM =
-            (longueurCadreCm / 100) *
-            nbCadresTotal;
-
-        const kgCadres =
-            longueurCadresM *
-            poidsAcier(diametreCadre);
-
-
-        const acierTotal =
-            kgPrincipal +
-            kgCadres;
-
-
-        /* Coûts */
-
-        const coutBeton =
-            volumeTotal *
-            prixBeton;
-
-        const coutAcier =
-            acierTotal *
-            prixAcier;
-
-        const coutMainOeuvre =
-            (coutBeton + coutAcier) *
-            (mainOeuvrePct / 100);
-
-        const coutTotal =
-            coutBeton +
-            coutAcier +
-            coutMainOeuvre;
-
-
-        afficherResultats(
-            volumeTotal,
-            acierTotal,
-            kgPrincipal,
-            kgCadres,
-            coutBeton,
-            coutAcier,
-            coutMainOeuvre,
-            coutTotal,
-            nombre
-        );
-
-
-        document.getElementById("noteCalcul").innerHTML =
-            "Calcul du poteau : " +
-            `<strong>${formatNombre(valeur("pLargeur"), 0)} × ` +
-            `${formatNombre(valeur("pProfondeur"), 0)} cm</strong>, ` +
-            `hauteur ${formatNombre(hauteur)} m. ` +
-            `Les étriers sont estimés avec un espacement de ` +
-            `<strong>${formatNombre(espacement, 0)} cm</strong>. ` +
-            "Les longueurs d'ancrage, recouvrements et dispositions constructives " +
-            "ne sont pas automatiquement dimensionnés.";
-
-
-        mettreAJourTableau([
-            ["Béton", volumeTotal, "m³"],
-            ["Acier longitudinal", kgPrincipal, "kg"],
-            ["Étriers / cadres", kgCadres, "kg"],
-            ["Acier total", acierTotal, "kg"],
-            ["Coût total", coutTotal, "FCFA"]
-        ]);
-
-    }
-
-
-    /* =========================
-       CALCUL POUTRE
-    ========================= */
-
-    function calculerPoutre() {
-
-        const largeur = valeur("bLargeur") / 100;
-        const hauteur = valeur("bHauteur") / 100;
-        const longueur = valeur("bLongueur");
-        const nombre = valeur("bNombre");
-
-        const basDiametre = valeur("bBasDiametre");
-        const basNombre = valeur("bBasNombre");
-
-        const hautDiametre = valeur("bHautDiametre");
-        const hautNombre = valeur("bHautNombre");
-
-        const cadreDiametre = valeur("bCadreDiametre");
-        const espacement = valeur("bEspacement");
-        const enrobage = valeur("bEnrobage");
-
-        const prixBeton = valeur("bPrixBeton");
-        const prixAcier = valeur("bPrixAcier");
-        const mainOeuvrePct = valeur("bMainOeuvre");
-
-
-        /* Béton */
-
-        const volumeUnitaire =
-            largeur *
-            hauteur *
-            longueur;
-
-        const volumeTotal =
-            volumeUnitaire *
-            nombre;
-
-
-        /* Barres inférieures */
-
-        const longueurBas =
-            basNombre *
-            longueur *
-            nombre;
-
-        const kgBas =
-            longueurBas *
-            poidsAcier(basDiametre);
-
-
-        /* Barres supérieures */
-
-        const longueurHaut =
-            hautNombre *
-            longueur *
-            nombre;
-
-        const kgHaut =
-            longueurHaut *
-            poidsAcier(hautDiametre);
-
-
-        const kgPrincipal =
-            kgBas +
-            kgHaut;
-
-
-        /* Cadres */
-
-        const nbCadresUnitaire =
-            Math.floor(
-                (longueur * 100) /
+                    hauteur * 100
+                ) /
                 espacement
             ) + 1;
 
@@ -1793,33 +2081,47 @@
         const largeurInterieure =
             Math.max(
                 0,
-                valeur("bLargeur") -
-                (2 * enrobage)
+                valeur("pLargeur") -
+                (
+                    2 *
+                    enrobage
+                )
             );
 
-        const hauteurInterieure =
+
+        const profondeurInterieure =
             Math.max(
                 0,
-                valeur("bHauteur") -
-                (2 * enrobage)
+                valeur("pProfondeur") -
+                (
+                    2 *
+                    enrobage
+                )
             );
+
 
         const longueurCadreCm =
             (
                 2 *
                 (
                     largeurInterieure +
-                    hauteurInterieure
+                    profondeurInterieure
                 )
             ) + 20;
 
+
         const longueurCadresM =
-            (longueurCadreCm / 100) *
+            (
+                longueurCadreCm / 100
+            ) *
             nbCadresTotal;
+
 
         const kgCadres =
             longueurCadresM *
-            poidsAcier(cadreDiametre);
+            poidsAcier(
+                diametreCadre
+            );
 
 
         const acierTotal =
@@ -1827,24 +2129,77 @@
             kgCadres;
 
 
-        /* Coûts */
+        /* =========================
+           COUTS
+        ========================= */
 
         const coutBeton =
             volumeTotal *
             prixBeton;
 
+
         const coutAcier =
             acierTotal *
             prixAcier;
 
+
         const coutMainOeuvre =
-            (coutBeton + coutAcier) *
-            (mainOeuvrePct / 100);
+            (
+                coutBeton +
+                coutAcier
+            ) *
+            (
+                mainOeuvrePct / 100
+            );
+
 
         const coutTotal =
             coutBeton +
             coutAcier +
             coutMainOeuvre;
+
+
+        dernierCalcul = {
+
+            type: "poteau",
+
+            designation:
+                "Poteaux en béton armé",
+
+            nombre,
+
+            largeur:
+                valeur("pLargeur"),
+
+            profondeur:
+                valeur("pProfondeur"),
+
+            hauteur,
+
+            volumeBeton:
+                volumeTotal,
+
+            acierPrincipal:
+                kgPrincipal,
+
+            acierCadres:
+                kgCadres,
+
+            acierTotal,
+
+            coutBeton,
+
+            coutAcier,
+
+            coutMainOeuvre,
+
+            coutTotal,
+
+            prixBeton,
+
+            prixAcier
+
+        };
 
 
         afficherResultats(
@@ -1860,35 +2215,421 @@
         );
 
 
-        document.getElementById("noteCalcul").innerHTML =
-            "Calcul de la poutre : " +
-            `<strong>${formatNombre(valeur("bLargeur"), 0)} × ` +
-            `${formatNombre(valeur("bHauteur"), 0)} cm</strong>, ` +
-            `longueur ${formatNombre(longueur)} m. ` +
+        document.getElementById(
+            "noteCalcul"
+        ).innerHTML =
+
+            "Calcul des poteaux : " +
+
+            `<strong>${
+                formatNombre(
+                    valeur("pLargeur"),
+                    0
+                )
+            } × ${
+                formatNombre(
+                    valeur("pProfondeur"),
+                    0
+                )
+            } cm</strong>, ` +
+
+            `hauteur ${
+                formatNombre(
+                    hauteur
+                )
+            } m, ` +
+
+            `<strong>${formatNombre(
+                nombre,
+                0
+            )} poteaux</strong>. ` +
+
             `Étriers estimés avec un espacement de ` +
-            `<strong>${formatNombre(espacement, 0)} cm</strong>. ` +
-            "Les ancrages, recouvrements et dispositions particulières " +
-            "doivent être vérifiés dans le dimensionnement structurel.";
+
+            `<strong>${formatNombre(
+                espacement,
+                0
+            )} cm</strong>.`;
 
 
         mettreAJourTableau([
-            ["Béton", volumeTotal, "m³"],
-            ["Acier principal", kgPrincipal, "kg"],
-            ["Étriers / cadres", kgCadres, "kg"],
-            ["Acier total", acierTotal, "kg"],
-            ["Coût total", coutTotal, "FCFA"]
+
+            [
+                "Béton",
+                volumeTotal,
+                "m³"
+            ],
+
+            [
+                "Acier longitudinal",
+                kgPrincipal,
+                "kg"
+            ],
+
+            [
+                "Étriers / cadres",
+                kgCadres,
+                "kg"
+            ],
+
+            [
+                "Acier total",
+                acierTotal,
+                "kg"
+            ],
+
+            [
+                "Coût total",
+                coutTotal,
+                "FCFA"
+            ]
+
         ]);
 
     }
 
 
-    /* =========================
+    /* ==================================================
+       CALCUL POUTRE
+    ================================================== */
+
+    function calculerPoutre() {
+
+        const largeur =
+            valeur("bLargeur") / 100;
+
+        const hauteur =
+            valeur("bHauteur") / 100;
+
+        const longueur =
+            valeur("bLongueur");
+
+        const nombre =
+            valeur("bNombre");
+
+
+        const basDiametre =
+            valeur("bBasDiametre");
+
+        const basNombre =
+            valeur("bBasNombre");
+
+
+        const hautDiametre =
+            valeur("bHautDiametre");
+
+        const hautNombre =
+            valeur("bHautNombre");
+
+
+        const cadreDiametre =
+            valeur("bCadreDiametre");
+
+        const espacement =
+            valeur("bEspacement");
+
+        const enrobage =
+            valeur("bEnrobage");
+
+
+        const prixBeton =
+            valeur("bPrixBeton");
+
+        const prixAcier =
+            valeur("bPrixAcier");
+
+        const mainOeuvrePct =
+            valeur("bMainOeuvre");
+
+
+        /* =========================
+           BETON
+        ========================= */
+
+        const volumeUnitaire =
+            largeur *
+            hauteur *
+            longueur;
+
+        const volumeTotal =
+            volumeUnitaire *
+            nombre;
+
+
+        /* =========================
+           BARRES BASSES
+        ========================= */
+
+        const longueurBas =
+            basNombre *
+            longueur *
+            nombre;
+
+        const kgBas =
+            longueurBas *
+            poidsAcier(
+                basDiametre
+            );
+
+
+        /* =========================
+           BARRES HAUTES
+        ========================= */
+
+        const longueurHaut =
+            hautNombre *
+            longueur *
+            nombre;
+
+        const kgHaut =
+            longueurHaut *
+            poidsAcier(
+                hautDiametre
+            );
+
+
+        const kgPrincipal =
+            kgBas +
+            kgHaut;
+
+
+        /* =========================
+           ETRIERS
+        ========================= */
+
+        const nbCadresUnitaire =
+            Math.floor(
+                (
+                    longueur * 100
+                ) /
+                espacement
+            ) + 1;
+
+
+        const nbCadresTotal =
+            nbCadresUnitaire *
+            nombre;
+
+
+        const largeurInterieure =
+            Math.max(
+                0,
+                valeur("bLargeur") -
+                (
+                    2 *
+                    enrobage
+                )
+            );
+
+
+        const hauteurInterieure =
+            Math.max(
+                0,
+                valeur("bHauteur") -
+                (
+                    2 *
+                    enrobage
+                )
+            );
+
+
+        const longueurCadreCm =
+            (
+                2 *
+                (
+                    largeurInterieure +
+                    hauteurInterieure
+                )
+            ) + 20;
+
+
+        const longueurCadresM =
+            (
+                longueurCadreCm / 100
+            ) *
+            nbCadresTotal;
+
+
+        const kgCadres =
+            longueurCadresM *
+            poidsAcier(
+                cadreDiametre
+            );
+
+
+        const acierTotal =
+            kgPrincipal +
+            kgCadres;
+
+
+        /* =========================
+           COUTS
+        ========================= */
+
+        const coutBeton =
+            volumeTotal *
+            prixBeton;
+
+
+        const coutAcier =
+            acierTotal *
+            prixAcier;
+
+
+        const coutMainOeuvre =
+            (
+                coutBeton +
+                coutAcier
+            ) *
+            (
+                mainOeuvrePct / 100
+            );
+
+
+        const coutTotal =
+            coutBeton +
+            coutAcier +
+            coutMainOeuvre;
+
+
+        dernierCalcul = {
+
+            type: "poutre",
+
+            designation:
+                "Poutres en béton armé",
+
+            nombre,
+
+            largeur:
+                valeur("bLargeur"),
+
+            hauteur:
+                valeur("bHauteur"),
+
+            longueur,
+
+            volumeBeton:
+                volumeTotal,
+
+            acierPrincipal:
+                kgPrincipal,
+
+            acierCadres:
+                kgCadres,
+
+            acierTotal,
+
+            coutBeton,
+
+            coutAcier,
+
+            coutMainOeuvre,
+
+            coutTotal,
+
+            prixBeton,
+
+            prixAcier
+
+        };
+
+
+        afficherResultats(
+            volumeTotal,
+            acierTotal,
+            kgPrincipal,
+            kgCadres,
+            coutBeton,
+            coutAcier,
+            coutMainOeuvre,
+            coutTotal,
+            nombre
+        );
+
+
+        document.getElementById(
+            "noteCalcul"
+        ).innerHTML =
+
+            "Calcul des poutres : " +
+
+            `<strong>${
+                formatNombre(
+                    valeur("bLargeur"),
+                    0
+                )} × ${
+                formatNombre(
+                    valeur("bHauteur"),
+                    0
+                )} cm</strong>, ` +
+
+            `longueur ${
+                formatNombre(
+                    longueur
+                )
+            } m, ` +
+
+            `<strong>${formatNombre(
+                nombre,
+                0
+            )} poutres</strong>. ` +
+
+            `Étriers estimés avec un espacement de ` +
+
+            `<strong>${formatNombre(
+                espacement,
+                0
+            )} cm</strong>.`;
+
+
+        mettreAJourTableau([
+
+            [
+                "Béton",
+                volumeTotal,
+                "m³"
+            ],
+
+            [
+                "Acier principal",
+                kgPrincipal,
+                "kg"
+            ],
+
+            [
+                "Étriers / cadres",
+                kgCadres,
+                "kg"
+            ],
+
+            [
+                "Acier total",
+                acierTotal,
+                "kg"
+            ],
+
+            [
+                "Coût total",
+                coutTotal,
+                "FCFA"
+            ]
+
+        ]);
+
+    }
+
+
+    /* ==================================================
        CALCUL PRINCIPAL
-    ========================= */
+    ================================================== */
 
     function calculer() {
 
-        if (typeActuel === "poteau") {
+        if (
+            typeActuel ===
+            "poteau"
+        ) {
 
             calculerPoteau();
 
@@ -1901,11 +2642,12 @@
     }
 
 
-    /* =========================
-       AFFICHAGE
-    ========================= */
+    /* ==================================================
+       AFFICHER RESULTATS
+    ================================================== */
 
     function afficherResultats(
+
         volume,
         acier,
         acierPrincipal,
@@ -1915,156 +2657,510 @@
         coutMainOeuvre,
         coutTotal,
         nombre
+
     ) {
 
-        document.getElementById("volumeBeton").textContent =
+        document.getElementById(
+            "volumeBeton"
+        ).textContent =
             formatNombre(volume);
 
-        document.getElementById("acierTotal").textContent =
+
+        document.getElementById(
+            "acierTotal"
+        ).textContent =
             formatNombre(acier);
 
-        document.getElementById("acierPrincipal").textContent =
-            formatNombre(acierPrincipal);
 
-        document.getElementById("acierCadres").textContent =
-            formatNombre(acierCadres);
+        document.getElementById(
+            "acierPrincipal"
+        ).textContent =
+            formatNombre(
+                acierPrincipal
+            );
 
-        document.getElementById("coutBeton").textContent =
-            formatNombre(coutBeton, 0);
 
-        document.getElementById("coutAcier").textContent =
-            formatNombre(coutAcier, 0);
+        document.getElementById(
+            "acierCadres"
+        ).textContent =
+            formatNombre(
+                acierCadres
+            );
 
-        document.getElementById("coutMainOeuvre").textContent =
-            formatNombre(coutMainOeuvre, 0);
 
-        document.getElementById("coutTotal").textContent =
-            formatFCFA(coutTotal);
+        document.getElementById(
+            "coutBeton"
+        ).textContent =
+            formatNombre(
+                coutBeton,
+                0
+            );
 
-        document.getElementById("nombreElements").textContent =
-            formatNombre(nombre, 0);
+
+        document.getElementById(
+            "coutAcier"
+        ).textContent =
+            formatNombre(
+                coutAcier,
+                0
+            );
+
+
+        document.getElementById(
+            "coutMainOeuvre"
+        ).textContent =
+            formatNombre(
+                coutMainOeuvre,
+                0
+            );
+
+
+        document.getElementById(
+            "coutTotal"
+        ).textContent =
+            formatFCFA(
+                coutTotal
+            );
+
+
+        document.getElementById(
+            "nombreElements"
+        ).textContent =
+            formatNombre(
+                nombre,
+                0
+            );
 
     }
 
 
-    function mettreAJourTableau(lignes) {
+    /* ==================================================
+       TABLEAU
+    ================================================== */
+
+    function mettreAJourTableau(
+        lignes
+    ) {
 
         const tbody =
-            document.getElementById("summaryBody");
+            document.getElementById(
+                "summaryBody"
+            );
 
         tbody.innerHTML = "";
 
-        lignes.forEach(function(ligne) {
 
-            const tr =
-                document.createElement("tr");
+        lignes.forEach(
+            function(ligne) {
 
-            const tdNom =
-                document.createElement("td");
+                const tr =
+                    document.createElement(
+                        "tr"
+                    );
 
-            const tdQuantite =
-                document.createElement("td");
+                const tdNom =
+                    document.createElement(
+                        "td"
+                    );
 
-            const tdUnite =
-                document.createElement("td");
+                const tdQuantite =
+                    document.createElement(
+                        "td"
+                    );
 
-            tdNom.textContent = ligne[0];
+                const tdUnite =
+                    document.createElement(
+                        "td"
+                    );
 
-            if (ligne[2] === "FCFA") {
 
-                tdQuantite.textContent =
-                    formatFCFA(ligne[1]);
+                tdNom.textContent =
+                    ligne[0];
 
-            } else {
 
-                tdQuantite.textContent =
-                    formatNombre(ligne[1]);
+                if (
+                    ligne[2] ===
+                    "FCFA"
+                ) {
+
+                    tdQuantite.textContent =
+                        formatFCFA(
+                            ligne[1]
+                        );
+
+                } else {
+
+                    tdQuantite.textContent =
+                        formatNombre(
+                            ligne[1]
+                        );
+
+                }
+
+
+                tdUnite.textContent =
+                    ligne[2];
+
+
+                tr.appendChild(
+                    tdNom
+                );
+
+                tr.appendChild(
+                    tdQuantite
+                );
+
+                tr.appendChild(
+                    tdUnite
+                );
+
+
+                tbody.appendChild(
+                    tr
+                );
 
             }
-
-            tdUnite.textContent =
-                ligne[2];
-
-            tr.appendChild(tdNom);
-            tr.appendChild(tdQuantite);
-            tr.appendChild(tdUnite);
-
-            tbody.appendChild(tr);
-
-        });
+        );
 
     }
 
 
-    /* =========================
-       RESET
-    ========================= */
+    /* ==================================================
+       AJOUTER AU DQE
+    ================================================== */
 
-    function reinitialiser() {
+    function ajouterAuDQE() {
 
-        if (typeActuel === "poteau") {
-
-            document.getElementById("pLargeur").value = 20;
-            document.getElementById("pProfondeur").value = 20;
-            document.getElementById("pHauteur").value = 3;
-            document.getElementById("pNombre").value = 10;
-
-            document.getElementById("pDiametre").value = 12;
-            document.getElementById("pBarres").value = 4;
-
-            document.getElementById("pCadreDiametre").value = 6;
-            document.getElementById("pEspacement").value = 15;
-            document.getElementById("pEnrobage").value = 3;
-
-            document.getElementById("pPrixBeton").value = 85000;
-            document.getElementById("pPrixAcier").value = 650;
-            document.getElementById("pMainOeuvre").value = 15;
-
-        } else {
-
-            document.getElementById("bLargeur").value = 20;
-            document.getElementById("bHauteur").value = 40;
-            document.getElementById("bLongueur").value = 5;
-            document.getElementById("bNombre").value = 5;
-
-            document.getElementById("bBasDiametre").value = 12;
-            document.getElementById("bBasNombre").value = 4;
-
-            document.getElementById("bHautDiametre").value = 10;
-            document.getElementById("bHautNombre").value = 2;
-
-            document.getElementById("bCadreDiametre").value = 6;
-            document.getElementById("bEspacement").value = 15;
-            document.getElementById("bEnrobage").value = 3;
-
-            document.getElementById("bPrixBeton").value = 85000;
-            document.getElementById("bPrixAcier").value = 650;
-            document.getElementById("bMainOeuvre").value = 15;
-
-        }
+        /*
+         * On recalcule avant l'enregistrement
+         * pour être certain d'avoir les dernières
+         * valeurs.
+         */
 
         calculer();
 
+
+        if (!dernierCalcul) {
+
+            afficherToast(
+                "Veuillez effectuer le calcul.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const ancienDQE =
+            localStorage.getItem(
+                "batiflowDQEItems"
+            );
+
+
+        let items = [];
+
+
+        try {
+
+            items =
+                ancienDQE
+                    ? JSON.parse(
+                        ancienDQE
+                    )
+                    : [];
+
+            if (
+                !Array.isArray(items)
+            ) {
+
+                items = [];
+
+            }
+
+        } catch (erreur) {
+
+            items = [];
+
+        }
+
+
+        const maintenant =
+            new Date();
+
+
+        /*
+         * Ligne béton
+         */
+
+        items.push({
+
+            id:
+                Date.now() +
+                "-beton",
+
+            source:
+                "poteaux-poutres",
+
+            type:
+                dernierCalcul.type,
+
+            designation:
+                dernierCalcul.designation +
+                " — Béton",
+
+            description:
+                dernierCalcul.type ===
+                "poteau"
+
+                    ? "Béton des poteaux en béton armé"
+
+                    : "Béton des poutres en béton armé",
+
+            quantite:
+                Number(
+                    dernierCalcul.volumeBeton
+                ),
+
+            unite:
+                "m³",
+
+            prixUnitaire:
+                Number(
+                    dernierCalcul.prixBeton
+                ),
+
+            montant:
+                Number(
+                    dernierCalcul.volumeBeton *
+                    dernierCalcul.prixBeton
+                ),
+
+            date:
+                maintenant.toISOString()
+
+        });
+
+
+        /*
+         * Ligne acier
+         */
+
+        items.push({
+
+            id:
+                Date.now() +
+                "-acier",
+
+            source:
+                "poteaux-poutres",
+
+            type:
+                dernierCalcul.type,
+
+            designation:
+                dernierCalcul.designation +
+                " — Acier",
+
+            description:
+                "Acier pour armatures principales et cadres",
+
+            quantite:
+                Number(
+                    dernierCalcul.acierTotal
+                ),
+
+            unite:
+                "kg",
+
+            prixUnitaire:
+                Number(
+                    dernierCalcul.prixAcier
+                ),
+
+            montant:
+                Number(
+                    dernierCalcul.acierTotal *
+                    dernierCalcul.prixAcier
+                ),
+
+            date:
+                maintenant.toISOString()
+
+        });
+
+
+        /*
+         * Sauvegarde
+         */
+
+        localStorage.setItem(
+            "batiflowDQEItems",
+            JSON.stringify(
+                items
+            )
+        );
+
+
+        afficherToast(
+            "✅ Les quantités ont été ajoutées au DQE.",
+            "success"
+        );
+
     }
 
 
-    /* =========================
+    /* ==================================================
+       REINITIALISER
+    ================================================== */
+
+    function reinitialiser() {
+
+        if (
+            typeActuel ===
+            "poteau"
+        ) {
+
+            document.getElementById(
+                "pLargeur"
+            ).value = 20;
+
+            document.getElementById(
+                "pProfondeur"
+            ).value = 20;
+
+            document.getElementById(
+                "pHauteur"
+            ).value = 3;
+
+            document.getElementById(
+                "pNombre"
+            ).value = 10;
+
+            document.getElementById(
+                "pDiametre"
+            ).value = 12;
+
+            document.getElementById(
+                "pBarres"
+            ).value = 4;
+
+            document.getElementById(
+                "pCadreDiametre"
+            ).value = 6;
+
+            document.getElementById(
+                "pEspacement"
+            ).value = 15;
+
+            document.getElementById(
+                "pEnrobage"
+            ).value = 3;
+
+            document.getElementById(
+                "pPrixBeton"
+            ).value = 85000;
+
+            document.getElementById(
+                "pPrixAcier"
+            ).value = 650;
+
+            document.getElementById(
+                "pMainOeuvre"
+            ).value = 15;
+
+        } else {
+
+            document.getElementById(
+                "bLargeur"
+            ).value = 20;
+
+            document.getElementById(
+                "bHauteur"
+            ).value = 40;
+
+            document.getElementById(
+                "bLongueur"
+            ).value = 5;
+
+            document.getElementById(
+                "bNombre"
+            ).value = 5;
+
+            document.getElementById(
+                "bBasDiametre"
+            ).value = 12;
+
+            document.getElementById(
+                "bBasNombre"
+            ).value = 4;
+
+            document.getElementById(
+                "bHautDiametre"
+            ).value = 10;
+
+            document.getElementById(
+                "bHautNombre"
+            ).value = 2;
+
+            document.getElementById(
+                "bCadreDiametre"
+            ).value = 6;
+
+            document.getElementById(
+                "bEspacement"
+            ).value = 15;
+
+            document.getElementById(
+                "bEnrobage"
+            ).value = 3;
+
+            document.getElementById(
+                "bPrixBeton"
+            ).value = 85000;
+
+            document.getElementById(
+                "bPrixAcier"
+            ).value = 650;
+
+            document.getElementById(
+                "bMainOeuvre"
+            ).value = 15;
+
+        }
+
+
+        calculer();
+
+        afficherToast(
+            "Valeurs réinitialisées.",
+            "success"
+        );
+
+    }
+
+
+    /* ==================================================
        SIDEBAR MOBILE
-    ========================= */
+    ================================================== */
 
     function toggleSidebar() {
 
         document
-            .getElementById("sidebar")
+            .getElementById(
+                "sidebar"
+            )
             .classList
-            .toggle("open");
+            .toggle(
+                "open"
+            );
 
     }
 
 
-    /* =========================
+    /* ==================================================
        CALCUL AUTOMATIQUE
-    ========================= */
+    ================================================== */
 
     document.addEventListener(
         "DOMContentLoaded",
@@ -2075,19 +3171,23 @@
                     "input, select"
                 );
 
-            champs.forEach(function(champ) {
 
-                champ.addEventListener(
-                    "input",
-                    calculer
-                );
+            champs.forEach(
+                function(champ) {
 
-                champ.addEventListener(
-                    "change",
-                    calculer
-                );
+                    champ.addEventListener(
+                        "input",
+                        calculer
+                    );
 
-            });
+                    champ.addEventListener(
+                        "change",
+                        calculer
+                    );
+
+                }
+            );
+
 
             calculer();
 
