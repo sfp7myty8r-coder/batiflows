@@ -2,12 +2,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calendrier chantier — BATIFLOW</title>
+<title>BATIFLOW — Calendrier & Gantt</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -15,396 +17,245 @@
 body{
     margin:0;
     font-family:Arial,Helvetica,sans-serif;
-    background:#f5f7fb;
+    background:#f4f6f8;
     color:#172033;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    width:260px;
-    background:#101827;
-    color:white;
-    z-index:1000;
-    overflow-y:auto;
+button,
+input,
+select{
+    font-family:inherit;
 }
 
-.sidebar-header{
-    height:92px;
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+    background:#0f172a;
+    color:white;
+    padding:18px 25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.header-inner{
+    max-width:1300px;
+    margin:auto;
     display:flex;
     align-items:center;
-    padding:0 25px;
-    border-bottom:1px solid rgba(255,255,255,.08);
+    justify-content:space-between;
+    gap:20px;
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    color:white;
-    text-decoration:none;
-    font-size:25px;
-    font-weight:900;
-    letter-spacing:.5px;
-}
-
-.logo-mark{
-    width:38px;
-    height:38px;
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:1px;
 }
 
 .logo span{
     color:#f28c28;
 }
 
-.nav{
-    padding:18px 12px 30px;
-}
-
-.nav-section{
-    color:#7e8ba3;
-    font-size:11px;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    padding:14px 13px 8px;
-}
-
-.nav-link{
-    display:flex;
-    align-items:center;
-    gap:13px;
-    min-height:46px;
-    padding:10px 13px;
-    margin-bottom:4px;
-    border-radius:9px;
-    color:#c8d0dd;
-    text-decoration:none;
-    font-size:14px;
-    font-weight:700;
-    transition:.2s;
-}
-
-.nav-link:hover{
-    background:#192438;
-    color:white;
-}
-
-.nav-link.active{
-    background:#f28c28;
-    color:white;
-}
-
-.nav-icon{
-    width:25px;
-    min-width:25px;
-    height:25px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.nav-icon svg{
-    width:19px;
-    height:19px;
-    stroke:currentColor;
-    fill:none;
-    stroke-width:2;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main{
-    margin-left:260px;
-    min-height:100vh;
-}
-
-/* =========================
-   TOPBAR
-========================= */
-
-.topbar{
-    height:72px;
-    background:white;
-    border-bottom:1px solid #e7ebf2;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 28px;
-    position:sticky;
-    top:0;
-    z-index:900;
-}
-
-.search{
-    width:360px;
-    max-width:45%;
-    position:relative;
-}
-
-.search input{
-    width:100%;
-    height:42px;
-    border:1px solid #e0e5ed;
-    border-radius:10px;
-    padding:0 15px 0 42px;
-    outline:none;
+.header-title{
+    margin-top:4px;
+    color:#cbd5e1;
     font-size:14px;
 }
 
-.search-icon{
-    position:absolute;
-    left:14px;
-    top:12px;
-}
-
-.search-icon svg{
-    width:18px;
-    height:18px;
-    stroke:#7d8797;
-    fill:none;
-    stroke-width:2;
-}
-
-.top-right{
+.header-actions{
     display:flex;
-    align-items:center;
-    gap:18px;
-}
-
-.notification{
-    width:40px;
-    height:40px;
-    border:1px solid #e4e8ef;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-}
-
-.notification svg{
-    width:20px;
-    height:20px;
-    stroke:#4c5668;
-    fill:none;
-    stroke-width:2;
-}
-
-.notification-dot{
-    position:absolute;
-    top:7px;
-    right:7px;
-    width:7px;
-    height:7px;
-    background:#f28c28;
-    border-radius:50%;
-}
-
-.user{
-    display:flex;
-    align-items:center;
     gap:10px;
+    flex-wrap:wrap;
 }
 
-.avatar{
-    width:38px;
-    height:38px;
-    background:#f28c28;
-    border-radius:50%;
-    color:white;
-    display:flex;
+.button{
+    border:none;
+    border-radius:8px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-weight:700;
+    text-decoration:none;
+    display:inline-flex;
     align-items:center;
     justify-content:center;
-    font-weight:800;
+    gap:7px;
 }
 
-.user-info strong{
-    display:block;
-    font-size:13px;
+.button-primary{
+    background:#f28c28;
+    color:white;
 }
 
-.user-info span{
-    display:block;
-    color:#8490a3;
-    font-size:11px;
-    margin-top:2px;
+.button-primary:hover{
+    background:#d97706;
 }
 
-/* =========================
-   CONTENT
-========================= */
+.button-secondary{
+    background:white;
+    color:#334155;
+    border:1px solid #cbd5e1;
+}
 
-.content{
-    padding:28px;
+.header-actions .button-secondary{
+    background:rgba(255,255,255,.08);
+    color:white;
+    border-color:rgba(255,255,255,.2);
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+    max-width:1300px;
+    margin:30px auto;
+    padding:0 20px 50px;
 }
 
 .page-header{
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:flex-start;
     gap:20px;
-    margin-bottom:22px;
-}
-
-.page-title h1{
-    margin:0 0 7px;
-    font-size:27px;
-    font-weight:900;
-}
-
-.page-title p{
-    margin:0;
-    color:#7a8598;
-    font-size:14px;
-}
-
-.actions{
-    display:flex;
-    gap:9px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    border:none;
-    border-radius:9px;
-    padding:11px 15px;
-    font-size:13px;
-    font-weight:800;
-    cursor:pointer;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    text-decoration:none;
-}
-
-.btn svg{
-    width:17px;
-    height:17px;
-    stroke:currentColor;
-    fill:none;
-    stroke-width:2;
-}
-
-.btn-primary{
-    background:#f28c28;
-    color:white;
-}
-
-.btn-secondary{
-    background:white;
-    color:#374151;
-    border:1px solid #dfe4eb;
-}
-
-/* =========================
-   FILTERS
-========================= */
-
-.filters{
-    background:white;
-    border:1px solid #e6eaf0;
-    border-radius:14px;
-    padding:16px;
-    display:grid;
-    grid-template-columns:1.5fr 1fr 1fr;
-    gap:14px;
     margin-bottom:20px;
 }
 
-.field label{
-    display:block;
-    font-size:11px;
+.page-title{
+    margin:0;
+    font-size:28px;
+    color:#0f172a;
+}
+
+.page-subtitle{
+    margin-top:7px;
+    color:#64748b;
+    font-size:14px;
+}
+
+
+/* =====================================================
+   CHANTIER
+===================================================== */
+
+.chantier-card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:18px 20px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(15,23,42,.05);
+}
+
+.chantier-name{
+    font-size:20px;
     font-weight:800;
-    color:#697386;
-    text-transform:uppercase;
-    margin-bottom:7px;
+    color:#0f172a;
 }
 
-.field select,
-.field input{
-    width:100%;
-    height:42px;
-    border:1px solid #dfe4eb;
-    border-radius:9px;
-    padding:0 12px;
-    outline:none;
-    background:white;
+.chantier-info{
+    color:#64748b;
+    font-size:13px;
+    margin-top:5px;
 }
 
-/* =========================
-   CALENDAR CONTROLS
-========================= */
 
-.calendar-toolbar{
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+.controls{
     background:white;
-    border:1px solid #e6eaf0;
-    border-radius:14px 14px 0 0;
-    padding:16px 20px;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:15px;
+    gap:12px;
+    flex-wrap:wrap;
+    box-shadow:0 3px 12px rgba(15,23,42,.05);
+}
+
+.controls-left,
+.controls-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
 .month-title{
-    font-size:18px;
-    font-weight:900;
-    text-transform:capitalize;
+    min-width:180px;
+    text-align:center;
+    font-size:17px;
+    font-weight:800;
+    color:#0f172a;
 }
 
-.month-controls{
-    display:flex;
-    gap:7px;
-}
-
-.month-btn{
-    width:38px;
-    height:38px;
-    border:1px solid #dfe4eb;
+.control-button{
+    border:1px solid #cbd5e1;
     background:white;
+    color:#334155;
     border-radius:8px;
+    padding:9px 12px;
     cursor:pointer;
-    font-weight:900;
-    font-size:16px;
+    font-weight:700;
 }
 
-.month-btn:hover{
+.control-button:hover{
     background:#f8fafc;
 }
 
-.calendar{
-    background:white;
-    border:1px solid #e6eaf0;
-    border-top:none;
-    border-radius:0 0 14px 14px;
-    overflow:hidden;
+.control-button.active{
+    background:#f28c28;
+    color:white;
+    border-color:#f28c28;
 }
 
-.calendar-head{
+select,
+input{
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    padding:9px 11px;
+    background:white;
+    color:#172033;
+    outline:none;
+}
+
+select:focus,
+input:focus{
+    border-color:#f28c28;
+}
+
+
+/* =====================================================
+   CALENDRIER
+===================================================== */
+
+.calendar-card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 3px 12px rgba(15,23,42,.05);
+}
+
+.calendar-weekdays{
     display:grid;
     grid-template-columns:repeat(7,1fr);
-    background:#f8fafc;
-    border-bottom:1px solid #e6eaf0;
+    background:#0f172a;
+    color:white;
 }
 
-.calendar-head div{
-    padding:12px;
+.weekday{
     text-align:center;
+    padding:12px 5px;
     font-size:11px;
-    font-weight:900;
-    color:#778195;
-    text-transform:uppercase;
+    font-weight:800;
 }
 
 .calendar-grid{
@@ -413,744 +264,491 @@ body{
 }
 
 .day{
-    min-height:135px;
-    border-right:1px solid #edf0f4;
-    border-bottom:1px solid #edf0f4;
+    min-height:130px;
+    border-right:1px solid #e5e7eb;
+    border-bottom:1px solid #e5e7eb;
     padding:8px;
-    position:relative;
     background:white;
+    cursor:pointer;
+    transition:.15s;
 }
 
 .day:nth-child(7n){
     border-right:none;
 }
 
+.day:hover{
+    background:#fffaf5;
+}
+
 .day.other-month{
-    background:#fafbfc;
+    background:#f8fafc;
+    color:#94a3b8;
+}
+
+.day.today{
+    box-shadow:inset 0 0 0 2px #f28c28;
 }
 
 .day-number{
-    width:27px;
-    height:27px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:11px;
+    font-size:12px;
     font-weight:800;
-    color:#687386;
-    margin-bottom:6px;
+    margin-bottom:7px;
+    color:#334155;
+}
+
+.day.other-month .day-number{
+    color:#94a3b8;
 }
 
 .day.today .day-number{
-    background:#f28c28;
-    color:white;
+    color:#f28c28;
 }
 
-.event{
-    width:100%;
-    margin-bottom:4px;
-    padding:6px 7px;
-    border-radius:6px;
-    background:#fff4e8;
+.day-task{
+    background:#fff7ed;
     border-left:3px solid #f28c28;
-    cursor:pointer;
-    overflow:hidden;
-}
-
-.event:hover{
-    background:#ffeddc;
-}
-
-.event-title{
+    border-radius:5px;
+    padding:5px 6px;
+    margin-bottom:4px;
     font-size:10px;
-    font-weight:900;
-    white-space:nowrap;
+    color:#7c2d12;
     overflow:hidden;
+    white-space:nowrap;
     text-overflow:ellipsis;
 }
 
-.event-meta{
-    font-size:9px;
-    color:#9a6b35;
-    margin-top:3px;
+.day-task.done{
+    background:#f0fdf4;
+    border-left-color:#16a34a;
+    color:#166534;
 }
 
-/* =========================
+.day-task.late{
+    background:#fff1f2;
+    border-left-color:#e11d48;
+    color:#9f1239;
+}
+
+.more-tasks{
+    color:#64748b;
+    font-size:9px;
+    font-weight:700;
+}
+
+
+/* =====================================================
    GANTT
-========================= */
+===================================================== */
 
 .gantt-card{
     background:white;
-    border:1px solid #e6eaf0;
+    border:1px solid #e5e7eb;
     border-radius:14px;
-    margin-top:22px;
+    padding:20px;
+    margin-top:20px;
+    box-shadow:0 3px 12px rgba(15,23,42,.05);
+}
+
+.card-title{
+    margin:0;
+    font-size:18px;
+    color:#0f172a;
+}
+
+.card-subtitle{
+    color:#94a3b8;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.gantt-wrapper{
+    margin-top:18px;
+    overflow-x:auto;
+}
+
+.gantt{
+    min-width:1000px;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
     overflow:hidden;
 }
 
 .gantt-header{
-    padding:17px 20px;
-    border-bottom:1px solid #edf0f4;
+    display:grid;
+    grid-template-columns:280px 1fr;
+    background:#0f172a;
+    color:white;
 }
 
-.gantt-title{
-    font-size:15px;
-    font-weight:900;
-}
-
-.gantt-subtitle{
-    color:#8993a4;
+.gantt-label-header{
+    padding:11px;
     font-size:11px;
-    margin-top:4px;
+    font-weight:800;
+    border-right:1px solid rgba(255,255,255,.12);
 }
 
-.gantt{
-    overflow-x:auto;
+.gantt-days{
+    display:grid;
+    min-width:700px;
 }
 
-.gantt-table{
-    min-width:900px;
+.gantt-day{
+    text-align:center;
+    padding:8px 2px;
+    font-size:9px;
+    border-right:1px solid rgba(255,255,255,.1);
+}
+
+.gantt-body{
+    display:grid;
 }
 
 .gantt-row{
     display:grid;
-    grid-template-columns:240px 1fr;
-    min-height:58px;
-    border-bottom:1px solid #edf0f4;
+    grid-template-columns:280px 1fr;
+    min-height:55px;
+    border-bottom:1px solid #e2e8f0;
 }
 
-.gantt-name{
-    padding:10px 15px;
-    border-right:1px solid #edf0f4;
-    background:#fff;
+.gantt-row:last-child{
+    border-bottom:none;
 }
 
-.gantt-name strong{
-    display:block;
-    font-size:12px;
+.gantt-label{
+    padding:10px;
+    border-right:1px solid #e2e8f0;
+    background:#f8fafc;
 }
 
-.gantt-name span{
-    display:block;
-    margin-top:4px;
-    font-size:10px;
-    color:#8993a4;
+.gantt-task-name{
+    font-size:11px;
+    font-weight:800;
+    color:#334155;
 }
 
-.gantt-days{
+.gantt-responsable{
+    font-size:9px;
+    color:#94a3b8;
+    margin-top:3px;
+}
+
+.gantt-timeline{
     position:relative;
     background:
         repeating-linear-gradient(
             to right,
             transparent 0,
-            transparent calc(100% / 14 - 1px),
-            #edf0f4 calc(100% / 14 - 1px),
-            #edf0f4 calc(100% / 14)
+            transparent calc(100% / 31 - 1px),
+            #e2e8f0 calc(100% / 31 - 1px),
+            #e2e8f0 calc(100% / 31)
         );
 }
 
 .gantt-bar{
     position:absolute;
-    top:15px;
-    height:28px;
-    border-radius:6px;
+    top:16px;
+    height:23px;
+    border-radius:5px;
     background:#f28c28;
-    min-width:12px;
-    overflow:hidden;
+    min-width:5px;
     cursor:pointer;
+    overflow:hidden;
 }
 
-.gantt-progress{
-    height:100%;
-    background:#d86f0b;
-    opacity:.7;
+.gantt-bar.done{
+    background:#16a34a;
 }
 
-.gantt-label{
-    position:absolute;
-    left:9px;
-    top:7px;
+.gantt-bar.late{
+    background:#e11d48;
+}
+
+.gantt-bar-label{
     color:white;
-    font-size:10px;
-    font-weight:900;
+    font-size:9px;
+    font-weight:700;
+    padding:5px 7px;
     white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-/* =========================
+
+/* =====================================================
    EMPTY
-========================= */
+===================================================== */
 
 .empty{
     text-align:center;
-    padding:50px 20px;
-    color:#8b95a5;
+    padding:55px 20px;
+    color:#94a3b8;
 }
 
-.empty svg{
-    width:45px;
-    height:45px;
-    stroke:#f28c28;
-    fill:none;
-    stroke-width:1.8;
-    margin-bottom:12px;
+.empty-title{
+    color:#334155;
+    font-size:18px;
+    font-weight:800;
+    margin-bottom:7px;
 }
 
-.empty strong{
-    display:block;
-    color:#475467;
-    margin-bottom:5px;
-}
 
-/* =========================
+/* =====================================================
    MODAL
-========================= */
+===================================================== */
 
-.modal-overlay{
+.modal{
+    display:none;
     position:fixed;
     inset:0;
-    background:rgba(15,23,42,.55);
-    display:none;
+    background:rgba(15,23,42,.65);
+    z-index:1000;
     align-items:center;
     justify-content:center;
     padding:20px;
-    z-index:3000;
 }
 
-.modal-overlay.show{
+.modal.show{
     display:flex;
 }
 
-.modal{
-    width:500px;
-    max-width:100%;
+.modal-box{
+    width:min(600px,100%);
     background:white;
     border-radius:14px;
-    overflow:hidden;
+    padding:23px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
 .modal-header{
-    padding:18px 20px;
-    border-bottom:1px solid #edf0f4;
     display:flex;
     justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
 }
 
 .modal-title{
-    font-size:16px;
-    font-weight:900;
+    margin:0;
+    color:#0f172a;
+    font-size:20px;
 }
 
 .close{
-    border:none;
     width:34px;
     height:34px;
+    border:none;
     border-radius:8px;
-    background:#f3f4f6;
+    background:#f1f5f9;
     cursor:pointer;
     font-size:18px;
 }
 
-.modal-body{
-    padding:20px;
-}
-
 .detail-row{
-    padding:11px 0;
-    border-bottom:1px solid #edf0f4;
+    display:grid;
+    grid-template-columns:130px 1fr;
+    gap:12px;
+    padding:10px 0;
+    border-bottom:1px solid #f1f5f9;
 }
 
-.detail-row:last-child{
-    border-bottom:none;
+.detail-label{
+    color:#94a3b8;
+    font-size:11px;
 }
 
-.detail-row span{
-    display:block;
-    font-size:10px;
-    color:#8993a4;
-    font-weight:800;
-    text-transform:uppercase;
-    margin-bottom:4px;
-}
-
-.detail-row strong{
+.detail-value{
+    color:#334155;
     font-size:13px;
-}
-
-.progress{
-    height:9px;
-    background:#edf0f4;
-    border-radius:10px;
-    overflow:hidden;
-    margin-top:8px;
+    font-weight:700;
 }
 
 .progress-bar{
+    height:8px;
+    background:#e2e8f0;
+    border-radius:99px;
+    overflow:hidden;
+    margin-top:5px;
+}
+
+.progress-fill{
     height:100%;
     background:#f28c28;
+    border-radius:99px;
 }
 
-/* =========================
-   MOBILE
-========================= */
 
-.mobile-menu{
-    display:none;
-    width:40px;
-    height:40px;
-    border:1px solid #e2e6ed;
-    background:white;
+/* =====================================================
+   MODULES
+===================================================== */
+
+.modules{
+    background:#0f172a;
+    border-radius:14px;
+    padding:20px;
+    margin-top:20px;
+}
+
+.modules-title{
+    color:white;
+    font-size:17px;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.module-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+}
+
+.module-link{
+    text-decoration:none;
+    color:#e2e8f0;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.06);
+    border-radius:8px;
+    padding:12px 8px;
+    text-align:center;
+    font-size:11px;
+    font-weight:700;
+}
+
+.module-link:hover{
+    background:#f28c28;
+    border-color:#f28c28;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    background:#0f172a;
+    color:white;
+    padding:13px 17px;
     border-radius:9px;
-    align-items:center;
-    justify-content:center;
+    font-size:13px;
+    font-weight:700;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    opacity:0;
+    transform:translateY(15px);
+    pointer-events:none;
+    transition:.25s;
+    z-index:2000;
 }
 
-.mobile-menu svg{
-    width:20px;
-    height:20px;
-    stroke:#344054;
-    fill:none;
-    stroke-width:2;
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
-@media(max-width:1000px){
-
-    .filters{
-        grid-template-columns:1fr 1fr;
-    }
+footer{
+    text-align:center;
+    color:#94a3b8;
+    font-size:12px;
+    padding:20px;
 }
 
-@media(max-width:800px){
 
-    .sidebar{
-        transform:translateX(-100%);
-        transition:.25s;
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    .calendar-grid{
+        min-width:750px;
     }
 
-    .sidebar.open{
-        transform:translateX(0);
+    .calendar-card{
+        overflow-x:auto;
     }
 
-    .main{
-        margin-left:0;
+    .module-grid{
+        grid-template-columns:repeat(3,1fr);
     }
 
-    .mobile-menu{
-        display:flex;
-    }
+}
 
-    .search{
-        display:none;
-    }
+@media(max-width:650px){
 
-    .topbar{
-        padding:0 15px;
-    }
-
-    .content{
-        padding:18px 15px;
-    }
-
-    .page-header{
+    .header-inner{
         flex-direction:column;
         align-items:flex-start;
     }
 
-    .filters{
+    .container{
+        margin-top:20px;
+        padding:0 14px 40px;
+    }
+
+    .page-header{
+        flex-direction:column;
+    }
+
+    .module-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:420px){
+
+    .module-grid{
         grid-template-columns:1fr;
     }
 
-    .day{
-        min-height:105px;
-    }
 }
 
-@media(max-width:600px){
-
-    .calendar-head div{
-        font-size:9px;
-        padding:9px 2px;
-    }
-
-    .day{
-        min-height:85px;
-        padding:5px;
-    }
-
-    .event{
-        padding:4px;
-    }
-
-    .event-meta{
-        display:none;
-    }
-
-    .user-info{
-        display:none;
-    }
-}
 </style>
+
 </head>
 
 <body>
 
-<!-- =========================
-     SIDEBAR
-========================= -->
 
-<aside class="sidebar" id="sidebar">
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <div class="sidebar-header">
+<header>
 
-        <a href="dashboard.html" class="logo">
+    <div class="header-inner">
 
-            <svg class="logo-mark" viewBox="0 0 100 100">
+        <div>
 
-                <rect
-                    x="7"
-                    y="7"
-                    width="86"
-                    height="86"
-                    rx="18"
-                    fill="#f28c28"
-                />
+            <div class="logo">
+                BATI<span>FLOW</span>
+            </div>
 
-                <path
-                    d="M27 68 L27 34 L38 23 L49 34 L49 68"
-                    stroke="#fff"
-                    stroke-width="8"
-                    fill="none"
-                    stroke-linejoin="round"
-                />
-
-                <path
-                    d="M49 68 L49 45 L60 34 L71 45 L71 68"
-                    stroke="#fff"
-                    stroke-width="8"
-                    fill="none"
-                    stroke-linejoin="round"
-                />
-
-                <path
-                    d="M20 68 H78"
-                    stroke="#fff"
-                    stroke-width="8"
-                    stroke-linecap="round"
-                />
-
-            </svg>
-
-            BATI<span>FLOW</span>
-
-        </a>
-
-    </div>
-
-
-    <nav class="nav">
-
-        <div class="nav-section">Principal</div>
-
-        <a href="dashboard.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7"/>
-                    <rect x="14" y="3" width="7" height="7"/>
-                    <rect x="3" y="14" width="7" height="7"/>
-                    <rect x="14" y="14" width="7" height="7"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Tableau de bord</span>
-
-        </a>
-
-
-        <a href="chantiers.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M3 21V9l9-6 9 6v12"/>
-                    <path d="M7 21v-8h10v8"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Chantiers</span>
-
-        </a>
-
-
-        <a href="suivi-chantier.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M4 19V5"/>
-                    <path d="M4 6h13l-2 4 2 4H4"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Suivi chantier</span>
-
-        </a>
-
-
-        <a href="planning.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="4" width="18" height="17" rx="2"/>
-                    <path d="M16 2v4"/>
-                    <path d="M8 2v4"/>
-                    <path d="M3 9h18"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Planning chantier</span>
-
-        </a>
-
-
-        <a href="calendrier.html" class="nav-link active">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="4" width="18" height="17" rx="2"/>
-                    <path d="M16 2v4"/>
-                    <path d="M8 2v4"/>
-                    <path d="M3 9h18"/>
-                    <path d="M8 13h2"/>
-                    <path d="M14 13h2"/>
-                    <path d="M8 17h2"/>
-                    <path d="M14 17h2"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Calendrier & Gantt</span>
-
-        </a>
-
-
-        <a href="rentabilite.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M4 19V5"/>
-                    <path d="M4 19h17"/>
-                    <path d="M7 15l4-4 3 2 6-7"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Rentabilité</span>
-
-        </a>
-
-
-        <div class="nav-section">Études & documents</div>
-
-
-        <a href="dqe.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M5 3h14v18H5z"/>
-                    <path d="M8 7h8"/>
-                    <path d="M8 11h8"/>
-                    <path d="M8 15h5"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">DQE & Métré</span>
-
-        </a>
-
-
-        <a href="devis.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 2h9l4 4v16H6z"/>
-                    <path d="M15 2v5h5"/>
-                    <path d="M9 12h6"/>
-                    <path d="M9 16h6"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Devis</span>
-
-        </a>
-
-
-        <a href="clients.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="9" cy="8" r="4"/>
-                    <path d="M3 21c0-4 2-7 6-7s6 3 6 7"/>
-                    <path d="M16 4a4 4 0 0 1 0 8"/>
-                    <path d="M18 14c2 1 3 3 3 7"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Clients</span>
-
-        </a>
-
-
-        <a href="documents.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 3h9l4 4v14H6z"/>
-                    <path d="M15 3v5h5"/>
-                    <path d="M9 13h6"/>
-                    <path d="M9 17h6"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Documents BTP</span>
-
-        </a>
-
-
-        <div class="nav-section">Gestion</div>
-
-
-        <a href="stocks.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M3 7l9-4 9 4-9 4z"/>
-                    <path d="M3 7v10l9 4 9-4V7"/>
-                    <path d="M12 11v10"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Stocks</span>
-
-        </a>
-
-
-        <a href="equipe.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="9" cy="8" r="3"/>
-                    <circle cx="17" cy="9" r="2.5"/>
-                    <path d="M3 20c0-4 2-6 6-6s6 2 6 6"/>
-                    <path d="M14 15c3 0 5 2 5 5"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Équipe & Personnel</span>
-
-        </a>
-
-
-        <a href="finances.html" class="nav-link">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="5" width="18" height="14" rx="2"/>
-                    <path d="M3 9h18"/>
-                    <path d="M7 14h4"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Finances</span>
-
-        </a>
-
-
-        <a href="#" class="nav-link" onclick="deconnexion();return false;">
-
-            <span class="nav-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 17l5-5-5-5"/>
-                    <path d="M15 12H3"/>
-                    <path d="M21 3v18"/>
-                </svg>
-            </span>
-
-            <span class="nav-label">Déconnexion</span>
-
-        </a>
-
-    </nav>
-
-</aside>
-
-
-<!-- =========================
-     MAIN
-========================= -->
-
-<main class="main">
-
-<header class="topbar">
-
-    <button class="mobile-menu" onclick="toggleSidebar()">
-
-        <svg viewBox="0 0 24 24">
-            <path d="M4 6h16"/>
-            <path d="M4 12h16"/>
-            <path d="M4 18h16"/>
-        </svg>
-
-    </button>
-
-
-    <div class="search">
-
-        <span class="search-icon">
-
-            <svg viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="7"/>
-                <path d="M16 16l5 5"/>
-            </svg>
-
-        </span>
-
-        <input
-            type="text"
-            id="search"
-            placeholder="Rechercher une tâche..."
-            oninput="actualiser()"
-        >
-
-    </div>
-
-
-    <div class="top-right">
-
-        <div class="notification">
-
-            <svg viewBox="0 0 24 24">
-                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-                <path d="M10 21h4"/>
-            </svg>
-
-            <span class="notification-dot"></span>
+            <div class="header-title">
+                Calendrier & Gantt des chantiers BTP
+            </div>
 
         </div>
 
 
-        <div class="user">
+        <div class="header-actions">
 
-            <div class="avatar" id="avatar">
-                B
-            </div>
+            <a
+                href="#"
+                class="button button-secondary"
+                onclick="ouvrirPlanning();return false;"
+            >
+                ← Planning
+            </a>
 
-            <div class="user-info">
-
-                <strong id="userName">
-                    BATIFLOW
-                </strong>
-
-                <span>
-                    Administrateur
-                </span>
-
-            </div>
+            <a
+                href="dashboard.html"
+                class="button button-secondary"
+            >
+                Tableau de bord
+            </a>
 
         </div>
 
@@ -1159,223 +757,37 @@ body{
 </header>
 
 
-<section class="content">
+<main class="container">
 
-    <div class="page-header">
-
-        <div class="page-title">
-
-            <h1>Calendrier & Gantt</h1>
-
-            <p>
-                Visualisez l'organisation et l'avancement de vos travaux.
-            </p>
-
-        </div>
-
-
-        <div class="actions">
-
-            <a href="planning.html" class="btn btn-secondary">
-
-                <svg viewBox="0 0 24 24">
-                    <path d="M4 19V5"/>
-                    <path d="M4 6h13l-2 4 2 4H4"/>
-                </svg>
-
-                Planning
-
-            </a>
-
-
-            <a href="suivi-chantier.html" class="btn btn-primary">
-
-                <svg viewBox="0 0 24 24">
-                    <path d="M4 19V5"/>
-                    <path d="M4 6h13l-2 4 2 4H4"/>
-                </svg>
-
-                Suivi chantier
-
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <!-- FILTERS -->
-
-    <div class="filters">
-
-        <div class="field">
-
-            <label>Chantier</label>
-
-            <select id="filterChantier" onchange="actualiser()">
-
-                <option value="">
-                    Tous les chantiers
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Statut</label>
-
-            <select id="filterStatut" onchange="actualiser()">
-
-                <option value="">
-                    Tous les statuts
-                </option>
-
-                <option value="À faire">
-                    À faire
-                </option>
-
-                <option value="En cours">
-                    En cours
-                </option>
-
-                <option value="Terminé">
-                    Terminé
-                </option>
-
-                <option value="En retard">
-                    En retard
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Recherche</label>
-
-            <input
-                type="text"
-                id="filterRecherche"
-                placeholder="Tâche, responsable..."
-                oninput="actualiser()"
-            >
-
-        </div>
-
-    </div>
-
-
-    <!-- CALENDAR -->
-
-    <div class="calendar-toolbar">
-
-        <div class="month-title" id="monthTitle">
-            —
-        </div>
-
-
-        <div class="month-controls">
-
-            <button
-                class="month-btn"
-                onclick="moisPrecedent()"
-            >
-                ‹
-            </button>
-
-            <button
-                class="month-btn"
-                onclick="moisAujourdhui()"
-            >
-                ●
-            </button>
-
-            <button
-                class="month-btn"
-                onclick="moisSuivant()"
-            >
-                ›
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="calendar">
-
-        <div class="calendar-head">
-
-            <div>Lun</div>
-            <div>Mar</div>
-            <div>Mer</div>
-            <div>Jeu</div>
-            <div>Ven</div>
-            <div>Sam</div>
-            <div>Dim</div>
-
-        </div>
-
-
-        <div
-            class="calendar-grid"
-            id="calendarGrid"
-        ></div>
-
-    </div>
-
-
-    <!-- GANTT -->
-
-    <div class="gantt-card">
-
-        <div class="gantt-header">
-
-            <div class="gantt-title">
-                Vue Gantt
-            </div>
-
-            <div class="gantt-subtitle">
-                Visualisation des tâches sur la période sélectionnée
-            </div>
-
-        </div>
-
-
-        <div class="gantt">
-
-            <div
-                class="gantt-table"
-                id="ganttTable"
-            ></div>
-
-        </div>
-
-    </div>
-
-</section>
+    <div id="application"></div>
 
 </main>
 
 
-<!-- =========================
+<footer>
+    BATIFLOW — Gestion BTP • V1.0
+</footer>
+
+
+<!-- =====================================================
      MODAL DÉTAIL
-========================= -->
+===================================================== -->
 
-<div class="modal-overlay" id="modal">
+<div
+    class="modal"
+    id="detailModal"
+>
 
-    <div class="modal">
+    <div class="modal-box">
 
         <div class="modal-header">
 
-            <div class="modal-title">
+            <h2
+                class="modal-title"
+                id="detailTitle"
+            >
                 Détail de la tâche
-            </div>
+            </h2>
 
             <button
                 class="close"
@@ -1387,172 +799,118 @@ body{
         </div>
 
 
-        <div class="modal-body">
-
-            <div class="detail-row">
-
-                <span>Tâche</span>
-
-                <strong id="detailTitre">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>Chantier</span>
-
-                <strong id="detailChantier">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>Responsable</span>
-
-                <strong id="detailResponsable">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>Période</span>
-
-                <strong id="detailDates">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>Statut</span>
-
-                <strong id="detailStatut">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>Avancement</span>
-
-                <strong id="detailProgressText">
-                    0%
-                </strong>
-
-                <div class="progress">
-
-                    <div
-                        class="progress-bar"
-                        id="detailProgress"
-                        style="width:0%"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>Description</span>
-
-                <strong id="detailDescription">
-                    —
-                </strong>
-
-            </div>
-
-        </div>
+        <div id="detailContent"></div>
 
     </div>
 
 </div>
 
 
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
 <script>
 
-/* =========================================================
-   BATIFLOW — CALENDRIER & GANTT
-========================================================= */
+/* =====================================================
+   CONFIGURATION
+===================================================== */
 
-const STORAGE_PLANNING =
+const CHANTIERS_KEY =
+    "batiflowChantiers";
+
+const PLANNING_KEY =
     "batiflowPlanning";
 
 
-let planning = [];
+let chantierActuel = null;
 
-let currentDate =
+let taches = [];
+
+let dateCourante =
     new Date();
 
 
-/* =========================
+/* =====================================================
    STORAGE
-========================= */
+===================================================== */
 
-function chargerDonnees(){
+function lireStorage(key){
 
     try{
 
-        planning =
+        const data =
             JSON.parse(
-                localStorage.getItem(
-                    STORAGE_PLANNING
-                ) || "[]"
+                localStorage.getItem(key)
             );
+
+        return Array.isArray(data)
+            ? data
+            : [];
 
     }catch(error){
 
-        planning = [];
+        return [];
 
     }
 
 }
 
 
-/* =========================
-   ESCAPE
-========================= */
+/* =====================================================
+   UTILITAIRES
+===================================================== */
 
-function escapeHTML(value){
+function echapper(value){
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-/* =========================
-   DATE
-========================= */
+function clamp(value,min,max){
 
-function dateLocale(date){
+    return Math.min(
+        max,
+        Math.max(
+            min,
+            Number(value) || 0
+        )
+    );
+
+}
+
+
+function formatDate(date){
 
     if(!date){
+
         return "—";
+
     }
 
     const d =
-        new Date(date + "T00:00:00");
+        new Date(
+            date + (
+                String(date).includes("T")
+                ? ""
+                : "T00:00:00"
+            )
+        );
 
-    if(isNaN(d)){
+    if(isNaN(d.getTime())){
+
         return date;
+
     }
 
     return d.toLocaleDateString(
@@ -1562,178 +920,613 @@ function dateLocale(date){
 }
 
 
-function dateISO(date){
+function formatMois(date){
+
+    return date.toLocaleDateString(
+        "fr-FR",
+        {
+            month:"long",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+function afficherToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    toast.textContent =
+        message;
+
+    toast.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2200
+        );
+
+}
+
+
+/* =====================================================
+   CHANTIER ID
+===================================================== */
+
+function obtenirChantierId(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const urlId =
+        params.get(
+            "chantierId"
+        );
+
+    if(urlId){
+
+        return urlId;
+
+    }
+
+
+    const actif =
+        localStorage.getItem(
+            "batiflowChantierActif"
+        );
+
+    if(actif){
+
+        return actif;
+
+    }
+
+
+    const selection =
+        localStorage.getItem(
+            "chantierSelectionne"
+        );
+
+    if(selection){
+
+        try{
+
+            const objet =
+                JSON.parse(
+                    selection
+                );
+
+            return objet?.id || null;
+
+        }catch(error){
+
+            return null;
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =====================================================
+   CHARGER CHANTIER
+===================================================== */
+
+function chargerChantier(){
+
+    const id =
+        obtenirChantierId();
+
+
+    const chantiers =
+        lireStorage(
+            CHANTIERS_KEY
+        );
+
+
+    if(id){
+
+        chantierActuel =
+            chantiers.find(
+                chantier =>
+                    String(
+                        chantier.id
+                    )
+                    ===
+                    String(id)
+            );
+
+    }
+
+
+    if(chantierActuel){
+
+        localStorage.setItem(
+            "batiflowChantierActif",
+            String(
+                chantierActuel.id
+            )
+        );
+
+        localStorage.setItem(
+            "chantierSelectionne",
+            JSON.stringify(
+                chantierActuel
+            )
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CHARGER PLANNING
+===================================================== */
+
+function chargerTaches(){
+
+    const planning =
+        lireStorage(
+            PLANNING_KEY
+        );
+
+
+    if(!chantierActuel){
+
+        taches =
+            planning;
+
+        return;
+
+    }
+
+
+    taches =
+        planning.filter(
+            tache =>
+                String(
+                    tache.chantierId
+                )
+                ===
+                String(
+                    chantierActuel.id
+                )
+        );
+
+}
+
+
+/* =====================================================
+   DATE LOCALE
+===================================================== */
+
+function dateString(
+    year,
+    month,
+    day
+){
+
+    const d =
+        new Date(
+            year,
+            month,
+            day
+        );
 
     const y =
-        date.getFullYear();
+        d.getFullYear();
 
     const m =
         String(
-            date.getMonth()+1
-        ).padStart(2,"0");
+            d.getMonth()+1
+        ).padStart(
+            2,
+            "0"
+        );
 
-    const d =
+    const j =
         String(
-            date.getDate()
-        ).padStart(2,"0");
+            d.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
 
-    return `${y}-${m}-${d}`;
+    return `${y}-${m}-${j}`;
 
 }
 
 
-/* =========================
-   FILTRES
-========================= */
+/* =====================================================
+   AUJOURD'HUI
+===================================================== */
 
-function tachesFiltrees(){
+function estAujourdHui(
+    date
+){
 
-    const chantier =
-        document.getElementById(
-            "filterChantier"
-        ).value;
+    const today =
+        new Date();
 
+    return (
+        date.getFullYear()
+        ===
+        today.getFullYear()
+        &&
+        date.getMonth()
+        ===
+        today.getMonth()
+        &&
+        date.getDate()
+        ===
+        today.getDate()
+    );
 
-    const statut =
-        document.getElementById(
-            "filterStatut"
-        ).value;
-
-
-    const recherche =
-        (
-            document.getElementById(
-                "filterRecherche"
-            ).value || ""
-        )
-        .toLowerCase()
-        .trim();
-
-
-    return planning.filter(function(task){
-
-        if(
-            chantier &&
-            String(task.chantierId)
-            !== String(chantier)
-        ){
-            return false;
-        }
+}
 
 
-        if(
-            statut &&
-            task.statut !== statut
-        ){
-            return false;
-        }
+/* =====================================================
+   TÂCHES D'UN JOUR
+===================================================== */
+
+function tachesDuJour(
+    date
+){
+
+    const cible =
+        dateString(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+        );
 
 
-        if(recherche){
-
-            const texte =
-                String(task.titre || "") +
-                " " +
-                String(task.description || "") +
-                " " +
-                String(task.responsable || "") +
-                " " +
-                String(task.chantier || "");
-
+    return taches.filter(
+        tache => {
 
             if(
-                !texte
-                .toLowerCase()
-                .includes(recherche)
+                !tache.dateDebut &&
+                !tache.dateFin
             ){
+
                 return false;
+
             }
 
+
+            const debut =
+                tache.dateDebut ||
+                tache.dateFin;
+
+
+            const fin =
+                tache.dateFin ||
+                tache.dateDebut;
+
+
+            return (
+                cible >= debut &&
+                cible <= fin
+            );
+
         }
-
-
-        return true;
-
-    });
+    );
 
 }
 
 
-/* =========================
-   CHANTIERS
-========================= */
+/* =====================================================
+   AFFICHER PAGE
+===================================================== */
 
-function chargerFiltres(){
+function afficherApplication(){
 
-    const select =
+    const app =
         document.getElementById(
-            "filterChantier"
+            "application"
         );
 
 
-    const chantiers = {};
+    if(!chantierActuel){
+
+        app.innerHTML = `
+
+            <div class="chantier-card">
+
+                <div class="empty">
+
+                    <div class="empty-title">
+                        Aucun chantier sélectionné
+                    </div>
+
+                    <p>
+                        Ouvrez le calendrier depuis
+                        Chantiers ou Planning.
+                    </p>
+
+                    <a
+                        href="chantiers.html"
+                        class="button button-primary"
+                    >
+                        ← Choisir un chantier
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
 
 
-    planning.forEach(function(task){
+    app.innerHTML = `
 
-        if(
-            task.chantierId &&
-            !chantiers[task.chantierId]
-        ){
+        <div class="page-header">
 
-            chantiers[
-                task.chantierId
-            ] =
-                task.chantier ||
-                "Chantier";
+            <div>
 
-        }
+                <h1 class="page-title">
+                    Calendrier & Gantt
+                </h1>
 
-    });
+                <div class="page-subtitle">
+                    Visualisez les tâches et les délais du chantier.
+                </div>
 
+            </div>
 
-    select.innerHTML =
-        '<option value="">Tous les chantiers</option>';
+        </div>
 
 
-    Object.keys(chantiers)
-        .forEach(function(id){
+        <section class="chantier-card">
 
-            select.innerHTML += `
+            <div class="chantier-name">
+                ${echapper(
+                    chantierActuel.nom
+                )}
+            </div>
 
-                <option value="${escapeHTML(id)}">
+            <div class="chantier-info">
 
-                    ${escapeHTML(
-                        chantiers[id]
-                    )}
+                ${
+                    chantierActuel.clientNom ||
+                    chantierActuel.client
+                    ? "Client : " +
+                      echapper(
+                          chantierActuel.clientNom ||
+                          chantierActuel.client
+                      )
+                    : ""
+                }
 
-                </option>
+                ${
+                    chantierActuel.localisation
+                    ? " • 📍 " +
+                      echapper(
+                          chantierActuel.localisation
+                      )
+                    : ""
+                }
 
-            `;
+            </div>
 
-        });
+        </section>
+
+
+        <section class="controls">
+
+            <div class="controls-left">
+
+                <button
+                    class="control-button"
+                    onclick="moisPrecedent()"
+                >
+                    ←
+                </button>
+
+
+                <button
+                    class="control-button"
+                    onclick="allerAujourdhui()"
+                >
+                    Aujourd'hui
+                </button>
+
+
+                <button
+                    class="control-button"
+                    onclick="moisSuivant()"
+                >
+                    →
+                </button>
+
+
+                <div
+                    class="month-title"
+                    id="monthTitle"
+                ></div>
+
+            </div>
+
+
+            <div class="controls-right">
+
+                <button
+                    class="control-button active"
+                    id="btnCalendrier"
+                    onclick="afficherVueCalendrier()"
+                >
+                    🗓️ Calendrier
+                </button>
+
+
+                <button
+                    class="control-button"
+                    id="btnGantt"
+                    onclick="afficherVueGantt()"
+                >
+                    📊 Gantt
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <div id="vuePrincipale"></div>
+
+
+        <section class="modules">
+
+            <div class="modules-title">
+                🔗 Modules du chantier
+            </div>
+
+            <div class="module-grid">
+
+                <a
+                    href="#"
+                    class="module-link"
+                    onclick="ouvrirPlanning();return false;"
+                >
+                    📋 Planning
+                </a>
+
+
+                <a
+                    href="#"
+                    class="module-link"
+                    onclick="ouvrirSuivi();return false;"
+                >
+                    📊 Suivi
+                </a>
+
+
+                <a
+                    href="#"
+                    class="module-link"
+                    onclick="ouvrirFinances();return false;"
+                >
+                    💰 Finances
+                </a>
+
+
+                <a
+                    href="#"
+                    class="module-link"
+                    onclick="ouvrirPilotage();return false;"
+                >
+                    📈 Pilotage financier
+                </a>
+
+
+                <a
+                    href="chantiers.html"
+                    class="module-link"
+                >
+                    🏗️ Chantiers
+                </a>
+
+            </div>
+
+        </section>
+
+    `;
+
+
+    document.getElementById(
+        "monthTitle"
+    ).textContent =
+        formatMois(
+            dateCourante
+        );
+
+
+    afficherVueCalendrier();
 
 }
 
 
-/* =========================
+/* =====================================================
    CALENDRIER
-========================= */
+===================================================== */
 
-function afficherCalendrier(){
+function afficherVueCalendrier(){
 
-    const grid =
+    const btnCalendrier =
         document.getElementById(
-            "calendarGrid"
+            "btnCalendrier"
         );
+
+    const btnGantt =
+        document.getElementById(
+            "btnGantt"
+        );
+
+
+    if(btnCalendrier){
+
+        btnCalendrier.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if(btnGantt){
+
+        btnGantt.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    const container =
+        document.getElementById(
+            "vuePrincipale"
+        );
+
+
+    if(!container){
+
+        return;
+
+    }
 
 
     const year =
-        currentDate.getFullYear();
-
+        dateCourante.getFullYear();
 
     const month =
-        currentDate.getMonth();
+        dateCourante.getMonth();
 
 
     const premier =
@@ -1752,508 +1545,176 @@ function afficherCalendrier(){
         );
 
 
-    let debutJour =
+    /*
+     * Lundi = 0
+     */
+
+    let jourDebut =
         premier.getDay();
 
-
-    /*
-       JS :
-       Dimanche = 0
-       Lundi = 1
-    */
-
-    debutJour =
-        debutJour === 0
+    jourDebut =
+        jourDebut === 0
         ? 6
-        : debutJour - 1;
+        : jourDebut - 1;
 
 
-    const nombreJours =
+    const joursMois =
         dernier.getDate();
 
 
-    const mois =
-        currentDate.toLocaleDateString(
-            "fr-FR",
-            {
-                month:"long",
-                year:"numeric"
-            }
-        );
+    const dernierMoisPrecedent =
+        new Date(
+            year,
+            month,
+            0
+        ).getDate();
 
 
-    document.getElementById(
-        "monthTitle"
-    ).textContent = mois;
+    let html = `
+
+        <section class="calendar-card">
+
+            <div class="calendar-weekdays">
+
+                <div class="weekday">
+                    LUN
+                </div>
+
+                <div class="weekday">
+                    MAR
+                </div>
+
+                <div class="weekday">
+                    MER
+                </div>
+
+                <div class="weekday">
+                    JEU
+                </div>
+
+                <div class="weekday">
+                    VEN
+                </div>
+
+                <div class="weekday">
+                    SAM
+                </div>
+
+                <div class="weekday">
+                    DIM
+                </div>
+
+            </div>
+
+            <div class="calendar-grid">
+    `;
 
 
-    grid.innerHTML = "";
-
-
-    const totalCases =
-        Math.ceil(
-            (
-                debutJour +
-                nombreJours
-            ) / 7
-        ) * 7;
-
+    /*
+     * Jours du mois précédent
+     */
 
     for(
-        let i = 0;
-        i < totalCases;
-        i++
+        let i = jourDebut - 1;
+        i >= 0;
+        i--
     ){
 
-        const numero =
-            i - debutJour + 1;
-
-
-        let date;
-
-
-        let autreMois = false;
-
-
-        if(numero < 1){
-
-            const previousLast =
-                new Date(
-                    year,
-                    month,
-                    0
-                ).getDate();
-
-
-            date =
-                new Date(
-                    year,
-                    month - 1,
-                    previousLast + numero
-                );
-
-
-            autreMois = true;
-
-        }else if(
-            numero > nombreJours
-        ){
-
-            date =
-                new Date(
-                    year,
-                    month,
-                    numero
-                );
-
-            autreMois = true;
-
-        }else{
-
-            date =
-                new Date(
-                    year,
-                    month,
-                    numero
-                );
-
-        }
-
-
-        const dateString =
-            dateISO(date);
-
-
         const day =
-            document.createElement(
-                "div"
-            );
+            dernierMoisPrecedent - i;
 
 
-        day.className =
-            "day" +
-            (
-                autreMois
-                ? " other-month"
-                : ""
-            );
-
-
-        const aujourd =
-            new Date();
-
-
-        if(
-            date.getFullYear() ===
-            aujourd.getFullYear() &&
-            date.getMonth() ===
-            aujourd.getMonth() &&
-            date.getDate() ===
-            aujourd.getDate()
-        ){
-
-            day.classList.add(
-                "today"
-            );
-
-        }
-
-
-        day.innerHTML = `
-
-            <div class="day-number">
-
-                ${date.getDate()}
-
-            </div>
-
-        `;
-
-
-        const tasks =
-            tachesFiltrees()
-            .filter(function(task){
-
-                return
-                    dateString >=
-                    String(task.dateDebut)
-                    &&
-                    dateString <=
-                    String(task.dateFin);
-
-            });
-
-
-        tasks
-            .slice(0,4)
-            .forEach(function(task){
-
-                const event =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                event.className =
-                    "event";
-
-
-                event.onclick =
-                    function(){
-
-                        afficherDetail(
-                            task.id
-                        );
-
-                    };
-
-
-                event.innerHTML = `
-
-                    <div class="event-title">
-
-                        ${escapeHTML(
-                            task.titre
-                        )}
-
-                    </div>
-
-                    <div class="event-meta">
-
-                        ${escapeHTML(
-                            task.statut ||
-                            ""
-                        )}
-
-                    </div>
-
-                `;
-
-
-                day.appendChild(
-                    event
-                );
-
-            });
-
-
-        if(tasks.length > 4){
-
-            const more =
-                document.createElement(
-                    "div"
-                );
-
-
-            more.style.fontSize =
-                "9px";
-
-
-            more.style.color =
-                "#8993a4";
-
-
-            more.style.fontWeight =
-                "800";
-
-
-            more.textContent =
-                "+" +
-                (
-                    tasks.length - 4
-                ) +
-                " autre(s)";
-
-
-            day.appendChild(
-                more
-            );
-
-        }
-
-
-        grid.appendChild(
-            day
-        );
-
-    }
-
-}
-
-
-/* =========================
-   GANTT
-========================= */
-
-function afficherGantt(){
-
-    const container =
-        document.getElementById(
-            "ganttTable"
-        );
-
-
-    const tasks =
-        tachesFiltrees()
-        .slice()
-        .sort(function(a,b){
-
-            return new Date(
-                a.dateDebut
-            ) -
+        const date =
             new Date(
-                b.dateDebut
+                year,
+                month - 1,
+                day
             );
 
-        });
 
-
-    if(!tasks.length){
-
-        container.innerHTML = `
-
-            <div class="empty">
-
-                <svg viewBox="0 0 24 24">
-
-                    <rect
-                        x="3"
-                        y="4"
-                        width="18"
-                        height="17"
-                        rx="2"
-                    />
-
-                    <path d="M8 2v4"/>
-                    <path d="M16 2v4"/>
-                    <path d="M3 9h18"/>
-
-                </svg>
-
-                <strong>
-                    Aucune tâche
-                </strong>
-
-                Ajoutez des tâches depuis le Planning chantier.
-
-            </div>
-
-        `;
-
-        return;
+        html +=
+            construireJour(
+                date,
+                true
+            );
 
     }
 
 
     /*
-       On crée une période Gantt
-       autour du mois affiché.
-    */
+     * Jours du mois actuel
+     */
 
-    const start =
-        new Date(
-            currentDate.getFullYear(),
-            currentDate.getMonth(),
-            1
+    for(
+        let day = 1;
+        day <= joursMois;
+        day++
+    ){
+
+        const date =
+            new Date(
+                year,
+                month,
+                day
+            );
+
+
+        html +=
+            construireJour(
+                date,
+                false
+            );
+
+    }
+
+
+    /*
+     * Jours du mois suivant
+     */
+
+    const totalCases =
+        jourDebut +
+        joursMois;
+
+
+    const casesRestantes =
+        totalCases % 7 === 0
+        ? 0
+        : 7 - (
+            totalCases % 7
         );
 
 
-    const end =
-        new Date(
-            currentDate.getFullYear(),
-            currentDate.getMonth()+1,
-            0
-        );
+    for(
+        let day = 1;
+        day <= casesRestantes;
+        day++
+    ){
 
-
-    const totalDays =
-        end.getDate();
-
-
-    let html = "";
-
-
-    tasks.forEach(function(task){
-
-        const taskStart =
+        const date =
             new Date(
-                task.dateDebut +
-                "T00:00:00"
+                year,
+                month + 1,
+                day
             );
 
 
-        const taskEnd =
-            new Date(
-                task.dateFin +
-                "T00:00:00"
+        html +=
+            construireJour(
+                date,
+                true
             );
 
-
-        let startDay =
-            taskStart.getMonth() ===
-            currentDate.getMonth()
-            &&
-            taskStart.getFullYear() ===
-            currentDate.getFullYear()
-            ?
-            taskStart.getDate()
-            :
-            1;
+    }
 
 
-        let endDay =
-            taskEnd.getMonth() ===
-            currentDate.getMonth()
-            &&
-            taskEnd.getFullYear() ===
-            currentDate.getFullYear()
-            ?
-            taskEnd.getDate()
-            :
-            totalDays;
-
-
-        if(taskStart < start){
-            startDay = 1;
-        }
-
-
-        if(taskEnd > end){
-            endDay = totalDays;
-        }
-
-
-        const left =
-            (
-                (startDay - 1) /
-                totalDays
-            ) * 100;
-
-
-        const width =
-            (
-                (
-                    endDay -
-                    startDay +
-                    1
-                ) /
-                totalDays
-            ) * 100;
-
-
-        const progress =
-            Math.max(
-                0,
-                Math.min(
-                    100,
-                    Number(
-                        task.avancement || 0
-                    )
-                )
-            );
-
-
-        html += `
-
-            <div class="gantt-row">
-
-                <div class="gantt-name">
-
-                    <strong>
-                        ${escapeHTML(
-                            task.titre
-                        )}
-                    </strong>
-
-                    <span>
-
-                        ${escapeHTML(
-                            task.responsable ||
-                            task.chantier ||
-                            ""
-                        )}
-
-                    </span>
-
-                </div>
-
-
-                <div class="gantt-days">
-
-                    <div
-                        class="gantt-bar"
-                        style="
-                            left:${left}%;
-                            width:${Math.max(
-                                width,
-                                1.5
-                            )}%;
-                        "
-                        onclick="afficherDetail('${escapeHTML(task.id)}')"
-                    >
-
-                        <div
-                            class="gantt-progress"
-                            style="
-                                width:${progress}%;
-                            "
-                        ></div>
-
-                        <div class="gantt-label">
-
-                            ${progress}%
-
-                        </div>
-
-                    </div>
-
-                </div>
+    html += `
 
             </div>
 
-        `;
+        </section>
 
-    });
+    `;
 
 
     container.innerHTML =
@@ -2262,85 +1723,789 @@ function afficherGantt(){
 }
 
 
-/* =========================
-   DÉTAIL TÂCHE
-========================= */
+function construireJour(
+    date,
+    autreMois
+){
 
-function afficherDetail(id){
-
-    const task =
-        planning.find(function(item){
-
-            return String(item.id)
-            === String(id);
-
-        });
+    const jourTaches =
+        tachesDuJour(
+            date
+        );
 
 
-    if(!task){
+    const today =
+        estAujourdHui(
+            date
+        );
+
+
+    let classes =
+        "day";
+
+
+    if(autreMois){
+
+        classes +=
+            " other-month";
+
+    }
+
+
+    if(today){
+
+        classes +=
+            " today";
+
+    }
+
+
+    let html = `
+
+        <div
+            class="${classes}"
+            onclick="cliquerJour('${dateString(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+            )}')"
+        >
+
+            <div class="day-number">
+                ${date.getDate()}
+            </div>
+
+    `;
+
+
+    const max =
+        3;
+
+
+    jourTaches
+        .slice(0,max)
+        .forEach(
+            tache => {
+
+                let taskClass =
+                    "day-task";
+
+
+                if(
+                    tache.statut ===
+                    "Terminé"
+                ){
+
+                    taskClass +=
+                        " done";
+
+                }
+
+
+                if(
+                    tache.statut ===
+                    "En retard"
+                ){
+
+                    taskClass +=
+                        " late";
+
+                }
+
+
+                html += `
+
+                    <div
+                        class="${taskClass}"
+                        title="${echapper(
+                            tache.titre
+                        )}"
+                        onclick="event.stopPropagation();ouvrirDetail('${tache.id}')"
+                    >
+                        ${echapper(
+                            tache.titre
+                        )}
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+    if(
+        jourTaches.length > max
+    ){
+
+        html += `
+
+            <div class="more-tasks">
+                + ${
+                    jourTaches.length - max
+                } autre(s)
+            </div>
+
+        `;
+
+    }
+
+
+    html += `
+
+        </div>
+
+    `;
+
+
+    return html;
+
+}
+
+
+/* =====================================================
+   CLIQUER JOUR
+===================================================== */
+
+function cliquerJour(date){
+
+    const jour =
+        taches.filter(
+            tache => {
+
+                const debut =
+                    tache.dateDebut ||
+                    tache.dateFin;
+
+                const fin =
+                    tache.dateFin ||
+                    tache.dateDebut;
+
+
+                return (
+                    date >= debut &&
+                    date <= fin
+                );
+
+            }
+        );
+
+
+    if(
+        jour.length === 1
+    ){
+
+        ouvrirDetail(
+            jour[0].id
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   GANTT
+===================================================== */
+
+function afficherVueGantt(){
+
+    const btnCalendrier =
+        document.getElementById(
+            "btnCalendrier"
+        );
+
+    const btnGantt =
+        document.getElementById(
+            "btnGantt"
+        );
+
+
+    if(btnCalendrier){
+
+        btnCalendrier.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    if(btnGantt){
+
+        btnGantt.classList.add(
+            "active"
+        );
+
+    }
+
+
+    const container =
+        document.getElementById(
+            "vuePrincipale"
+        );
+
+
+    if(!container){
+
         return;
+
+    }
+
+
+    if(!taches.length){
+
+        container.innerHTML = `
+
+            <section class="gantt-card">
+
+                <div class="empty">
+
+                    <div class="empty-title">
+                        Aucun élément dans le Gantt
+                    </div>
+
+                    Ajoutez d'abord des tâches dans le Planning.
+
+                </div>
+
+            </section>
+
+        `;
+
+        return;
+
+    }
+
+
+    const dates =
+        taches
+        .flatMap(
+            tache => [
+                tache.dateDebut,
+                tache.dateFin
+            ]
+        )
+        .filter(Boolean)
+        .sort();
+
+
+    if(!dates.length){
+
+        container.innerHTML = `
+
+            <section class="gantt-card">
+
+                <div class="empty">
+
+                    <div class="empty-title">
+                        Dates manquantes
+                    </div>
+
+                    Ajoutez des dates de début et de fin
+                    aux tâches dans le Planning.
+
+                </div>
+
+            </section>
+
+        `;
+
+        return;
+
+    }
+
+
+    const debutGlobal =
+        new Date(
+            dates[0] +
+            "T00:00:00"
+        );
+
+
+    const finGlobal =
+        new Date(
+            dates[dates.length - 1] +
+            "T00:00:00"
+        );
+
+
+    const jours = [];
+
+
+    let curseur =
+        new Date(
+            debutGlobal
+        );
+
+
+    while(
+        curseur <= finGlobal
+    ){
+
+        jours.push(
+            new Date(
+                curseur
+            )
+        );
+
+
+        curseur.setDate(
+            curseur.getDate() + 1
+        );
+
+    }
+
+
+    /*
+     * Limiter l'affichage à 90 jours
+     * pour garder le Gantt lisible.
+     */
+
+    if(jours.length > 90){
+
+        jours.length = 90;
+
+    }
+
+
+    let html = `
+
+        <section class="gantt-card">
+
+            <h2 class="card-title">
+                📊 Diagramme de Gantt
+            </h2>
+
+            <div class="card-subtitle">
+                Du ${formatDate(
+                    dates[0]
+                )}
+                au ${formatDate(
+                    dates[dates.length - 1]
+                )}
+            </div>
+
+
+            <div class="gantt-wrapper">
+
+                <div class="gantt">
+
+                    <div class="gantt-header">
+
+                        <div class="gantt-label-header">
+                            Tâche
+                        </div>
+
+                        <div
+                            class="gantt-days"
+                            style="
+                                grid-template-columns:
+                                repeat(${jours.length},1fr)
+                            "
+                        >
+    `;
+
+
+    jours.forEach(
+        jour => {
+
+            html += `
+
+                <div class="gantt-day">
+
+                    ${jour.getDate()}
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="gantt-body">
+
+    `;
+
+
+    taches.forEach(
+        tache => {
+
+            const debut =
+                new Date(
+                    (
+                        tache.dateDebut ||
+                        dates[0]
+                    ) +
+                    "T00:00:00"
+                );
+
+
+            const fin =
+                new Date(
+                    (
+                        tache.dateFin ||
+                        tache.dateDebut ||
+                        dates[0]
+                    ) +
+                    "T00:00:00"
+                );
+
+
+            let indexDebut =
+                differenceJours(
+                    debutGlobal,
+                    debut
+                );
+
+
+            let indexFin =
+                differenceJours(
+                    debutGlobal,
+                    fin
+                );
+
+
+            indexDebut =
+                Math.max(
+                    0,
+                    Math.min(
+                        jours.length - 1,
+                        indexDebut
+                    )
+                );
+
+
+            indexFin =
+                Math.max(
+                    indexDebut,
+                    Math.min(
+                        jours.length - 1,
+                        indexFin
+                    )
+                );
+
+
+            const left =
+                (
+                    indexDebut /
+                    jours.length
+                ) * 100;
+
+
+            const width =
+                (
+                    (
+                        indexFin -
+                        indexDebut +
+                        1
+                    )
+                    /
+                    jours.length
+                ) * 100;
+
+
+            let barClass =
+                "";
+
+
+            if(
+                tache.statut ===
+                "Terminé"
+            ){
+
+                barClass =
+                    "done";
+
+            }
+
+
+            if(
+                tache.statut ===
+                "En retard"
+            ){
+
+                barClass =
+                    "late";
+
+            }
+
+
+            html += `
+
+                <div class="gantt-row">
+
+                    <div
+                        class="gantt-label"
+                        onclick="ouvrirDetail('${tache.id}')"
+                        style="cursor:pointer"
+                    >
+
+                        <div class="gantt-task-name">
+                            ${echapper(
+                                tache.titre
+                            )}
+                        </div>
+
+                        <div class="gantt-responsable">
+                            ${
+                                echapper(
+                                    tache.responsable
+                                ) ||
+                                "Responsable non défini"
+                            }
+                        </div>
+
+                    </div>
+
+
+                    <div class="gantt-timeline">
+
+                        <div
+                            class="gantt-bar ${barClass}"
+                            style="
+                                left:${left}%;
+                                width:${width}%;
+                            "
+                            onclick="ouvrirDetail('${tache.id}')"
+                            title="${echapper(
+                                tache.titre
+                            )}"
+                        >
+
+                            <div class="gantt-bar-label">
+                                ${echapper(
+                                    tache.titre
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+function differenceJours(
+    debut,
+    fin
+){
+
+    const ms =
+        24 *
+        60 *
+        60 *
+        1000;
+
+
+    return Math.round(
+        (
+            fin - debut
+        ) / ms
+    );
+
+}
+
+
+/* =====================================================
+   DÉTAIL TÂCHE
+===================================================== */
+
+function ouvrirDetail(id){
+
+    const tache =
+        taches.find(
+            item =>
+                String(item.id)
+                ===
+                String(id)
+        );
+
+
+    if(!tache){
+
+        return;
+
     }
 
 
     document.getElementById(
-        "detailTitre"
+        "detailTitle"
     ).textContent =
-        task.titre || "—";
+        tache.titre ||
+        "Détail de la tâche";
 
 
-    document.getElementById(
-        "detailChantier"
-    ).textContent =
-        task.chantier || "—";
-
-
-    document.getElementById(
-        "detailResponsable"
-    ).textContent =
-        task.responsable || "—";
-
-
-    document.getElementById(
-        "detailDates"
-    ).textContent =
-        dateLocale(task.dateDebut) +
-        " → " +
-        dateLocale(task.dateFin);
-
-
-    document.getElementById(
-        "detailStatut"
-    ).textContent =
-        task.statut || "—";
-
-
-    const progress =
-        Number(
-            task.avancement || 0
+    const avancement =
+        clamp(
+            tache.avancement,
+            0,
+            100
         );
 
 
     document.getElementById(
-        "detailProgressText"
-    ).textContent =
-        progress + "%";
+        "detailContent"
+    ).innerHTML = `
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Statut
+            </div>
+
+            <div class="detail-value">
+                ${echapper(
+                    tache.statut ||
+                    "À faire"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Responsable
+            </div>
+
+            <div class="detail-value">
+                ${
+                    echapper(
+                        tache.responsable
+                    ) || "Non défini"
+                }
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Priorité
+            </div>
+
+            <div class="detail-value">
+                ${
+                    echapper(
+                        tache.priorite
+                    ) || "Moyenne"
+                }
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Début
+            </div>
+
+            <div class="detail-value">
+                ${formatDate(
+                    tache.dateDebut
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Fin
+            </div>
+
+            <div class="detail-value">
+                ${formatDate(
+                    tache.dateFin
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Avancement
+            </div>
+
+            <div class="detail-value">
+
+                ${avancement} %
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        style="
+                            width:${avancement}%
+                        "
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Description
+            </div>
+
+            <div class="detail-value">
+                ${
+                    echapper(
+                        tache.description
+                    ) ||
+                    "Aucune description."
+                }
+            </div>
+
+        </div>
+
+    `;
 
 
     document.getElementById(
-        "detailProgress"
-    ).style.width =
-        progress + "%";
-
-
-    document.getElementById(
-        "detailDescription"
-    ).textContent =
-        task.description ||
-        "Aucune description";
-
-
-    document.getElementById(
-        "modal"
+        "detailModal"
     ).classList.add(
         "show"
     );
@@ -2351,7 +2516,7 @@ function afficherDetail(id){
 function fermerModal(){
 
     document.getElementById(
-        "modal"
+        "detailModal"
     ).classList.remove(
         "show"
     );
@@ -2359,108 +2524,142 @@ function fermerModal(){
 }
 
 
-/* =========================
-   NAVIGATION MOIS
-========================= */
+/* =====================================================
+   MOIS
+===================================================== */
 
 function moisPrecedent(){
 
-    currentDate =
-        new Date(
-            currentDate.getFullYear(),
-            currentDate.getMonth()-1,
-            1
-        );
+    dateCourante.setMonth(
+        dateCourante.getMonth() - 1
+    );
 
-    actualiser();
+    rafraichir();
 
 }
 
 
 function moisSuivant(){
 
-    currentDate =
-        new Date(
-            currentDate.getFullYear(),
-            currentDate.getMonth()+1,
-            1
-        );
+    dateCourante.setMonth(
+        dateCourante.getMonth() + 1
+    );
 
-    actualiser();
+    rafraichir();
 
 }
 
 
-function moisAujourdhui(){
+function allerAujourdhui(){
 
-    currentDate =
+    dateCourante =
         new Date();
 
-    actualiser();
+    rafraichir();
 
 }
 
 
-/* =========================
-   ACTUALISER
-========================= */
+function rafraichir(){
 
-function actualiser(){
+    const title =
+        document.getElementById(
+            "monthTitle"
+        );
 
-    afficherCalendrier();
 
-    afficherGantt();
+    if(title){
+
+        title.textContent =
+            formatMois(
+                dateCourante
+            );
+
+    }
+
+
+    afficherVueCalendrier();
 
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-function toggleSidebar(){
+function urlModule(page){
 
-    document.getElementById(
-        "sidebar"
-    ).classList.toggle(
-        "open"
+    if(!chantierActuel){
+
+        return page;
+
+    }
+
+
+    return (
+        page +
+        "?chantierId=" +
+        encodeURIComponent(
+            chantierActuel.id
+        )
     );
 
 }
 
 
-/* =========================
-   DÉCONNEXION
-========================= */
+function ouvrirPlanning(){
 
-function deconnexion(){
-
-    if(
-        confirm(
-            "Voulez-vous vous déconnecter ?"
-        )
-    ){
-
-        window.location.href =
-            "index.html";
-
-    }
+    window.location.href =
+        urlModule(
+            "planning.html"
+        );
 
 }
 
 
-/* =========================
-   MODAL EXTÉRIEUR
-========================= */
+function ouvrirSuivi(){
+
+    window.location.href =
+        urlModule(
+            "suivi-chantier.html"
+        );
+
+}
+
+
+function ouvrirFinances(){
+
+    window.location.href =
+        urlModule(
+            "finances.html"
+        );
+
+}
+
+
+function ouvrirPilotage(){
+
+    window.location.href =
+        urlModule(
+            "pilotage-financier.html"
+        );
+
+}
+
+
+/* =====================================================
+   FERMETURE MODAL EXTÉRIEURE
+===================================================== */
 
 document.getElementById(
-    "modal"
+    "detailModal"
 ).addEventListener(
     "click",
     function(event){
 
         if(
-            event.target === this
+            event.target ===
+            this
         ){
 
             fermerModal();
@@ -2471,19 +2670,55 @@ document.getElementById(
 );
 
 
-/* =========================
-   INIT
-========================= */
+/* =====================================================
+   STORAGE
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(){
+
+        chargerChantier();
+
+        chargerTaches();
+
+        afficherApplication();
+
+    }
+);
+
+
+/* =====================================================
+   PAGESHOW
+===================================================== */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        chargerChantier();
+
+        chargerTaches();
+
+        afficherApplication();
+
+    }
+);
+
+
+/* =====================================================
+   INITIALISATION
+===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
     function(){
 
-        chargerDonnees();
+        chargerChantier();
 
-        chargerFiltres();
+        chargerTaches();
 
-        actualiser();
+        afficherApplication();
 
     }
 );
