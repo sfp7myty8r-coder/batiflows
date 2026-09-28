@@ -1,1 +1,4702 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BATIFLOW — DQE</title>
 
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+    --bg:#f4f7fb;
+    --card:#fff;
+    --dark:#101827;
+    --orange:#f59e0b;
+    --orange-dark:#d97706;
+    --text:#172033;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --shadow:0 10px 30px rgba(15,23,42,.06);
+}
+
+html,body{min-height:100%}
+
+body{
+    font-family:Inter,"Segoe UI",Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* =========================
+   SIDEBAR — IDENTIQUE DASHBOARD
+========================= */
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:260px;
+    background:#101827;
+    color:#fff;
+    z-index:1000;
+    overflow-y:auto;
+}
+
+.sidebar-logo{
+    height:82px;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.batiflow-logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    text-decoration:none;
+    width:max-content;
+    position:relative;
+    transition:transform .25s ease;
+}
+
+.batiflow-logo:hover{transform:translateY(-1px)}
+
+.batiflow-logo-icon{
+    width:48px;
+    height:48px;
+    flex:none;
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))
+           drop-shadow(0 0 8px rgba(245,158,11,.12));
+}
+
+.batiflow-logo-text{
+    font-family:Inter,"Segoe UI",Arial,Helvetica,sans-serif;
+    font-size:22px;
+    line-height:1;
+    font-weight:900;
+    letter-spacing:1.5px;
+    white-space:nowrap;
+}
+
+.batiflow-logo-text .bati{color:#fff}
+.batiflow-logo-text .flow{color:#f59e0b}
+
+.batiflow-logo-subtitle{
+    position:absolute;
+    left:59px;
+    bottom:-12px;
+    color:#64748b;
+    font-size:7px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+.nav{padding:18px 12px}
+
+.nav-title{
+    color:#64748b;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    padding:10px 12px;
+    text-transform:uppercase;
+}
+
+.nav-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 14px;
+    margin:4px 0;
+    border-radius:10px;
+    color:#cbd5e1;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    transition:.2s;
+}
+
+.nav-link span{
+    width:23px;
+    text-align:center;
+    font-size:17px;
+    flex:none;
+}
+
+.nav-link:hover{
+    background:rgba(255,255,255,.06);
+    color:#fff;
+}
+
+.nav-link.active{
+    background:rgba(245,158,11,.13);
+    color:#f59e0b;
+}
+
+.nav-separator{
+    height:1px;
+    background:rgba(255,255,255,.07);
+    margin:15px 8px;
+}
+
+.logout{margin-top:15px}
+
+/* =========================
+   MAIN / TOPBAR — DASHBOARD
+========================= */
+.main{
+    margin-left:260px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:76px;
+    background:#fff;
+    border-bottom:1px solid #e2e8f0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    position:sticky;
+    top:0;
+    z-index:900;
+}
+
+.menu-btn{
+    display:none;
+    border:0;
+    background:none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.page-title{
+    font-size:20px;
+    font-weight:850;
+}
+
+.autosave{
+    font-size:11px;
+    font-weight:800;
+    color:#15803d;
+    background:#ecfdf3;
+    border:1px solid #bbf7d0;
+    padding:6px 10px;
+    border-radius:20px;
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.search-dashboard{
+    position:relative;
+}
+
+.search-dashboard input{
+    width:290px;
+    padding:10px 15px 10px 38px;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    outline:none;
+    background:#f8fafc;
+    font-size:13px;
+}
+
+.search-dashboard input:focus{
+    border-color:#f59e0b;
+    background:#fff;
+}
+
+.search-dashboard span{
+    position:absolute;
+    left:13px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#64748b;
+}
+
+.notification{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f8fafc;
+    font-size:17px;
+}
+
+.user{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#101827;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+}
+
+.user-name{
+    font-size:13px;
+    font-weight:700;
+}
+
+/* =========================
+   CONTENT
+========================= */
+.content{
+    padding:30px;
+    max-width:1600px;
+    margin:auto;
+}
+
+/* =========================
+   STATS — DASHBOARD STYLE
+========================= */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:17px;
+    margin-bottom:22px;
+}
+
+.stat{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:var(--shadow);
+}
+
+.stat-label{
+    color:#64748b;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.stat-value{
+    font-size:28px;
+    font-weight:900;
+    color:#172033;
+}
+
+/* =========================
+   DQE GRID / CARDS
+========================= */
+.grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.45fr) minmax(320px,.75fr);
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    margin-bottom:20px;
+    overflow:hidden;
+}
+
+.card-header{
+    padding:19px 20px;
+    border-bottom:1px solid #e2e8f0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.card-title{
+    font-size:17px;
+    font-weight:850;
+}
+
+.card-title::first-line{color:#172033}
+
+.card-body{padding:20px}
+
+/* =========================
+   FORM
+========================= */
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.form-group{margin-bottom:2px}
+.form-group.full{grid-column:1/-1}
+
+label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    color:#374151;
+    margin-bottom:6px;
+}
+
+input,select,textarea{
+    width:100%;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    padding:11px 12px;
+    font-family:inherit;
+    font-size:13px;
+    outline:none;
+    background:#fff;
+    transition:.2s;
+}
+
+input:focus,select:focus,textarea:focus{
+    border-color:#f59e0b;
+    box-shadow:0 0 0 3px rgba(245,158,11,.10);
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.field-help{
+    display:block;
+    margin-top:6px;
+    color:#94a3b8;
+    font-size:11px;
+}
+
+/* =========================
+   BUTTONS — ORANGE BATIFLOW
+========================= */
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:#f59e0b;
+    color:#111827;
+}
+
+.btn-primary:hover{background:#fbbf24}
+
+.btn-secondary{
+    background:#f8fafc;
+    color:#475569;
+    border:1px solid #e2e8f0;
+}
+
+.btn-success{
+    background:#16a34a;
+    color:#fff;
+}
+
+.btn-danger{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.btn-warning{
+    background:#fff7ed;
+    color:#b45309;
+}
+
+.btn-small{
+    padding:8px 11px;
+    font-size:12px;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+/* =========================
+   TABLE
+========================= */
+.table-wrap{overflow-x:auto}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:720px;
+}
+
+th{
+    background:#f8fafc;
+    color:#64748b;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    padding:11px 8px;
+    border-bottom:1px solid #e2e8f0;
+    text-align:left;
+}
+
+td{
+    padding:8px;
+    border-bottom:1px solid #eef2f7;
+    vertical-align:middle;
+}
+
+td input,td select{
+    padding:8px;
+    font-size:12px;
+}
+
+.total-box{
+    margin-top:18px;
+    margin-left:auto;
+    max-width:360px;
+}
+
+.total-row{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    font-size:13px;
+}
+
+.total-row.grand{
+    border-top:2px solid #101827;
+    margin-top:6px;
+    padding-top:12px;
+    font-size:18px;
+    font-weight:900;
+}
+
+/* =========================
+   LISTE DQE
+========================= */
+.search{max-width:300px}
+
+.dqe-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.dqe-item{
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    transition:.2s;
+}
+
+.dqe-item:hover{
+    border-color:#f59e0b;
+    background:#fffdf8;
+    box-shadow:0 5px 18px rgba(15,23,42,.05);
+}
+
+.dqe-main{min-width:0}
+
+.dqe-name{
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.dqe-meta{
+    color:#64748b;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.status{
+    display:inline-block;
+    border-radius:20px;
+    padding:5px 9px;
+    font-size:10px;
+    font-weight:800;
+}
+
+.status-brouillon{background:#f1f5f9;color:#475569}
+.status-valide{background:#dcfce7;color:#15803d}
+.status-annule{background:#fee2e2;color:#b91c1c}
+
+/* =========================
+   MODAL / TOAST
+========================= */
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:2000;
+}
+
+.modal.show{display:flex}
+
+.modal-box{
+    width:min(900px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 25px 80px rgba(15,23,42,.25);
+}
+
+.modal-header{
+    padding:18px 20px;
+    border-bottom:1px solid #e2e8f0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.modal-body{padding:20px}
+
+.close{
+    border:0;
+    background:#f8fafc;
+    width:34px;
+    height:34px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#101827;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:10px;
+    font-size:13px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    transform:translateY(100px);
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:3000;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media(max-width:1100px){
+    .grid{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:800px){
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.25s;
+    }
+
+    .sidebar.open{transform:translateX(0)}
+
+    .main{margin-left:0}
+
+    .menu-btn{display:block}
+
+    .topbar{padding:0 15px}
+
+    .search-dashboard{display:none}
+
+    .user-name{display:none}
+
+    .content{padding:20px 15px}
+
+    .form-grid{grid-template-columns:1fr}
+
+    .form-group.full{grid-column:auto}
+}
+
+@media(max-width:560px){
+    .stats{grid-template-columns:1fr}
+
+    .dqe-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .actions{width:100%}
+
+    .actions .btn{flex:1}
+
+    .page-title{font-size:17px}
+}
+
+/* =========================
+   IMPRESSION
+========================= */
+.print-only{display:none}
+
+@media print{
+    body{background:#fff}
+
+    .sidebar,.topbar,.no-print,.modal{
+        display:none!important;
+    }
+
+    .main{margin:0}
+
+    .content{
+        padding:0;
+        max-width:none;
+    }
+
+    .print-only{display:block}
+
+    .card{
+        box-shadow:none;
+        border:0;
+    }
+}
+</style>
+
+</head>
+
+
+<body>
+
+<!-- =========================================================
+     SIDEBAR — BATIFLOW DASHBOARD
+========================================================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+        <a href="dashboard.html" class="batiflow-logo" aria-label="BATIFLOW - Tableau de bord">
+
+            <svg class="batiflow-logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="50" cy="50" r="45" fill="#111827" stroke="#F59E0B" stroke-width="2.5"/>
+                <path d="M25 69V39L50 22L75 39V69" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M50 30V69" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+                <path d="M30 56C39 49 45 61 54 54C61 49 66 43 72 47" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="72" cy="47" r="4" fill="#F59E0B"/>
+                <path d="M22 72H78" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+            </svg>
+
+            <span class="batiflow-logo-text">
+                <span class="bati">BATI</span><span class="flow">FLOW</span>
+            </span>
+
+            <span class="batiflow-logo-subtitle">CONSTRUCTION MANAGEMENT</span>
+        </a>
+    </div>
+
+    <nav class="nav">
+
+        <div class="nav-title">Principal</div>
+
+        <a href="dashboard.html" class="nav-link">
+            <span>🏠</span>
+            Tableau de bord
+        </a>
+
+        <a href="chantiers.html" class="nav-link">
+            <span>🏗️</span>
+            Chantiers
+        </a>
+
+        <a href="./dqe.html" class="nav-link active">
+            <span>📋</span>
+            DQE &amp; Métré
+        </a>
+
+        <a href="devis.html" class="nav-link">
+            <span>💰</span>
+            Devis
+        </a>
+
+        <div class="nav-separator"></div>
+
+        <div class="nav-title">Outils BTP</div>
+
+        <a href="calculator.html" class="nav-link">
+            <span>🧮</span>
+            Calculateur BTP
+        </a>
+
+        <a href="mortar.html" class="nav-link">
+            <span>🧱</span>
+            Mortier
+        </a>
+
+        <a href="masonry.html" class="nav-link">
+            <span>🏠</span>
+            Maçonnerie
+        </a>
+
+        <a href="slab.html" class="nav-link">
+            <span>📐</span>
+            Dalle
+        </a>
+
+        <div class="nav-separator"></div>
+
+        <div class="nav-title">Gestion</div>
+
+        <a href="./clients.html" class="nav-link">
+            <span>👥</span>
+            Clients
+        </a>
+
+        <a href="#" class="nav-link" onclick="return false;">
+            <span>📦</span>
+            Matériaux
+        </a>
+
+        <a href="#" class="nav-link" onclick="return false;">
+            <span>📁</span>
+            Documents
+        </a>
+
+        <a href="#" class="nav-link" onclick="return false;">
+            <span>⚙️</span>
+            Paramètres
+        </a>
+
+        <a href="login.html" class="nav-link logout">
+            <span>🚪</span>
+            Déconnexion
+        </a>
+
+    </nav>
+</aside>
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button type="button" class="menu-btn" onclick="toggleMenu()">☰</button>
+
+            <div class="page-title">
+                DQE &amp; Métré
+            </div>
+
+            <span class="autosave" id="autosaveStatus">
+                ● Prêt
+            </span>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <div class="search-dashboard">
+                <span>🔎</span>
+                <input type="search" placeholder="Rechercher un DQE..." id="searchDashboard">
+            </div>
+
+            <div class="notification">🔔</div>
+
+            <div class="user">
+                <div class="user-name" id="userName">Utilisateur</div>
+                <div class="avatar" id="userAvatar">U</div>
+            </div>
+
+        </div>
+
+    </header>
+
+    <div class="content">
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="stats">
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    TOTAL DQE
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statTotal">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    BROUILLONS
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statBrouillons">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    VALIDÉS
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statValides">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    TOTAL TTC
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statTTC">
+                    0 FCFA
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <div class="grid">
+
+            <!-- =================================================
+                 FORMULAIRE
+            ================================================== -->
+
+            <div>
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div
+                            class="card-title"
+                            id="formTitle">
+                            Nouveau DQE
+                        </div>
+
+                        <div class="actions no-print">
+
+                            <button
+                                class="btn btn-secondary btn-small"
+                                onclick="nouveauDQE()">
+                                + Nouveau
+                            </button>
+
+                            <button
+                                class="btn btn-success btn-small"
+                                onclick="enregistrerDQE(true)">
+                                💾 Enregistrer
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <input
+                            type="hidden"
+                            id="dqeId">
+
+
+                        <div class="form-grid">
+
+                            <!-- REFERENCE -->
+
+                            <div class="form-group">
+
+                                <label for="reference">
+                                    Référence
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="reference"
+                                    placeholder="DQE-2026-0001">
+
+                            </div>
+
+
+                            <!-- DATE -->
+
+                            <div class="form-group">
+
+                                <label for="date">
+                                    Date
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="date">
+
+                            </div>
+
+
+                            <!-- NOM -->
+
+                            <div class="form-group">
+
+                                <label for="nom">
+                                    Nom du DQE *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nom"
+                                    placeholder="Ex : Construction villa R+1">
+
+                            </div>
+
+
+                            <!-- STATUT -->
+
+                            <div class="form-group">
+
+                                <label for="statut">
+                                    Statut
+                                </label>
+
+                                <select id="statut">
+
+                                    <option value="brouillon">
+                                        Brouillon
+                                    </option>
+
+                                    <option value="valide">
+                                        Validé
+                                    </option>
+
+                                    <option value="annule">
+                                        Annulé
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- CLIENT -->
+
+                            <div class="form-group">
+
+                                <label for="clientId">
+                                    Client
+                                </label>
+
+                                <select id="clientId">
+
+                                    <option value="">
+                                        Sélectionner un client
+                                    </option>
+
+                                </select>
+
+                                <span class="field-help">
+                                    Les clients viennent de la rubrique Clients.
+                                </span>
+
+                            </div>
+
+
+                            <!-- CHANTIER -->
+
+                            <div class="form-group">
+
+                                <label for="chantierId">
+                                    Chantier lié
+                                </label>
+
+                                <select id="chantierId">
+
+                                    <option value="">
+                                        -- Aucun chantier --
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- LOCALISATION -->
+
+                            <div class="form-group">
+
+                                <label for="localisation">
+                                    Localisation
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="localisation"
+                                    placeholder="Lomé, Agoè, Adétikopé...">
+
+                            </div>
+
+
+                            <!-- DUREE -->
+
+                            <div class="form-group">
+
+                                <label for="duree">
+                                    Durée prévue
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="duree"
+                                    placeholder="Ex : 6 mois">
+
+                            </div>
+
+
+                            <!-- OBJET -->
+
+                            <div class="form-group full">
+
+                                <label for="objet">
+                                    Objet / Description
+                                </label>
+
+                                <textarea
+                                    id="objet"
+                                    placeholder="Description du projet ou objet du DQE..."></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     LIGNES DQE
+                ================================================== -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+                            Détail quantitatif et estimatif
+                        </div>
+
+                        <button
+                            class="btn btn-primary btn-small no-print"
+                            onclick="ajouterLigne()">
+                            + Ajouter une ligne
+                        </button>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="table-wrap">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th style="width:45px">
+                                            N°
+                                        </th>
+
+                                        <th>
+                                            Désignation
+                                        </th>
+
+                                        <th style="width:90px">
+                                            Unité
+                                        </th>
+
+                                        <th style="width:100px">
+                                            Quantité
+                                        </th>
+
+                                        <th style="width:130px">
+                                            Prix unitaire
+                                        </th>
+
+                                        <th style="width:140px">
+                                            Montant
+                                        </th>
+
+                                        <th style="width:45px">
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="lignesBody"></tbody>
+
+                            </table>
+
+                        </div>
+
+
+                        <div class="total-box">
+
+                            <div class="total-row">
+
+                                <span>
+                                    Total HT
+                                </span>
+
+                                <strong id="totalHT">
+                                    0 FCFA
+                                </strong>
+
+                            </div>
+
+
+                            <div class="total-row">
+
+                                <span>
+
+                                    TVA
+
+                                    <input
+                                        id="tva"
+                                        type="number"
+                                        value="18"
+                                        min="0"
+                                        max="100"
+                                        style="
+                                            width:60px;
+                                            display:inline-block;
+                                            padding:5px;
+                                        "
+                                        oninput="calculerTotaux()">
+
+                                    %
+
+                                </span>
+
+                                <strong id="montantTVA">
+                                    0 FCFA
+                                </strong>
+
+                            </div>
+
+
+                            <div class="total-row grand">
+
+                                <span>
+                                    Total TTC
+                                </span>
+
+                                <strong id="totalTTC">
+                                    0 FCFA
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     ACTIONS
+                ================================================== -->
+
+                <section class="card no-print">
+
+                    <div class="card-body">
+
+                        <div class="actions">
+
+                            <button
+                                class="btn btn-primary"
+                                onclick="enregistrerDQE(true)">
+                                💾 Enregistrer le DQE
+                            </button>
+
+                            <button
+                                class="btn btn-secondary"
+                                onclick="imprimerDQE()">
+                                🖨 Imprimer / PDF
+                            </button>
+
+                            <button
+                                class="btn btn-secondary"
+                                onclick="nouveauDQE()">
+                                ↻ Nouveau DQE
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- =================================================
+                 COLONNE DROITE
+            ================================================== -->
+
+            <div>
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+                            Mes DQE
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <input
+                            type="search"
+                            id="searchDQE"
+                            class="search"
+                            placeholder="🔎 Rechercher..."
+                            oninput="afficherListeDQEs()">
+
+                        <div style="height:15px"></div>
+
+                        <div
+                            class="dqe-list"
+                            id="dqeList">
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="print-only"
+            id="printArea">
+        </div>
+
+    </div>
+
+</main>
+
+<!-- =========================================================
+     MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="detailModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <strong id="modalTitle">
+                Détail du DQE
+            </strong>
+
+            <button
+                class="close"
+                onclick="fermerModal()">
+                ✕
+            </button>
+
+        </div>
+
+        <div
+            class="modal-body"
+            id="modalContent">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<script>
+
+/* =========================================================
+   BATIFLOW — DQE
+   STOCKAGE
+========================================================= */
+
+const DQE_STORAGE_KEY =
+    "batiflowDQEs";
+
+const CHANTIER_STORAGE_KEY =
+    "batiflowChantiers";
+
+const CLIENT_STORAGE_KEY =
+    "batiflowClients";
+
+let sauvegardeTimer = null;
+
+
+/* =========================================================
+   DQE
+========================================================= */
+
+function obtenirDQEs(){
+
+    try{
+
+        const data =
+            localStorage.getItem(
+                DQE_STORAGE_KEY
+            );
+
+        if(!data) return [];
+
+        const parsed =
+            JSON.parse(data);
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    }catch(error){
+
+        console.error(
+            "Erreur lecture DQE :",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+function sauvegarderDQEs(dqes){
+
+    try{
+
+        localStorage.setItem(
+            DQE_STORAGE_KEY,
+            JSON.stringify(dqes)
+        );
+
+        return true;
+
+    }catch(error){
+
+        console.error(
+            "Erreur sauvegarde DQE :",
+            error
+        );
+
+        afficherToast(
+            "❌ Impossible de sauvegarder le DQE."
+        );
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   CLIENTS
+========================================================= */
+
+function obtenirClients(){
+
+    try{
+
+        const data =
+            localStorage.getItem(
+                CLIENT_STORAGE_KEY
+            );
+
+        if(!data) return [];
+
+        const parsed =
+            JSON.parse(data);
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    }catch(error){
+
+        console.error(
+            "Erreur lecture clients :",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+function trouverClientParId(id){
+
+    if(!id) return null;
+
+    const clients =
+        obtenirClients();
+
+    return clients.find(
+        client =>
+            String(client.id) === String(id)
+    ) || null;
+
+}
+
+
+function trouverClientParNom(nom){
+
+    if(!nom) return null;
+
+    const recherche =
+        String(nom)
+        .trim()
+        .toLowerCase();
+
+    if(!recherche) return null;
+
+    const clients =
+        obtenirClients();
+
+    return clients.find(client => {
+
+        const nomClient =
+            String(client.nom || "")
+            .trim()
+            .toLowerCase();
+
+        const entreprise =
+            String(client.entreprise || "")
+            .trim()
+            .toLowerCase();
+
+        return (
+            nomClient === recherche ||
+            entreprise === recherche
+        );
+
+    }) || null;
+
+}
+
+
+function chargerClients(clientId = ""){
+
+    const select =
+        document.getElementById(
+            "clientId"
+        );
+
+    if(!select) return;
+
+    const clients =
+        obtenirClients();
+
+    select.innerHTML = `
+        <option value="">
+            Sélectionner un client
+        </option>
+    `;
+
+    clients.forEach(client => {
+
+        if(!client || !client.id) return;
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value =
+            client.id;
+
+        const nom =
+            client.nom ||
+            "Client sans nom";
+
+        const entreprise =
+            client.entreprise ||
+            "";
+
+        option.textContent =
+            entreprise
+                ? `${nom} — ${entreprise}`
+                : nom;
+
+        select.appendChild(
+            option
+        );
+
+    });
+
+    if(clientId){
+
+        const existe =
+            [...select.options]
+            .some(
+                option =>
+                    String(option.value) ===
+                    String(clientId)
+            );
+
+        if(existe){
+
+            select.value =
+                clientId;
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   CHANTIERS
+========================================================= */
+
+function obtenirChantiers(){
+
+    try{
+
+        const data =
+            localStorage.getItem(
+                CHANTIER_STORAGE_KEY
+            );
+
+        if(!data) return [];
+
+        const parsed =
+            JSON.parse(data);
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    }catch(error){
+
+        console.error(
+            "Erreur lecture chantiers :",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+function chargerChantiers(
+    chantierId = "",
+    clientId = ""
+){
+
+    const select =
+        document.getElementById(
+            "chantierId"
+        );
+
+    if(!select) return;
+
+    select.innerHTML = `
+        <option value="">
+            -- Aucun chantier --
+        </option>
+    `;
+
+    const chantiers =
+        obtenirChantiers();
+
+    /*
+       Si un client est sélectionné,
+       on affiche en priorité les chantiers
+       liés à ce client.
+    */
+
+    let chantiersAffiches =
+        chantiers;
+
+    if(clientId){
+
+        const filtres =
+            chantiers.filter(chantier => {
+
+                if(
+                    chantier.clientId &&
+                    String(chantier.clientId) ===
+                    String(clientId)
+                ){
+
+                    return true;
+
+                }
+
+                const clientNom =
+                    chantier.client ||
+                    chantier.clientNom ||
+                    chantier.nomClient ||
+                    "";
+
+                const client =
+                    trouverClientParId(
+                        clientId
+                    );
+
+                if(!client) return false;
+
+                return (
+                    String(clientNom)
+                    .trim()
+                    .toLowerCase() ===
+                    String(client.nom || "")
+                    .trim()
+                    .toLowerCase()
+                );
+
+            });
+
+        /*
+           Si aucun chantier n'est lié
+           au client, on garde tous les
+           chantiers disponibles.
+        */
+
+        if(filtres.length){
+
+            chantiersAffiches =
+                filtres;
+
+        }
+
+    }
+
+    chantiersAffiches.forEach(
+        chantier => {
+
+            const id =
+                chantier.id ||
+                chantier.reference ||
+                chantier.nom;
+
+            const nom =
+                chantier.nom ||
+                chantier.titre ||
+                chantier.reference ||
+                "Chantier";
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                id;
+
+            option.textContent =
+                nom;
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+    if(chantierId){
+
+        const existe =
+            [...select.options]
+            .some(
+                option =>
+                    String(option.value) ===
+                    String(chantierId)
+            );
+
+        if(existe){
+
+            select.value =
+                chantierId;
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   OUTILS
+========================================================= */
+
+function genererId(){
+
+    return "dqe_" +
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2,8);
+
+}
+
+
+function genererReference(){
+
+    const annee =
+        new Date().getFullYear();
+
+    const dqes =
+        obtenirDQEs();
+
+    let numero =
+        dqes.length + 1;
+
+    let reference =
+        "DQE-" +
+        annee +
+        "-" +
+        String(numero)
+            .padStart(4,"0");
+
+    while(
+        dqes.some(
+            d =>
+                d.reference ===
+                reference
+        )
+    ){
+
+        numero++;
+
+        reference =
+            "DQE-" +
+            annee +
+            "-" +
+            String(numero)
+                .padStart(4,"0");
+
+    }
+
+    return reference;
+
+}
+
+
+function formaterMontant(nombre){
+
+    return Number(
+        nombre || 0
+    )
+    .toLocaleString("fr-FR") +
+    " FCFA";
+
+}
+
+
+function formaterDate(date){
+
+    if(!date) return "—";
+
+    const d =
+        new Date(date);
+
+    if(
+        isNaN(
+            d.getTime()
+        )
+    ){
+
+        return date;
+
+    }
+
+    return d.toLocaleDateString(
+        "fr-FR"
+    );
+
+}
+
+
+function echapper(texte){
+
+    return String(
+        texte ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   UTILISATEUR
+========================================================= */
+
+function chargerUtilisateur(){
+
+    let utilisateur = null;
+
+    try{
+
+        utilisateur =
+            JSON.parse(
+                localStorage.getItem(
+                    "batiflowUser"
+                )
+            );
+
+    }catch(error){
+
+        utilisateur =
+            null;
+
+    }
+
+    const nom =
+        utilisateur?.nom ||
+        utilisateur?.name ||
+        localStorage.getItem(
+            "batiflowUserName"
+        ) ||
+        "Utilisateur";
+
+    document.getElementById(
+        "userName"
+    ).textContent =
+        nom;
+
+    document.getElementById(
+        "userAvatar"
+    ).textContent =
+        nom
+        .charAt(0)
+        .toUpperCase();
+
+}
+
+
+/* =========================================================
+   LIGNES DQE
+========================================================= */
+
+function ajouterLigne(data = {}){
+
+    const tbody =
+        document.getElementById(
+            "lignesBody"
+        );
+
+    if(!tbody) return;
+
+    const tr =
+        document.createElement(
+            "tr"
+        );
+
+    tr.innerHTML = `
+
+        <td class="numero-ligne"></td>
+
+        <td>
+
+            <input
+                type="text"
+                class="designation"
+                placeholder="Ex : Béton dosé à 350 kg/m³"
+                value="${echapper(
+                    data.designation || ""
+                )}"
+                oninput="
+                    calculerTotaux();
+                    programmerSauvegarde();
+                ">
+
+        </td>
+
+        <td>
+
+            <input
+                type="text"
+                class="unite"
+                placeholder="m³"
+                value="${echapper(
+                    data.unite || ""
+                )}"
+                oninput="
+                    programmerSauvegarde();
+                ">
+
+        </td>
+
+        <td>
+
+            <input
+                type="number"
+                class="quantite"
+                min="0"
+                step="0.01"
+                value="${
+                    data.quantite ?? ""
+                }"
+                oninput="
+                    calculerTotaux();
+                    programmerSauvegarde();
+                ">
+
+        </td>
+
+        <td>
+
+            <input
+                type="number"
+                class="prix"
+                min="0"
+                step="1"
+                value="${
+                    data.prixUnitaire ??
+                    data.prix ??
+                    ""
+                }"
+                oninput="
+                    calculerTotaux();
+                    programmerSauvegarde();
+                ">
+
+        </td>
+
+        <td>
+
+            <strong class="montant-ligne">
+                0 FCFA
+            </strong>
+
+        </td>
+
+        <td>
+
+            <button
+                type="button"
+                class="btn btn-danger btn-small no-print"
+                onclick="supprimerLigne(this)">
+                ×
+            </button>
+
+        </td>
+
+    `;
+
+    tbody.appendChild(
+        tr
+    );
+
+    renumeroterLignes();
+
+    calculerTotaux();
+
+}
+
+
+function supprimerLigne(button){
+
+    const tr =
+        button.closest("tr");
+
+    if(!tr) return;
+
+    tr.remove();
+
+    renumeroterLignes();
+
+    calculerTotaux();
+
+    programmerSauvegarde();
+
+}
+
+
+function renumeroterLignes(){
+
+    document
+        .querySelectorAll(
+            "#lignesBody tr"
+        )
+        .forEach(
+            (tr,index) => {
+
+                const numero =
+                    tr.querySelector(
+                        ".numero-ligne"
+                    );
+
+                if(numero){
+
+                    numero.textContent =
+                        index + 1;
+
+                }
+
+            }
+        );
+
+}
+
+
+function obtenirLignes(){
+
+    const lignes = [];
+
+    document
+        .querySelectorAll(
+            "#lignesBody tr"
+        )
+        .forEach(
+            tr => {
+
+                const designation =
+                    tr.querySelector(
+                        ".designation"
+                    )?.value ||
+                    "";
+
+                const unite =
+                    tr.querySelector(
+                        ".unite"
+                    )?.value ||
+                    "";
+
+                const quantite =
+                    Number(
+                        tr.querySelector(
+                            ".quantite"
+                        )?.value ||
+                        0
+                    );
+
+                const prixUnitaire =
+                    Number(
+                        tr.querySelector(
+                            ".prix"
+                        )?.value ||
+                        0
+                    );
+
+                lignes.push({
+
+                    designation,
+
+                    unite,
+
+                    quantite,
+
+                    prixUnitaire,
+
+                    montant:
+                        quantite *
+                        prixUnitaire
+
+                });
+
+            }
+        );
+
+    return lignes;
+
+}
+
+
+/* =========================================================
+   CALCULS
+========================================================= */
+
+function calculerTotaux(){
+
+    let totalHT = 0;
+
+    document
+        .querySelectorAll(
+            "#lignesBody tr"
+        )
+        .forEach(
+            tr => {
+
+                const quantite =
+                    Number(
+                        tr.querySelector(
+                            ".quantite"
+                        )?.value ||
+                        0
+                    );
+
+                const prix =
+                    Number(
+                        tr.querySelector(
+                            ".prix"
+                        )?.value ||
+                        0
+                    );
+
+                const montant =
+                    quantite *
+                    prix;
+
+                totalHT +=
+                    montant;
+
+                const affichage =
+                    tr.querySelector(
+                        ".montant-ligne"
+                    );
+
+                if(affichage){
+
+                    affichage.textContent =
+                        formaterMontant(
+                            montant
+                        );
+
+                }
+
+            }
+        );
+
+    const tva =
+        Number(
+            document.getElementById(
+                "tva"
+            )?.value ||
+            0
+        );
+
+    const montantTVA =
+        totalHT *
+        tva /
+        100;
+
+    const totalTTC =
+        totalHT +
+        montantTVA;
+
+    document.getElementById(
+        "totalHT"
+    ).textContent =
+        formaterMontant(
+            totalHT
+        );
+
+    document.getElementById(
+        "montantTVA"
+    ).textContent =
+        formaterMontant(
+            montantTVA
+        );
+
+    document.getElementById(
+        "totalTTC"
+    ).textContent =
+        formaterMontant(
+            totalTTC
+        );
+
+    return {
+
+        totalHT,
+
+        montantTVA,
+
+        totalTTC,
+
+        tva
+
+    };
+
+}
+
+
+/* =========================================================
+   NOUVEAU DQE
+========================================================= */
+
+function nouveauDQE(){
+
+    clearTimeout(
+        sauvegardeTimer
+    );
+
+    document.getElementById(
+        "dqeId"
+    ).value =
+        genererId();
+
+    document.getElementById(
+        "reference"
+    ).value =
+        genererReference();
+
+    document.getElementById(
+        "date"
+    ).value =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+    document.getElementById(
+        "nom"
+    ).value =
+        "";
+
+    document.getElementById(
+        "statut"
+    ).value =
+        "brouillon";
+
+    /*
+       IMPORTANT :
+       on utilise maintenant clientId
+       et non plus l'ancien id="client".
+    */
+
+    chargerClients();
+
+    document.getElementById(
+        "clientId"
+    ).value =
+        "";
+
+    chargerChantiers();
+
+    document.getElementById(
+        "chantierId"
+    ).value =
+        "";
+
+    document.getElementById(
+        "localisation"
+    ).value =
+        "";
+
+    document.getElementById(
+        "duree"
+    ).value =
+        "";
+
+    document.getElementById(
+        "objet"
+    ).value =
+        "";
+
+    document.getElementById(
+        "tva"
+    ).value =
+        18;
+
+    document.getElementById(
+        "lignesBody"
+    ).innerHTML =
+        "";
+
+    ajouterLigne();
+
+    ajouterLigne();
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "Nouveau DQE";
+
+    document.getElementById(
+        "autosaveStatus"
+    ).textContent =
+        "● Nouveau DQE";
+
+    calculerTotaux();
+
+}
+
+
+/* =========================================================
+   CHARGEMENT D'UN DQE
+========================================================= */
+
+function modifierDQE(id){
+
+    const dqes =
+        obtenirDQEs();
+
+    const dqe =
+        dqes.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
+
+    if(!dqe){
+
+        afficherToast(
+            "DQE introuvable."
+        );
+
+        return false;
+
+    }
+
+    document.getElementById(
+        "dqeId"
+    ).value =
+        dqe.id;
+
+    document.getElementById(
+        "reference"
+    ).value =
+        dqe.reference || "";
+
+    document.getElementById(
+        "date"
+    ).value =
+        dqe.date || "";
+
+    document.getElementById(
+        "nom"
+    ).value =
+        dqe.nom || "";
+
+    document.getElementById(
+        "statut"
+    ).value =
+        dqe.statut ||
+        "brouillon";
+
+
+    /*
+       CLIENT
+       On essaie d'abord avec clientId.
+       Si ancien DQE : recherche par nom.
+    */
+
+    let clientId =
+        dqe.clientId || "";
+
+    if(
+        !clientId &&
+        dqe.client
+    ){
+
+        const ancienClient =
+            trouverClientParNom(
+                dqe.client
+            );
+
+        if(ancienClient){
+
+            clientId =
+                ancienClient.id;
+
+        }
+
+    }
+
+    chargerClients(
+        clientId
+    );
+
+
+    /*
+       CHANTIER
+    */
+
+    chargerChantiers(
+        dqe.chantierId || "",
+        clientId
+    );
+
+
+    document.getElementById(
+        "localisation"
+    ).value =
+        dqe.localisation || "";
+
+    document.getElementById(
+        "duree"
+    ).value =
+        dqe.duree || "";
+
+    document.getElementById(
+        "objet"
+    ).value =
+        dqe.objet || "";
+
+    document.getElementById(
+        "tva"
+    ).value =
+        dqe.tva ?? 18;
+
+
+    /*
+       LIGNES
+    */
+
+    const tbody =
+        document.getElementById(
+            "lignesBody"
+        );
+
+    tbody.innerHTML =
+        "";
+
+    if(
+        Array.isArray(dqe.lignes) &&
+        dqe.lignes.length
+    ){
+
+        dqe.lignes.forEach(
+            ligne => {
+
+                ajouterLigne({
+
+                    designation:
+                        ligne.designation ||
+                        "",
+
+                    unite:
+                        ligne.unite ||
+                        "",
+
+                    quantite:
+                        ligne.quantite ??
+                        0,
+
+                    prixUnitaire:
+                        ligne.prixUnitaire ??
+                        ligne.prix ??
+                        0
+
+                });
+
+            }
+        );
+
+    }else{
+
+        ajouterLigne();
+
+    }
+
+    renumeroterLignes();
+
+    calculerTotaux();
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "Modifier : " +
+        (
+            dqe.nom ||
+            dqe.reference
+        );
+
+    document.getElementById(
+        "autosaveStatus"
+    ).textContent =
+        "● DQE chargé";
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+    return true;
+
+}
+
+
+/* =========================================================
+   COLLECTER FORMULAIRE
+========================================================= */
+
+function collecterFormulaire(){
+
+    const totaux =
+        calculerTotaux();
+
+    const id =
+        document.getElementById(
+            "dqeId"
+        ).value ||
+        genererId();
+
+
+    /*
+       CLIENT
+    */
+
+    const clientId =
+        document.getElementById(
+            "clientId"
+        )?.value ||
+        "";
+
+    const clientSelectionne =
+        trouverClientParId(
+            clientId
+        );
+
+
+    /*
+       CHANTIER
+    */
+
+    const chantierId =
+        document.getElementById(
+            "chantierId"
+        ).value ||
+        "";
+
+    const chantiers =
+        obtenirChantiers();
+
+    const chantier =
+        chantiers.find(
+            c => {
+
+                const idChantier =
+                    c.id ||
+                    c.reference ||
+                    c.nom;
+
+                return (
+                    String(idChantier) ===
+                    String(chantierId)
+                );
+
+            }
+        );
+
+
+    return {
+
+        id,
+
+        reference:
+            document.getElementById(
+                "reference"
+            ).value.trim(),
+
+        nom:
+            document.getElementById(
+                "nom"
+            ).value.trim(),
+
+        date:
+            document.getElementById(
+                "date"
+            ).value,
+
+        statut:
+            document.getElementById(
+                "statut"
+            ).value,
+
+
+        /*
+           NOUVELLE RELATION CLIENT
+        */
+
+       clientId: clientId,
+
+client:
+    clientSelectionne
+        ? (
+            clientSelectionne.nom ||
+            clientSelectionne.entreprise ||
+            ""
+        )
+        : "",
+
+clientNom:
+    clientSelectionne?.nom ||
+    "",
+
+entrepriseClient:
+    clientSelectionne?.entreprise ||
+    "",
+
+clientTelephone:
+    clientSelectionne?.telephone ||
+    "",
+
+clientWhatsapp:
+    clientSelectionne?.whatsapp ||
+    "",
+
+clientEmail:
+    clientSelectionne?.email ||
+    "",
+
+clientAdresse:
+    clientSelectionne?.adresse ||
+    "",
+
+
+        /*
+           RELATION CHANTIER
+        */
+
+        chantierId:
+
+            chantierId,
+
+        chantier:
+            chantier?.nom ||
+            chantier?.titre ||
+            chantier?.reference ||
+            "",
+
+
+        localisation:
+            document.getElementById(
+                "localisation"
+            ).value.trim(),
+
+        duree:
+            document.getElementById(
+                "duree"
+            ).value.trim(),
+
+        objet:
+            document.getElementById(
+                "objet"
+            ).value.trim(),
+
+        tva:
+            totaux.tva,
+
+        lignes:
+            obtenirLignes(),
+
+        totalHT:
+            totaux.totalHT,
+
+        montantTVA:
+            totaux.montantTVA,
+
+        totalTTC:
+            totaux.totalTTC
+
+    };
+
+}
+
+
+/* =========================================================
+   ENREGISTRER DQE
+========================================================= */
+
+function enregistrerDQE(
+    notifier = false
+){
+
+    const dqe =
+        collecterFormulaire();
+
+    if(!dqe.nom){
+
+        if(notifier){
+
+            afficherToast(
+                "⚠️ Donne un nom au DQE avant d'enregistrer."
+            );
+
+        }
+
+        return false;
+
+    }
+
+
+    const dqes =
+        obtenirDQEs();
+
+    const index =
+        dqes.findIndex(
+            item =>
+                String(item.id) ===
+                String(dqe.id)
+        );
+
+    const maintenant =
+        new Date()
+        .toISOString();
+
+
+    if(index === -1){
+
+        dqe.createdAt =
+            maintenant;
+
+        dqe.updatedAt =
+            maintenant;
+
+        dqe.version =
+            "BATIFLOW-DQE-V3";
+
+        dqes.unshift(
+            dqe
+        );
+
+    }else{
+
+        dqe.createdAt =
+            dqes[index].createdAt ||
+            maintenant;
+
+        dqe.updatedAt =
+            maintenant;
+
+        dqe.version =
+            "BATIFLOW-DQE-V3";
+
+        dqes[index] = {
+
+            ...dqes[index],
+
+            ...dqe
+
+        };
+
+    }
+
+
+    const sauvegarde =
+        sauvegarderDQEs(
+            dqes
+        );
+
+    if(!sauvegarde){
+
+        return false;
+
+    }
+
+
+    actualiserStatistiques();
+
+    afficherListeDQEs();
+
+    document.getElementById(
+        "autosaveStatus"
+    ).textContent =
+        "● Enregistré";
+
+
+    if(notifier){
+
+        afficherToast(
+            "✅ DQE enregistré avec succès."
+        );
+
+    }
+
+    return true;
+
+}
+
+
+/* =========================================================
+   AUTOSAVE
+========================================================= */
+
+function programmerSauvegarde(){
+
+    clearTimeout(
+        sauvegardeTimer
+    );
+
+    const status =
+        document.getElementById(
+            "autosaveStatus"
+        );
+
+    if(status){
+
+        status.textContent =
+            "● Modification...";
+
+    }
+
+    sauvegardeTimer =
+        setTimeout(
+            () => {
+
+                const nom =
+                    document.getElementById(
+                        "nom"
+                    )?.value
+                    ?.trim();
+
+                if(nom){
+
+                    enregistrerDQE(
+                        false
+                    );
+
+                }
+
+            },
+            1200
+        );
+
+}
+
+
+/* =========================================================
+   STATISTIQUES
+========================================================= */
+
+function actualiserStatistiques(){
+
+    const dqes =
+        obtenirDQEs();
+
+    const brouillons =
+        dqes.filter(
+            d =>
+                d.statut ===
+                "brouillon"
+        ).length;
+
+    const valides =
+        dqes.filter(
+            d =>
+                d.statut ===
+                "valide"
+        ).length;
+
+    const totalTTC =
+        dqes.reduce(
+            (
+                total,
+                d
+            ) =>
+                total +
+                Number(
+                    d.totalTTC ??
+                    d.ttc ??
+                    d.montantTTC ??
+                    0
+                ),
+            0
+        );
+
+    document.getElementById(
+        "statTotal"
+    ).textContent =
+        dqes.length;
+
+    document.getElementById(
+        "statBrouillons"
+    ).textContent =
+        brouillons;
+
+    document.getElementById(
+        "statValides"
+    ).textContent =
+        valides;
+
+    document.getElementById(
+        "statTTC"
+    ).textContent =
+        formaterMontant(
+            totalTTC
+        );
+
+}
+
+
+/* =========================================================
+   LISTE DQE
+========================================================= */
+
+function afficherListeDQEs(){
+
+    const container =
+        document.getElementById(
+            "dqeList"
+        );
+
+    if(!container) return;
+
+    const recherche =
+        (
+            document.getElementById(
+                "searchDQE"
+            )?.value ||
+            ""
+        )
+        .toLowerCase()
+        .trim();
+
+    let dqes =
+        obtenirDQEs();
+
+
+    dqes.sort(
+        (a,b) =>
+            new Date(
+                b.updatedAt ||
+                b.createdAt ||
+                b.date ||
+                0
+            ) -
+            new Date(
+                a.updatedAt ||
+                a.createdAt ||
+                a.date ||
+                0
+            )
+    );
+
+
+    if(recherche){
+
+        dqes =
+            dqes.filter(
+                dqe => {
+
+                    const texte =
+                        [
+
+                            dqe.nom,
+
+                            dqe.reference,
+
+                            dqe.client,
+
+                            dqe.chantier,
+
+                            dqe.localisation
+
+                        ]
+                        .join(" ")
+                        .toLowerCase();
+
+                    return texte.includes(
+                        recherche
+                    );
+
+                }
+            );
+
+    }
+
+
+    if(!dqes.length){
+
+        container.innerHTML = `
+
+            <div style="
+                text-align:center;
+                padding:30px 10px;
+                color:#6b7280;
+                font-size:13px;
+            ">
+
+                <div
+                    style="
+                        font-size:30px;
+                        margin-bottom:8px
+                    ">
+                    📋
+                </div>
+
+                Aucun DQE trouvé.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        dqes
+        .map(
+            creerCarteDQE
+        )
+        .join("");
+
+}
+
+
+function creerCarteDQE(dqe){
+
+    const nom =
+        dqe.nom ||
+        dqe.titre ||
+        "DQE sans nom";
+
+    const reference =
+        dqe.reference ||
+        "Sans référence";
+
+    const client =
+        dqe.client ||
+        "Client non renseigné";
+
+    const total =
+        Number(
+            dqe.totalTTC ??
+            dqe.ttc ??
+            dqe.montantTTC ??
+            dqe.montant ??
+            0
+        );
+
+    const statut =
+        dqe.statut ||
+        "brouillon";
+
+
+    return `
+
+        <div class="dqe-item">
+
+            <div class="dqe-main">
+
+                <div class="dqe-name">
+                    ${echapper(nom)}
+                </div>
+
+                <div class="dqe-meta">
+
+                    ${echapper(reference)}
+
+                    <br>
+
+                    Client :
+                    ${echapper(client)}
+
+                    <br>
+
+                    ${formaterDate(
+                        dqe.updatedAt ||
+                        dqe.createdAt ||
+                        dqe.date
+                    )}
+
+                    <br>
+
+                    <strong>
+                        ${formaterMontant(total)}
+                    </strong>
+
+                </div>
+
+                <div style="margin-top:7px">
+
+                    <span
+                        class="status status-${echapper(
+                            statut
+                        )}">
+                        ${texteStatut(
+                            statut
+                        )}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="actions no-print">
+
+                <button
+                    class="btn btn-secondary btn-small"
+                    onclick="consulterDQE('${dqe.id}')">
+                    Voir
+                </button>
+
+                <button
+                    class="btn btn-primary btn-small"
+                    onclick="modifierDQE('${dqe.id}')">
+                    Modifier
+                </button>
+
+                <button
+                    class="btn btn-warning btn-small"
+                    onclick="dupliquerDQE('${dqe.id}')">
+                    Copier
+                </button>
+
+                <button
+                    class="btn btn-danger btn-small"
+                    onclick="supprimerDQE('${dqe.id}')">
+                    Supprimer
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+function texteStatut(statut){
+
+    const textes = {
+
+        brouillon:
+            "Brouillon",
+
+        valide:
+            "Validé",
+
+        annule:
+            "Annulé"
+
+    };
+
+    return (
+        textes[statut] ||
+        statut
+    );
+
+}
+
+
+/* =========================================================
+   CONSULTATION
+========================================================= */
+
+function consulterDQE(id){
+
+    const dqes =
+        obtenirDQEs();
+
+    const dqe =
+        dqes.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
+
+    if(!dqe){
+
+        afficherToast(
+            "DQE introuvable."
+        );
+
+        return;
+
+    }
+
+
+    const lignes =
+        Array.isArray(
+            dqe.lignes
+        )
+        ? dqe.lignes
+        : [];
+
+
+    const lignesHTML =
+        lignes
+        .map(
+            (ligne,index) => `
+
+            <tr>
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${echapper(
+                        ligne.designation ||
+                        ""
+                    )}
+                </td>
+
+                <td>
+                    ${echapper(
+                        ligne.unite ||
+                        ""
+                    )}
+                </td>
+
+                <td>
+                    ${Number(
+                        ligne.quantite ||
+                        0
+                    )}
+                </td>
+
+                <td>
+                    ${formaterMontant(
+                        ligne.prixUnitaire ||
+                        ligne.prix ||
+                        0
+                    )}
+                </td>
+
+                <td>
+                    ${formaterMontant(
+                        ligne.montant ??
+                        (
+                            Number(
+                                ligne.quantite ||
+                                0
+                            ) *
+                            Number(
+                                ligne.prixUnitaire ||
+                                ligne.prix ||
+                                0
+                            )
+                        )
+                    )}
+                </td>
+
+            </tr>
+
+        `
+        )
+        .join("");
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        dqe.nom ||
+        dqe.reference ||
+        "Détail du DQE";
+
+
+    document.getElementById(
+        "modalContent"
+    ).innerHTML = `
+
+        <div class="form-grid">
+
+            <div>
+
+                <strong>
+                    Référence
+                </strong>
+
+                <p>
+                    ${echapper(
+                        dqe.reference ||
+                        "—"
+                    )}
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Date
+                </strong>
+
+                <p>
+                    ${formaterDate(
+                        dqe.date
+                    )}
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Client
+                </strong>
+
+                <p>
+                    ${echapper(
+                        dqe.client ||
+                        "—"
+                    )}
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Chantier
+                </strong>
+
+                <p>
+                    ${echapper(
+                        dqe.chantier ||
+                        "—"
+                    )}
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Localisation
+                </strong>
+
+                <p>
+                    ${echapper(
+                        dqe.localisation ||
+                        "—"
+                    )}
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Durée
+                </strong>
+
+                <p>
+                    ${echapper(
+                        dqe.duree ||
+                        "—"
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <strong>
+                    Objet
+                </strong>
+
+                <p style="margin-top:6px">
+
+                    ${echapper(
+                        dqe.objet ||
+                        "—"
+                    )}
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <hr style="
+            border:0;
+            border-top:1px solid #e5e7eb;
+            margin:20px 0;
+        ">
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            N°
+                        </th>
+
+                        <th>
+                            Désignation
+                        </th>
+
+                        <th>
+                            Unité
+                        </th>
+
+                        <th>
+                            Qté
+                        </th>
+
+                        <th>
+                            PU
+                        </th>
+
+                        <th>
+                            Montant
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    ${lignesHTML}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="total-box">
+
+            <div class="total-row">
+
+                <span>
+                    Total HT
+                </span>
+
+                <strong>
+                    ${formaterMontant(
+                        dqe.totalHT
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="total-row">
+
+                <span>
+                    TVA (${dqe.tva ?? 18}%)
+                </span>
+
+                <strong>
+                    ${formaterMontant(
+                        dqe.montantTVA
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="total-row grand">
+
+                <span>
+                    Total TTC
+                </span>
+
+                <strong>
+                    ${formaterMontant(
+                        dqe.totalTTC
+                    )}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="actions no-print"
+            style="margin-top:20px">
+
+            <button
+                class="btn btn-primary"
+                onclick="
+                    modifierDQE('${dqe.id}');
+                    fermerModal();
+                ">
+                Modifier
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="
+                    imprimerDQE('${dqe.id}')
+                ">
+                🖨 Imprimer
+            </button>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById(
+            "detailModal"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+function fermerModal(){
+
+    document
+        .getElementById(
+            "detailModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+/* =========================================================
+   DUPLICATION
+========================================================= */
+
+function dupliquerDQE(id){
+
+    const dqes =
+        obtenirDQEs();
+
+    const original =
+        dqes.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
+
+    if(!original){
+
+        afficherToast(
+            "DQE introuvable."
+        );
+
+        return;
+
+    }
+
+
+    const maintenant =
+        new Date()
+        .toISOString();
+
+
+    const copie = {
+
+        ...original,
+
+        id:
+            genererId(),
+
+        reference:
+            genererReference(),
+
+        nom:
+            "Copie - " +
+            (
+                original.nom ||
+                "DQE"
+            ),
+
+        statut:
+            "brouillon",
+
+        createdAt:
+            maintenant,
+
+        updatedAt:
+            maintenant
+
+    };
+
+
+    dqes.unshift(
+        copie
+    );
+
+    sauvegarderDQEs(
+        dqes
+    );
+
+    actualiserStatistiques();
+
+    afficherListeDQEs();
+
+    afficherToast(
+        "✅ DQE dupliqué."
+    );
+
+}
+
+
+/* =========================================================
+   SUPPRESSION
+========================================================= */
+
+function supprimerDQE(id){
+
+    const dqes =
+        obtenirDQEs();
+
+    const dqe =
+        dqes.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
+
+    if(!dqe) return;
+
+
+    const confirmation =
+        confirm(
+            "Supprimer le DQE « " +
+            (
+                dqe.nom ||
+                dqe.reference
+            ) +
+            " » ?\n\nCette action est irréversible."
+        );
+
+    if(!confirmation) return;
+
+
+    const nouveaux =
+        dqes.filter(
+            item =>
+                String(item.id) !==
+                String(id)
+        );
+
+
+    sauvegarderDQEs(
+        nouveaux
+    );
+
+    actualiserStatistiques();
+
+    afficherListeDQEs();
+
+    afficherToast(
+        "🗑 DQE supprimé."
+    );
+
+}
+
+
+/* =========================================================
+   IMPRESSION
+========================================================= */
+
+function imprimerDQE(
+    id = null
+){
+
+    let dqe;
+
+
+    if(id){
+
+        const dqes =
+            obtenirDQEs();
+
+        dqe =
+            dqes.find(
+                item =>
+                    String(item.id) ===
+                    String(id)
+            );
+
+    }else{
+
+        dqe =
+            collecterFormulaire();
+
+    }
+
+
+    if(
+        !dqe ||
+        !dqe.nom
+    ){
+
+        afficherToast(
+            "Veuillez renseigner le nom du DQE."
+        );
+
+        return;
+
+    }
+
+
+    const lignes =
+        Array.isArray(
+            dqe.lignes
+        )
+        ? dqe.lignes
+        : [];
+
+
+    const lignesHTML =
+        lignes
+        .map(
+            (ligne,index) => `
+
+            <tr>
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${echapper(
+                        ligne.designation ||
+                        ""
+                    )}
+                </td>
+
+                <td>
+                    ${echapper(
+                        ligne.unite ||
+                        ""
+                    )}
+                </td>
+
+                <td>
+                    ${Number(
+                        ligne.quantite ||
+                        0
+                    )}
+                </td>
+
+                <td>
+                    ${formaterMontant(
+                        ligne.prixUnitaire ||
+                        ligne.prix ||
+                        0
+                    )}
+                </td>
+
+                <td>
+                    ${formaterMontant(
+                        ligne.montant ??
+                        Number(
+                            ligne.quantite ||
+                            0
+                        ) *
+                        Number(
+                            ligne.prixUnitaire ||
+                            ligne.prix ||
+                            0
+                        )
+                    )}
+                </td>
+
+            </tr>
+
+        `
+        )
+        .join("");
+
+
+    const win =
+        window.open(
+            "",
+            "_blank",
+            "width=1100,height=800"
+        );
+
+
+    if(!win){
+
+        afficherToast(
+            "Autorisez les fenêtres popup du navigateur."
+        );
+
+        return;
+
+    }
+
+
+    win.document.write(`
+
+        <!DOCTYPE html>
+
+        <html lang="fr">
+
+        <head>
+
+            <meta charset="UTF-8">
+
+            <title>
+                ${echapper(
+                    dqe.reference ||
+                    dqe.nom
+                )}
+            </title>
+
+            <style>
+
+                body{
+                    font-family:Arial,sans-serif;
+                    margin:35px;
+                    color:#111827;
+                }
+
+                .header{
+                    display:flex;
+                    justify-content:space-between;
+                    border-bottom:3px solid #111827;
+                    padding-bottom:15px;
+                    margin-bottom:25px;
+                }
+
+                h1{
+                    margin:0;
+                    font-size:25px;
+                }
+
+                h2{
+                    margin-top:25px;
+                    font-size:18px;
+                }
+
+                .info{
+                    display:grid;
+                    grid-template-columns:1fr 1fr;
+                    gap:10px;
+                    margin-bottom:25px;
+                }
+
+                .info div{
+                    border:1px solid #ddd;
+                    padding:10px;
+                }
+
+                table{
+                    width:100%;
+                    border-collapse:collapse;
+                    margin-top:15px;
+                }
+
+                th,
+                td{
+                    border:1px solid #ccc;
+                    padding:9px;
+                    font-size:12px;
+                }
+
+                th{
+                    background:#f1f5f9;
+                    text-align:left;
+                }
+
+                .totaux{
+                    margin-left:auto;
+                    width:320px;
+                    margin-top:20px;
+                }
+
+                .ligne{
+                    display:flex;
+                    justify-content:space-between;
+                    padding:7px 0;
+                }
+
+                .ttc{
+                    border-top:2px solid #111;
+                    font-size:18px;
+                    font-weight:bold;
+                    padding-top:10px;
+                }
+
+                .footer{
+                    margin-top:45px;
+                    text-align:center;
+                    font-size:11px;
+                    color:#777;
+                }
+
+                @media print{
+
+                    body{
+                        margin:15mm;
+                    }
+
+                }
+
+            </style>
+
+        </head>
+
+
+        <body>
+
+            <div class="header">
+
+                <div>
+
+                    <h1>
+                        BATIFLOW
+                    </h1>
+
+                    <div>
+                        Gestion BTP
+                    </div>
+
+                </div>
+
+
+                <div
+                    style="text-align:right">
+
+                    <strong>
+                        DQE
+                    </strong>
+
+                    <br>
+
+                    ${echapper(
+                        dqe.reference ||
+                        ""
+                    )}
+
+                    <br>
+
+                    ${formaterDate(
+                        dqe.date
+                    )}
+
+                </div>
+
+            </div>
+
+
+            <h2>
+                ${echapper(
+                    dqe.nom
+                )}
+            </h2>
+
+
+            <div class="info">
+
+                <div>
+
+                    <strong>
+                        Client
+                    </strong>
+
+                    <br>
+
+                    ${echapper(
+                        dqe.client ||
+                        "—"
+                    )}
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Chantier
+                    </strong>
+
+                    <br>
+
+                    ${echapper(
+                        dqe.chantier ||
+                        "—"
+                    )}
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Localisation
+                    </strong>
+
+                    <br>
+
+                    ${echapper(
+                        dqe.localisation ||
+                        "—"
+                    )}
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Durée
+                    </strong>
+
+                    <br>
+
+                    ${echapper(
+                        dqe.duree ||
+                        "—"
+                    )}
+
+                </div>
+
+            </div>
+
+
+            <p>
+
+                <strong>
+                    Objet :
+                </strong>
+
+                ${echapper(
+                    dqe.objet ||
+                    "—"
+                )}
+
+            </p>
+
+
+            <h2>
+                Détail quantitatif et estimatif
+            </h2>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            N°
+                        </th>
+
+                        <th>
+                            Désignation
+                        </th>
+
+                        <th>
+                            Unité
+                        </th>
+
+                        <th>
+                            Quantité
+                        </th>
+
+                        <th>
+                            Prix unitaire
+                        </th>
+
+                        <th>
+                            Montant
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    ${lignesHTML}
+
+                </tbody>
+
+            </table>
+
+
+            <div class="totaux">
+
+                <div class="ligne">
+
+                    <span>
+                        Total HT
+                    </span>
+
+                    <strong>
+                        ${formaterMontant(
+                            dqe.totalHT
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="ligne">
+
+                    <span>
+                        TVA (${dqe.tva ?? 18}%)
+                    </span>
+
+                    <strong>
+                        ${formaterMontant(
+                            dqe.montantTVA
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="ligne ttc">
+
+                    <span>
+                        TOTAL TTC
+                    </span>
+
+                    <strong>
+                        ${formaterMontant(
+                            dqe.totalTTC
+                        )}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer">
+
+                BATIFLOW — Solution de gestion BTP
+
+            </div>
+
+
+            <script>
+
+                window.onload = function(){
+
+                    window.print();
+
+                };
+
+            <\/script>
+
+        </body>
+
+        </html>
+
+    `);
+
+
+    win.document.close();
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function afficherToast(
+    message
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    if(!toast) return;
+
+    toast.textContent =
+        message;
+
+    toast.classList.add(
+        "show"
+    );
+
+    setTimeout(
+        () => {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },
+        3000
+    );
+
+}
+
+
+/* =========================================================
+   MENU MOBILE
+========================================================= */
+
+function toggleMenu(){
+
+    document
+        .getElementById(
+            "sidebar"
+        )
+        .classList.toggle(
+            "open"
+        );
+
+}
+
+
+/* =========================================================
+   PARAMETRES URL
+========================================================= */
+
+function traiterParametresURL(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const voirId =
+        params.get(
+            "voir"
+        );
+
+    const modifierId =
+        params.get(
+            "modifier"
+        );
+
+
+    /*
+       PRIORITÉ À MODIFIER
+    */
+
+    if(modifierId){
+
+        const trouve =
+            modifierDQE(
+                modifierId
+            );
+
+        if(!trouve){
+
+            afficherToast(
+                "⚠️ Le DQE demandé n'existe plus."
+            );
+
+        }
+
+        nettoyerURL();
+
+        return;
+
+    }
+
+
+    /*
+       MODE CONSULTATION
+    */
+
+    if(voirId){
+
+        const dqes =
+            obtenirDQEs();
+
+        const existe =
+            dqes.some(
+                item =>
+                    String(item.id) ===
+                    String(voirId)
+            );
+
+        if(existe){
+
+            consulterDQE(
+                voirId
+            );
+
+        }else{
+
+            afficherToast(
+                "⚠️ Le DQE demandé n'existe plus."
+            );
+
+        }
+
+        nettoyerURL();
+
+    }
+
+}
+
+
+/* =========================================================
+   NETTOYER URL
+========================================================= */
+
+function nettoyerURL(){
+
+    if(
+        window.history &&
+        window.history.replaceState
+    ){
+
+        const url =
+            new URL(
+                window.location.href
+            );
+
+        url.searchParams.delete(
+            "voir"
+        );
+
+        url.searchParams.delete(
+            "modifier"
+        );
+
+        window.history.replaceState(
+            {},
+            document.title,
+            url.pathname +
+            url.search +
+            url.hash
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SYNCHRONISATION
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        /*
+           DQE
+        */
+
+        if(
+            event.key ===
+            DQE_STORAGE_KEY
+        ){
+
+            actualiserStatistiques();
+
+            afficherListeDQEs();
+
+        }
+
+
+        /*
+           CHANTIERS
+        */
+
+        if(
+            event.key ===
+            CHANTIER_STORAGE_KEY
+        ){
+
+            const clientId =
+                document.getElementById(
+                    "clientId"
+                )?.value ||
+                "";
+
+            const chantierId =
+                document.getElementById(
+                    "chantierId"
+                )?.value ||
+                "";
+
+            chargerChantiers(
+                chantierId,
+                clientId
+            );
+
+        }
+
+
+        /*
+           CLIENTS
+        */
+
+        if(
+            event.key ===
+            CLIENT_STORAGE_KEY
+        ){
+
+            const clientId =
+                document.getElementById(
+                    "clientId"
+                )?.value ||
+                "";
+
+            const chantierId =
+                document.getElementById(
+                    "chantierId"
+                )?.value ||
+                "";
+
+            chargerClients(
+                clientId
+            );
+
+            chargerChantiers(
+                chantierId,
+                clientId
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CHANGEMENT CLIENT
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const clientSelect =
+            document.getElementById(
+                "clientId"
+            );
+
+        if(clientSelect){
+
+            clientSelect.addEventListener(
+                "change",
+                function(){
+
+                    const clientId =
+                        this.value;
+
+                    chargerChantiers(
+                        "",
+                        clientId
+                    );
+
+                    programmerSauvegarde();
+
+                }
+            );
+
+        }
+
+
+        const chantierSelect =
+            document.getElementById(
+                "chantierId"
+            );
+
+        if(chantierSelect){
+
+            chantierSelect.addEventListener(
+                "change",
+                function(){
+
+                    programmerSauvegarde();
+
+                }
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   FERMER MODAL EN CLIQUANT À CÔTÉ
+========================================================= */
+
+document
+    .getElementById(
+        "detailModal"
+    )
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target ===
+                this
+            ){
+
+                fermerModal();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   RACCOURCI ECHAP
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            fermerModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+function initialiser(){
+
+    chargerUtilisateur();
+
+    chargerClients();
+
+    chargerChantiers();
+
+    nouveauDQE();
+
+    actualiserStatistiques();
+
+    afficherListeDQEs();
+
+    /*
+       Important :
+       traiter les paramètres après
+       l'initialisation du formulaire.
+    */
+
+    traiterParametresURL();
+
+}
+
+
+/* =========================================================
+   LANCEMENT
+========================================================= */
+
+initialiser();
+
+</script>
+
+</body>
+</html>
