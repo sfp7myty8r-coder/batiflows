@@ -3138,6 +3138,33 @@ function afficherListeDQEs(){
 
 function creerCarteDQE(dqe){
 
+    function creerDevisDepuisDQE(id){
+
+    const dqes = obtenirDQEs();
+
+    const dqe = dqes.find(
+        item => String(item.id) === String(id)
+    );
+
+    if(!dqe){
+
+        afficherToast("DQE introuvable.");
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "batiflowDQESelectionne",
+        String(id)
+    );
+
+    window.location.href =
+        "devis.html?dqeId=" +
+        encodeURIComponent(id);
+
+}
+    
     const nom =
         dqe.nom ||
         dqe.titre ||
@@ -3241,6 +3268,12 @@ function creerCarteDQE(dqe){
                     onclick="supprimerDQE('${dqe.id}')">
                     Supprimer
                 </button>
+
+                 <button
+                     class="btn btn-success btn-small"
+                     onclick="creerDevisDepuisDQE('${dqe.id}')">
+                    💰 Créer un devis
+                 </button>
 
             </div>
 
