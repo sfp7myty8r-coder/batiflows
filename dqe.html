@@ -5,131 +5,176 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BATIFLOW — DQE</title>
 
+
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
     --bg:#f4f7fb;
-    --card:#ffffff;
-    --dark:#111827;
-    --dark2:#1f2937;
-    --primary:#2563eb;
-    --primary2:#1d4ed8;
-    --success:#16a34a;
-    --warning:#d97706;
-    --danger:#dc2626;
+    --card:#fff;
+    --dark:#101827;
+    --orange:#f59e0b;
+    --orange-dark:#d97706;
     --text:#172033;
-    --muted:#6b7280;
-    --border:#e5e7eb;
-    --shadow:0 8px 30px rgba(15,23,42,.07);
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --shadow:0 10px 30px rgba(15,23,42,.06);
 }
 
+html,body{min-height:100%}
+
 body{
-    font-family:Inter,Segoe UI,Arial,sans-serif;
+    font-family:Inter,"Segoe UI",Arial,Helvetica,sans-serif;
     background:var(--bg);
     color:var(--text);
 }
 
-/* SIDEBAR */
+/* =========================
+   SIDEBAR — IDENTIQUE DASHBOARD
+========================= */
 .sidebar{
     position:fixed;
     left:0;
     top:0;
-    width:250px;
-    height:100vh;
-    background:#111827;
+    bottom:0;
+    width:260px;
+    background:#101827;
     color:#fff;
-    padding:20px 15px;
     z-index:1000;
     overflow-y:auto;
 }
 
-.logo{
+.sidebar-logo{
+    height:82px;
     display:flex;
     align-items:center;
-    gap:10px;
-    padding:5px 10px 25px;
-    font-size:23px;
-    font-weight:800;
+    padding:0 20px;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.logo-mark{
-    width:38px;
-    height:38px;
-    border-radius:10px;
-    background:#2563eb;
+.batiflow-logo{
     display:flex;
     align-items:center;
-    justify-content:center;
+    gap:11px;
+    text-decoration:none;
+    width:max-content;
+    position:relative;
+    transition:transform .25s ease;
+}
+
+.batiflow-logo:hover{transform:translateY(-1px)}
+
+.batiflow-logo-icon{
+    width:48px;
+    height:48px;
+    flex:none;
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))
+           drop-shadow(0 0 8px rgba(245,158,11,.12));
+}
+
+.batiflow-logo-text{
+    font-family:Inter,"Segoe UI",Arial,Helvetica,sans-serif;
+    font-size:22px;
+    line-height:1;
     font-weight:900;
+    letter-spacing:1.5px;
+    white-space:nowrap;
 }
 
-.logo small{
-    display:block;
-    font-size:10px;
-    color:#9ca3af;
-    font-weight:500;
+.batiflow-logo-text .bati{color:#fff}
+.batiflow-logo-text .flow{color:#f59e0b}
+
+.batiflow-logo-subtitle{
+    position:absolute;
+    left:59px;
+    bottom:-12px;
+    color:#64748b;
+    font-size:7px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    white-space:nowrap;
 }
+
+.nav{padding:18px 12px}
 
 .nav-title{
-    color:#6b7280;
-    font-size:11px;
+    color:#64748b;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    padding:10px 12px;
     text-transform:uppercase;
-    padding:15px 12px 8px;
-    letter-spacing:1px;
 }
 
 .nav-link{
     display:flex;
     align-items:center;
     gap:12px;
+    padding:12px 14px;
+    margin:4px 0;
+    border-radius:10px;
     color:#cbd5e1;
-    text-decoration:none;
-    padding:11px 12px;
-    margin:3px 0;
-    border-radius:9px;
     font-size:14px;
+    font-weight:600;
+    text-decoration:none;
     transition:.2s;
 }
 
-.nav-link:hover,
-.nav-link.active{
-    background:#1e40af;
+.nav-link span{
+    width:23px;
+    text-align:center;
+    font-size:17px;
+    flex:none;
+}
+
+.nav-link:hover{
+    background:rgba(255,255,255,.06);
     color:#fff;
 }
 
-.nav-icon{
-    width:22px;
-    text-align:center;
+.nav-link.active{
+    background:rgba(245,158,11,.13);
+    color:#f59e0b;
 }
 
-.logout{
-    margin-top:20px;
-    border-top:1px solid #374151;
-    padding-top:15px;
+.nav-separator{
+    height:1px;
+    background:rgba(255,255,255,.07);
+    margin:15px 8px;
 }
 
-/* MAIN */
+.logout{margin-top:15px}
+
+/* =========================
+   MAIN / TOPBAR — DASHBOARD
+========================= */
 .main{
-    margin-left:250px;
+    margin-left:260px;
     min-height:100vh;
 }
 
 .topbar{
-    height:70px;
+    height:76px;
     background:#fff;
-    border-bottom:1px solid var(--border);
+    border-bottom:1px solid #e2e8f0;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 28px;
+    padding:0 30px;
     position:sticky;
     top:0;
-    z-index:100;
+    z-index:900;
+}
+
+.menu-btn{
+    display:none;
+    border:0;
+    background:none;
+    font-size:25px;
+    cursor:pointer;
 }
 
 .topbar-left{
@@ -140,15 +185,61 @@ body{
 
 .page-title{
     font-size:20px;
-    font-weight:750;
+    font-weight:850;
 }
 
 .autosave{
-    font-size:12px;
-    color:var(--success);
+    font-size:11px;
+    font-weight:800;
+    color:#15803d;
     background:#ecfdf3;
+    border:1px solid #bbf7d0;
     padding:6px 10px;
     border-radius:20px;
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.search-dashboard{
+    position:relative;
+}
+
+.search-dashboard input{
+    width:290px;
+    padding:10px 15px 10px 38px;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    outline:none;
+    background:#f8fafc;
+    font-size:13px;
+}
+
+.search-dashboard input:focus{
+    border-color:#f59e0b;
+    background:#fff;
+}
+
+.search-dashboard span{
+    position:absolute;
+    left:13px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#64748b;
+}
+
+.notification{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f8fafc;
+    font-size:17px;
 }
 
 .user{
@@ -160,176 +251,131 @@ body{
 .avatar{
     width:38px;
     height:38px;
-    background:#2563eb;
-    color:#fff;
     border-radius:50%;
+    background:#101827;
+    color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
+    font-weight:800;
+}
+
+.user-name{
+    font-size:13px;
     font-weight:700;
 }
 
+/* =========================
+   CONTENT
+========================= */
 .content{
-    padding:25px;
+    padding:30px;
+    max-width:1600px;
+    margin:auto;
 }
 
-/* BUTTONS */
-.btn{
-    border:0;
-    border-radius:8px;
-    padding:10px 15px;
-    cursor:pointer;
-    font-size:13px;
-    font-weight:650;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-1px);
-}
-
-.btn-primary{
-    background:var(--primary);
-    color:#fff;
-}
-
-.btn-primary:hover{
-    background:var(--primary2);
-}
-
-.btn-secondary{
-    background:#eef2f7;
-    color:#374151;
-}
-
-.btn-success{
-    background:var(--success);
-    color:#fff;
-}
-
-.btn-danger{
-    background:#fee2e2;
-    color:#b91c1c;
-}
-
-.btn-warning{
-    background:#fff7ed;
-    color:#c2410c;
-}
-
-.btn-small{
-    padding:7px 10px;
-    font-size:12px;
-}
-
-.actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-/* STATS */
+/* =========================
+   STATS — DASHBOARD STYLE
+========================= */
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:16px;
+    gap:17px;
     margin-bottom:22px;
 }
 
 .stat{
     background:#fff;
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:18px;
+    border:1px solid #e2e8f0;
+    border-radius:16px;
+    padding:20px;
     box-shadow:var(--shadow);
 }
 
 .stat-label{
-    color:var(--muted);
+    color:#64748b;
     font-size:12px;
-    margin-bottom:7px;
+    font-weight:700;
+    margin-bottom:10px;
 }
 
 .stat-value{
-    font-size:25px;
-    font-weight:800;
+    font-size:28px;
+    font-weight:900;
+    color:#172033;
 }
 
-/* GRID */
+/* =========================
+   DQE GRID / CARDS
+========================= */
 .grid{
     display:grid;
-    grid-template-columns:1fr 380px;
+    grid-template-columns:minmax(0,1.45fr) minmax(320px,.75fr);
     gap:20px;
 }
 
 .card{
     background:#fff;
-    border:1px solid var(--border);
-    border-radius:13px;
+    border:1px solid #e2e8f0;
+    border-radius:16px;
     box-shadow:var(--shadow);
     margin-bottom:20px;
     overflow:hidden;
 }
 
 .card-header{
-    padding:17px 20px;
-    border-bottom:1px solid var(--border);
+    padding:19px 20px;
+    border-bottom:1px solid #e2e8f0;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:10px;
+    gap:15px;
 }
 
 .card-title{
-    font-size:16px;
-    font-weight:750;
+    font-size:17px;
+    font-weight:850;
 }
 
-.card-body{
-    padding:20px;
-}
+.card-title::first-line{color:#172033}
 
-/* FORM */
+.card-body{padding:20px}
+
+/* =========================
+   FORM
+========================= */
 .form-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:15px;
 }
 
-.form-group{
-    margin-bottom:2px;
-}
-
-.form-group.full{
-    grid-column:1/-1;
-}
+.form-group{margin-bottom:2px}
+.form-group.full{grid-column:1/-1}
 
 label{
     display:block;
     font-size:12px;
-    font-weight:650;
+    font-weight:700;
     color:#374151;
     margin-bottom:6px;
 }
 
-input,
-select,
-textarea{
+input,select,textarea{
     width:100%;
     border:1px solid #d1d5db;
-    border-radius:8px;
-    padding:10px 11px;
+    border-radius:10px;
+    padding:11px 12px;
     font-family:inherit;
     font-size:13px;
     outline:none;
     background:#fff;
+    transition:.2s;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#2563eb;
-    box-shadow:0 0 0 3px rgba(37,99,235,.08);
+input:focus,select:focus,textarea:focus{
+    border-color:#f59e0b;
+    box-shadow:0 0 0 3px rgba(245,158,11,.10);
 }
 
 textarea{
@@ -344,10 +390,66 @@ textarea{
     font-size:11px;
 }
 
-/* TABLE */
-.table-wrap{
-    overflow-x:auto;
+/* =========================
+   BUTTONS — ORANGE BATIFLOW
+========================= */
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:800;
+    transition:.2s;
 }
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:#f59e0b;
+    color:#111827;
+}
+
+.btn-primary:hover{background:#fbbf24}
+
+.btn-secondary{
+    background:#f8fafc;
+    color:#475569;
+    border:1px solid #e2e8f0;
+}
+
+.btn-success{
+    background:#16a34a;
+    color:#fff;
+}
+
+.btn-danger{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.btn-warning{
+    background:#fff7ed;
+    color:#b45309;
+}
+
+.btn-small{
+    padding:8px 11px;
+    font-size:12px;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+/* =========================
+   TABLE
+========================= */
+.table-wrap{overflow-x:auto}
 
 table{
     width:100%;
@@ -360,8 +462,9 @@ th{
     color:#64748b;
     font-size:11px;
     text-transform:uppercase;
+    letter-spacing:.4px;
     padding:11px 8px;
-    border-bottom:1px solid var(--border);
+    border-bottom:1px solid #e2e8f0;
     text-align:left;
 }
 
@@ -371,8 +474,7 @@ td{
     vertical-align:middle;
 }
 
-td input,
-td select{
+td input,td select{
     padding:8px;
     font-size:12px;
 }
@@ -391,17 +493,17 @@ td select{
 }
 
 .total-row.grand{
-    border-top:2px solid #111827;
+    border-top:2px solid #101827;
     margin-top:6px;
     padding-top:12px;
     font-size:18px;
-    font-weight:800;
+    font-weight:900;
 }
 
-/* DQE LIST */
-.search{
-    max-width:300px;
-}
+/* =========================
+   LISTE DQE
+========================= */
+.search{max-width:300px}
 
 .dqe-list{
     display:flex;
@@ -410,26 +512,31 @@ td select{
 }
 
 .dqe-item{
-    border:1px solid var(--border);
-    border-radius:10px;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
     padding:15px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:15px;
+    transition:.2s;
 }
 
-.dqe-main{
-    min-width:0;
+.dqe-item:hover{
+    border-color:#f59e0b;
+    background:#fffdf8;
+    box-shadow:0 5px 18px rgba(15,23,42,.05);
 }
+
+.dqe-main{min-width:0}
 
 .dqe-name{
-    font-weight:750;
+    font-weight:800;
     margin-bottom:5px;
 }
 
 .dqe-meta{
-    color:var(--muted);
+    color:#64748b;
     font-size:11px;
     line-height:1.6;
 }
@@ -437,27 +544,18 @@ td select{
 .status{
     display:inline-block;
     border-radius:20px;
-    padding:4px 9px;
+    padding:5px 9px;
     font-size:10px;
-    font-weight:700;
+    font-weight:800;
 }
 
-.status-brouillon{
-    background:#f3f4f6;
-    color:#4b5563;
-}
+.status-brouillon{background:#f1f5f9;color:#475569}
+.status-valide{background:#dcfce7;color:#15803d}
+.status-annule{background:#fee2e2;color:#b91c1c}
 
-.status-valide{
-    background:#dcfce7;
-    color:#15803d;
-}
-
-.status-annule{
-    background:#fee2e2;
-    color:#b91c1c;
-}
-
-/* MODAL */
+/* =========================
+   MODAL / TOAST
+========================= */
 .modal{
     position:fixed;
     inset:0;
@@ -469,48 +567,44 @@ td select{
     z-index:2000;
 }
 
-.modal.show{
-    display:flex;
-}
+.modal.show{display:flex}
 
 .modal-box{
     width:min(900px,100%);
     max-height:90vh;
     overflow:auto;
     background:#fff;
-    border-radius:14px;
+    border-radius:16px;
+    box-shadow:0 25px 80px rgba(15,23,42,.25);
 }
 
 .modal-header{
     padding:18px 20px;
-    border-bottom:1px solid var(--border);
+    border-bottom:1px solid #e2e8f0;
     display:flex;
     justify-content:space-between;
     align-items:center;
 }
 
-.modal-body{
-    padding:20px;
-}
+.modal-body{padding:20px}
 
 .close{
     border:0;
-    background:#f3f4f6;
+    background:#f8fafc;
     width:34px;
     height:34px;
     border-radius:8px;
     cursor:pointer;
 }
 
-/* TOAST */
 .toast{
     position:fixed;
     right:20px;
     bottom:20px;
-    background:#111827;
+    background:#101827;
     color:#fff;
     padding:13px 18px;
-    border-radius:9px;
+    border-radius:10px;
     font-size:13px;
     box-shadow:0 10px 30px rgba(0,0,0,.2);
     transform:translateY(100px);
@@ -525,115 +619,74 @@ td select{
     opacity:1;
 }
 
-/* MOBILE */
-.menu-btn{
-    display:none;
-    border:0;
-    background:#eef2f7;
-    border-radius:8px;
-    padding:8px 11px;
-    cursor:pointer;
-}
-
+/* =========================
+   MOBILE
+========================= */
 @media(max-width:1100px){
-    .grid{
-        grid-template-columns:1fr;
-    }
+    .grid{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(2,1fr)}
 }
 
-@media(max-width:850px){
-
+@media(max-width:800px){
     .sidebar{
         transform:translateX(-100%);
         transition:.25s;
     }
 
-    .sidebar.open{
-        transform:translateX(0);
-    }
+    .sidebar.open{transform:translateX(0)}
 
-    .main{
-        margin-left:0;
-    }
+    .main{margin-left:0}
 
-    .menu-btn{
-        display:block;
-    }
+    .menu-btn{display:block}
 
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
+    .topbar{padding:0 15px}
 
-    .form-grid{
-        grid-template-columns:1fr;
-    }
+    .search-dashboard{display:none}
 
-    .form-group.full{
-        grid-column:auto;
-    }
+    .user-name{display:none}
 
-    .content{
-        padding:15px;
-    }
+    .content{padding:20px 15px}
 
-    .topbar{
-        padding:0 15px;
-    }
+    .form-grid{grid-template-columns:1fr}
+
+    .form-group.full{grid-column:auto}
 }
 
-@media(max-width:550px){
-
-    .stats{
-        grid-template-columns:1fr;
-    }
+@media(max-width:560px){
+    .stats{grid-template-columns:1fr}
 
     .dqe-item{
         flex-direction:column;
         align-items:flex-start;
     }
 
-    .actions{
-        width:100%;
-    }
+    .actions{width:100%}
 
-    .actions .btn{
-        flex:1;
-    }
+    .actions .btn{flex:1}
 
-    .user-name{
-        display:none;
-    }
+    .page-title{font-size:17px}
 }
 
-/* IMPRESSION */
-.print-only{
-    display:none;
-}
+/* =========================
+   IMPRESSION
+========================= */
+.print-only{display:none}
 
 @media print{
+    body{background:#fff}
 
-    body{
-        background:#fff;
-    }
-
-    .sidebar,
-    .topbar,
-    .no-print,
-    .modal{
+    .sidebar,.topbar,.no-print,.modal{
         display:none!important;
     }
 
-    .main{
-        margin:0;
-    }
+    .main{margin:0}
 
     .content{
         padding:0;
+        max-width:none;
     }
 
-    .print-only{
-        display:block;
-    }
+    .print-only{display:block}
 
     .card{
         box-shadow:none;
@@ -641,104 +694,117 @@ td select{
     }
 }
 </style>
+
 </head>
+
 
 <body>
 
 <!-- =========================================================
-     SIDEBAR
+     SIDEBAR — BATIFLOW DASHBOARD
 ========================================================= -->
 
 <aside class="sidebar" id="sidebar">
 
-    <div class="logo">
+    <div class="sidebar-logo">
+        <a href="dashboard.html" class="batiflow-logo" aria-label="BATIFLOW - Tableau de bord">
 
-        <div class="logo-mark">
-            B
-        </div>
+            <svg class="batiflow-logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="50" cy="50" r="45" fill="#111827" stroke="#F59E0B" stroke-width="2.5"/>
+                <path d="M25 69V39L50 22L75 39V69" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M50 30V69" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+                <path d="M30 56C39 49 45 61 54 54C61 49 66 43 72 47" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="72" cy="47" r="4" fill="#F59E0B"/>
+                <path d="M22 72H78" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+            </svg>
 
-        <div>
-            BATIFLOW
-            <small>GESTION BTP</small>
-        </div>
+            <span class="batiflow-logo-text">
+                <span class="bati">BATI</span><span class="flow">FLOW</span>
+            </span>
 
+            <span class="batiflow-logo-subtitle">CONSTRUCTION MANAGEMENT</span>
+        </a>
     </div>
 
-    <div class="nav-title">
-        Principal
-    </div>
+    <nav class="nav">
 
-    <a href="dashboard.html" class="nav-link">
-        <span class="nav-icon">⌂</span>
-        Tableau de bord
-    </a>
+        <div class="nav-title">Principal</div>
 
-    <a href="chantiers.html" class="nav-link">
-        <span class="nav-icon">🏗</span>
-        Chantiers
-    </a>
+        <a href="dashboard.html" class="nav-link">
+            <span>🏠</span>
+            Tableau de bord
+        </a>
 
-    <a href="dqe.html" class="nav-link active">
-        <span class="nav-icon">📋</span>
-        DQE
-    </a>
+        <a href="chantiers.html" class="nav-link">
+            <span>🏗️</span>
+            Chantiers
+        </a>
 
-    <a href="#" class="nav-link" onclick="return false;">
-        <span class="nav-icon">💰</span>
-        Devis
-    </a>
+        <a href="./dqe.html" class="nav-link active">
+            <span>📋</span>
+            DQE &amp; Métré
+        </a>
 
-    <!-- CLIENTS ACTIVÉS -->
-    <a href="clients.html" class="nav-link">
-        <span class="nav-icon">👥</span>
-        Clients
-    </a>
+        <a href="devis.html" class="nav-link">
+            <span>💰</span>
+            Devis
+        </a>
 
-    <a href="#" class="nav-link" onclick="return false;">
-        <span class="nav-icon">🧱</span>
-        Matériaux
-    </a>
+        <div class="nav-separator"></div>
 
-    <a href="#" class="nav-link" onclick="return false;">
-        <span class="nav-icon">📁</span>
-        Documents
-    </a>
+        <div class="nav-title">Outils BTP</div>
 
-    <div class="nav-title">
-        Outils BTP
-    </div>
+        <a href="calculator.html" class="nav-link">
+            <span>🧮</span>
+            Calculateur BTP
+        </a>
 
-    <a href="calculator.html" class="nav-link">
-        <span class="nav-icon">🧮</span>
-        Calculateur BTP
-    </a>
+        <a href="mortar.html" class="nav-link">
+            <span>🧱</span>
+            Mortier
+        </a>
 
-    <a href="mortar.html" class="nav-link">
-        <span class="nav-icon">▦</span>
-        Mortier
-    </a>
+        <a href="masonry.html" class="nav-link">
+            <span>🏠</span>
+            Maçonnerie
+        </a>
 
-    <a href="masonry.html" class="nav-link">
-        <span class="nav-icon">▤</span>
-        Maçonnerie
-    </a>
+        <a href="slab.html" class="nav-link">
+            <span>📐</span>
+            Dalle
+        </a>
 
-    <a href="slab.html" class="nav-link">
-        <span class="nav-icon">▥</span>
-        Dalle
-    </a>
+        <div class="nav-separator"></div>
 
-    <div class="logout">
+        <div class="nav-title">Gestion</div>
 
-        <a href="login.html" class="nav-link">
-            <span class="nav-icon">↪</span>
+        <a href="./clients.html" class="nav-link">
+            <span>👥</span>
+            Clients
+        </a>
+
+        <a href="#" class="nav-link" onclick="return false;">
+            <span>📦</span>
+            Matériaux
+        </a>
+
+        <a href="#" class="nav-link" onclick="return false;">
+            <span>📁</span>
+            Documents
+        </a>
+
+        <a href="#" class="nav-link" onclick="return false;">
+            <span>⚙️</span>
+            Paramètres
+        </a>
+
+        <a href="login.html" class="nav-link logout">
+            <span>🚪</span>
             Déconnexion
         </a>
 
-    </div>
-
+    </nav>
 </aside>
-
 
 <!-- =========================================================
      MAIN
@@ -750,48 +816,38 @@ td select{
 
         <div class="topbar-left">
 
-            <button
-                class="menu-btn"
-                onclick="toggleMenu()">
-                ☰
-            </button>
+            <button type="button" class="menu-btn" onclick="toggleMenu()">☰</button>
 
-            <div>
-                <div class="page-title">
-                    DQE — Devis Quantitatif Estimatif
-                </div>
+            <div class="page-title">
+                DQE &amp; Métré
             </div>
 
-            <span
-                class="autosave"
-                id="autosaveStatus">
+            <span class="autosave" id="autosaveStatus">
                 ● Prêt
             </span>
 
         </div>
 
-        <div class="user">
+        <div class="topbar-right">
 
-            <div>
-                <div
-                    class="user-name"
-                    id="userName">
-                    Utilisateur
-                </div>
+            <div class="search-dashboard">
+                <span>🔎</span>
+                <input type="search" placeholder="Rechercher un DQE..." id="searchDashboard">
             </div>
 
-            <div
-                class="avatar"
-                id="userAvatar">
-                U
+            <div class="notification">🔔</div>
+
+            <div class="user">
+                <div class="user-name" id="userName">Utilisateur</div>
+                <div class="avatar" id="userAvatar">U</div>
             </div>
 
         </div>
 
     </header>
 
-
     <div class="content">
+
 
         <!-- =================================================
              STATS
@@ -1296,7 +1352,6 @@ td select{
     </div>
 
 </main>
-
 
 <!-- =========================================================
      MODAL
