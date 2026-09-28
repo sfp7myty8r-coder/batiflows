@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Chantiers - BATIFLOW</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -14,6 +19,10 @@ body{
     background:#f4f6f8;
     color:#172033;
 }
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header{
     background:#0f172a;
@@ -38,6 +47,10 @@ body{
     text-decoration:none;
 }
 
+/* =====================================================
+   CONTAINER
+===================================================== */
+
 .container{
     max-width:1200px;
     margin:35px auto;
@@ -61,6 +74,10 @@ body{
     color:#6b7280;
 }
 
+/* =====================================================
+   BUTTONS
+===================================================== */
+
 .primary-button{
     border:none;
     background:#f59e0b;
@@ -76,6 +93,10 @@ body{
     background:#d97706;
     color:white;
 }
+
+/* =====================================================
+   EMPTY
+===================================================== */
 
 .empty{
     background:white;
@@ -94,7 +115,9 @@ body{
     margin-bottom:20px;
 }
 
-/* LISTE */
+/* =====================================================
+   LISTE
+===================================================== */
 
 .chantiers-list{
     display:grid;
@@ -156,6 +179,10 @@ body{
     color:#1e40af;
 }
 
+/* =====================================================
+   INFO GRID
+===================================================== */
+
 .info-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -179,6 +206,10 @@ body{
 .info strong{
     font-size:14px;
 }
+
+/* =====================================================
+   PROGRESS
+===================================================== */
 
 .progress-area{
     margin-top:15px;
@@ -204,14 +235,73 @@ body{
     border-radius:20px;
 }
 
+/* =====================================================
+   FINANCE MINI
+===================================================== */
+
+.finance-summary{
+    margin-top:18px;
+    padding:15px;
+    background:#f8fafc;
+    border-radius:10px;
+    border:1px solid #e5e7eb;
+}
+
+.finance-summary-title{
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:12px;
+    color:#475569;
+}
+
+.finance-mini-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.finance-mini{
+    background:white;
+    border-radius:8px;
+    padding:10px;
+    border:1px solid #e5e7eb;
+}
+
+.finance-mini small{
+    display:block;
+    color:#64748b;
+    font-size:10px;
+    margin-bottom:4px;
+}
+
+.finance-mini strong{
+    font-size:12px;
+}
+
+.finance-positive{
+    color:#15803d;
+}
+
+.finance-negative{
+    color:#b91c1c;
+}
+
+.finance-warning{
+    color:#b45309;
+}
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
 .card-actions{
-    display:flex;
+    display:grid;
+    grid-template-columns:1fr 1fr;
     gap:10px;
     margin-top:18px;
 }
 
 .action-button{
-    flex:1;
     padding:10px;
     border-radius:7px;
     cursor:pointer;
@@ -224,6 +314,17 @@ body{
     background:#fef3c7;
 }
 
+.action-button.finance{
+    background:#fff7ed;
+    border-color:#fed7aa;
+    color:#9a3412;
+}
+
+.action-button.finance:hover{
+    background:#f59e0b;
+    color:white;
+}
+
 .action-button.delete{
     color:#b91c1c;
 }
@@ -232,7 +333,13 @@ body{
     background:#fee2e2;
 }
 
-/* MODALE */
+.action-button.full{
+    grid-column:1/-1;
+}
+
+/* =====================================================
+   MODALE GENERALE
+===================================================== */
 
 .modal{
     display:none;
@@ -276,6 +383,10 @@ body{
     font-size:28px;
     cursor:pointer;
 }
+
+/* =====================================================
+   FORM
+===================================================== */
 
 .form-grid{
     display:grid;
@@ -353,6 +464,10 @@ textarea{
     background:#1e293b;
 }
 
+/* =====================================================
+   CLIENT
+===================================================== */
+
 .client-helper{
     margin-top:8px;
     display:flex;
@@ -387,7 +502,244 @@ textarea{
     margin-top:8px;
 }
 
-/* TOAST */
+/* =====================================================
+   FINANCE MODAL
+===================================================== */
+
+.finance-modal-content{
+    max-width:900px;
+}
+
+.finance-project-header{
+    background:#0f172a;
+    color:white;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.finance-project-header h3{
+    margin:0 0 5px;
+    font-size:20px;
+}
+
+.finance-project-header p{
+    margin:0;
+    color:#cbd5e1;
+    font-size:13px;
+}
+
+.finance-dashboard{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:22px;
+}
+
+.finance-box{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:15px;
+}
+
+.finance-box small{
+    display:block;
+    color:#64748b;
+    font-size:11px;
+    margin-bottom:6px;
+}
+
+.finance-box strong{
+    font-size:16px;
+}
+
+.finance-box.budget{
+    border-left:4px solid #f59e0b;
+}
+
+.finance-box.depenses{
+    border-left:4px solid #ef4444;
+}
+
+.finance-box.recettes{
+    border-left:4px solid #22c55e;
+}
+
+.finance-box.resultat{
+    border-left:4px solid #3b82f6;
+}
+
+.finance-progress{
+    margin-bottom:25px;
+}
+
+.finance-progress-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.finance-progress-bar{
+    height:12px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.finance-progress-fill{
+    height:100%;
+    background:#f59e0b;
+    border-radius:20px;
+}
+
+.finance-progress-fill.danger{
+    background:#ef4444;
+}
+
+.finance-progress-fill.success{
+    background:#22c55e;
+}
+
+/* =====================================================
+   FINANCE FORMS
+===================================================== */
+
+.finance-forms{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.finance-form-card{
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:18px;
+}
+
+.finance-form-card h3{
+    margin:0 0 15px;
+    font-size:16px;
+}
+
+.finance-form-card.expense h3{
+    color:#b91c1c;
+}
+
+.finance-form-card.income h3{
+    color:#15803d;
+}
+
+/* =====================================================
+   OPERATIONS
+===================================================== */
+
+.operations-title{
+    margin:0 0 12px;
+    font-size:17px;
+}
+
+.operations-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.operation{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:13px;
+    border:1px solid #e5e7eb;
+    border-radius:9px;
+    background:#fff;
+}
+
+.operation-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.operation-icon{
+    width:36px;
+    height:36px;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+}
+
+.operation-icon.depense{
+    background:#fee2e2;
+}
+
+.operation-icon.recette{
+    background:#dcfce7;
+}
+
+.operation-info strong{
+    display:block;
+    font-size:13px;
+}
+
+.operation-info small{
+    display:block;
+    color:#64748b;
+    font-size:11px;
+    margin-top:3px;
+}
+
+.operation-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.operation-amount{
+    font-weight:bold;
+    font-size:13px;
+}
+
+.operation-amount.depense{
+    color:#b91c1c;
+}
+
+.operation-amount.recette{
+    color:#15803d;
+}
+
+.delete-operation{
+    border:none;
+    background:#fee2e2;
+    color:#b91c1c;
+    width:30px;
+    height:30px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.delete-operation:hover{
+    background:#fecaca;
+}
+
+.no-operation{
+    text-align:center;
+    padding:25px;
+    background:#f8fafc;
+    border-radius:9px;
+    color:#64748b;
+    font-size:13px;
+}
+
+/* =====================================================
+   TOAST
+===================================================== */
 
 .toast-container{
     position:fixed;
@@ -418,20 +770,37 @@ textarea{
 }
 
 @keyframes toastIn{
+
     from{
         opacity:0;
         transform:translateY(10px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
+
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    .finance-dashboard{
+        grid-template-columns:1fr 1fr;
+    }
+
 }
 
 @media(max-width:800px){
+
     .chantiers-list{
         grid-template-columns:1fr;
     }
+
 }
 
 @media(max-width:700px){
@@ -468,7 +837,42 @@ textarea{
     .form-actions button{
         width:100%;
     }
+
+    .finance-dashboard{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .finance-forms{
+        grid-template-columns:1fr;
+    }
+
+    .finance-mini-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card-actions{
+        grid-template-columns:1fr;
+    }
+
+    .operation{
+        align-items:flex-start;
+    }
+
+    .operation-right{
+        flex-direction:column;
+        align-items:flex-end;
+    }
+
 }
+
+@media(max-width:480px){
+
+    .finance-dashboard{
+        grid-template-columns:1fr;
+    }
+
+}
+
 </style>
 
 </head>
@@ -493,15 +897,22 @@ textarea{
 <div class="top">
 
     <div>
+
         <h1>Mes chantiers</h1>
-        <p>Gérez et suivez vos projets de construction.</p>
+
+        <p>
+            Gérez et suivez vos projets de construction.
+        </p>
+
     </div>
 
     <button
         type="button"
         class="primary-button"
         id="nouveauChantierBtn">
+
         + Nouveau chantier
+
     </button>
 
 </div>
@@ -519,7 +930,9 @@ textarea{
         type="button"
         class="primary-button"
         id="emptyButton">
+
         + Créer un chantier
+
     </button>
 
 </section>
@@ -529,14 +942,15 @@ textarea{
     id="chantiersList"
     class="chantiers-list"
     style="display:none;">
+
 </section>
 
 </main>
 
 
-<!-- ===============================
+<!-- =====================================================
      MODALE CHANTIER
-================================ -->
+===================================================== -->
 
 <div class="modal" id="chantierModal">
 
@@ -552,7 +966,9 @@ textarea{
             type="button"
             class="close"
             id="closeModal">
+
             ×
+
         </button>
 
     </div>
@@ -562,8 +978,6 @@ textarea{
 
         <div class="form-grid">
 
-
-            <!-- NOM -->
 
             <div class="form-group full">
 
@@ -579,8 +993,6 @@ textarea{
 
             </div>
 
-
-            <!-- CLIENT -->
 
             <div class="form-group">
 
@@ -601,12 +1013,11 @@ textarea{
                 <div
                     id="clientHelper"
                     class="client-helper">
+
                 </div>
 
             </div>
 
-
-            <!-- LOCALISATION -->
 
             <div class="form-group">
 
@@ -623,8 +1034,6 @@ textarea{
             </div>
 
 
-            <!-- DATE DEBUT -->
-
             <div class="form-group">
 
                 <label for="dateDebut">
@@ -638,8 +1047,6 @@ textarea{
             </div>
 
 
-            <!-- DATE FIN -->
-
             <div class="form-group">
 
                 <label for="dateFin">
@@ -652,8 +1059,6 @@ textarea{
 
             </div>
 
-
-            <!-- BUDGET -->
 
             <div class="form-group">
 
@@ -670,8 +1075,6 @@ textarea{
             </div>
 
 
-            <!-- AVANCEMENT -->
-
             <div class="form-group">
 
                 <label for="avancement">
@@ -687,8 +1090,6 @@ textarea{
 
             </div>
 
-
-            <!-- STATUT -->
 
             <div class="form-group">
 
@@ -719,8 +1120,6 @@ textarea{
             </div>
 
 
-            <!-- NOTES -->
-
             <div class="form-group full">
 
                 <label for="notes">
@@ -743,13 +1142,17 @@ textarea{
                 type="button"
                 class="secondary-button"
                 id="cancelButton">
+
                 Annuler
+
             </button>
 
             <button
                 type="submit"
                 class="submit-button">
+
                 Enregistrer le chantier
+
             </button>
 
         </div>
@@ -761,11 +1164,325 @@ textarea{
 </div>
 
 
+<!-- =====================================================
+     MODALE BUDGET / RENTABILITE
+===================================================== -->
+
+<div class="modal" id="financeModal">
+
+<div class="modal-content finance-modal-content">
+
+    <div class="modal-header">
+
+        <h2>
+            💰 Budget & Rentabilité
+        </h2>
+
+        <button
+            type="button"
+            class="close"
+            id="closeFinanceModal">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="financeProjectHeader"
+        class="finance-project-header">
+
+    </div>
+
+
+    <!-- TABLEAU FINANCIER -->
+
+    <div
+        id="financeDashboard"
+        class="finance-dashboard">
+
+    </div>
+
+
+    <!-- BARRE CONSOMMATION -->
+
+    <div class="finance-progress">
+
+        <div class="finance-progress-top">
+
+            <span>
+                Consommation du budget
+            </span>
+
+            <strong id="financePercent">
+                0 %
+            </strong>
+
+        </div>
+
+        <div class="finance-progress-bar">
+
+            <div
+                id="financeProgressFill"
+                class="finance-progress-fill"
+                style="width:0%;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FORMULAIRES -->
+
+    <div class="finance-forms">
+
+
+        <!-- DEPENSE -->
+
+        <div class="finance-form-card expense">
+
+            <h3>
+                💸 Ajouter une dépense
+            </h3>
+
+            <form id="depenseForm">
+
+                <div class="form-group">
+
+                    <label for="depenseLibelle">
+                        Libellé *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="depenseLibelle"
+                        placeholder="Ex : Achat ciment"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="depenseCategorie">
+                        Catégorie
+                    </label>
+
+                    <select id="depenseCategorie">
+
+                        <option value="Matériaux">
+                            Matériaux
+                        </option>
+
+                        <option value="Main-d'œuvre">
+                            Main-d'œuvre
+                        </option>
+
+                        <option value="Transport">
+                            Transport
+                        </option>
+
+                        <option value="Engins">
+                            Engins
+                        </option>
+
+                        <option value="Fournitures">
+                            Fournitures
+                        </option>
+
+                        <option value="Sous-traitance">
+                            Sous-traitance
+                        </option>
+
+                        <option value="Autre">
+                            Autre
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="depenseMontant">
+                        Montant (FCFA) *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="depenseMontant"
+                        min="1"
+                        placeholder="Ex : 250000"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="depenseDate">
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="depenseDate">
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="submit-button">
+
+                        + Enregistrer la dépense
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- RECETTE -->
+
+        <div class="finance-form-card income">
+
+            <h3>
+                📥 Ajouter une recette
+            </h3>
+
+            <form id="recetteForm">
+
+                <div class="form-group">
+
+                    <label for="recetteLibelle">
+                        Libellé *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="recetteLibelle"
+                        placeholder="Ex : Avance client"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="recetteCategorie">
+                        Type
+                    </label>
+
+                    <select id="recetteCategorie">
+
+                        <option value="Paiement client">
+                            Paiement client
+                        </option>
+
+                        <option value="Avance">
+                            Avance
+                        </option>
+
+                        <option value="Acompte">
+                            Acompte
+                        </option>
+
+                        <option value="Solde">
+                            Solde
+                        </option>
+
+                        <option value="Autre">
+                            Autre
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="recetteMontant">
+                        Montant (FCFA) *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="recetteMontant"
+                        min="1"
+                        placeholder="Ex : 5000000"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="recetteDate">
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="recetteDate">
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="submit-button">
+
+                        + Enregistrer la recette
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- OPERATIONS -->
+
+    <h3 class="operations-title">
+        📋 Historique financier
+    </h3>
+
+    <div
+        id="operationsList"
+        class="operations-list">
+
+    </div>
+
+
+</div>
+
+</div>
+
+
 <!-- TOAST -->
 
 <div
     id="toastContainer"
     class="toast-container">
+
 </div>
 
 
@@ -781,12 +1498,17 @@ const STORAGE_KEY =
 const CLIENT_STORAGE_KEY =
     "batiflowClients";
 
+const FINANCE_STORAGE_KEY =
+    "batiflowFinances";
+
 
 let chantierEnModification = null;
 
+let chantierFinanceActuel = null;
+
 
 /* =====================================================
-   ELEMENTS
+   ELEMENTS CHANTIER
 ===================================================== */
 
 const nouveauBtn =
@@ -842,6 +1564,56 @@ const clientSelect =
 const clientHelper =
     document.getElementById(
         "clientHelper"
+    );
+
+
+/* =====================================================
+   ELEMENTS FINANCE
+===================================================== */
+
+const financeModal =
+    document.getElementById(
+        "financeModal"
+    );
+
+const closeFinanceModal =
+    document.getElementById(
+        "closeFinanceModal"
+    );
+
+const financeProjectHeader =
+    document.getElementById(
+        "financeProjectHeader"
+    );
+
+const financeDashboard =
+    document.getElementById(
+        "financeDashboard"
+    );
+
+const financePercent =
+    document.getElementById(
+        "financePercent"
+    );
+
+const financeProgressFill =
+    document.getElementById(
+        "financeProgressFill"
+    );
+
+const operationsList =
+    document.getElementById(
+        "operationsList"
+    );
+
+const depenseForm =
+    document.getElementById(
+        "depenseForm"
+    );
+
+const recetteForm =
+    document.getElementById(
+        "recetteForm"
     );
 
 
@@ -938,6 +1710,60 @@ function sauvegarderChantiers(
 
 
 /* =====================================================
+   OBTENIR FINANCES
+===================================================== */
+
+function obtenirFinances(){
+
+    try{
+
+        const data =
+            localStorage.getItem(
+                FINANCE_STORAGE_KEY
+            );
+
+        if(!data){
+            return [];
+        }
+
+        const finances =
+            JSON.parse(data);
+
+        return Array.isArray(finances)
+            ? finances
+            : [];
+
+    }catch(error){
+
+        console.error(
+            "Erreur lecture finances :",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   SAUVEGARDER FINANCES
+===================================================== */
+
+function sauvegarderFinances(
+    finances
+){
+
+    localStorage.setItem(
+        FINANCE_STORAGE_KEY,
+        JSON.stringify(finances)
+    );
+
+}
+
+
+/* =====================================================
    GENERER ID
 ===================================================== */
 
@@ -945,6 +1771,20 @@ function genererId(){
 
     return (
         "chantier_" +
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2,8)
+    );
+
+}
+
+
+function genererFinanceId(){
+
+    return (
+        "finance_" +
         Date.now() +
         "_" +
         Math.random()
@@ -991,7 +1831,7 @@ function echapper(
 
 
 /* =====================================================
-   INITIALISATION LISTE CLIENTS
+   INITIALISATION CLIENTS
 ===================================================== */
 
 function chargerClients(){
@@ -1022,12 +1862,17 @@ function chargerClients(){
 
         clientHelper.innerHTML = `
             <div class="no-client-message">
+
                 ⚠️ Aucun client enregistré.
+
                 <a
                     href="clients.html"
                     class="client-link">
+
                     Créer un client
+
                 </a>
+
             </div>
         `;
 
@@ -1074,17 +1919,23 @@ function chargerClients(){
 
 
     clientHelper.innerHTML = `
+
         <span class="client-helper-text">
+
             ${clients.length}
             client${clients.length > 1 ? "s" : ""}
             disponible${clients.length > 1 ? "s" : ""}
+
         </span>
 
         <a
             href="clients.html"
             class="client-link">
+
             + Nouveau client
+
         </a>
+
     `;
 
 
@@ -1110,7 +1961,7 @@ function chargerClients(){
 
 
 /* =====================================================
-   OBTENIR CLIENT SELECTIONNE
+   CLIENT SELECTIONNE
 ===================================================== */
 
 function obtenirClientSelectionne(){
@@ -1135,8 +1986,7 @@ function obtenirClientSelectionne(){
 
 
 /* =====================================================
-   TROUVER CLIENT PAR NOM
-   POUR ANCIENS CHANTIERS
+   CLIENT PAR NOM
 ===================================================== */
 
 function trouverClientParNom(
@@ -1174,6 +2024,59 @@ function trouverClientParNom(
 
 
 /* =====================================================
+   CLIENT POUR CHANTIER
+===================================================== */
+
+function trouverClientPourChantier(
+    chantier
+){
+
+    const clients =
+        obtenirClients();
+
+
+    if(
+        chantier.clientId
+    ){
+
+        const parId =
+            clients.find(
+                client =>
+                    String(client.id) ===
+                    String(
+                        chantier.clientId
+                    )
+            );
+
+        if(parId){
+            return parId;
+        }
+
+    }
+
+
+    if(
+        chantier.client
+    ){
+
+        const parNom =
+            trouverClientParNom(
+                chantier.client
+            );
+
+        if(parNom){
+            return parNom;
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =====================================================
    OUVRIR NOUVEAU CHANTIER
 ===================================================== */
 
@@ -1201,7 +2104,7 @@ function ouvrirChantier(){
 
 
 /* =====================================================
-   FERMER
+   FERMER CHANTIER
 ===================================================== */
 
 function fermerChantier(){
@@ -1245,6 +2148,38 @@ function formaterMontant(
 
 
 /* =====================================================
+   FORMATAGE DATE
+===================================================== */
+
+function formaterDate(
+    date
+){
+
+    if(!date){
+        return "Non définie";
+    }
+
+    try{
+
+        const d =
+            new Date(
+                date + "T00:00:00"
+            );
+
+        return d.toLocaleDateString(
+            "fr-FR"
+        );
+
+    }catch(error){
+
+        return "Non définie";
+
+    }
+
+}
+
+
+/* =====================================================
    STATUT
 ===================================================== */
 
@@ -1278,33 +2213,119 @@ function statutTexte(
 
 
 /* =====================================================
-   DATE
+   FINANCES DU CHANTIER
 ===================================================== */
 
-function formaterDate(
-    date
+function obtenirFinancesChantier(
+    chantierId
 ){
 
-    if(!date){
-        return "Non définie";
-    }
-
-    try{
-
-        const d =
-            new Date(
-                date + "T00:00:00"
-            );
-
-        return d.toLocaleDateString(
-            "fr-FR"
+    return obtenirFinances()
+        .filter(
+            operation =>
+                String(
+                    operation.chantierId
+                ) ===
+                String(chantierId)
         );
 
-    }catch(error){
+}
 
-        return "Non définie";
+
+/* =====================================================
+   CALCUL FINANCIER
+===================================================== */
+
+function calculerFinancesChantier(
+    chantier
+){
+
+    const operations =
+        obtenirFinancesChantier(
+            chantier.id
+        );
+
+
+    const budget =
+        Number(
+            chantier.budget
+        ) || 0;
+
+
+    const depenses =
+        operations
+            .filter(
+                operation =>
+                    operation.type ===
+                    "depense"
+            )
+            .reduce(
+                (
+                    total,
+                    operation
+                ) =>
+                    total +
+                    Number(
+                        operation.montant
+                    ),
+                0
+            );
+
+
+    const recettes =
+        operations
+            .filter(
+                operation =>
+                    operation.type ===
+                    "recette"
+            )
+            .reduce(
+                (
+                    total,
+                    operation
+                ) =>
+                    total +
+                    Number(
+                        operation.montant
+                    ),
+                0
+            );
+
+
+    const restant =
+        budget -
+        depenses;
+
+
+    const resultat =
+        recettes -
+        depenses;
+
+
+    let consommation = 0;
+
+    if(budget > 0){
+
+        consommation =
+            (
+                depenses /
+                budget
+            ) * 100;
 
     }
+
+
+    return {
+
+        budget,
+        depenses,
+        recettes,
+        restant,
+        resultat,
+        consommation,
+        operations
+
+    };
 
 }
 
@@ -1391,6 +2412,50 @@ function afficherChantiers(){
             }
 
 
+            const finance =
+                calculerFinancesChantier(
+                    chantier
+                );
+
+
+            let consommation =
+                Math.round(
+                    finance.consommation
+                );
+
+
+            if(
+                !Number.isFinite(
+                    consommation
+                )
+            ){
+
+                consommation = 0;
+
+            }
+
+
+            const consommationAffichee =
+                Math.max(
+                    0,
+                    consommation
+                );
+
+
+            let financeClass =
+                "finance-positive";
+
+
+            if(
+                finance.resultat < 0
+            ){
+
+                financeClass =
+                    "finance-negative";
+
+            }
+
+
             card.innerHTML = `
 
                 <div class="chantier-header">
@@ -1404,12 +2469,15 @@ function afficherChantiers(){
                         </h3>
 
                         <div class="chantier-client">
+
                             👤 ${echapper(
                                 nomClient
                             )}
+
                         </div>
 
                     </div>
+
 
                     <span class="status ${
                         echapper(
@@ -1520,7 +2588,77 @@ function afficherChantiers(){
                 </div>
 
 
+                <!-- RESUME FINANCIER -->
+
+                <div class="finance-summary">
+
+                    <div class="finance-summary-title">
+
+                        💰 Résumé financier
+
+                    </div>
+
+
+                    <div class="finance-mini-grid">
+
+
+                        <div class="finance-mini">
+
+                            <small>
+                                Dépenses
+                            </small>
+
+                            <strong>
+                                ${formaterMontant(
+                                    finance.depenses
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="finance-mini">
+
+                            <small>
+                                Recettes
+                            </small>
+
+                            <strong class="finance-positive">
+
+                                ${formaterMontant(
+                                    finance.recettes
+                                )}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="finance-mini">
+
+                            <small>
+                                Résultat
+                            </small>
+
+                            <strong class="${financeClass}">
+
+                                ${formaterMontant(
+                                    finance.resultat
+                                )}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
                 <div class="card-actions">
+
 
                     <button
                         class="action-button edit"
@@ -1534,7 +2672,18 @@ function afficherChantiers(){
 
 
                     <button
-                        class="action-button delete"
+                        class="action-button finance"
+                        onclick="ouvrirFinances('${echapper(
+                            chantier.id
+                        )}')">
+
+                        💰 Budget & rentabilité
+
+                    </button>
+
+
+                    <button
+                        class="action-button delete full"
                         onclick="supprimerChantier('${echapper(
                             chantier.id
                         )}')">
@@ -1542,6 +2691,7 @@ function afficherChantiers(){
                         🗑️ Supprimer
 
                     </button>
+
 
                 </div>
 
@@ -1554,59 +2704,6 @@ function afficherChantiers(){
 
         }
     );
-
-}
-
-
-/* =====================================================
-   TROUVER CLIENT POUR CHANTIER
-===================================================== */
-
-function trouverClientPourChantier(
-    chantier
-){
-
-    const clients =
-        obtenirClients();
-
-
-    if(
-        chantier.clientId
-    ){
-
-        const parId =
-            clients.find(
-                client =>
-                    String(client.id) ===
-                    String(
-                        chantier.clientId
-                    )
-            );
-
-        if(parId){
-            return parId;
-        }
-
-    }
-
-
-    if(
-        chantier.client
-    ){
-
-        const parNom =
-            trouverClientParNom(
-                chantier.client
-            );
-
-        if(parNom){
-            return parNom;
-        }
-
-    }
-
-
-    return null;
 
 }
 
@@ -1667,11 +2764,6 @@ function modifierChantier(
         chantier.clientId ||
         "";
 
-
-    /*
-       Compatibilité avec les anciens
-       chantiers qui n'avaient pas clientId.
-    */
 
     if(!clientId){
 
@@ -1745,7 +2837,7 @@ function modifierChantier(
 
 
 /* =====================================================
-   SUPPRIMER
+   SUPPRIMER CHANTIER
 ===================================================== */
 
 function supprimerChantier(
@@ -1808,6 +2900,30 @@ function supprimerChantier(
     );
 
 
+    /*
+       Suppression des finances
+       liées au chantier supprimé.
+    */
+
+    const finances =
+        obtenirFinances();
+
+
+    const nouvellesFinances =
+        finances.filter(
+            operation =>
+                String(
+                    operation.chantierId
+                ) !==
+                String(id)
+        );
+
+
+    sauvegarderFinances(
+        nouvellesFinances
+    );
+
+
     afficherChantiers();
 
 
@@ -1820,7 +2936,7 @@ function supprimerChantier(
 
 
 /* =====================================================
-   ENREGISTREMENT
+   ENREGISTREMENT CHANTIER
 ===================================================== */
 
 formulaire.addEventListener(
@@ -1888,12 +3004,6 @@ formulaire.addEventListener(
         }
 
 
-        /*
-           Si modification :
-           on conserve la date de création
-           existante.
-        */
-
         let ancienChantier =
             null;
 
@@ -1925,24 +3035,10 @@ formulaire.addEventListener(
                 genererId(),
 
             nom:
-
                 nom,
-
-            /*
-               IMPORTANT :
-               clientId permet maintenant
-               de relier réellement le
-               chantier au client.
-            */
 
             clientId:
                 client.id,
-
-            /*
-               On conserve également
-               le nom pour compatibilité
-               avec l'ancien BATIFLOW.
-            */
 
             client:
                 client.nom || "",
@@ -1954,41 +3050,34 @@ formulaire.addEventListener(
                 client.entreprise || "",
 
             localisation:
-
                 localisation,
 
             dateDebut:
-
                 document.getElementById(
                     "dateDebut"
                 ).value,
 
             dateFin:
-
                 document.getElementById(
                     "dateFin"
                 ).value,
 
             budget:
-
                 document.getElementById(
                     "budget"
                 ).value,
 
             avancement:
-
                 document.getElementById(
                     "avancement"
                 ).value,
 
             statut:
-
                 document.getElementById(
                     "statut"
                 ).value,
 
             notes:
-
                 document.getElementById(
                     "notes"
                 ).value.trim(),
@@ -2003,7 +3092,6 @@ formulaire.addEventListener(
                     : maintenant,
 
             updatedAt:
-
                 maintenant
 
         };
@@ -2079,7 +3167,859 @@ formulaire.addEventListener(
 
 
 /* =====================================================
-   EVENEMENTS
+   OUVRIR FINANCES
+===================================================== */
+
+function ouvrirFinances(
+    chantierId
+){
+
+    const chantiers =
+        obtenirChantiers();
+
+
+    const chantier =
+        chantiers.find(
+            item =>
+                String(item.id) ===
+                String(chantierId)
+        );
+
+
+    if(!chantier){
+
+        afficherToast(
+            "❌ Chantier introuvable.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    chantierFinanceActuel =
+        chantier.id;
+
+
+    financeModal.classList.add(
+        "active"
+    );
+
+
+    document.getElementById(
+        "depenseDate"
+    ).value =
+        obtenirDateAujourdhui();
+
+
+    document.getElementById(
+        "recetteDate"
+    ).value =
+        obtenirDateAujourdhui();
+
+
+    afficherFinances(
+        chantier
+    );
+
+}
+
+
+/* =====================================================
+   FERMER FINANCES
+===================================================== */
+
+function fermerFinances(){
+
+    financeModal.classList.remove(
+        "active"
+    );
+
+    chantierFinanceActuel =
+        null;
+
+}
+
+
+/* =====================================================
+   DATE DU JOUR
+===================================================== */
+
+function obtenirDateAujourdhui(){
+
+    const maintenant =
+        new Date();
+
+    const annee =
+        maintenant.getFullYear();
+
+    const mois =
+        String(
+            maintenant.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const jour =
+        String(
+            maintenant.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    return (
+        annee +
+        "-" +
+        mois +
+        "-" +
+        jour
+    );
+
+}
+
+
+/* =====================================================
+   AFFICHER FINANCES
+===================================================== */
+
+function afficherFinances(
+    chantier
+){
+
+    const finance =
+        calculerFinancesChantier(
+            chantier
+        );
+
+
+    const client =
+        trouverClientPourChantier(
+            chantier
+        );
+
+
+    const nomClient =
+        client
+            ? client.nom
+            : (
+                chantier.client ||
+                "Client non renseigné"
+            );
+
+
+    financeProjectHeader.innerHTML = `
+
+        <h3>
+            ${echapper(
+                chantier.nom
+            )}
+        </h3>
+
+        <p>
+            👤 ${echapper(
+                nomClient
+            )}
+            &nbsp; • &nbsp;
+            📍 ${echapper(
+                chantier.localisation
+            )}
+        </p>
+
+    `;
+
+
+    financeDashboard.innerHTML = `
+
+        <div class="finance-box budget">
+
+            <small>
+                💰 Budget prévu
+            </small>
+
+            <strong>
+                ${formaterMontant(
+                    finance.budget
+                )}
+            </strong>
+
+        </div>
+
+
+        <div class="finance-box depenses">
+
+            <small>
+                💸 Dépenses
+            </small>
+
+            <strong>
+                ${formaterMontant(
+                    finance.depenses
+                )}
+            </strong>
+
+        </div>
+
+
+        <div class="finance-box recettes">
+
+            <small>
+                📥 Recettes
+            </small>
+
+            <strong>
+                ${formaterMontant(
+                    finance.recettes
+                )}
+            </strong>
+
+        </div>
+
+
+        <div class="finance-box resultat">
+
+            <small>
+                📊 Résultat
+            </small>
+
+            <strong class="${
+                finance.resultat >= 0
+                    ? "finance-positive"
+                    : "finance-negative"
+            }">
+
+                ${formaterMontant(
+                    finance.resultat
+                )}
+
+            </strong>
+
+        </div>
+
+    `;
+
+
+    let consommation =
+        finance.consommation;
+
+
+    if(
+        !Number.isFinite(
+            consommation
+        )
+    ){
+
+        consommation = 0;
+
+    }
+
+
+    const consommationWidth =
+        Math.min(
+            Math.max(
+                consommation,
+                0
+            ),
+            100
+        );
+
+
+    financePercent.textContent =
+        Math.round(
+            consommation
+        ) + " %";
+
+
+    financeProgressFill.style.width =
+        consommationWidth + "%";
+
+
+    financeProgressFill.className =
+        "finance-progress-fill";
+
+
+    if(
+        consommation > 100
+    ){
+
+        financeProgressFill.classList.add(
+            "danger"
+        );
+
+    }else if(
+        consommation >= 80
+    ){
+
+        financeProgressFill.classList.add(
+            "danger"
+        );
+
+    }else if(
+        consommation <= 50
+    ){
+
+        financeProgressFill.classList.add(
+            "success"
+        );
+
+    }
+
+
+    afficherOperations(
+        finance.operations
+    );
+
+}
+
+
+/* =====================================================
+   AFFICHER OPERATIONS
+===================================================== */
+
+function afficherOperations(
+    operations
+){
+
+    if(
+        operations.length === 0
+    ){
+
+        operationsList.innerHTML = `
+
+            <div class="no-operation">
+
+                📋 Aucune opération financière
+                enregistrée pour ce chantier.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const operationsTriees =
+        [...operations].sort(
+            function(a,b){
+
+                return new Date(
+                    b.dateCreation ||
+                    b.date
+                ) -
+                new Date(
+                    a.dateCreation ||
+                    a.date
+                );
+
+            }
+        );
+
+
+    operationsList.innerHTML =
+        "";
+
+
+    operationsTriees.forEach(
+        function(operation){
+
+            const date =
+                operation.date
+                    ? formaterDate(
+                        operation.date
+                    )
+                    : "Date non définie";
+
+
+            const estDepense =
+                operation.type ===
+                "depense";
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "operation";
+
+
+            div.innerHTML = `
+
+                <div class="operation-left">
+
+                    <div class="operation-icon ${
+                        estDepense
+                            ? "depense"
+                            : "recette"
+                    }">
+
+                        ${
+                            estDepense
+                                ? "💸"
+                                : "📥"
+                        }
+
+                    </div>
+
+
+                    <div class="operation-info">
+
+                        <strong>
+                            ${echapper(
+                                operation.libelle
+                            )}
+                        </strong>
+
+                        <small>
+
+                            ${echapper(
+                                operation.categorie ||
+                                "Autre"
+                            )}
+
+                            •
+                            ${echapper(
+                                date
+                            )}
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="operation-right">
+
+                    <span class="operation-amount ${
+                        estDepense
+                            ? "depense"
+                            : "recette"
+                    }">
+
+                        ${
+                            estDepense
+                                ? "-"
+                                : "+"
+                        }
+
+                        ${formaterMontant(
+                            operation.montant
+                        )}
+
+                    </span>
+
+
+                    <button
+                        class="delete-operation"
+                        title="Supprimer"
+                        onclick="supprimerOperation('${echapper(
+                            operation.id
+                        )}')">
+
+                        ×
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            operationsList.appendChild(
+                div
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   AJOUT DEPENSE
+===================================================== */
+
+depenseForm.addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+
+        if(!chantierFinanceActuel){
+
+            afficherToast(
+                "❌ Aucun chantier sélectionné.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const libelle =
+            document.getElementById(
+                "depenseLibelle"
+            ).value.trim();
+
+
+        const categorie =
+            document.getElementById(
+                "depenseCategorie"
+            ).value;
+
+
+        const montant =
+            Number(
+                document.getElementById(
+                    "depenseMontant"
+                ).value
+            );
+
+
+        const date =
+            document.getElementById(
+                "depenseDate"
+            ).value ||
+            obtenirDateAujourdhui();
+
+
+        if(!libelle){
+
+            afficherToast(
+                "⚠️ Veuillez saisir le libellé.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !montant ||
+            montant <= 0
+        ){
+
+            afficherToast(
+                "⚠️ Veuillez saisir un montant valide.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const finances =
+            obtenirFinances();
+
+
+        finances.push({
+
+            id:
+                genererFinanceId(),
+
+            chantierId:
+                chantierFinanceActuel,
+
+            type:
+                "depense",
+
+            libelle:
+                libelle,
+
+            categorie:
+                categorie,
+
+            montant:
+                montant,
+
+            date:
+                date,
+
+            dateCreation:
+                new Date().toISOString()
+
+        });
+
+
+        sauvegarderFinances(
+            finances
+        );
+
+
+        depenseForm.reset();
+
+
+        document.getElementById(
+            "depenseDate"
+        ).value =
+            obtenirDateAujourdhui();
+
+
+        const chantier =
+            obtenirChantiers().find(
+                item =>
+                    String(item.id) ===
+                    String(
+                        chantierFinanceActuel
+                    )
+            );
+
+
+        if(chantier){
+
+            afficherFinances(
+                chantier
+            );
+
+        }
+
+
+        afficherChantiers();
+
+
+        afficherToast(
+            "✅ Dépense enregistrée.",
+            "success"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   AJOUT RECETTE
+===================================================== */
+
+recetteForm.addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+
+        if(!chantierFinanceActuel){
+
+            afficherToast(
+                "❌ Aucun chantier sélectionné.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const libelle =
+            document.getElementById(
+                "recetteLibelle"
+            ).value.trim();
+
+
+        const categorie =
+            document.getElementById(
+                "recetteCategorie"
+            ).value;
+
+
+        const montant =
+            Number(
+                document.getElementById(
+                    "recetteMontant"
+                ).value
+            );
+
+
+        const date =
+            document.getElementById(
+                "recetteDate"
+            ).value ||
+            obtenirDateAujourdhui();
+
+
+        if(!libelle){
+
+            afficherToast(
+                "⚠️ Veuillez saisir le libellé.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !montant ||
+            montant <= 0
+        ){
+
+            afficherToast(
+                "⚠️ Veuillez saisir un montant valide.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const finances =
+            obtenirFinances();
+
+
+        finances.push({
+
+            id:
+                genererFinanceId(),
+
+            chantierId:
+                chantierFinanceActuel,
+
+            type:
+                "recette",
+
+            libelle:
+                libelle,
+
+            categorie:
+                categorie,
+
+            montant:
+                montant,
+
+            date:
+                date,
+
+            dateCreation:
+                new Date().toISOString()
+
+        });
+
+
+        sauvegarderFinances(
+            finances
+        );
+
+
+        recetteForm.reset();
+
+
+        document.getElementById(
+            "recetteDate"
+        ).value =
+            obtenirDateAujourdhui();
+
+
+        const chantier =
+            obtenirChantiers().find(
+                item =>
+                    String(item.id) ===
+                    String(
+                        chantierFinanceActuel
+                    )
+            );
+
+
+        if(chantier){
+
+            afficherFinances(
+                chantier
+            );
+
+        }
+
+
+        afficherChantiers();
+
+
+        afficherToast(
+            "✅ Recette enregistrée.",
+            "success"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   SUPPRIMER OPERATION
+===================================================== */
+
+function supprimerOperation(
+    operationId
+){
+
+    const confirmation =
+        confirm(
+            "Voulez-vous supprimer cette opération financière ?"
+        );
+
+
+    if(!confirmation){
+        return;
+    }
+
+
+    const finances =
+        obtenirFinances();
+
+
+    const nouvellesFinances =
+        finances.filter(
+            operation =>
+                String(operation.id) !==
+                String(operationId)
+        );
+
+
+    sauvegarderFinances(
+        nouvellesFinances
+    );
+
+
+    const chantier =
+        obtenirChantiers().find(
+            item =>
+                String(item.id) ===
+                String(
+                    chantierFinanceActuel
+                )
+        );
+
+
+    if(chantier){
+
+        afficherFinances(
+            chantier
+        );
+
+    }
+
+
+    afficherChantiers();
+
+
+    afficherToast(
+        "✅ Opération supprimée.",
+        "success"
+    );
+
+}
+
+
+/* =====================================================
+   EVENEMENTS CHANTIER
 ===================================================== */
 
 nouveauBtn.addEventListener(
@@ -2124,7 +4064,81 @@ modal.addEventListener(
 
 
 /* =====================================================
-   SYNCHRONISATION CLIENTS
+   EVENEMENTS FINANCE
+===================================================== */
+
+closeFinanceModal.addEventListener(
+    "click",
+    fermerFinances
+);
+
+
+financeModal.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            financeModal
+        ){
+
+            fermerFinances();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function afficherToast(
+    message,
+    type = "success"
+){
+
+    const container =
+        document.getElementById(
+            "toastContainer"
+        );
+
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+
+    toast.className =
+        "toast " +
+        type;
+
+
+    toast.textContent =
+        message;
+
+
+    container.appendChild(
+        toast
+    );
+
+
+    setTimeout(
+        function(){
+
+            toast.remove();
+
+        },
+        3500
+    );
+
+}
+
+
+/* =====================================================
+   SYNCHRONISATION
 ===================================================== */
 
 window.addEventListener(
@@ -2149,6 +4163,41 @@ window.addEventListener(
         ){
 
             afficherChantiers();
+
+        }
+
+
+        if(
+            event.key ===
+            FINANCE_STORAGE_KEY
+        ){
+
+            afficherChantiers();
+
+
+            if(
+                chantierFinanceActuel
+            ){
+
+                const chantier =
+                    obtenirChantiers().find(
+                        item =>
+                            String(item.id) ===
+                            String(
+                                chantierFinanceActuel
+                            )
+                    );
+
+
+                if(chantier){
+
+                    afficherFinances(
+                        chantier
+                    );
+
+                }
+
+            }
 
         }
 
