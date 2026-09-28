@@ -20,10 +20,6 @@ body{
     color:#111827;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
-
 .sidebar{
     position:fixed;
     left:0;
@@ -148,18 +144,10 @@ body{
     color:#94a3b8;
 }
 
-/* =========================
-   MAIN
-========================= */
-
 .main{
     margin-left:260px;
     min-height:100vh;
 }
-
-/* =========================
-   TOPBAR
-========================= */
 
 .topbar{
     height:75px;
@@ -183,7 +171,6 @@ body{
 .page-title{
     font-size:23px;
     font-weight:800;
-    color:#111827;
 }
 
 .page-subtitle{
@@ -223,10 +210,6 @@ body{
     cursor:pointer;
     font-size:20px;
 }
-
-/* =========================
-   CONTENT
-========================= */
 
 .content{
     padding:30px;
@@ -273,22 +256,29 @@ body{
     background:#d1d5db;
 }
 
+.btn-blue{
+    background:#eff6ff;
+    color:#2563eb;
+}
+
+.btn-green{
+    background:#ecfdf5;
+    color:#059669;
+}
+
+.btn-purple{
+    background:#f5f3ff;
+    color:#7c3aed;
+}
+
 .btn-danger{
     background:#fee2e2;
     color:#dc2626;
 }
 
-.btn-danger:hover{
-    background:#fecaca;
-}
-
-/* =========================
-   STATS
-========================= */
-
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
     gap:18px;
     margin-bottom:25px;
 }
@@ -312,6 +302,7 @@ body{
     justify-content:center;
     font-size:22px;
     background:#fff7ed;
+    flex:none;
 }
 
 .stat-label{
@@ -321,14 +312,9 @@ body{
 }
 
 .stat-value{
-    font-size:23px;
+    font-size:21px;
     font-weight:800;
-    color:#111827;
 }
-
-/* =========================
-   CLIENT GRID
-========================= */
 
 .clients-grid{
     display:grid;
@@ -380,7 +366,6 @@ body{
 .client-name{
     font-size:16px;
     font-weight:800;
-    color:#111827;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -400,7 +385,6 @@ body{
     border-radius:20px;
     font-size:10px;
     font-weight:bold;
-    white-space:nowrap;
 }
 
 .client-info{
@@ -429,39 +413,38 @@ body{
 
 .client-stats{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
     margin-top:15px;
 }
 
 .client-stat{
     background:#f8fafc;
     border-radius:8px;
-    padding:10px;
+    padding:9px 4px;
     text-align:center;
 }
 
 .client-stat-value{
-    font-size:16px;
+    font-size:15px;
     font-weight:800;
-    color:#111827;
 }
 
 .client-stat-label{
-    font-size:10px;
+    font-size:9px;
     color:#6b7280;
     margin-top:3px;
 }
 
 .client-actions{
     display:flex;
-    gap:8px;
+    gap:7px;
     margin-top:15px;
 }
 
 .client-actions button{
     flex:1;
-    padding:9px 7px;
+    padding:9px 5px;
     border:none;
     border-radius:7px;
     cursor:pointer;
@@ -483,10 +466,6 @@ body{
     background:#fef2f2;
     color:#dc2626;
 }
-
-/* =========================
-   EMPTY STATE
-========================= */
 
 .empty-state{
     background:white;
@@ -514,10 +493,6 @@ body{
     margin-bottom:20px;
 }
 
-/* =========================
-   MODAL
-========================= */
-
 .modal-overlay{
     position:fixed;
     inset:0;
@@ -536,7 +511,7 @@ body{
 .modal{
     background:white;
     width:100%;
-    max-width:650px;
+    max-width:850px;
     max-height:90vh;
     overflow-y:auto;
     border-radius:14px;
@@ -623,10 +598,6 @@ textarea.form-control{
     gap:10px;
 }
 
-/* =========================
-   DETAIL MODAL
-========================= */
-
 .detail-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -649,7 +620,6 @@ textarea.form-control{
 .detail-value{
     font-size:13px;
     font-weight:bold;
-    color:#111827;
     word-break:break-word;
 }
 
@@ -657,9 +627,98 @@ textarea.form-control{
     grid-column:1/-1;
 }
 
-/* =========================
-   TOAST
-========================= */
+.activity-section{
+    margin-top:22px;
+}
+
+.activity-title{
+    font-size:15px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.activity-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.activity-item{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:9px;
+    padding:12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.activity-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+}
+
+.activity-icon{
+    width:35px;
+    height:35px;
+    border-radius:8px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:none;
+}
+
+.activity-name{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.activity-meta{
+    font-size:11px;
+    color:#64748b;
+    margin-top:3px;
+}
+
+.activity-actions{
+    display:flex;
+    gap:5px;
+    flex:none;
+}
+
+.activity-btn{
+    border:none;
+    border-radius:6px;
+    padding:7px 9px;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.total-client-box{
+    margin-top:15px;
+    background:#101827;
+    color:white;
+    border-radius:10px;
+    padding:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.total-client-label{
+    font-size:12px;
+    color:#cbd5e1;
+}
+
+.total-client-value{
+    font-size:20px;
+    font-weight:900;
+    color:#f28c28;
+}
 
 .toast{
     position:fixed;
@@ -690,17 +749,17 @@ textarea.form-control{
     border-left:4px solid #ef4444;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+@media(max-width:1400px){
+
+    .stats{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
 
 @media(max-width:1200px){
 
     .clients-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .stats{
         grid-template-columns:repeat(2,1fr);
     }
 
@@ -787,6 +846,15 @@ textarea.form-control{
         grid-column:auto;
     }
 
+    .client-stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .activity-item{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
 }
 
 </style>
@@ -795,17 +863,15 @@ textarea.form-control{
 
 <body>
 
-<!-- =========================
-     SIDEBAR
-========================= -->
-
 <aside class="sidebar" id="sidebar">
 
     <div class="logo">
         <div class="logo-text">
             BATI<span>FLOW</span>
         </div>
-        <div class="logo-sub">BTP MANAGEMENT</div>
+        <div class="logo-sub">
+            BTP MANAGEMENT
+        </div>
     </div>
 
     <nav class="menu">
@@ -905,197 +971,184 @@ textarea.form-control{
 </aside>
 
 
-<!-- =========================
-     MAIN
-========================= -->
-
 <main class="main">
 
-    <!-- TOPBAR -->
+<header class="topbar">
 
-    <header class="topbar">
+    <div class="topbar-left">
 
-        <div class="topbar-left">
+        <button
+            class="menu-toggle"
+            onclick="toggleSidebar()"
+        >
+            ☰
+        </button>
 
-            <button
-                class="menu-toggle"
-                onclick="toggleSidebar()"
-            >
-                ☰
-            </button>
+        <div>
+
+            <div class="page-title">
+                Clients
+            </div>
+
+            <div class="page-subtitle">
+                Clients, chantiers, DQE et devis
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="search-box">
+
+        🔎
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Rechercher un client..."
+            oninput="rechercherClients()"
+        >
+
+    </div>
+
+</header>
+
+
+<section class="content">
+
+    <div class="action-bar">
+
+        <div class="action-description">
+            Centralisez vos clients et suivez toute leur activité dans BATIFLOW.
+        </div>
+
+        <button
+            class="btn btn-primary"
+            onclick="nouveauClient()"
+        >
+            ＋ Nouveau client
+        </button>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">👥</div>
 
             <div>
-
-                <div class="page-title">
-                    Clients
+                <div class="stat-label">
+                    Total clients
                 </div>
 
-                <div class="page-subtitle">
-                    Gérez vos clients et leurs informations
+                <div
+                    class="stat-value"
+                    id="statTotal"
+                >
+                    0
                 </div>
-
-            </div>
-
-        </div>
-
-        <div class="search-box">
-
-            🔎
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Rechercher un client..."
-                oninput="rechercherClients()"
-            >
-
-        </div>
-
-    </header>
-
-
-    <!-- CONTENT -->
-
-    <section class="content">
-
-        <div class="action-bar">
-
-            <div class="action-description">
-                Centralisez vos clients, entreprises et contacts liés à vos chantiers.
-            </div>
-
-            <button
-                class="btn btn-primary"
-                onclick="nouveauClient()"
-            >
-                ＋ Nouveau client
-            </button>
-
-        </div>
-
-
-        <!-- =========================
-             STATISTIQUES
-        ========================= -->
-
-        <div class="stats">
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    👥
-                </div>
-
-                <div>
-
-                    <div class="stat-label">
-                        Total clients
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="statTotal"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    👤
-                </div>
-
-                <div>
-
-                    <div class="stat-label">
-                        Particuliers
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="statParticuliers"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    🏢
-                </div>
-
-                <div>
-
-                    <div class="stat-label">
-                        Entreprises
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="statEntreprises"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    🏗️
-                </div>
-
-                <div>
-
-                    <div class="stat-label">
-                        Chantiers liés
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="statChantiers"
-                    >
-                        0
-                    </div>
-
-                </div>
-
             </div>
 
         </div>
 
 
-        <!-- =========================
-             CLIENTS
-        ========================= -->
+        <div class="stat-card">
 
-        <div
-            class="clients-grid"
-            id="clientsGrid"
-        >
+            <div class="stat-icon">👤</div>
+
+            <div>
+                <div class="stat-label">
+                    Particuliers
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statParticuliers"
+                >
+                    0
+                </div>
+            </div>
+
         </div>
 
-    </section>
+
+        <div class="stat-card">
+
+            <div class="stat-icon">🏢</div>
+
+            <div>
+                <div class="stat-label">
+                    Entreprises
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statEntreprises"
+                >
+                    0
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">🏗️</div>
+
+            <div>
+                <div class="stat-label">
+                    Chantiers liés
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statChantiers"
+                >
+                    0
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">🧾</div>
+
+            <div>
+                <div class="stat-label">
+                    Devis
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="statDevis"
+                >
+                    0
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="clients-grid"
+        id="clientsGrid"
+    ></div>
+
+</section>
 
 </main>
 
 
-<!-- =========================
+<!-- =====================================================
      MODAL CLIENT
-========================= -->
+===================================================== -->
 
 <div
     class="modal-overlay"
@@ -1103,210 +1156,209 @@ textarea.form-control{
     onclick="fermerModalExterne(event)"
 >
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-header">
+    <div class="modal-header">
 
-            <div
-                class="modal-title"
-                id="modalTitle"
-            >
-                Nouveau client
-            </div>
-
-            <button
-                class="modal-close"
-                onclick="fermerModal()"
-            >
-                ×
-            </button>
-
+        <div
+            class="modal-title"
+            id="modalTitle"
+        >
+            Nouveau client
         </div>
 
+        <button
+            class="modal-close"
+            onclick="fermerModal()"
+        >
+            ×
+        </button>
 
-        <div class="modal-body">
+    </div>
 
-            <form
-                id="clientForm"
-                onsubmit="enregistrerClient(event)"
+
+    <div class="modal-body">
+
+        <form
+            id="clientForm"
+            onsubmit="enregistrerClient(event)"
+        >
+
+            <input
+                type="hidden"
+                id="clientId"
             >
 
-                <input
-                    type="hidden"
-                    id="clientId"
-                >
+            <div class="form-grid">
 
+                <div class="form-group">
 
-                <div class="form-grid">
+                    <label class="form-label">
+                        Nom complet *
+                    </label>
 
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Nom complet *
-                        </label>
-
-                        <input
-                            type="text"
-                            id="clientNom"
-                            class="form-control"
-                            placeholder="Ex : Jean Dupont"
-                            required
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Type de client
-                        </label>
-
-                        <select
-                            id="clientType"
-                            class="form-control"
-                        >
-
-                            <option value="Particulier">
-                                Particulier
-                            </option>
-
-                            <option value="Entreprise">
-                                Entreprise
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Entreprise
-                        </label>
-
-                        <input
-                            type="text"
-                            id="clientEntreprise"
-                            class="form-control"
-                            placeholder="Nom de l'entreprise"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Téléphone
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="clientTelephone"
-                            class="form-control"
-                            placeholder="+228 XX XX XX XX"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            WhatsApp
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="clientWhatsapp"
-                            class="form-control"
-                            placeholder="+228 XX XX XX XX"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Email
-                        </label>
-
-                        <input
-                            type="email"
-                            id="clientEmail"
-                            class="form-control"
-                            placeholder="client@email.com"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group full">
-
-                        <label class="form-label">
-                            Adresse
-                        </label>
-
-                        <input
-                            type="text"
-                            id="clientAdresse"
-                            class="form-control"
-                            placeholder="Adresse du client"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group full">
-
-                        <label class="form-label">
-                            Notes
-                        </label>
-
-                        <textarea
-                            id="clientNotes"
-                            class="form-control"
-                            placeholder="Informations complémentaires..."
-                        ></textarea>
-
-                    </div>
+                    <input
+                        type="text"
+                        id="clientNom"
+                        class="form-control"
+                        placeholder="Ex : Jean Dupont"
+                        required
+                    >
 
                 </div>
 
-            </form>
 
-        </div>
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Type de client
+                    </label>
+
+                    <select
+                        id="clientType"
+                        class="form-control"
+                    >
+
+                        <option value="Particulier">
+                            Particulier
+                        </option>
+
+                        <option value="Entreprise">
+                            Entreprise
+                        </option>
+
+                    </select>
+
+                </div>
 
 
-        <div class="modal-footer">
+                <div class="form-group">
 
-            <button
-                class="btn btn-secondary"
-                onclick="fermerModal()"
-            >
-                Annuler
-            </button>
+                    <label class="form-label">
+                        Entreprise
+                    </label>
 
-            <button
-                class="btn btn-primary"
-                onclick="document.getElementById('clientForm').requestSubmit()"
-            >
-                💾 Enregistrer
-            </button>
+                    <input
+                        type="text"
+                        id="clientEntreprise"
+                        class="form-control"
+                        placeholder="Nom de l'entreprise"
+                    >
 
-        </div>
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Téléphone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="clientTelephone"
+                        class="form-control"
+                        placeholder="+228 XX XX XX XX"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        WhatsApp
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="clientWhatsapp"
+                        class="form-control"
+                        placeholder="+228 XX XX XX XX"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="clientEmail"
+                        class="form-control"
+                        placeholder="client@email.com"
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label class="form-label">
+                        Adresse
+                    </label>
+
+                    <input
+                        type="text"
+                        id="clientAdresse"
+                        class="form-control"
+                        placeholder="Adresse du client"
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label class="form-label">
+                        Notes
+                    </label>
+
+                    <textarea
+                        id="clientNotes"
+                        class="form-control"
+                        placeholder="Informations complémentaires..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+        <button
+            class="btn btn-secondary"
+            onclick="fermerModal()"
+        >
+            Annuler
+        </button>
+
+        <button
+            class="btn btn-primary"
+            onclick="document.getElementById('clientForm').requestSubmit()"
+        >
+            💾 Enregistrer
+        </button>
 
     </div>
 
 </div>
 
+</div>
 
-<!-- =========================
-     MODAL DETAILS
-========================= -->
+
+<!-- =====================================================
+     MODAL ACTIVITE CLIENT
+===================================================== -->
 
 <div
     class="modal-overlay"
@@ -1314,99 +1366,101 @@ textarea.form-control{
     onclick="fermerDetailExterne(event)"
 >
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-header">
+    <div class="modal-header">
 
-            <div class="modal-title">
-                Détails du client
-            </div>
-
-            <button
-                class="modal-close"
-                onclick="fermerDetailModal()"
-            >
-                ×
-            </button>
-
+        <div class="modal-title">
+            Activité du client
         </div>
 
-        <div
-            class="modal-body"
-            id="detailContent"
+        <button
+            class="modal-close"
+            onclick="fermerDetailModal()"
         >
-        </div>
+            ×
+        </button>
 
-        <div class="modal-footer">
+    </div>
 
-            <button
-                class="btn btn-secondary"
-                onclick="fermerDetailModal()"
-            >
-                Fermer
-            </button>
 
-            <button
-                class="btn btn-primary"
-                id="detailEditButton"
-                onclick="modifierDepuisModal()"
-            >
-                ✏️ Modifier
-            </button>
+    <div
+        class="modal-body"
+        id="detailContent"
+    ></div>
 
-        </div>
+
+    <div class="modal-footer">
+
+        <button
+            class="btn btn-secondary"
+            onclick="fermerDetailModal()"
+        >
+            Fermer
+        </button>
+
+        <button
+            class="btn btn-primary"
+            id="detailEditButton"
+            onclick="modifierDepuisModal()"
+        >
+            ✏️ Modifier le client
+        </button>
 
     </div>
 
 </div>
 
+</div>
 
-<!-- =========================
-     TOAST
-========================= -->
 
 <div
     class="toast"
     id="toast"
->
-</div>
+></div>
 
 
 <script>
 
 /* =====================================================
-   BATIFLOW - GESTION CLIENTS
+   STOCKAGE
 ===================================================== */
 
 const CLIENT_STORAGE_KEY = "batiflowClients";
 const CHANTIER_STORAGE_KEY = "batiflowChantiers";
 const DQE_STORAGE_KEY = "batiflowDQEs";
+const DEVIS_STORAGE_KEY = "batiflowDevis";
 
 let clientDetailId = null;
 
 
 /* =====================================================
-   OUTILS
+   LECTURE STOCKAGE
 ===================================================== */
 
-function obtenirClients(){
+function lireStockage(key){
 
     try{
 
-        const data = localStorage.getItem(CLIENT_STORAGE_KEY);
+        const data =
+            localStorage.getItem(key);
 
         if(!data){
             return [];
         }
 
-        const clients = JSON.parse(data);
+        const result =
+            JSON.parse(data);
 
-        return Array.isArray(clients) ? clients : [];
+        return Array.isArray(result)
+            ? result
+            : [];
 
     }catch(error){
 
         console.error(
-            "Erreur lecture clients :",
+            "Erreur stockage :",
+            key,
             error
         );
 
@@ -1414,6 +1468,26 @@ function obtenirClients(){
 
     }
 
+}
+
+
+function obtenirClients(){
+    return lireStockage(CLIENT_STORAGE_KEY);
+}
+
+
+function obtenirChantiers(){
+    return lireStockage(CHANTIER_STORAGE_KEY);
+}
+
+
+function obtenirDQEs(){
+    return lireStockage(DQE_STORAGE_KEY);
+}
+
+
+function obtenirDevis(){
+    return lireStockage(DEVIS_STORAGE_KEY);
 }
 
 
@@ -1427,63 +1501,9 @@ function sauvegarderClients(clients){
 }
 
 
-function obtenirChantiers(){
-
-    try{
-
-        const data = localStorage.getItem(
-            CHANTIER_STORAGE_KEY
-        );
-
-        if(!data){
-            return [];
-        }
-
-        const chantiers = JSON.parse(data);
-
-        return Array.isArray(chantiers)
-            ? chantiers
-            : [];
-
-    }catch(error){
-
-        console.error(error);
-
-        return [];
-
-    }
-
-}
-
-
-function obtenirDQEs(){
-
-    try{
-
-        const data = localStorage.getItem(
-            DQE_STORAGE_KEY
-        );
-
-        if(!data){
-            return [];
-        }
-
-        const dqes = JSON.parse(data);
-
-        return Array.isArray(dqes)
-            ? dqes
-            : [];
-
-    }catch(error){
-
-        console.error(error);
-
-        return [];
-
-    }
-
-}
-
+/* =====================================================
+   OUTILS
+===================================================== */
 
 function genererId(){
 
@@ -1517,8 +1537,8 @@ function obtenirInitiales(nom){
         return "CL";
     }
 
-    const mots = nom
-        .trim()
+    const mots =
+        nom.trim()
         .split(/\s+/)
         .filter(Boolean);
 
@@ -1546,14 +1566,15 @@ function dateLisible(date){
 
     try{
 
-        return new Date(date).toLocaleDateString(
-            "fr-FR",
-            {
-                day:"2-digit",
-                month:"2-digit",
-                year:"numeric"
-            }
-        );
+        return new Date(date)
+            .toLocaleDateString(
+                "fr-FR",
+                {
+                    day:"2-digit",
+                    month:"2-digit",
+                    year:"numeric"
+                }
+            );
 
     }catch(error){
 
@@ -1564,86 +1585,132 @@ function dateLisible(date){
 }
 
 
-/* =====================================================
-   LIENS CHANTIERS
-===================================================== */
+function montant(value){
 
-function nombreChantiersClient(client){
+    const n =
+        Number(value) || 0;
 
-    const chantiers = obtenirChantiers();
-
-    if(!client){
-        return 0;
-    }
-
-    return chantiers.filter(chantier => {
-
-        if(
-            chantier.clientId !== undefined &&
-            chantier.clientId !== null &&
-            String(chantier.clientId) === String(client.id)
-        ){
-            return true;
+    return n.toLocaleString(
+        "fr-FR",
+        {
+            minimumFractionDigits:0,
+            maximumFractionDigits:0
         }
-
-        const clientNom =
-            chantier.client ||
-            chantier.clientNom ||
-            chantier.nomClient ||
-            "";
-
-        if(
-            clientNom &&
-            client.nom &&
-            clientNom.toLowerCase().trim() ===
-            client.nom.toLowerCase().trim()
-        ){
-            return true;
-        }
-
-        return false;
-
-    }).length;
+    ) + " FCFA";
 
 }
 
 
-function nombreDQEsClient(client){
+/* =====================================================
+   VERIFICATION CLIENT
+===================================================== */
 
-    const dqes = obtenirDQEs();
+function correspondClient(element,client){
 
-    if(!client){
-        return 0;
+    if(!element || !client){
+        return false;
     }
 
-    return dqes.filter(dqe => {
+    if(
+        element.clientId !== undefined &&
+        element.clientId !== null &&
+        String(element.clientId) === String(client.id)
+    ){
 
-        if(
-            dqe.clientId !== undefined &&
-            dqe.clientId !== null &&
-            String(dqe.clientId) === String(client.id)
-        ){
-            return true;
-        }
+        return true;
 
-        const clientNom =
-            dqe.client ||
-            dqe.clientNom ||
-            dqe.nomClient ||
-            "";
+    }
 
-        if(
-            clientNom &&
-            client.nom &&
-            clientNom.toLowerCase().trim() ===
-            client.nom.toLowerCase().trim()
-        ){
-            return true;
-        }
 
-        return false;
+    const nomElement =
+        element.client ||
+        element.clientNom ||
+        element.nomClient ||
+        "";
 
-    }).length;
+
+    if(
+        nomElement &&
+        client.nom &&
+        String(nomElement)
+            .toLowerCase()
+            .trim() ===
+        String(client.nom)
+            .toLowerCase()
+            .trim()
+    ){
+
+        return true;
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =====================================================
+   DONNEES DU CLIENT
+===================================================== */
+
+function chantiersClient(client){
+
+    return obtenirChantiers()
+        .filter(
+            chantier =>
+                correspondClient(
+                    chantier,
+                    client
+                )
+        );
+
+}
+
+
+function dqesClient(client){
+
+    return obtenirDQEs()
+        .filter(
+            dqe =>
+                correspondClient(
+                    dqe,
+                    client
+                )
+        );
+
+}
+
+
+function devisClient(client){
+
+    return obtenirDevis()
+        .filter(
+            devis =>
+                correspondClient(
+                    devis,
+                    client
+                )
+        );
+
+}
+
+
+function totalDevisClient(client){
+
+    return devisClient(client)
+        .reduce(
+            (total,devis) =>
+                total +
+                (
+                    Number(
+                        devis.totalTTC ||
+                        devis.total ||
+                        0
+                    ) || 0
+                ),
+            0
+        );
 
 }
 
@@ -1680,17 +1747,12 @@ function nouveauClient(){
 
     viderFormulaire();
 
-    document.getElementById("modalTitle").textContent =
+    document.getElementById("modalTitle")
+        .textContent =
         "Nouveau client";
 
     document.getElementById("clientModal")
         .classList.add("show");
-
-    setTimeout(() => {
-
-        document.getElementById("clientNom").focus();
-
-    },100);
 
 }
 
@@ -1733,7 +1795,8 @@ function enregistrerClient(event){
 
     const nom =
         document.getElementById("clientNom")
-        .value.trim();
+        .value
+        .trim();
 
     if(!nom){
 
@@ -1747,66 +1810,83 @@ function enregistrerClient(event){
     }
 
 
-    let clients = obtenirClients();
+    let clients =
+        obtenirClients();
 
     const id =
-        document.getElementById("clientId").value.trim();
+        document.getElementById("clientId")
+        .value
+        .trim();
 
-    const now = new Date().toISOString();
+    const now =
+        new Date().toISOString();
 
 
     const clientData = {
 
-        id: id || genererId(),
+        id:
+            id ||
+            genererId(),
 
-        nom: nom,
+        nom:nom,
 
         type:
-            document.getElementById("clientType").value ||
+            document.getElementById("clientType")
+            .value ||
             "Particulier",
 
         entreprise:
             document.getElementById("clientEntreprise")
-            .value.trim(),
+            .value
+            .trim(),
 
         telephone:
             document.getElementById("clientTelephone")
-            .value.trim(),
+            .value
+            .trim(),
 
         whatsapp:
             document.getElementById("clientWhatsapp")
-            .value.trim(),
+            .value
+            .trim(),
 
         email:
             document.getElementById("clientEmail")
-            .value.trim(),
+            .value
+            .trim(),
 
         adresse:
             document.getElementById("clientAdresse")
-            .value.trim(),
+            .value
+            .trim(),
 
         notes:
             document.getElementById("clientNotes")
-            .value.trim(),
+            .value
+            .trim(),
 
-        updatedAt: now
+        updatedAt:now
 
     };
 
 
     if(id){
 
-        const index = clients.findIndex(
-            client =>
-                String(client.id) === String(id)
-        );
+        const index =
+            clients.findIndex(
+                client =>
+                    String(client.id) ===
+                    String(id)
+            );
 
         if(index !== -1){
 
             clientData.createdAt =
-                clients[index].createdAt || now;
+                clients[index].createdAt ||
+                now;
 
-            clients[index] = clientData;
+            clients[index] =
+                clientData;
 
             afficherToast(
                 "Client modifié avec succès.",
@@ -1817,9 +1897,12 @@ function enregistrerClient(event){
 
     }else{
 
-        clientData.createdAt = now;
+        clientData.createdAt =
+            now;
 
-        clients.unshift(clientData);
+        clients.unshift(
+            clientData
+        );
 
         afficherToast(
             "Client ajouté avec succès.",
@@ -1841,7 +1924,26 @@ function enregistrerClient(event){
 
 
 /* =====================================================
-   AFFICHAGE
+   NOMBRE CHANTIERS / DQE / DEVIS
+===================================================== */
+
+function nombreChantiersClient(client){
+    return chantiersClient(client).length;
+}
+
+
+function nombreDQEsClient(client){
+    return dqesClient(client).length;
+}
+
+
+function nombreDevisClient(client){
+    return devisClient(client).length;
+}
+
+
+/* =====================================================
+   AFFICHAGE CLIENTS
 ===================================================== */
 
 function afficherClients(){
@@ -1855,30 +1957,36 @@ function afficherClients(){
         .toLowerCase()
         .trim();
 
-    let clients = obtenirClients();
+
+    let clients =
+        obtenirClients();
 
 
     if(recherche){
 
-        clients = clients.filter(client => {
+        clients =
+            clients.filter(client => {
 
-            const texte = [
+                const texte = [
 
-                client.nom,
-                client.entreprise,
-                client.telephone,
-                client.whatsapp,
-                client.email,
-                client.adresse
+                    client.nom,
+                    client.entreprise,
+                    client.telephone,
+                    client.whatsapp,
+                    client.email,
+                    client.adresse
 
-            ]
-            .filter(Boolean)
-            .join(" ")
-            .toLowerCase();
+                ]
+                .filter(Boolean)
+                .join(" ")
+                .toLowerCase();
 
-            return texte.includes(recherche);
 
-        });
+                return texte.includes(
+                    recherche
+                );
+
+            });
 
     }
 
@@ -1894,23 +2002,19 @@ function afficherClients(){
                 </div>
 
                 <div class="empty-title">
-
                     ${
                         recherche
                         ? "Aucun client trouvé"
                         : "Aucun client enregistré"
                     }
-
                 </div>
 
                 <div class="empty-text">
-
                     ${
                         recherche
                         ? "Essayez une autre recherche."
                         : "Commencez par ajouter votre premier client."
                     }
-
                 </div>
 
                 ${
@@ -1935,8 +2039,12 @@ function afficherClients(){
     }
 
 
-    grid.innerHTML = clients
-        .map(client => creerCarteClient(client))
+    grid.innerHTML =
+        clients
+        .map(
+            client =>
+                creerCarteClient(client)
+        )
         .join("");
 
 }
@@ -1950,32 +2058,65 @@ function creerCarteClient(client){
     const dqes =
         nombreDQEsClient(client);
 
+    const devis =
+        nombreDevisClient(client);
+
+    const total =
+        totalDevisClient(client);
+
+
     const nom =
-        echapper(client.nom || "Client");
+        echapper(
+            client.nom ||
+            "Client"
+        );
 
     const entreprise =
-        echapper(client.entreprise || "");
+        echapper(
+            client.entreprise ||
+            ""
+        );
 
     const telephone =
-        echapper(client.telephone || "");
+        echapper(
+            client.telephone ||
+            ""
+        );
 
     const whatsapp =
-        echapper(client.whatsapp || "");
+        echapper(
+            client.whatsapp ||
+            ""
+        );
 
     const email =
-        echapper(client.email || "");
+        echapper(
+            client.email ||
+            ""
+        );
 
     const adresse =
-        echapper(client.adresse || "");
+        echapper(
+            client.adresse ||
+            ""
+        );
 
     const type =
         echapper(
             client.type ||
-            (entreprise ? "Entreprise" : "Particulier")
+            (
+                entreprise
+                ? "Entreprise"
+                : "Particulier"
+            )
         );
 
     const initiales =
-        echapper(obtenirInitiales(client.nom));
+        echapper(
+            obtenirInitiales(
+                client.nom
+            )
+        );
 
 
     return `
@@ -2103,7 +2244,7 @@ function creerCarteClient(client){
                     </div>
 
                     <div class="client-stat-label">
-                        Chantier${chantiers > 1 ? "s" : ""}
+                        Chantiers
                     </div>
 
                 </div>
@@ -2121,6 +2262,35 @@ function creerCarteClient(client){
 
                 </div>
 
+
+                <div class="client-stat">
+
+                    <div class="client-stat-value">
+                        ${devis}
+                    </div>
+
+                    <div class="client-stat-label">
+                        Devis
+                    </div>
+
+                </div>
+
+
+                <div class="client-stat">
+
+                    <div
+                        class="client-stat-value"
+                        style="font-size:11px;"
+                    >
+                        ${montant(total)}
+                    </div>
+
+                    <div class="client-stat-label">
+                        Total TTC
+                    </div>
+
+                </div>
+
             </div>
 
 
@@ -2130,7 +2300,7 @@ function creerCarteClient(client){
                     class="btn-view"
                     onclick="consulterClient('${client.id}')"
                 >
-                    👁️ Voir
+                    👁️ Activité
                 </button>
 
                 <button
@@ -2162,14 +2332,14 @@ function creerCarteClient(client){
 
 function modifierClient(id){
 
-    const clients =
-        obtenirClients();
-
     const client =
-        clients.find(
+        obtenirClients()
+        .find(
             item =>
-                String(item.id) === String(id)
+                String(item.id) ===
+                String(id)
         );
+
 
     if(!client){
 
@@ -2183,9 +2353,12 @@ function modifierClient(id){
     }
 
 
-    chargerClientDansFormulaire(client);
+    chargerClientDansFormulaire(
+        client
+    );
 
-    document.getElementById("modalTitle").textContent =
+    document.getElementById("modalTitle")
+        .textContent =
         "Modifier le client";
 
     document.getElementById("clientModal")
@@ -2195,19 +2368,19 @@ function modifierClient(id){
 
 
 /* =====================================================
-   CONSULTER
+   ACTIVITE CLIENT
 ===================================================== */
 
 function consulterClient(id){
 
-    const clients =
-        obtenirClients();
-
     const client =
-        clients.find(
+        obtenirClients()
+        .find(
             item =>
-                String(item.id) === String(id)
+                String(item.id) ===
+                String(id)
         );
+
 
     if(!client){
 
@@ -2221,28 +2394,35 @@ function consulterClient(id){
     }
 
 
-    clientDetailId = client.id;
+    clientDetailId =
+        client.id;
 
 
     const chantiers =
-        nombreChantiersClient(client);
+        chantiersClient(client);
 
     const dqes =
-        nombreDQEsClient(client);
+        dqesClient(client);
+
+    const devis =
+        devisClient(client);
+
+    const total =
+        totalDevisClient(client);
 
 
-    const contenu = `
+    let contenu = `
 
         <div class="detail-grid">
 
             <div class="detail-item">
 
                 <div class="detail-label">
-                    Nom
+                    Client
                 </div>
 
                 <div class="detail-value">
-                    ${echapper(client.nom || "—")}
+                    ${echapper(client.nom)}
                 </div>
 
             </div>
@@ -2256,19 +2436,6 @@ function consulterClient(id){
 
                 <div class="detail-value">
                     ${echapper(client.type || "Particulier")}
-                </div>
-
-            </div>
-
-
-            <div class="detail-item">
-
-                <div class="detail-label">
-                    Entreprise
-                </div>
-
-                <div class="detail-value">
-                    ${echapper(client.entreprise || "—")}
                 </div>
 
             </div>
@@ -2313,6 +2480,19 @@ function consulterClient(id){
             </div>
 
 
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Entreprise
+                </div>
+
+                <div class="detail-value">
+                    ${echapper(client.entreprise || "—")}
+                </div>
+
+            </div>
+
+
             <div class="detail-item detail-full">
 
                 <div class="detail-label">
@@ -2325,68 +2505,360 @@ function consulterClient(id){
 
             </div>
 
+        </div>
 
-            <div class="detail-item">
 
-                <div class="detail-label">
-                    Chantiers liés
+        <div class="total-client-box">
+
+            <div>
+
+                <div class="total-client-label">
+                    Total des devis du client
                 </div>
 
-                <div class="detail-value">
-                    ${chantiers}
-                </div>
-
-            </div>
-
-
-            <div class="detail-item">
-
-                <div class="detail-label">
-                    DQE liés
-                </div>
-
-                <div class="detail-value">
-                    ${dqes}
+                <div style="font-size:11px;color:#94a3b8;margin-top:4px;">
+                    ${devis.length} devis enregistré(s)
                 </div>
 
             </div>
 
+            <div class="total-client-value">
+                ${montant(total)}
+            </div>
 
-            <div class="detail-item">
+        </div>
 
-                <div class="detail-label">
-                    Créé le
+    `;
+
+
+    /* =========================
+       CHANTIERS
+    ========================= */
+
+    contenu += `
+
+        <div class="activity-section">
+
+            <div class="activity-title">
+                🏗️ Chantiers liés (${chantiers.length})
+            </div>
+
+            <div class="activity-list">
+
+    `;
+
+
+    if(chantiers.length === 0){
+
+        contenu += `
+            <div class="activity-item">
+                <div class="activity-meta">
+                    Aucun chantier lié à ce client.
                 </div>
+            </div>
+        `;
 
-                <div class="detail-value">
-                    ${dateLisible(client.createdAt)}
-                </div>
+    }else{
+
+        chantiers.forEach(
+            chantier => {
+
+                const nom =
+                    chantier.nom ||
+                    chantier.nomChantier ||
+                    chantier.titre ||
+                    chantier.reference ||
+                    "Chantier sans nom";
+
+                const statut =
+                    chantier.statut ||
+                    chantier.status ||
+                    "—";
+
+                contenu += `
+
+                    <div class="activity-item">
+
+                        <div class="activity-left">
+
+                            <div class="activity-icon">
+                                🏗️
+                            </div>
+
+                            <div>
+
+                                <div class="activity-name">
+                                    ${echapper(nom)}
+                                </div>
+
+                                <div class="activity-meta">
+                                    Statut : ${echapper(statut)}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="activity-actions">
+
+                            <button
+                                class="activity-btn btn-blue"
+                                onclick="ouvrirChantier('${chantier.id || ""}')"
+                            >
+                                Ouvrir
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+    }
+
+
+    contenu += `
 
             </div>
 
+        </div>
 
-            <div class="detail-item">
+    `;
 
-                <div class="detail-label">
-                    Modifié le
+
+    /* =========================
+       DQE
+    ========================= */
+
+    contenu += `
+
+        <div class="activity-section">
+
+            <div class="activity-title">
+                📐 DQE liés (${dqes.length})
+            </div>
+
+            <div class="activity-list">
+
+    `;
+
+
+    if(dqes.length === 0){
+
+        contenu += `
+            <div class="activity-item">
+                <div class="activity-meta">
+                    Aucun DQE lié à ce client.
                 </div>
+            </div>
+        `;
 
-                <div class="detail-value">
-                    ${dateLisible(client.updatedAt || client.createdAt)}
-                </div>
+    }else{
+
+        dqes.forEach(
+            dqe => {
+
+                const reference =
+                    dqe.reference ||
+                    "DQE sans référence";
+
+                const totalDQE =
+                    Number(
+                        dqe.totalTTC ||
+                        dqe.totalHT ||
+                        0
+                    ) || 0;
+
+                contenu += `
+
+                    <div class="activity-item">
+
+                        <div class="activity-left">
+
+                            <div class="activity-icon">
+                                📐
+                            </div>
+
+                            <div>
+
+                                <div class="activity-name">
+                                    ${echapper(reference)}
+                                </div>
+
+                                <div class="activity-meta">
+                                    ${montant(totalDQE)}
+                                    · ${dateLisible(dqe.date)}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="activity-actions">
+
+                            <button
+                                class="activity-btn btn-purple"
+                                onclick="ouvrirDQE('${dqe.id}')"
+                            >
+                                Ouvrir
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+    }
+
+
+    contenu += `
 
             </div>
 
+        </div>
 
-            <div class="detail-item detail-full">
+    `;
 
-                <div class="detail-label">
-                    Notes
+
+    /* =========================
+       DEVIS
+    ========================= */
+
+    contenu += `
+
+        <div class="activity-section">
+
+            <div class="activity-title">
+                🧾 Devis liés (${devis.length})
+            </div>
+
+            <div class="activity-list">
+
+    `;
+
+
+    if(devis.length === 0){
+
+        contenu += `
+            <div class="activity-item">
+                <div class="activity-meta">
+                    Aucun devis lié à ce client.
                 </div>
+            </div>
+        `;
 
-                <div class="detail-value">
-                    ${echapper(client.notes || "Aucune note")}
-                </div>
+    }else{
+
+        devis.forEach(
+            devisItem => {
+
+                const reference =
+                    devisItem.reference ||
+                    "Devis sans référence";
+
+                const totalDevis =
+                    Number(
+                        devisItem.totalTTC ||
+                        devisItem.total ||
+                        0
+                    ) || 0;
+
+                contenu += `
+
+                    <div class="activity-item">
+
+                        <div class="activity-left">
+
+                            <div class="activity-icon">
+                                🧾
+                            </div>
+
+                            <div>
+
+                                <div class="activity-name">
+                                    ${echapper(reference)}
+                                </div>
+
+                                <div class="activity-meta">
+                                    ${montant(totalDevis)}
+                                    · ${dateLisible(devisItem.date)}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="activity-actions">
+
+                            <button
+                                class="activity-btn btn-green"
+                                onclick="ouvrirDevis('${devisItem.id}')"
+                            >
+                                Ouvrir
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+    }
+
+
+    contenu += `
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    contenu += `
+
+        <div class="activity-section">
+
+            <div class="activity-title">
+                ⚡ Actions rapides
+            </div>
+
+            <div style="
+                display:flex;
+                gap:8px;
+                flex-wrap:wrap;
+            ">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="creerDQEClient('${client.id}')"
+                >
+                    📐 Nouveau DQE
+                </button>
+
+                <button
+                    class="btn btn-green"
+                    onclick="creerDevisClient('${client.id}')"
+                >
+                    🧾 Nouveau devis
+                </button>
+
+                <button
+                    class="btn btn-blue"
+                    onclick="ouvrirChantiersClient('${client.id}')"
+                >
+                    🏗️ Voir chantiers
+                </button>
 
             </div>
 
@@ -2396,7 +2868,9 @@ function consulterClient(id){
 
 
     document.getElementById("detailContent")
-        .innerHTML = contenu;
+        .innerHTML =
+        contenu;
+
 
     document.getElementById("detailModal")
         .classList.add("show");
@@ -2405,7 +2879,142 @@ function consulterClient(id){
 
 
 /* =====================================================
-   MODIFIER DEPUIS DETAILS
+   OUVERTURE CHANTIER
+===================================================== */
+
+function ouvrirChantier(id){
+
+    if(!id){
+
+        window.location.href =
+            "chantiers.html";
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "batiflowChantierSelectionne",
+        String(id)
+    );
+
+    window.location.href =
+        "chantiers.html?voir=" +
+        encodeURIComponent(id);
+
+}
+
+
+/* =====================================================
+   OUVERTURE DQE
+===================================================== */
+
+function ouvrirDQE(id){
+
+    if(!id){
+
+        window.location.href =
+            "dqe.html";
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "batiflowDQESelectionne",
+        String(id)
+    );
+
+    window.location.href =
+        "dqe.html?voir=" +
+        encodeURIComponent(id);
+
+}
+
+
+/* =====================================================
+   OUVERTURE DEVIS
+===================================================== */
+
+function ouvrirDevis(id){
+
+    if(!id){
+
+        window.location.href =
+            "devis.html";
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "batiflowDevisSelectionne",
+        String(id)
+    );
+
+    window.location.href =
+        "devis.html?voir=" +
+        encodeURIComponent(id);
+
+}
+
+
+/* =====================================================
+   NOUVEAU DQE CLIENT
+===================================================== */
+
+function creerDQEClient(id){
+
+    localStorage.setItem(
+        "batiflowClientSelectionne",
+        String(id)
+    );
+
+    window.location.href =
+        "dqe.html?clientId=" +
+        encodeURIComponent(id);
+
+}
+
+
+/* =====================================================
+   NOUVEAU DEVIS CLIENT
+===================================================== */
+
+function creerDevisClient(id){
+
+    localStorage.setItem(
+        "batiflowClientSelectionne",
+        String(id)
+    );
+
+    window.location.href =
+        "devis.html?clientId=" +
+        encodeURIComponent(id);
+
+}
+
+
+/* =====================================================
+   CHANTIERS CLIENT
+===================================================== */
+
+function ouvrirChantiersClient(id){
+
+    localStorage.setItem(
+        "batiflowClientSelectionne",
+        String(id)
+    );
+
+    window.location.href =
+        "chantiers.html?clientId=" +
+        encodeURIComponent(id);
+
+}
+
+
+/* =====================================================
+   MODIFIER DEPUIS MODAL
 ===================================================== */
 
 function modifierDepuisModal(){
@@ -2416,7 +3025,9 @@ function modifierDepuisModal(){
 
     fermerDetailModal();
 
-    modifierClient(clientDetailId);
+    modifierClient(
+        clientDetailId
+    );
 
 }
 
@@ -2433,8 +3044,10 @@ function supprimerClient(id){
     const client =
         clients.find(
             item =>
-                String(item.id) === String(id)
+                String(item.id) ===
+                String(id)
         );
+
 
     if(!client){
         return;
@@ -2442,7 +3055,13 @@ function supprimerClient(id){
 
 
     const chantiers =
-        nombreChantiersClient(client);
+        chantiersClient(client);
+
+    const dqes =
+        dqesClient(client);
+
+    const devis =
+        devisClient(client);
 
 
     let message =
@@ -2451,21 +3070,22 @@ function supprimerClient(id){
         "\" ?";
 
 
-    if(chantiers > 0){
+    if(
+        chantiers.length ||
+        dqes.length ||
+        devis.length
+    ){
 
         message +=
-            "\n\nAttention : ce client est lié à " +
-            chantiers +
-            " chantier(s).";
+            "\n\nAttention : ce client possède :" +
+            "\n- " + chantiers.length + " chantier(s)" +
+            "\n- " + dqes.length + " DQE" +
+            "\n- " + devis.length + " devis";
 
     }
 
 
-    const confirmation =
-        confirm(message);
-
-
-    if(!confirmation){
+    if(!confirm(message)){
         return;
     }
 
@@ -2473,11 +3093,14 @@ function supprimerClient(id){
     const nouveauxClients =
         clients.filter(
             item =>
-                String(item.id) !== String(id)
+                String(item.id) !==
+                String(id)
         );
 
 
-    sauvegarderClients(nouveauxClients);
+    sauvegarderClients(
+        nouveauxClients
+    );
 
 
     afficherClients();
@@ -2513,62 +3136,75 @@ function actualiserStatistiques(){
     const clients =
         obtenirClients();
 
-    const chantiers =
-        obtenirChantiers();
-
-
     const particuliers =
-        clients.filter(client => {
-
-            const type =
-                client.type ||
-                "Particulier";
-
-            return type === "Particulier";
-
-        }).length;
+        clients.filter(
+            client =>
+                (
+                    client.type ||
+                    "Particulier"
+                ) ===
+                "Particulier"
+        ).length;
 
 
     const entreprises =
-        clients.filter(client => {
-
-            const type =
-                client.type ||
-                "";
-
-            return type === "Entreprise";
-
-        }).length;
-
-
-    let totalChantiersLies = 0;
+        clients.filter(
+            client =>
+                (
+                    client.type ||
+                    ""
+                ) ===
+                "Entreprise"
+        ).length;
 
 
-    clients.forEach(client => {
+    let totalChantiers = 0;
 
-        totalChantiersLies +=
-            nombreChantiersClient(client);
+    clients.forEach(
+        client => {
 
-    });
+            totalChantiers +=
+                nombreChantiersClient(
+                    client
+                );
+
+        }
+    );
+
+
+    const totalDevis =
+        obtenirDevis().length;
 
 
     document.getElementById("statTotal")
-        .textContent = clients.length;
+        .textContent =
+        clients.length;
+
 
     document.getElementById("statParticuliers")
-        .textContent = particuliers;
+        .textContent =
+        particuliers;
+
 
     document.getElementById("statEntreprises")
-        .textContent = entreprises;
+        .textContent =
+        entreprises;
+
 
     document.getElementById("statChantiers")
-        .textContent = totalChantiersLies;
+        .textContent =
+        totalChantiers;
+
+
+    document.getElementById("statDevis")
+        .textContent =
+        totalDevis;
 
 }
 
 
 /* =====================================================
-   MODAL
+   MODALS
 ===================================================== */
 
 function fermerModal(){
@@ -2581,7 +3217,10 @@ function fermerModal(){
 
 function fermerModalExterne(event){
 
-    if(event.target.id === "clientModal"){
+    if(
+        event.target.id ===
+        "clientModal"
+    ){
 
         fermerModal();
 
@@ -2602,7 +3241,10 @@ function fermerDetailModal(){
 
 function fermerDetailExterne(event){
 
-    if(event.target.id === "detailModal"){
+    if(
+        event.target.id ===
+        "detailModal"
+    ){
 
         fermerDetailModal();
 
@@ -2618,13 +3260,17 @@ function fermerDetailExterne(event){
 let toastTimer = null;
 
 
-function afficherToast(message,type="success"){
+function afficherToast(
+    message,
+    type="success"
+){
 
     const toast =
         document.getElementById("toast");
 
 
-    toast.textContent = message;
+    toast.textContent =
+        message;
 
 
     toast.className =
@@ -2633,15 +3279,21 @@ function afficherToast(message,type="success"){
         " show";
 
 
-    clearTimeout(toastTimer);
+    clearTimeout(
+        toastTimer
+    );
 
 
     toastTimer =
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            toast.classList.remove("show");
+                toast.classList
+                    .remove("show");
 
-        },3000);
+            },
+            3000
+        );
 
 }
 
@@ -2654,7 +3306,8 @@ function toggleSidebar(){
 
     document
         .getElementById("sidebar")
-        .classList.toggle("open");
+        .classList
+        .toggle("open");
 
 }
 
@@ -2687,13 +3340,18 @@ function chargerUtilisateur(){
             "BATIFLOW";
 
 
-        document.getElementById("userName")
-            .textContent = nom;
+        document.getElementById(
+            "userName"
+        ).textContent =
+            nom;
 
 
-        document.getElementById("userAvatar")
-            .textContent =
-                obtenirInitiales(nom);
+        document.getElementById(
+            "userAvatar"
+        ).textContent =
+            obtenirInitiales(
+                nom
+            );
 
     }catch(error){
 
@@ -2715,9 +3373,19 @@ window.addEventListener(
     function(event){
 
         if(
-            event.key === CLIENT_STORAGE_KEY ||
-            event.key === CHANTIER_STORAGE_KEY ||
-            event.key === DQE_STORAGE_KEY
+
+            event.key ===
+                CLIENT_STORAGE_KEY ||
+
+            event.key ===
+                CHANTIER_STORAGE_KEY ||
+
+            event.key ===
+                DQE_STORAGE_KEY ||
+
+            event.key ===
+                DEVIS_STORAGE_KEY
+
         ){
 
             afficherClients();
@@ -2747,14 +3415,17 @@ document.addEventListener(
 
 
 /* =====================================================
-   FERMER AVEC ESC
+   ESC
 ===================================================== */
 
 document.addEventListener(
     "keydown",
     function(event){
 
-        if(event.key === "Escape"){
+        if(
+            event.key ===
+            "Escape"
+        ){
 
             fermerModal();
 
@@ -2772,18 +3443,14 @@ document.addEventListener(
 
 function initialiser(){
 
+    chargerUtilisateur();
+
     afficherClients();
 
     actualiserStatistiques();
 
-    chargerUtilisateur();
-
 }
 
-
-/* =====================================================
-   LANCEMENT
-===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
