@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BATIFLOW — DQE</title>
 
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
@@ -32,8 +31,9 @@ body{
 }
 
 /* =========================
-   SIDEBAR — IDENTIQUE DASHBOARD
+   SIDEBAR
 ========================= */
+
 .sidebar{
     position:fixed;
     left:0;
@@ -75,7 +75,6 @@ body{
 }
 
 .batiflow-logo-text{
-    font-family:Inter,"Segoe UI",Arial,Helvetica,sans-serif;
     font-size:22px;
     line-height:1;
     font-weight:900;
@@ -149,8 +148,9 @@ body{
 .logout{margin-top:15px}
 
 /* =========================
-   MAIN / TOPBAR — DASHBOARD
+   MAIN
 ========================= */
+
 .main{
     margin-left:260px;
     min-height:100vh;
@@ -268,15 +268,13 @@ body{
 /* =========================
    CONTENT
 ========================= */
+
 .content{
     padding:30px;
     max-width:1600px;
     margin:auto;
 }
 
-/* =========================
-   STATS — DASHBOARD STYLE
-========================= */
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -305,9 +303,6 @@ body{
     color:#172033;
 }
 
-/* =========================
-   DQE GRID / CARDS
-========================= */
 .grid{
     display:grid;
     grid-template-columns:minmax(0,1.45fr) minmax(320px,.75fr);
@@ -337,13 +332,12 @@ body{
     font-weight:850;
 }
 
-.card-title::first-line{color:#172033}
-
 .card-body{padding:20px}
 
 /* =========================
    FORM
 ========================= */
+
 .form-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -391,8 +385,9 @@ textarea{
 }
 
 /* =========================
-   BUTTONS — ORANGE BATIFLOW
+   BUTTONS
 ========================= */
+
 .btn{
     border:0;
     border-radius:10px;
@@ -449,6 +444,7 @@ textarea{
 /* =========================
    TABLE
 ========================= */
+
 .table-wrap{overflow-x:auto}
 
 table{
@@ -503,6 +499,7 @@ td input,td select{
 /* =========================
    LISTE DQE
 ========================= */
+
 .search{max-width:300px}
 
 .dqe-list{
@@ -554,8 +551,75 @@ td input,td select{
 .status-annule{background:#fee2e2;color:#b91c1c}
 
 /* =========================
+   CHANTIER ACTIF
+========================= */
+
+.chantier-context{
+    display:none;
+    margin-bottom:20px;
+    border:1px solid #fed7aa;
+    background:linear-gradient(135deg,#fff7ed,#fffbeb);
+    border-radius:16px;
+    padding:16px 18px;
+}
+
+.chantier-context.show{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.chantier-context-left{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.chantier-context-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:#f59e0b;
+    color:#111827;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.chantier-context-title{
+    font-size:12px;
+    color:#92400e;
+    font-weight:700;
+}
+
+.chantier-context-name{
+    font-size:16px;
+    font-weight:900;
+    margin-top:2px;
+}
+
+.chantier-context-meta{
+    color:#78716c;
+    font-size:11px;
+    margin-top:3px;
+}
+
+.chantier-context-badge{
+    background:#f59e0b;
+    color:#111827;
+    padding:7px 10px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+/* =========================
    MODAL / TOAST
 ========================= */
+
 .modal{
     position:fixed;
     inset:0;
@@ -622,6 +686,7 @@ td input,td select{
 /* =========================
    MOBILE
 ========================= */
+
 @media(max-width:1100px){
     .grid{grid-template-columns:1fr}
     .stats{grid-template-columns:repeat(2,1fr)}
@@ -650,6 +715,11 @@ td input,td select{
     .form-grid{grid-template-columns:1fr}
 
     .form-group.full{grid-column:auto}
+
+    .chantier-context.show{
+        align-items:flex-start;
+        flex-direction:column;
+    }
 }
 
 @media(max-width:560px){
@@ -670,12 +740,13 @@ td input,td select{
 /* =========================
    IMPRESSION
 ========================= */
+
 .print-only{display:none}
 
 @media print{
     body{background:#fff}
 
-    .sidebar,.topbar,.no-print,.modal{
+    .sidebar,.topbar,.no-print,.modal,.chantier-context{
         display:none!important;
     }
 
@@ -694,36 +765,66 @@ td input,td select{
     }
 }
 </style>
-
 </head>
-
 
 <body>
 
-<!-- =========================================================
-     SIDEBAR — BATIFLOW DASHBOARD
-========================================================= -->
+<!-- SIDEBAR -->
 
 <aside class="sidebar" id="sidebar">
 
     <div class="sidebar-logo">
-        <a href="dashboard.html" class="batiflow-logo" aria-label="BATIFLOW - Tableau de bord">
 
-            <svg class="batiflow-logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="50" cy="50" r="45" fill="#111827" stroke="#F59E0B" stroke-width="2.5"/>
-                <path d="M25 69V39L50 22L75 39V69" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M50 30V69" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
-                <path d="M30 56C39 49 45 61 54 54C61 49 66 43 72 47" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
-                <circle cx="72" cy="47" r="4" fill="#F59E0B"/>
-                <path d="M22 72H78" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+        <a href="dashboard.html" class="batiflow-logo">
+
+            <svg class="batiflow-logo-icon" viewBox="0 0 100 100"
+                 xmlns="http://www.w3.org/2000/svg">
+
+                <circle cx="50" cy="50" r="45"
+                        fill="#111827"
+                        stroke="#F59E0B"
+                        stroke-width="2.5"/>
+
+                <path d="M25 69V39L50 22L75 39V69"
+                      fill="none"
+                      stroke="#FFFFFF"
+                      stroke-width="6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+
+                <path d="M50 30V69"
+                      fill="none"
+                      stroke="#F59E0B"
+                      stroke-width="5"
+                      stroke-linecap="round"/>
+
+                <path d="M30 56C39 49 45 61 54 54C61 49 66 43 72 47"
+                      fill="none"
+                      stroke="#F59E0B"
+                      stroke-width="5"
+                      stroke-linecap="round"/>
+
+                <circle cx="72" cy="47" r="4"
+                        fill="#F59E0B"/>
+
+                <path d="M22 72H78"
+                      fill="none"
+                      stroke="#FFFFFF"
+                      stroke-width="5"
+                      stroke-linecap="round"/>
+
             </svg>
 
             <span class="batiflow-logo-text">
                 <span class="bati">BATI</span><span class="flow">FLOW</span>
             </span>
 
-            <span class="batiflow-logo-subtitle">CONSTRUCTION MANAGEMENT</span>
+            <span class="batiflow-logo-subtitle">
+                CONSTRUCTION MANAGEMENT
+            </span>
+
         </a>
+
     </div>
 
     <nav class="nav">
@@ -740,7 +841,7 @@ td input,td select{
             Chantiers
         </a>
 
-        <a href="./dqe.html" class="nav-link active">
+        <a href="dqe.html" class="nav-link active">
             <span>📋</span>
             DQE &amp; Métré
         </a>
@@ -778,7 +879,7 @@ td input,td select{
 
         <div class="nav-title">Gestion</div>
 
-        <a href="./clients.html" class="nav-link">
+        <a href="clients.html" class="nav-link">
             <span>👥</span>
             Clients
         </a>
@@ -804,11 +905,10 @@ td input,td select{
         </a>
 
     </nav>
+
 </aside>
 
-<!-- =========================================================
-     MAIN
-========================================================= -->
+<!-- MAIN -->
 
 <main class="main">
 
@@ -816,7 +916,11 @@ td input,td select{
 
         <div class="topbar-left">
 
-            <button type="button" class="menu-btn" onclick="toggleMenu()">☰</button>
+            <button type="button"
+                    class="menu-btn"
+                    onclick="toggleMenu()">
+                ☰
+            </button>
 
             <div class="page-title">
                 DQE &amp; Métré
@@ -831,15 +935,31 @@ td input,td select{
         <div class="topbar-right">
 
             <div class="search-dashboard">
+
                 <span>🔎</span>
-                <input type="search" placeholder="Rechercher un DQE..." id="searchDashboard">
+
+                <input type="search"
+                       placeholder="Rechercher un DQE..."
+                       id="searchDashboard">
+
             </div>
 
-            <div class="notification">🔔</div>
+            <div class="notification">
+                🔔
+            </div>
 
             <div class="user">
-                <div class="user-name" id="userName">Utilisateur</div>
-                <div class="avatar" id="userAvatar">U</div>
+
+                <div class="user-name"
+                     id="userName">
+                    Utilisateur
+                </div>
+
+                <div class="avatar"
+                     id="userAvatar">
+                    U
+                </div>
+
             </div>
 
         </div>
@@ -848,10 +968,44 @@ td input,td select{
 
     <div class="content">
 
+        <!-- CONTEXTE CHANTIER -->
 
-        <!-- =================================================
-             STATS
-        ================================================== -->
+        <div class="chantier-context"
+             id="chantierContext">
+
+            <div class="chantier-context-left">
+
+                <div class="chantier-context-icon">
+                    🏗️
+                </div>
+
+                <div>
+
+                    <div class="chantier-context-title">
+                        DQE rattaché au chantier
+                    </div>
+
+                    <div class="chantier-context-name"
+                         id="chantierContextName">
+                        —
+                    </div>
+
+                    <div class="chantier-context-meta"
+                         id="chantierContextMeta">
+                        —
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="chantier-context-badge">
+                CHANTIER ACTIF
+            </div>
+
+        </div>
+
+        <!-- STATS -->
 
         <section class="stats">
 
@@ -861,14 +1015,12 @@ td input,td select{
                     TOTAL DQE
                 </div>
 
-                <div
-                    class="stat-value"
-                    id="statTotal">
+                <div class="stat-value"
+                     id="statTotal">
                     0
                 </div>
 
             </div>
-
 
             <div class="stat">
 
@@ -876,14 +1028,12 @@ td input,td select{
                     BROUILLONS
                 </div>
 
-                <div
-                    class="stat-value"
-                    id="statBrouillons">
+                <div class="stat-value"
+                     id="statBrouillons">
                     0
                 </div>
 
             </div>
-
 
             <div class="stat">
 
@@ -891,14 +1041,12 @@ td input,td select{
                     VALIDÉS
                 </div>
 
-                <div
-                    class="stat-value"
-                    id="statValides">
+                <div class="stat-value"
+                     id="statValides">
                     0
                 </div>
 
             </div>
-
 
             <div class="stat">
 
@@ -906,9 +1054,8 @@ td input,td select{
                     TOTAL TTC
                 </div>
 
-                <div
-                    class="stat-value"
-                    id="statTTC">
+                <div class="stat-value"
+                     id="statTTC">
                     0 FCFA
                 </div>
 
@@ -916,12 +1063,9 @@ td input,td select{
 
         </section>
 
-
         <div class="grid">
 
-            <!-- =================================================
-                 FORMULAIRE
-            ================================================== -->
+            <!-- FORMULAIRE -->
 
             <div>
 
@@ -929,23 +1073,20 @@ td input,td select{
 
                     <div class="card-header">
 
-                        <div
-                            class="card-title"
-                            id="formTitle">
+                        <div class="card-title"
+                             id="formTitle">
                             Nouveau DQE
                         </div>
 
                         <div class="actions no-print">
 
-                            <button
-                                class="btn btn-secondary btn-small"
-                                onclick="nouveauDQE()">
+                            <button class="btn btn-secondary btn-small"
+                                    onclick="nouveauDQE()">
                                 + Nouveau
                             </button>
 
-                            <button
-                                class="btn btn-success btn-small"
-                                onclick="enregistrerDQE(true)">
+                            <button class="btn btn-success btn-small"
+                                    onclick="enregistrerDQE(true)">
                                 💾 Enregistrer
                             </button>
 
@@ -953,17 +1094,12 @@ td input,td select{
 
                     </div>
 
-
                     <div class="card-body">
 
-                        <input
-                            type="hidden"
-                            id="dqeId">
-
+                        <input type="hidden"
+                               id="dqeId">
 
                         <div class="form-grid">
-
-                            <!-- REFERENCE -->
 
                             <div class="form-group">
 
@@ -971,15 +1107,11 @@ td input,td select{
                                     Référence
                                 </label>
 
-                                <input
-                                    type="text"
-                                    id="reference"
-                                    placeholder="DQE-2026-0001">
+                                <input type="text"
+                                       id="reference"
+                                       placeholder="DQE-2026-0001">
 
                             </div>
-
-
-                            <!-- DATE -->
 
                             <div class="form-group">
 
@@ -987,14 +1119,10 @@ td input,td select{
                                     Date
                                 </label>
 
-                                <input
-                                    type="date"
-                                    id="date">
+                                <input type="date"
+                                       id="date">
 
                             </div>
-
-
-                            <!-- NOM -->
 
                             <div class="form-group">
 
@@ -1002,15 +1130,11 @@ td input,td select{
                                     Nom du DQE *
                                 </label>
 
-                                <input
-                                    type="text"
-                                    id="nom"
-                                    placeholder="Ex : Construction villa R+1">
+                                <input type="text"
+                                       id="nom"
+                                       placeholder="Ex : Construction villa R+1">
 
                             </div>
-
-
-                            <!-- STATUT -->
 
                             <div class="form-group">
 
@@ -1036,9 +1160,6 @@ td input,td select{
 
                             </div>
 
-
-                            <!-- CLIENT -->
-
                             <div class="form-group">
 
                                 <label for="clientId">
@@ -1054,13 +1175,10 @@ td input,td select{
                                 </select>
 
                                 <span class="field-help">
-                                    Les clients viennent de la rubrique Clients.
+                                    Le client du chantier est sélectionné automatiquement.
                                 </span>
 
                             </div>
-
-
-                            <!-- CHANTIER -->
 
                             <div class="form-group">
 
@@ -1076,10 +1194,11 @@ td input,td select{
 
                                 </select>
 
+                                <span class="field-help">
+                                    Le chantier est automatiquement sélectionné lorsque le DQE est ouvert depuis un chantier.
+                                </span>
+
                             </div>
-
-
-                            <!-- LOCALISATION -->
 
                             <div class="form-group">
 
@@ -1087,15 +1206,11 @@ td input,td select{
                                     Localisation
                                 </label>
 
-                                <input
-                                    type="text"
-                                    id="localisation"
-                                    placeholder="Lomé, Agoè, Adétikopé...">
+                                <input type="text"
+                                       id="localisation"
+                                       placeholder="Lomé, Agoè, Adétikopé...">
 
                             </div>
-
-
-                            <!-- DUREE -->
 
                             <div class="form-group">
 
@@ -1103,15 +1218,11 @@ td input,td select{
                                     Durée prévue
                                 </label>
 
-                                <input
-                                    type="text"
-                                    id="duree"
-                                    placeholder="Ex : 6 mois">
+                                <input type="text"
+                                       id="duree"
+                                       placeholder="Ex : 6 mois">
 
                             </div>
-
-
-                            <!-- OBJET -->
 
                             <div class="form-group full">
 
@@ -1119,9 +1230,8 @@ td input,td select{
                                     Objet / Description
                                 </label>
 
-                                <textarea
-                                    id="objet"
-                                    placeholder="Description du projet ou objet du DQE..."></textarea>
+                                <textarea id="objet"
+                                          placeholder="Description du projet ou objet du DQE..."></textarea>
 
                             </div>
 
@@ -1131,10 +1241,7 @@ td input,td select{
 
                 </section>
 
-
-                <!-- =================================================
-                     LIGNES DQE
-                ================================================== -->
+                <!-- LIGNES -->
 
                 <section class="card">
 
@@ -1144,14 +1251,12 @@ td input,td select{
                             Détail quantitatif et estimatif
                         </div>
 
-                        <button
-                            class="btn btn-primary btn-small no-print"
-                            onclick="ajouterLigne()">
+                        <button class="btn btn-primary btn-small no-print"
+                                onclick="ajouterLigne()">
                             + Ajouter une ligne
                         </button>
 
                     </div>
-
 
                     <div class="card-body">
 
@@ -1163,32 +1268,19 @@ td input,td select{
 
                                     <tr>
 
-                                        <th style="width:45px">
-                                            N°
-                                        </th>
+                                        <th style="width:45px">N°</th>
 
-                                        <th>
-                                            Désignation
-                                        </th>
+                                        <th>Désignation</th>
 
-                                        <th style="width:90px">
-                                            Unité
-                                        </th>
+                                        <th style="width:90px">Unité</th>
 
-                                        <th style="width:100px">
-                                            Quantité
-                                        </th>
+                                        <th style="width:100px">Quantité</th>
 
-                                        <th style="width:130px">
-                                            Prix unitaire
-                                        </th>
+                                        <th style="width:130px">Prix unitaire</th>
 
-                                        <th style="width:140px">
-                                            Montant
-                                        </th>
+                                        <th style="width:140px">Montant</th>
 
-                                        <th style="width:45px">
-                                        </th>
+                                        <th style="width:45px"></th>
 
                                     </tr>
 
@@ -1200,14 +1292,11 @@ td input,td select{
 
                         </div>
 
-
                         <div class="total-box">
 
                             <div class="total-row">
 
-                                <span>
-                                    Total HT
-                                </span>
+                                <span>Total HT</span>
 
                                 <strong id="totalHT">
                                     0 FCFA
@@ -1215,25 +1304,19 @@ td input,td select{
 
                             </div>
 
-
                             <div class="total-row">
 
                                 <span>
 
                                     TVA
 
-                                    <input
-                                        id="tva"
-                                        type="number"
-                                        value="18"
-                                        min="0"
-                                        max="100"
-                                        style="
-                                            width:60px;
-                                            display:inline-block;
-                                            padding:5px;
-                                        "
-                                        oninput="calculerTotaux()">
+                                    <input id="tva"
+                                           type="number"
+                                           value="18"
+                                           min="0"
+                                           max="100"
+                                           style="width:60px;display:inline-block;padding:5px;"
+                                           oninput="calculerTotaux()">
 
                                     %
 
@@ -1245,12 +1328,9 @@ td input,td select{
 
                             </div>
 
-
                             <div class="total-row grand">
 
-                                <span>
-                                    Total TTC
-                                </span>
+                                <span>Total TTC</span>
 
                                 <strong id="totalTTC">
                                     0 FCFA
@@ -1264,10 +1344,7 @@ td input,td select{
 
                 </section>
 
-
-                <!-- =================================================
-                     ACTIONS
-                ================================================== -->
+                <!-- ACTIONS -->
 
                 <section class="card no-print">
 
@@ -1275,21 +1352,18 @@ td input,td select{
 
                         <div class="actions">
 
-                            <button
-                                class="btn btn-primary"
-                                onclick="enregistrerDQE(true)">
+                            <button class="btn btn-primary"
+                                    onclick="enregistrerDQE(true)">
                                 💾 Enregistrer le DQE
                             </button>
 
-                            <button
-                                class="btn btn-secondary"
-                                onclick="imprimerDQE()">
+                            <button class="btn btn-secondary"
+                                    onclick="imprimerDQE()">
                                 🖨 Imprimer / PDF
                             </button>
 
-                            <button
-                                class="btn btn-secondary"
-                                onclick="nouveauDQE()">
+                            <button class="btn btn-secondary"
+                                    onclick="nouveauDQE()">
                                 ↻ Nouveau DQE
                             </button>
 
@@ -1301,10 +1375,7 @@ td input,td select{
 
             </div>
 
-
-            <!-- =================================================
-                 COLONNE DROITE
-            ================================================== -->
+            <!-- COLONNE DROITE -->
 
             <div>
 
@@ -1318,21 +1389,18 @@ td input,td select{
 
                     </div>
 
-
                     <div class="card-body">
 
-                        <input
-                            type="search"
-                            id="searchDQE"
-                            class="search"
-                            placeholder="🔎 Rechercher..."
-                            oninput="afficherListeDQEs()">
+                        <input type="search"
+                               id="searchDQE"
+                               class="search"
+                               placeholder="🔎 Rechercher..."
+                               oninput="afficherListeDQEs()">
 
                         <div style="height:15px"></div>
 
-                        <div
-                            class="dqe-list"
-                            id="dqeList">
+                        <div class="dqe-list"
+                             id="dqeList">
                         </div>
 
                     </div>
@@ -1343,23 +1411,18 @@ td input,td select{
 
         </div>
 
-
-        <div
-            class="print-only"
-            id="printArea">
+        <div class="print-only"
+             id="printArea">
         </div>
 
     </div>
 
 </main>
 
-<!-- =========================================================
-     MODAL
-========================================================= -->
+<!-- MODAL -->
 
-<div
-    class="modal"
-    id="detailModal">
+<div class="modal"
+     id="detailModal">
 
     <div class="modal-box">
 
@@ -1369,47 +1432,36 @@ td input,td select{
                 Détail du DQE
             </strong>
 
-            <button
-                class="close"
-                onclick="fermerModal()">
+            <button class="close"
+                    onclick="fermerModal()">
                 ✕
             </button>
 
         </div>
 
-        <div
-            class="modal-body"
-            id="modalContent">
+        <div class="modal-body"
+             id="modalContent">
         </div>
 
     </div>
 
 </div>
 
-
 <!-- TOAST -->
 
-<div
-    class="toast"
-    id="toast">
+<div class="toast"
+     id="toast">
 </div>
-
 
 <script>
 
 /* =========================================================
-   BATIFLOW — DQE
    STOCKAGE
 ========================================================= */
 
-const DQE_STORAGE_KEY =
-    "batiflowDQEs";
-
-const CHANTIER_STORAGE_KEY =
-    "batiflowChantiers";
-
-const CLIENT_STORAGE_KEY =
-    "batiflowClients";
+const DQE_STORAGE_KEY = "batiflowDQEs";
+const CHANTIER_STORAGE_KEY = "batiflowChantiers";
+const CLIENT_STORAGE_KEY = "batiflowClients";
 
 let sauvegardeTimer = null;
 
@@ -1422,33 +1474,23 @@ function obtenirDQEs(){
 
     try{
 
-        const data =
-            localStorage.getItem(
-                DQE_STORAGE_KEY
-            );
+        const data = localStorage.getItem(DQE_STORAGE_KEY);
 
         if(!data) return [];
 
-        const parsed =
-            JSON.parse(data);
+        const parsed = JSON.parse(data);
 
-        return Array.isArray(parsed)
-            ? parsed
-            : [];
+        return Array.isArray(parsed) ? parsed : [];
 
     }catch(error){
 
-        console.error(
-            "Erreur lecture DQE :",
-            error
-        );
+        console.error("Erreur lecture DQE :",error);
 
         return [];
 
     }
 
 }
-
 
 function sauvegarderDQEs(dqes){
 
@@ -1463,10 +1505,7 @@ function sauvegarderDQEs(dqes){
 
     }catch(error){
 
-        console.error(
-            "Erreur sauvegarde DQE :",
-            error
-        );
+        console.error("Erreur sauvegarde DQE :",error);
 
         afficherToast(
             "❌ Impossible de sauvegarder le DQE."
@@ -1488,25 +1527,17 @@ function obtenirClients(){
     try{
 
         const data =
-            localStorage.getItem(
-                CLIENT_STORAGE_KEY
-            );
+            localStorage.getItem(CLIENT_STORAGE_KEY);
 
         if(!data) return [];
 
-        const parsed =
-            JSON.parse(data);
+        const parsed = JSON.parse(data);
 
-        return Array.isArray(parsed)
-            ? parsed
-            : [];
+        return Array.isArray(parsed) ? parsed : [];
 
     }catch(error){
 
-        console.error(
-            "Erreur lecture clients :",
-            error
-        );
+        console.error("Erreur lecture clients :",error);
 
         return [];
 
@@ -1514,37 +1545,25 @@ function obtenirClients(){
 
 }
 
-
 function trouverClientParId(id){
 
     if(!id) return null;
 
-    const clients =
-        obtenirClients();
-
-    return clients.find(
+    return obtenirClients().find(
         client =>
             String(client.id) === String(id)
     ) || null;
 
 }
 
-
 function trouverClientParNom(nom){
 
     if(!nom) return null;
 
     const recherche =
-        String(nom)
-        .trim()
-        .toLowerCase();
+        String(nom).trim().toLowerCase();
 
-    if(!recherche) return null;
-
-    const clients =
-        obtenirClients();
-
-    return clients.find(client => {
+    return obtenirClients().find(client => {
 
         const nomClient =
             String(client.nom || "")
@@ -1565,18 +1584,12 @@ function trouverClientParNom(nom){
 
 }
 
-
 function chargerClients(clientId = ""){
 
     const select =
-        document.getElementById(
-            "clientId"
-        );
+        document.getElementById("clientId");
 
     if(!select) return;
-
-    const clients =
-        obtenirClients();
 
     select.innerHTML = `
         <option value="">
@@ -1584,17 +1597,14 @@ function chargerClients(clientId = ""){
         </option>
     `;
 
-    clients.forEach(client => {
+    obtenirClients().forEach(client => {
 
         if(!client || !client.id) return;
 
         const option =
-            document.createElement(
-                "option"
-            );
+            document.createElement("option");
 
-        option.value =
-            client.id;
+        option.value = client.id;
 
         const nom =
             client.nom ||
@@ -1609,27 +1619,21 @@ function chargerClients(clientId = ""){
                 ? `${nom} — ${entreprise}`
                 : nom;
 
-        select.appendChild(
-            option
-        );
+        select.appendChild(option);
 
     });
 
     if(clientId){
 
         const existe =
-            [...select.options]
-            .some(
+            [...select.options].some(
                 option =>
                     String(option.value) ===
                     String(clientId)
             );
 
         if(existe){
-
-            select.value =
-                clientId;
-
+            select.value = clientId;
         }
 
     }
@@ -1652,12 +1656,9 @@ function obtenirChantiers(){
 
         if(!data) return [];
 
-        const parsed =
-            JSON.parse(data);
+        const parsed = JSON.parse(data);
 
-        return Array.isArray(parsed)
-            ? parsed
-            : [];
+        return Array.isArray(parsed) ? parsed : [];
 
     }catch(error){
 
@@ -1672,6 +1673,186 @@ function obtenirChantiers(){
 
 }
 
+
+function trouverChantierParId(id){
+
+    if(!id) return null;
+
+    return obtenirChantiers().find(
+        chantier => {
+
+            const chantierId =
+                chantier.id ||
+                chantier.reference ||
+                chantier.nom;
+
+            return (
+                String(chantierId) ===
+                String(id)
+            );
+
+        }
+    ) || null;
+
+}
+
+
+/* =========================================================
+   CHANTIER ACTIF — NOUVEAU
+========================================================= */
+
+function obtenirChantierActif(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    /*
+       1. Priorité absolue :
+       chantierId envoyé dans l'URL
+    */
+
+    const chantierIdURL =
+        params.get("chantierId");
+
+    if(chantierIdURL){
+
+        const chantierURL =
+            trouverChantierParId(
+                chantierIdURL
+            );
+
+        if(chantierURL){
+
+            return chantierURL;
+
+        }
+
+    }
+
+
+    /*
+       2. Chantier actif stocké
+    */
+
+    const chantierActifId =
+        localStorage.getItem(
+            "batiflowChantierActif"
+        );
+
+    if(chantierActifId){
+
+        const chantierActif =
+            trouverChantierParId(
+                chantierActifId
+            );
+
+        if(chantierActif){
+
+            return chantierActif;
+
+        }
+
+    }
+
+
+    /*
+       3. Chantier sélectionné
+    */
+
+    try{
+
+        const selected =
+            JSON.parse(
+                localStorage.getItem(
+                    "chantierSelectionne"
+                ) || "null"
+            );
+
+        if(
+            selected &&
+            selected.id
+        ){
+
+            const chantier =
+                trouverChantierParId(
+                    selected.id
+                );
+
+            if(chantier){
+
+                return chantier;
+
+            }
+
+            return selected;
+
+        }
+
+    }catch(error){
+
+        console.warn(
+            "Impossible de lire chantierSelectionne"
+        );
+
+    }
+
+    return null;
+
+}
+
+
+/* =========================================================
+   AFFICHER CONTEXTE CHANTIER
+========================================================= */
+
+function afficherContexteChantier(chantier){
+
+    const bloc =
+        document.getElementById(
+            "chantierContext"
+        );
+
+    if(!bloc) return;
+
+    if(!chantier){
+
+        bloc.classList.remove("show");
+
+        return;
+
+    }
+
+    const nom =
+        chantier.nom ||
+        chantier.titre ||
+        chantier.reference ||
+        "Chantier";
+
+    const localisation =
+        chantier.localisation ||
+        chantier.adresse ||
+        "Localisation non renseignée";
+
+    document.getElementById(
+        "chantierContextName"
+    ).textContent =
+        nom;
+
+    document.getElementById(
+        "chantierContextMeta"
+    ).textContent =
+        localisation;
+
+    bloc.classList.add("show");
+
+}
+
+
+/* =========================================================
+   CHARGER CHANTIERS
+========================================================= */
 
 function chargerChantiers(
     chantierId = "",
@@ -1693,12 +1874,6 @@ function chargerChantiers(
 
     const chantiers =
         obtenirChantiers();
-
-    /*
-       Si un client est sélectionné,
-       on affiche en priorité les chantiers
-       liés à ce client.
-    */
 
     let chantiersAffiches =
         chantiers;
@@ -1742,12 +1917,6 @@ function chargerChantiers(
 
             });
 
-        /*
-           Si aucun chantier n'est lié
-           au client, on garde tous les
-           chantiers disponibles.
-        */
-
         if(filtres.length){
 
             chantiersAffiches =
@@ -1776,15 +1945,11 @@ function chargerChantiers(
                     "option"
                 );
 
-            option.value =
-                id;
+            option.value = id;
 
-            option.textContent =
-                nom;
+            option.textContent = nom;
 
-            select.appendChild(
-                option
-            );
+            select.appendChild(option);
 
         }
     );
@@ -1792,8 +1957,7 @@ function chargerChantiers(
     if(chantierId){
 
         const existe =
-            [...select.options]
-            .some(
+            [...select.options].some(
                 option =>
                     String(option.value) ===
                     String(chantierId)
@@ -1812,6 +1976,188 @@ function chargerChantiers(
 
 
 /* =========================================================
+   SYNCHRONISER LE CHANTIER
+========================================================= */
+
+function synchroniserChantierActif(){
+
+    const chantier =
+        obtenirChantierActif();
+
+    if(!chantier){
+
+        afficherContexteChantier(null);
+
+        return null;
+
+    }
+
+    const chantierId =
+        chantier.id ||
+        chantier.reference ||
+        chantier.nom;
+
+    /*
+       On garde le chantier actif
+       dans BATIFLOW.
+    */
+
+    localStorage.setItem(
+        "batiflowChantierActif",
+        String(chantierId)
+    );
+
+    localStorage.setItem(
+        "chantierSelectionne",
+        JSON.stringify(chantier)
+    );
+
+    /*
+       Sélection automatique du chantier
+    */
+
+    chargerChantiers(
+        chantierId,
+        chantier.clientId || ""
+    );
+
+    /*
+       Sélection automatique du client
+    */
+
+    let clientId =
+        chantier.clientId ||
+        "";
+
+    if(
+        !clientId &&
+        (
+            chantier.client ||
+            chantier.clientNom
+        )
+    ){
+
+        const client =
+            trouverClientParNom(
+                chantier.client ||
+                chantier.clientNom
+            );
+
+        if(client){
+
+            clientId =
+                client.id;
+
+        }
+
+    }
+
+    if(clientId){
+
+        chargerClients(
+            clientId
+        );
+
+        const clientSelect =
+            document.getElementById(
+                "clientId"
+            );
+
+        if(clientSelect){
+
+            clientSelect.value =
+                clientId;
+
+        }
+
+    }
+
+    /*
+       Localisation automatique
+    */
+
+    const localisation =
+        chantier.localisation ||
+        chantier.adresse ||
+        "";
+
+    const localisationInput =
+        document.getElementById(
+            "localisation"
+        );
+
+    if(
+        localisationInput &&
+        localisation
+    ){
+
+        localisationInput.value =
+            localisation;
+
+    }
+
+    /*
+       Objet automatique
+       uniquement si vide.
+    */
+
+    const objetInput =
+        document.getElementById(
+            "objet"
+        );
+
+    if(
+        objetInput &&
+        !objetInput.value.trim()
+    ){
+
+        objetInput.value =
+            "DQE / Métré du chantier : " +
+            (
+                chantier.nom ||
+                chantier.titre ||
+                chantier.reference ||
+                ""
+            );
+
+    }
+
+    /*
+       Nom automatique
+       uniquement si vide.
+    */
+
+    const nomInput =
+        document.getElementById(
+            "nom"
+        );
+
+    if(
+        nomInput &&
+        !nomInput.value.trim()
+    ){
+
+        nomInput.value =
+            "DQE - " +
+            (
+                chantier.nom ||
+                chantier.titre ||
+                chantier.reference ||
+                "Chantier"
+            );
+
+    }
+
+    afficherContexteChantier(
+        chantier
+    );
+
+    return chantier;
+
+}
+
+
+/* =========================================================
    OUTILS
 ========================================================= */
 
@@ -1825,7 +2171,6 @@ function genererId(){
             .substring(2,8);
 
 }
-
 
 function genererReference(){
 
@@ -1868,7 +2213,6 @@ function genererReference(){
 
 }
 
-
 function formaterMontant(nombre){
 
     return Number(
@@ -1879,7 +2223,6 @@ function formaterMontant(nombre){
 
 }
 
-
 function formaterDate(date){
 
     if(!date) return "—";
@@ -1887,11 +2230,7 @@ function formaterDate(date){
     const d =
         new Date(date);
 
-    if(
-        isNaN(
-            d.getTime()
-        )
-    ){
+    if(isNaN(d.getTime())){
 
         return date;
 
@@ -1903,32 +2242,16 @@ function formaterDate(date){
 
 }
 
-
 function echapper(texte){
 
     return String(
         texte ?? ""
     )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
@@ -1952,8 +2275,7 @@ function chargerUtilisateur(){
 
     }catch(error){
 
-        utilisateur =
-            null;
+        utilisateur = null;
 
     }
 
@@ -1973,15 +2295,13 @@ function chargerUtilisateur(){
     document.getElementById(
         "userAvatar"
     ).textContent =
-        nom
-        .charAt(0)
-        .toUpperCase();
+        nom.charAt(0).toUpperCase();
 
 }
 
 
 /* =========================================================
-   LIGNES DQE
+   LIGNES
 ========================================================= */
 
 function ajouterLigne(data = {}){
@@ -1994,16 +2314,13 @@ function ajouterLigne(data = {}){
     if(!tbody) return;
 
     const tr =
-        document.createElement(
-            "tr"
-        );
+        document.createElement("tr");
 
     tr.innerHTML = `
 
         <td class="numero-ligne"></td>
 
         <td>
-
             <input
                 type="text"
                 class="designation"
@@ -2015,11 +2332,9 @@ function ajouterLigne(data = {}){
                     calculerTotaux();
                     programmerSauvegarde();
                 ">
-
         </td>
 
         <td>
-
             <input
                 type="text"
                 class="unite"
@@ -2030,28 +2345,22 @@ function ajouterLigne(data = {}){
                 oninput="
                     programmerSauvegarde();
                 ">
-
         </td>
 
         <td>
-
             <input
                 type="number"
                 class="quantite"
                 min="0"
                 step="0.01"
-                value="${
-                    data.quantite ?? ""
-                }"
+                value="${data.quantite ?? ""}"
                 oninput="
                     calculerTotaux();
                     programmerSauvegarde();
                 ">
-
         </td>
 
         <td>
-
             <input
                 type="number"
                 class="prix"
@@ -2066,15 +2375,12 @@ function ajouterLigne(data = {}){
                     calculerTotaux();
                     programmerSauvegarde();
                 ">
-
         </td>
 
         <td>
-
             <strong class="montant-ligne">
                 0 FCFA
             </strong>
-
         </td>
 
         <td>
@@ -2090,16 +2396,13 @@ function ajouterLigne(data = {}){
 
     `;
 
-    tbody.appendChild(
-        tr
-    );
+    tbody.appendChild(tr);
 
     renumeroterLignes();
 
     calculerTotaux();
 
 }
-
 
 function supprimerLigne(button){
 
@@ -2117,7 +2420,6 @@ function supprimerLigne(button){
     programmerSauvegarde();
 
 }
-
 
 function renumeroterLignes(){
 
@@ -2145,7 +2447,6 @@ function renumeroterLignes(){
 
 }
 
-
 function obtenirLignes(){
 
     const lignes = [];
@@ -2160,32 +2461,36 @@ function obtenirLignes(){
                 const designation =
                     tr.querySelector(
                         ".designation"
-                    )?.value ||
-                    "";
+                    )?.value || "";
 
                 const unite =
                     tr.querySelector(
                         ".unite"
-                    )?.value ||
-                    "";
+                    )?.value || "";
 
                 const quantite =
                     Number(
                         tr.querySelector(
                             ".quantite"
-                        )?.value ||
-                        0
+                        )?.value || 0
                     );
 
                 const prixUnitaire =
                     Number(
                         tr.querySelector(
                             ".prix"
-                        )?.value ||
-                        0
+                        )?.value || 0
                     );
 
                 lignes.push({
+
+                    id:
+                        "ligne_" +
+                        Date.now() +
+                        "_" +
+                        Math.random()
+                            .toString(36)
+                            .substring(2,6),
 
                     designation,
 
@@ -2228,24 +2533,20 @@ function calculerTotaux(){
                     Number(
                         tr.querySelector(
                             ".quantite"
-                        )?.value ||
-                        0
+                        )?.value || 0
                     );
 
                 const prix =
                     Number(
                         tr.querySelector(
                             ".prix"
-                        )?.value ||
-                        0
+                        )?.value || 0
                     );
 
                 const montant =
-                    quantite *
-                    prix;
+                    quantite * prix;
 
-                totalHT +=
-                    montant;
+                totalHT += montant;
 
                 const affichage =
                     tr.querySelector(
@@ -2268,50 +2569,35 @@ function calculerTotaux(){
         Number(
             document.getElementById(
                 "tva"
-            )?.value ||
-            0
+            )?.value || 0
         );
 
     const montantTVA =
-        totalHT *
-        tva /
-        100;
+        totalHT * tva / 100;
 
     const totalTTC =
-        totalHT +
-        montantTVA;
+        totalHT + montantTVA;
 
     document.getElementById(
         "totalHT"
     ).textContent =
-        formaterMontant(
-            totalHT
-        );
+        formaterMontant(totalHT);
 
     document.getElementById(
         "montantTVA"
     ).textContent =
-        formaterMontant(
-            montantTVA
-        );
+        formaterMontant(montantTVA);
 
     document.getElementById(
         "totalTTC"
     ).textContent =
-        formaterMontant(
-            totalTTC
-        );
+        formaterMontant(totalTTC);
 
     return {
-
         totalHT,
-
         montantTVA,
-
         totalTTC,
-
         tva
-
     };
 
 }
@@ -2346,61 +2632,46 @@ function nouveauDQE(){
 
     document.getElementById(
         "nom"
-    ).value =
-        "";
+    ).value = "";
 
     document.getElementById(
         "statut"
     ).value =
         "brouillon";
 
-    /*
-       IMPORTANT :
-       on utilise maintenant clientId
-       et non plus l'ancien id="client".
-    */
-
     chargerClients();
 
     document.getElementById(
         "clientId"
-    ).value =
-        "";
+    ).value = "";
 
     chargerChantiers();
 
     document.getElementById(
         "chantierId"
-    ).value =
-        "";
+    ).value = "";
 
     document.getElementById(
         "localisation"
-    ).value =
-        "";
+    ).value = "";
 
     document.getElementById(
         "duree"
-    ).value =
-        "";
+    ).value = "";
 
     document.getElementById(
         "objet"
-    ).value =
-        "";
+    ).value = "";
 
     document.getElementById(
         "tva"
-    ).value =
-        18;
+    ).value = 18;
 
     document.getElementById(
         "lignesBody"
-    ).innerHTML =
-        "";
+    ).innerHTML = "";
 
     ajouterLigne();
-
     ajouterLigne();
 
     document.getElementById(
@@ -2415,11 +2686,20 @@ function nouveauDQE(){
 
     calculerTotaux();
 
+    /*
+       IMPORTANT :
+       après avoir réinitialisé le formulaire,
+       on remet automatiquement le chantier
+       transmis dans l'URL.
+    */
+
+    synchroniserChantierActif();
+
 }
 
 
 /* =========================================================
-   CHARGEMENT D'UN DQE
+   MODIFICATION
 ========================================================= */
 
 function modifierDQE(id){
@@ -2467,23 +2747,12 @@ function modifierDQE(id){
     document.getElementById(
         "statut"
     ).value =
-        dqe.statut ||
-        "brouillon";
-
-
-    /*
-       CLIENT
-       On essaie d'abord avec clientId.
-       Si ancien DQE : recherche par nom.
-    */
+        dqe.statut || "brouillon";
 
     let clientId =
         dqe.clientId || "";
 
-    if(
-        !clientId &&
-        dqe.client
-    ){
+    if(!clientId && dqe.client){
 
         const ancienClient =
             trouverClientParNom(
@@ -2503,16 +2772,10 @@ function modifierDQE(id){
         clientId
     );
 
-
-    /*
-       CHANTIER
-    */
-
     chargerChantiers(
         dqe.chantierId || "",
         clientId
     );
-
 
     document.getElementById(
         "localisation"
@@ -2534,18 +2797,38 @@ function modifierDQE(id){
     ).value =
         dqe.tva ?? 18;
 
+    const chantier =
+        trouverChantierParId(
+            dqe.chantierId
+        );
 
-    /*
-       LIGNES
-    */
+    if(chantier){
+
+        afficherContexteChantier(
+            chantier
+        );
+
+        localStorage.setItem(
+            "batiflowChantierActif",
+            String(
+                chantier.id ||
+                chantier.reference ||
+                chantier.nom
+            )
+        );
+
+    }else{
+
+        afficherContexteChantier(null);
+
+    }
 
     const tbody =
         document.getElementById(
             "lignesBody"
         );
 
-    tbody.innerHTML =
-        "";
+    tbody.innerHTML = "";
 
     if(
         Array.isArray(dqe.lignes) &&
@@ -2558,16 +2841,13 @@ function modifierDQE(id){
                 ajouterLigne({
 
                     designation:
-                        ligne.designation ||
-                        "",
+                        ligne.designation || "",
 
                     unite:
-                        ligne.unite ||
-                        "",
+                        ligne.unite || "",
 
                     quantite:
-                        ligne.quantite ??
-                        0,
+                        ligne.quantite ?? 0,
 
                     prixUnitaire:
                         ligne.prixUnitaire ??
@@ -2604,11 +2884,8 @@ function modifierDQE(id){
         "● DQE chargé";
 
     window.scrollTo({
-
         top:0,
-
         behavior:"smooth"
-
     });
 
     return true;
@@ -2632,15 +2909,12 @@ function collecterFormulaire(){
         genererId();
 
 
-    /*
-       CLIENT
-    */
+    /* CLIENT */
 
     const clientId =
         document.getElementById(
             "clientId"
-        )?.value ||
-        "";
+        )?.value || "";
 
     const clientSelectionne =
         trouverClientParId(
@@ -2648,35 +2922,147 @@ function collecterFormulaire(){
         );
 
 
-    /*
-       CHANTIER
-    */
+    /* CHANTIER */
 
-    const chantierId =
+    let chantierId =
         document.getElementById(
             "chantierId"
-        ).value ||
-        "";
+        )?.value || "";
 
-    const chantiers =
-        obtenirChantiers();
+    let chantier =
+        chantierId
+            ? trouverChantierParId(
+                chantierId
+            )
+            : null;
 
-    const chantier =
-        chantiers.find(
-            c => {
 
-                const idChantier =
-                    c.id ||
-                    c.reference ||
-                    c.nom;
+    /*
+       SÉCURITÉ IMPORTANTE :
+       si aucun chantier n'est sélectionné
+       dans le formulaire, on regarde le
+       chantier transmis à la page.
+    */
 
-                return (
-                    String(idChantier) ===
-                    String(chantierId)
+    if(!chantierId){
+
+        const chantierActif =
+            obtenirChantierActif();
+
+        if(chantierActif){
+
+            chantier =
+                chantierActif;
+
+            chantierId =
+                chantierActif.id ||
+                chantierActif.reference ||
+                chantierActif.nom;
+
+            const chantierSelect =
+                document.getElementById(
+                    "chantierId"
                 );
 
+            if(chantierSelect){
+
+                chargerChantiers(
+                    chantierId,
+                    chantierActif.clientId || ""
+                );
+
+                chantierSelect.value =
+                    chantierId;
+
             }
-        );
+
+        }
+
+    }
+
+
+    /*
+       CLIENT AUTOMATIQUE DU CHANTIER
+    */
+
+    let finalClientId =
+        clientId;
+
+    let finalClient =
+        clientSelectionne;
+
+
+    if(
+        chantier &&
+        chantier.clientId &&
+        !finalClient
+    ){
+
+        finalClient =
+            trouverClientParId(
+                chantier.clientId
+            );
+
+        if(finalClient){
+
+            finalClientId =
+                finalClient.id;
+
+        }
+
+    }
+
+
+    /*
+       Si le chantier contient seulement
+       le nom du client.
+    */
+
+    if(
+        chantier &&
+        !finalClient &&
+        (
+            chantier.client ||
+            chantier.clientNom
+        )
+    ){
+
+        finalClient =
+            trouverClientParNom(
+                chantier.client ||
+                chantier.clientNom
+            );
+
+        if(finalClient){
+
+            finalClientId =
+                finalClient.id;
+
+        }
+
+    }
+
+
+    /*
+       LOCALISATION AUTOMATIQUE
+    */
+
+    let localisation =
+        document.getElementById(
+            "localisation"
+        ).value.trim();
+
+    if(
+        !localisation &&
+        chantier
+    ){
+
+        localisation =
+            chantier.localisation ||
+            chantier.adresse ||
+            "";
+
+    }
 
 
     return {
@@ -2704,52 +3090,54 @@ function collecterFormulaire(){
             ).value,
 
 
-        /*
-           NOUVELLE RELATION CLIENT
-        */
+        /* CLIENT */
 
-       clientId: clientId,
+        clientId:
+            finalClientId,
 
-client:
-    clientSelectionne
-        ? (
-            clientSelectionne.nom ||
-            clientSelectionne.entreprise ||
-            ""
-        )
-        : "",
+        client:
+            finalClient
+                ? (
+                    finalClient.nom ||
+                    finalClient.entreprise ||
+                    ""
+                )
+                : (
+                    chantier?.client ||
+                    chantier?.clientNom ||
+                    ""
+                ),
 
-clientNom:
-    clientSelectionne?.nom ||
-    "",
+        clientNom:
+            finalClient?.nom ||
+            chantier?.clientNom ||
+            chantier?.client ||
+            "",
 
-entrepriseClient:
-    clientSelectionne?.entreprise ||
-    "",
+        entrepriseClient:
+            finalClient?.entreprise ||
+            "",
 
-clientTelephone:
-    clientSelectionne?.telephone ||
-    "",
+        clientTelephone:
+            finalClient?.telephone ||
+            "",
 
-clientWhatsapp:
-    clientSelectionne?.whatsapp ||
-    "",
+        clientWhatsapp:
+            finalClient?.whatsapp ||
+            "",
 
-clientEmail:
-    clientSelectionne?.email ||
-    "",
+        clientEmail:
+            finalClient?.email ||
+            "",
 
-clientAdresse:
-    clientSelectionne?.adresse ||
-    "",
+        clientAdresse:
+            finalClient?.adresse ||
+            "",
 
 
-        /*
-           RELATION CHANTIER
-        */
+        /* CHANTIER */
 
         chantierId:
-
             chantierId,
 
         chantier:
@@ -2759,10 +3147,7 @@ clientAdresse:
             "",
 
 
-        localisation:
-            document.getElementById(
-                "localisation"
-            ).value.trim(),
+        localisation,
 
         duree:
             document.getElementById(
@@ -2795,7 +3180,7 @@ clientAdresse:
 
 
 /* =========================================================
-   ENREGISTRER DQE
+   ENREGISTRER
 ========================================================= */
 
 function enregistrerDQE(
@@ -2819,7 +3204,6 @@ function enregistrerDQE(
 
     }
 
-
     const dqes =
         obtenirDQEs();
 
@@ -2831,9 +3215,7 @@ function enregistrerDQE(
         );
 
     const maintenant =
-        new Date()
-        .toISOString();
-
+        new Date().toISOString();
 
     if(index === -1){
 
@@ -2844,11 +3226,9 @@ function enregistrerDQE(
             maintenant;
 
         dqe.version =
-            "BATIFLOW-DQE-V3";
+            "BATIFLOW-DQE-V4";
 
-        dqes.unshift(
-            dqe
-        );
+        dqes.unshift(dqe);
 
     }else{
 
@@ -2860,23 +3240,17 @@ function enregistrerDQE(
             maintenant;
 
         dqe.version =
-            "BATIFLOW-DQE-V3";
+            "BATIFLOW-DQE-V4";
 
         dqes[index] = {
-
             ...dqes[index],
-
             ...dqe
-
         };
 
     }
 
-
     const sauvegarde =
-        sauvegarderDQEs(
-            dqes
-        );
+        sauvegarderDQEs(dqes);
 
     if(!sauvegarde){
 
@@ -2884,6 +3258,33 @@ function enregistrerDQE(
 
     }
 
+    /*
+       On conserve le chantier comme
+       chantier actif BATIFLOW.
+    */
+
+    if(dqe.chantierId){
+
+        localStorage.setItem(
+            "batiflowChantierActif",
+            String(dqe.chantierId)
+        );
+
+        const chantier =
+            trouverChantierParId(
+                dqe.chantierId
+            );
+
+        if(chantier){
+
+            localStorage.setItem(
+                "chantierSelectionne",
+                JSON.stringify(chantier)
+            );
+
+        }
+
+    }
 
     actualiserStatistiques();
 
@@ -2894,11 +3295,12 @@ function enregistrerDQE(
     ).textContent =
         "● Enregistré";
 
-
     if(notifier){
 
         afficherToast(
-            "✅ DQE enregistré avec succès."
+            dqe.chantierId
+                ? "✅ DQE enregistré et rattaché au chantier."
+                : "✅ DQE enregistré avec succès."
         );
 
     }
@@ -2937,14 +3339,11 @@ function programmerSauvegarde(){
                 const nom =
                     document.getElementById(
                         "nom"
-                    )?.value
-                    ?.trim();
+                    )?.value?.trim();
 
                 if(nom){
 
-                    enregistrerDQE(
-                        false
-                    );
+                    enregistrerDQE(false);
 
                 }
 
@@ -3020,7 +3419,7 @@ function actualiserStatistiques(){
 
 
 /* =========================================================
-   LISTE DQE
+   LISTE
 ========================================================= */
 
 function afficherListeDQEs(){
@@ -3036,15 +3435,13 @@ function afficherListeDQEs(){
         (
             document.getElementById(
                 "searchDQE"
-            )?.value ||
-            ""
+            )?.value || ""
         )
         .toLowerCase()
         .trim();
 
     let dqes =
         obtenirDQEs();
-
 
     dqes.sort(
         (a,b) =>
@@ -3062,7 +3459,6 @@ function afficherListeDQEs(){
             )
     );
 
-
     if(recherche){
 
         dqes =
@@ -3071,17 +3467,11 @@ function afficherListeDQEs(){
 
                     const texte =
                         [
-
                             dqe.nom,
-
                             dqe.reference,
-
                             dqe.client,
-
                             dqe.chantier,
-
                             dqe.localisation
-
                         ]
                         .join(" ")
                         .toLowerCase();
@@ -3095,7 +3485,6 @@ function afficherListeDQEs(){
 
     }
 
-
     if(!dqes.length){
 
         container.innerHTML = `
@@ -3107,11 +3496,9 @@ function afficherListeDQEs(){
                 font-size:13px;
             ">
 
-                <div
-                    style="
-                        font-size:30px;
-                        margin-bottom:8px
-                    ">
+                <div style="
+                    font-size:30px;
+                    margin-bottom:8px">
                     📋
                 </div>
 
@@ -3125,46 +3512,16 @@ function afficherListeDQEs(){
 
     }
 
-
     container.innerHTML =
-        dqes
-        .map(
+        dqes.map(
             creerCarteDQE
-        )
-        .join("");
+        ).join("");
 
 }
 
 
 function creerCarteDQE(dqe){
 
-    function creerDevisDepuisDQE(id){
-
-    const dqes = obtenirDQEs();
-
-    const dqe = dqes.find(
-        item => String(item.id) === String(id)
-    );
-
-    if(!dqe){
-
-        afficherToast("DQE introuvable.");
-
-        return;
-
-    }
-
-    localStorage.setItem(
-        "batiflowDQESelectionne",
-        String(id)
-    );
-
-    window.location.href =
-        "devis.html?dqeId=" +
-        encodeURIComponent(id);
-
-}
-    
     const nom =
         dqe.nom ||
         dqe.titre ||
@@ -3178,6 +3535,10 @@ function creerCarteDQE(dqe){
         dqe.client ||
         "Client non renseigné";
 
+    const chantier =
+        dqe.chantier ||
+        "Aucun chantier";
+
     const total =
         Number(
             dqe.totalTTC ??
@@ -3190,7 +3551,6 @@ function creerCarteDQE(dqe){
     const statut =
         dqe.statut ||
         "brouillon";
-
 
     return `
 
@@ -3213,6 +3573,11 @@ function creerCarteDQE(dqe){
 
                     <br>
 
+                    Chantier :
+                    ${echapper(chantier)}
+
+                    <br>
+
                     ${formaterDate(
                         dqe.updatedAt ||
                         dqe.createdAt ||
@@ -3229,19 +3594,13 @@ function creerCarteDQE(dqe){
 
                 <div style="margin-top:7px">
 
-                    <span
-                        class="status status-${echapper(
-                            statut
-                        )}">
-                        ${texteStatut(
-                            statut
-                        )}
+                    <span class="status status-${echapper(statut)}">
+                        ${texteStatut(statut)}
                     </span>
 
                 </div>
 
             </div>
-
 
             <div class="actions no-print">
 
@@ -3269,11 +3628,11 @@ function creerCarteDQE(dqe){
                     Supprimer
                 </button>
 
-                 <button
-                     class="btn btn-success btn-small"
-                     onclick="creerDevisDepuisDQE('${dqe.id}')">
+                <button
+                    class="btn btn-success btn-small"
+                    onclick="creerDevisDepuisDQE('${dqe.id}')">
                     💰 Créer un devis
-                 </button>
+                </button>
 
             </div>
 
@@ -3284,25 +3643,76 @@ function creerCarteDQE(dqe){
 }
 
 
+/* =========================================================
+   CRÉER DEVIS DEPUIS DQE
+========================================================= */
+
+function creerDevisDepuisDQE(id){
+
+    const dqes =
+        obtenirDQEs();
+
+    const dqe =
+        dqes.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
+
+    if(!dqe){
+
+        afficherToast(
+            "DQE introuvable."
+        );
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "batiflowDQESelectionne",
+        String(id)
+    );
+
+    if(dqe.chantierId){
+
+        localStorage.setItem(
+            "batiflowChantierActif",
+            String(dqe.chantierId)
+        );
+
+    }
+
+    window.location.href =
+        "devis.html?dqeId=" +
+        encodeURIComponent(id) +
+        (
+            dqe.chantierId
+                ? "&chantierId=" +
+                  encodeURIComponent(
+                      dqe.chantierId
+                  )
+                : ""
+        );
+
+}
+
+
+/* =========================================================
+   STATUT
+========================================================= */
+
 function texteStatut(statut){
 
     const textes = {
 
-        brouillon:
-            "Brouillon",
-
-        valide:
-            "Validé",
-
-        annule:
-            "Annulé"
+        brouillon:"Brouillon",
+        valide:"Validé",
+        annule:"Annulé"
 
     };
 
-    return (
-        textes[statut] ||
-        statut
-    );
+    return textes[statut] || statut;
 
 }
 
@@ -3333,44 +3743,34 @@ function consulterDQE(id){
 
     }
 
-
     const lignes =
-        Array.isArray(
-            dqe.lignes
-        )
-        ? dqe.lignes
-        : [];
-
+        Array.isArray(dqe.lignes)
+            ? dqe.lignes
+            : [];
 
     const lignesHTML =
-        lignes
-        .map(
+        lignes.map(
             (ligne,index) => `
 
             <tr>
 
-                <td>
-                    ${index + 1}
-                </td>
+                <td>${index + 1}</td>
 
                 <td>
                     ${echapper(
-                        ligne.designation ||
-                        ""
+                        ligne.designation || ""
                     )}
                 </td>
 
                 <td>
                     ${echapper(
-                        ligne.unite ||
-                        ""
+                        ligne.unite || ""
                     )}
                 </td>
 
                 <td>
                     ${Number(
-                        ligne.quantite ||
-                        0
+                        ligne.quantite || 0
                     )}
                 </td>
 
@@ -3387,8 +3787,7 @@ function consulterDQE(id){
                         ligne.montant ??
                         (
                             Number(
-                                ligne.quantite ||
-                                0
+                                ligne.quantite || 0
                             ) *
                             Number(
                                 ligne.prixUnitaire ||
@@ -3402,9 +3801,7 @@ function consulterDQE(id){
             </tr>
 
         `
-        )
-        .join("");
-
+        ).join("");
 
     document.getElementById(
         "modalTitle"
@@ -3413,7 +3810,6 @@ function consulterDQE(id){
         dqe.reference ||
         "Détail du DQE";
 
-
     document.getElementById(
         "modalContent"
     ).innerHTML = `
@@ -3421,126 +3817,85 @@ function consulterDQE(id){
         <div class="form-grid">
 
             <div>
-
-                <strong>
-                    Référence
-                </strong>
-
+                <strong>Référence</strong>
                 <p>
                     ${echapper(
-                        dqe.reference ||
-                        "—"
+                        dqe.reference || "—"
                     )}
                 </p>
-
             </div>
 
-
             <div>
-
-                <strong>
-                    Date
-                </strong>
-
+                <strong>Date</strong>
                 <p>
-                    ${formaterDate(
-                        dqe.date
-                    )}
+                    ${formaterDate(dqe.date)}
                 </p>
-
             </div>
 
-
             <div>
-
-                <strong>
-                    Client
-                </strong>
-
+                <strong>Client</strong>
                 <p>
                     ${echapper(
-                        dqe.client ||
-                        "—"
+                        dqe.client || "—"
                     )}
                 </p>
-
             </div>
-
 
             <div>
-
-                <strong>
-                    Chantier
-                </strong>
-
+                <strong>Chantier</strong>
                 <p>
                     ${echapper(
-                        dqe.chantier ||
-                        "—"
+                        dqe.chantier || "—"
                     )}
                 </p>
-
             </div>
-
 
             <div>
-
-                <strong>
-                    Localisation
-                </strong>
-
+                <strong>ID chantier</strong>
                 <p>
                     ${echapper(
-                        dqe.localisation ||
-                        "—"
+                        dqe.chantierId || "—"
                     )}
                 </p>
-
             </div>
-
 
             <div>
-
-                <strong>
-                    Durée
-                </strong>
-
+                <strong>Localisation</strong>
                 <p>
                     ${echapper(
-                        dqe.duree ||
-                        "—"
+                        dqe.localisation || "—"
                     )}
                 </p>
-
             </div>
 
+            <div>
+                <strong>Durée</strong>
+                <p>
+                    ${echapper(
+                        dqe.duree || "—"
+                    )}
+                </p>
+            </div>
 
             <div class="form-group full">
 
-                <strong>
-                    Objet
-                </strong>
+                <strong>Objet</strong>
 
                 <p style="margin-top:6px">
-
                     ${echapper(
-                        dqe.objet ||
-                        "—"
+                        dqe.objet || "—"
                     )}
-
                 </p>
 
             </div>
 
         </div>
 
-
         <hr style="
             border:0;
             border-top:1px solid #e5e7eb;
             margin:20px 0;
         ">
-
 
         <div class="table-wrap">
 
@@ -3550,29 +3905,12 @@ function consulterDQE(id){
 
                     <tr>
 
-                        <th>
-                            N°
-                        </th>
-
-                        <th>
-                            Désignation
-                        </th>
-
-                        <th>
-                            Unité
-                        </th>
-
-                        <th>
-                            Qté
-                        </th>
-
-                        <th>
-                            PU
-                        </th>
-
-                        <th>
-                            Montant
-                        </th>
+                        <th>N°</th>
+                        <th>Désignation</th>
+                        <th>Unité</th>
+                        <th>Qté</th>
+                        <th>PU</th>
+                        <th>Montant</th>
 
                     </tr>
 
@@ -3588,14 +3926,11 @@ function consulterDQE(id){
 
         </div>
 
-
         <div class="total-box">
 
             <div class="total-row">
 
-                <span>
-                    Total HT
-                </span>
+                <span>Total HT</span>
 
                 <strong>
                     ${formaterMontant(
@@ -3604,7 +3939,6 @@ function consulterDQE(id){
                 </strong>
 
             </div>
-
 
             <div class="total-row">
 
@@ -3620,12 +3954,9 @@ function consulterDQE(id){
 
             </div>
 
-
             <div class="total-row grand">
 
-                <span>
-                    Total TTC
-                </span>
+                <span>Total TTC</span>
 
                 <strong>
                     ${formaterMontant(
@@ -3637,10 +3968,8 @@ function consulterDQE(id){
 
         </div>
 
-
-        <div
-            class="actions no-print"
-            style="margin-top:20px">
+        <div class="actions no-print"
+             style="margin-top:20px">
 
             <button
                 class="btn btn-primary"
@@ -3663,27 +3992,17 @@ function consulterDQE(id){
 
     `;
 
-
     document
-        .getElementById(
-            "detailModal"
-        )
-        .classList.add(
-            "show"
-        );
+        .getElementById("detailModal")
+        .classList.add("show");
 
 }
-
 
 function fermerModal(){
 
     document
-        .getElementById(
-            "detailModal"
-        )
-        .classList.remove(
-            "show"
-        );
+        .getElementById("detailModal")
+        .classList.remove("show");
 
 }
 
@@ -3714,11 +4033,8 @@ function dupliquerDQE(id){
 
     }
 
-
     const maintenant =
-        new Date()
-        .toISOString();
-
+        new Date().toISOString();
 
     const copie = {
 
@@ -3748,14 +4064,9 @@ function dupliquerDQE(id){
 
     };
 
+    dqes.unshift(copie);
 
-    dqes.unshift(
-        copie
-    );
-
-    sauvegarderDQEs(
-        dqes
-    );
+    sauvegarderDQEs(dqes);
 
     actualiserStatistiques();
 
@@ -3786,7 +4097,6 @@ function supprimerDQE(id){
 
     if(!dqe) return;
 
-
     const confirmation =
         confirm(
             "Supprimer le DQE « " +
@@ -3799,7 +4109,6 @@ function supprimerDQE(id){
 
     if(!confirmation) return;
 
-
     const nouveaux =
         dqes.filter(
             item =>
@@ -3807,10 +4116,7 @@ function supprimerDQE(id){
                 String(id)
         );
 
-
-    sauvegarderDQEs(
-        nouveaux
-    );
+    sauvegarderDQEs(nouveaux);
 
     actualiserStatistiques();
 
@@ -3827,12 +4133,9 @@ function supprimerDQE(id){
    IMPRESSION
 ========================================================= */
 
-function imprimerDQE(
-    id = null
-){
+function imprimerDQE(id = null){
 
     let dqe;
-
 
     if(id){
 
@@ -3853,11 +4156,7 @@ function imprimerDQE(
 
     }
 
-
-    if(
-        !dqe ||
-        !dqe.nom
-    ){
+    if(!dqe || !dqe.nom){
 
         afficherToast(
             "Veuillez renseigner le nom du DQE."
@@ -3867,44 +4166,34 @@ function imprimerDQE(
 
     }
 
-
     const lignes =
-        Array.isArray(
-            dqe.lignes
-        )
-        ? dqe.lignes
-        : [];
-
+        Array.isArray(dqe.lignes)
+            ? dqe.lignes
+            : [];
 
     const lignesHTML =
-        lignes
-        .map(
+        lignes.map(
             (ligne,index) => `
 
             <tr>
 
-                <td>
-                    ${index + 1}
-                </td>
+                <td>${index + 1}</td>
 
                 <td>
                     ${echapper(
-                        ligne.designation ||
-                        ""
+                        ligne.designation || ""
                     )}
                 </td>
 
                 <td>
                     ${echapper(
-                        ligne.unite ||
-                        ""
+                        ligne.unite || ""
                     )}
                 </td>
 
                 <td>
                     ${Number(
-                        ligne.quantite ||
-                        0
+                        ligne.quantite || 0
                     )}
                 </td>
 
@@ -3919,14 +4208,15 @@ function imprimerDQE(
                 <td>
                     ${formaterMontant(
                         ligne.montant ??
-                        Number(
-                            ligne.quantite ||
-                            0
-                        ) *
-                        Number(
-                            ligne.prixUnitaire ||
-                            ligne.prix ||
-                            0
+                        (
+                            Number(
+                                ligne.quantite || 0
+                            ) *
+                            Number(
+                                ligne.prixUnitaire ||
+                                ligne.prix ||
+                                0
+                            )
                         )
                     )}
                 </td>
@@ -3934,9 +4224,7 @@ function imprimerDQE(
             </tr>
 
         `
-        )
-        .join("");
-
+        ).join("");
 
     const win =
         window.open(
@@ -3944,7 +4232,6 @@ function imprimerDQE(
             "_blank",
             "width=1100,height=800"
         );
-
 
     if(!win){
 
@@ -3955,7 +4242,6 @@ function imprimerDQE(
         return;
 
     }
-
 
     win.document.write(`
 
@@ -4018,8 +4304,7 @@ function imprimerDQE(
                     margin-top:15px;
                 }
 
-                th,
-                td{
+                th,td{
                     border:1px solid #ccc;
                     padding:9px;
                     font-size:12px;
@@ -4068,16 +4353,13 @@ function imprimerDQE(
 
         </head>
 
-
         <body>
 
             <div class="header">
 
                 <div>
 
-                    <h1>
-                        BATIFLOW
-                    </h1>
+                    <h1>BATIFLOW</h1>
 
                     <div>
                         Gestion BTP
@@ -4085,19 +4367,14 @@ function imprimerDQE(
 
                 </div>
 
+                <div style="text-align:right">
 
-                <div
-                    style="text-align:right">
-
-                    <strong>
-                        DQE
-                    </strong>
+                    <strong>DQE</strong>
 
                     <br>
 
                     ${echapper(
-                        dqe.reference ||
-                        ""
+                        dqe.reference || ""
                     )}
 
                     <br>
@@ -4110,100 +4387,75 @@ function imprimerDQE(
 
             </div>
 
-
             <h2>
-                ${echapper(
-                    dqe.nom
-                )}
+                ${echapper(dqe.nom)}
             </h2>
-
 
             <div class="info">
 
                 <div>
 
-                    <strong>
-                        Client
-                    </strong>
+                    <strong>Client</strong>
 
                     <br>
 
                     ${echapper(
-                        dqe.client ||
-                        "—"
+                        dqe.client || "—"
                     )}
 
                 </div>
 
-
                 <div>
 
-                    <strong>
-                        Chantier
-                    </strong>
+                    <strong>Chantier</strong>
 
                     <br>
 
                     ${echapper(
-                        dqe.chantier ||
-                        "—"
+                        dqe.chantier || "—"
                     )}
 
                 </div>
 
-
                 <div>
 
-                    <strong>
-                        Localisation
-                    </strong>
+                    <strong>Localisation</strong>
 
                     <br>
 
                     ${echapper(
-                        dqe.localisation ||
-                        "—"
+                        dqe.localisation || "—"
                     )}
 
                 </div>
 
-
                 <div>
 
-                    <strong>
-                        Durée
-                    </strong>
+                    <strong>Durée</strong>
 
                     <br>
 
                     ${echapper(
-                        dqe.duree ||
-                        "—"
+                        dqe.duree || "—"
                     )}
 
                 </div>
 
             </div>
 
-
             <p>
 
-                <strong>
-                    Objet :
-                </strong>
+                <strong>Objet :</strong>
 
                 ${echapper(
-                    dqe.objet ||
-                    "—"
+                    dqe.objet || "—"
                 )}
 
             </p>
 
-
             <h2>
                 Détail quantitatif et estimatif
             </h2>
-
 
             <table>
 
@@ -4211,34 +4463,16 @@ function imprimerDQE(
 
                     <tr>
 
-                        <th>
-                            N°
-                        </th>
-
-                        <th>
-                            Désignation
-                        </th>
-
-                        <th>
-                            Unité
-                        </th>
-
-                        <th>
-                            Quantité
-                        </th>
-
-                        <th>
-                            Prix unitaire
-                        </th>
-
-                        <th>
-                            Montant
-                        </th>
+                        <th>N°</th>
+                        <th>Désignation</th>
+                        <th>Unité</th>
+                        <th>Quantité</th>
+                        <th>Prix unitaire</th>
+                        <th>Montant</th>
 
                     </tr>
 
                 </thead>
-
 
                 <tbody>
 
@@ -4248,14 +4482,11 @@ function imprimerDQE(
 
             </table>
 
-
             <div class="totaux">
 
                 <div class="ligne">
 
-                    <span>
-                        Total HT
-                    </span>
+                    <span>Total HT</span>
 
                     <strong>
                         ${formaterMontant(
@@ -4264,7 +4495,6 @@ function imprimerDQE(
                     </strong>
 
                 </div>
-
 
                 <div class="ligne">
 
@@ -4280,12 +4510,9 @@ function imprimerDQE(
 
                 </div>
 
-
                 <div class="ligne ttc">
 
-                    <span>
-                        TOTAL TTC
-                    </span>
+                    <span>TOTAL TTC</span>
 
                     <strong>
                         ${formaterMontant(
@@ -4297,20 +4524,14 @@ function imprimerDQE(
 
             </div>
 
-
             <div class="footer">
-
                 BATIFLOW — Solution de gestion BTP
-
             </div>
-
 
             <script>
 
                 window.onload = function(){
-
                     window.print();
-
                 };
 
             <\/script>
@@ -4321,7 +4542,6 @@ function imprimerDQE(
 
     `);
 
-
     win.document.close();
 
 }
@@ -4331,9 +4551,7 @@ function imprimerDQE(
    TOAST
 ========================================================= */
 
-function afficherToast(
-    message
-){
+function afficherToast(message){
 
     const toast =
         document.getElementById(
@@ -4345,17 +4563,11 @@ function afficherToast(
     toast.textContent =
         message;
 
-    toast.classList.add(
-        "show"
-    );
+    toast.classList.add("show");
 
     setTimeout(
         () => {
-
-            toast.classList.remove(
-                "show"
-            );
-
+            toast.classList.remove("show");
         },
         3000
     );
@@ -4364,24 +4576,20 @@ function afficherToast(
 
 
 /* =========================================================
-   MENU MOBILE
+   MENU
 ========================================================= */
 
 function toggleMenu(){
 
     document
-        .getElementById(
-            "sidebar"
-        )
-        .classList.toggle(
-            "open"
-        );
+        .getElementById("sidebar")
+        .classList.toggle("open");
 
 }
 
 
 /* =========================================================
-   PARAMETRES URL
+   PARAMÈTRES URL
 ========================================================= */
 
 function traiterParametresURL(){
@@ -4392,26 +4600,21 @@ function traiterParametresURL(){
         );
 
     const voirId =
-        params.get(
-            "voir"
-        );
+        params.get("voir");
 
     const modifierId =
-        params.get(
-            "modifier"
-        );
-
+        params.get("modifier");
 
     /*
-       PRIORITÉ À MODIFIER
+       Le chantierId reste volontairement
+       dans l'URL afin que le DQE reste
+       rattaché au chantier.
     */
 
     if(modifierId){
 
         const trouve =
-            modifierDQE(
-                modifierId
-            );
+            modifierDQE(modifierId);
 
         if(!trouve){
 
@@ -4421,16 +4624,11 @@ function traiterParametresURL(){
 
         }
 
-        nettoyerURL();
+        nettoyerURL(false);
 
         return;
 
     }
-
-
-    /*
-       MODE CONSULTATION
-    */
 
     if(voirId){
 
@@ -4446,9 +4644,7 @@ function traiterParametresURL(){
 
         if(existe){
 
-            consulterDQE(
-                voirId
-            );
+            consulterDQE(voirId);
 
         }else{
 
@@ -4458,7 +4654,7 @@ function traiterParametresURL(){
 
         }
 
-        nettoyerURL();
+        nettoyerURL(false);
 
     }
 
@@ -4469,7 +4665,7 @@ function traiterParametresURL(){
    NETTOYER URL
 ========================================================= */
 
-function nettoyerURL(){
+function nettoyerURL(tout = true){
 
     if(
         window.history &&
@@ -4481,13 +4677,13 @@ function nettoyerURL(){
                 window.location.href
             );
 
-        url.searchParams.delete(
-            "voir"
-        );
+        url.searchParams.delete("voir");
+        url.searchParams.delete("modifier");
 
-        url.searchParams.delete(
-            "modifier"
-        );
+        /*
+           IMPORTANT :
+           chantierId n'est pas supprimé.
+        */
 
         window.history.replaceState(
             {},
@@ -4503,16 +4699,12 @@ function nettoyerURL(){
 
 
 /* =========================================================
-   SYNCHRONISATION
+   SYNCHRONISATION STORAGE
 ========================================================= */
 
 window.addEventListener(
     "storage",
     function(event){
-
-        /*
-           DQE
-        */
 
         if(
             event.key ===
@@ -4520,15 +4712,9 @@ window.addEventListener(
         ){
 
             actualiserStatistiques();
-
             afficherListeDQEs();
 
         }
-
-
-        /*
-           CHANTIERS
-        */
 
         if(
             event.key ===
@@ -4538,14 +4724,12 @@ window.addEventListener(
             const clientId =
                 document.getElementById(
                     "clientId"
-                )?.value ||
-                "";
+                )?.value || "";
 
             const chantierId =
                 document.getElementById(
                     "chantierId"
-                )?.value ||
-                "";
+                )?.value || "";
 
             chargerChantiers(
                 chantierId,
@@ -4553,11 +4737,6 @@ window.addEventListener(
             );
 
         }
-
-
-        /*
-           CLIENTS
-        */
 
         if(
             event.key ===
@@ -4567,18 +4746,14 @@ window.addEventListener(
             const clientId =
                 document.getElementById(
                     "clientId"
-                )?.value ||
-                "";
+                )?.value || "";
 
             const chantierId =
                 document.getElementById(
                     "chantierId"
-                )?.value ||
-                "";
+                )?.value || "";
 
-            chargerClients(
-                clientId
-            );
+            chargerClients(clientId);
 
             chargerChantiers(
                 chantierId,
@@ -4637,6 +4812,72 @@ document.addEventListener(
                 "change",
                 function(){
 
+                    /*
+                       Nouveau chantier sélectionné :
+                       on le conserve comme chantier actif.
+                    */
+
+                    const chantier =
+                        trouverChantierParId(
+                            this.value
+                        );
+
+                    if(chantier){
+
+                        const id =
+                            chantier.id ||
+                            chantier.reference ||
+                            chantier.nom;
+
+                        localStorage.setItem(
+                            "batiflowChantierActif",
+                            String(id)
+                        );
+
+                        localStorage.setItem(
+                            "chantierSelectionne",
+                            JSON.stringify(
+                                chantier
+                            )
+                        );
+
+                        afficherContexteChantier(
+                            chantier
+                        );
+
+                        /*
+                           Si le client du chantier
+                           existe, on le sélectionne.
+                        */
+
+                        if(
+                            chantier.clientId
+                        ){
+
+                            chargerClients(
+                                chantier.clientId
+                            );
+
+                            document.getElementById(
+                                "clientId"
+                            ).value =
+                                chantier.clientId;
+
+                        }
+
+                        if(
+                            chantier.localisation
+                        ){
+
+                            document.getElementById(
+                                "localisation"
+                            ).value =
+                                chantier.localisation;
+
+                        }
+
+                    }
+
                     programmerSauvegarde();
 
                 }
@@ -4649,21 +4890,16 @@ document.addEventListener(
 
 
 /* =========================================================
-   FERMER MODAL EN CLIQUANT À CÔTÉ
+   MODAL
 ========================================================= */
 
 document
-    .getElementById(
-        "detailModal"
-    )
+    .getElementById("detailModal")
     .addEventListener(
         "click",
         function(event){
 
-            if(
-                event.target ===
-                this
-            ){
+            if(event.target === this){
 
                 fermerModal();
 
@@ -4673,18 +4909,11 @@ document
     );
 
 
-/* =========================================================
-   RACCOURCI ECHAP
-========================================================= */
-
 document.addEventListener(
     "keydown",
     function(event){
 
-        if(
-            event.key ===
-            "Escape"
-        ){
+        if(event.key === "Escape"){
 
             fermerModal();
 
@@ -4713,10 +4942,11 @@ function initialiser(){
     afficherListeDQEs();
 
     /*
-       Important :
-       traiter les paramètres après
-       l'initialisation du formulaire.
+       On synchronise encore une fois
+       après le chargement complet.
     */
+
+    synchroniserChantierActif();
 
     traiterParametresURL();
 
@@ -4733,3 +4963,4 @@ initialiser();
 
 </body>
 </html>
+
