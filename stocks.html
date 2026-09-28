@@ -1,12 +1,16 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Matériaux & Stocks — BATIFLOW</title>
+<title>BATIFLOW — Matériaux & Stocks</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -18,9 +22,9 @@ body{
     color:#172033;
 }
 
-/* =========================
+/* ==============================
    SIDEBAR
-========================= */
+============================== */
 
 .sidebar{
     position:fixed;
@@ -41,68 +45,54 @@ body{
     padding:0 24px;
     font-size:24px;
     font-weight:800;
-    letter-spacing:.5px;
-    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .logo span{
     color:#f28c28;
 }
 
-.logo small{
-    display:block;
-    font-size:10px;
-    color:#94a3b8;
-    margin-left:8px;
-    margin-top:14px;
-    font-weight:500;
-}
-
 .menu{
-    padding:18px 12px;
+    padding:15px 12px;
 }
 
 .menu-title{
-    font-size:11px;
-    text-transform:uppercase;
     color:#64748b;
-    padding:12px;
+    font-size:11px;
     font-weight:bold;
+    text-transform:uppercase;
+    padding:15px 12px 8px;
 }
 
 .menu a{
     display:flex;
     align-items:center;
     gap:12px;
-    padding:12px 14px;
-    margin-bottom:4px;
     color:#cbd5e1;
     text-decoration:none;
-    border-radius:9px;
+    padding:12px 14px;
+    margin-bottom:4px;
+    border-radius:8px;
     font-size:14px;
-    transition:.2s;
 }
 
 .menu a:hover{
-    background:#182438;
+    background:#1b293d;
     color:white;
 }
 
 .menu a.active{
     background:#f28c28;
     color:white;
-    font-weight:bold;
 }
 
-.menu-icon{
-    width:20px;
+.icon{
+    width:22px;
     text-align:center;
-    font-size:17px;
 }
 
-/* =========================
+/* ==============================
    MAIN
-========================= */
+============================== */
 
 .main{
     margin-left:260px;
@@ -114,26 +104,20 @@ body{
     background:white;
     border-bottom:1px solid #e5e7eb;
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
     padding:0 28px;
     position:sticky;
     top:0;
-    z-index:500;
+    z-index:100;
 }
 
-.topbar-title{
+.topbar h2{
+    margin:0;
     font-size:20px;
-    font-weight:700;
 }
 
-.topbar-right{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.user-badge{
+.user{
     width:38px;
     height:38px;
     border-radius:50%;
@@ -149,9 +133,9 @@ body{
     padding:28px;
 }
 
-/* =========================
-   PAGE HEADER
-========================= */
+/* ==============================
+   HEADER
+============================== */
 
 .page-header{
     display:flex;
@@ -161,36 +145,2902 @@ body{
     margin-bottom:25px;
 }
 
-.page-title h1{
-    margin:0 0 7px;
+.page-header h1{
+    margin:0 0 6px;
     font-size:28px;
 }
 
-.page-title p{
+.page-header p{
     margin:0;
     color:#64748b;
     font-size:14px;
 }
 
-.primary-btn{
-    border:0;
+.btn-primary{
     background:#f28c28;
+    border:none;
     color:white;
     padding:13px 18px;
-    border-radius:9px;
+    border-radius:8px;
     cursor:pointer;
     font-weight:bold;
-    font-size:14px;
 }
 
-.primary-btn:hover{
+.btn-primary:hover{
     background:#df7818;
 }
 
-/* =========================
+/* ==============================
    STATS
-========================= */
+============================== */
 
 .stats{
-    display:g
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:22px;
+}
 
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.stat-label{
+    color:#64748b;
+    font-size:13px;
+}
+
+.stat-number{
+    font-size:25px;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+/* ==============================
+   TOOLBAR
+============================== */
+
+.toolbar{
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    margin-bottom:18px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.search{
+    flex:1;
+    min-width:230px;
+}
+
+.search input,
+.toolbar select{
+    width:100%;
+    padding:12px;
+    border:1px solid #dbe1e8;
+    border-radius:8px;
+    background:white;
+    outline:none;
+}
+
+.toolbar select{
+    width:190px;
+}
+
+/* ==============================
+   TABLE
+============================== */
+
+.card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1000px;
+}
+
+thead{
+    background:#f8fafc;
+}
+
+th{
+    text-align:left;
+    padding:14px;
+    color:#64748b;
+    font-size:12px;
+    text-transform:uppercase;
+}
+
+td{
+    padding:14px;
+    border-top:1px solid #edf0f4;
+    font-size:14px;
+}
+
+.material{
+    font-weight:bold;
+}
+
+.sub{
+    color:#64748b;
+    font-size:12px;
+    margin-top:3px;
+}
+
+/* ==============================
+   STATUS
+============================== */
+
+.badge{
+    display:inline-block;
+    padding:6px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.ok{
+    background:#e8f7ee;
+    color:#16803c;
+}
+
+.low{
+    background:#fff5dc;
+    color:#a16207;
+}
+
+.out{
+    background:#feecec;
+    color:#c62828;
+}
+
+/* ==============================
+   ACTIONS
+============================== */
+
+.actions{
+    display:flex;
+    gap:5px;
+}
+
+.action{
+    width:34px;
+    height:34px;
+    border:1px solid #e2e8f0;
+    background:white;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.action:hover{
+    background:#f8fafc;
+}
+
+/* ==============================
+   EMPTY
+============================== */
+
+.empty{
+    text-align:center;
+    padding:60px 20px;
+    color:#64748b;
+}
+
+.empty-icon{
+    font-size:45px;
+    margin-bottom:12px;
+}
+
+.empty h3{
+    color:#172033;
+    margin:0 0 8px;
+}
+
+/* ==============================
+   MODAL
+============================== */
+
+.modal-bg{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.6);
+    z-index:3000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-bg.show{
+    display:flex;
+}
+
+.modal{
+    background:white;
+    width:100%;
+    max-width:650px;
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:14px;
+}
+
+.modal-head{
+    padding:20px;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.modal-head h2{
+    margin:0;
+    font-size:20px;
+}
+
+.close{
+    border:none;
+    background:none;
+    font-size:26px;
+    cursor:pointer;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+.modal-footer{
+    padding:18px 20px;
+    border-top:1px solid #e5e7eb;
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}
+
+.btn-secondary{
+    border:1px solid #dbe1e8;
+    background:white;
+    padding:11px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    padding:11px;
+    border:1px solid #dbe1e8;
+    border-radius:8px;
+    outline:none;
+    font-family:inherit;
+}
+
+.form-group textarea{
+    min-height:80px;
+}
+
+/* ==============================
+   TOAST
+============================== */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#101827;
+    color:white;
+    padding:14px 18px;
+    border-radius:8px;
+    opacity:0;
+    transform:translateY(30px);
+    transition:.3s;
+    z-index:5000;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        width:70px;
+    }
+
+    .logo{
+        justify-content:center;
+        padding:0;
+        font-size:17px;
+    }
+
+    .menu-title{
+        display:none;
+    }
+
+    .menu a{
+        justify-content:center;
+        padding:14px 5px;
+    }
+
+    .menu a span:last-child{
+        display:none;
+    }
+
+    .main{
+        margin-left:70px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .content{
+        padding:15px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ======================================
+     SIDEBAR
+====================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        BATI<span>FLOW</span>
+    </div>
+
+    <nav class="menu">
+
+        <div class="menu-title">Principal</div>
+
+        <a href="dashboard.html">
+            <span class="icon">🏠</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="chantiers.html">
+            <span class="icon">🏗️</span>
+            <span>Chantiers</span>
+        </a>
+
+        <a href="dqe.html">
+            <span class="icon">📐</span>
+            <span>DQE & Métré</span>
+        </a>
+
+        <a href="devis.html">
+            <span class="icon">💰</span>
+            <span>Devis</span>
+        </a>
+
+        <a href="clients.html">
+            <span class="icon">👥</span>
+            <span>Clients</span>
+        </a>
+
+
+        <div class="menu-title">Calcul BTP</div>
+
+        <a href="calculator.html">
+            <span class="icon">🧮</span>
+            <span>Calculateur BTP</span>
+        </a>
+
+        <a href="mortar.html">
+            <span class="icon">🧱</span>
+            <span>Mortier</span>
+        </a>
+
+        <a href="masonry.html">
+            <span class="icon">🧱</span>
+            <span>Maçonnerie</span>
+        </a>
+
+        <a href="slab.html">
+            <span class="icon">🏢</span>
+            <span>Dalle</span>
+        </a>
+
+
+        <div class="menu-title">Gestion</div>
+
+        <a href="stocks.html" class="active">
+            <span class="icon">📦</span>
+            <span>Matériaux & Stocks</span>
+        </a>
+
+        <a href="documents.html">
+            <span class="icon">📁</span>
+            <span>Documents BTP</span>
+        </a>
+
+        <a href="parametres.html">
+            <span class="icon">⚙️</span>
+            <span>Paramètres</span>
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- ======================================
+     MAIN
+====================================== -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+    <h2>Matériaux & Stocks</h2>
+
+    <div class="user">
+        B
+    </div>
+
+</header>
+
+
+<section class="content">
+
+
+<!-- ======================================
+     PAGE HEADER
+====================================== -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Matériaux & Stocks</h1>
+
+        <p>
+            Gérez vos matériaux et les mouvements de votre stock.
+        </p>
+
+    </div>
+
+    <button
+        class="btn-primary"
+        onclick="nouveauMateriau()"
+    >
+        ＋ Nouveau matériau
+    </button>
+
+</div>
+
+
+<!-- ======================================
+     STATISTIQUES
+====================================== -->
+
+<div class="stats">
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Total matériaux
+        </div>
+
+        <div
+            class="stat-number"
+            id="totalMateriaux"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Stock faible
+        </div>
+
+        <div
+            class="stat-number"
+            id="stockFaible"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Rupture
+        </div>
+
+        <div
+            class="stat-number"
+            id="stockRupture"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Valeur du stock
+        </div>
+
+        <div
+            class="stat-number"
+            id="valeurStock"
+        >
+            0 FCFA
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================
+     RECHERCHE
+====================================== -->
+
+<div class="toolbar">
+
+    <div class="search">
+
+        <input
+            type="text"
+            id="recherche"
+            placeholder="🔎 Rechercher un matériau..."
+            oninput="afficherStocks()"
+        >
+
+    </div>
+
+
+    <select
+        id="filtreCategorie"
+        onchange="afficherStocks()"
+    >
+
+        <option value="">
+            Toutes les catégories
+        </option>
+
+        <option value="Ciment">Ciment</option>
+        <option value="Sable">Sable</option>
+        <option value="Gravier">Gravier</option>
+        <option value="Acier">Acier</option>
+        <option value="Bois">Bois</option>
+        <option value="Maçonnerie">Maçonnerie</option>
+        <option value="Électricité">Électricité</option>
+        <option value="Plomberie">Plomberie</option>
+        <option value="Finition">Finition</option>
+        <option value="Autres">Autres</option>
+
+    </select>
+
+
+    <select
+        id="filtreStatut"
+        onchange="afficherStocks()"
+    >
+
+        <option value="">
+            Tous les stocks
+        </option>
+
+        <option value="OK">
+            Stock OK
+        </option>
+
+        <option value="FAIBLE">
+            Stock faible
+        </option>
+
+        <option value="RUPTURE">
+            Rupture
+        </option>
+
+    </select>
+
+</div>
+
+
+<!-- ======================================
+     TABLE
+====================================== -->
+
+<div class="card">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Référence</th>
+<th>Matériau</th>
+<th>Catégorie</th>
+<th>Stock</th>
+<th>Unité</th>
+<th>Prix unitaire</th>
+<th>Valeur</th>
+<th>Statut</th>
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableStocks"></tbody>
+
+</table>
+
+</div>
+
+
+<div
+    class="empty"
+    id="messageVide"
+>
+
+    <div class="empty-icon">
+        📦
+    </div>
+
+    <h3>
+        Aucun matériau enregistré
+    </h3>
+
+    <p>
+        Ajoutez votre premier matériau pour commencer la gestion du stock.
+    </p>
+
+    <button
+        class="btn-primary"
+        onclick="nouveauMateriau()"
+    >
+        ＋ Ajouter un matériau
+    </button>
+
+</div>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<!-- ======================================
+     MODAL MATÉRIAU
+====================================== -->
+
+<div
+    class="modal-bg"
+    id="modalMateriau"
+>
+
+<div class="modal">
+
+
+<div class="modal-head">
+
+<h2 id="titreModal">
+Nouveau matériau
+</h2>
+
+<button
+    class="close"
+    onclick="fermerModal('modalMateriau')"
+>
+×
+</button>
+
+</div>
+
+
+<form
+    id="formMateriau"
+    onsubmit="enregistrerMateriau(event)"
+>
+
+<div class="modal-body">
+
+<input
+    type="hidden"
+    id="materiauId"
+>
+
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Référence
+</label>
+
+<input
+    type="text"
+    id="reference"
+    placeholder="Ex : MAT-001"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Nom du matériau *
+</label>
+
+<input
+    type="text"
+    id="nom"
+    placeholder="Ex : Ciment CPJ 45"
+    required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Catégorie *
+</label>
+
+<select
+    id="categorie"
+    required
+>
+
+<option value="">
+Sélectionner
+</option>
+
+<option value="Ciment">
+Ciment
+</option>
+
+<option value="Sable">
+Sable
+</option>
+
+<option value="Gravier">
+Gravier
+</option>
+
+<option value="Acier">
+Acier
+</option>
+
+<option value="Bois">
+Bois
+</option>
+
+<option value="Maçonnerie">
+Maçonnerie
+</option>
+
+<option value="Électricité">
+Électricité
+</option>
+
+<option value="Plomberie">
+Plomberie
+</option>
+
+<option value="Finition">
+Finition
+</option>
+
+<option value="Autres">
+Autres
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Unité *
+</label>
+
+<select
+    id="unite"
+    required
+>
+
+<option value="">
+Sélectionner
+</option>
+
+<option value="sac">
+Sac
+</option>
+
+<option value="kg">
+Kg
+</option>
+
+<option value="tonne">
+Tonne
+</option>
+
+<option value="m³">
+m³
+</option>
+
+<option value="m²">
+m²
+</option>
+
+<option value="ml">
+ml
+</option>
+
+<option value="barre">
+Barre
+</option>
+
+<option value="pièce">
+Pièce
+</option>
+
+<option value="unité">
+Unité
+</option>
+
+<option value="litre">
+Litre
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Stock initial
+</label>
+
+<input
+    type="number"
+    id="stock"
+    min="0"
+    step="0.01"
+    value="0"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Stock minimum
+</label>
+
+<input
+    type="number"
+    id="stockMin"
+    min="0"
+    step="0.01"
+    value="0"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Prix unitaire FCFA
+</label>
+
+<input
+    type="number"
+    id="prix"
+    min="0"
+    step="1"
+    value="0"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Fournisseur
+</label>
+
+<input
+    type="text"
+    id="fournisseur"
+    placeholder="Ex : CIMTOGO"
+>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Emplacement
+</label>
+
+<input
+    type="text"
+    id="emplacement"
+    placeholder="Ex : Dépôt principal"
+>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Notes
+</label>
+
+<textarea
+    id="notes"
+    placeholder="Informations complémentaires..."
+></textarea>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="modal-footer">
+
+<button
+    type="button"
+    class="btn-secondary"
+    onclick="fermerModal('modalMateriau')"
+>
+Annuler
+</button>
+
+<button
+    type="submit"
+    class="btn-primary"
+>
+Enregistrer
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- ======================================
+     MODAL MOUVEMENT
+====================================== -->
+
+<div
+    class="modal-bg"
+    id="modalMouvement"
+>
+
+<div class="modal">
+
+<div class="modal-head">
+
+<h2 id="titreMouvement">
+Entrée de stock
+</h2>
+
+<button
+    class="close"
+    onclick="fermerModal('modalMouvement')"
+>
+×
+</button>
+
+</div>
+
+
+<form
+    onsubmit="enregistrerMouvement(event)"
+>
+
+<div class="modal-body">
+
+
+<input
+    type="hidden"
+    id="mouvementId"
+/>
+
+<input
+    type="hidden"
+    id="mouvementType"
+/>
+
+
+<div class="form-group">
+
+<label>
+Matériau
+</label>
+
+<input
+    type="text"
+    id="mouvementMateriau"
+    readonly
+>
+
+</div>
+
+
+<br>
+
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Quantité *
+</label>
+
+<input
+    type="number"
+    id="mouvementQuantite"
+    min="0.01"
+    step="0.01"
+    required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Date
+</label>
+
+<input
+    type="date"
+    id="mouvementDate"
+    required
+>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Motif
+</label>
+
+<input
+    type="text"
+    id="mouvementMotif"
+    placeholder="Ex : Achat / utilisation chantier"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Chantier
+</label>
+
+<select
+    id="mouvementChantier"
+>
+
+<option value="">
+Aucun chantier
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Fournisseur
+</label>
+
+<input
+    type="text"
+    id="mouvementFournisseur"
+>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="modal-footer">
+
+<button
+    type="button"
+    class="btn-secondary"
+    onclick="fermerModal('modalMouvement')"
+>
+Annuler
+</button>
+
+<button
+    type="submit"
+    class="btn-primary"
+>
+Valider
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- ======================================
+     MODAL DÉTAILS
+====================================== -->
+
+<div
+    class="modal-bg"
+    id="modalDetails"
+>
+
+<div class="modal">
+
+<div class="modal-head">
+
+<h2>
+Détails du matériau
+</h2>
+
+<button
+    class="close"
+    onclick="fermerModal('modalDetails')"
+>
+×
+</button>
+
+</div>
+
+<div
+    class="modal-body"
+    id="details"
+></div>
+
+<div class="modal-footer">
+
+<button
+    class="btn-secondary"
+    onclick="fermerModal('modalDetails')"
+>
+Fermer
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ======================================
+     TOAST
+====================================== -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+/* ==========================================
+   CONFIGURATION BATIFLOW
+========================================== */
+
+const STOCKS_KEY = "batiflowStocks";
+
+const MOUVEMENTS_KEY =
+    "batiflowMouvementsStocks";
+
+
+/* ==========================================
+   UTILITAIRES
+========================================== */
+
+function getStocks(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(STOCKS_KEY)
+        ) || [];
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function saveStocks(data){
+
+    localStorage.setItem(
+        STOCKS_KEY,
+        JSON.stringify(data)
+    );
+
+}
+
+
+function getMouvements(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(MOUVEMENTS_KEY)
+        ) || [];
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function saveMouvements(data){
+
+    localStorage.setItem(
+        MOUVEMENTS_KEY,
+        JSON.stringify(data)
+    );
+
+}
+
+
+function idUnique(){
+
+    return Date.now().toString(36) +
+    Math.random().toString(36).substring(2,8);
+
+}
+
+
+function aujourdHui(){
+
+    const d = new Date();
+
+    const mois =
+        String(d.getMonth()+1).padStart(2,"0");
+
+    const jour =
+        String(d.getDate()).padStart(2,"0");
+
+    return d.getFullYear() +
+        "-" +
+        mois +
+        "-" +
+        jour;
+
+}
+
+
+function nombre(value){
+
+    return Number(value || 0)
+        .toLocaleString(
+            "fr-FR",
+            {
+                maximumFractionDigits:2
+            }
+        );
+
+}
+
+
+function fcfa(value){
+
+    return Number(value || 0)
+        .toLocaleString(
+            "fr-FR",
+            {
+                maximumFractionDigits:0
+            }
+        ) + " FCFA";
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ==========================================
+   TOAST
+========================================== */
+
+function toast(message){
+
+    const element =
+        document.getElementById("toast");
+
+    element.textContent = message;
+
+    element.classList.add("show");
+
+    setTimeout(function(){
+
+        element.classList.remove("show");
+
+    },3000);
+
+}
+
+
+/* ==========================================
+   STATUT
+========================================== */
+
+function statutStock(item){
+
+    const stock =
+        Number(item.stock || 0);
+
+    const minimum =
+        Number(item.stockMin || 0);
+
+    if(stock <= 0){
+
+        return "RUPTURE";
+
+    }
+
+    if(
+        minimum > 0 &&
+        stock <= minimum
+    ){
+
+        return "FAIBLE";
+
+    }
+
+    return "OK";
+
+}
+
+
+function badge(statut){
+
+    if(statut === "RUPTURE"){
+
+        return `
+            <span class="badge out">
+                Rupture
+            </span>
+        `;
+
+    }
+
+    if(statut === "FAIBLE"){
+
+        return `
+            <span class="badge low">
+                Stock faible
+            </span>
+        `;
+
+    }
+
+    return `
+        <span class="badge ok">
+            Stock OK
+        </span>
+    `;
+
+}
+
+
+/* ==========================================
+   AFFICHAGE STOCKS
+========================================== */
+
+function afficherStocks(){
+
+    const stocks =
+        getStocks();
+
+    const recherche =
+        document.getElementById("recherche")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const categorie =
+        document.getElementById("filtreCategorie")
+        .value;
+
+    const statut =
+        document.getElementById("filtreStatut")
+        .value;
+
+
+    const tbody =
+        document.getElementById("tableStocks");
+
+    tbody.innerHTML = "";
+
+
+    let liste =
+        stocks.filter(function(item){
+
+            const texte =
+                (
+                    item.nom || ""
+                ) +
+                " " +
+                (
+                    item.reference || ""
+                ) +
+                " " +
+                (
+                    item.categorie || ""
+                ) +
+                " " +
+                (
+                    item.fournisseur || ""
+                );
+
+
+            const rechercheOK =
+                !recherche ||
+                texte.toLowerCase()
+                .includes(recherche);
+
+
+            const categorieOK =
+                !categorie ||
+                item.categorie === categorie;
+
+
+            const statutOK =
+                !statut ||
+                statutStock(item) === statut;
+
+
+            return (
+                rechercheOK &&
+                categorieOK &&
+                statutOK
+            );
+
+        });
+
+
+    liste.forEach(function(item){
+
+        const stock =
+            Number(item.stock || 0);
+
+        const prix =
+            Number(item.prix || 0);
+
+        const valeur =
+            stock * prix;
+
+        const statutItem =
+            statutStock(item);
+
+
+        const tr =
+            document.createElement("tr");
+
+
+        tr.innerHTML = `
+
+<td>
+
+<strong>
+${escapeHTML(item.reference || "—")}
+</strong>
+
+</td>
+
+
+<td>
+
+<div class="material">
+${escapeHTML(item.nom)}
+</div>
+
+<div class="sub">
+${escapeHTML(item.emplacement || "")}
+</div>
+
+</td>
+
+
+<td>
+${escapeHTML(item.categorie)}
+</td>
+
+
+<td>
+
+<strong>
+${nombre(stock)}
+</strong>
+
+</td>
+
+
+<td>
+${escapeHTML(item.unite)}
+</td>
+
+
+<td>
+${fcfa(prix)}
+</td>
+
+
+<td>
+
+<strong>
+${fcfa(valeur)}
+</strong>
+
+</td>
+
+
+<td>
+${badge(statutItem)}
+</td>
+
+
+<td>
+
+<div class="actions">
+
+<button
+class="action"
+title="Détails"
+onclick="detailsMateriau('${item.id}')"
+>
+👁️
+</button>
+
+
+<button
+class="action"
+title="Entrée"
+onclick="mouvement('${item.id}','ENTREE')"
+>
+➕
+</button>
+
+
+<button
+class="action"
+title="Sortie"
+onclick="mouvement('${item.id}','SORTIE')"
+>
+➖
+</button>
+
+
+<button
+class="action"
+title="Modifier"
+onclick="modifierMateriau('${item.id}')"
+>
+✏️
+</button>
+
+
+<button
+class="action"
+title="Supprimer"
+onclick="supprimerMateriau('${item.id}')"
+>
+🗑️
+</button>
+
+</div>
+
+</td>
+
+`;
+
+
+        tbody.appendChild(tr);
+
+    });
+
+
+    const message =
+        document.getElementById("messageVide");
+
+
+    if(liste.length === 0){
+
+        message.style.display = "block";
+
+    }else{
+
+        message.style.display = "none";
+
+    }
+
+
+    afficherStatistiques();
+
+}
+
+
+/* ==========================================
+   STATISTIQUES
+========================================== */
+
+function afficherStatistiques(){
+
+    const stocks =
+        getStocks();
+
+
+    let faible = 0;
+    let rupture = 0;
+    let valeur = 0;
+
+
+    stocks.forEach(function(item){
+
+        const statut =
+            statutStock(item);
+
+
+        if(statut === "FAIBLE"){
+            faible++;
+        }
+
+
+        if(statut === "RUPTURE"){
+            rupture++;
+        }
+
+
+        valeur +=
+            Number(item.stock || 0) *
+            Number(item.prix || 0);
+
+    });
+
+
+    document.getElementById(
+        "totalMateriaux"
+    ).textContent = stocks.length;
+
+
+    document.getElementById(
+        "stockFaible"
+    ).textContent = faible;
+
+
+    document.getElementById(
+        "stockRupture"
+    ).textContent = rupture;
+
+
+    document.getElementById(
+        "valeurStock"
+    ).textContent = fcfa(valeur);
+
+}
+
+
+/* ==========================================
+   NOUVEAU MATÉRIAU
+========================================== */
+
+function nouveauMateriau(){
+
+    document.getElementById(
+        "formMateriau"
+    ).reset();
+
+
+    document.getElementById(
+        "materiauId"
+    ).value = "";
+
+
+    document.getElementById(
+        "stock"
+    ).value = 0;
+
+
+    document.getElementById(
+        "stockMin"
+    ).value = 0;
+
+
+    document.getElementById(
+        "prix"
+    ).value = 0;
+
+
+    document.getElementById(
+        "titreModal"
+    ).textContent =
+        "Nouveau matériau";
+
+
+    document.getElementById(
+        "modalMateriau"
+    ).classList.add("show");
+
+}
+
+
+/* ==========================================
+   ENREGISTRER
+========================================== */
+
+function enregistrerMateriau(event){
+
+    event.preventDefault();
+
+
+    const stocks =
+        getStocks();
+
+
+    const id =
+        document.getElementById(
+            "materiauId"
+        ).value;
+
+
+    const item = {
+
+        id:
+            id || idUnique(),
+
+        reference:
+            document.getElementById(
+                "reference"
+            ).value.trim()
+            ||
+            "MAT-" +
+            Date.now().toString().slice(-6),
+
+        nom:
+            document.getElementById(
+                "nom"
+            ).value.trim(),
+
+        categorie:
+            document.getElementById(
+                "categorie"
+            ).value,
+
+        unite:
+            document.getElementById(
+                "unite"
+            ).value,
+
+        stock:
+            Number(
+                document.getElementById(
+                    "stock"
+                ).value
+            ) || 0,
+
+        stockMin:
+            Number(
+                document.getElementById(
+                    "stockMin"
+                ).value
+            ) || 0,
+
+        prix:
+            Number(
+                document.getElementById(
+                    "prix"
+                ).value
+            ) || 0,
+
+        fournisseur:
+            document.getElementById(
+                "fournisseur"
+            ).value.trim(),
+
+        emplacement:
+            document.getElementById(
+                "emplacement"
+            ).value.trim(),
+
+        notes:
+            document.getElementById(
+                "notes"
+            ).value.trim(),
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
+
+    if(!item.nom){
+
+        toast(
+            "Veuillez saisir le nom du matériau."
+        );
+
+        return;
+
+    }
+
+
+    if(!item.categorie){
+
+        toast(
+            "Veuillez sélectionner une catégorie."
+        );
+
+        return;
+
+    }
+
+
+    if(!item.unite){
+
+        toast(
+            "Veuillez sélectionner une unité."
+        );
+
+        return;
+
+    }
+
+
+    const index =
+        stocks.findIndex(
+            function(element){
+
+                return String(element.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if(index >= 0){
+
+        item.createdAt =
+            stocks[index].createdAt ||
+            new Date().toISOString();
+
+        stocks[index] = item;
+
+        toast(
+            "Matériau modifié avec succès."
+        );
+
+    }else{
+
+        item.createdAt =
+            new Date().toISOString();
+
+        stocks.push(item);
+
+        toast(
+            "Matériau ajouté avec succès."
+        );
+
+    }
+
+
+    saveStocks(stocks);
+
+    fermerModal("modalMateriau");
+
+    afficherStocks();
+
+}
+
+
+/* ==========================================
+   MODIFIER
+========================================== */
+
+function modifierMateriau(id){
+
+    const stocks =
+        getStocks();
+
+
+    const item =
+        stocks.find(
+            function(element){
+
+                return String(element.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if(!item){
+
+        toast(
+            "Matériau introuvable."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "materiauId"
+    ).value = item.id;
+
+
+    document.getElementById(
+        "reference"
+    ).value =
+        item.reference || "";
+
+
+    document.getElementById(
+        "nom"
+    ).value =
+        item.nom || "";
+
+
+    document.getElementById(
+        "categorie"
+    ).value =
+        item.categorie || "";
+
+
+    document.getElementById(
+        "unite"
+    ).value =
+        item.unite || "";
+
+
+    document.getElementById(
+        "stock"
+    ).value =
+        item.stock || 0;
+
+
+    document.getElementById(
+        "stockMin"
+    ).value =
+        item.stockMin || 0;
+
+
+    document.getElementById(
+        "prix"
+    ).value =
+        item.prix || 0;
+
+
+    document.getElementById(
+        "fournisseur"
+    ).value =
+        item.fournisseur || "";
+
+
+    document.getElementById(
+        "emplacement"
+    ).value =
+        item.emplacement || "";
+
+
+    document.getElementById(
+        "notes"
+    ).value =
+        item.notes || "";
+
+
+    document.getElementById(
+        "titreModal"
+    ).textContent =
+        "Modifier le matériau";
+
+
+    document.getElementById(
+        "modalMateriau"
+    ).classList.add("show");
+
+}
+
+
+/* ==========================================
+   SUPPRIMER
+========================================== */
+
+function supprimerMateriau(id){
+
+    const stocks =
+        getStocks();
+
+
+    const item =
+        stocks.find(
+            function(element){
+
+                return String(element.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if(!item){
+        return;
+    }
+
+
+    if(
+        !confirm(
+            "Voulez-vous supprimer le matériau :\n\n" +
+            item.nom +
+            " ?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    const nouveaux =
+        stocks.filter(
+            function(element){
+
+                return String(element.id) !==
+                    String(id);
+
+            }
+        );
+
+
+    saveStocks(nouveaux);
+
+
+    const mouvements =
+        getMouvements().filter(
+            function(element){
+
+                return String(element.stockId) !==
+                    String(id);
+
+            }
+        );
+
+
+    saveMouvements(mouvements);
+
+
+    afficherStocks();
+
+    toast(
+        "Matériau supprimé."
+    );
+
+}
+
+
+/* ==========================================
+   MOUVEMENT
+========================================== */
+
+function mouvement(id,type){
+
+    const stocks =
+        getStocks();
+
+
+    const item =
+        stocks.find(
+            function(element){
+
+                return String(element.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if(!item){
+
+        toast(
+            "Matériau introuvable."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "mouvementId"
+    ).value = id;
+
+
+    document.getElementById(
+        "mouvementType"
+    ).value = type;
+
+
+    document.getElementById(
+        "mouvementMateriau"
+    ).value =
+        item.nom +
+        " — Stock : " +
+        nombre(item.stock) +
+        " " +
+        item.unite;
+
+
+    document.getElementById(
+        "mouvementQuantite"
+    ).value = "";
+
+
+    document.getElementById(
+        "mouvementDate"
+    ).value =
+        aujourdHui();
+
+
+    document.getElementById(
+        "mouvementMotif"
+    ).value = "";
+
+
+    document.getElementById(
+        "mouvementFournisseur"
+    ).value =
+        item.fournisseur || "";
+
+
+    document.getElementById(
+        "titreMouvement"
+    ).textContent =
+        type === "ENTREE"
+        ? "Entrée de stock"
+        : "Sortie de stock";
+
+
+    chargerChantiers();
+
+
+    document.getElementById(
+        "modalMouvement"
+    ).classList.add("show");
+
+}
+
+
+/* ==========================================
+   CHARGER CHANTIERS
+========================================== */
+
+function chargerChantiers(){
+
+    const select =
+        document.getElementById(
+            "mouvementChantier"
+        );
+
+
+    select.innerHTML =
+        `
+        <option value="">
+        Aucun chantier
+        </option>
+        `;
+
+
+    let chantiers = [];
+
+
+    try{
+
+        chantiers =
+            JSON.parse(
+                localStorage.getItem(
+                    "batiflowChantiers"
+                )
+            ) || [];
+
+    }catch(e){
+
+        chantiers = [];
+
+    }
+
+
+    chantiers.forEach(
+        function(chantier){
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                chantier.id || "";
+
+
+            option.textContent =
+                chantier.nom ||
+                chantier.name ||
+                chantier.reference ||
+                "Chantier";
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   ENREGISTRER MOUVEMENT
+========================================== */
+
+function enregistrerMouvement(event){
+
+    event.preventDefault();
+
+
+    const id =
+        document.getElementById(
+            "mouvementId"
+        ).value;
+
+
+    const type =
+        document.getElementById(
+            "mouvementType"
+        ).value;
+
+
+    const quantite =
+        Number(
+            document.getElementById(
+                "mouvementQuantite"
+            ).value
+        );
+
+
+    if(
+        !quantite ||
+        quantite <= 0
+    ){
+
+        toast(
+            "Veuillez saisir une quantité valide."
+        );
+
+        return;
+
+    }
+
+
+    const stocks =
+        getStocks();
+
+
+    const index =
+        stocks.findIndex(
+            function(element){
+
+                return String(element.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if(index === -1){
+
+        toast(
+            "Matériau introuvable."
+        );
+
+        return;
+
+    }
+
+
+    const ancienStock =
+        Number(
+            stocks[index].stock || 0
+        );
+
+
+    if(
+        type === "SORTIE" &&
+        quantite > ancienStock
+    ){
+
+        toast(
+            "Stock insuffisant."
+        );
+
+        return;
+
+    }
+
+
+    if(type === "ENTREE"){
+
+        stocks[index].stock =
+            ancienStock + quantite;
+
+    }else{
+
+        stocks[index].stock =
+            ancienStock - quantite;
+
+    }
+
+
+    stocks[index].updatedAt =
+        new Date().toISOString();
+
+
+    saveStocks(stocks);
+
+
+    let chantier = null;
+
+
+    try{
+
+        const chantiers =
+            JSON.parse(
+                localStorage.getItem(
+                    "batiflowChantiers"
+                )
+            ) || [];
+
+
+        const chantierId =
+            document.getElementById(
+                "mouvementChantier"
+            ).value;
+
+
+        chantier =
+            chantiers.find(
+                function(element){
+
+                    return String(element.id) ===
+                        String(chantierId);
+
+                }
+            ) || null;
+
+    }catch(e){
+
+        chantier = null;
+
+    }
+
+
+    const mouvements =
+        getMouvements();
+
+
+    mouvements.push({
+
+        id:idUnique(),
+
+        stockId:id,
+
+        type:type,
+
+        quantite:quantite,
+
+        date:
+            document.getElementById(
+                "mouvementDate"
+            ).value,
+
+        motif:
+            document.getElementById(
+                "mouvementMotif"
+            ).value.trim(),
+
+        fournisseur:
+            document.getElementById(
+                "mouvementFournisseur"
+            ).value.trim(),
+
+        chantierId:
+            chantier
+            ? chantier.id
+            : "",
+
+        chantier:
+            chantier
+            ? (
+                chantier.nom ||
+                chantier.name ||
+                chantier.reference ||
+                ""
+            )
+            : "",
+
+        createdAt:
+            new Date().toISOString()
+
+    });
+
+
+    saveMouvements(mouvements);
+
+
+    fermerModal(
+        "modalMouvement"
+    );
+
+
+    afficherStocks();
+
+
+    toast(
+        type === "ENTREE"
+        ? "Entrée enregistrée."
+        : "Sortie enregistrée."
+    );
+
+}
+
+
+/* ==========================================
+   DÉTAILS
+========================================== */
+
+function detailsMateriau(id){
+
+    const stocks =
+        getStocks();
+
+
+    const item =
+        stocks.find(
+            function(element){
+
+                return String(element.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if(!item){
+        return;
+    }
+
+
+    const mouvements =
+        getMouvements().filter(
+            function(element){
+
+                return String(
+                    element.stockId
+                ) === String(id);
+
+            }
+        );
+
+
+    let historique =
+        "";
+
+
+    if(mouvements.length === 0){
+
+        historique =
+            "<p>Aucun mouvement enregistré.</p>";
+
+    }else{
+
+        historique =
+            mouvements
+            .slice()
+            .reverse()
+            .map(
+                function(m){
+
+                    const signe =
+                        m.type === "ENTREE"
+                        ? "+"
+                        : "-";
+
+
+                    return `
+
+                    <div style="
+                        padding:10px 0;
+                        border-bottom:1px solid #eee;
+                    ">
+
+                    <strong>
+                    ${signe}
+                    ${nombre(m.quantite)}
+                    ${escapeHTML(item.unite)}
+                    </strong>
+
+                    — ${escapeHTML(
+                        m.motif ||
+                        "Mouvement"
+                    )}
+
+                    <div style="
+                        color:#64748b;
+                        font-size:12px;
+                        margin-top:4px;
+                    ">
+
+                    ${escapeHTML(
+                        m.date || ""
+                    )}
+
+                    ${
+                        m.chantier
+                        ? " — " +
+                        escapeHTML(m.chantier)
+                        : ""
+                    }
+
+                    </div>
+
+                    </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+    }
+
+
+    const valeur =
+        Number(item.stock || 0) *
+        Number(item.prix || 0);
+
+
+    document.getElementById(
+        "details"
+    ).innerHTML = `
+
+        <h3 style="margin-top:0;">
+        ${escapeHTML(item.nom)}
+        </h3>
+
+        <p>
+        <strong>Référence :</strong>
+        ${escapeHTML(item.reference)}
+        </p>
+
+        <p>
+        <strong>Catégorie :</strong>
+        ${escapeHTML(item.categorie)}
+        </p>
+
+        <p>
+        <strong>Stock :</strong>
+        ${nombre(item.stock)}
+        ${escapeHTML(item.unite)}
+        </p>
+
+        <p>
+        <strong>Stock minimum :</strong>
+        ${nombre(item.stockMin)}
+        ${escapeHTML(item.unite)}
+        </p>
+
+        <p>
+        <strong>Prix unitaire :</strong>
+        ${fcfa(item.prix)}
+        </p>
+
+        <p>
+        <strong>Valeur du stock :</strong>
+        ${fcfa(valeur)}
+        </p>
+
+        <p>
+        <strong>Fournisseur :</strong>
+        ${escapeHTML(item.fournisseur || "—")}
+        </p>
+
+        <p>
+        <strong>Emplacement :</strong>
+        ${escapeHTML(item.emplacement || "—")}
+        </p>
+
+        <hr>
+
+        <h3>
+        Historique des mouvements
+        </h3>
+
+        ${historique}
+
+    `;
+
+
+    document.getElementById(
+        "modalDetails"
+    ).classList.add("show");
+
+}
+
+
+/* ==========================================
+   FERMER MODALE
+========================================== */
+
+function fermerModal(id){
+
+    document.getElementById(
+        id
+    ).classList.remove("show");
+
+}
+
+
+/* ==========================================
+   FERMETURE EN CLIQUANT À CÔTÉ
+========================================== */
+
+document
+.querySelectorAll(".modal-bg")
+.forEach(
+    function(modal){
+
+        modal.addEventListener(
+            "click",
+            function(event){
+
+                if(
+                    event.target === modal
+                ){
+
+                    modal.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* ==========================================
+   ESCAPE
+========================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape"
+        ){
+
+            document
+            .querySelectorAll(
+                ".modal-bg.show"
+            )
+            .forEach(
+                function(modal){
+
+                    modal.classList.remove(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   SYNCHRONISATION BATIFLOW
+========================================== */
+
+window.addEventListener(
+    "storage",
+    function(){
+
+        afficherStocks();
+
+    }
+);
+
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            !document.hidden
+        ){
+
+            afficherStocks();
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   DÉMARRAGE
+========================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        afficherStocks();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
