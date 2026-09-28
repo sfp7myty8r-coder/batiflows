@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BATIFLOW — Documents BTP</title>
+
+    <meta
+        name="description"
+        content="BATIFLOW — Gestion professionnelle des documents BTP."
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f9;
+            color: #172033;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100vh;
+            background: #101827;
+            color: white;
+            padding: 22px 16px;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            padding-left: 12px;
+            letter-spacing: .3px;
+        }
+
+        .logo span {
+            color: #f28c28;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #8993a5;
+            margin: 20px 12px 8px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #c8cfda;
+            padding: 12px 14px;
+            margin: 4px 0;
+            border-radius: 9px;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .sidebar a:hover {
+            background: #1b2638;
+            color: white;
+        }
+
+        .sidebar a.active {
+            background: #f28c28;
+            color: white;
+            font-weight: 600;
+        }
+
+        .icon {
+            width: 20px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 260px;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .user {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #f28c28;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+            padding: 30px;
+        }
+
+        .page-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 20px;
+        }
+
+        .page-title h2 {
+            font-size: 25px;
+        }
+
+        .page-title p {
+            color: #6b7280;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 11px 17px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .btn-primary {
+            background: #f28c28;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #dc7417;
+        }
+
+        .btn-secondary {
+            background: #e9edf2;
+            color: #263244;
+        }
+
+        .btn-secondary:hover {
+            background: #dce1e7;
+        }
+
+        .btn-danger {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-header h3 {
+            font-size: 17px;
+        }
+
+        /* =========================
+           SEARCH / FILTER
+        ========================= */
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .search {
+            width: 260px;
+            padding: 10px 13px;
+            border: 1px solid #d9dee7;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .search:focus,
+        .filter-select:focus {
+            border-color: #f28c28;
+        }
+
+        .filter-select {
+            padding: 10px 12px;
+            border: 1px solid #d9dee7;
+            border-radius: 8px;
+            outline: none;
+            background: white;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8fafc;
+            text-align: left;
+            padding: 14px 16px;
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 15px 16px;
+            border-top: 1px solid #edf0f4;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .document-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .document-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 9px;
+            background: #fff3e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .document-title {
+            font-weight: 700;
+            color: #172033;
+        }
+
+        .document-size {
+            color: #8a93a3;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #fff3e6;
+            color: #c96812;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .actions button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .actions button:hover {
+            transform: scale(1.08);
+        }
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+            text-align: center;
+            padding: 50px 20px;
+            color: #6b7280;
+        }
+
+        .empty-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .empty h3 {
+            color: #374151;
+            margin-bottom: 7px;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, .55);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 560px;
+            max-width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+        }
+
+        .modal-box h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 11px;
+            border: 1px solid #d9dee7;
+            border-radius: 8px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 85px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #f28c28;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: #101827;
+            color: white;
+            padding: 14px 18px;
+            border-radius: 9px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.2);
+            display: none;
+            z-index: 2000;
+            font-size: 14px;
+        }
+
+        .toast.show {
+            display: block;
+            animation: apparition .25s ease;
+        }
+
+        @keyframes apparition {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #8a93a3;
+            font-size: 12px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width: 1000px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filters {
+                flex-wrap: wrap;
+            }
+
+            .search {
+                width: 220px;
+            }
+        }
+
+        @media(max-width: 800px) {
+
+            .sidebar {
+                width: 220px;
+            }
+
+            .main {
+                margin-left: 220px;
+            }
+
+            .header-right span {
+                display: none;
+            }
+        }
+
+        @media(max-width: 650px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .header {
+                padding: 0 15px;
+            }
+
+            .content {
+                padding: 18px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filters {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search,
+            .filter-select {
+                width: 100%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-actions button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        BATI<span>FLOW</span>
+    </div>
+
+    <div class="menu-title">Principal</div>
+
+    <a href="dashboard.html">
+        <span class="icon">📊</span>
+        Tableau de bord
+    </a>
+
+    <a href="chantiers.html">
+        <span class="icon">🏗️</span>
+        Chantiers
+    </a>
+
+    <a href="dqe.html">
+        <span class="icon">📐</span>
+        DQE & Métré
+    </a>
+
+    <a href="devis.html">
+        <span class="icon">🧾</span>
+        Devis
+    </a>
+
+    <a href="clients.html">
+        <span class="icon">👥</span>
+        Clients
+    </a>
+
+    <div class="menu-title">Calcul BTP</div>
+
+    <a href="calculator.html">
+        <span class="icon">🧮</span>
+        Calculateur BTP
+    </a>
+
+    <a href="mortar.html">
+        <span class="icon">🧱</span>
+        Mortier
+    </a>
+
+    <a href="masonry.html">
+        <span class="icon">🏠</span>
+        Maçonnerie
+    </a>
+
+    <a href="slab.html">
+        <span class="icon">▦</span>
+        Dalle
+    </a>
+
+    <a href="poteaux-poutres.html">
+        <span class="icon">🏢</span>
+        Poteaux & Poutres
+    </a>
+
+    <div class="menu-title">Gestion</div>
+
+    <a href="materiaux.html">
+        <span class="icon">🧱</span>
+        Matériaux
+    </a>
+
+    <a href="documents.html" class="active">
+        <span class="icon">📁</span>
+        Documents
+    </a>
+
+    <a href="parametres.html">
+        <span class="icon">⚙️</span>
+        Paramètres
+    </a>
+
+    <div class="menu-title">Compte</div>
+
+    <a href="login.html">
+        <span class="icon">↪️</span>
+        Déconnexion
+    </a>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+    <header class="header">
+
+        <h1>Documents BTP</h1>
+
+        <div class="header-right">
+
+            <span>Gestion documentaire</span>
+
+            <div class="user">
+                M
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <section class="content">
+
+        <div class="page-title">
+
+            <div>
+
+                <h2>Documents BTP</h2>
+
+                <p>
+                    Centralisez les plans, devis, contrats, rapports et autres documents de vos chantiers.
+                </p>
+
+            </div>
+
+            <button
+                class="btn btn-primary"
+                onclick="ouvrirModal()"
+            >
+                + Ajouter un document
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             STATISTIQUES
+        ========================= -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Documents
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalDocuments"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Plans
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalPlans"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Devis & DQE
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalDevis"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Autres documents
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalAutres"
+                >
+                    0
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             LISTE
+        ========================= -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h3>
+                    Liste des documents
+                </h3>
+
+                <div class="filters">
+
+                    <input
+                        type="text"
+                        class="search"
+                        id="recherche"
+                        placeholder="Rechercher un document..."
+                        oninput="afficherDocuments()"
+                    >
+
+                    <select
+                        class="filter-select"
+                        id="filtreCategorie"
+                        onchange="afficherDocuments()"
+                    >
+
+                        <option value="">
+                            Toutes les catégories
+                        </option>
+
+                        <option value="Plan">
+                            Plans
+                        </option>
+
+                        <option value="Devis">
+                            Devis
+                        </option>
+
+                        <option value="DQE">
+                            DQE
+                        </option>
+
+                        <option value="Facture">
+                            Factures
+                        </option>
+
+                        <option value="Contrat">
+                            Contrats
+                        </option>
+
+                        <option value="Rapport">
+                            Rapports
+                        </option>
+
+                        <option value="Photo">
+                            Photos
+                        </option>
+
+                        <option value="Autre">
+                            Autres
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Document
+                            </th>
+
+                            <th>
+                                Catégorie
+                            </th>
+
+                            <th>
+                                Chantier
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Taille
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="tableDocuments"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="footer">
+        BATIFLOW V1.0 — Gestion professionnelle BTP
+    </div>
+
+</main>
+
+
+<!-- =========================
+     MODAL AJOUT DOCUMENT
+========================= -->
+
+<div
+    class="modal"
+    id="modal"
+>
+
+    <div class="modal-box">
+
+        <h3>
+            Ajouter un document
+        </h3>
+
+
+        <div class="form-grid">
+
+            <div class="form-group full">
+
+                <label>
+                    Nom du document
+                </label>
+
+                <input
+                    type="text"
+                    id="nomDocument"
+                    placeholder="Ex : Plan de fondation Villa Lomé"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Catégorie
+                </label>
+
+                <select id="categorieDocument">
+
+                    <option value="Plan">
+                        Plan
+                    </option>
+
+                    <option value="Devis">
+                        Devis
+                    </option>
+
+                    <option value="DQE">
+                        DQE
+                    </option>
+
+                    <option value="Facture">
+                        Facture
+                    </option>
+
+                    <option value="Contrat">
+                        Contrat
+                    </option>
+
+                    <option value="Rapport">
+                        Rapport
+                    </option>
+
+                    <option value="Photo">
+                        Photo
+                    </option>
+
+                    <option value="Autre">
+                        Autre
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Chantier
+                </label>
+
+                <input
+                    type="text"
+                    id="chantierDocument"
+                    placeholder="Ex : Villa Lomé"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="dateDocument"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Fichier
+                </label>
+
+                <input
+                    type="file"
+                    id="fichierDocument"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
+                >
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    id="descriptionDocument"
+                    placeholder="Description ou remarque..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn btn-secondary"
+                onclick="fermerModal()"
+            >
+                Annuler
+            </button>
+
+            <button
+                class="btn btn-primary"
+                onclick="enregistrerDocument()"
+            >
+                Enregistrer
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+/* =========================
+   DONNÉES
+========================= */
+
+let documents = JSON.parse(
+    localStorage.getItem("batiflowDocuments")
+) || [];
+
+
+/* =========================
+   MODAL
+========================= */
+
+function ouvrirModal() {
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+    document
+        .getElementById("nomDocument")
+        .value = "";
+
+    document
+        .getElementById("chantierDocument")
+        .value = "";
+
+    document
+        .getElementById("descriptionDocument")
+        .value = "";
+
+    document
+        .getElementById("fichierDocument")
+        .value = "";
+
+    document
+        .getElementById("dateDocument")
+        .value = new Date()
+        .toISOString()
+        .split("T")[0];
+}
+
+
+function fermerModal() {
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+}
+
+
+/* =========================
+   ENREGISTRER DOCUMENT
+========================= */
+
+async function enregistrerDocument() {
+
+    const nom =
+        document
+        .getElementById("nomDocument")
+        .value
+        .trim();
+
+    const categorie =
+        document
+        .getElementById("categorieDocument")
+        .value;
+
+    const chantier =
+        document
+        .getElementById("chantierDocument")
+        .value
+        .trim();
+
+    const date =
+        document
+        .getElementById("dateDocument")
+        .value;
+
+    const description =
+        document
+        .getElementById("descriptionDocument")
+        .value
+        .trim();
+
+    const fichier =
+        document
+        .getElementById("fichierDocument")
+        .files[0];
+
+
+    if (!nom) {
+
+        alert(
+            "Veuillez saisir le nom du document."
+        );
+
+        return;
+    }
+
+
+    let fichierNom = "Aucun fichier";
+    let fichierTaille = 0;
+    let fichierData = null;
+    let fichierType = "";
+
+
+    /*
+       Le fichier est converti en Base64
+       afin de pouvoir être consulté
+       depuis le navigateur.
+    */
+
+    if (fichier) {
+
+        fichierNom = fichier.name;
+        fichierTaille = fichier.size;
+        fichierType = fichier.type;
+
+
+        /*
+           Limite de sécurité pour localStorage.
+           Les gros fichiers seront refusés.
+        */
+
+        if (fichier.size > 2 * 1024 * 1024) {
+
+            alert(
+                "Pour cette version V1, veuillez utiliser un fichier de moins de 2 Mo."
+            );
+
+            return;
+        }
+
+
+        fichierData =
+            await convertirFichierEnBase64(fichier);
+    }
+
+
+    const nouveauDocument = {
+
+        id: Date.now(),
+
+        nom: nom,
+
+        categorie: categorie,
+
+        chantier: chantier || "Non associé",
+
+        date: date || new Date()
+            .toISOString()
+            .split("T")[0],
+
+        description: description,
+
+        fichierNom: fichierNom,
+
+        fichierTaille: fichierTaille,
+
+        fichierType: fichierType,
+
+        fichierData: fichierData
+
+    };
+
+
+    documents.push(
+        nouveauDocument
+    );
+
+
+    try {
+
+        localStorage.setItem(
+            "batiflowDocuments",
+            JSON.stringify(documents)
+        );
+
+    } catch (error) {
+
+        alert(
+            "Le stockage du fichier a échoué. Le fichier est probablement trop volumineux."
+        );
+
+        documents.pop();
+
+        return;
+    }
+
+
+    fermerModal();
+
+    afficherDocuments();
+
+    afficherToast(
+        "Document ajouté avec succès."
+    );
+}
+
+
+/* =========================
+   CONVERSION FICHIER
+========================= */
+
+function convertirFichierEnBase64(fichier) {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const reader =
+                new FileReader();
+
+            reader.onload = () =>
+                resolve(reader.result);
+
+            reader.onerror = reject;
+
+            reader.readAsDataURL(fichier);
+        }
+    );
+}
+
+
+/* =========================
+   AFFICHAGE
+========================= */
+
+function afficherDocuments() {
+
+    const tbody =
+        document.getElementById(
+            "tableDocuments"
+        );
+
+
+    const recherche =
+        document
+        .getElementById("recherche")
+        .value
+        .toLowerCase();
+
+
+    const categorie =
+        document
+        .getElementById("filtreCategorie")
+        .value;
+
+
+    const filtres =
+        documents.filter(doc => {
+
+            const correspondRecherche =
+
+                doc.nom
+                    .toLowerCase()
+                    .includes(recherche)
+
+                ||
+
+                doc.chantier
+                    .toLowerCase()
+                    .includes(recherche);
+
+
+            const correspondCategorie =
+
+                !categorie ||
+
+                doc.categorie === categorie;
+
+
+            return (
+                correspondRecherche &&
+                correspondCategorie
+            );
+
+        });
+
+
+    tbody.innerHTML = "";
+
+
+    if (filtres.length === 0) {
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td colspan="6">
+
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            📁
+                        </div>
+
+                        <h3>
+                            Aucun document
+                        </h3>
+
+                        <p>
+                            Ajoutez votre premier document BTP.
+                        </p>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    } else {
+
+        filtres.forEach(doc => {
+
+            const index =
+                documents.findIndex(
+                    d => d.id === doc.id
+                );
+
+
+            const icone =
+                obtenirIcone(doc.categorie);
+
+
+            tbody.innerHTML += `
+
+                <tr>
+
+                    <td>
+
+                        <div class="document-name">
+
+                            <div class="document-icon">
+                                ${icone}
+                            </div>
+
+                            <div>
+
+                                <div class="document-title">
+                                    ${echapper(doc.nom)}
+                                </div>
+
+                                <div class="document-size">
+                                    ${echapper(doc.fichierNom)}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="badge">
+                            ${echapper(doc.categorie)}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        ${echapper(doc.chantier)}
+                    </td>
+
+
+                    <td>
+                        ${formaterDate(doc.date)}
+                    </td>
+
+
+                    <td>
+                        ${formaterTaille(doc.fichierTaille)}
+                    </td>
+
+
+                    <td class="actions">
+
+                        <button
+                            title="Consulter"
+                            onclick="ouvrirDocument(${index})"
+                        >
+                            👁️
+                        </button>
+
+
+                        <button
+                            title="Télécharger"
+                            onclick="telechargerDocument(${index})"
+                        >
+                            ⬇️
+                        </button>
+
+
+                        <button
+                            title="Supprimer"
+                            onclick="supprimerDocument(${index})"
+                        >
+                            🗑️
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        });
+
+    }
+
+
+    mettreAJourStats();
+}
+
+
+/* =========================
+   ICÔNES
+========================= */
+
+function obtenirIcone(categorie) {
+
+    const icones = {
+
+        "Plan": "📐",
+
+        "Devis": "🧾",
+
+        "DQE": "📊",
+
+        "Facture": "💰",
+
+        "Contrat": "📜",
+
+        "Rapport": "📋",
+
+        "Photo": "🖼️",
+
+        "Autre": "📄"
+
+    };
+
+
+    return (
+        icones[categorie] ||
+        "📄"
+    );
+}
+
+
+/* =========================
+   OUVRIR DOCUMENT
+========================= */
+
+function ouvrirDocument(index) {
+
+    const doc =
+        documents[index];
+
+
+    if (!doc.fichierData) {
+
+        alert(
+            "Aucun fichier associé à ce document."
+        );
+
+        return;
+    }
+
+
+    const nouvelleFenetre =
+        window.open(
+            "",
+            "_blank"
+        );
+
+
+    if (!nouvelleFenetre) {
+
+        alert(
+            "Votre navigateur bloque la nouvelle fenêtre. Autorisez les fenêtres pop-up pour BATIFLOW."
+        );
+
+        return;
+    }
+
+
+    nouvelleFenetre.document.write(`
+
+        <!DOCTYPE html>
+
+        <html lang="fr">
+
+        <head>
+
+            <meta charset="UTF-8">
+
+            <title>
+                ${echapper(doc.nom)}
+            </title>
+
+            <style>
+
+                body {
+                    margin: 0;
+                    background: #101827;
+                    color: white;
+                    font-family: Arial;
+                    text-align: center;
+                }
+
+                header {
+                    padding: 15px;
+                    background: #172033;
+                }
+
+                iframe,
+                img {
+                    width: 100%;
+                    height: calc(100vh - 70px);
+                    border: none;
+                    object-fit: contain;
+                }
+
+            </style>
+
+        </head>
+
+        <body>
+
+            <header>
+                ${echapper(doc.nom)}
+            </header>
+
+            ${
+                doc.fichierType.startsWith("image/")
+                ?
+
+                `<img src="${doc.fichierData}" alt="${echapper(doc.nom)}">`
+
+                :
+
+                `<iframe src="${doc.fichierData}"></iframe>`
+            }
+
+        </body>
+
+        </html>
+
+    `);
+
+    nouvelleFenetre.document.close();
+}
+
+
+/* =========================
+   TÉLÉCHARGER
+========================= */
+
+function telechargerDocument(index) {
+
+    const doc =
+        documents[index];
+
+
+    if (!doc.fichierData) {
+
+        alert(
+            "Aucun fichier disponible."
+        );
+
+        return;
+    }
+
+
+    const lien =
+        document.createElement("a");
+
+    lien.href =
+        doc.fichierData;
+
+    lien.download =
+        doc.fichierNom !== "Aucun fichier"
+            ? doc.fichierNom
+            : doc.nom;
+
+
+    document.body.appendChild(lien);
+
+    lien.click();
+
+    lien.remove();
+}
+
+
+/* =========================
+   SUPPRIMER
+========================= */
+
+function supprimerDocument(index) {
+
+    const doc =
+        documents[index];
+
+
+    const confirmation =
+        confirm(
+            `Voulez-vous supprimer "${doc.nom}" ?`
+        );
+
+
+    if (!confirmation) {
+        return;
+    }
+
+
+    documents.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        "batiflowDocuments",
+        JSON.stringify(documents)
+    );
+
+
+    afficherDocuments();
+
+
+    afficherToast(
+        "Document supprimé."
+    );
+}
+
+
+/* =========================
+   STATISTIQUES
+========================= */
+
+function mettreAJourStats() {
+
+    document
+        .getElementById("totalDocuments")
+        .textContent =
+        documents.length;
+
+
+    document
+        .getElementById("totalPlans")
+        .textContent =
+        documents.filter(
+            d => d.categorie === "Plan"
+        ).length;
+
+
+    document
+        .getElementById("totalDevis")
+        .textContent =
+        documents.filter(
+            d =>
+                d.categorie === "Devis" ||
+                d.categorie === "DQE"
+        ).length;
+
+
+    document
+        .getElementById("totalAutres")
+        .textContent =
+        documents.filter(
+            d =>
+                ![
+                    "Plan",
+                    "Devis",
+                    "DQE"
+                ].includes(d.categorie)
+        ).length;
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+function formaterDate(date) {
+
+    if (!date) {
+        return "-";
+    }
+
+
+    const d =
+        new Date(date);
+
+
+    if (isNaN(d)) {
+        return date;
+    }
+
+
+    return d.toLocaleDateString(
+        "fr-FR"
+    );
+}
+
+
+/* =========================
+   TAILLE
+========================= */
+
+function formaterTaille(taille) {
+
+    if (!taille) {
+        return "-";
+    }
+
+
+    if (taille < 1024) {
+
+        return taille + " octets";
+
+    }
+
+
+    if (taille < 1024 * 1024) {
+
+        return (
+            (taille / 1024)
+            .toFixed(1)
+            + " Ko"
+        );
+
+    }
+
+
+    return (
+        (taille / (1024 * 1024))
+        .toFixed(1)
+        + " Mo"
+    );
+}
+
+
+/* =========================
+   PROTECTION TEXTE
+========================= */
+
+function echapper(texte) {
+
+    return String(texte || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function afficherToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add("show");
+
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+}
+
+
+/* =========================
+   FERMER MODAL EN CLIQUANT
+   À L'EXTÉRIEUR
+========================= */
+
+document
+    .getElementById("modal")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (event.target === this) {
+
+                fermerModal();
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   INITIALISATION
+========================= */
+
+afficherDocuments();
+
+</script>
+
+</body>
+</html>
