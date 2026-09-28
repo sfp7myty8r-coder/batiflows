@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BATIFLOW — Suivi du chantier</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 16px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #f28c28;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 11px 16px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+        }
+
+        .btn-orange {
+            background: #f28c28;
+            color: white;
+        }
+
+        .btn-orange:hover {
+            background: #d97706;
+        }
+
+        .btn-dark {
+            background: #1e293b;
+            color: white;
+        }
+
+        .btn-light {
+            background: white;
+            color: #1f2937;
+            border: 1px solid #d1d5db;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 1250px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 28px;
+            margin-bottom: 7px;
+            color: #0f172a;
+        }
+
+        .page-title p {
+            color: #64748b;
+        }
+
+        /* =========================
+           CHANTIER HEADER
+        ========================= */
+
+        .chantier-header {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .chantier-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .chantier-info h2 {
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .chantier-info p {
+            margin: 5px 0;
+            color: #64748b;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .card.full {
+            grid-column: 1 / -1;
+        }
+
+        .card h3 {
+            color: #0f172a;
+            margin-bottom: 18px;
+            font-size: 18px;
+        }
+
+        /* =========================
+           PROGRESSION
+        ========================= */
+
+        .progress-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #f28c28;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 18px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #f28c28;
+            width: 0%;
+            transition: width .4s ease;
+        }
+
+        .progress-label {
+            margin-top: 10px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* =========================
+           INFO GRID
+        ========================= */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .info-box strong {
+            display: block;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .info-box span {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #f28c28;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* =========================
+           LISTES
+        ========================= */
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .list-item {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 9px;
+            padding: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .list-item-text {
+            flex: 1;
+        }
+
+        .list-item-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .list-item-date {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .small-btn {
+            border: none;
+            background: #fee2e2;
+            color: #b91c1c;
+            border-radius: 7px;
+            padding: 7px 10px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .empty {
+            padding: 25px;
+            text-align: center;
+            color: #94a3b8;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        /* =========================
+           ALERT
+        ========================= */
+
+        .status-box {
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        .status-normal {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-retard {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-avance {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        #toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #0f172a;
+            color: white;
+            padding: 14px 18px;
+            border-radius: 9px;
+            display: none;
+            z-index: 9999;
+            box-shadow: 0 5px 20px rgba(0,0,0,.2);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card.full {
+                grid-column: auto;
+            }
+
+            .form-row,
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h1 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        BATI<span>FLOW</span>
+    </div>
+
+    <div class="header-actions">
+        <a href="chantiers.html" class="btn btn-dark">
+            ← Retour aux chantiers
+        </a>
+
+        <a href="dashboard.html" class="btn btn-orange">
+            🏠 Tableau de bord
+        </a>
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div class="page-title">
+        <h1>📊 Suivi du chantier</h1>
+        <p>Pilotage de l'avancement, des tâches, du journal et des problèmes.</p>
+    </div>
+
+
+    <!-- INFORMATIONS CHANTIER -->
+
+    <section class="chantier-header">
+
+        <div class="chantier-top">
+
+            <div class="chantier-info">
+
+                <h2 id="chantierNom">
+                    Chargement...
+                </h2>
+
+                <p>
+                    👤 Client :
+                    <strong id="chantierClient">—</strong>
+                </p>
+
+                <p>
+                    📍 Localisation :
+                    <strong id="chantierLocalisation">—</strong>
+                </p>
+
+            </div>
+
+            <div>
+                <span class="badge" id="chantierStatut">
+                    — 
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="grid">
+
+
+        <!-- AVANCEMENT -->
+
+        <section class="card">
+
+            <h3>📈 Avancement du chantier</h3>
+
+            <div class="progress-number">
+                <span id="progressNumber">0</span>%
+            </div>
+
+            <div class="progress-bar">
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+            </div>
+
+            <div class="progress-label">
+                Avancement global du chantier
+            </div>
+
+        </section>
+
+
+        <!-- ÉTAT DU PLANNING -->
+
+        <section class="card">
+
+            <h3>⏱️ État du planning</h3>
+
+            <div
+                id="planningStatus"
+                class="status-box status-normal"
+            >
+                Analyse du planning...
+            </div>
+
+            <br>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <strong>Date début</strong>
+                    <span id="dateDebut">—</span>
+                </div>
+
+                <div class="info-box">
+                    <strong>Date fin prévue</strong>
+                    <span id="dateFin">—</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INFORMATIONS -->
+
+        <section class="card">
+
+            <h3>🏗️ Informations de suivi</h3>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <strong>Étape actuelle</strong>
+                    <span id="etapeActuelleAffichage">
+                        Non définie
+                    </span>
+                </div>
+
+                <div class="info-box">
+                    <strong>Responsable</strong>
+                    <span id="responsableAffichage">
+                        Non défini
+                    </span>
+                </div>
+
+                <div class="info-box">
+                    <strong>Budget</strong>
+                    <span id="budgetAffichage">
+                        0 FCFA
+                    </span>
+                </div>
+
+                <div class="info-box">
+                    <strong>Tâches</strong>
+                    <span id="nombreTaches">
+                        0
+                    </span>
+                </div>
+
+                <div class="info-box">
+                    <strong>Problèmes</strong>
+                    <span id="nombreProblemes">
+                        0
+                    </span>
+                </div>
+
+                <div class="info-box">
+                    <strong>Journal</strong>
+                    <span id="nombreJournal">
+                        0
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MODIFIER LE SUIVI -->
+
+        <section class="card">
+
+            <h3>⚙️ Paramètres du suivi</h3>
+
+            <div class="form-group">
+
+                <label for="responsable">
+                    Responsable du chantier
+                </label>
+
+                <input
+                    type="text"
+                    id="responsable"
+                    placeholder="Ex : Chef de chantier"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="etapeActuelle">
+                    Étape actuelle
+                </label>
+
+                <select id="etapeActuelle">
+
+                    <option value="">
+                        Sélectionner une étape
+                    </option>
+
+                    <option value="Préparation">
+                        Préparation
+                    </option>
+
+                    <option value="Terrassement">
+                        Terrassement
+                    </option>
+
+                    <option value="Fondations">
+                        Fondations
+                    </option>
+
+                    <option value="Soubassement">
+                        Soubassement
+                    </option>
+
+                    <option value="Élévation">
+                        Élévation
+                    </option>
+
+                    <option value="Toiture">
+                        Toiture
+                    </option>
+
+                    <option value="Enduit">
+                        Enduit
+                    </option>
+
+                    <option value="Électricité">
+                        Électricité
+                    </option>
+
+                    <option value="Plomberie">
+                        Plomberie
+                    </option>
+
+                    <option value="Carrelage">
+                        Carrelage
+                    </option>
+
+                    <option value="Peinture">
+                        Peinture
+                    </option>
+
+                    <option value="Finitions">
+                        Finitions
+                    </option>
+
+                    <option value="Réception">
+                        Réception
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="avancement">
+                    Avancement global (%)
+                </label>
+
+                <input
+                    type="number"
+                    id="avancement"
+                    min="0"
+                    max="100"
+                    value="0"
+                >
+
+            </div>
+
+
+            <button
+                class="btn btn-orange"
+                onclick="sauvegarderSuivi()"
+            >
+                💾 Enregistrer le suivi
+            </button>
+
+        </section>
+
+
+        <!-- TACHES -->
+
+        <section class="card">
+
+            <h3>✅ Tâches du chantier</h3>
+
+            <div class="form-group">
+
+                <input
+                    type="text"
+                    id="nouvelleTache"
+                    placeholder="Ex : Ferraillage des semelles"
+                >
+
+            </div>
+
+            <button
+                class="btn btn-orange"
+                onclick="ajouterTache()"
+            >
+                + Ajouter une tâche
+            </button>
+
+            <br><br>
+
+            <div
+                class="list"
+                id="listeTaches"
+            ></div>
+
+        </section>
+
+
+        <!-- JOURNAL -->
+
+        <section class="card">
+
+            <h3>📝 Journal de chantier</h3>
+
+            <div class="form-group">
+
+                <textarea
+                    id="nouvelleNote"
+                    placeholder="Décrire les travaux réalisés aujourd'hui..."
+                ></textarea>
+
+            </div>
+
+            <button
+                class="btn btn-orange"
+                onclick="ajouterJournal()"
+            >
+                + Ajouter au journal
+            </button>
+
+            <br><br>
+
+            <div
+                class="list"
+                id="listeJournal"
+            ></div>
+
+        </section>
+
+
+        <!-- PROBLEMES -->
+
+        <section class="card full">
+
+            <h3>⚠️ Problèmes / incidents</h3>
+
+            <div class="form-row">
+
+                <input
+                    type="text"
+                    id="nouveauProbleme"
+                    placeholder="Ex : Retard livraison ciment"
+                >
+
+                <button
+                    class="btn btn-orange"
+                    onclick="ajouterProbleme()"
+                >
+                    + Ajouter un problème
+                </button>
+
+            </div>
+
+            <br>
+
+            <div
+                class="list"
+                id="listeProblemes"
+            ></div>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<footer>
+    BATIFLOW V1.0 — Gestion professionnelle des chantiers
+</footer>
+
+
+<div id="toast"></div>
+
+
+<script>
+
+    /* ==========================================
+       STOCKAGE
+    ========================================== */
+
+    const CHANTIERS_KEY = "batiflowChantiers";
+    const SUIVIS_KEY = "batiflowSuivisChantiers";
+
+
+    /* ==========================================
+       RÉCUPÉRER L'ID DU CHANTIER
+    ========================================== */
+
+    const params = new URLSearchParams(window.location.search);
+
+    const chantierId = params.get("chantierId");
+
+
+    let chantier = null;
+
+    let suivi = {
+        chantierId: chantierId,
+        responsable: "",
+        etapeActuelle: "",
+        taches: [],
+        journal: [],
+        problemes: [],
+        updatedAt: new Date().toISOString()
+    };
+
+
+    /* ==========================================
+       OUTILS
+    ========================================== */
+
+    function afficherToast(message) {
+
+        const toast = document.getElementById("toast");
+
+        toast.textContent = message;
+        toast.style.display = "block";
+
+        setTimeout(() => {
+            toast.style.display = "none";
+        }, 2500);
+    }
+
+
+    function formaterMontant(nombre) {
+
+        const valeur = Number(nombre) || 0;
+
+        return valeur.toLocaleString("fr-FR") + " FCFA";
+    }
+
+
+    function formaterDate(date) {
+
+        if (!date) {
+            return "—";
+        }
+
+        const d = new Date(date);
+
+        if (isNaN(d.getTime())) {
+            return date;
+        }
+
+        return d.toLocaleDateString("fr-FR");
+    }
+
+
+    function echapper(texte) {
+
+        return String(texte ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+
+    /* ==========================================
+       CHARGER LES CHANTIERS
+    ========================================== */
+
+    function chargerChantier() {
+
+        const chantiers =
+            JSON.parse(
+                localStorage.getItem(CHANTIERS_KEY)
+            ) || [];
+
+
+        chantier =
+            chantiers.find(
+                c => String(c.id) === String(chantierId)
+            );
+
+
+        if (!chantier) {
+
+            document.getElementById("chantierNom").textContent =
+                "Chantier introuvable";
+
+            afficherToast("Chantier introuvable");
+
+            return;
+        }
+
+
+        document.getElementById("chantierNom").textContent =
+            chantier.nom || "Chantier sans nom";
+
+
+        document.getElementById("chantierClient").textContent =
+            chantier.clientNom ||
+            chantier.client ||
+            "Non défini";
+
+
+        document.getElementById("chantierLocalisation").textContent =
+            chantier.localisation ||
+            "Non définie";
+
+
+        document.getElementById("chantierStatut").textContent =
+            statutTexte(chantier.statut);
+
+
+        document.getElementById("dateDebut").textContent =
+            formaterDate(chantier.dateDebut);
+
+
+        document.getElementById("dateFin").textContent =
+            formaterDate(chantier.dateFin);
+
+
+        document.getElementById("budgetAffichage").textContent =
+            formaterMontant(chantier.budget);
+
+
+        const avancement =
+            Math.max(
+                0,
+                Math.min(
+                    100,
+                    Number(chantier.avancement) || 0
+                )
+            );
+
+
+        document.getElementById("progressNumber").textContent =
+            avancement;
+
+
+        document.getElementById("progressFill").style.width =
+            avancement + "%";
+
+
+        document.getElementById("avancement").value =
+            avancement;
+
+
+        analyserPlanning();
+
+    }
+
+
+    /* ==========================================
+       STATUT
+    ========================================== */
+
+    function statutTexte(statut) {
+
+        const valeurs = {
+
+            planifie: "Planifié",
+            en_cours: "En cours",
+            termine: "Terminé",
+            suspendu: "Suspendu"
+
+        };
+
+        return valeurs[statut] || statut || "Non défini";
+    }
+
+
+    /* ==========================================
+       CHARGER LE SUIVI
+    ========================================== */
+
+    function chargerSuivi() {
+
+        const suivis =
+            JSON.parse(
+                localStorage.getItem(SUIVIS_KEY)
+            ) || {};
+
+
+        if (
+            suivis[chantierId]
+        ) {
+
+            suivi = suivis[chantierId];
+
+        }
+
+
+        document.getElementById("responsable").value =
+            suivi.responsable || "";
+
+
+        document.getElementById("responsableAffichage").textContent =
+            suivi.responsable || "Non défini";
+
+
+        document.getElementById("etapeActuelle").value =
+            suivi.etapeActuelle || "";
+
+
+        document.getElementById("etapeActuelleAffichage").textContent =
+            suivi.etapeActuelle || "Non définie";
+
+
+        afficherTaches();
+
+        afficherJournal();
+
+        afficherProblemes();
+
+        mettreAJourCompteurs();
+
+    }
+
+
+    /* ==========================================
+       SAUVEGARDER LE SUIVI
+    ========================================== */
+
+    function sauvegarderSuivi() {
+
+        if (!chantier) {
+
+            afficherToast("Chantier introuvable");
+
+            return;
+        }
+
+
+        const responsable =
+            document.getElementById("responsable").value.trim();
+
+
+        const etape =
+            document.getElementById("etapeActuelle").value;
+
+
+        const avancement =
+            Math.max(
+                0,
+                Math.min(
+                    100,
+                    Number(
+                        document.getElementById("avancement").value
+                    ) || 0
+                )
+            );
+
+
+        suivi.responsable = responsable;
+
+        suivi.etapeActuelle = etape;
+
+        suivi.updatedAt =
+            new Date().toISOString();
+
+
+        /* Sauvegarder le suivi */
+
+        const suivis =
+            JSON.parse(
+                localStorage.getItem(SUIVIS_KEY)
+            ) || {};
+
+
+        suivis[chantierId] = suivi;
+
+
+        localStorage.setItem(
+            SUIVIS_KEY,
+            JSON.stringify(suivis)
+        );
+
+
+        /* Mettre à jour le chantier */
+
+        const chantiers =
+            JSON.parse(
+                localStorage.getItem(CHANTIERS_KEY)
+            ) || [];
+
+
+        const index =
+            chantiers.findIndex(
+                c => String(c.id) === String(chantierId)
+            );
+
+
+        if (index !== -1) {
+
+            chantiers[index].avancement =
+                avancement;
+
+            chantiers[index].updatedAt =
+                new Date().toISOString();
+
+            localStorage.setItem(
+                CHANTIERS_KEY,
+                JSON.stringify(chantiers)
+            );
+
+            chantier = chantiers[index];
+        }
+
+
+        document.getElementById("progressNumber").textContent =
+            avancement;
+
+
+        document.getElementById("progressFill").style.width =
+            avancement + "%";
+
+
+        document.getElementById("responsableAffichage").textContent =
+            responsable || "Non défini";
+
+
+        document.getElementById("etapeActuelleAffichage").textContent =
+            etape || "Non définie";
+
+
+        analyserPlanning();
+
+
+        afficherToast("Suivi enregistré avec succès");
+
+    }
+
+
+    /* ==========================================
+       TACHES
+    ========================================== */
+
+    function ajouterTache() {
+
+        const input =
+            document.getElementById("nouvelleTache");
+
+
+        const texte =
+            input.value.trim();
+
+
+        if (!texte) {
+
+            afficherToast("Écris d'abord une tâche");
+
+            return;
+        }
+
+
+        suivi.taches.push({
+
+            id: Date.now(),
+
+            texte: texte,
+
+            terminee: false,
+
+            date:
+                new Date().toISOString()
+
+        });
+
+
+        input.value = "";
+
+
+        sauvegarderDonneesSuivi();
+
+        afficherTaches();
+
+        mettreAJourCompteurs();
+
+    }
+
+
+    function afficherTaches() {
+
+        const container =
+            document.getElementById("listeTaches");
+
+
+        if (!suivi.taches.length) {
+
+            container.innerHTML =
+                '<div class="empty">Aucune tâche enregistrée.</div>';
+
+            return;
+        }
+
+
+        container.innerHTML =
+            suivi.taches.map((tache, index) => `
+
+                <div class="list-item">
+
+                    <div class="list-item-text">
+
+                        <div class="list-item-title">
+
+                            <input
+                                type="checkbox"
+                                ${tache.terminee ? "checked" : ""}
+                                onchange="changerEtatTache(${index})"
+                                style="width:auto;margin-right:8px;"
+                            >
+
+                            <span style="${
+                                tache.terminee
+                                ? "text-decoration:line-through;color:#94a3b8;"
+                                : ""
+                            }">
+
+                                ${echapper(tache.texte)}
+
+                            </span>
+
+                        </div>
+
+                        <div class="list-item-date">
+                            ${formaterDate(tache.date)}
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="small-btn"
+                        onclick="supprimerTache(${index})"
+                    >
+                        Supprimer
+                    </button>
+
+                </div>
+
+            `).join("");
+
+    }
+
+
+    function changerEtatTache(index) {
+
+        suivi.taches[index].terminee =
+            !suivi.taches[index].terminee;
+
+
+        sauvegarderDonneesSuivi();
+
+        afficherTaches();
+
+    }
+
+
+    function supprimerTache(index) {
+
+        if (!confirm("Supprimer cette tâche ?")) {
+            return;
+        }
+
+
+        suivi.taches.splice(index, 1);
+
+
+        sauvegarderDonneesSuivi();
+
+        afficherTaches();
+
+        mettreAJourCompteurs();
+
+    }
+
+
+    /* ==========================================
+       JOURNAL
+    ========================================== */
+
+    function ajouterJournal() {
+
+        const textarea =
+            document.getElementById("nouvelleNote");
+
+
+        const texte =
+            textarea.value.trim();
+
+
+        if (!texte) {
+
+            afficherToast("Écris une note de chantier");
+
+            return;
+        }
+
+
+        suivi.journal.unshift({
+
+            id: Date.now(),
+
+            texte: texte,
+
+            date:
+                new Date().toISOString()
+
+        });
+
+
+        textarea.value = "";
+
+
+        sauvegarderDonneesSuivi();
+
+        afficherJournal();
+
+        mettreAJourCompteurs();
+
+        afficherToast("Note ajoutée au journal");
+
+    }
+
+
+    function afficherJournal() {
+
+        const container =
+            document.getElementById("listeJournal");
+
+
+        if (!suivi.journal.length) {
+
+            container.innerHTML =
+                '<div class="empty">Aucune entrée dans le journal.</div>';
+
+            return;
+        }
+
+
+        container.innerHTML =
+            suivi.journal.map((note, index) => `
+
+                <div class="list-item">
+
+                    <div class="list-item-text">
+
+                        <div class="list-item-title">
+                            ${echapper(note.texte)}
+                        </div>
+
+                        <div class="list-item-date">
+                            ${formaterDate(note.date)}
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="small-btn"
+                        onclick="supprimerJournal(${index})"
+                    >
+                        Supprimer
+                    </button>
+
+                </div>
+
+            `).join("");
+
+    }
+
+
+    function supprimerJournal(index) {
+
+        if (!confirm("Supprimer cette entrée ?")) {
+            return;
+        }
+
+
+        suivi.journal.splice(index, 1);
+
+
+        sauvegarderDonneesSuivi();
+
+        afficherJournal();
+
+        mettreAJourCompteurs();
+
+    }
+
+
+    /* ==========================================
+       PROBLÈMES
+    ========================================== */
+
+    function ajouterProbleme() {
+
+        const input =
+            document.getElementById("nouveauProbleme");
+
+
+        const texte =
+            input.value.trim();
+
+
+        if (!texte) {
+
+            afficherToast("Écris le problème rencontré");
+
+            return;
+        }
+
+
+        suivi.problemes.push({
+
+            id: Date.now(),
+
+            texte: texte,
+
+            date:
+                new Date().toISOString()
+
+        });
+
+
+        input.value = "";
+
+
+        sauvegarderDonneesSuivi();
+
+        afficherProblemes();
+
+        mettreAJourCompteurs();
+
+        afficherToast("Problème ajouté");
+
+    }
+
+
+    function afficherProblemes() {
+
+        const container =
+            document.getElementById("listeProblemes");
+
+
+        if (!suivi.problemes.length) {
+
+            container.innerHTML =
+                '<div class="empty">Aucun problème enregistré.</div>';
+
+            return;
+        }
+
+
+        container.innerHTML =
+            suivi.problemes.map((probleme, index) => `
+
+                <div class="list-item">
+
+                    <div class="list-item-text">
+
+                        <div class="list-item-title">
+                            ⚠️ ${echapper(probleme.texte)}
+                        </div>
+
+                        <div class="list-item-date">
+                            ${formaterDate(probleme.date)}
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="small-btn"
+                        onclick="supprimerProbleme(${index})"
+                    >
+                        Supprimer
+                    </button>
+
+                </div>
+
+            `).join("");
+
+    }
+
+
+    function supprimerProbleme(index) {
+
+        if (!confirm("Supprimer ce problème ?")) {
+            return;
+        }
+
+
+        suivi.problemes.splice(index, 1);
+
+
+        sauvegarderDonneesSuivi();
+
+        afficherProblemes();
+
+        mettreAJourCompteurs();
+
+    }
+
+
+    /* ==========================================
+       SAUVEGARDER LES DONNÉES
+    ========================================== */
+
+    function sauvegarderDonneesSuivi() {
+
+        suivi.updatedAt =
+            new Date().toISOString();
+
+
+        const suivis =
+            JSON.parse(
+                localStorage.getItem(SUIVIS_KEY)
+            ) || {};
+
+
+        suivis[chantierId] = suivi;
+
+
+        localStorage.setItem(
+            SUIVIS_KEY,
+            JSON.stringify(suivis)
+        );
+
+    }
+
+
+    /* ==========================================
+       COMPTEURS
+    ========================================== */
+
+    function mettreAJourCompteurs() {
+
+        document.getElementById("nombreTaches").textContent =
+            suivi.taches.length;
+
+
+        document.getElementById("nombreProblemes").textContent =
+            suivi.problemes.length;
+
+
+        document.getElementById("nombreJournal").textContent =
+            suivi.journal.length;
+
+    }
+
+
+    /* ==========================================
+       PLANNING
+    ========================================== */
+
+    function analyserPlanning() {
+
+        if (!chantier) {
+            return;
+        }
+
+
+        const element =
+            document.getElementById("planningStatus");
+
+
+        if (!chantier.dateFin) {
+
+            element.className =
+                "status-box status-normal";
+
+            element.textContent =
+                "📅 Date de fin non définie.";
+
+            return;
+        }
+
+
+        const dateFin =
+            new Date(chantier.dateFin);
+
+
+        const aujourdHui =
+            new Date();
+
+
+        aujourdHui.setHours(
+            0, 0, 0, 0
+        );
+
+
+        dateFin.setHours(
+            0, 0, 0, 0
+        );
+
+
+        const difference =
+            Math.ceil(
+                (
+                    dateFin - aujourdHui
+                ) /
+                (
+                    1000 *
+                    60 *
+                    60 *
+                    24
+                )
+            );
+
+
+        const avancement =
+            Number(chantier.avancement) || 0;
+
+
+        if (
+            chantier.statut === "termine" ||
+            avancement >= 100
+        ) {
+
+            element.className =
+                "status-box status-avance";
+
+            element.textContent =
+                "✅ Chantier terminé ou avancement à 100 %.";
+
+            return;
+        }
+
+
+        if (difference < 0) {
+
+            element.className =
+                "status-box status-retard";
+
+            element.textContent =
+                "⚠️ La date prévue est dépassée de " +
+                Math.abs(difference) +
+                " jour(s).";
+
+            return;
+        }
+
+
+        if (difference <= 7) {
+
+            element.className =
+                "status-box status-retard";
+
+            element.textContent =
+                "⏳ Il reste " +
+                difference +
+                " jour(s) avant la date prévue.";
+
+            return;
+        }
+
+
+        element.className =
+            "status-box status-normal";
+
+        element.textContent =
+            "🟢 Planning en cours — " +
+            difference +
+            " jour(s) restant(s).";
+
+    }
+
+
+    /* ==========================================
+       INITIALISATION
+    ========================================== */
+
+    function initialiser() {
+
+        if (!chantierId) {
+
+            document.getElementById("chantierNom").textContent =
+                "Aucun chantier sélectionné";
+
+            afficherToast(
+                "Aucun chantier sélectionné"
+            );
+
+            return;
+        }
+
+
+        chargerChantier();
+
+        chargerSuivi();
+
+    }
+
+
+    initialiser();
+
+</script>
+
+</body>
+</html>
