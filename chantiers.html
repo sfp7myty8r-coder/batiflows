@@ -1,640 +1,641 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>BATIFLOW — Chantiers</title>
-
-    <meta
-        name="description"
-        content="BATIFLOW — Gestion professionnelle des chantiers BTP"
-    >
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f6f8;
-            color: #172033;
-        }
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        header {
-            background: #0f172a;
-            color: white;
-            padding: 18px 25px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
-        }
-
-        .header-inner {
-            max-width: 1200px;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: #f28c28;
-        }
-
-        .header-title {
-            font-size: 15px;
-            color: #cbd5e1;
-        }
-
-        /* =========================
-           CONTAINER
-        ========================= */
-
-        .container {
-            max-width: 1200px;
-            margin: 35px auto;
-            padding: 0 20px 50px;
-        }
-
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .page-title {
-            margin: 0;
-            font-size: 28px;
-            color: #0f172a;
-        }
-
-        .page-subtitle {
-            margin-top: 7px;
-            color: #64748b;
-            font-size: 14px;
-        }
-
-        /* =========================
-           BUTTONS
-        ========================= */
-
-        button,
-        .main-button {
-            font-family: inherit;
-        }
-
-        .main-button {
-            border: none;
-            background: #f28c28;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            transition: 0.2s;
-        }
-
-        .main-button:hover {
-            background: #d97706;
-            transform: translateY(-1px);
-        }
-
-        .secondary-button {
-            border: 1px solid #cbd5e1;
-            background: white;
-            color: #334155;
-            padding: 11px 17px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .secondary-button:hover {
-            background: #f8fafc;
-        }
-
-        /* =========================
-           STATS
-        ========================= */
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-bottom: 28px;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 3px 12px rgba(15,23,42,0.07);
-            border: 1px solid #e5e7eb;
-        }
-
-        .stat-label {
-            color: #64748b;
-            font-size: 13px;
-            margin-bottom: 8px;
-        }
-
-        .stat-value {
-            font-size: 26px;
-            font-weight: 800;
-            color: #0f172a;
-        }
-
-        /* =========================
-           CHANTIERS
-        ========================= */
-
-        .empty {
-            background: white;
-            border: 1px dashed #cbd5e1;
-            border-radius: 12px;
-            padding: 45px 20px;
-            text-align: center;
-            color: #64748b;
-        }
-
-        .empty strong {
-            display: block;
-            font-size: 18px;
-            color: #334155;
-            margin-bottom: 8px;
-        }
-
-        .chantiers-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 22px;
-        }
-
-        .chantier-card {
-            background: white;
-            border-radius: 14px;
-            padding: 22px;
-            box-shadow: 0 4px 15px rgba(15,23,42,0.07);
-            border: 1px solid #e5e7eb;
-        }
-
-        .chantier-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 18px;
-        }
-
-        .chantier-name {
-            font-size: 20px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 5px;
-        }
-
-        .chantier-client {
-            font-size: 13px;
-            color: #64748b;
-        }
-
-        .status {
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-size: 11px;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .status-en-cours {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .status-termine {
-            background: #dbeafe;
-            color: #1d4ed8;
-        }
-
-        .status-en-attente {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .status-suspendu {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .status-autre {
-            background: #e2e8f0;
-            color: #475569;
-        }
-
-        .info-list {
-            display: grid;
-            gap: 9px;
-            margin-bottom: 18px;
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            font-size: 13px;
-            border-bottom: 1px solid #f1f5f9;
-            padding-bottom: 8px;
-        }
-
-        .info-label {
-            color: #64748b;
-        }
-
-        .info-value {
-            color: #1e293b;
-            font-weight: 600;
-            text-align: right;
-        }
-
-        /* =========================
-           PROGRESSION
-        ========================= */
-
-        .progress-section {
-            margin: 18px 0;
-        }
-
-        .progress-top {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 7px;
-            font-size: 13px;
-        }
-
-        .progress-label {
-            color: #64748b;
-        }
-
-        .progress-value {
-            font-weight: 800;
-            color: #0f172a;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 9px;
-            background: #e2e8f0;
-            border-radius: 999px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #f28c28;
-            border-radius: 999px;
-            transition: width 0.3s;
-        }
-
-        /* =========================
-           FINANCE SUMMARY
-        ========================= */
-
-        .finance-summary {
-            margin-top: 16px;
-            padding: 14px;
-            border-radius: 10px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-        }
-
-        .finance-title {
-            font-size: 12px;
-            font-weight: 800;
-            color: #334155;
-            margin-bottom: 8px;
-        }
-
-        .finance-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            font-size: 12px;
-            margin-bottom: 5px;
-        }
-
-        .finance-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .finance-label {
-            color: #64748b;
-        }
-
-        .finance-value {
-            font-weight: 700;
-            color: #0f172a;
-        }
-
-        /* =========================
-           ACTIONS
-        ========================= */
-
-        .card-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 9px;
-            margin-top: 18px;
-        }
-
-        .action-button {
-            border: 1px solid #cbd5e1;
-            background: white;
-            color: #334155;
-            padding: 10px 9px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 700;
-            text-align: center;
-            transition: 0.2s;
-        }
-
-        .action-button:hover {
-            transform: translateY(-1px);
-        }
-
-        .action-button.edit:hover {
-            background: #f1f5f9;
-        }
-
-        .action-button.suivi {
-            background: #eff6ff;
-            border-color: #bfdbfe;
-            color: #1d4ed8;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .action-button.suivi:hover {
-            background: #2563eb;
-            color: white;
-        }
-
-        .action-button.finance {
-            background: #fff7ed;
-            border-color: #fed7aa;
-            color: #c2410c;
-        }
-
-        .action-button.finance:hover {
-            background: #f97316;
-            color: white;
-        }
-
-        .action-button.delete {
-            background: #fff1f2;
-            border-color: #fecdd3;
-            color: #be123c;
-        }
-
-        .action-button.delete:hover {
-            background: #e11d48;
-            color: white;
-        }
-
-        .action-button.full {
-            grid-column: 1 / -1;
-        }
-
-        /* =========================
-           MODAL
-        ========================= */
-
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(15,23,42,0.65);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            z-index: 1000;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            width: min(700px, 100%);
-            max-height: 90vh;
-            overflow-y: auto;
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 22px;
-        }
-
-        .modal-title {
-            margin: 0;
-            color: #0f172a;
-            font-size: 22px;
-        }
-
-        .close-button {
-            width: 35px;
-            height: 35px;
-            border: none;
-            border-radius: 50%;
-            background: #f1f5f9;
-            color: #334155;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .close-button:hover {
-            background: #e2e8f0;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
-
-        label {
-            font-size: 13px;
-            font-weight: 700;
-            color: #334155;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 11px 12px;
-            font-family: inherit;
-            font-size: 14px;
-            outline: none;
-            background: white;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: #f28c28;
-            box-shadow: 0 0 0 3px rgba(242,140,40,0.12);
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 24px;
-        }
-
-        /* =========================
-           CLIENT NOTICE
-        ========================= */
-
-        .client-notice {
-            display: none;
-            padding: 11px 13px;
-            background: #fff7ed;
-            border: 1px solid #fed7aa;
-            color: #9a3412;
-            border-radius: 8px;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-        .client-notice.show {
-            display: block;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            text-align: center;
-            color: #94a3b8;
-            font-size: 12px;
-            padding: 20px;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 850px) {
-            .chantiers-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 650px) {
-            header {
-                padding: 15px;
-            }
-
-            .header-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .container {
-                margin-top: 25px;
-                padding: 0 14px 40px;
-            }
-
-            .topbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .page-title {
-                font-size: 24px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-group.full {
-                grid-column: auto;
-            }
-
-            .card-actions {
-                grid-template-columns: 1fr;
-            }
-
-            .action-button.full {
-                grid-column: auto;
-            }
-
-            .chantier-header {
-                flex-direction: column;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BATIFLOW — Chantiers</title>
+
+<meta
+    name="description"
+    content="BATIFLOW — Gestion professionnelle des chantiers BTP"
+>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f8;
+    color:#172033;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:#0f172a;
+    color:white;
+    padding:18px 25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#f28c28;
+}
+
+.header-title{
+    font-size:15px;
+    color:#cbd5e1;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    max-width:1200px;
+    margin:35px auto;
+    padding:0 20px 50px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.page-title{
+    margin:0;
+    font-size:28px;
+    color:#0f172a;
+}
+
+.page-subtitle{
+    margin-top:7px;
+    color:#64748b;
+    font-size:14px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button,
+.main-button{
+    font-family:inherit;
+}
+
+.main-button{
+    border:none;
+    background:#f28c28;
+    color:white;
+    padding:12px 18px;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    transition:.2s;
+}
+
+.main-button:hover{
+    background:#d97706;
+    transform:translateY(-1px);
+}
+
+.secondary-button{
+    border:1px solid #cbd5e1;
+    background:white;
+    color:#334155;
+    padding:11px 17px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.secondary-button:hover{
+    background:#f8fafc;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-bottom:28px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(15,23,42,.07);
+    border:1px solid #e5e7eb;
+}
+
+.stat-label{
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.stat-value{
+    font-size:26px;
+    font-weight:800;
+    color:#0f172a;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+    background:white;
+    border:1px dashed #cbd5e1;
+    border-radius:12px;
+    padding:45px 20px;
+    text-align:center;
+    color:#64748b;
+}
+
+.empty strong{
+    display:block;
+    font-size:18px;
+    color:#334155;
+    margin-bottom:8px;
+}
+
+/* =========================
+   CHANTIERS
+========================= */
+
+.chantiers-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+.chantier-card{
+    background:white;
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 4px 15px rgba(15,23,42,.07);
+    border:1px solid #e5e7eb;
+}
+
+.chantier-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.chantier-name{
+    font-size:20px;
+    font-weight:800;
+    color:#0f172a;
+    margin-bottom:5px;
+}
+
+.chantier-client{
+    font-size:13px;
+    color:#64748b;
+}
+
+.status{
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.status-en-cours{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status-termine{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.status-en-attente{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.status-suspendu{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.status-autre{
+    background:#e2e8f0;
+    color:#475569;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.info-list{
+    display:grid;
+    gap:9px;
+    margin-bottom:18px;
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    font-size:13px;
+    border-bottom:1px solid #f1f5f9;
+    padding-bottom:8px;
+}
+
+.info-label{
+    color:#64748b;
+}
+
+.info-value{
+    color:#1e293b;
+    font-weight:600;
+    text-align:right;
+}
+
+/* =========================
+   PROGRESSION
+========================= */
+
+.progress-section{
+    margin:18px 0;
+}
+
+.progress-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:13px;
+}
+
+.progress-label{
+    color:#64748b;
+}
+
+.progress-value{
+    font-weight:800;
+    color:#0f172a;
+}
+
+.progress-bar{
+    width:100%;
+    height:9px;
+    background:#e2e8f0;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    background:#f28c28;
+    border-radius:999px;
+}
+
+/* =========================
+   FINANCES
+========================= */
+
+.finance-summary{
+    margin-top:16px;
+    padding:14px;
+    border-radius:10px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+}
+
+.finance-title{
+    font-size:12px;
+    font-weight:800;
+    color:#334155;
+    margin-bottom:8px;
+}
+
+.finance-row{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.finance-row:last-child{
+    margin-bottom:0;
+}
+
+.finance-label{
+    color:#64748b;
+}
+
+.finance-value{
+    font-weight:700;
+    color:#0f172a;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.card-actions{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+    margin-top:18px;
+}
+
+.action-button{
+    border:1px solid #cbd5e1;
+    background:white;
+    color:#334155;
+    padding:10px 9px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+    text-align:center;
+    transition:.2s;
+    text-decoration:none;
+}
+
+.action-button:hover{
+    transform:translateY(-1px);
+}
+
+.action-button.suivi{
+    background:#eff6ff;
+    border-color:#bfdbfe;
+    color:#1d4ed8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.action-button.suivi:hover{
+    background:#2563eb;
+    color:white;
+}
+
+.action-button.finance{
+    background:#fff7ed;
+    border-color:#fed7aa;
+    color:#c2410c;
+}
+
+.action-button.finance:hover{
+    background:#f97316;
+    color:white;
+}
+
+.action-button.delete{
+    background:#fff1f2;
+    border-color:#fecdd3;
+    color:#be123c;
+}
+
+.action-button.delete:hover{
+    background:#e11d48;
+    color:white;
+}
+
+.action-button.full{
+    grid-column:1/-1;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:1000;
+}
+
+.modal-overlay.active{
+    display:flex;
+}
+
+.modal{
+    width:min(700px,100%);
+    max-height:90vh;
+    overflow-y:auto;
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.modal-title{
+    margin:0;
+    color:#0f172a;
+    font-size:22px;
+}
+
+.close-button{
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:50%;
+    background:#f1f5f9;
+    color:#334155;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:13px;
+    font-weight:700;
+    color:#334155;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    padding:11px 12px;
+    font-family:inherit;
+    font-size:14px;
+    outline:none;
+    background:white;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#f28c28;
+    box-shadow:0 0 0 3px rgba(242,140,40,.12);
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:24px;
+}
+
+.client-notice{
+    display:none;
+    padding:11px 13px;
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    color:#9a3412;
+    border-radius:8px;
+    font-size:12px;
+}
+
+.client-notice.show{
+    display:block;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    color:#94a3b8;
+    font-size:12px;
+    padding:20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:850px){
+
+    .chantiers-grid,
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .header-inner{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .container{
+        margin-top:25px;
+        padding:0 14px 40px;
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .card-actions{
+        grid-template-columns:1fr;
+    }
+
+    .action-button.full{
+        grid-column:auto;
+    }
+
+    .chantier-header{
+        flex-direction:column;
+    }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
+
     <div class="header-inner">
 
         <div>
+
             <div class="logo">
                 BATI<span>FLOW</span>
             </div>
@@ -642,6 +643,7 @@
             <div class="header-title">
                 Gestion professionnelle des chantiers BTP
             </div>
+
         </div>
 
         <a
@@ -652,20 +654,31 @@
         </a>
 
     </div>
+
 </header>
 
 
+<!-- =========================
+     CONTENU
+========================= -->
+
 <main class="container">
+
 
     <div class="topbar">
 
         <div>
-            <h1 class="page-title">Mes chantiers</h1>
+
+            <h1 class="page-title">
+                Mes chantiers
+            </h1>
 
             <div class="page-subtitle">
                 Créez, gérez et suivez vos projets BTP.
             </div>
+
         </div>
+
 
         <button
             class="main-button"
@@ -677,11 +690,14 @@
     </div>
 
 
-    <!-- STATISTIQUES -->
+    <!-- =========================
+         STATISTIQUES
+    ========================= -->
 
     <section class="stats">
 
         <div class="stat-card">
+
             <div class="stat-label">
                 Total chantiers
             </div>
@@ -692,10 +708,12 @@
             >
                 0
             </div>
+
         </div>
 
 
         <div class="stat-card">
+
             <div class="stat-label">
                 Chantiers en cours
             </div>
@@ -706,10 +724,12 @@
             >
                 0
             </div>
+
         </div>
 
 
         <div class="stat-card">
+
             <div class="stat-label">
                 Avancement moyen
             </div>
@@ -720,14 +740,18 @@
             >
                 0 %
             </div>
+
         </div>
 
     </section>
 
 
-    <!-- LISTE DES CHANTIERS -->
+    <!-- =========================
+         LISTE
+    ========================= -->
 
     <section id="listeChantiers"></section>
+
 
 </main>
 
@@ -738,7 +762,7 @@
 
 
 <!-- =========================
-     MODAL CHANTIER
+     MODAL
 ========================= -->
 
 <div
@@ -771,6 +795,7 @@
 
             <div class="form-grid">
 
+
                 <div class="form-group full">
 
                     <label for="nom">
@@ -797,16 +822,19 @@
                         id="clientId"
                         required
                     >
+
                         <option value="">
                             Sélectionner un client
                         </option>
+
                     </select>
 
                     <div
                         class="client-notice"
                         id="clientNotice"
                     >
-                        Aucun client enregistré. Créez d'abord un client dans le module Clients.
+                        Aucun client enregistré.
+                        Créez d'abord un client dans le module Clients.
                     </div>
 
                 </div>
@@ -926,7 +954,7 @@
 
                     <textarea
                         id="notes"
-                        placeholder="Informations complémentaires sur le chantier..."
+                        placeholder="Informations complémentaires..."
                     ></textarea>
 
                 </div>
@@ -943,6 +971,7 @@
                 >
                     Annuler
                 </button>
+
 
                 <button
                     type="submit"
@@ -962,723 +991,753 @@
 
 <script>
 
-    /* =====================================================
-       STOCKAGE BATIFLOW
-    ===================================================== */
+/* =====================================================
+   CONFIGURATION
+===================================================== */
 
-    const STORAGE_KEY = "batiflowChantiers";
+const STORAGE_KEY =
+    "batiflowChantiers";
 
-    const CLIENT_STORAGE_KEY = "batiflowClients";
+const CLIENT_STORAGE_KEY =
+    "batiflowClients";
 
-    const FINANCE_STORAGE_KEY = "batiflowFinances";
+const FINANCE_STORAGE_KEY =
+    "batiflowFinances";
 
-    const SUIVI_STORAGE_KEY = "batiflowSuivisChantiers";
+const SUIVI_STORAGE_KEY =
+    "batiflowSuivisChantiers";
 
 
-    let chantierEnModification = null;
+let chantierEnModification = null;
 
 
-    /* =====================================================
-       OUTILS LOCALSTORAGE
-    ===================================================== */
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
 
-    function obtenirChantiers() {
+function obtenirChantiers(){
 
-        try {
+    try{
 
-            return JSON.parse(
-                localStorage.getItem(STORAGE_KEY)
-            ) || [];
+        return JSON.parse(
+            localStorage.getItem(
+                STORAGE_KEY
+            )
+        ) || [];
 
-        } catch (error) {
+    }catch(error){
 
-            console.error(
-                "Erreur lecture chantiers :",
-                error
+        console.error(error);
+
+        return [];
+
+    }
+
+}
+
+
+function sauvegarderChantiers(chantiers){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(chantiers)
+    );
+
+}
+
+
+function obtenirClients(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CLIENT_STORAGE_KEY
+            )
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function obtenirFinances(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                FINANCE_STORAGE_KEY
+            )
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function sauvegarderFinances(finances){
+
+    localStorage.setItem(
+        FINANCE_STORAGE_KEY,
+        JSON.stringify(finances)
+    );
+
+}
+
+
+function obtenirSuivis(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                SUIVI_STORAGE_KEY
+            )
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function sauvegarderSuivis(suivis){
+
+    localStorage.setItem(
+        SUIVI_STORAGE_KEY,
+        JSON.stringify(suivis)
+    );
+
+}
+
+
+/* =====================================================
+   ID
+===================================================== */
+
+function genererId(){
+
+    return (
+        "chantier_" +
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2,8)
+    );
+
+}
+
+
+/* =====================================================
+   FORMATAGE
+===================================================== */
+
+function formaterFCFA(value){
+
+    return (
+        Number(value) || 0
+    ).toLocaleString("fr-FR")
+    + " FCFA";
+
+}
+
+
+function formaterDate(date){
+
+    if(!date){
+
+        return "—";
+
+    }
+
+    const d =
+        new Date(
+            date + "T00:00:00"
+        );
+
+    if(isNaN(d.getTime())){
+
+        return date;
+
+    }
+
+    return d.toLocaleDateString(
+        "fr-FR"
+    );
+
+}
+
+
+/* =====================================================
+   PROTECTION HTML
+===================================================== */
+
+function echapper(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   CLIENTS
+===================================================== */
+
+function chargerClients(){
+
+    const select =
+        document.getElementById(
+            "clientId"
+        );
+
+    const clients =
+        obtenirClients();
+
+
+    select.innerHTML = `
+        <option value="">
+            Sélectionner un client
+        </option>
+    `;
+
+
+    clients.forEach(client => {
+
+        const option =
+            document.createElement(
+                "option"
             );
 
-            return [];
-
-        }
-
-    }
+        option.value =
+            client.id;
 
 
-    function sauvegarderChantiers(chantiers) {
+        const nom =
+            client.nom ||
+            client.name ||
+            "Client";
 
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(chantiers)
+
+        const entreprise =
+            client.entreprise
+                ? " — " +
+                  client.entreprise
+                : "";
+
+
+        option.textContent =
+            nom + entreprise;
+
+
+        select.appendChild(
+            option
+        );
+
+    });
+
+
+    const notice =
+        document.getElementById(
+            "clientNotice"
+        );
+
+
+    if(clients.length === 0){
+
+        notice.classList.add(
+            "show"
+        );
+
+    }else{
+
+        notice.classList.remove(
+            "show"
         );
 
     }
 
+}
 
-    function obtenirClients() {
 
-        try {
+function trouverClient(
+    clientId,
+    ancienNom
+){
 
-            return JSON.parse(
-                localStorage.getItem(CLIENT_STORAGE_KEY)
-            ) || [];
+    const clients =
+        obtenirClients();
 
-        } catch (error) {
 
-            console.error(
-                "Erreur lecture clients :",
-                error
+    let client =
+        clients.find(
+            c =>
+                String(c.id)
+                ===
+                String(clientId)
+        );
+
+
+    if(!client && ancienNom){
+
+        client =
+            clients.find(
+                c =>
+                    String(
+                        c.nom ||
+                        c.name ||
+                        ""
+                    ).toLowerCase()
+                    ===
+                    String(
+                        ancienNom
+                    ).toLowerCase()
             );
 
-            return [];
-
-        }
-
     }
 
 
-    function obtenirFinances() {
+    return client || null;
 
-        try {
-
-            return JSON.parse(
-                localStorage.getItem(FINANCE_STORAGE_KEY)
-            ) || [];
-
-        } catch (error) {
-
-            console.error(
-                "Erreur lecture finances :",
-                error
-            );
-
-            return [];
-
-        }
-
-    }
+}
 
 
-    function sauvegarderFinances(finances) {
+/* =====================================================
+   SUIVI INITIAL
+===================================================== */
 
-        localStorage.setItem(
-            FINANCE_STORAGE_KEY,
-            JSON.stringify(finances)
+function initialiserSuivi(
+    chantier
+){
+
+    const suivis =
+        obtenirSuivis();
+
+
+    const existe =
+        suivis.some(
+            suivi =>
+                String(
+                    suivi.chantierId
+                )
+                ===
+                String(
+                    chantier.id
+                )
         );
 
-    }
 
+    if(!existe){
 
-    function obtenirSuivisChantiers() {
+        suivis.push({
 
-        try {
+            chantierId:
+                chantier.id,
 
-            return JSON.parse(
-                localStorage.getItem(SUIVI_STORAGE_KEY)
-            ) || [];
+            responsable:
+                "",
 
-        } catch (error) {
+            etapeActuelle:
+                "Préparation",
 
-            console.error(
-                "Erreur lecture suivis :",
-                error
-            );
+            retardJours:
+                0,
 
-            return [];
+            taches:
+                [],
 
-        }
+            journal:
+                [],
 
-    }
+            problemes:
+                [],
 
+            photos:
+                [],
 
-    function sauvegarderSuivisChantiers(suivis) {
-
-        localStorage.setItem(
-            SUIVI_STORAGE_KEY,
-            JSON.stringify(suivis)
-        );
-
-    }
-
-
-    /* =====================================================
-       ID UNIQUE
-    ===================================================== */
-
-    function genererId() {
-
-        return (
-            "chantier_" +
-            Date.now() +
-            "_" +
-            Math.random()
-                .toString(36)
-                .substring(2, 8)
-        );
-
-    }
-
-
-    /* =====================================================
-       ECHAPPEMENT
-    ===================================================== */
-
-    function echapper(value) {
-
-        return String(value ?? "")
-            .replace(/\\/g, "\\\\")
-            .replace(/'/g, "\\'")
-            .replace(/"/g, "&quot;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;");
-
-    }
-
-
-    /* =====================================================
-       FORMATAGE FCFA
-    ===================================================== */
-
-    function formaterFCFA(value) {
-
-        const nombre = Number(value) || 0;
-
-        return nombre.toLocaleString(
-            "fr-FR"
-        ) + " FCFA";
-
-    }
-
-
-    /* =====================================================
-       DATE
-    ===================================================== */
-
-    function formaterDate(date) {
-
-        if (!date) {
-            return "—";
-        }
-
-        const d = new Date(date + "T00:00:00");
-
-        if (isNaN(d.getTime())) {
-            return date;
-        }
-
-        return d.toLocaleDateString(
-            "fr-FR"
-        );
-
-    }
-
-
-    /* =====================================================
-       CLIENTS
-    ===================================================== */
-
-    function chargerClients() {
-
-        const select =
-            document.getElementById("clientId");
-
-        const clients =
-            obtenirClients();
-
-        select.innerHTML = `
-            <option value="">
-                Sélectionner un client
-            </option>
-        `;
-
-        clients.forEach(client => {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                client.id;
-
-            const nom =
-                client.nom ||
-                client.name ||
-                "Client sans nom";
-
-            const entreprise =
-                client.entreprise
-                    ? " — " + client.entreprise
-                    : "";
-
-            option.textContent =
-                nom + entreprise;
-
-            select.appendChild(option);
+            updatedAt:
+                new Date().toISOString()
 
         });
 
-
-        const notice =
-            document.getElementById(
-                "clientNotice"
-            );
-
-        if (clients.length === 0) {
-
-            notice.classList.add("show");
-
-        } else {
-
-            notice.classList.remove("show");
-
-        }
-
-    }
-
-
-    function trouverClient(clientId, ancienNom) {
-
-        const clients =
-            obtenirClients();
-
-        let client =
-            clients.find(
-                c => String(c.id) === String(clientId)
-            );
-
-        if (!client && ancienNom) {
-
-            client =
-                clients.find(
-                    c =>
-                        String(
-                            c.nom ||
-                            c.name ||
-                            ""
-                        ).toLowerCase()
-                        ===
-                        String(ancienNom)
-                            .toLowerCase()
-                );
-
-        }
-
-        return client || null;
-
-    }
-
-
-    /* =====================================================
-       INITIALISATION DU SUIVI
-    ===================================================== */
-
-    function initialiserSuiviChantier(chantier) {
-
-        const suivis =
-            obtenirSuivisChantiers();
-
-        const index =
-            suivis.findIndex(
-                suivi =>
-                    String(suivi.chantierId)
-                    ===
-                    String(chantier.id)
-            );
-
-
-        if (index === -1) {
-
-            suivis.push({
-
-                chantierId:
-                    chantier.id,
-
-                responsable:
-                    "",
-
-                dateReelleFin:
-                    "",
-
-                etapeActuelle:
-                    "Préparation",
-
-                retardJours:
-                    0,
-
-                taches:
-                    [],
-
-                journal:
-                    [],
-
-                problemes:
-                    [],
-
-                photos:
-                    [],
-
-                updatedAt:
-                    new Date().toISOString()
-
-            });
-
-        } else {
-
-            /*
-             * On conserve le suivi existant.
-             * On met seulement à jour la date.
-             */
-
-            suivis[index].updatedAt =
-                new Date().toISOString();
-
-        }
-
-
-        sauvegarderSuivisChantiers(
+        sauvegarderSuivis(
             suivis
         );
 
     }
 
+}
 
-    /* =====================================================
-       SUPPRESSION DU SUIVI
-    ===================================================== */
 
-    function supprimerSuiviChantier(
-        chantierId
-    ) {
+/* =====================================================
+   AFFICHAGE
+===================================================== */
 
-        const suivis =
-            obtenirSuivisChantiers();
+function afficherChantiers(){
 
-        const nouveauxSuivis =
-            suivis.filter(
-                suivi =>
-                    String(suivi.chantierId)
-                    !==
-                    String(chantierId)
-            );
+    const chantiers =
+        obtenirChantiers();
 
-        sauvegarderSuivisChantiers(
-            nouveauxSuivis
+
+    const container =
+        document.getElementById(
+            "listeChantiers"
         );
+
+
+    /* STATS */
+
+    const total =
+        chantiers.length;
+
+
+    const enCours =
+        chantiers.filter(
+            c =>
+                c.statut ===
+                "En cours"
+        ).length;
+
+
+    const moyenne =
+        total
+            ? Math.round(
+                chantiers.reduce(
+                    (
+                        somme,
+                        c
+                    ) =>
+                        somme +
+                        (
+                            Number(
+                                c.avancement
+                            ) || 0
+                        ),
+                    0
+                ) / total
+            )
+            : 0;
+
+
+    document.getElementById(
+        "statTotal"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "statEnCours"
+    ).textContent =
+        enCours;
+
+
+    document.getElementById(
+        "statAvancement"
+    ).textContent =
+        moyenne + " %";
+
+
+    /* AUCUN CHANTIER */
+
+    if(!chantiers.length){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <strong>
+                    Aucun chantier enregistré
+                </strong>
+
+                Créez votre premier chantier
+                pour commencer.
+
+                <br><br>
+
+                <button
+                    class="main-button"
+                    onclick="ouvrirModal()"
+                >
+                    ＋ Créer un chantier
+                </button>
+
+            </div>
+
+        `;
+
+        return;
 
     }
 
 
-    /* =====================================================
-       AFFICHER LES CHANTIERS
-    ===================================================== */
-
-    function afficherChantiers() {
-
-        const chantiers =
-            obtenirChantiers();
-
-        const clients =
-            obtenirClients();
-
-        const container =
-            document.getElementById(
-                "listeChantiers"
-            );
+    const finances =
+        obtenirFinances();
 
 
-        /* =========================
-           STATISTIQUES
-        ========================= */
+    container.innerHTML = `
 
-        const total =
-            chantiers.length;
+        <div class="chantiers-grid">
 
-        const enCours =
-            chantiers.filter(
-                chantier =>
-                    chantier.statut
-                    ===
-                    "En cours"
-            ).length;
+            ${chantiers.map(
+                chantier => {
+
+                    const client =
+                        trouverClient(
+                            chantier.clientId,
+                            chantier.client ||
+                            chantier.clientNom
+                        );
 
 
-        const moyenne =
-            total > 0
-                ? Math.round(
-                    chantiers.reduce(
-                        (
-                            totalAvancement,
-                            chantier
-                        ) =>
-                            totalAvancement +
-                            (
+                    const clientNom =
+                        client?.nom ||
+                        client?.name ||
+                        chantier.clientNom ||
+                        chantier.client ||
+                        "Client non renseigné";
+
+
+                    const entreprise =
+                        client?.entreprise ||
+                        chantier.entrepriseClient ||
+                        "";
+
+
+                    const avancement =
+                        Math.min(
+                            100,
+                            Math.max(
+                                0,
                                 Number(
                                     chantier.avancement
                                 ) || 0
-                            ),
-                        0
-                    ) / total
-                )
-                : 0;
+                            )
+                        );
 
 
-        document.getElementById(
-            "statTotal"
-        ).textContent = total;
+                    const statut =
+                        chantier.statut ||
+                        "En cours";
 
 
-        document.getElementById(
-            "statEnCours"
-        ).textContent = enCours;
+                    let statutClass =
+                        "status-autre";
 
 
-        document.getElementById(
-            "statAvancement"
-        ).textContent =
-            moyenne + " %";
+                    if(
+                        statut ===
+                        "En cours"
+                    ){
+
+                        statutClass =
+                            "status-en-cours";
+
+                    }else if(
+                        statut ===
+                        "Terminé"
+                    ){
+
+                        statutClass =
+                            "status-termine";
+
+                    }else if(
+                        statut ===
+                        "En attente"
+                    ){
+
+                        statutClass =
+                            "status-en-attente";
+
+                    }else if(
+                        statut ===
+                        "Suspendu"
+                    ){
+
+                        statutClass =
+                            "status-suspendu";
+
+                    }
 
 
-        /* =========================
-           AUCUN CHANTIER
-        ========================= */
+                    /* FINANCES */
 
-        if (chantiers.length === 0) {
-
-            container.innerHTML = `
-
-                <div class="empty">
-
-                    <strong>
-                        Aucun chantier enregistré
-                    </strong>
-
-                    Créez votre premier chantier
-                    pour commencer le suivi de vos projets BTP.
-
-                    <br><br>
-
-                    <button
-                        class="main-button"
-                        onclick="ouvrirModal()"
-                    >
-                        ＋ Créer un chantier
-                    </button>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
+                    const operations =
+                        finances.filter(
+                            operation =>
+                                String(
+                                    operation.chantierId
+                                )
+                                ===
+                                String(
+                                    chantier.id
+                                )
+                        );
 
 
-        /* =========================
-           AFFICHAGE
-        ========================= */
-
-        container.innerHTML = `
-
-            <div class="chantiers-grid">
-
-                ${chantiers.map(
-                    chantier => {
-
-                        let client =
-                            trouverClient(
-                                chantier.clientId,
-                                chantier.client ||
-                                chantier.clientNom
-                            );
-
-
-                        const clientNom =
-                            client?.nom ||
-                            client?.name ||
-                            chantier.clientNom ||
-                            chantier.client ||
-                            "Client non renseigné";
-
-
-                        const entreprise =
-                            client?.entreprise ||
-                            chantier.entrepriseClient ||
-                            "";
-
-
-                        const avancement =
-                            Math.min(
-                                100,
-                                Math.max(
-                                    0,
+                    const depenses =
+                        operations
+                        .filter(
+                            operation =>
+                                operation.type
+                                ===
+                                "depense"
+                        )
+                        .reduce(
+                            (
+                                total,
+                                operation
+                            ) =>
+                                total +
+                                (
                                     Number(
-                                        chantier.avancement
+                                        operation.montant
                                     ) || 0
-                                )
-                            );
+                                ),
+                            0
+                        );
 
 
-                        const statut =
-                            chantier.statut ||
-                            "En cours";
+                    const recettes =
+                        operations
+                        .filter(
+                            operation =>
+                                operation.type
+                                ===
+                                "recette"
+                        )
+                        .reduce(
+                            (
+                                total,
+                                operation
+                            ) =>
+                                total +
+                                (
+                                    Number(
+                                        operation.montant
+                                    ) || 0
+                                ),
+                            0
+                        );
 
 
-                        let statutClass =
-                            "status-autre";
+                    const solde =
+                        recettes -
+                        depenses;
 
 
-                        if (
-                            statut
-                            ===
-                            "En cours"
-                        ) {
+                    return `
 
-                            statutClass =
-                                "status-en-cours";
+                        <article
+                            class="chantier-card"
+                        >
 
-                        } else if (
-                            statut
-                            ===
-                            "Terminé"
-                        ) {
+                            <div
+                                class="chantier-header"
+                            >
 
-                            statutClass =
-                                "status-termine";
+                                <div>
 
-                        } else if (
-                            statut
-                            ===
-                            "En attente"
-                        ) {
+                                    <div
+                                        class="chantier-name"
+                                    >
+                                        ${echapper(
+                                            chantier.nom
+                                        )}
+                                    </div>
 
-                            statutClass =
-                                "status-en-attente";
+                                    <div
+                                        class="chantier-client"
+                                    >
+                                        👤
+                                        ${echapper(
+                                            clientNom
+                                        )}
 
-                        } else if (
-                            statut
-                            ===
-                            "Suspendu"
-                        ) {
+                                        ${
+                                            entreprise
+                                            ? " — " +
+                                              echapper(
+                                                  entreprise
+                                              )
+                                            : ""
+                                        }
+                                    </div>
 
-                            statutClass =
-                                "status-suspendu";
-
-                        }
-
-
-                        /* =========================
-                           FINANCES
-                        ========================= */
-
-                        const finances =
-                            obtenirFinances()
-                                .filter(
-                                    operation =>
-                                        String(
-                                            operation.chantierId
-                                        )
-                                        ===
-                                        String(
-                                            chantier.id
-                                        )
-                                );
+                                </div>
 
 
-                        const depenses =
-                            finances
-                                .filter(
-                                    operation =>
-                                        operation.type
-                                        ===
-                                        "depense"
-                                )
-                                .reduce(
-                                    (
-                                        total,
-                                        operation
-                                    ) =>
-                                        total +
-                                        (
-                                            Number(
-                                                operation.montant
-                                            ) || 0
-                                        ),
-                                    0
-                                );
+                                <span
+                                    class="status ${statutClass}"
+                                >
+                                    ${echapper(
+                                        statut
+                                    )}
+                                </span>
+
+                            </div>
 
 
-                        const recettes =
-                            finances
-                                .filter(
-                                    operation =>
-                                        operation.type
-                                        ===
-                                        "recette"
-                                )
-                                .reduce(
-                                    (
-                                        total,
-                                        operation
-                                    ) =>
-                                        total +
-                                        (
-                                            Number(
-                                                operation.montant
-                                            ) || 0
-                                        ),
-                                    0
-                                );
-
-
-                        const resultat =
-                            recettes -
-                            depenses;
-
-
-                        return `
-
-                            <article
-                                class="chantier-card"
+                            <div
+                                class="info-list"
                             >
 
                                 <div
-                                    class="chantier-header"
+                                    class="info-row"
                                 >
 
-                                    <div>
-
-                                        <div
-                                            class="chantier-name"
-                                        >
-                                            ${echapper(
-                                                chantier.nom
-                                            )}
-                                        </div>
-
-                                        <div
-                                            class="chantier-client"
-                                        >
-                                            👤
-                                            ${echapper(
-                                                clientNom
-                                            )}
-
-                                            ${
-                                                entreprise
-                                                    ? " — " +
-                                                      echapper(
-                                                          entreprise
-                                                      )
-                                                    : ""
-                                            }
-                                        </div>
-
-                                    </div>
-
+                                    <span
+                                        class="info-label"
+                                    >
+                                        📍 Localisation
+                                    </span>
 
                                     <span
-                                        class="status ${statutClass}"
+                                        class="info-value"
                                     >
-                                        ${echapper(
-                                            statut
+                                        ${
+                                            echapper(
+                                                chantier.localisation
+                                            ) || "—"
+                                        }
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="info-row"
+                                >
+
+                                    <span
+                                        class="info-label"
+                                    >
+                                        📅 Début
+                                    </span>
+
+                                    <span
+                                        class="info-value"
+                                    >
+                                        ${formaterDate(
+                                            chantier.dateDebut
                                         )}
                                     </span>
 
@@ -1686,765 +1745,514 @@
 
 
                                 <div
-                                    class="info-list"
+                                    class="info-row"
                                 >
 
-                                    <div
-                                        class="info-row"
+                                    <span
+                                        class="info-label"
                                     >
+                                        🏁 Fin prévue
+                                    </span>
 
-                                        <span
-                                            class="info-label"
-                                        >
-                                            📍 Localisation
-                                        </span>
-
-                                        <span
-                                            class="info-value"
-                                        >
-                                            ${
-                                                echapper(
-                                                    chantier.localisation
-                                                ) ||
-                                                "—"
-                                            }
-                                        </span>
-
-                                    </div>
-
-
-                                    <div
-                                        class="info-row"
+                                    <span
+                                        class="info-value"
                                     >
-
-                                        <span
-                                            class="info-label"
-                                        >
-                                            📅 Début
-                                        </span>
-
-                                        <span
-                                            class="info-value"
-                                        >
-                                            ${formaterDate(
-                                                chantier.dateDebut
-                                            )}
-                                        </span>
-
-                                    </div>
-
-
-                                    <div
-                                        class="info-row"
-                                    >
-
-                                        <span
-                                            class="info-label"
-                                        >
-                                            🏁 Fin prévue
-                                        </span>
-
-                                        <span
-                                            class="info-value"
-                                        >
-                                            ${formaterDate(
-                                                chantier.dateFin
-                                            )}
-                                        </span>
-
-                                    </div>
-
-
-                                    <div
-                                        class="info-row"
-                                    >
-
-                                        <span
-                                            class="info-label"
-                                        >
-                                            💰 Budget
-                                        </span>
-
-                                        <span
-                                            class="info-value"
-                                        >
-                                            ${formaterFCFA(
-                                                chantier.budget
-                                            )}
-                                        </span>
-
-                                    </div>
+                                        ${formaterDate(
+                                            chantier.dateFin
+                                        )}
+                                    </span>
 
                                 </div>
 
-
-                                <!-- PROGRESSION -->
 
                                 <div
-                                    class="progress-section"
+                                    class="info-row"
                                 >
 
-                                    <div
-                                        class="progress-top"
+                                    <span
+                                        class="info-label"
                                     >
+                                        💰 Budget
+                                    </span>
 
-                                        <span
-                                            class="progress-label"
-                                        >
-                                            Avancement
-                                        </span>
-
-                                        <span
-                                            class="progress-value"
-                                        >
-                                            ${avancement} %
-                                        </span>
-
-                                    </div>
-
-
-                                    <div
-                                        class="progress-bar"
+                                    <span
+                                        class="info-value"
                                     >
-
-                                        <div
-                                            class="progress-fill"
-                                            style="width:${avancement}%"
-                                        ></div>
-
-                                    </div>
+                                        ${formaterFCFA(
+                                            chantier.budget
+                                        )}
+                                    </span>
 
                                 </div>
 
+                            </div>
 
-                                <!-- FINANCES -->
+
+                            <!-- AVANCEMENT -->
+
+                            <div
+                                class="progress-section"
+                            >
 
                                 <div
-                                    class="finance-summary"
+                                    class="progress-top"
                                 >
 
-                                    <div
-                                        class="finance-title"
+                                    <span
+                                        class="progress-label"
                                     >
-                                        💰 Situation financière
-                                    </div>
+                                        Avancement
+                                    </span>
 
-
-                                    <div
-                                        class="finance-row"
+                                    <span
+                                        class="progress-value"
                                     >
-
-                                        <span
-                                            class="finance-label"
-                                        >
-                                            Dépenses
-                                        </span>
-
-                                        <span
-                                            class="finance-value"
-                                        >
-                                            ${formaterFCFA(
-                                                depenses
-                                            )}
-                                        </span>
-
-                                    </div>
-
-
-                                    <div
-                                        class="finance-row"
-                                    >
-
-                                        <span
-                                            class="finance-label"
-                                        >
-                                            Recettes
-                                        </span>
-
-                                        <span
-                                            class="finance-value"
-                                        >
-                                            ${formaterFCFA(
-                                                recettes
-                                            )}
-                                        </span>
-
-                                    </div>
-
-
-                                    <div
-                                        class="finance-row"
-                                    >
-
-                                        <span
-                                            class="finance-label"
-                                        >
-                                            Solde
-                                        </span>
-
-                                        <span
-                                            class="finance-value"
-                                        >
-                                            ${formaterFCFA(
-                                                resultat
-                                            )}
-                                        </span>
-
-                                    </div>
+                                        ${avancement} %
+                                    </span>
 
                                 </div>
 
-
-                                <!-- ACTIONS -->
 
                                 <div
-                                    class="card-actions"
+                                    class="progress-bar"
                                 >
 
-                                    <button
-                                        class="action-button edit"
-                                        onclick="modifierChantier('${echapper(
-                                            chantier.id
-                                        )}')"
-                                    >
-                                        ✏️ Modifier
-                                    </button>
-
-
-                                    <!--
-                                        LIEN DIRECT VERS
-                                        SUIVI-CHANTIER.HTML
-                                    -->
-
-                                    <a
-                                        class="action-button suivi"
-                                        href="suivi-chantier.html?chantierId=${encodeURIComponent(
-                                            chantier.id
-                                        )}"
-                                    >
-                                        📊 Suivi
-                                    </a>
-
-
-                                    <button
-                                        class="action-button finance"
-                                        onclick="ouvrirFinances('${echapper(
-                                            chantier.id
-                                        )}')"
-                                    >
-                                        💰 Budget & rentabilité
-                                    </button>
-
-
-                                    <button
-                                        class="action-button delete full"
-                                        onclick="supprimerChantier('${echapper(
-                                            chantier.id
-                                        )}')"
-                                    >
-                                        🗑️ Supprimer
-                                    </button>
+                                    <div
+                                        class="progress-fill"
+                                        style="width:${avancement}%"
+                                    ></div>
 
                                 </div>
 
-                            </article>
+                            </div>
 
-                        `;
 
-                    }
-                ).join("")}
+                            <!-- FINANCES -->
 
-            </div>
+                            <div
+                                class="finance-summary"
+                            >
 
-        `;
+                                <div
+                                    class="finance-title"
+                                >
+                                    💰 Situation financière
+                                </div>
 
-    }
 
+                                <div
+                                    class="finance-row"
+                                >
 
-    /* =====================================================
-       OUVRIR MODAL
-    ===================================================== */
+                                    <span
+                                        class="finance-label"
+                                    >
+                                        Dépenses
+                                    </span>
 
-    function ouvrirModal() {
+                                    <span
+                                        class="finance-value"
+                                    >
+                                        ${formaterFCFA(
+                                            depenses
+                                        )}
+                                    </span>
 
-        chantierEnModification =
-            null;
+                                </div>
 
-        document.getElementById(
-            "modalTitle"
-        ).textContent =
-            "Nouveau chantier";
 
+                                <div
+                                    class="finance-row"
+                                >
 
-        document.getElementById(
-            "chantierForm"
-        ).reset();
+                                    <span
+                                        class="finance-label"
+                                    >
+                                        Recettes
+                                    </span>
 
+                                    <span
+                                        class="finance-value"
+                                    >
+                                        ${formaterFCFA(
+                                            recettes
+                                        )}
+                                    </span>
 
-        document.getElementById(
-            "avancement"
-        ).value = 0;
+                                </div>
 
 
-        chargerClients();
+                                <div
+                                    class="finance-row"
+                                >
 
+                                    <span
+                                        class="finance-label"
+                                    >
+                                        Solde
+                                    </span>
 
-        document.getElementById(
-            "modalChantier"
-        ).classList.add("active");
+                                    <span
+                                        class="finance-value"
+                                    >
+                                        ${formaterFCFA(
+                                            solde
+                                        )}
+                                    </span>
 
-    }
+                                </div>
 
+                            </div>
 
-    /* =====================================================
-       FERMER MODAL
-    ===================================================== */
 
-    function fermerModal() {
+                            <!-- ACTIONS -->
 
-        document.getElementById(
-            "modalChantier"
-        ).classList.remove("active");
+                            <div
+                                class="card-actions"
+                            >
 
-        chantierEnModification =
-            null;
+                                <button
+                                    class="action-button"
+                                    onclick="modifierChantier('${chantier.id}')"
+                                >
+                                    ✏️ Modifier
+                                </button>
 
-    }
 
+                                <button
+                                    class="action-button suivi"
+                                    onclick="ouvrirSuivi('${chantier.id}')"
+                                >
+                                    📊 Suivi
+                                </button>
 
-    /* =====================================================
-       MODIFIER CHANTIER
-    ===================================================== */
 
-    function modifierChantier(id) {
+                                <button
+                                    class="action-button finance"
+                                    onclick="ouvrirFinances('${chantier.id}')"
+                                >
+                                    💰 Budget & rentabilité
+                                </button>
 
-        const chantiers =
-            obtenirChantiers();
 
-        const chantier =
-            chantiers.find(
-                c =>
-                    String(c.id)
-                    ===
-                    String(id)
-            );
+                                <button
+                                    class="action-button delete full"
+                                    onclick="supprimerChantier('${chantier.id}')"
+                                >
+                                    🗑️ Supprimer
+                                </button>
 
+                            </div>
 
-        if (!chantier) {
+                        </article>
 
-            alert(
-                "Chantier introuvable."
-            );
+                    `;
 
-            return;
+                }
+            ).join("")}
 
-        }
+        </div>
 
+    `;
 
-        chantierEnModification =
-            chantier.id;
+}
 
 
-        chargerClients();
+/* =====================================================
+   OUVRIR MODAL
+===================================================== */
 
+function ouvrirModal(){
 
-        document.getElementById(
-            "modalTitle"
-        ).textContent =
-            "Modifier le chantier";
+    chantierEnModification =
+        null;
 
 
-        document.getElementById(
-            "nom"
-        ).value =
-            chantier.nom || "";
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Nouveau chantier";
 
-
-        /*
-         * Recherche du client.
-         */
-
-        let clientId =
-            chantier.clientId || "";
-
-
-        if (!clientId) {
-
-            const client =
-                trouverClient(
-                    "",
-                    chantier.client ||
-                    chantier.clientNom
-                );
-
-            if (client) {
-
-                clientId =
-                    client.id;
-
-            }
-
-        }
-
-
-        document.getElementById(
-            "clientId"
-        ).value =
-            clientId;
-
-
-        document.getElementById(
-            "localisation"
-        ).value =
-            chantier.localisation || "";
-
-
-        document.getElementById(
-            "dateDebut"
-        ).value =
-            chantier.dateDebut || "";
-
-
-        document.getElementById(
-            "dateFin"
-        ).value =
-            chantier.dateFin || "";
-
-
-        document.getElementById(
-            "budget"
-        ).value =
-            chantier.budget || "";
-
-
-        document.getElementById(
-            "avancement"
-        ).value =
-            chantier.avancement || 0;
-
-
-        document.getElementById(
-            "statut"
-        ).value =
-            chantier.statut ||
-            "En cours";
-
-
-        document.getElementById(
-            "notes"
-        ).value =
-            chantier.notes || "";
-
-
-        document.getElementById(
-            "modalChantier"
-        ).classList.add("active");
-
-    }
-
-
-    /* =====================================================
-       ENREGISTRER CHANTIER
-    ===================================================== */
 
     document.getElementById(
         "chantierForm"
-    ).addEventListener(
-        "submit",
-        function(event) {
+    ).reset();
 
-            event.preventDefault();
 
+    document.getElementById(
+        "avancement"
+    ).value = 0;
 
-            const nom =
-                document.getElementById(
-                    "nom"
-                ).value.trim();
 
+    chargerClients();
 
-            const clientId =
-                document.getElementById(
-                    "clientId"
-                ).value;
 
+    document.getElementById(
+        "modalChantier"
+    ).classList.add(
+        "active"
+    );
 
-            const localisation =
-                document.getElementById(
-                    "localisation"
-                ).value.trim();
+}
 
 
-            const dateDebut =
-                document.getElementById(
-                    "dateDebut"
-                ).value;
+/* =====================================================
+   FERMER MODAL
+===================================================== */
 
+function fermerModal(){
 
-            const dateFin =
-                document.getElementById(
-                    "dateFin"
-                ).value;
-
-
-            const budget =
-                Number(
-                    document.getElementById(
-                        "budget"
-                    ).value
-                ) || 0;
-
-
-            let avancement =
-                Number(
-                    document.getElementById(
-                        "avancement"
-                    ).value
-                ) || 0;
-
-
-            const statut =
-                document.getElementById(
-                    "statut"
-                ).value;
-
-
-            const notes =
-                document.getElementById(
-                    "notes"
-                ).value.trim();
-
-
-            /* =========================
-               VALIDATION
-            ========================= */
-
-            if (!nom) {
-
-                alert(
-                    "Veuillez saisir le nom du chantier."
-                );
-
-                return;
-
-            }
-
-
-            if (!clientId) {
-
-                alert(
-                    "Veuillez sélectionner un client."
-                );
-
-                return;
-
-            }
-
-
-            avancement =
-                Math.min(
-                    100,
-                    Math.max(
-                        0,
-                        avancement
-                    )
-                );
-
-
-            const clients =
-                obtenirClients();
-
-
-            const client =
-                clients.find(
-                    c =>
-                        String(c.id)
-                        ===
-                        String(clientId)
-                );
-
-
-            if (!client) {
-
-                alert(
-                    "Le client sélectionné est introuvable."
-                );
-
-                return;
-
-            }
-
-
-            const chantiers =
-                obtenirChantiers();
-
-
-            const maintenant =
-                new Date().toISOString();
-
-
-            /* =========================
-               CHANTIER
-            ========================= */
-
-            const id =
-                chantierEnModification
-                ||
-                genererId();
-
-
-            const ancienChantier =
-                chantiers.find(
-                    c =>
-                        String(c.id)
-                        ===
-                        String(id)
-                );
-
-
-            const chantier = {
-
-                id:
-
-                    id,
-
-                nom:
-
-                    nom,
-
-                clientId:
-
-                    client.id,
-
-                client:
-
-                    client.nom ||
-                    client.name ||
-                    "",
-
-                clientNom:
-
-                    client.nom ||
-                    client.name ||
-                    "",
-
-                entrepriseClient:
-
-                    client.entreprise ||
-                    "",
-
-                localisation:
-
-                    localisation,
-
-                dateDebut:
-
-                    dateDebut,
-
-                dateFin:
-
-                    dateFin,
-
-                budget:
-
-                    budget,
-
-                avancement:
-
-                    avancement,
-
-                statut:
-
-                    statut,
-
-                notes:
-
-                    notes,
-
-                dateCreation:
-
-                    ancienChantier?.dateCreation
-                    ||
-                    maintenant,
-
-                updatedAt:
-
-                    maintenant
-
-            };
-
-
-            /* =========================
-               AJOUT / MODIFICATION
-            ========================= */
-
-            const index =
-                chantiers.findIndex(
-                    c =>
-                        String(c.id)
-                        ===
-                        String(id)
-                );
-
-
-            if (index === -1) {
-
-                chantiers.push(
-                    chantier
-                );
-
-            } else {
-
-                chantiers[index] =
-                    chantier;
-
-            }
-
-
-            sauvegarderChantiers(
-                chantiers
-            );
-
-
-            /* =========================
-               CRÉER / CONSERVER
-               LE SUIVI DU CHANTIER
-            ========================= */
-
-            initialiserSuiviChantier(
-                chantier
-            );
-
-
-            /* =========================
-               FERMETURE
-            ========================= */
-
-            fermerModal();
-
-
-            afficherChantiers();
-
-
-            alert(
-                index === -1
-                    ? "Chantier créé avec succès."
-                    : "Chantier modifié avec succès."
-            );
-
-        }
+    document.getElementById(
+        "modalChantier"
+    ).classList.remove(
+        "active"
     );
 
 
-    /* =====================================================
-       SUPPRIMER CHANTIER
-    ===================================================== */
+    chantierEnModification =
+        null;
 
-    function supprimerChantier(id) {
+}
+
+
+/* =====================================================
+   MODIFIER
+===================================================== */
+
+function modifierChantier(id){
+
+    const chantiers =
+        obtenirChantiers();
+
+
+    const chantier =
+        chantiers.find(
+            c =>
+                String(c.id)
+                ===
+                String(id)
+        );
+
+
+    if(!chantier){
+
+        alert(
+            "Chantier introuvable."
+        );
+
+        return;
+
+    }
+
+
+    chantierEnModification =
+        chantier.id;
+
+
+    chargerClients();
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Modifier le chantier";
+
+
+    document.getElementById(
+        "nom"
+    ).value =
+        chantier.nom || "";
+
+
+    document.getElementById(
+        "clientId"
+    ).value =
+        chantier.clientId || "";
+
+
+    document.getElementById(
+        "localisation"
+    ).value =
+        chantier.localisation || "";
+
+
+    document.getElementById(
+        "dateDebut"
+    ).value =
+        chantier.dateDebut || "";
+
+
+    document.getElementById(
+        "dateFin"
+    ).value =
+        chantier.dateFin || "";
+
+
+    document.getElementById(
+        "budget"
+    ).value =
+        chantier.budget || "";
+
+
+    document.getElementById(
+        "avancement"
+    ).value =
+        chantier.avancement || 0;
+
+
+    document.getElementById(
+        "statut"
+    ).value =
+        chantier.statut ||
+        "En cours";
+
+
+    document.getElementById(
+        "notes"
+    ).value =
+        chantier.notes || "";
+
+
+    document.getElementById(
+        "modalChantier"
+    ).classList.add(
+        "active"
+    );
+
+}
+
+
+/* =====================================================
+   ENREGISTREMENT
+===================================================== */
+
+document.getElementById(
+    "chantierForm"
+).addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+
+        const nom =
+            document.getElementById(
+                "nom"
+            ).value.trim();
+
+
+        const clientId =
+            document.getElementById(
+                "clientId"
+            ).value;
+
+
+        const localisation =
+            document.getElementById(
+                "localisation"
+            ).value.trim();
+
+
+        const dateDebut =
+            document.getElementById(
+                "dateDebut"
+            ).value;
+
+
+        const dateFin =
+            document.getElementById(
+                "dateFin"
+            ).value;
+
+
+        const budget =
+            Number(
+                document.getElementById(
+                    "budget"
+                ).value
+            ) || 0;
+
+
+        let avancement =
+            Number(
+                document.getElementById(
+                    "avancement"
+                ).value
+            ) || 0;
+
+
+        const statut =
+            document.getElementById(
+                "statut"
+            ).value;
+
+
+        const notes =
+            document.getElementById(
+                "notes"
+            ).value.trim();
+
+
+        if(!nom){
+
+            alert(
+                "Veuillez saisir le nom du chantier."
+            );
+
+            return;
+
+        }
+
+
+        if(!clientId){
+
+            alert(
+                "Veuillez sélectionner un client."
+            );
+
+            return;
+
+        }
+
+
+        avancement =
+            Math.max(
+                0,
+                Math.min(
+                    100,
+                    avancement
+                )
+            );
+
+
+        const client =
+            trouverClient(
+                clientId
+            );
+
+
+        if(!client){
+
+            alert(
+                "Client introuvable."
+            );
+
+            return;
+
+        }
+
 
         const chantiers =
             obtenirChantiers();
 
-        const chantier =
+
+        const id =
+            chantierEnModification
+            ||
+            genererId();
+
+
+        const ancien =
             chantiers.find(
                 c =>
                     String(c.id)
@@ -2453,168 +2261,460 @@
             );
 
 
-        if (!chantier) {
+        const chantier = {
 
-            return;
+            id:
 
-        }
+                id,
+
+            nom:
+
+                nom,
+
+            clientId:
+
+                client.id,
+
+            client:
+
+                client.nom ||
+                client.name ||
+                "",
+
+            clientNom:
+
+                client.nom ||
+                client.name ||
+                "",
+
+            entrepriseClient:
+
+                client.entreprise ||
+                "",
+
+            localisation:
+
+                localisation,
+
+            dateDebut:
+
+                dateDebut,
+
+            dateFin:
+
+                dateFin,
+
+            budget:
+
+                budget,
+
+            avancement:
+
+                avancement,
+
+            statut:
+
+                statut,
+
+            notes:
+
+                notes,
+
+            dateCreation:
+
+                ancien?.dateCreation
+                ||
+                new Date().toISOString(),
+
+            updatedAt:
+
+                new Date().toISOString()
+
+        };
 
 
-        const confirmation =
-            confirm(
-                "Voulez-vous vraiment supprimer le chantier « " +
-                chantier.nom +
-                " » ?\n\n" +
-                "Son suivi et ses données financières liées seront également supprimés."
-            );
-
-
-        if (!confirmation) {
-
-            return;
-
-        }
-
-
-        /* =========================
-           SUPPRIMER LE CHANTIER
-        ========================= */
-
-        const nouveauxChantiers =
-            chantiers.filter(
+        const index =
+            chantiers.findIndex(
                 c =>
                     String(c.id)
-                    !==
+                    ===
                     String(id)
             );
+
+
+        if(index === -1){
+
+            chantiers.push(
+                chantier
+            );
+
+        }else{
+
+            chantiers[index] =
+                chantier;
+
+        }
 
 
         sauvegarderChantiers(
-            nouveauxChantiers
+            chantiers
         );
 
 
-        /* =========================
-           SUPPRIMER FINANCES
-        ========================= */
-
-        const finances =
-            obtenirFinances();
-
-
-        const nouvellesFinances =
-            finances.filter(
-                operation =>
-                    String(
-                        operation.chantierId
-                    )
-                    !==
-                    String(id)
-            );
-
-
-        sauvegarderFinances(
-            nouvellesFinances
+        initialiserSuivi(
+            chantier
         );
 
 
-        /* =========================
-           SUPPRIMER SUIVI
-        ========================= */
-
-        supprimerSuiviChantier(
-            id
-        );
+        fermerModal();
 
 
         afficherChantiers();
 
+
+        alert(
+            index === -1
+            ? "Chantier créé avec succès."
+            : "Chantier modifié avec succès."
+        );
+
+    }
+);
+
+
+/* =====================================================
+   ⭐ CHANTIER SÉLECTIONNÉ
+===================================================== */
+
+function selectionnerChantier(
+    chantier
+){
+
+    /*
+     * C'est cette fonction qui fait
+     * la liaison entre les modules BATIFLOW.
+     */
+
+    localStorage.setItem(
+        "chantierSelectionne",
+        JSON.stringify(
+            chantier
+        )
+    );
+
+}
+
+
+/* =====================================================
+   📊 OUVRIR SUIVI
+===================================================== */
+
+function ouvrirSuivi(id){
+
+    const chantiers =
+        obtenirChantiers();
+
+
+    const chantier =
+        chantiers.find(
+            c =>
+                String(c.id)
+                ===
+                String(id)
+        );
+
+
+    if(!chantier){
+
+        alert(
+            "Chantier introuvable."
+        );
+
+        return;
+
     }
 
 
-    /* =====================================================
-       BUDGET & RENTABILITÉ
-    ===================================================== */
+    /*
+     * Enregistrement du chantier sélectionné
+     */
 
-    function ouvrirFinances(id) {
+    selectionnerChantier(
+        chantier
+    );
 
-        /*
-         * On redirige vers le module
-         * financier avec le chantier sélectionné.
-         *
-         * Si ta page devis/finances utilise déjà
-         * une autre URL, tu peux remplacer cette ligne.
-         */
 
-        window.location.href =
-            "rentabilite.html?chantierId=" +
-            encodeURIComponent(id);
+    /*
+     * Transmission également
+     * par URL.
+     */
+
+    window.location.href =
+        "suivi-chantier.html?chantierId=" +
+        encodeURIComponent(
+            chantier.id
+        );
+
+}
+
+
+/* =====================================================
+   💰 OUVRIR RENTABILITÉ
+===================================================== */
+
+function ouvrirFinances(id){
+
+    const chantiers =
+        obtenirChantiers();
+
+
+    const chantier =
+        chantiers.find(
+            c =>
+                String(c.id)
+                ===
+                String(id)
+        );
+
+
+    if(!chantier){
+
+        alert(
+            "Chantier introuvable."
+        );
+
+        return;
 
     }
 
 
-    /* =====================================================
-       FERMER MODAL EN CLIQUANT À L'EXTÉRIEUR
-    ===================================================== */
+    /*
+     * ⭐ IMPORTANT
+     *
+     * Le chantier est enregistré dans
+     * localStorage avant la redirection.
+     *
+     * rentabilite.html pourra donc
+     * automatiquement le récupérer.
+     */
 
-    document.getElementById(
-        "modalChantier"
-    ).addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target ===
-                this
-            ) {
-
-                fermerModal();
-
-            }
-
-        }
+    selectionnerChantier(
+        chantier
     );
 
 
-    /* =====================================================
-       SYNCHRONISATION
-    ===================================================== */
+    /*
+     * On transmet aussi son ID
+     * dans l'URL.
+     */
 
-    window.addEventListener(
-        "storage",
-        function(event) {
+    window.location.href =
+        "rentabilite.html?chantierId=" +
+        encodeURIComponent(
+            chantier.id
+        );
 
-            if (
-                event.key ===
-                STORAGE_KEY
-                ||
-                event.key ===
-                CLIENT_STORAGE_KEY
-                ||
-                event.key ===
-                FINANCE_STORAGE_KEY
-                ||
-                event.key ===
-                SUIVI_STORAGE_KEY
-            ) {
+}
 
-                chargerClients();
 
-                afficherChantiers();
+/* =====================================================
+   🗑️ SUPPRIMER
+===================================================== */
 
-            }
+function supprimerChantier(id){
 
-        }
+    const chantiers =
+        obtenirChantiers();
+
+
+    const chantier =
+        chantiers.find(
+            c =>
+                String(c.id)
+                ===
+                String(id)
+        );
+
+
+    if(!chantier){
+
+        return;
+
+    }
+
+
+    const confirmation =
+        confirm(
+            "Voulez-vous vraiment supprimer le chantier « "
+            +
+            chantier.nom
+            +
+            " » ?\n\n"
+            +
+            "Son suivi sera également supprimé."
+        );
+
+
+    if(!confirmation){
+
+        return;
+
+    }
+
+
+    /*
+     * Supprimer chantier
+     */
+
+    sauvegarderChantiers(
+        chantiers.filter(
+            c =>
+                String(c.id)
+                !==
+                String(id)
+        )
     );
 
 
-    /* =====================================================
-       INITIALISATION
-    ===================================================== */
+    /*
+     * Supprimer finances
+     */
 
-    chargerClients();
+    const finances =
+        obtenirFinances();
+
+
+    sauvegarderFinances(
+        finances.filter(
+            operation =>
+                String(
+                    operation.chantierId
+                )
+                !==
+                String(id)
+        )
+    );
+
+
+    /*
+     * Supprimer suivi
+     */
+
+    const suivis =
+        obtenirSuivis();
+
+
+    sauvegarderSuivis(
+        suivis.filter(
+            suivi =>
+                String(
+                    suivi.chantierId
+                )
+                !==
+                String(id)
+        )
+    );
+
+
+    /*
+     * Si le chantier supprimé
+     * était sélectionné,
+     * on nettoie également
+     * chantierSelectionne.
+     */
+
+    const selection =
+        localStorage.getItem(
+            "chantierSelectionne"
+        );
+
+
+    if(selection){
+
+        try{
+
+            const chantierSelectionne =
+                JSON.parse(
+                    selection
+                );
+
+
+            if(
+                String(
+                    chantierSelectionne.id
+                )
+                ===
+                String(id)
+            ){
+
+                localStorage.removeItem(
+                    "chantierSelectionne"
+                );
+
+            }
+
+        }catch(error){
+
+            localStorage.removeItem(
+                "chantierSelectionne"
+            );
+
+        }
+
+    }
+
 
     afficherChantiers();
+
+}
+
+
+/* =====================================================
+   FERMER MODAL EXTÉRIEUR
+===================================================== */
+
+document.getElementById(
+    "modalChantier"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            this
+        ){
+
+            fermerModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SYNCHRONISATION
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(){
+
+        chargerClients();
+
+        afficherChantiers();
+
+    }
+);
+
+
+/* =====================================================
+   INITIALISATION
+===================================================== */
+
+chargerClients();
+
+afficherChantiers();
 
 </script>
 
