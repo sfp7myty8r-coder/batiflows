@@ -438,18 +438,6 @@ button,
     color:white;
 }
 
-.action-button.devis{
-    background:#fff7ed;
-    border-color:#fed7aa;
-    color:#c2410c;
-}
-
-.action-button.devis:hover{
-    background:#f28c28;
-    color:white;
-    border-color:#f28c28;
-}
-
 
 /* =====================================================
    DQE & METRE
@@ -465,6 +453,23 @@ button,
     background:#0d9488;
     color:white;
     border-color:#0d9488;
+}
+
+
+/* =====================================================
+   DEVIS
+===================================================== */
+
+.action-button.devis{
+    background:#fff7ed;
+    border-color:#fed7aa;
+    color:#c2410c;
+}
+
+.action-button.devis:hover{
+    background:#f28c28;
+    color:white;
+    border-color:#f28c28;
 }
 
 
@@ -1467,6 +1472,12 @@ function preparerChantier(id){
     }
 
 
+    /*
+     * Mémorisation globale du chantier.
+     * Tous les modules BATIFLOW peuvent
+     * récupérer ce chantier.
+     */
+
     localStorage.setItem(
         "chantierSelectionne",
         JSON.stringify(
@@ -2148,8 +2159,6 @@ function afficherChantiers(){
                                 </button>
 
 
-                                <!-- DQE & METRE -->
-
                                 <button
                                     class="action-button dqe"
                                     onclick="ouvrirDQE('${chantier.id}')"
@@ -2157,8 +2166,6 @@ function afficherChantiers(){
                                     📐 DQE & Métré
                                 </button>
 
-
-                                <!-- DEVIS -->
 
                                 <button
                                     class="action-button devis"
@@ -2760,14 +2767,11 @@ function ouvrirDQE(id){
 
 
     /*
-     * Le chantier est maintenant actif
-     * avant d'ouvrir le DQE.
+     * Le chantier est enregistré avant
+     * l'ouverture du DQE.
      *
-     * Le DQE pourra donc récupérer :
-     *
-     * chantierId
-     * chantierSelectionne
-     * batiflowChantierActif
+     * Le DQE reçoit également directement
+     * son identifiant dans l'URL.
      */
 
     window.location.href =
