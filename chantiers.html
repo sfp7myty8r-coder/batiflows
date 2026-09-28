@@ -1,2990 +1,2039 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Chantiers - BATIFLOW</title>
-
-<style>
-
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4f6f8;
-    color:#172033;
-}
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.header{
-    background:#0f172a;
-    color:white;
-    padding:18px 30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-size:24px;
-    font-weight:bold;
-}
-
-.logo span{
-    color:#f59e0b;
-}
-
-.header a{
-    color:white;
-    text-decoration:none;
-}
-
-/* =====================================================
-   CONTAINER
-===================================================== */
-
-.container{
-    max-width:1200px;
-    margin:35px auto;
-    padding:0 20px;
-}
-
-.top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-    margin-bottom:25px;
-}
-
-.top h1{
-    margin:0 0 5px;
-}
-
-.top p{
-    margin:0;
-    color:#6b7280;
-}
-
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-.primary-button{
-    border:none;
-    background:#f59e0b;
-    color:#111827;
-    padding:13px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:bold;
-}
-
-.primary-button:hover{
-    background:#d97706;
-    color:white;
-}
-
-/* =====================================================
-   EMPTY
-===================================================== */
-
-.empty{
-    background:white;
-    border-radius:12px;
-    padding:60px 20px;
-    text-align:center;
-    box-shadow:0 4px 20px rgba(0,0,0,.06);
-}
-
-.empty h2{
-    margin-bottom:10px;
-}
-
-.empty p{
-    color:#6b7280;
-    margin-bottom:20px;
-}
-
-/* =====================================================
-   LISTE
-===================================================== */
-
-.chantiers-list{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
-}
-
-.chantier-card{
-    background:white;
-    border:1px solid #e5e7eb;
-    border-radius:14px;
-    padding:22px;
-    box-shadow:0 4px 20px rgba(0,0,0,.05);
-}
-
-.chantier-header{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    align-items:flex-start;
-    margin-bottom:15px;
-}
-
-.chantier-header h3{
-    margin:0 0 5px;
-    font-size:19px;
-}
-
-.chantier-client{
-    color:#6b7280;
-    font-size:13px;
-}
-
-.status{
-    padding:6px 10px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:bold;
-    white-space:nowrap;
-}
-
-.status.a-demarrer{
-    background:#fef3c7;
-    color:#92400e;
-}
-
-.status.en-cours{
-    background:#dcfce7;
-    color:#166534;
-}
-
-.status.pause{
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-.status.termine{
-    background:#dbeafe;
-    color:#1e40af;
-}
-
-/* =====================================================
-   INFO GRID
-===================================================== */
-
-.info-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin:18px 0;
-}
-
-.info{
-    background:#f8fafc;
-    padding:12px;
-    border-radius:8px;
-}
-
-.info small{
-    display:block;
-    color:#6b7280;
-    font-size:11px;
-    margin-bottom:4px;
-}
-
-.info strong{
-    font-size:14px;
-}
-
-/* =====================================================
-   PROGRESS
-===================================================== */
-
-.progress-area{
-    margin-top:15px;
-}
-
-.progress-top{
-    display:flex;
-    justify-content:space-between;
-    font-size:12px;
-    margin-bottom:6px;
-}
-
-.progress{
-    height:9px;
-    background:#e5e7eb;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.progress-bar{
-    height:100%;
-    background:#f59e0b;
-    border-radius:20px;
-}
-
-/* =====================================================
-   FINANCE MINI
-===================================================== */
-
-.finance-summary{
-    margin-top:18px;
-    padding:15px;
-    background:#f8fafc;
-    border-radius:10px;
-    border:1px solid #e5e7eb;
-}
-
-.finance-summary-title{
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:12px;
-    color:#475569;
-}
-
-.finance-mini-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-}
-
-.finance-mini{
-    background:white;
-    border-radius:8px;
-    padding:10px;
-    border:1px solid #e5e7eb;
-}
-
-.finance-mini small{
-    display:block;
-    color:#64748b;
-    font-size:10px;
-    margin-bottom:4px;
-}
-
-.finance-mini strong{
-    font-size:12px;
-}
-
-.finance-positive{
-    color:#15803d;
-}
-
-.finance-negative{
-    color:#b91c1c;
-}
-
-.finance-warning{
-    color:#b45309;
-}
-
-/* =====================================================
-   ACTIONS
-===================================================== */
-
-.card-actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-top:18px;
-}
-
-.action-button{
-    padding:10px;
-    border-radius:7px;
-    cursor:pointer;
-    font-weight:bold;
-    border:1px solid #d1d5db;
-    background:white;
-}
-
-.action-button.edit:hover{
-    background:#fef3c7;
-}
-
-.action-button.finance{
-    background:#fff7ed;
-    border-color:#fed7aa;
-    color:#9a3412;
-}
-
-.action-button.finance:hover{
-    background:#f59e0b;
-    color:white;
-}
-
-.action-button.delete{
-    color:#b91c1c;
-}
-
-.action-button.delete:hover{
-    background:#fee2e2;
-}
-
-.action-button.full{
-    grid-column:1/-1;
-}
-
-/* =====================================================
-   MODALE GENERALE
-===================================================== */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    z-index:9999;
-}
-
-.modal.active{
-    display:flex;
-}
-
-.modal-content{
-    width:100%;
-    max-width:700px;
-    max-height:90vh;
-    overflow-y:auto;
-    background:white;
-    border-radius:14px;
-    padding:30px;
-}
-
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-}
-
-.modal-header h2{
-    margin:0;
-}
-
-.close{
-    border:none;
-    background:transparent;
-    font-size:28px;
-    cursor:pointer;
-}
-
-/* =====================================================
-   FORM
-===================================================== */
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-.form-group{
-    display:flex;
-    flex-direction:column;
-}
-
-.form-group.full{
-    grid-column:1/-1;
-}
-
-label{
-    margin-bottom:7px;
-    font-weight:bold;
-}
-
-input,
-select,
-textarea{
-    width:100%;
-    padding:12px;
-    border:1px solid #d1d5db;
-    border-radius:7px;
-    font-size:15px;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-    outline:none;
-    border-color:#f59e0b;
-    box-shadow:0 0 0 3px rgba(245,158,11,.12);
-}
-
-textarea{
-    min-height:100px;
-    resize:vertical;
-}
-
-.form-actions{
-    display:flex;
-    justify-content:flex-end;
-    gap:12px;
-    margin-top:25px;
-}
-
-.secondary-button{
-    border:1px solid #d1d5db;
-    background:white;
-    padding:12px 20px;
-    border-radius:7px;
-    cursor:pointer;
-}
-
-.secondary-button:hover{
-    background:#f8fafc;
-}
-
-.submit-button{
-    border:none;
-    background:#0f172a;
-    color:white;
-    padding:12px 20px;
-    border-radius:7px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.submit-button:hover{
-    background:#1e293b;
-}
-
-/* =====================================================
-   CLIENT
-===================================================== */
-
-.client-helper{
-    margin-top:8px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-}
-
-.client-helper-text{
-    font-size:11px;
-    color:#6b7280;
-}
-
-.client-link{
-    color:#2563eb;
-    text-decoration:none;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.client-link:hover{
-    text-decoration:underline;
-}
-
-.no-client-message{
-    padding:10px 12px;
-    background:#fff7ed;
-    border:1px solid #fed7aa;
-    border-radius:7px;
-    color:#9a3412;
-    font-size:12px;
-    margin-top:8px;
-}
-
-/* =====================================================
-   FINANCE MODAL
-===================================================== */
-
-.finance-modal-content{
-    max-width:900px;
-}
-
-.finance-project-header{
-    background:#0f172a;
-    color:white;
-    border-radius:12px;
-    padding:20px;
-    margin-bottom:20px;
-}
-
-.finance-project-header h3{
-    margin:0 0 5px;
-    font-size:20px;
-}
-
-.finance-project-header p{
-    margin:0;
-    color:#cbd5e1;
-    font-size:13px;
-}
-
-.finance-dashboard{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-bottom:22px;
-}
-
-.finance-box{
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:10px;
-    padding:15px;
-}
-
-.finance-box small{
-    display:block;
-    color:#64748b;
-    font-size:11px;
-    margin-bottom:6px;
-}
-
-.finance-box strong{
-    font-size:16px;
-}
-
-.finance-box.budget{
-    border-left:4px solid #f59e0b;
-}
-
-.finance-box.depenses{
-    border-left:4px solid #ef4444;
-}
-
-.finance-box.recettes{
-    border-left:4px solid #22c55e;
-}
-
-.finance-box.resultat{
-    border-left:4px solid #3b82f6;
-}
-
-.finance-progress{
-    margin-bottom:25px;
-}
-
-.finance-progress-top{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:7px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.finance-progress-bar{
-    height:12px;
-    background:#e5e7eb;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.finance-progress-fill{
-    height:100%;
-    background:#f59e0b;
-    border-radius:20px;
-}
-
-.finance-progress-fill.danger{
-    background:#ef4444;
-}
-
-.finance-progress-fill.success{
-    background:#22c55e;
-}
-
-/* =====================================================
-   FINANCE FORMS
-===================================================== */
-
-.finance-forms{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-    margin-bottom:25px;
-}
-
-.finance-form-card{
-    border:1px solid #e5e7eb;
-    border-radius:10px;
-    padding:18px;
-}
-
-.finance-form-card h3{
-    margin:0 0 15px;
-    font-size:16px;
-}
-
-.finance-form-card.expense h3{
-    color:#b91c1c;
-}
-
-.finance-form-card.income h3{
-    color:#15803d;
-}
-
-/* =====================================================
-   OPERATIONS
-===================================================== */
-
-.operations-title{
-    margin:0 0 12px;
-    font-size:17px;
-}
-
-.operations-list{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.operation{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    padding:13px;
-    border:1px solid #e5e7eb;
-    border-radius:9px;
-    background:#fff;
-}
-
-.operation-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.operation-icon{
-    width:36px;
-    height:36px;
-    border-radius:8px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:17px;
-}
-
-.operation-icon.depense{
-    background:#fee2e2;
-}
-
-.operation-icon.recette{
-    background:#dcfce7;
-}
-
-.operation-info strong{
-    display:block;
-    font-size:13px;
-}
-
-.operation-info small{
-    display:block;
-    color:#64748b;
-    font-size:11px;
-    margin-top:3px;
-}
-
-.operation-right{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.operation-amount{
-    font-weight:bold;
-    font-size:13px;
-}
-
-.operation-amount.depense{
-    color:#b91c1c;
-}
-
-.operation-amount.recette{
-    color:#15803d;
-}
-
-.delete-operation{
-    border:none;
-    background:#fee2e2;
-    color:#b91c1c;
-    width:30px;
-    height:30px;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-.delete-operation:hover{
-    background:#fecaca;
-}
-
-.no-operation{
-    text-align:center;
-    padding:25px;
-    background:#f8fafc;
-    border-radius:9px;
-    color:#64748b;
-    font-size:13px;
-}
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-.toast-container{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:20000;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.toast{
-    background:#0f172a;
-    color:white;
-    padding:14px 18px;
-    border-radius:8px;
-    box-shadow:0 8px 25px rgba(0,0,0,.20);
-    font-size:13px;
-    animation:toastIn .25s ease;
-}
-
-.toast.success{
-    border-left:4px solid #22c55e;
-}
-
-.toast.error{
-    border-left:4px solid #ef4444;
-}
-
-@keyframes toastIn{
-
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media(max-width:900px){
-
-    .finance-dashboard{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
-@media(max-width:800px){
-
-    .chantiers-list{
-        grid-template-columns:1fr;
-    }
-
-}
-
-@media(max-width:700px){
-
-    .top{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-group.full{
-        grid-column:auto;
-    }
-
-    .header{
-        padding:16px 18px;
-    }
-
-    .container{
-        padding:0 14px;
-    }
-
-    .modal-content{
-        padding:20px;
-    }
-
-    .form-actions{
-        flex-direction:column;
-    }
-
-    .form-actions button{
-        width:100%;
-    }
-
-    .finance-dashboard{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .finance-forms{
-        grid-template-columns:1fr;
-    }
-
-    .finance-mini-grid{
-        grid-template-columns:1fr;
-    }
-
-    .card-actions{
-        grid-template-columns:1fr;
-    }
-
-    .operation{
-        align-items:flex-start;
-    }
-
-    .operation-right{
-        flex-direction:column;
-        align-items:flex-end;
-    }
-
-}
-
-@media(max-width:480px){
-
-    .finance-dashboard{
-        grid-template-columns:1fr;
-    }
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BATIFLOW — Chantiers</title>
+
+    <meta
+        name="description"
+        content="BATIFLOW — Gestion professionnelle des chantiers BTP"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #172033;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #f28c28;
+        }
+
+        .header-title {
+            font-size: 15px;
+            color: #cbd5e1;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 1200px;
+            margin: 35px auto;
+            padding: 0 20px 50px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .page-title {
+            margin: 0;
+            font-size: 28px;
+            color: #0f172a;
+        }
+
+        .page-subtitle {
+            margin-top: 7px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        button,
+        .main-button {
+            font-family: inherit;
+        }
+
+        .main-button {
+            border: none;
+            background: #f28c28;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            transition: 0.2s;
+        }
+
+        .main-button:hover {
+            background: #d97706;
+            transform: translateY(-1px);
+        }
+
+        .secondary-button {
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #334155;
+            padding: 11px 17px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .secondary-button:hover {
+            background: #f8fafc;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 12px rgba(15,23,42,0.07);
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        /* =========================
+           CHANTIERS
+        ========================= */
+
+        .empty {
+            background: white;
+            border: 1px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 45px 20px;
+            text-align: center;
+            color: #64748b;
+        }
+
+        .empty strong {
+            display: block;
+            font-size: 18px;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        .chantiers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .chantier-card {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(15,23,42,0.07);
+            border: 1px solid #e5e7eb;
+        }
+
+        .chantier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .chantier-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 5px;
+        }
+
+        .chantier-client {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .status {
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-en-cours {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-termine {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .status-en-attente {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-suspendu {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-autre {
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        .info-list {
+            display: grid;
+            gap: 9px;
+            margin-bottom: 18px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            font-size: 13px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        .info-label {
+            color: #64748b;
+        }
+
+        .info-value {
+            color: #1e293b;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* =========================
+           PROGRESSION
+        ========================= */
+
+        .progress-section {
+            margin: 18px 0;
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+            font-size: 13px;
+        }
+
+        .progress-label {
+            color: #64748b;
+        }
+
+        .progress-value {
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 9px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #f28c28;
+            border-radius: 999px;
+            transition: width 0.3s;
+        }
+
+        /* =========================
+           FINANCE SUMMARY
+        ========================= */
+
+        .finance-summary {
+            margin-top: 16px;
+            padding: 14px;
+            border-radius: 10px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .finance-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        .finance-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .finance-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .finance-label {
+            color: #64748b;
+        }
+
+        .finance-value {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .card-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .action-button {
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #334155;
+            padding: 10px 9px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .action-button:hover {
+            transform: translateY(-1px);
+        }
+
+        .action-button.edit:hover {
+            background: #f1f5f9;
+        }
+
+        .action-button.suivi {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+            color: #1d4ed8;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-button.suivi:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .action-button.finance {
+            background: #fff7ed;
+            border-color: #fed7aa;
+            color: #c2410c;
+        }
+
+        .action-button.finance:hover {
+            background: #f97316;
+            color: white;
+        }
+
+        .action-button.delete {
+            background: #fff1f2;
+            border-color: #fecdd3;
+            color: #be123c;
+        }
+
+        .action-button.delete:hover {
+            background: #e11d48;
+            color: white;
+        }
+
+        .action-button.full {
+            grid-column: 1 / -1;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            width: min(700px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .modal-title {
+            margin: 0;
+            color: #0f172a;
+            font-size: 22px;
+        }
+
+        .close-button {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: #334155;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .close-button:hover {
+            background: #e2e8f0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 11px 12px;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            background: white;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #f28c28;
+            box-shadow: 0 0 0 3px rgba(242,140,40,0.12);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        /* =========================
+           CLIENT NOTICE
+        ========================= */
+
+        .client-notice {
+            display: none;
+            padding: 11px 13px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .client-notice.show {
+            display: block;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 12px;
+            padding: 20px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+            .chantiers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+            header {
+                padding: 15px;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .container {
+                margin-top: 25px;
+                padding: 0 14px 40px;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .card-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .action-button.full {
+                grid-column: auto;
+            }
+
+            .chantier-header {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="header">
+<header>
+    <div class="header-inner">
 
-<a href="dashboard.html" class="logo">
-    BATI<span>FLOW</span>
-</a>
+        <div>
+            <div class="logo">
+                BATI<span>FLOW</span>
+            </div>
 
-<a href="dashboard.html">
-    ← Tableau de bord
-</a>
+            <div class="header-title">
+                Gestion professionnelle des chantiers BTP
+            </div>
+        </div>
 
+        <a
+            href="dashboard.html"
+            class="secondary-button"
+        >
+            ← Tableau de bord
+        </a>
+
+    </div>
 </header>
 
 
 <main class="container">
 
-<div class="top">
+    <div class="topbar">
 
-    <div>
+        <div>
+            <h1 class="page-title">Mes chantiers</h1>
 
-        <h1>Mes chantiers</h1>
+            <div class="page-subtitle">
+                Créez, gérez et suivez vos projets BTP.
+            </div>
+        </div>
 
-        <p>
-            Gérez et suivez vos projets de construction.
-        </p>
+        <button
+            class="main-button"
+            onclick="ouvrirModal()"
+        >
+            ＋ Nouveau chantier
+        </button>
 
     </div>
 
-    <button
-        type="button"
-        class="primary-button"
-        id="nouveauChantierBtn">
 
-        + Nouveau chantier
+    <!-- STATISTIQUES -->
 
-    </button>
+    <section class="stats">
 
-</div>
+        <div class="stat-card">
+            <div class="stat-label">
+                Total chantiers
+            </div>
 
-
-<section id="emptyState" class="empty">
-
-    <h2>🏗️ Aucun chantier</h2>
-
-    <p>
-        Commencez par créer votre premier chantier.
-    </p>
-
-    <button
-        type="button"
-        class="primary-button"
-        id="emptyButton">
-
-        + Créer un chantier
-
-    </button>
-
-</section>
+            <div
+                class="stat-value"
+                id="statTotal"
+            >
+                0
+            </div>
+        </div>
 
 
-<section
-    id="chantiersList"
-    class="chantiers-list"
-    style="display:none;">
+        <div class="stat-card">
+            <div class="stat-label">
+                Chantiers en cours
+            </div>
 
-</section>
+            <div
+                class="stat-value"
+                id="statEnCours"
+            >
+                0
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-label">
+                Avancement moyen
+            </div>
+
+            <div
+                class="stat-value"
+                id="statAvancement"
+            >
+                0 %
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- LISTE DES CHANTIERS -->
+
+    <section id="listeChantiers"></section>
 
 </main>
 
 
-<!-- =====================================================
-     MODALE CHANTIER
-===================================================== -->
+<footer>
+    BATIFLOW — Gestion BTP • V1.0
+</footer>
 
-<div class="modal" id="chantierModal">
 
-<div class="modal-content">
-
-    <div class="modal-header">
-
-        <h2 id="modalTitle">
-            Nouveau chantier
-        </h2>
-
-        <button
-            type="button"
-            class="close"
-            id="closeModal">
-
-            ×
-
-        </button>
-
-    </div>
-
-
-    <form id="chantierForm">
-
-        <div class="form-grid">
-
-
-            <div class="form-group full">
-
-                <label for="nom">
-                    Nom du chantier *
-                </label>
-
-                <input
-                    type="text"
-                    id="nom"
-                    placeholder="Ex : Construction maison R+1"
-                    required>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="clientId">
-                    Client *
-                </label>
-
-                <select
-                    id="clientId"
-                    required>
-
-                    <option value="">
-                        -- Sélectionner un client --
-                    </option>
-
-                </select>
-
-                <div
-                    id="clientHelper"
-                    class="client-helper">
-
-                </div>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="localisation">
-                    Localisation *
-                </label>
-
-                <input
-                    type="text"
-                    id="localisation"
-                    placeholder="Ex : Lomé, Agoè"
-                    required>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="dateDebut">
-                    Date de début
-                </label>
-
-                <input
-                    type="date"
-                    id="dateDebut">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="dateFin">
-                    Fin prévue
-                </label>
-
-                <input
-                    type="date"
-                    id="dateFin">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="budget">
-                    Budget (FCFA)
-                </label>
-
-                <input
-                    type="number"
-                    id="budget"
-                    min="0"
-                    placeholder="Ex : 15000000">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="avancement">
-                    Avancement (%)
-                </label>
-
-                <input
-                    type="number"
-                    id="avancement"
-                    min="0"
-                    max="100"
-                    value="0">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="statut">
-                    Statut
-                </label>
-
-                <select id="statut">
-
-                    <option value="a-demarrer">
-                        À démarrer
-                    </option>
-
-                    <option value="en-cours">
-                        En cours
-                    </option>
-
-                    <option value="pause">
-                        En pause
-                    </option>
-
-                    <option value="termine">
-                        Terminé
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group full">
-
-                <label for="notes">
-                    Notes
-                </label>
-
-                <textarea
-                    id="notes"
-                    placeholder="Informations complémentaires..."></textarea>
-
-            </div>
-
-
-        </div>
-
-
-        <div class="form-actions">
-
-            <button
-                type="button"
-                class="secondary-button"
-                id="cancelButton">
-
-                Annuler
-
-            </button>
-
-            <button
-                type="submit"
-                class="submit-button">
-
-                Enregistrer le chantier
-
-            </button>
-
-        </div>
-
-    </form>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     MODALE BUDGET / RENTABILITE
-===================================================== -->
-
-<div class="modal" id="financeModal">
-
-<div class="modal-content finance-modal-content">
-
-    <div class="modal-header">
-
-        <h2>
-            💰 Budget & Rentabilité
-        </h2>
-
-        <button
-            type="button"
-            class="close"
-            id="closeFinanceModal">
-
-            ×
-
-        </button>
-
-    </div>
-
-
-    <div
-        id="financeProjectHeader"
-        class="finance-project-header">
-
-    </div>
-
-
-    <!-- TABLEAU FINANCIER -->
-
-    <div
-        id="financeDashboard"
-        class="finance-dashboard">
-
-    </div>
-
-
-    <!-- BARRE CONSOMMATION -->
-
-    <div class="finance-progress">
-
-        <div class="finance-progress-top">
-
-            <span>
-                Consommation du budget
-            </span>
-
-            <strong id="financePercent">
-                0 %
-            </strong>
-
-        </div>
-
-        <div class="finance-progress-bar">
-
-            <div
-                id="financeProgressFill"
-                class="finance-progress-fill"
-                style="width:0%;">
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- FORMULAIRES -->
-
-    <div class="finance-forms">
-
-
-        <!-- DEPENSE -->
-
-        <div class="finance-form-card expense">
-
-            <h3>
-                💸 Ajouter une dépense
-            </h3>
-
-            <form id="depenseForm">
-
-                <div class="form-group">
-
-                    <label for="depenseLibelle">
-                        Libellé *
-                    </label>
-
-                    <input
-                        type="text"
-                        id="depenseLibelle"
-                        placeholder="Ex : Achat ciment"
-                        required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="depenseCategorie">
-                        Catégorie
-                    </label>
-
-                    <select id="depenseCategorie">
-
-                        <option value="Matériaux">
-                            Matériaux
-                        </option>
-
-                        <option value="Main-d'œuvre">
-                            Main-d'œuvre
-                        </option>
-
-                        <option value="Transport">
-                            Transport
-                        </option>
-
-                        <option value="Engins">
-                            Engins
-                        </option>
-
-                        <option value="Fournitures">
-                            Fournitures
-                        </option>
-
-                        <option value="Sous-traitance">
-                            Sous-traitance
-                        </option>
-
-                        <option value="Autre">
-                            Autre
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="depenseMontant">
-                        Montant (FCFA) *
-                    </label>
-
-                    <input
-                        type="number"
-                        id="depenseMontant"
-                        min="1"
-                        placeholder="Ex : 250000"
-                        required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="depenseDate">
-                        Date
-                    </label>
-
-                    <input
-                        type="date"
-                        id="depenseDate">
-
-                </div>
-
-
-                <div class="form-actions">
-
-                    <button
-                        type="submit"
-                        class="submit-button">
-
-                        + Enregistrer la dépense
-
-                    </button>
-
-                </div>
-
-            </form>
-
-        </div>
-
-
-        <!-- RECETTE -->
-
-        <div class="finance-form-card income">
-
-            <h3>
-                📥 Ajouter une recette
-            </h3>
-
-            <form id="recetteForm">
-
-                <div class="form-group">
-
-                    <label for="recetteLibelle">
-                        Libellé *
-                    </label>
-
-                    <input
-                        type="text"
-                        id="recetteLibelle"
-                        placeholder="Ex : Avance client"
-                        required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="recetteCategorie">
-                        Type
-                    </label>
-
-                    <select id="recetteCategorie">
-
-                        <option value="Paiement client">
-                            Paiement client
-                        </option>
-
-                        <option value="Avance">
-                            Avance
-                        </option>
-
-                        <option value="Acompte">
-                            Acompte
-                        </option>
-
-                        <option value="Solde">
-                            Solde
-                        </option>
-
-                        <option value="Autre">
-                            Autre
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="recetteMontant">
-                        Montant (FCFA) *
-                    </label>
-
-                    <input
-                        type="number"
-                        id="recetteMontant"
-                        min="1"
-                        placeholder="Ex : 5000000"
-                        required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="recetteDate">
-                        Date
-                    </label>
-
-                    <input
-                        type="date"
-                        id="recetteDate">
-
-                </div>
-
-
-                <div class="form-actions">
-
-                    <button
-                        type="submit"
-                        class="submit-button">
-
-                        + Enregistrer la recette
-
-                    </button>
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-    <!-- OPERATIONS -->
-
-    <h3 class="operations-title">
-        📋 Historique financier
-    </h3>
-
-    <div
-        id="operationsList"
-        class="operations-list">
-
-    </div>
-
-
-</div>
-
-</div>
-
-
-<!-- TOAST -->
+<!-- =========================
+     MODAL CHANTIER
+========================= -->
 
 <div
-    id="toastContainer"
-    class="toast-container">
+    class="modal-overlay"
+    id="modalChantier"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2
+                class="modal-title"
+                id="modalTitle"
+            >
+                Nouveau chantier
+            </h2>
+
+            <button
+                class="close-button"
+                onclick="fermerModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="chantierForm">
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+
+                    <label for="nom">
+                        Nom du chantier *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nom"
+                        placeholder="Ex : Villa Lomé"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label for="clientId">
+                        Client *
+                    </label>
+
+                    <select
+                        id="clientId"
+                        required
+                    >
+                        <option value="">
+                            Sélectionner un client
+                        </option>
+                    </select>
+
+                    <div
+                        class="client-notice"
+                        id="clientNotice"
+                    >
+                        Aucun client enregistré. Créez d'abord un client dans le module Clients.
+                    </div>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label for="localisation">
+                        Localisation
+                    </label>
+
+                    <input
+                        type="text"
+                        id="localisation"
+                        placeholder="Ex : Lomé, Agoè"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="dateDebut">
+                        Date de début
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dateDebut"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="dateFin">
+                        Date prévue de fin
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dateFin"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="budget">
+                        Budget prévu (FCFA)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="budget"
+                        min="0"
+                        step="1"
+                        placeholder="Ex : 25000000"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="avancement">
+                        Avancement (%)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="avancement"
+                        min="0"
+                        max="100"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="statut">
+                        Statut
+                    </label>
+
+                    <select id="statut">
+
+                        <option value="En cours">
+                            En cours
+                        </option>
+
+                        <option value="En attente">
+                            En attente
+                        </option>
+
+                        <option value="Terminé">
+                            Terminé
+                        </option>
+
+                        <option value="Suspendu">
+                            Suspendu
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label for="notes">
+                        Notes
+                    </label>
+
+                    <textarea
+                        id="notes"
+                        placeholder="Informations complémentaires sur le chantier..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="fermerModal()"
+                >
+                    Annuler
+                </button>
+
+                <button
+                    type="submit"
+                    class="main-button"
+                >
+                    💾 Enregistrer
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </div>
 
 
 <script>
 
-/* =====================================================
-   STOCKAGE BATIFLOW
-===================================================== */
+    /* =====================================================
+       STOCKAGE BATIFLOW
+    ===================================================== */
 
-const STORAGE_KEY =
-    "batiflowChantiers";
+    const STORAGE_KEY = "batiflowChantiers";
 
-const CLIENT_STORAGE_KEY =
-    "batiflowClients";
+    const CLIENT_STORAGE_KEY = "batiflowClients";
 
-const FINANCE_STORAGE_KEY =
-    "batiflowFinances";
+    const FINANCE_STORAGE_KEY = "batiflowFinances";
 
-
-let chantierEnModification = null;
-
-let chantierFinanceActuel = null;
+    const SUIVI_STORAGE_KEY = "batiflowSuivisChantiers";
 
 
-/* =====================================================
-   ELEMENTS CHANTIER
-===================================================== */
-
-const nouveauBtn =
-    document.getElementById(
-        "nouveauChantierBtn"
-    );
-
-const emptyBtn =
-    document.getElementById(
-        "emptyButton"
-    );
-
-const modal =
-    document.getElementById(
-        "chantierModal"
-    );
-
-const closeBtn =
-    document.getElementById(
-        "closeModal"
-    );
-
-const cancelBtn =
-    document.getElementById(
-        "cancelButton"
-    );
-
-const formulaire =
-    document.getElementById(
-        "chantierForm"
-    );
-
-const liste =
-    document.getElementById(
-        "chantiersList"
-    );
-
-const emptyState =
-    document.getElementById(
-        "emptyState"
-    );
-
-const modalTitle =
-    document.getElementById(
-        "modalTitle"
-    );
-
-const clientSelect =
-    document.getElementById(
-        "clientId"
-    );
-
-const clientHelper =
-    document.getElementById(
-        "clientHelper"
-    );
+    let chantierEnModification = null;
 
 
-/* =====================================================
-   ELEMENTS FINANCE
-===================================================== */
+    /* =====================================================
+       OUTILS LOCALSTORAGE
+    ===================================================== */
 
-const financeModal =
-    document.getElementById(
-        "financeModal"
-    );
+    function obtenirChantiers() {
 
-const closeFinanceModal =
-    document.getElementById(
-        "closeFinanceModal"
-    );
+        try {
 
-const financeProjectHeader =
-    document.getElementById(
-        "financeProjectHeader"
-    );
+            return JSON.parse(
+                localStorage.getItem(STORAGE_KEY)
+            ) || [];
 
-const financeDashboard =
-    document.getElementById(
-        "financeDashboard"
-    );
+        } catch (error) {
 
-const financePercent =
-    document.getElementById(
-        "financePercent"
-    );
-
-const financeProgressFill =
-    document.getElementById(
-        "financeProgressFill"
-    );
-
-const operationsList =
-    document.getElementById(
-        "operationsList"
-    );
-
-const depenseForm =
-    document.getElementById(
-        "depenseForm"
-    );
-
-const recetteForm =
-    document.getElementById(
-        "recetteForm"
-    );
-
-
-/* =====================================================
-   OBTENIR CLIENTS
-===================================================== */
-
-function obtenirClients(){
-
-    try{
-
-        const data =
-            localStorage.getItem(
-                CLIENT_STORAGE_KEY
+            console.error(
+                "Erreur lecture chantiers :",
+                error
             );
 
-        if(!data){
             return [];
+
         }
 
-        const clients =
-            JSON.parse(data);
+    }
 
-        return Array.isArray(clients)
-            ? clients
-            : [];
 
-    }catch(error){
+    function sauvegarderChantiers(chantiers) {
 
-        console.error(
-            "Erreur lecture clients :",
-            error
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(chantiers)
         );
 
-        return [];
+    }
+
+
+    function obtenirClients() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(CLIENT_STORAGE_KEY)
+            ) || [];
+
+        } catch (error) {
+
+            console.error(
+                "Erreur lecture clients :",
+                error
+            );
+
+            return [];
+
+        }
 
     }
 
-}
 
+    function obtenirFinances() {
 
-/* =====================================================
-   OBTENIR CHANTIERS
-===================================================== */
+        try {
 
-function obtenirChantiers(){
+            return JSON.parse(
+                localStorage.getItem(FINANCE_STORAGE_KEY)
+            ) || [];
 
-    try{
+        } catch (error) {
 
-        const data =
-            localStorage.getItem(
-                STORAGE_KEY
+            console.error(
+                "Erreur lecture finances :",
+                error
             );
 
-        if(!data){
             return [];
+
         }
 
-        const chantiers =
-            JSON.parse(data);
+    }
 
-        return Array.isArray(chantiers)
-            ? chantiers
-            : [];
 
-    }catch(error){
+    function sauvegarderFinances(finances) {
 
-        console.error(
-            "Erreur lecture chantiers :",
-            error
+        localStorage.setItem(
+            FINANCE_STORAGE_KEY,
+            JSON.stringify(finances)
         );
 
-        return [];
+    }
+
+
+    function obtenirSuivisChantiers() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(SUIVI_STORAGE_KEY)
+            ) || [];
+
+        } catch (error) {
+
+            console.error(
+                "Erreur lecture suivis :",
+                error
+            );
+
+            return [];
+
+        }
 
     }
 
-}
 
+    function sauvegarderSuivisChantiers(suivis) {
 
-/* =====================================================
-   SAUVEGARDER CHANTIERS
-===================================================== */
-
-function sauvegarderChantiers(
-    chantiers
-){
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(chantiers)
-    );
-
-}
-
-
-/* =====================================================
-   OBTENIR FINANCES
-===================================================== */
-
-function obtenirFinances(){
-
-    try{
-
-        const data =
-            localStorage.getItem(
-                FINANCE_STORAGE_KEY
-            );
-
-        if(!data){
-            return [];
-        }
-
-        const finances =
-            JSON.parse(data);
-
-        return Array.isArray(finances)
-            ? finances
-            : [];
-
-    }catch(error){
-
-        console.error(
-            "Erreur lecture finances :",
-            error
+        localStorage.setItem(
+            SUIVI_STORAGE_KEY,
+            JSON.stringify(suivis)
         );
 
-        return [];
-
     }
 
-}
 
+    /* =====================================================
+       ID UNIQUE
+    ===================================================== */
 
-/* =====================================================
-   SAUVEGARDER FINANCES
-===================================================== */
+    function genererId() {
 
-function sauvegarderFinances(
-    finances
-){
-
-    localStorage.setItem(
-        FINANCE_STORAGE_KEY,
-        JSON.stringify(finances)
-    );
-
-}
-
-
-/* =====================================================
-   GENERER ID
-===================================================== */
-
-function genererId(){
-
-    return (
-        "chantier_" +
-        Date.now() +
-        "_" +
-        Math.random()
-            .toString(36)
-            .substring(2,8)
-    );
-
-}
-
-
-function genererFinanceId(){
-
-    return (
-        "finance_" +
-        Date.now() +
-        "_" +
-        Math.random()
-            .toString(36)
-            .substring(2,8)
-    );
-
-}
-
-
-/* =====================================================
-   ECHAPPER HTML
-===================================================== */
-
-function echapper(
-    texte
-){
-
-    return String(
-        texte || ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-/* =====================================================
-   INITIALISATION CLIENTS
-===================================================== */
-
-function chargerClients(){
-
-    const clients =
-        obtenirClients();
-
-    const ancienneValeur =
-        clientSelect.value;
-
-
-    clientSelect.innerHTML = `
-        <option value="">
-            -- Sélectionner un client --
-        </option>
-    `;
-
-
-    if(
-        clients.length === 0
-    ){
-
-        clientSelect.innerHTML += `
-            <option value="" disabled>
-                Aucun client enregistré
-            </option>
-        `;
-
-        clientHelper.innerHTML = `
-            <div class="no-client-message">
-
-                ⚠️ Aucun client enregistré.
-
-                <a
-                    href="clients.html"
-                    class="client-link">
-
-                    Créer un client
-
-                </a>
-
-            </div>
-        `;
-
-        return;
+        return (
+            "chantier_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2, 8)
+        );
 
     }
 
 
-    clients.forEach(
-        function(client){
+    /* =====================================================
+       ECHAPPEMENT
+    ===================================================== */
 
-            const option =
-                document.createElement(
-                    "option"
-                );
+    function echapper(value) {
 
-            option.value =
-                client.id;
+        return String(value ?? "")
+            .replace(/\\/g, "\\\\")
+            .replace(/'/g, "\\'")
+            .replace(/"/g, "&quot;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
 
-            let texte =
-                client.nom ||
-                "Client sans nom";
-
-            if(
-                client.entreprise &&
-                client.entreprise.trim()
-            ){
-
-                texte +=
-                    " — " +
-                    client.entreprise;
-
-            }
-
-            option.textContent =
-                texte;
-
-            clientSelect.appendChild(
-                option
-            );
-
-        }
-    );
+    }
 
 
-    clientHelper.innerHTML = `
+    /* =====================================================
+       FORMATAGE FCFA
+    ===================================================== */
 
-        <span class="client-helper-text">
+    function formaterFCFA(value) {
 
-            ${clients.length}
-            client${clients.length > 1 ? "s" : ""}
-            disponible${clients.length > 1 ? "s" : ""}
+        const nombre = Number(value) || 0;
 
-        </span>
+        return nombre.toLocaleString(
+            "fr-FR"
+        ) + " FCFA";
 
-        <a
-            href="clients.html"
-            class="client-link">
-
-            + Nouveau client
-
-        </a>
-
-    `;
+    }
 
 
-    if(ancienneValeur){
+    /* =====================================================
+       DATE
+    ===================================================== */
 
-        const existe =
-            clients.some(
-                client =>
-                    String(client.id) ===
-                    String(ancienneValeur)
-            );
+    function formaterDate(date) {
 
-        if(existe){
-
-            clientSelect.value =
-                ancienneValeur;
-
+        if (!date) {
+            return "—";
         }
 
-    }
+        const d = new Date(date + "T00:00:00");
 
-}
-
-
-/* =====================================================
-   CLIENT SELECTIONNE
-===================================================== */
-
-function obtenirClientSelectionne(){
-
-    const clientId =
-        clientSelect.value;
-
-    if(!clientId){
-        return null;
-    }
-
-    const clients =
-        obtenirClients();
-
-    return clients.find(
-        client =>
-            String(client.id) ===
-            String(clientId)
-    ) || null;
-
-}
-
-
-/* =====================================================
-   CLIENT PAR NOM
-===================================================== */
-
-function trouverClientParNom(
-    nom
-){
-
-    if(!nom){
-        return null;
-    }
-
-    const clients =
-        obtenirClients();
-
-    const recherche =
-        String(nom)
-            .trim()
-            .toLowerCase();
-
-
-    return clients.find(
-        client => {
-
-            return (
-                client.nom &&
-                String(client.nom)
-                    .trim()
-                    .toLowerCase() ===
-                recherche
-            );
-
+        if (isNaN(d.getTime())) {
+            return date;
         }
-    ) || null;
-
-}
-
-
-/* =====================================================
-   CLIENT POUR CHANTIER
-===================================================== */
-
-function trouverClientPourChantier(
-    chantier
-){
-
-    const clients =
-        obtenirClients();
-
-
-    if(
-        chantier.clientId
-    ){
-
-        const parId =
-            clients.find(
-                client =>
-                    String(client.id) ===
-                    String(
-                        chantier.clientId
-                    )
-            );
-
-        if(parId){
-            return parId;
-        }
-
-    }
-
-
-    if(
-        chantier.client
-    ){
-
-        const parNom =
-            trouverClientParNom(
-                chantier.client
-            );
-
-        if(parNom){
-            return parNom;
-        }
-
-    }
-
-
-    return null;
-
-}
-
-
-/* =====================================================
-   OUVRIR NOUVEAU CHANTIER
-===================================================== */
-
-function ouvrirChantier(){
-
-    chantierEnModification =
-        null;
-
-    modalTitle.textContent =
-        "Nouveau chantier";
-
-    formulaire.reset();
-
-    document.getElementById(
-        "avancement"
-    ).value = 0;
-
-    chargerClients();
-
-    modal.classList.add(
-        "active"
-    );
-
-}
-
-
-/* =====================================================
-   FERMER CHANTIER
-===================================================== */
-
-function fermerChantier(){
-
-    modal.classList.remove(
-        "active"
-    );
-
-    chantierEnModification =
-        null;
-
-}
-
-
-/* =====================================================
-   FORMATAGE MONTANT
-===================================================== */
-
-function formaterMontant(
-    montant
-){
-
-    if(
-        montant === null ||
-        montant === undefined ||
-        montant === "" ||
-        Number(montant) === 0
-    ){
-
-        return "Non défini";
-
-    }
-
-    return Number(
-        montant
-    ).toLocaleString(
-        "fr-FR"
-    ) + " FCFA";
-
-}
-
-
-/* =====================================================
-   FORMATAGE DATE
-===================================================== */
-
-function formaterDate(
-    date
-){
-
-    if(!date){
-        return "Non définie";
-    }
-
-    try{
-
-        const d =
-            new Date(
-                date + "T00:00:00"
-            );
 
         return d.toLocaleDateString(
             "fr-FR"
         );
 
-    }catch(error){
-
-        return "Non définie";
-
     }
 
-}
+
+    /* =====================================================
+       CLIENTS
+    ===================================================== */
+
+    function chargerClients() {
+
+        const select =
+            document.getElementById("clientId");
+
+        const clients =
+            obtenirClients();
+
+        select.innerHTML = `
+            <option value="">
+                Sélectionner un client
+            </option>
+        `;
+
+        clients.forEach(client => {
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                client.id;
+
+            const nom =
+                client.nom ||
+                client.name ||
+                "Client sans nom";
+
+            const entreprise =
+                client.entreprise
+                    ? " — " + client.entreprise
+                    : "";
+
+            option.textContent =
+                nom + entreprise;
+
+            select.appendChild(option);
+
+        });
 
 
-/* =====================================================
-   STATUT
-===================================================== */
-
-function statutTexte(
-    statut
-){
-
-    const statuts = {
-
-        "a-demarrer":
-            "À démarrer",
-
-        "en-cours":
-            "En cours",
-
-        "pause":
-            "En pause",
-
-        "termine":
-            "Terminé"
-
-    };
-
-    return (
-        statuts[statut] ||
-        statut ||
-        "À démarrer"
-    );
-
-}
-
-
-/* =====================================================
-   FINANCES DU CHANTIER
-===================================================== */
-
-function obtenirFinancesChantier(
-    chantierId
-){
-
-    return obtenirFinances()
-        .filter(
-            operation =>
-                String(
-                    operation.chantierId
-                ) ===
-                String(chantierId)
-        );
-
-}
-
-
-/* =====================================================
-   CALCUL FINANCIER
-===================================================== */
-
-function calculerFinancesChantier(
-    chantier
-){
-
-    const operations =
-        obtenirFinancesChantier(
-            chantier.id
-        );
-
-
-    const budget =
-        Number(
-            chantier.budget
-        ) || 0;
-
-
-    const depenses =
-        operations
-            .filter(
-                operation =>
-                    operation.type ===
-                    "depense"
-            )
-            .reduce(
-                (
-                    total,
-                    operation
-                ) =>
-                    total +
-                    Number(
-                        operation.montant
-                    ),
-                0
+        const notice =
+            document.getElementById(
+                "clientNotice"
             );
 
+        if (clients.length === 0) {
 
-    const recettes =
-        operations
-            .filter(
-                operation =>
-                    operation.type ===
-                    "recette"
-            )
-            .reduce(
-                (
-                    total,
-                    operation
-                ) =>
-                    total +
-                    Number(
-                        operation.montant
-                    ),
-                0
+            notice.classList.add("show");
+
+        } else {
+
+            notice.classList.remove("show");
+
+        }
+
+    }
+
+
+    function trouverClient(clientId, ancienNom) {
+
+        const clients =
+            obtenirClients();
+
+        let client =
+            clients.find(
+                c => String(c.id) === String(clientId)
             );
 
+        if (!client && ancienNom) {
 
-    const restant =
-        budget -
-        depenses;
-
-
-    const resultat =
-        recettes -
-        depenses;
-
-
-    let consommation = 0;
-
-    if(budget > 0){
-
-        consommation =
-            (
-                depenses /
-                budget
-            ) * 100;
-
-    }
-
-
-    return {
-
-        budget,
-        depenses,
-        recettes,
-        restant,
-        resultat,
-        consommation,
-        operations
-
-    };
-
-}
-
-
-/* =====================================================
-   AFFICHER CHANTIERS
-===================================================== */
-
-function afficherChantiers(){
-
-    const chantiers =
-        obtenirChantiers();
-
-
-    if(
-        chantiers.length === 0
-    ){
-
-        emptyState.style.display =
-            "block";
-
-        liste.style.display =
-            "none";
-
-        liste.innerHTML =
-            "";
-
-        return;
-
-    }
-
-
-    emptyState.style.display =
-        "none";
-
-    liste.style.display =
-        "grid";
-
-    liste.innerHTML =
-        "";
-
-
-    chantiers.forEach(
-        function(chantier){
-
-            const card =
-                document.createElement(
-                    "article"
+            client =
+                clients.find(
+                    c =>
+                        String(
+                            c.nom ||
+                            c.name ||
+                            ""
+                        ).toLowerCase()
+                        ===
+                        String(ancienNom)
+                            .toLowerCase()
                 );
 
-            card.className =
-                "chantier-card";
+        }
+
+        return client || null;
+
+    }
 
 
-            const avancement =
-                Math.max(
+    /* =====================================================
+       INITIALISATION DU SUIVI
+    ===================================================== */
+
+    function initialiserSuiviChantier(chantier) {
+
+        const suivis =
+            obtenirSuivisChantiers();
+
+        const index =
+            suivis.findIndex(
+                suivi =>
+                    String(suivi.chantierId)
+                    ===
+                    String(chantier.id)
+            );
+
+
+        if (index === -1) {
+
+            suivis.push({
+
+                chantierId:
+                    chantier.id,
+
+                responsable:
+                    "",
+
+                dateReelleFin:
+                    "",
+
+                etapeActuelle:
+                    "Préparation",
+
+                retardJours:
                     0,
-                    Math.min(
-                        100,
-                        Number(
-                            chantier.avancement
-                        ) || 0
-                    )
-                );
+
+                taches:
+                    [],
+
+                journal:
+                    [],
+
+                problemes:
+                    [],
+
+                photos:
+                    [],
+
+                updatedAt:
+                    new Date().toISOString()
+
+            });
+
+        } else {
+
+            /*
+             * On conserve le suivi existant.
+             * On met seulement à jour la date.
+             */
+
+            suivis[index].updatedAt =
+                new Date().toISOString();
+
+        }
 
 
-            const client =
-                trouverClientPourChantier(
-                    chantier
-                );
+        sauvegarderSuivisChantiers(
+            suivis
+        );
+
+    }
 
 
-            let nomClient =
-                chantier.client ||
-                "Client non renseigné";
+    /* =====================================================
+       SUPPRESSION DU SUIVI
+    ===================================================== */
+
+    function supprimerSuiviChantier(
+        chantierId
+    ) {
+
+        const suivis =
+            obtenirSuivisChantiers();
+
+        const nouveauxSuivis =
+            suivis.filter(
+                suivi =>
+                    String(suivi.chantierId)
+                    !==
+                    String(chantierId)
+            );
+
+        sauvegarderSuivisChantiers(
+            nouveauxSuivis
+        );
+
+    }
 
 
-            if(client){
+    /* =====================================================
+       AFFICHER LES CHANTIERS
+    ===================================================== */
 
-                nomClient =
-                    client.nom ||
-                    nomClient;
+    function afficherChantiers() {
 
-            }
+        const chantiers =
+            obtenirChantiers();
 
+        const clients =
+            obtenirClients();
 
-            const finance =
-                calculerFinancesChantier(
-                    chantier
-                );
-
-
-            let consommation =
-                Math.round(
-                    finance.consommation
-                );
+        const container =
+            document.getElementById(
+                "listeChantiers"
+            );
 
 
-            if(
-                !Number.isFinite(
-                    consommation
+        /* =========================
+           STATISTIQUES
+        ========================= */
+
+        const total =
+            chantiers.length;
+
+        const enCours =
+            chantiers.filter(
+                chantier =>
+                    chantier.statut
+                    ===
+                    "En cours"
+            ).length;
+
+
+        const moyenne =
+            total > 0
+                ? Math.round(
+                    chantiers.reduce(
+                        (
+                            totalAvancement,
+                            chantier
+                        ) =>
+                            totalAvancement +
+                            (
+                                Number(
+                                    chantier.avancement
+                                ) || 0
+                            ),
+                        0
+                    ) / total
                 )
-            ){
+                : 0;
 
-                consommation = 0;
 
-            }
+        document.getElementById(
+            "statTotal"
+        ).textContent = total;
 
 
-            const consommationAffichee =
-                Math.max(
-                    0,
-                    consommation
-                );
+        document.getElementById(
+            "statEnCours"
+        ).textContent = enCours;
 
 
-            let financeClass =
-                "finance-positive";
+        document.getElementById(
+            "statAvancement"
+        ).textContent =
+            moyenne + " %";
 
 
-            if(
-                finance.resultat < 0
-            ){
+        /* =========================
+           AUCUN CHANTIER
+        ========================= */
 
-                financeClass =
-                    "finance-negative";
+        if (chantiers.length === 0) {
 
-            }
+            container.innerHTML = `
 
+                <div class="empty">
 
-            card.innerHTML = `
+                    <strong>
+                        Aucun chantier enregistré
+                    </strong>
 
-                <div class="chantier-header">
+                    Créez votre premier chantier
+                    pour commencer le suivi de vos projets BTP.
 
-                    <div>
-
-                        <h3>
-                            ${echapper(
-                                chantier.nom
-                            )}
-                        </h3>
-
-                        <div class="chantier-client">
-
-                            👤 ${echapper(
-                                nomClient
-                            )}
-
-                        </div>
-
-                    </div>
-
-
-                    <span class="status ${
-                        echapper(
-                            chantier.statut ||
-                            "a-demarrer"
-                        )
-                    }">
-
-                        ${echapper(
-                            statutTexte(
-                                chantier.statut
-                            )
-                        )}
-
-                    </span>
-
-                </div>
-
-
-                <div class="info-grid">
-
-                    <div class="info">
-
-                        <small>
-                            📍 Localisation
-                        </small>
-
-                        <strong>
-                            ${echapper(
-                                chantier.localisation
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="info">
-
-                        <small>
-                            💰 Budget
-                        </small>
-
-                        <strong>
-                            ${formaterMontant(
-                                chantier.budget
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="info">
-
-                        <small>
-                            📅 Début
-                        </small>
-
-                        <strong>
-                            ${formaterDate(
-                                chantier.dateDebut
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="info">
-
-                        <small>
-                            🏁 Fin prévue
-                        </small>
-
-                        <strong>
-                            ${formaterDate(
-                                chantier.dateFin
-                            )}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <div class="progress-area">
-
-                    <div class="progress-top">
-
-                        <span>
-                            Avancement
-                        </span>
-
-                        <strong>
-                            ${avancement}%
-                        </strong>
-
-                    </div>
-
-
-                    <div class="progress">
-
-                        <div
-                            class="progress-bar"
-                            style="width:${avancement}%">
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- RESUME FINANCIER -->
-
-                <div class="finance-summary">
-
-                    <div class="finance-summary-title">
-
-                        💰 Résumé financier
-
-                    </div>
-
-
-                    <div class="finance-mini-grid">
-
-
-                        <div class="finance-mini">
-
-                            <small>
-                                Dépenses
-                            </small>
-
-                            <strong>
-                                ${formaterMontant(
-                                    finance.depenses
-                                )}
-                            </strong>
-
-                        </div>
-
-
-                        <div class="finance-mini">
-
-                            <small>
-                                Recettes
-                            </small>
-
-                            <strong class="finance-positive">
-
-                                ${formaterMontant(
-                                    finance.recettes
-                                )}
-
-                            </strong>
-
-                        </div>
-
-
-                        <div class="finance-mini">
-
-                            <small>
-                                Résultat
-                            </small>
-
-                            <strong class="${financeClass}">
-
-                                ${formaterMontant(
-                                    finance.resultat
-                                )}
-
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ACTIONS -->
-
-                <div class="card-actions">
-
+                    <br><br>
 
                     <button
-                        class="action-button edit"
-                        onclick="modifierChantier('${echapper(
-                            chantier.id
-                        )}')">
-
-                        ✏️ Modifier
-
+                        class="main-button"
+                        onclick="ouvrirModal()"
+                    >
+                        ＋ Créer un chantier
                     </button>
-
-
-                    <button
-                        class="action-button finance"
-                        onclick="ouvrirFinances('${echapper(
-                            chantier.id
-                        )}')">
-
-                        💰 Budget & rentabilité
-
-                    </button>
-
-
-                    <button
-                        class="action-button delete full"
-                        onclick="supprimerChantier('${echapper(
-                            chantier.id
-                        )}')">
-
-                        🗑️ Supprimer
-
-                    </button>
-
 
                 </div>
 
             `;
 
-
-            liste.appendChild(
-                card
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   MODIFIER CHANTIER
-===================================================== */
-
-function modifierChantier(
-    id
-){
-
-    const chantiers =
-        obtenirChantiers();
-
-
-    const chantier =
-        chantiers.find(
-            function(item){
-
-                return String(item.id) ===
-                    String(id);
-
-            }
-        );
-
-
-    if(!chantier){
-
-        afficherToast(
-            "❌ Chantier introuvable.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    chantierEnModification =
-        chantier.id;
-
-
-    modalTitle.textContent =
-        "Modifier le chantier";
-
-
-    chargerClients();
-
-
-    document.getElementById(
-        "nom"
-    ).value =
-        chantier.nom || "";
-
-
-    let clientId =
-        chantier.clientId ||
-        "";
-
-
-    if(!clientId){
-
-        const ancienClient =
-            trouverClientParNom(
-                chantier.client
-            );
-
-        if(ancienClient){
-
-            clientId =
-                ancienClient.id;
+            return;
 
         }
 
+
+        /* =========================
+           AFFICHAGE
+        ========================= */
+
+        container.innerHTML = `
+
+            <div class="chantiers-grid">
+
+                ${chantiers.map(
+                    chantier => {
+
+                        let client =
+                            trouverClient(
+                                chantier.clientId,
+                                chantier.client ||
+                                chantier.clientNom
+                            );
+
+
+                        const clientNom =
+                            client?.nom ||
+                            client?.name ||
+                            chantier.clientNom ||
+                            chantier.client ||
+                            "Client non renseigné";
+
+
+                        const entreprise =
+                            client?.entreprise ||
+                            chantier.entrepriseClient ||
+                            "";
+
+
+                        const avancement =
+                            Math.min(
+                                100,
+                                Math.max(
+                                    0,
+                                    Number(
+                                        chantier.avancement
+                                    ) || 0
+                                )
+                            );
+
+
+                        const statut =
+                            chantier.statut ||
+                            "En cours";
+
+
+                        let statutClass =
+                            "status-autre";
+
+
+                        if (
+                            statut
+                            ===
+                            "En cours"
+                        ) {
+
+                            statutClass =
+                                "status-en-cours";
+
+                        } else if (
+                            statut
+                            ===
+                            "Terminé"
+                        ) {
+
+                            statutClass =
+                                "status-termine";
+
+                        } else if (
+                            statut
+                            ===
+                            "En attente"
+                        ) {
+
+                            statutClass =
+                                "status-en-attente";
+
+                        } else if (
+                            statut
+                            ===
+                            "Suspendu"
+                        ) {
+
+                            statutClass =
+                                "status-suspendu";
+
+                        }
+
+
+                        /* =========================
+                           FINANCES
+                        ========================= */
+
+                        const finances =
+                            obtenirFinances()
+                                .filter(
+                                    operation =>
+                                        String(
+                                            operation.chantierId
+                                        )
+                                        ===
+                                        String(
+                                            chantier.id
+                                        )
+                                );
+
+
+                        const depenses =
+                            finances
+                                .filter(
+                                    operation =>
+                                        operation.type
+                                        ===
+                                        "depense"
+                                )
+                                .reduce(
+                                    (
+                                        total,
+                                        operation
+                                    ) =>
+                                        total +
+                                        (
+                                            Number(
+                                                operation.montant
+                                            ) || 0
+                                        ),
+                                    0
+                                );
+
+
+                        const recettes =
+                            finances
+                                .filter(
+                                    operation =>
+                                        operation.type
+                                        ===
+                                        "recette"
+                                )
+                                .reduce(
+                                    (
+                                        total,
+                                        operation
+                                    ) =>
+                                        total +
+                                        (
+                                            Number(
+                                                operation.montant
+                                            ) || 0
+                                        ),
+                                    0
+                                );
+
+
+                        const resultat =
+                            recettes -
+                            depenses;
+
+
+                        return `
+
+                            <article
+                                class="chantier-card"
+                            >
+
+                                <div
+                                    class="chantier-header"
+                                >
+
+                                    <div>
+
+                                        <div
+                                            class="chantier-name"
+                                        >
+                                            ${echapper(
+                                                chantier.nom
+                                            )}
+                                        </div>
+
+                                        <div
+                                            class="chantier-client"
+                                        >
+                                            👤
+                                            ${echapper(
+                                                clientNom
+                                            )}
+
+                                            ${
+                                                entreprise
+                                                    ? " — " +
+                                                      echapper(
+                                                          entreprise
+                                                      )
+                                                    : ""
+                                            }
+                                        </div>
+
+                                    </div>
+
+
+                                    <span
+                                        class="status ${statutClass}"
+                                    >
+                                        ${echapper(
+                                            statut
+                                        )}
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="info-list"
+                                >
+
+                                    <div
+                                        class="info-row"
+                                    >
+
+                                        <span
+                                            class="info-label"
+                                        >
+                                            📍 Localisation
+                                        </span>
+
+                                        <span
+                                            class="info-value"
+                                        >
+                                            ${
+                                                echapper(
+                                                    chantier.localisation
+                                                ) ||
+                                                "—"
+                                            }
+                                        </span>
+
+                                    </div>
+
+
+                                    <div
+                                        class="info-row"
+                                    >
+
+                                        <span
+                                            class="info-label"
+                                        >
+                                            📅 Début
+                                        </span>
+
+                                        <span
+                                            class="info-value"
+                                        >
+                                            ${formaterDate(
+                                                chantier.dateDebut
+                                            )}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div
+                                        class="info-row"
+                                    >
+
+                                        <span
+                                            class="info-label"
+                                        >
+                                            🏁 Fin prévue
+                                        </span>
+
+                                        <span
+                                            class="info-value"
+                                        >
+                                            ${formaterDate(
+                                                chantier.dateFin
+                                            )}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div
+                                        class="info-row"
+                                    >
+
+                                        <span
+                                            class="info-label"
+                                        >
+                                            💰 Budget
+                                        </span>
+
+                                        <span
+                                            class="info-value"
+                                        >
+                                            ${formaterFCFA(
+                                                chantier.budget
+                                            )}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- PROGRESSION -->
+
+                                <div
+                                    class="progress-section"
+                                >
+
+                                    <div
+                                        class="progress-top"
+                                    >
+
+                                        <span
+                                            class="progress-label"
+                                        >
+                                            Avancement
+                                        </span>
+
+                                        <span
+                                            class="progress-value"
+                                        >
+                                            ${avancement} %
+                                        </span>
+
+                                    </div>
+
+
+                                    <div
+                                        class="progress-bar"
+                                    >
+
+                                        <div
+                                            class="progress-fill"
+                                            style="width:${avancement}%"
+                                        ></div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- FINANCES -->
+
+                                <div
+                                    class="finance-summary"
+                                >
+
+                                    <div
+                                        class="finance-title"
+                                    >
+                                        💰 Situation financière
+                                    </div>
+
+
+                                    <div
+                                        class="finance-row"
+                                    >
+
+                                        <span
+                                            class="finance-label"
+                                        >
+                                            Dépenses
+                                        </span>
+
+                                        <span
+                                            class="finance-value"
+                                        >
+                                            ${formaterFCFA(
+                                                depenses
+                                            )}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div
+                                        class="finance-row"
+                                    >
+
+                                        <span
+                                            class="finance-label"
+                                        >
+                                            Recettes
+                                        </span>
+
+                                        <span
+                                            class="finance-value"
+                                        >
+                                            ${formaterFCFA(
+                                                recettes
+                                            )}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div
+                                        class="finance-row"
+                                    >
+
+                                        <span
+                                            class="finance-label"
+                                        >
+                                            Solde
+                                        </span>
+
+                                        <span
+                                            class="finance-value"
+                                        >
+                                            ${formaterFCFA(
+                                                resultat
+                                            )}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ACTIONS -->
+
+                                <div
+                                    class="card-actions"
+                                >
+
+                                    <button
+                                        class="action-button edit"
+                                        onclick="modifierChantier('${echapper(
+                                            chantier.id
+                                        )}')"
+                                    >
+                                        ✏️ Modifier
+                                    </button>
+
+
+                                    <!--
+                                        LIEN DIRECT VERS
+                                        SUIVI-CHANTIER.HTML
+                                    -->
+
+                                    <a
+                                        class="action-button suivi"
+                                        href="suivi-chantier.html?chantierId=${encodeURIComponent(
+                                            chantier.id
+                                        )}"
+                                    >
+                                        📊 Suivi
+                                    </a>
+
+
+                                    <button
+                                        class="action-button finance"
+                                        onclick="ouvrirFinances('${echapper(
+                                            chantier.id
+                                        )}')"
+                                    >
+                                        💰 Budget & rentabilité
+                                    </button>
+
+
+                                    <button
+                                        class="action-button delete full"
+                                        onclick="supprimerChantier('${echapper(
+                                            chantier.id
+                                        )}')"
+                                    >
+                                        🗑️ Supprimer
+                                    </button>
+
+                                </div>
+
+                            </article>
+
+                        `;
+
+                    }
+                ).join("")}
+
+            </div>
+
+        `;
+
     }
 
 
-    clientSelect.value =
-        clientId;
+    /* =====================================================
+       OUVRIR MODAL
+    ===================================================== */
+
+    function ouvrirModal() {
+
+        chantierEnModification =
+            null;
+
+        document.getElementById(
+            "modalTitle"
+        ).textContent =
+            "Nouveau chantier";
 
 
-    document.getElementById(
-        "localisation"
-    ).value =
-        chantier.localisation || "";
+        document.getElementById(
+            "chantierForm"
+        ).reset();
 
 
-    document.getElementById(
-        "dateDebut"
-    ).value =
-        chantier.dateDebut || "";
+        document.getElementById(
+            "avancement"
+        ).value = 0;
 
 
-    document.getElementById(
-        "dateFin"
-    ).value =
-        chantier.dateFin || "";
+        chargerClients();
 
 
-    document.getElementById(
-        "budget"
-    ).value =
-        chantier.budget || "";
-
-
-    document.getElementById(
-        "avancement"
-    ).value =
-        chantier.avancement || 0;
-
-
-    document.getElementById(
-        "statut"
-    ).value =
-        chantier.statut ||
-        "a-demarrer";
-
-
-    document.getElementById(
-        "notes"
-    ).value =
-        chantier.notes || "";
-
-
-    modal.classList.add(
-        "active"
-    );
-
-}
-
-
-/* =====================================================
-   SUPPRIMER CHANTIER
-===================================================== */
-
-function supprimerChantier(
-    id
-){
-
-    const chantiers =
-        obtenirChantiers();
-
-
-    const chantier =
-        chantiers.find(
-            function(item){
-
-                return String(item.id) ===
-                    String(id);
-
-            }
-        );
-
-
-    if(!chantier){
-
-        afficherToast(
-            "❌ Chantier introuvable.",
-            "error"
-        );
-
-        return;
+        document.getElementById(
+            "modalChantier"
+        ).classList.add("active");
 
     }
 
 
-    const confirmation =
-        confirm(
-            "Voulez-vous vraiment supprimer le chantier « " +
-            chantier.nom +
-            " » ?"
-        );
+    /* =====================================================
+       FERMER MODAL
+    ===================================================== */
 
+    function fermerModal() {
 
-    if(!confirmation){
-        return;
+        document.getElementById(
+            "modalChantier"
+        ).classList.remove("active");
+
+        chantierEnModification =
+            null;
+
     }
 
 
-    const nouveauxChantiers =
-        chantiers.filter(
-            function(item){
+    /* =====================================================
+       MODIFIER CHANTIER
+    ===================================================== */
 
-                return String(item.id) !==
-                    String(id);
-
-            }
-        );
-
-
-    sauvegarderChantiers(
-        nouveauxChantiers
-    );
-
-
-    /*
-       Suppression des finances
-       liées au chantier supprimé.
-    */
-
-    const finances =
-        obtenirFinances();
-
-
-    const nouvellesFinances =
-        finances.filter(
-            operation =>
-                String(
-                    operation.chantierId
-                ) !==
-                String(id)
-        );
-
-
-    sauvegarderFinances(
-        nouvellesFinances
-    );
-
-
-    afficherChantiers();
-
-
-    afficherToast(
-        "✅ Chantier supprimé.",
-        "success"
-    );
-
-}
-
-
-/* =====================================================
-   ENREGISTREMENT CHANTIER
-===================================================== */
-
-formulaire.addEventListener(
-    "submit",
-    function(event){
-
-        event.preventDefault();
-
+    function modifierChantier(id) {
 
         const chantiers =
             obtenirChantiers();
 
-
-        const client =
-            obtenirClientSelectionne();
-
-
-        if(!client){
-
-            afficherToast(
-                "⚠️ Veuillez sélectionner un client.",
-                "error"
+        const chantier =
+            chantiers.find(
+                c =>
+                    String(c.id)
+                    ===
+                    String(id)
             );
 
-            clientSelect.focus();
 
-            return;
+        if (!chantier) {
 
-        }
-
-
-        const nom =
-            document.getElementById(
-                "nom"
-            ).value.trim();
-
-
-        const localisation =
-            document.getElementById(
-                "localisation"
-            ).value.trim();
-
-
-        if(!nom){
-
-            afficherToast(
-                "⚠️ Veuillez saisir le nom du chantier.",
-                "error"
+            alert(
+                "Chantier introuvable."
             );
 
             return;
@@ -2992,129 +2041,358 @@ formulaire.addEventListener(
         }
 
 
-        if(!localisation){
-
-            afficherToast(
-                "⚠️ Veuillez saisir la localisation.",
-                "error"
-            );
-
-            return;
-
-        }
+        chantierEnModification =
+            chantier.id;
 
 
-        let ancienChantier =
-            null;
+        chargerClients();
 
 
-        if(
-            chantierEnModification
-        ){
+        document.getElementById(
+            "modalTitle"
+        ).textContent =
+            "Modifier le chantier";
 
-            ancienChantier =
-                chantiers.find(
-                    item =>
-                        String(item.id) ===
-                        String(
-                            chantierEnModification
-                        )
+
+        document.getElementById(
+            "nom"
+        ).value =
+            chantier.nom || "";
+
+
+        /*
+         * Recherche du client.
+         */
+
+        let clientId =
+            chantier.clientId || "";
+
+
+        if (!clientId) {
+
+            const client =
+                trouverClient(
+                    "",
+                    chantier.client ||
+                    chantier.clientNom
                 );
 
+            if (client) {
+
+                clientId =
+                    client.id;
+
+            }
+
         }
 
 
-        const maintenant =
-            new Date().toISOString();
+        document.getElementById(
+            "clientId"
+        ).value =
+            clientId;
 
 
-        const chantier = {
+        document.getElementById(
+            "localisation"
+        ).value =
+            chantier.localisation || "";
 
-            id:
-                chantierEnModification ||
-                genererId(),
 
-            nom:
-                nom,
+        document.getElementById(
+            "dateDebut"
+        ).value =
+            chantier.dateDebut || "";
 
-            clientId:
-                client.id,
 
-            client:
-                client.nom || "",
+        document.getElementById(
+            "dateFin"
+        ).value =
+            chantier.dateFin || "";
 
-            clientNom:
-                client.nom || "",
 
-            entrepriseClient:
-                client.entreprise || "",
+        document.getElementById(
+            "budget"
+        ).value =
+            chantier.budget || "";
 
-            localisation:
-                localisation,
 
-            dateDebut:
+        document.getElementById(
+            "avancement"
+        ).value =
+            chantier.avancement || 0;
+
+
+        document.getElementById(
+            "statut"
+        ).value =
+            chantier.statut ||
+            "En cours";
+
+
+        document.getElementById(
+            "notes"
+        ).value =
+            chantier.notes || "";
+
+
+        document.getElementById(
+            "modalChantier"
+        ).classList.add("active");
+
+    }
+
+
+    /* =====================================================
+       ENREGISTRER CHANTIER
+    ===================================================== */
+
+    document.getElementById(
+        "chantierForm"
+    ).addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const nom =
+                document.getElementById(
+                    "nom"
+                ).value.trim();
+
+
+            const clientId =
+                document.getElementById(
+                    "clientId"
+                ).value;
+
+
+            const localisation =
+                document.getElementById(
+                    "localisation"
+                ).value.trim();
+
+
+            const dateDebut =
                 document.getElementById(
                     "dateDebut"
-                ).value,
+                ).value;
 
-            dateFin:
+
+            const dateFin =
                 document.getElementById(
                     "dateFin"
-                ).value,
+                ).value;
 
-            budget:
-                document.getElementById(
-                    "budget"
-                ).value,
 
-            avancement:
-                document.getElementById(
-                    "avancement"
-                ).value,
+            const budget =
+                Number(
+                    document.getElementById(
+                        "budget"
+                    ).value
+                ) || 0;
 
-            statut:
+
+            let avancement =
+                Number(
+                    document.getElementById(
+                        "avancement"
+                    ).value
+                ) || 0;
+
+
+            const statut =
                 document.getElementById(
                     "statut"
-                ).value,
+                ).value;
 
-            notes:
+
+            const notes =
                 document.getElementById(
                     "notes"
-                ).value.trim(),
-
-            dateCreation:
-
-                ancienChantier &&
-                ancienChantier.dateCreation
-
-                    ? ancienChantier.dateCreation
-
-                    : maintenant,
-
-            updatedAt:
-                maintenant
-
-        };
+                ).value.trim();
 
 
-        if(
-            chantierEnModification
-        ){
+            /* =========================
+               VALIDATION
+            ========================= */
+
+            if (!nom) {
+
+                alert(
+                    "Veuillez saisir le nom du chantier."
+                );
+
+                return;
+
+            }
+
+
+            if (!clientId) {
+
+                alert(
+                    "Veuillez sélectionner un client."
+                );
+
+                return;
+
+            }
+
+
+            avancement =
+                Math.min(
+                    100,
+                    Math.max(
+                        0,
+                        avancement
+                    )
+                );
+
+
+            const clients =
+                obtenirClients();
+
+
+            const client =
+                clients.find(
+                    c =>
+                        String(c.id)
+                        ===
+                        String(clientId)
+                );
+
+
+            if (!client) {
+
+                alert(
+                    "Le client sélectionné est introuvable."
+                );
+
+                return;
+
+            }
+
+
+            const chantiers =
+                obtenirChantiers();
+
+
+            const maintenant =
+                new Date().toISOString();
+
+
+            /* =========================
+               CHANTIER
+            ========================= */
+
+            const id =
+                chantierEnModification
+                ||
+                genererId();
+
+
+            const ancienChantier =
+                chantiers.find(
+                    c =>
+                        String(c.id)
+                        ===
+                        String(id)
+                );
+
+
+            const chantier = {
+
+                id:
+
+                    id,
+
+                nom:
+
+                    nom,
+
+                clientId:
+
+                    client.id,
+
+                client:
+
+                    client.nom ||
+                    client.name ||
+                    "",
+
+                clientNom:
+
+                    client.nom ||
+                    client.name ||
+                    "",
+
+                entrepriseClient:
+
+                    client.entreprise ||
+                    "",
+
+                localisation:
+
+                    localisation,
+
+                dateDebut:
+
+                    dateDebut,
+
+                dateFin:
+
+                    dateFin,
+
+                budget:
+
+                    budget,
+
+                avancement:
+
+                    avancement,
+
+                statut:
+
+                    statut,
+
+                notes:
+
+                    notes,
+
+                dateCreation:
+
+                    ancienChantier?.dateCreation
+                    ||
+                    maintenant,
+
+                updatedAt:
+
+                    maintenant
+
+            };
+
+
+            /* =========================
+               AJOUT / MODIFICATION
+            ========================= */
 
             const index =
                 chantiers.findIndex(
-                    function(item){
-
-                        return String(item.id) ===
-                            String(
-                                chantierEnModification
-                            );
-
-                    }
+                    c =>
+                        String(c.id)
+                        ===
+                        String(id)
                 );
 
 
-            if(index !== -1){
+            if (index === -1) {
+
+                chantiers.push(
+                    chantier
+                );
+
+            } else {
 
                 chantiers[index] =
                     chantier;
@@ -3127,1098 +2405,216 @@ formulaire.addEventListener(
             );
 
 
-            afficherChantiers();
+            /* =========================
+               CRÉER / CONSERVER
+               LE SUIVI DU CHANTIER
+            ========================= */
 
-            fermerChantier();
-
-
-            afficherToast(
-                "✅ Chantier modifié avec succès.",
-                "success"
-            );
-
-
-        }else{
-
-            chantiers.unshift(
+            initialiserSuiviChantier(
                 chantier
             );
 
 
-            sauvegarderChantiers(
-                chantiers
-            );
+            /* =========================
+               FERMETURE
+            ========================= */
+
+            fermerModal();
 
 
             afficherChantiers();
 
-            fermerChantier();
 
-
-            afficherToast(
-                "✅ Chantier enregistré avec succès.",
-                "success"
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   OUVRIR FINANCES
-===================================================== */
-
-function ouvrirFinances(
-    chantierId
-){
-
-    const chantiers =
-        obtenirChantiers();
-
-
-    const chantier =
-        chantiers.find(
-            item =>
-                String(item.id) ===
-                String(chantierId)
-        );
-
-
-    if(!chantier){
-
-        afficherToast(
-            "❌ Chantier introuvable.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    chantierFinanceActuel =
-        chantier.id;
-
-
-    financeModal.classList.add(
-        "active"
-    );
-
-
-    document.getElementById(
-        "depenseDate"
-    ).value =
-        obtenirDateAujourdhui();
-
-
-    document.getElementById(
-        "recetteDate"
-    ).value =
-        obtenirDateAujourdhui();
-
-
-    afficherFinances(
-        chantier
-    );
-
-}
-
-
-/* =====================================================
-   FERMER FINANCES
-===================================================== */
-
-function fermerFinances(){
-
-    financeModal.classList.remove(
-        "active"
-    );
-
-    chantierFinanceActuel =
-        null;
-
-}
-
-
-/* =====================================================
-   DATE DU JOUR
-===================================================== */
-
-function obtenirDateAujourdhui(){
-
-    const maintenant =
-        new Date();
-
-    const annee =
-        maintenant.getFullYear();
-
-    const mois =
-        String(
-            maintenant.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
-
-    const jour =
-        String(
-            maintenant.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
-
-    return (
-        annee +
-        "-" +
-        mois +
-        "-" +
-        jour
-    );
-
-}
-
-
-/* =====================================================
-   AFFICHER FINANCES
-===================================================== */
-
-function afficherFinances(
-    chantier
-){
-
-    const finance =
-        calculerFinancesChantier(
-            chantier
-        );
-
-
-    const client =
-        trouverClientPourChantier(
-            chantier
-        );
-
-
-    const nomClient =
-        client
-            ? client.nom
-            : (
-                chantier.client ||
-                "Client non renseigné"
-            );
-
-
-    financeProjectHeader.innerHTML = `
-
-        <h3>
-            ${echapper(
-                chantier.nom
-            )}
-        </h3>
-
-        <p>
-            👤 ${echapper(
-                nomClient
-            )}
-            &nbsp; • &nbsp;
-            📍 ${echapper(
-                chantier.localisation
-            )}
-        </p>
-
-    `;
-
-
-    financeDashboard.innerHTML = `
-
-        <div class="finance-box budget">
-
-            <small>
-                💰 Budget prévu
-            </small>
-
-            <strong>
-                ${formaterMontant(
-                    finance.budget
-                )}
-            </strong>
-
-        </div>
-
-
-        <div class="finance-box depenses">
-
-            <small>
-                💸 Dépenses
-            </small>
-
-            <strong>
-                ${formaterMontant(
-                    finance.depenses
-                )}
-            </strong>
-
-        </div>
-
-
-        <div class="finance-box recettes">
-
-            <small>
-                📥 Recettes
-            </small>
-
-            <strong>
-                ${formaterMontant(
-                    finance.recettes
-                )}
-            </strong>
-
-        </div>
-
-
-        <div class="finance-box resultat">
-
-            <small>
-                📊 Résultat
-            </small>
-
-            <strong class="${
-                finance.resultat >= 0
-                    ? "finance-positive"
-                    : "finance-negative"
-            }">
-
-                ${formaterMontant(
-                    finance.resultat
-                )}
-
-            </strong>
-
-        </div>
-
-    `;
-
-
-    let consommation =
-        finance.consommation;
-
-
-    if(
-        !Number.isFinite(
-            consommation
-        )
-    ){
-
-        consommation = 0;
-
-    }
-
-
-    const consommationWidth =
-        Math.min(
-            Math.max(
-                consommation,
-                0
-            ),
-            100
-        );
-
-
-    financePercent.textContent =
-        Math.round(
-            consommation
-        ) + " %";
-
-
-    financeProgressFill.style.width =
-        consommationWidth + "%";
-
-
-    financeProgressFill.className =
-        "finance-progress-fill";
-
-
-    if(
-        consommation > 100
-    ){
-
-        financeProgressFill.classList.add(
-            "danger"
-        );
-
-    }else if(
-        consommation >= 80
-    ){
-
-        financeProgressFill.classList.add(
-            "danger"
-        );
-
-    }else if(
-        consommation <= 50
-    ){
-
-        financeProgressFill.classList.add(
-            "success"
-        );
-
-    }
-
-
-    afficherOperations(
-        finance.operations
-    );
-
-}
-
-
-/* =====================================================
-   AFFICHER OPERATIONS
-===================================================== */
-
-function afficherOperations(
-    operations
-){
-
-    if(
-        operations.length === 0
-    ){
-
-        operationsList.innerHTML = `
-
-            <div class="no-operation">
-
-                📋 Aucune opération financière
-                enregistrée pour ce chantier.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    const operationsTriees =
-        [...operations].sort(
-            function(a,b){
-
-                return new Date(
-                    b.dateCreation ||
-                    b.date
-                ) -
-                new Date(
-                    a.dateCreation ||
-                    a.date
-                );
-
-            }
-        );
-
-
-    operationsList.innerHTML =
-        "";
-
-
-    operationsTriees.forEach(
-        function(operation){
-
-            const date =
-                operation.date
-                    ? formaterDate(
-                        operation.date
-                    )
-                    : "Date non définie";
-
-
-            const estDepense =
-                operation.type ===
-                "depense";
-
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.className =
-                "operation";
-
-
-            div.innerHTML = `
-
-                <div class="operation-left">
-
-                    <div class="operation-icon ${
-                        estDepense
-                            ? "depense"
-                            : "recette"
-                    }">
-
-                        ${
-                            estDepense
-                                ? "💸"
-                                : "📥"
-                        }
-
-                    </div>
-
-
-                    <div class="operation-info">
-
-                        <strong>
-                            ${echapper(
-                                operation.libelle
-                            )}
-                        </strong>
-
-                        <small>
-
-                            ${echapper(
-                                operation.categorie ||
-                                "Autre"
-                            )}
-
-                            •
-                            ${echapper(
-                                date
-                            )}
-
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="operation-right">
-
-                    <span class="operation-amount ${
-                        estDepense
-                            ? "depense"
-                            : "recette"
-                    }">
-
-                        ${
-                            estDepense
-                                ? "-"
-                                : "+"
-                        }
-
-                        ${formaterMontant(
-                            operation.montant
-                        )}
-
-                    </span>
-
-
-                    <button
-                        class="delete-operation"
-                        title="Supprimer"
-                        onclick="supprimerOperation('${echapper(
-                            operation.id
-                        )}')">
-
-                        ×
-
-                    </button>
-
-                </div>
-
-            `;
-
-
-            operationsList.appendChild(
-                div
+            alert(
+                index === -1
+                    ? "Chantier créé avec succès."
+                    : "Chantier modifié avec succès."
             );
 
         }
     );
 
-}
 
+    /* =====================================================
+       SUPPRIMER CHANTIER
+    ===================================================== */
 
-/* =====================================================
-   AJOUT DEPENSE
-===================================================== */
+    function supprimerChantier(id) {
 
-depenseForm.addEventListener(
-    "submit",
-    function(event){
+        const chantiers =
+            obtenirChantiers();
 
-        event.preventDefault();
-
-
-        if(!chantierFinanceActuel){
-
-            afficherToast(
-                "❌ Aucun chantier sélectionné.",
-                "error"
+        const chantier =
+            chantiers.find(
+                c =>
+                    String(c.id)
+                    ===
+                    String(id)
             );
+
+
+        if (!chantier) {
 
             return;
 
         }
 
 
-        const libelle =
-            document.getElementById(
-                "depenseLibelle"
-            ).value.trim();
-
-
-        const categorie =
-            document.getElementById(
-                "depenseCategorie"
-            ).value;
-
-
-        const montant =
-            Number(
-                document.getElementById(
-                    "depenseMontant"
-                ).value
+        const confirmation =
+            confirm(
+                "Voulez-vous vraiment supprimer le chantier « " +
+                chantier.nom +
+                " » ?\n\n" +
+                "Son suivi et ses données financières liées seront également supprimés."
             );
 
 
-        const date =
-            document.getElementById(
-                "depenseDate"
-            ).value ||
-            obtenirDateAujourdhui();
-
-
-        if(!libelle){
-
-            afficherToast(
-                "⚠️ Veuillez saisir le libellé.",
-                "error"
-            );
+        if (!confirmation) {
 
             return;
 
         }
 
 
-        if(
-            !montant ||
-            montant <= 0
-        ){
+        /* =========================
+           SUPPRIMER LE CHANTIER
+        ========================= */
 
-            afficherToast(
-                "⚠️ Veuillez saisir un montant valide.",
-                "error"
+        const nouveauxChantiers =
+            chantiers.filter(
+                c =>
+                    String(c.id)
+                    !==
+                    String(id)
             );
 
-            return;
 
-        }
+        sauvegarderChantiers(
+            nouveauxChantiers
+        );
 
+
+        /* =========================
+           SUPPRIMER FINANCES
+        ========================= */
 
         const finances =
             obtenirFinances();
 
 
-        finances.push({
-
-            id:
-                genererFinanceId(),
-
-            chantierId:
-                chantierFinanceActuel,
-
-            type:
-                "depense",
-
-            libelle:
-                libelle,
-
-            categorie:
-                categorie,
-
-            montant:
-                montant,
-
-            date:
-                date,
-
-            dateCreation:
-                new Date().toISOString()
-
-        });
+        const nouvellesFinances =
+            finances.filter(
+                operation =>
+                    String(
+                        operation.chantierId
+                    )
+                    !==
+                    String(id)
+            );
 
 
         sauvegarderFinances(
-            finances
+            nouvellesFinances
         );
 
 
-        depenseForm.reset();
+        /* =========================
+           SUPPRIMER SUIVI
+        ========================= */
 
-
-        document.getElementById(
-            "depenseDate"
-        ).value =
-            obtenirDateAujourdhui();
-
-
-        const chantier =
-            obtenirChantiers().find(
-                item =>
-                    String(item.id) ===
-                    String(
-                        chantierFinanceActuel
-                    )
-            );
-
-
-        if(chantier){
-
-            afficherFinances(
-                chantier
-            );
-
-        }
+        supprimerSuiviChantier(
+            id
+        );
 
 
         afficherChantiers();
 
-
-        afficherToast(
-            "✅ Dépense enregistrée.",
-            "success"
-        );
-
-    }
-);
-
-
-/* =====================================================
-   AJOUT RECETTE
-===================================================== */
-
-recetteForm.addEventListener(
-    "submit",
-    function(event){
-
-        event.preventDefault();
-
-
-        if(!chantierFinanceActuel){
-
-            afficherToast(
-                "❌ Aucun chantier sélectionné.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        const libelle =
-            document.getElementById(
-                "recetteLibelle"
-            ).value.trim();
-
-
-        const categorie =
-            document.getElementById(
-                "recetteCategorie"
-            ).value;
-
-
-        const montant =
-            Number(
-                document.getElementById(
-                    "recetteMontant"
-                ).value
-            );
-
-
-        const date =
-            document.getElementById(
-                "recetteDate"
-            ).value ||
-            obtenirDateAujourdhui();
-
-
-        if(!libelle){
-
-            afficherToast(
-                "⚠️ Veuillez saisir le libellé.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(
-            !montant ||
-            montant <= 0
-        ){
-
-            afficherToast(
-                "⚠️ Veuillez saisir un montant valide.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        const finances =
-            obtenirFinances();
-
-
-        finances.push({
-
-            id:
-                genererFinanceId(),
-
-            chantierId:
-                chantierFinanceActuel,
-
-            type:
-                "recette",
-
-            libelle:
-                libelle,
-
-            categorie:
-                categorie,
-
-            montant:
-                montant,
-
-            date:
-                date,
-
-            dateCreation:
-                new Date().toISOString()
-
-        });
-
-
-        sauvegarderFinances(
-            finances
-        );
-
-
-        recetteForm.reset();
-
-
-        document.getElementById(
-            "recetteDate"
-        ).value =
-            obtenirDateAujourdhui();
-
-
-        const chantier =
-            obtenirChantiers().find(
-                item =>
-                    String(item.id) ===
-                    String(
-                        chantierFinanceActuel
-                    )
-            );
-
-
-        if(chantier){
-
-            afficherFinances(
-                chantier
-            );
-
-        }
-
-
-        afficherChantiers();
-
-
-        afficherToast(
-            "✅ Recette enregistrée.",
-            "success"
-        );
-
-    }
-);
-
-
-/* =====================================================
-   SUPPRIMER OPERATION
-===================================================== */
-
-function supprimerOperation(
-    operationId
-){
-
-    const confirmation =
-        confirm(
-            "Voulez-vous supprimer cette opération financière ?"
-        );
-
-
-    if(!confirmation){
-        return;
     }
 
 
-    const finances =
-        obtenirFinances();
+    /* =====================================================
+       BUDGET & RENTABILITÉ
+    ===================================================== */
 
+    function ouvrirFinances(id) {
 
-    const nouvellesFinances =
-        finances.filter(
-            operation =>
-                String(operation.id) !==
-                String(operationId)
-        );
+        /*
+         * On redirige vers le module
+         * financier avec le chantier sélectionné.
+         *
+         * Si ta page devis/finances utilise déjà
+         * une autre URL, tu peux remplacer cette ligne.
+         */
 
-
-    sauvegarderFinances(
-        nouvellesFinances
-    );
-
-
-    const chantier =
-        obtenirChantiers().find(
-            item =>
-                String(item.id) ===
-                String(
-                    chantierFinanceActuel
-                )
-        );
-
-
-    if(chantier){
-
-        afficherFinances(
-            chantier
-        );
+        window.location.href =
+            "rentabilite.html?chantierId=" +
+            encodeURIComponent(id);
 
     }
 
 
-    afficherChantiers();
-
-
-    afficherToast(
-        "✅ Opération supprimée.",
-        "success"
-    );
-
-}
-
-
-/* =====================================================
-   EVENEMENTS CHANTIER
-===================================================== */
-
-nouveauBtn.addEventListener(
-    "click",
-    ouvrirChantier
-);
-
-
-emptyBtn.addEventListener(
-    "click",
-    ouvrirChantier
-);
-
-
-closeBtn.addEventListener(
-    "click",
-    fermerChantier
-);
-
-
-cancelBtn.addEventListener(
-    "click",
-    fermerChantier
-);
-
-
-modal.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target ===
-            modal
-        ){
-
-            fermerChantier();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   EVENEMENTS FINANCE
-===================================================== */
-
-closeFinanceModal.addEventListener(
-    "click",
-    fermerFinances
-);
-
-
-financeModal.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target ===
-            financeModal
-        ){
-
-            fermerFinances();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-function afficherToast(
-    message,
-    type = "success"
-){
-
-    const container =
-        document.getElementById(
-            "toastContainer"
-        );
-
-
-    const toast =
-        document.createElement(
-            "div"
-        );
-
-
-    toast.className =
-        "toast " +
-        type;
-
-
-    toast.textContent =
-        message;
-
-
-    container.appendChild(
-        toast
-    );
-
-
-    setTimeout(
-        function(){
-
-            toast.remove();
-
-        },
-        3500
-    );
-
-}
-
-
-/* =====================================================
-   SYNCHRONISATION
-===================================================== */
-
-window.addEventListener(
-    "storage",
-    function(event){
-
-        if(
-            event.key ===
-            CLIENT_STORAGE_KEY
-        ){
-
-            chargerClients();
-
-            afficherChantiers();
-
-        }
-
-
-        if(
-            event.key ===
-            STORAGE_KEY
-        ){
-
-            afficherChantiers();
-
-        }
-
-
-        if(
-            event.key ===
-            FINANCE_STORAGE_KEY
-        ){
-
-            afficherChantiers();
-
-
-            if(
-                chantierFinanceActuel
-            ){
-
-                const chantier =
-                    obtenirChantiers().find(
-                        item =>
-                            String(item.id) ===
-                            String(
-                                chantierFinanceActuel
-                            )
-                    );
-
-
-                if(chantier){
-
-                    afficherFinances(
-                        chantier
-                    );
-
-                }
+    /* =====================================================
+       FERMER MODAL EN CLIQUANT À L'EXTÉRIEUR
+    ===================================================== */
+
+    document.getElementById(
+        "modalChantier"
+    ).addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
+
+                fermerModal();
 
             }
 
         }
-
-    }
-);
+    );
 
 
-/* =====================================================
-   INITIALISATION
-===================================================== */
+    /* =====================================================
+       SYNCHRONISATION
+    ===================================================== */
 
-function initialiser(){
+    window.addEventListener(
+        "storage",
+        function(event) {
+
+            if (
+                event.key ===
+                STORAGE_KEY
+                ||
+                event.key ===
+                CLIENT_STORAGE_KEY
+                ||
+                event.key ===
+                FINANCE_STORAGE_KEY
+                ||
+                event.key ===
+                SUIVI_STORAGE_KEY
+            ) {
+
+                chargerClients();
+
+                afficherChantiers();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIALISATION
+    ===================================================== */
 
     chargerClients();
 
     afficherChantiers();
-
-}
-
-
-initialiser();
 
 </script>
 
