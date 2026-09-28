@@ -1,6 +1,8 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,6 +15,10 @@
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
     box-sizing:border-box;
 }
@@ -24,9 +30,10 @@ body{
     color:#172033;
 }
 
-/* =========================
+
+/* =====================================================
    HEADER
-========================= */
+===================================================== */
 
 header{
     background:#0f172a;
@@ -59,9 +66,10 @@ header{
     color:#cbd5e1;
 }
 
-/* =========================
+
+/* =====================================================
    CONTAINER
-========================= */
+===================================================== */
 
 .container{
     max-width:1200px;
@@ -89,9 +97,10 @@ header{
     font-size:14px;
 }
 
-/* =========================
+
+/* =====================================================
    BUTTONS
-========================= */
+===================================================== */
 
 button,
 .main-button{
@@ -137,9 +146,10 @@ button,
     background:#f8fafc;
 }
 
-/* =========================
+
+/* =====================================================
    STATS
-========================= */
+===================================================== */
 
 .stats{
     display:grid;
@@ -168,9 +178,10 @@ button,
     color:#0f172a;
 }
 
-/* =========================
+
+/* =====================================================
    EMPTY
-========================= */
+===================================================== */
 
 .empty{
     background:white;
@@ -188,9 +199,10 @@ button,
     margin-bottom:8px;
 }
 
-/* =========================
+
+/* =====================================================
    CHANTIERS
-========================= */
+===================================================== */
 
 .chantiers-grid{
     display:grid;
@@ -259,9 +271,10 @@ button,
     color:#475569;
 }
 
-/* =========================
+
+/* =====================================================
    INFO
-========================= */
+===================================================== */
 
 .info-list{
     display:grid;
@@ -288,9 +301,10 @@ button,
     text-align:right;
 }
 
-/* =========================
+
+/* =====================================================
    PROGRESSION
-========================= */
+===================================================== */
 
 .progress-section{
     margin:18px 0;
@@ -326,9 +340,10 @@ button,
     border-radius:999px;
 }
 
-/* =========================
+
+/* =====================================================
    FINANCES
-========================= */
+===================================================== */
 
 .finance-summary{
     margin-top:16px;
@@ -366,9 +381,10 @@ button,
     color:#0f172a;
 }
 
-/* =========================
+
+/* =====================================================
    ACTIONS
-========================= */
+===================================================== */
 
 .card-actions{
     display:grid;
@@ -389,25 +405,76 @@ button,
     text-align:center;
     transition:.2s;
     text-decoration:none;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
 }
 
 .action-button:hover{
     transform:translateY(-1px);
+    box-shadow:0 3px 8px rgba(15,23,42,.08);
 }
+
+
+/* MODIFIER */
+
+.action-button.modifier{
+    background:#f8fafc;
+    border-color:#cbd5e1;
+    color:#334155;
+}
+
+.action-button.modifier:hover{
+    background:#334155;
+    color:white;
+}
+
+
+/* SUIVI */
 
 .action-button.suivi{
     background:#eff6ff;
     border-color:#bfdbfe;
     color:#1d4ed8;
-    display:flex;
-    align-items:center;
-    justify-content:center;
 }
 
 .action-button.suivi:hover{
     background:#2563eb;
     color:white;
 }
+
+
+/* PLANNING */
+
+.action-button.planning{
+    background:#f0fdf4;
+    border-color:#bbf7d0;
+    color:#15803d;
+}
+
+.action-button.planning:hover{
+    background:#16a34a;
+    color:white;
+}
+
+
+/* CALENDRIER */
+
+.action-button.calendrier{
+    background:#f5f3ff;
+    border-color:#ddd6fe;
+    color:#6d28d9;
+}
+
+.action-button.calendrier:hover{
+    background:#7c3aed;
+    color:white;
+}
+
+
+/* FINANCES */
 
 .action-button.finance{
     background:#fff7ed;
@@ -419,6 +486,37 @@ button,
     background:#f97316;
     color:white;
 }
+
+
+/* PILOTAGE */
+
+.action-button.pilotage{
+    background:#ecfeff;
+    border-color:#a5f3fc;
+    color:#0e7490;
+}
+
+.action-button.pilotage:hover{
+    background:#0891b2;
+    color:white;
+}
+
+
+/* RENTABILITÉ */
+
+.action-button.rentabilite{
+    background:#fdf4ff;
+    border-color:#f5d0fe;
+    color:#a21caf;
+}
+
+.action-button.rentabilite:hover{
+    background:#c026d3;
+    color:white;
+}
+
+
+/* SUPPRIMER */
 
 .action-button.delete{
     background:#fff1f2;
@@ -435,9 +533,10 @@ button,
     grid-column:1/-1;
 }
 
-/* =========================
+
+/* =====================================================
    MODAL
-========================= */
+===================================================== */
 
 .modal-overlay{
     position:fixed;
@@ -556,9 +655,10 @@ textarea{
     display:block;
 }
 
-/* =========================
+
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 footer{
     text-align:center;
@@ -567,9 +667,10 @@ footer{
     padding:20px;
 }
 
-/* =========================
+
+/* =====================================================
    RESPONSIVE
-========================= */
+===================================================== */
 
 @media(max-width:850px){
 
@@ -626,9 +727,9 @@ footer{
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      HEADER
-========================= -->
+===================================================== -->
 
 <header>
 
@@ -646,6 +747,7 @@ footer{
 
         </div>
 
+
         <a
             href="dashboard.html"
             class="secondary-button"
@@ -658,9 +760,9 @@ footer{
 </header>
 
 
-<!-- =========================
+<!-- =====================================================
      CONTENU
-========================= -->
+===================================================== -->
 
 <main class="container">
 
@@ -690,9 +792,9 @@ footer{
     </div>
 
 
-    <!-- =========================
+    <!-- =================================================
          STATISTIQUES
-    ========================= -->
+    ================================================= -->
 
     <section class="stats">
 
@@ -746,9 +848,9 @@ footer{
     </section>
 
 
-    <!-- =========================
-         LISTE
-    ========================= -->
+    <!-- =================================================
+         LISTE CHANTIERS
+    ================================================= -->
 
     <section id="listeChantiers"></section>
 
@@ -761,9 +863,9 @@ footer{
 </footer>
 
 
-<!-- =========================
-     MODAL
-========================= -->
+<!-- =====================================================
+     MODAL NOUVEAU / MODIFICATION
+===================================================== -->
 
 <div
     class="modal-overlay"
@@ -780,6 +882,7 @@ footer{
             >
                 Nouveau chantier
             </h2>
+
 
             <button
                 class="close-button"
@@ -828,6 +931,7 @@ footer{
                         </option>
 
                     </select>
+
 
                     <div
                         class="client-notice"
@@ -1362,6 +1466,11 @@ function initialiserSuivi(
             retardJours:
                 0,
 
+            avancement:
+                Number(
+                    chantier.avancement
+                ) || 0,
+
             taches:
                 [],
 
@@ -1551,7 +1660,8 @@ function afficherChantiers(){
                         statutClass =
                             "status-en-cours";
 
-                    }else if(
+                    }
+                    else if(
                         statut ===
                         "Terminé"
                     ){
@@ -1559,7 +1669,8 @@ function afficherChantiers(){
                         statutClass =
                             "status-termine";
 
-                    }else if(
+                    }
+                    else if(
                         statut ===
                         "En attente"
                     ){
@@ -1567,7 +1678,8 @@ function afficherChantiers(){
                         statutClass =
                             "status-en-attente";
 
-                    }else if(
+                    }
+                    else if(
                         statut ===
                         "Suspendu"
                     ){
@@ -1695,6 +1807,8 @@ function afficherChantiers(){
 
                             </div>
 
+
+                            <!-- INFORMATIONS -->
 
                             <div
                                 class="info-list"
@@ -1905,19 +2019,25 @@ function afficherChantiers(){
                             </div>
 
 
-                            <!-- ACTIONS -->
+                            <!-- =================================================
+                                 ACTIONS
+                            ================================================= -->
 
                             <div
                                 class="card-actions"
                             >
 
+                                <!-- MODIFIER -->
+
                                 <button
-                                    class="action-button"
+                                    class="action-button modifier"
                                     onclick="modifierChantier('${chantier.id}')"
                                 >
                                     ✏️ Modifier
                                 </button>
 
+
+                                <!-- SUIVI -->
 
                                 <button
                                     class="action-button suivi"
@@ -1927,13 +2047,57 @@ function afficherChantiers(){
                                 </button>
 
 
+                                <!-- PLANNING -->
+
+                                <button
+                                    class="action-button planning"
+                                    onclick="ouvrirPlanning('${chantier.id}')"
+                                >
+                                    📅 Planning
+                                </button>
+
+
+                                <!-- CALENDRIER -->
+
+                                <button
+                                    class="action-button calendrier"
+                                    onclick="ouvrirCalendrier('${chantier.id}')"
+                                >
+                                    🗓️ Calendrier
+                                </button>
+
+
+                                <!-- FINANCES -->
+
                                 <button
                                     class="action-button finance"
                                     onclick="ouvrirFinances('${chantier.id}')"
                                 >
-                                    💰 Budget & rentabilité
+                                    💰 Finances
                                 </button>
 
+
+                                <!-- PILOTAGE -->
+
+                                <button
+                                    class="action-button pilotage"
+                                    onclick="ouvrirPilotage('${chantier.id}')"
+                                >
+                                    📊 Pilotage financier
+                                </button>
+
+
+                                <!-- RENTABILITÉ -->
+
+                                <button
+                                    class="action-button rentabilite"
+                                    onclick="ouvrirRentabilite('${chantier.id}')"
+                                >
+                                    📈 Rentabilité
+                                </button>
+
+
+                                <!-- SUPPRIMER -->
 
                                 <button
                                     class="action-button delete full"
@@ -1959,7 +2123,7 @@ function afficherChantiers(){
 
 
 /* =====================================================
-   OUVRIR MODAL
+   MODAL
 ===================================================== */
 
 function ouvrirModal(){
@@ -1981,7 +2145,8 @@ function ouvrirModal(){
 
     document.getElementById(
         "avancement"
-    ).value = 0;
+    ).value =
+        0;
 
 
     chargerClients();
@@ -1995,10 +2160,6 @@ function ouvrirModal(){
 
 }
 
-
-/* =====================================================
-   FERMER MODAL
-===================================================== */
 
 function fermerModal(){
 
@@ -2016,7 +2177,7 @@ function fermerModal(){
 
 
 /* =====================================================
-   MODIFIER
+   MODIFIER CHANTIER
 ===================================================== */
 
 function modifierChantier(id){
@@ -2366,6 +2527,16 @@ document.getElementById(
         );
 
 
+        /*
+         * Le chantier devient immédiatement
+         * le chantier actif.
+         */
+
+        preparerChantier(
+            chantier.id
+        );
+
+
         fermerModal();
 
 
@@ -2383,16 +2554,28 @@ document.getElementById(
 
 
 /* =====================================================
-   ⭐ CHANTIER SÉLECTIONNÉ
+   ⭐ CHANTIER ACTIF
 ===================================================== */
 
-function selectionnerChantier(
-    chantier
-){
+function preparerChantier(id){
+
+    const chantier =
+        obtenirChantierParId(id);
+
+
+    if(!chantier){
+
+        alert(
+            "Chantier introuvable."
+        );
+
+        return null;
+
+    }
+
 
     /*
-     * C'est cette fonction qui fait
-     * la liaison entre les modules BATIFLOW.
+     * Objet complet
      */
 
     localStorage.setItem(
@@ -2402,55 +2585,62 @@ function selectionnerChantier(
         )
     );
 
+
+    /*
+     * ID uniquement
+     */
+
+    localStorage.setItem(
+        "batiflowChantierActif",
+        String(
+            chantier.id
+        )
+    );
+
+
+    return chantier;
+
+}
+
+
+function obtenirChantierParId(id){
+
+    const chantiers =
+        obtenirChantiers();
+
+
+    return chantiers.find(
+        chantier =>
+            String(
+                chantier.id
+            )
+            ===
+            String(id)
+    );
+
 }
 
 
 /* =====================================================
-   📊 OUVRIR SUIVI
+   📊 SUIVI
 ===================================================== */
 
 function ouvrirSuivi(id){
 
-    const chantiers =
-        obtenirChantiers();
-
-
     const chantier =
-        chantiers.find(
-            c =>
-                String(c.id)
-                ===
-                String(id)
-        );
+        preparerChantier(id);
 
 
     if(!chantier){
-
-        alert(
-            "Chantier introuvable."
-        );
 
         return;
 
     }
 
 
-    /*
-     * Enregistrement du chantier sélectionné
-     */
-
-    selectionnerChantier(
-        chantier
-    );
-
-
-    /*
-     * Transmission également
-     * par URL.
-     */
-
     window.location.href =
-        "suivi-chantier.html?chantierId=" +
+        "suivi-chantier.html?chantierId="
+        +
         encodeURIComponent(
             chantier.id
         );
@@ -2459,57 +2649,79 @@ function ouvrirSuivi(id){
 
 
 /* =====================================================
-   💰 OUVRIR RENTABILITÉ
+   📅 PLANNING
+===================================================== */
+
+function ouvrirPlanning(id){
+
+    const chantier =
+        preparerChantier(id);
+
+
+    if(!chantier){
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "planning.html?chantierId="
+        +
+        encodeURIComponent(
+            chantier.id
+        );
+
+}
+
+
+/* =====================================================
+   🗓️ CALENDRIER
+===================================================== */
+
+function ouvrirCalendrier(id){
+
+    const chantier =
+        preparerChantier(id);
+
+
+    if(!chantier){
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "calendrier.html?chantierId="
+        +
+        encodeURIComponent(
+            chantier.id
+        );
+
+}
+
+
+/* =====================================================
+   💰 FINANCES
 ===================================================== */
 
 function ouvrirFinances(id){
 
-    const chantiers =
-        obtenirChantiers();
-
-
     const chantier =
-        chantiers.find(
-            c =>
-                String(c.id)
-                ===
-                String(id)
-        );
+        preparerChantier(id);
 
 
     if(!chantier){
-
-        alert(
-            "Chantier introuvable."
-        );
 
         return;
 
     }
 
 
-    /*
-     * ⭐ IMPORTANT
-     *
-     * Le chantier est enregistré dans
-     * localStorage avant la redirection.
-     *
-     * rentabilite.html pourra donc
-     * automatiquement le récupérer.
-     */
-
-    selectionnerChantier(
-        chantier
-    );
-
-
-    /*
-     * On transmet aussi son ID
-     * dans l'URL.
-     */
-
     window.location.href =
-        "rentabilite.html?chantierId=" +
+        "finances.html?chantierId="
+        +
         encodeURIComponent(
             chantier.id
         );
@@ -2518,7 +2730,61 @@ function ouvrirFinances(id){
 
 
 /* =====================================================
-   🗑️ SUPPRIMER
+   📊 PILOTAGE FINANCIER
+===================================================== */
+
+function ouvrirPilotage(id){
+
+    const chantier =
+        preparerChantier(id);
+
+
+    if(!chantier){
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "pilotage-financier.html?chantierId="
+        +
+        encodeURIComponent(
+            chantier.id
+        );
+
+}
+
+
+/* =====================================================
+   📈 RENTABILITÉ
+===================================================== */
+
+function ouvrirRentabilite(id){
+
+    const chantier =
+        preparerChantier(id);
+
+
+    if(!chantier){
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "rentabilite.html?chantierId="
+        +
+        encodeURIComponent(
+            chantier.id
+        );
+
+}
+
+
+/* =====================================================
+   🗑️ SUPPRESSION
 ===================================================== */
 
 function supprimerChantier(id){
@@ -2551,7 +2817,9 @@ function supprimerChantier(id){
             +
             " » ?\n\n"
             +
-            "Son suivi sera également supprimé."
+            "Son suivi et ses opérations financières "
+            +
+            "seront également supprimés."
         );
 
 
@@ -2562,9 +2830,7 @@ function supprimerChantier(id){
     }
 
 
-    /*
-     * Supprimer chantier
-     */
+    /* SUPPRESSION CHANTIER */
 
     sauvegarderChantiers(
         chantiers.filter(
@@ -2576,9 +2842,7 @@ function supprimerChantier(id){
     );
 
 
-    /*
-     * Supprimer finances
-     */
+    /* SUPPRESSION FINANCES */
 
     const finances =
         obtenirFinances();
@@ -2596,9 +2860,7 @@ function supprimerChantier(id){
     );
 
 
-    /*
-     * Supprimer suivi
-     */
+    /* SUPPRESSION SUIVI */
 
     const suivis =
         obtenirSuivis();
@@ -2616,50 +2878,28 @@ function supprimerChantier(id){
     );
 
 
-    /*
-     * Si le chantier supprimé
-     * était sélectionné,
-     * on nettoie également
-     * chantierSelectionne.
-     */
+    /* NETTOYAGE CHANTIER ACTIF */
 
-    const selection =
+    const actif =
         localStorage.getItem(
-            "chantierSelectionne"
+            "batiflowChantierActif"
         );
 
 
-    if(selection){
+    if(
+        actif &&
+        String(actif)
+        ===
+        String(id)
+    ){
 
-        try{
+        localStorage.removeItem(
+            "batiflowChantierActif"
+        );
 
-            const chantierSelectionne =
-                JSON.parse(
-                    selection
-                );
-
-
-            if(
-                String(
-                    chantierSelectionne.id
-                )
-                ===
-                String(id)
-            ){
-
-                localStorage.removeItem(
-                    "chantierSelectionne"
-                );
-
-            }
-
-        }catch(error){
-
-            localStorage.removeItem(
-                "chantierSelectionne"
-            );
-
-        }
+        localStorage.removeItem(
+            "chantierSelectionne"
+        );
 
     }
 
@@ -2670,7 +2910,7 @@ function supprimerChantier(id){
 
 
 /* =====================================================
-   FERMER MODAL EXTÉRIEUR
+   FERMETURE MODAL EXTÉRIEUR
 ===================================================== */
 
 document.getElementById(
@@ -2709,6 +2949,22 @@ window.addEventListener(
 
 
 /* =====================================================
+   PAGESHOW
+===================================================== */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        chargerClients();
+
+        afficherChantiers();
+
+    }
+);
+
+
+/* =====================================================
    INITIALISATION
 ===================================================== */
 
@@ -2720,3 +2976,4 @@ afficherChantiers();
 
 </body>
 </html>
+```
