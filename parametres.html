@@ -1,1 +1,2581 @@
+<!DOCTYPE html>
+<html lang="fr">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BATIFLOW — Paramètres</title>
+
+<style>
+
+/* =========================================================
+   BATIFLOW — PARAMÈTRES
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:#f4f7fb;
+    color:#172033;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:260px;
+
+    background:#101827;
+    color:#fff;
+
+    z-index:1000;
+
+    overflow-y:auto;
+}
+
+.sidebar-logo{
+    height:82px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 20px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+
+/* LOGO */
+
+.batiflow-logo{
+    display:flex;
+    align-items:center;
+
+    gap:11px;
+
+    text-decoration:none;
+
+    width:max-content;
+
+    position:relative;
+}
+
+.batiflow-logo-icon{
+    width:48px;
+    height:48px;
+
+    flex:none;
+}
+
+.batiflow-logo-text{
+    font-size:22px;
+
+    line-height:1;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+
+    white-space:nowrap;
+}
+
+.batiflow-logo-text .bati{
+    color:#fff;
+}
+
+.batiflow-logo-text .flow{
+    color:#f59e0b;
+}
+
+.batiflow-logo-subtitle{
+    position:absolute;
+
+    left:59px;
+    bottom:-12px;
+
+    color:#64748b;
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav{
+    padding:18px 12px;
+}
+
+.nav-title{
+    color:#64748b;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:1.5px;
+
+    padding:10px 12px;
+
+    text-transform:uppercase;
+}
+
+.nav-link{
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 14px;
+
+    margin:4px 0;
+
+    border-radius:10px;
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:.2s;
+}
+
+.nav-link span{
+    width:23px;
+
+    text-align:center;
+
+    font-size:17px;
+}
+
+.nav-link:hover{
+    background:rgba(255,255,255,.06);
+
+    color:#fff;
+}
+
+.nav-link.active{
+    background:rgba(245,158,11,.13);
+
+    color:#f59e0b;
+}
+
+.nav-separator{
+    height:1px;
+
+    background:rgba(255,255,255,.07);
+
+    margin:15px 8px;
+}
+
+.logout{
+    margin-top:15px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    margin-left:260px;
+
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar{
+    height:76px;
+
+    background:#fff;
+
+    border-bottom:1px solid #e2e8f0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:900;
+}
+
+.topbar-left{
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.menu-btn{
+    display:none;
+
+    border:0;
+
+    background:none;
+
+    font-size:25px;
+
+    cursor:pointer;
+}
+
+.topbar-right{
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+}
+
+.search-dashboard{
+    position:relative;
+}
+
+.search-dashboard input{
+    width:290px;
+
+    padding:10px 15px 10px 38px;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:10px;
+
+    outline:none;
+
+    background:#f8fafc;
+
+    font-size:13px;
+}
+
+.search-dashboard span{
+    position:absolute;
+
+    left:13px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#64748b;
+}
+
+.notification{
+    width:38px;
+    height:38px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#f8fafc;
+
+    font-size:17px;
+}
+
+.user{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    background:#101827;
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-weight:800;
+}
+
+.user-name{
+    font-size:13px;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+    padding:30px;
+
+    max-width:1400px;
+
+    margin:auto;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:25px;
+}
+
+.eyebrow{
+    color:#d97706;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+
+    margin-bottom:6px;
+}
+
+.page-header h1{
+    font-size:29px;
+
+    margin-bottom:6px;
+}
+
+.page-header p{
+    color:#64748b;
+
+    font-size:14px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.settings-grid{
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.5fr)
+        minmax(280px,.7fr);
+
+    gap:20px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+    background:#fff;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 10px 30px rgba(15,23,42,.06);
+
+    overflow:hidden;
+
+    margin-bottom:20px;
+}
+
+.card:last-child{
+    margin-bottom:0;
+}
+
+.card-header{
+    padding:19px 20px;
+
+    border-bottom:1px solid #e2e8f0;
+}
+
+.card-header-label{
+    color:#d97706;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:1.4px;
+
+    margin-bottom:4px;
+}
+
+.card-header h2{
+    font-size:17px;
+}
+
+.card-body{
+    padding:20px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:17px;
+}
+
+.form-group{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+.form-group label{
+    font-size:12px;
+
+    font-weight:800;
+
+    color:#334155;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+
+    padding:11px 12px;
+
+    border:1px solid #dbe2ea;
+
+    border-radius:9px;
+
+    outline:none;
+
+    background:#f8fafc;
+
+    color:#172033;
+
+    font-family:inherit;
+
+    font-size:13px;
+
+    transition:.2s;
+}
+
+.form-group textarea{
+    min-height:90px;
+
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#f59e0b;
+
+    background:#fff;
+
+    box-shadow:
+        0 0 0 3px rgba(245,158,11,.10);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.actions{
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+    margin-top:20px;
+}
+
+.btn{
+    border:0;
+
+    border-radius:9px;
+
+    padding:11px 16px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.btn-primary{
+    background:#f59e0b;
+
+    color:#111827;
+}
+
+.btn-primary:hover{
+    background:#fbbf24;
+
+    transform:translateY(-1px);
+}
+
+.btn-secondary{
+    background:#f1f5f9;
+
+    color:#475569;
+}
+
+.btn-secondary:hover{
+    background:#e2e8f0;
+}
+
+.btn-danger{
+    background:#fee2e2;
+
+    color:#b91c1c;
+}
+
+.btn-danger:hover{
+    background:#fecaca;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-box{
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.profile-avatar{
+    width:64px;
+    height:64px;
+
+    border-radius:50%;
+
+    background:#101827;
+
+    color:#f59e0b;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+
+    font-weight:900;
+}
+
+.profile-info h3{
+    font-size:16px;
+
+    margin-bottom:4px;
+}
+
+.profile-info p{
+    color:#64748b;
+
+    font-size:11px;
+}
+
+
+/* =========================================================
+   OPTION
+========================================================= */
+
+.option-row{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:14px 0;
+
+    border-bottom:1px solid #eef2f7;
+}
+
+.option-row:last-child{
+    border-bottom:0;
+}
+
+.option-info strong{
+    display:block;
+
+    font-size:13px;
+}
+
+.option-info small{
+    display:block;
+
+    color:#64748b;
+
+    font-size:10px;
+
+    margin-top:4px;
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.switch{
+    position:relative;
+
+    width:44px;
+    height:24px;
+
+    flex:none;
+}
+
+.switch input{
+    opacity:0;
+
+    width:0;
+    height:0;
+}
+
+.slider{
+    position:absolute;
+
+    cursor:pointer;
+
+    inset:0;
+
+    background:#cbd5e1;
+
+    border-radius:30px;
+
+    transition:.2s;
+}
+
+.slider:before{
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+    height:18px;
+
+    left:3px;
+    top:3px;
+
+    background:white;
+
+    border-radius:50%;
+
+    transition:.2s;
+
+    box-shadow:0 2px 5px rgba(0,0,0,.15);
+}
+
+.switch input:checked + .slider{
+    background:#f59e0b;
+}
+
+.switch input:checked + .slider:before{
+    transform:translateX(20px);
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.info-list{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.info-item{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:11px;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:10px;
+}
+
+.info-icon{
+    width:35px;
+    height:35px;
+
+    border-radius:8px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#fff7ed;
+
+    font-size:17px;
+}
+
+.info-item strong{
+    display:block;
+
+    font-size:12px;
+}
+
+.info-item small{
+    display:block;
+
+    color:#64748b;
+
+    font-size:10px;
+
+    margin-top:2px;
+}
+
+
+/* =========================================================
+   DANGER ZONE
+========================================================= */
+
+.danger-zone{
+    border-color:#fecaca;
+}
+
+.danger-zone .card-header-label{
+    color:#dc2626;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    background:#101827;
+
+    color:#fff;
+
+    padding:13px 17px;
+
+    border-radius:10px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.20);
+
+    transform:translateY(20px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.25s;
+
+    z-index:2000;
+}
+
+.toast.show{
+    transform:translateY(0);
+
+    opacity:1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .settings-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        transform:translateX(-100%);
+
+        transition:.25s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .search-dashboard{
+        display:none;
+    }
+
+    .user-name{
+        display:none;
+    }
+
+    .content{
+        padding:20px 15px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .page-header{
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .page-header h1{
+        font-size:24px;
+    }
+
+    .actions{
+        justify-content:stretch;
+
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <a
+            href="dashboard.html"
+            class="batiflow-logo">
+
+            <svg
+                class="batiflow-logo-icon"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg">
+
+                <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    fill="#111827"
+                    stroke="#F59E0B"
+                    stroke-width="2.5"/>
+
+                <path
+                    d="M25 69V39L50 22L75 39V69"
+                    fill="none"
+                    stroke="#FFFFFF"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+
+                <path
+                    d="M50 30V69"
+                    fill="none"
+                    stroke="#F59E0B"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+                <path
+                    d="M30 56C39 49 45 61 54 54C61 49 66 43 72 47"
+                    fill="none"
+                    stroke="#F59E0B"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+                <circle
+                    cx="72"
+                    cy="47"
+                    r="4"
+                    fill="#F59E0B"/>
+
+                <path
+                    d="M22 72H78"
+                    fill="none"
+                    stroke="#FFFFFF"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <span class="batiflow-logo-text">
+                <span class="bati">BATI</span><span class="flow">FLOW</span>
+            </span>
+
+            <span class="batiflow-logo-subtitle">
+                CONSTRUCTION MANAGEMENT
+            </span>
+
+        </a>
+
+    </div>
+
+
+    <nav class="nav">
+
+        <div class="nav-title">
+            Principal
+        </div>
+
+
+        <a
+            href="dashboard.html"
+            class="nav-link">
+
+            <span>🏠</span>
+            Tableau de bord
+
+        </a>
+
+
+        <a
+            href="chantiers.html"
+            class="nav-link">
+
+            <span>🏗️</span>
+            Chantiers
+
+        </a>
+
+
+        <a
+            href="dqe.html"
+            class="nav-link">
+
+            <span>📋</span>
+            DQE &amp; Métré
+
+        </a>
+
+
+        <a
+            href="devis.html"
+            class="nav-link">
+
+            <span>💰</span>
+            Devis
+
+        </a>
+
+
+        <div class="nav-separator"></div>
+
+
+        <div class="nav-title">
+            Outils BTP
+        </div>
+
+
+        <a
+            href="calculator.html"
+            class="nav-link">
+
+            <span>🧮</span>
+            Calculateur BTP
+
+        </a>
+
+
+        <a
+            href="mortar.html"
+            class="nav-link">
+
+            <span>🧱</span>
+            Mortier
+
+        </a>
+
+
+        <a
+            href="masonry.html"
+            class="nav-link">
+
+            <span>🏠</span>
+            Maçonnerie
+
+        </a>
+
+
+        <a
+            href="slab.html"
+            class="nav-link">
+
+            <span>📐</span>
+            Dalle
+
+        </a>
+
+
+        <a
+            href="poteaux-poutres.html"
+            class="nav-link">
+
+            <span>🏛️</span>
+            Poteaux &amp; Poutres
+
+        </a>
+
+
+        <div class="nav-separator"></div>
+
+
+        <div class="nav-title">
+            Gestion
+        </div>
+
+
+        <a
+            href="clients.html"
+            class="nav-link">
+
+            <span>👥</span>
+            Clients
+
+        </a>
+
+
+        <a
+            href="materiaux.html"
+            class="nav-link">
+
+            <span>📦</span>
+            Matériaux
+
+        </a>
+
+
+        <a
+            href="documents.html"
+            class="nav-link">
+
+            <span>📁</span>
+            Documents
+
+        </a>
+
+
+        <a
+            href="parametres.html"
+            class="nav-link active">
+
+            <span>⚙️</span>
+            Paramètres
+
+        </a>
+
+
+        <a
+            href="login.html"
+            class="nav-link logout">
+
+            <span>🚪</span>
+            Déconnexion
+
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuBtn">
+
+                ☰
+
+            </button>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="search-dashboard">
+
+                <span>🔎</span>
+
+                <input
+                    type="search"
+                    placeholder="Rechercher...">
+
+            </div>
+
+
+            <div class="notification">
+                🔔
+            </div>
+
+
+            <div class="user">
+
+                <div
+                    class="avatar"
+                    id="avatar">
+
+                    U
+
+                </div>
+
+                <div
+                    class="user-name"
+                    id="topUserName">
+
+                    Utilisateur
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+
+    <div class="content">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div>
+
+                <div class="eyebrow">
+                    CONFIGURATION
+                </div>
+
+                <h1>
+                    Paramètres
+                </h1>
+
+                <p>
+                    Configurez votre espace de travail BATIFLOW.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <div class="settings-grid">
+
+
+            <!-- =================================================
+                 COLONNE PRINCIPALE
+            ================================================== -->
+
+            <div>
+
+
+                <!-- PROFIL -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-header-label">
+                            PROFIL UTILISATEUR
+                        </div>
+
+                        <h2>
+                            Informations personnelles
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="profile-box">
+
+                            <div
+                                class="profile-avatar"
+                                id="profileAvatar">
+
+                                U
+
+                            </div>
+
+                            <div class="profile-info">
+
+                                <h3 id="profileName">
+                                    Utilisateur
+                                </h3>
+
+                                <p>
+                                    Administrateur BATIFLOW
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="form-grid"
+                            style="margin-top:22px;">
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Nom / prénom
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nomUtilisateur"
+                                    placeholder="Votre nom">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Téléphone
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="telephone"
+                                    placeholder="+228 XX XX XX XX">
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="votre@email.com">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="actions">
+
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                onclick="sauvegarderProfil()">
+
+                                💾 Enregistrer le profil
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ENTREPRISE -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-header-label">
+                            ENTREPRISE
+                        </div>
+
+                        <h2>
+                            Informations de l'entreprise
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Nom de l'entreprise
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="entreprise"
+                                    placeholder="Ex : LMBAT GROUP">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Pays
+                                </label>
+
+                                <select id="pays">
+
+                                    <option value="Togo">
+                                        🇹🇬 Togo
+                                    </option>
+
+                                    <option value="Benin">
+                                        🇧🇯 Bénin
+                                    </option>
+
+                                    <option value="Ghana">
+                                        🇬🇭 Ghana
+                                    </option>
+
+                                    <option value="Cote d'Ivoire">
+                                        🇨🇮 Côte d'Ivoire
+                                    </option>
+
+                                    <option value="Senegal">
+                                        🇸🇳 Sénégal
+                                    </option>
+
+                                    <option value="Burkina Faso">
+                                        🇧🇫 Burkina Faso
+                                    </option>
+
+                                    <option value="Mali">
+                                        🇲🇱 Mali
+                                    </option>
+
+                                    <option value="Niger">
+                                        🇳🇪 Niger
+                                    </option>
+
+                                    <option value="Guinee">
+                                        🇬🇳 Guinée
+                                    </option>
+
+                                    <option value="Cameroun">
+                                        🇨🇲 Cameroun
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Ville
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="ville"
+                                    placeholder="Ex : Lomé">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Devise
+                                </label>
+
+                                <select id="devise">
+
+                                    <option value="FCFA">
+                                        FCFA
+                                    </option>
+
+                                    <option value="GHS">
+                                        GHS
+                                    </option>
+
+                                    <option value="USD">
+                                        USD
+                                    </option>
+
+                                    <option value="EUR">
+                                        EUR
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    Adresse
+                                </label>
+
+                                <textarea
+                                    id="adresse"
+                                    placeholder="Adresse de l'entreprise"></textarea>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="actions">
+
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                onclick="sauvegarderEntreprise()">
+
+                                💾 Enregistrer l'entreprise
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- PREFERENCES -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-header-label">
+                            PRÉFÉRENCES
+                        </div>
+
+                        <h2>
+                            Préférences de BATIFLOW
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+
+                        <div class="option-row">
+
+                            <div class="option-info">
+
+                                <strong>
+                                    Notifications
+                                </strong>
+
+                                <small>
+                                    Recevoir les notifications de BATIFLOW.
+                                </small>
+
+                            </div>
+
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="notifications">
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="option-row">
+
+                            <div class="option-info">
+
+                                <strong>
+                                    Enregistrer automatiquement
+                                </strong>
+
+                                <small>
+                                    Sauvegarder automatiquement les données locales.
+                                </small>
+
+                            </div>
+
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="autosave"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="option-row">
+
+                            <div class="option-info">
+
+                                <strong>
+                                    Confirmation avant suppression
+                                </strong>
+
+                                <small>
+                                    Demander une confirmation avant de supprimer.
+                                </small>
+
+                            </div>
+
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="confirmationSuppression"
+                                    checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="actions">
+
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                onclick="sauvegarderPreferences()">
+
+                                💾 Enregistrer les préférences
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- =================================================
+                 COLONNE DROITE
+            ================================================== -->
+
+            <div>
+
+
+                <!-- INFORMATIONS -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-header-label">
+                            ESPACE BATIFLOW
+                        </div>
+
+                        <h2>
+                            Informations
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="info-list">
+
+
+                            <div class="info-item">
+
+                                <div class="info-icon">
+                                    🏗️
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Gestion BTP
+                                    </strong>
+
+                                    <small>
+                                        Chantiers, DQE et devis
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-icon">
+                                    📦
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Matériaux
+                                    </strong>
+
+                                    <small>
+                                        Gestion des matériaux
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-icon">
+                                    📁
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Documents
+                                    </strong>
+
+                                    <small>
+                                        Documents BTP
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-icon">
+                                    🌍
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Version Afrique
+                                    </strong>
+
+                                    <small>
+                                        Préparé pour plusieurs pays africains
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- DONNEES -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-header-label">
+                            DONNÉES
+                        </div>
+
+                        <h2>
+                            Gestion des données
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+
+                        <div class="option-row">
+
+                            <div class="option-info">
+
+                                <strong>
+                                    Exporter les paramètres
+                                </strong>
+
+                                <small>
+                                    Télécharger une copie de votre configuration.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            style="width:100%;"
+                            onclick="exporterParametres()">
+
+                            📥 Exporter
+
+                        </button>
+
+
+                        <div style="height:10px;"></div>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            style="width:100%;"
+                            onclick="importerParametres()">
+
+                            📤 Importer
+
+                        </button>
+
+                        <input
+                            type="file"
+                            id="importFile"
+                            accept=".json"
+                            style="display:none;">
+
+                    </div>
+
+                </section>
+
+
+                <!-- DANGER -->
+
+                <section class="card danger-zone">
+
+                    <div class="card-header">
+
+                        <div class="card-header-label">
+                            ZONE SENSIBLE
+                        </div>
+
+                        <h2>
+                            Réinitialisation
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <p
+                            style="
+                            color:#64748b;
+                            font-size:11px;
+                            line-height:1.6;
+                            margin-bottom:15px;
+                            ">
+
+                            Cette action réinitialise uniquement
+                            les paramètres enregistrés par BATIFLOW.
+
+                        </p>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            style="width:100%;"
+                            onclick="reinitialiserParametres()">
+
+                            🗑️ Réinitialiser les paramètres
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+
+    Paramètres enregistrés.
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   BATIFLOW — PARAMÈTRES JS
+========================================================= */
+
+const SETTINGS_KEY = "batiflowParametres";
+
+
+/* =========================================================
+   UTILITAIRES
+========================================================= */
+
+function afficherToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+function obtenirParametres(){
+
+    try{
+
+        const data =
+            JSON.parse(
+                localStorage.getItem(
+                    SETTINGS_KEY
+                ) || "{}"
+            );
+
+        return data || {};
+
+    }catch(error){
+
+        console.error(error);
+
+        return {};
+
+    }
+
+}
+
+
+/* =========================================================
+   CHARGEMENT
+========================================================= */
+
+function chargerParametres(){
+
+    const p =
+        obtenirParametres();
+
+
+    /* PROFIL */
+
+    const nom =
+        p.nomUtilisateur ||
+        localStorage.getItem("userName") ||
+        localStorage.getItem("batiflowUserName") ||
+        "Utilisateur";
+
+
+    document.getElementById(
+        "nomUtilisateur"
+    ).value = nom;
+
+
+    document.getElementById(
+        "telephone"
+    ).value =
+        p.telephone || "";
+
+
+    document.getElementById(
+        "email"
+    ).value =
+        p.email || "";
+
+
+    /* ENTREPRISE */
+
+    document.getElementById(
+        "entreprise"
+    ).value =
+        p.entreprise || "";
+
+
+    document.getElementById(
+        "pays"
+    ).value =
+        p.pays || "Togo";
+
+
+    document.getElementById(
+        "ville"
+    ).value =
+        p.ville || "";
+
+
+    document.getElementById(
+        "devise"
+    ).value =
+        p.devise || "FCFA";
+
+
+    document.getElementById(
+        "adresse"
+    ).value =
+        p.adresse || "";
+
+
+    /* PREFERENCES */
+
+    document.getElementById(
+        "notifications"
+    ).checked =
+        p.notifications === true;
+
+
+    document.getElementById(
+        "autosave"
+    ).checked =
+        p.autosave !== false;
+
+
+    document.getElementById(
+        "confirmationSuppression"
+    ).checked =
+        p.confirmationSuppression !== false;
+
+
+    actualiserProfil();
+
+}
+
+
+/* =========================================================
+   PROFIL VISUEL
+========================================================= */
+
+function actualiserProfil(){
+
+    const nom =
+        document.getElementById(
+            "nomUtilisateur"
+        ).value.trim() ||
+        "Utilisateur";
+
+
+    document.getElementById(
+        "profileName"
+    ).textContent =
+        nom;
+
+
+    document.getElementById(
+        "topUserName"
+    ).textContent =
+        nom;
+
+
+    const initiale =
+        nom
+            .charAt(0)
+            .toUpperCase();
+
+
+    document.getElementById(
+        "avatar"
+    ).textContent =
+        initiale || "U";
+
+
+    document.getElementById(
+        "profileAvatar"
+    ).textContent =
+        initiale || "U";
+
+}
+
+
+/* =========================================================
+   SAUVEGARDE PROFIL
+========================================================= */
+
+function sauvegarderProfil(){
+
+    const p =
+        obtenirParametres();
+
+
+    p.nomUtilisateur =
+        document
+            .getElementById(
+                "nomUtilisateur"
+            )
+            .value
+            .trim();
+
+
+    p.telephone =
+        document
+            .getElementById(
+                "telephone"
+            )
+            .value
+            .trim();
+
+
+    p.email =
+        document
+            .getElementById(
+                "email"
+            )
+            .value
+            .trim();
+
+
+    localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(p)
+    );
+
+
+    /* Compatibilité avec le dashboard */
+
+    localStorage.setItem(
+        "userName",
+        p.nomUtilisateur || "Utilisateur"
+    );
+
+
+    localStorage.setItem(
+        "batiflowUserName",
+        p.nomUtilisateur || "Utilisateur"
+    );
+
+
+    actualiserProfil();
+
+    afficherToast(
+        "Profil enregistré avec succès."
+    );
+
+}
+
+
+/* =========================================================
+   SAUVEGARDE ENTREPRISE
+========================================================= */
+
+function sauvegarderEntreprise(){
+
+    const p =
+        obtenirParametres();
+
+
+    p.entreprise =
+        document
+            .getElementById(
+                "entreprise"
+            )
+            .value
+            .trim();
+
+
+    p.pays =
+        document
+            .getElementById(
+                "pays"
+            )
+            .value;
+
+
+    p.ville =
+        document
+            .getElementById(
+                "ville"
+            )
+            .value
+            .trim();
+
+
+    p.devise =
+        document
+            .getElementById(
+                "devise"
+            )
+            .value;
+
+
+    p.adresse =
+        document
+            .getElementById(
+                "adresse"
+            )
+            .value
+            .trim();
+
+
+    localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(p)
+    );
+
+
+    afficherToast(
+        "Informations de l'entreprise enregistrées."
+    );
+
+}
+
+
+/* =========================================================
+   PREFERENCES
+========================================================= */
+
+function sauvegarderPreferences(){
+
+    const p =
+        obtenirParametres();
+
+
+    p.notifications =
+        document.getElementById(
+            "notifications"
+        ).checked;
+
+
+    p.autosave =
+        document.getElementById(
+            "autosave"
+        ).checked;
+
+
+    p.confirmationSuppression =
+        document.getElementById(
+            "confirmationSuppression"
+        ).checked;
+
+
+    localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(p)
+    );
+
+
+    afficherToast(
+        "Préférences enregistrées."
+    );
+
+}
+
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+function exporterParametres(){
+
+    const p =
+        obtenirParametres();
+
+
+    const contenu =
+        JSON.stringify(
+            p,
+            null,
+            2
+        );
+
+
+    const blob =
+        new Blob(
+            [contenu],
+            {
+                type:"application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const a =
+        document.createElement("a");
+
+
+    a.href = url;
+
+    a.download =
+        "BATIFLOW_parametres.json";
+
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+
+    URL.revokeObjectURL(url);
+
+
+    afficherToast(
+        "Paramètres exportés."
+    );
+
+}
+
+
+/* =========================================================
+   IMPORT
+========================================================= */
+
+function importerParametres(){
+
+    document
+        .getElementById(
+            "importFile"
+        )
+        .click();
+
+}
+
+
+document
+    .getElementById(
+        "importFile"
+    )
+    .addEventListener(
+        "change",
+        function(event){
+
+            const file =
+                event.target.files[0];
+
+
+            if(!file){
+                return;
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(){
+
+                    try{
+
+                        const data =
+                            JSON.parse(
+                                reader.result
+                            );
+
+
+                        if(
+                            typeof data !==
+                            "object"
+                        ){
+
+                            throw new Error(
+                                "Format invalide"
+                            );
+
+                        }
+
+
+                        localStorage.setItem(
+                            SETTINGS_KEY,
+                            JSON.stringify(data)
+                        );
+
+
+                        chargerParametres();
+
+
+                        afficherToast(
+                            "Paramètres importés avec succès."
+                        );
+
+
+                    }catch(error){
+
+                        console.error(error);
+
+                        alert(
+                            "Le fichier de paramètres est invalide."
+                        );
+
+                    }
+
+                };
+
+
+            reader.readAsText(file);
+
+        }
+    );
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function reinitialiserParametres(){
+
+    const confirmation =
+        confirm(
+            "Voulez-vous vraiment réinitialiser les paramètres BATIFLOW ?"
+        );
+
+
+    if(!confirmation){
+        return;
+    }
+
+
+    localStorage.removeItem(
+        SETTINGS_KEY
+    );
+
+
+    localStorage.removeItem(
+        "userName"
+    );
+
+
+    localStorage.removeItem(
+        "batiflowUserName"
+    );
+
+
+    chargerParametres();
+
+
+    afficherToast(
+        "Paramètres réinitialisés."
+    );
+
+}
+
+
+/* =========================================================
+   MENU MOBILE
+========================================================= */
+
+document
+    .getElementById(
+        "menuBtn"
+    )
+    .addEventListener(
+        "click",
+        function(){
+
+            document
+                .getElementById(
+                    "sidebar"
+                )
+                .classList.toggle(
+                    "open"
+                );
+
+        }
+    );
+
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+chargerParametres();
+
+
+/* Mise à jour visuelle du nom */
+
+document
+    .getElementById(
+        "nomUtilisateur"
+    )
+    .addEventListener(
+        "input",
+        actualiserProfil
+    );
+
+</script>
+
+</body>
+</html>
