@@ -1,0 +1,1115 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Abonnement — BATIFLOW</title>
+
+<meta name="description" content="Gestion de l'abonnement BATIFLOW">
+
+<style>
+
+/* ================================
+   BASE
+================================ */
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#172033;
+}
+
+/* ================================
+   SIDEBAR
+================================ */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:260px;
+    height:100vh;
+    background:#101827;
+    color:white;
+    padding:20px 15px;
+    overflow-y:auto;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:5px 10px 25px;
+    font-size:23px;
+    font-weight:800;
+}
+
+.logo-mark{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:#f28c28;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    color:white;
+}
+
+.logo span{
+    color:#f28c28;
+}
+
+.menu-title{
+    color:#7f8ba3;
+    font-size:11px;
+    font-weight:bold;
+    margin:18px 10px 8px;
+    text-transform:uppercase;
+}
+
+.nav-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#cbd5e1;
+    text-decoration:none;
+    padding:12px 13px;
+    margin:4px 0;
+    border-radius:9px;
+    font-size:14px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.nav-link:hover{
+    background:#1b2638;
+    color:white;
+}
+
+.nav-link.active{
+    background:#f28c28;
+    color:white;
+}
+
+.nav-icon{
+    width:22px;
+    text-align:center;
+    font-size:17px;
+}
+
+/* ================================
+   MAIN
+================================ */
+
+.main{
+    margin-left:260px;
+    min-height:100vh;
+}
+
+/* ================================
+   TOPBAR
+================================ */
+
+.topbar{
+    height:70px;
+    background:white;
+    border-bottom:1px solid #e6e9ef;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:900;
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.mobile-menu{
+    display:none;
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:9px;
+    background:#101827;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.search-box{
+    width:320px;
+    height:40px;
+    border:1px solid #e1e5eb;
+    border-radius:9px;
+    padding:0 14px;
+    outline:none;
+    background:#f8fafc;
+}
+
+.search-box:focus{
+    border-color:#f28c28;
+}
+
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.user-avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#f28c28;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.user-text strong{
+    display:block;
+    font-size:14px;
+}
+
+.user-text small{
+    color:#7b8495;
+}
+
+/* ================================
+   CONTENT
+================================ */
+
+.content{
+    padding:30px;
+    max-width:1400px;
+    margin:auto;
+}
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    margin:0 0 7px;
+    font-size:28px;
+}
+
+.page-title p{
+    margin:0;
+    color:#6b7280;
+}
+
+/* ================================
+   STATUS
+================================ */
+
+.subscription-status{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:15px;
+    padding:22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:28px;
+}
+
+.status-left{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.status-icon{
+    width:52px;
+    height:52px;
+    border-radius:12px;
+    background:#fff4e8;
+    color:#f28c28;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.status-label{
+    color:#6b7280;
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.status-value{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.status-badge{
+    background:#fff4e8;
+    color:#d96d08;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* ================================
+   PRICING
+================================ */
+
+.section-title{
+    font-size:21px;
+    margin:0 0 18px;
+}
+
+.pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.plan{
+    background:white;
+    border:1px solid #e4e7ec;
+    border-radius:16px;
+    padding:25px;
+    position:relative;
+    transition:.2s;
+}
+
+.plan:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(16,24,39,.08);
+}
+
+.plan.popular{
+    border:2px solid #f28c28;
+}
+
+.popular-label{
+    position:absolute;
+    top:-12px;
+    right:18px;
+    background:#f28c28;
+    color:white;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.plan h3{
+    margin:0 0 8px;
+    font-size:19px;
+}
+
+.plan-description{
+    color:#6b7280;
+    font-size:13px;
+    min-height:38px;
+}
+
+.price{
+    margin:20px 0;
+}
+
+.price strong{
+    font-size:28px;
+}
+
+.price span{
+    color:#6b7280;
+    font-size:13px;
+}
+
+.features{
+    list-style:none;
+    padding:0;
+    margin:0 0 22px;
+}
+
+.features li{
+    margin:11px 0;
+    font-size:13px;
+    color:#374151;
+}
+
+.features li::before{
+    content:"✓";
+    color:#f28c28;
+    font-weight:bold;
+    margin-right:8px;
+}
+
+.plan-button{
+    width:100%;
+    height:43px;
+    border:none;
+    border-radius:9px;
+    background:#101827;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.plan-button:hover{
+    background:#f28c28;
+}
+
+.plan.popular .plan-button{
+    background:#f28c28;
+}
+
+.plan.popular .plan-button:hover{
+    background:#d96d08;
+}
+
+/* ================================
+   INFO CARDS
+================================ */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-top:28px;
+}
+
+.info-card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:15px;
+    padding:22px;
+}
+
+.info-card h3{
+    margin-top:0;
+    font-size:16px;
+}
+
+.info-card p{
+    color:#6b7280;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* ================================
+   FOOTER
+================================ */
+
+.footer{
+    text-align:center;
+    color:#8992a3;
+    font-size:12px;
+    padding:30px;
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+.mobile-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:950;
+}
+
+.mobile-overlay.show{
+    display:block;
+}
+
+@media(max-width:1100px){
+
+    .pricing-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:transform .25s ease;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .mobile-menu{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .search-box{
+        width:180px;
+    }
+
+    .user-area{
+        display:none;
+    }
+
+    .content{
+        padding:20px;
+    }
+
+    .subscription-status{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+}
+
+@media(max-width:600px){
+
+    .search-box{
+        width:140px;
+    }
+
+    .pricing-grid{
+        grid-template-columns:1fr;
+    }
+
+    .page-title h1{
+        font-size:23px;
+    }
+
+    .content{
+        padding:15px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- OVERLAY MOBILE -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <div class="logo-mark">B</div>
+        <div>BATI<span>FLOW</span></div>
+    </div>
+
+    <div class="menu-title">Principal</div>
+
+    <a href="dashboard.html" class="nav-link">
+        <span class="nav-icon">▦</span>
+        Tableau de bord
+    </a>
+
+    <a href="chantiers.html" class="nav-link">
+        <span class="nav-icon">⌂</span>
+        Chantiers
+    </a>
+
+    <a href="suivi-chantier.html" class="nav-link">
+        <span class="nav-icon">◷</span>
+        Suivi de chantier
+    </a>
+
+    <div class="menu-title">Études & Documents</div>
+
+    <a href="dqe.html" class="nav-link">
+        <span class="nav-icon">▤</span>
+        DQE & Métré
+    </a>
+
+    <a href="devis.html" class="nav-link">
+        <span class="nav-icon">▧</span>
+        Devis
+    </a>
+
+    <a href="documents.html" class="nav-link">
+        <span class="nav-icon">□</span>
+        Documents BTP
+    </a>
+
+    <div class="menu-title">Gestion</div>
+
+    <a href="clients.html" class="nav-link">
+        <span class="nav-icon">♙</span>
+        Clients
+    </a>
+
+    <a href="stocks.html" class="nav-link">
+        <span class="nav-icon">▥</span>
+        Stocks & Matériaux
+    </a>
+
+    <a href="equipe.html" class="nav-link">
+        <span class="nav-icon">♧</span>
+        Équipe & Personnel
+    </a>
+
+    <div class="menu-title">Finance</div>
+
+    <a href="finances.html" class="nav-link">
+        <span class="nav-icon">₣</span>
+        Finances
+    </a>
+
+    <a href="rentabilite.html" class="nav-link">
+        <span class="nav-icon">↗</span>
+        Rentabilité
+    </a>
+
+    <a href="pilotage-financier.html" class="nav-link">
+        <span class="nav-icon">◫</span>
+        Pilotage financier
+    </a>
+
+    <div class="menu-title">Compte</div>
+
+    <a href="abonnement.html" class="nav-link active">
+        <span class="nav-icon">◆</span>
+        Abonnement
+    </a>
+
+    <a href="parametres.html" class="nav-link">
+        <span class="nav-icon">⚙</span>
+        Paramètres
+    </a>
+
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+                type="button"
+                aria-label="Ouvrir le menu">
+                ☰
+            </button>
+
+            <input
+                class="search-box"
+                type="search"
+                placeholder="Rechercher..."
+            >
+
+        </div>
+
+        <div class="user-area">
+
+            <div class="user-avatar">U</div>
+
+            <div class="user-text">
+                <strong>Utilisateur BATIFLOW</strong>
+                <small>Compte professionnel</small>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- CONTENT -->
+    <section class="content">
+
+        <div class="page-title">
+            <h1>Mon abonnement</h1>
+            <p>Gérez votre accès à BATIFLOW et choisissez la formule adaptée à votre activité.</p>
+        </div>
+
+        <!-- STATUT -->
+        <div class="subscription-status">
+
+            <div class="status-left">
+
+                <div class="status-icon">◆</div>
+
+                <div>
+                    <div class="status-label">Statut actuel</div>
+                    <div class="status-value" id="subscriptionStatus">
+                        Essai gratuit
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <span class="status-badge" id="statusBadge">
+                    EN COURS
+                </span>
+            </div>
+
+        </div>
+
+        <!-- OFFRES -->
+        <h2 class="section-title">
+            Choisissez votre abonnement
+        </h2>
+
+        <div class="pricing-grid">
+
+            <!-- MENSUEL -->
+            <div class="plan">
+
+                <h3>Mensuel</h3>
+
+                <div class="plan-description">
+                    Pour les professionnels qui souhaitent payer chaque mois.
+                </div>
+
+                <div class="price">
+                    <strong>5 000</strong>
+                    <span> FCFA / mois</span>
+                </div>
+
+                <ul class="features">
+                    <li>Accès BATIFLOW</li>
+                    <li>Gestion des chantiers</li>
+                    <li>DQE & Métré</li>
+                    <li>Création de devis</li>
+                    <li>Suivi financier</li>
+                </ul>
+
+                <button
+                    class="plan-button"
+                    onclick="choisirPlan('mensuel')">
+                    S'abonner
+                </button>
+
+            </div>
+
+            <!-- TRIMESTRIEL -->
+            <div class="plan popular">
+
+                <div class="popular-label">
+                    POPULAIRE
+                </div>
+
+                <h3>Trimestriel</h3>
+
+                <div class="plan-description">
+                    Une formule pratique pour travailler plusieurs mois.
+                </div>
+
+                <div class="price">
+                    <strong>13 500</strong>
+                    <span> FCFA / 3 mois</span>
+                </div>
+
+                <ul class="features">
+                    <li>Accès BATIFLOW</li>
+                    <li>Gestion des chantiers</li>
+                    <li>DQE & Métré</li>
+                    <li>Création de devis</li>
+                    <li>Suivi financier</li>
+                </ul>
+
+                <button
+                    class="plan-button"
+                    onclick="choisirPlan('trimestriel')">
+                    S'abonner
+                </button>
+
+            </div>
+
+            <!-- SEMESTRIEL -->
+            <div class="plan">
+
+                <h3>Semestriel</h3>
+
+                <div class="plan-description">
+                    Pour les entreprises qui veulent une période plus longue.
+                </div>
+
+                <div class="price">
+                    <strong>25 000</strong>
+                    <span> FCFA / 6 mois</span>
+                </div>
+
+                <ul class="features">
+                    <li>Accès BATIFLOW</li>
+                    <li>Gestion des chantiers</li>
+                    <li>DQE & Métré</li>
+                    <li>Création de devis</li>
+                    <li>Suivi financier</li>
+                </ul>
+
+                <button
+                    class="plan-button"
+                    onclick="choisirPlan('semestriel')">
+                    S'abonner
+                </button>
+
+            </div>
+
+            <!-- ANNUEL -->
+            <div class="plan">
+
+                <h3>Annuel</h3>
+
+                <div class="plan-description">
+                    Une formule annuelle pour les entreprises.
+                </div>
+
+                <div class="price">
+                    <strong>45 000</strong>
+                    <span> FCFA / an</span>
+                </div>
+
+                <ul class="features">
+                    <li>Accès BATIFLOW</li>
+                    <li>Gestion des chantiers</li>
+                    <li>DQE & Métré</li>
+                    <li>Création de devis</li>
+                    <li>Suivi financier</li>
+                </ul>
+
+                <button
+                    class="plan-button"
+                    onclick="choisirPlan('annuel')">
+                    S'abonner
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- INFORMATIONS -->
+        <div class="info-grid">
+
+            <div class="info-card">
+
+                <h3>🎁 Essai gratuit</h3>
+
+                <p>
+                    Chaque utilisateur pourra bénéficier d'une période
+                    d'essai gratuite lors de sa première inscription.
+                    Une fois l'essai utilisé, un abonnement sera nécessaire
+                    pour continuer à utiliser les fonctionnalités premium.
+                </p>
+
+            </div>
+
+            <div class="info-card">
+
+                <h3>🔐 Sécurité</h3>
+
+                <p>
+                    Le statut de l'abonnement sera vérifié côté serveur
+                    dans la version commerciale de BATIFLOW afin d'éviter
+                    toute modification frauduleuse du statut.
+                </p>
+
+            </div>
+
+            <div class="info-card">
+
+                <h3>💳 Paiement</h3>
+
+                <p>
+                    Cette interface est actuellement prête à recevoir
+                    le système de paiement. Le paiement réel sera connecté
+                    dans l'étape suivante.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="footer">
+        BATIFLOW — Gestion professionnelle BTP · V1.0
+    </div>
+
+</main>
+
+
+<script>
+
+/* =====================================
+   MENU MOBILE
+===================================== */
+
+function activerMenuMobile(){
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const mobileOverlay =
+        document.getElementById("mobileOverlay");
+
+    if(!mobileMenu || !sidebar){
+        return;
+    }
+
+    function ouvrirMenu(){
+
+        sidebar.classList.add("open");
+
+        if(mobileOverlay){
+            mobileOverlay.classList.add("show");
+        }
+
+        mobileMenu.textContent = "✕";
+
+        document.body.style.overflow = "hidden";
+    }
+
+    function fermerMenu(){
+
+        sidebar.classList.remove("open");
+
+        if(mobileOverlay){
+            mobileOverlay.classList.remove("show");
+        }
+
+        mobileMenu.textContent = "☰";
+
+        document.body.style.overflow = "";
+    }
+
+    mobileMenu.addEventListener("click", function(){
+
+        if(sidebar.classList.contains("open")){
+            fermerMenu();
+        }else{
+            ouvrirMenu();
+        }
+
+    });
+
+    if(mobileOverlay){
+
+        mobileOverlay.addEventListener(
+            "click",
+            fermerMenu
+        );
+
+    }
+
+    document.querySelectorAll(".nav-link").forEach(function(link){
+
+        link.addEventListener("click", function(){
+
+            if(window.innerWidth <= 800){
+                fermerMenu();
+            }
+
+        });
+
+    });
+
+    window.addEventListener("resize", function(){
+
+        if(window.innerWidth > 800){
+            fermerMenu();
+        }
+
+    });
+
+}
+
+
+/* =====================================
+   ABONNEMENT
+===================================== */
+
+const PLAN_STORAGE_KEY =
+    "batiflowSubscription";
+
+
+function choisirPlan(plan){
+
+    const plans = {
+
+        mensuel:{
+            nom:"Mensuel",
+            prix:5000,
+            duree:"1 mois"
+        },
+
+        trimestriel:{
+            nom:"Trimestriel",
+            prix:13500,
+            duree:"3 mois"
+        },
+
+        semestriel:{
+            nom:"Semestriel",
+            prix:25000,
+            duree:"6 mois"
+        },
+
+        annuel:{
+            nom:"Annuel",
+            prix:45000,
+            duree:"12 mois"
+        }
+
+    };
+
+    const selection = plans[plan];
+
+    if(!selection){
+        return;
+    }
+
+    /*
+       Pour le moment nous enregistrons uniquement
+       la sélection.
+
+       Le vrai paiement sera connecté plus tard.
+    */
+
+    const abonnement = {
+
+        plan:plan,
+
+        nom:selection.nom,
+
+        prix:selection.prix,
+
+        duree:selection.duree,
+
+        statut:"en_attente",
+
+        dateSelection:new Date().toISOString()
+
+    };
+
+    localStorage.setItem(
+        PLAN_STORAGE_KEY,
+        JSON.stringify(abonnement)
+    );
+
+    alert(
+        "Formule sélectionnée : " +
+        selection.nom +
+        "\n\n" +
+        "Montant : " +
+        selection.prix.toLocaleString("fr-FR") +
+        " FCFA\n\n" +
+        "Le système de paiement sera connecté dans l'étape suivante."
+    );
+
+}
+
+
+/* =====================================
+   CHARGER ABONNEMENT
+===================================== */
+
+function chargerAbonnement(){
+
+    const data =
+        localStorage.getItem(PLAN_STORAGE_KEY);
+
+    if(!data){
+        return;
+    }
+
+    try{
+
+        const abonnement =
+            JSON.parse(data);
+
+        const status =
+            document.getElementById(
+                "subscriptionStatus"
+            );
+
+        const badge =
+            document.getElementById(
+                "statusBadge"
+            );
+
+        if(abonnement.statut === "actif"){
+
+            status.textContent =
+                abonnement.nom;
+
+            badge.textContent =
+                "ACTIF";
+
+        }else{
+
+            status.textContent =
+                "Paiement en attente";
+
+            badge.textContent =
+                "EN ATTENTE";
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Erreur abonnement :",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   INITIALISATION
+===================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        activerMenuMobile();
+
+        chargerAbonnement();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
