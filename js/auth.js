@@ -1,142 +1,176 @@
 // ======================================
-// BATIFLOW - AUTHENTIFICATION V1
+// BATIFLOW — AUTHENTIFICATION SUPABASE
 // ======================================
 
-const registerForm = document.getElementById("registerForm");
-const loginForm = document.getElementById("loginForm");
+
+// ======================================
+// CONFIGURATION SUPABASE
+// ======================================
+
+const BATIFLOW_SUPABASE_URL =
+    "https://bwimievqpgaifjwbzayb.supabase.co";
+
+const BATIFLOW_SUPABASE_KEY =
+    "sb_publishable_D6v3wBJQVQypsPNyRZPfsA_PVQ_u-PX";
 
 
-// ================================
-// INSCRIPTION
-// ================================
+// ======================================
+// CLIENT SUPABASE
+// ======================================
 
-if (registerForm) {
-
-    registerForm.addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        const name =
-            document.getElementById("registerName").value.trim();
-
-        const email =
-            document.getElementById("registerEmail").value.trim();
-
-        const password =
-            document.getElementById("registerPassword").value;
-
-        const passwordConfirm =
-            document.getElementById("registerPasswordConfirm").value;
-
-        const message =
-            document.getElementById("registerMessage");
+const batiflowSupabase =
+    window.supabase.createClient(
+        BATIFLOW_SUPABASE_URL,
+        BATIFLOW_SUPABASE_KEY
+    );
 
 
-        if (password !== passwordConfirm) {
+// ======================================
+// PROTÉGER UNE PAGE
+// ======================================
 
-            message.textContent =
-                "Les mots de passe ne correspondent pas.";
+async function protegerPageBATIFLOW() {
 
-            return;
-        }
+    try {
 
-
-        const user = {
-
-            name: name,
-            email: email,
-            password: password
-
-        };
-
-
-        localStorage.setItem(
-            "batiflowUser",
-            JSON.stringify(user)
-        );
+        const {
+            data,
+            error
+        } =
+            await batiflowSupabase
+                .auth
+                .getSession();
 
 
-        message.textContent =
-            "Compte créé avec succès !";
+        if (error) {
 
-
-        setTimeout(function() {
-
-            window.location.href = "login.html";
-
-        }, 1000);
-
-    });
-
-}
-
-
-// ================================
-// CONNEXION
-// ================================
-
-if (loginForm) {
-
-    loginForm.addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        const email =
-            document.getElementById("loginEmail").value.trim();
-
-        const password =
-            document.getElementById("loginPassword").value;
-
-        const message =
-            document.getElementById("loginMessage");
-
-
-        const savedUser =
-            localStorage.getItem("batiflowUser");
-
-
-        if (!savedUser) {
-
-            message.textContent =
-                "Aucun compte trouvé. Créez d'abord un compte.";
-
-            return;
-        }
-
-
-        const user =
-            JSON.parse(savedUser);
-
-
-        if (
-            email === user.email &&
-            password === user.password
-        ) {
-
-            localStorage.setItem(
-                "batiflowLoggedIn",
-                "true"
+            console.error(
+                "Erreur Supabase :",
+                error
             );
 
+            window.location.href =
+                "connexion.html";
 
-            message.textContent =
-                "Connexion réussie !";
-
-
-            setTimeout(function() {
-
-                window.location.href =
-                    "dashboard.html";
-
-            }, 800);
-
-        } else {
-
-            message.textContent =
-                "E-mail ou mot de passe incorrect.";
-
+            return null;
         }
 
-    });
 
+        const session =
+            data.session;
+
+
+        // Aucun utilisateur connecté
+        if (!session) {
+
+            window.location.href =
+                "connexion.html";
+
+            return null;
+        }
+
+
+        // Utilisateur connecté
+        return session;
+
+
+    } catch (error) {
+
+        console.error(
+            "Erreur authentification :",
+            error
+        );
+
+        window.location.href =
+            "connexion.html";
+
+        return null;
+    }
 }
+
+
+// ======================================
+// RÉCUPÉRER L'UTILISATEUR
+// ======================================
+
+async function obtenirUtilisateurBATIFLOW() {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await batiflowSupabase
+                .auth
+                .getUser();
+
+
+        if (error) {
+
+            console.error(
+                "Erreur utilisateur :",
+                error
+            );
+
+            return null;
+        }
+
+
+        return data.user;
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        return null;
+    }
+}
+
+
+// ======================================
+// DÉCONNEXION
+// ======================================
+
+async function deconnecterBATIFLOW() {
+
+    try {
+
+        await batiflowSupabase
+            .auth
+            .signOut();
+
+    } catch (error) {
+
+        console.error(
+            "Erreur déconnexion :",
+            error
+        );
+
+    }
+
+
+    // Retour à la connexion
+    window.location.href =
+        "connexion.html";
+}
+
+
+// ======================================
+// ÉCOUTER LES CHANGEMENTS DE SESSION
+// ======================================
+
+batiflowSupabase
+    .auth
+    .onAuthStateChange(
+        function(event, session) {
+
+            console.log(
+                "BATIFLOW Auth :",
+                event
+            );
+
+        }
+    );
+
