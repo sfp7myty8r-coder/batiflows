@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Tableau de bord — BATIFLOW</title>
 
@@ -11,6 +16,16 @@
     name="description"
     content="BATIFLOW — Plateforme professionnelle de gestion BTP."
 >
+
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="auth.js"></script>
+
 
 <style>
 
@@ -64,7 +79,7 @@ input{
 }
 
 
-/* Logo */
+/* LOGO */
 
 .logo{
     height:80px;
@@ -95,7 +110,7 @@ input{
 }
 
 
-/* Navigation */
+/* NAVIGATION */
 
 .nav{
     padding:18px 12px;
@@ -157,6 +172,7 @@ input{
 
 .nav-separator{
     height:1px;
+
     background:rgba(255,255,255,.08);
 
     margin:14px 10px;
@@ -220,7 +236,7 @@ input{
 }
 
 
-/* Menu mobile */
+/* MENU MOBILE */
 
 .mobile-menu{
     display:none;
@@ -246,7 +262,7 @@ input{
 }
 
 
-/* Zone gauche */
+/* ZONE GAUCHE */
 
 .topbar-left{
     display:flex;
@@ -254,7 +270,7 @@ input{
 }
 
 
-/* Recherche */
+/* RECHERCHE */
 
 .search-box{
     width:320px;
@@ -289,7 +305,7 @@ input{
 }
 
 
-/* Profil */
+/* PROFIL */
 
 .topbar-right{
     display:flex;
@@ -416,7 +432,9 @@ input{
 
     padding:20px;
 
-    box-shadow:0 3px 12px rgba(15,23,42,.04);
+    box-shadow:
+        0 3px 12px
+        rgba(15,23,42,.04);
 }
 
 .stat-top{
@@ -481,7 +499,9 @@ input{
 
     padding:22px;
 
-    box-shadow:0 3px 12px rgba(15,23,42,.04);
+    box-shadow:
+        0 3px 12px
+        rgba(15,23,42,.04);
 }
 
 .card-header{
@@ -838,9 +858,12 @@ input{
 
     font-size:13px;
 
-    box-shadow:0 8px 30px rgba(0,0,0,.2);
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,.2);
 
     opacity:0;
+
     transform:translateY(20px);
 
     pointer-events:none;
@@ -967,7 +990,7 @@ input{
 
 
 /* =========================================================
-   TRÈS PETIT ÉCRAN
+   TRES PETIT ECRAN
 ========================================================= */
 
 @media(max-width:420px){
@@ -1000,13 +1023,24 @@ input{
 
 
 <!-- =====================================================
+     PROTECTION SUPABASE
+===================================================== -->
+
+<script>
+
+protegerPageBATIFLOW();
+
+</script>
+
+
+<!-- =====================================================
      OVERLAY MOBILE
 ===================================================== -->
 
 <div
     class="mobile-overlay"
-    id="mobileOverlay">
-</div>
+    id="mobileOverlay"
+></div>
 
 
 <!-- =====================================================
@@ -1223,9 +1257,12 @@ input{
         <div class="nav-separator"></div>
 
 
+        <!-- DECONNEXION SUPABASE -->
+
         <a
-            href="login.html"
+            href="#"
             class="nav-link"
+            id="logoutButton"
         >
             <span class="nav-icon">⇥</span>
             Déconnexion
@@ -1286,7 +1323,7 @@ input{
                     class="user-name"
                     id="userName"
                 >
-                    Utilisateur
+                    Chargement...
                 </div>
 
                 <div
@@ -1357,6 +1394,7 @@ input{
                 <div class="stat-top">
 
                     <div>
+
                         <div class="stat-label">
                             Chantiers
                         </div>
@@ -1367,6 +1405,7 @@ input{
                         >
                             0
                         </div>
+
                     </div>
 
                     <div class="stat-icon">
@@ -1383,6 +1422,7 @@ input{
                 <div class="stat-top">
 
                     <div>
+
                         <div class="stat-label">
                             Devis
                         </div>
@@ -1393,6 +1433,7 @@ input{
                         >
                             0
                         </div>
+
                     </div>
 
                     <div class="stat-icon">
@@ -1409,6 +1450,7 @@ input{
                 <div class="stat-top">
 
                     <div>
+
                         <div class="stat-label">
                             Clients
                         </div>
@@ -1419,6 +1461,7 @@ input{
                         >
                             0
                         </div>
+
                     </div>
 
                     <div class="stat-icon">
@@ -1435,6 +1478,7 @@ input{
                 <div class="stat-top">
 
                     <div>
+
                         <div class="stat-label">
                             DQE
                         </div>
@@ -1445,6 +1489,7 @@ input{
                         >
                             0
                         </div>
+
                     </div>
 
                     <div class="stat-icon">
@@ -1692,7 +1737,10 @@ input{
              INDICATEURS
         ================================================== -->
 
-        <div class="card" style="margin-bottom:20px;">
+        <div
+            class="card"
+            style="margin-bottom:20px;"
+        >
 
             <div class="card-header">
 
@@ -1759,7 +1807,7 @@ input{
 
 
         <!-- =================================================
-             ALERTES + ACTIVITÉ
+             ALERTES + ACTIVITE
         ================================================== -->
 
         <div class="dashboard-grid">
@@ -1945,10 +1993,12 @@ function chargerChantiers(){
             "batiflowChantiers"
         );
 
+
     const element =
         document.getElementById(
             "statChantiers"
         );
+
 
     if(element){
 
@@ -1962,6 +2012,7 @@ function chargerChantiers(){
         document.getElementById(
             "recentChantiers"
         );
+
 
     if(!container){
         return;
@@ -1982,52 +2033,59 @@ function chargerChantiers(){
 
 
     const derniers =
-        chantiers.slice(-5).reverse();
+        chantiers
+            .slice(-5)
+            .reverse();
 
 
     container.innerHTML =
-        derniers.map(function(chantier){
+        derniers
+            .map(function(chantier){
 
-            const nom =
-                chantier.nom ||
-                chantier.name ||
-                "Chantier sans nom";
+                const nom =
+                    chantier.nom ||
+                    chantier.name ||
+                    "Chantier sans nom";
 
-            const client =
-                chantier.client ||
-                chantier.clientNom ||
-                "Client non renseigné";
 
-            const statut =
-                chantier.statut ||
-                chantier.status ||
-                "En cours";
+                const client =
+                    chantier.client ||
+                    chantier.clientNom ||
+                    "Client non renseigné";
 
-            return `
 
-                <div class="chantier-item">
+                const statut =
+                    chantier.statut ||
+                    chantier.status ||
+                    "En cours";
 
-                    <div>
 
-                        <div class="chantier-name">
-                            ${escapeHTML(nom)}
+                return `
+
+                    <div class="chantier-item">
+
+                        <div>
+
+                            <div class="chantier-name">
+                                ${escapeHTML(nom)}
+                            </div>
+
+                            <div class="chantier-client">
+                                ${escapeHTML(client)}
+                            </div>
+
                         </div>
 
-                        <div class="chantier-client">
-                            ${escapeHTML(client)}
+                        <div class="chantier-status">
+                            ${escapeHTML(statut)}
                         </div>
 
                     </div>
 
-                    <div class="chantier-status">
-                        ${escapeHTML(statut)}
-                    </div>
+                `;
 
-                </div>
-
-            `;
-
-        }).join("");
+            })
+            .join("");
 
 }
 
@@ -2043,10 +2101,12 @@ function chargerClients(){
             "batiflowClients"
         );
 
+
     const element =
         document.getElementById(
             "statClients"
         );
+
 
     if(element){
 
@@ -2069,10 +2129,12 @@ function chargerDevis(){
             "batiflowDevis"
         );
 
+
     const element =
         document.getElementById(
             "statDevis"
         );
+
 
     if(element){
 
@@ -2095,10 +2157,12 @@ function chargerDQE(){
             "batiflowDQEs"
         );
 
+
     const element =
         document.getElementById(
             "statDQE"
         );
+
 
     if(element){
 
@@ -2112,6 +2176,7 @@ function chargerDQE(){
         document.getElementById(
             "recentDQE"
         );
+
 
     if(!container){
         return;
@@ -2132,51 +2197,58 @@ function chargerDQE(){
 
 
     const derniers =
-        dqe.slice(-5).reverse();
+        dqe
+            .slice(-5)
+            .reverse();
 
 
     container.innerHTML =
-        derniers.map(function(item){
+        derniers
+            .map(function(item){
 
-            const reference =
-                item.reference ||
-                "DQE";
+                const reference =
+                    item.reference ||
+                    "DQE";
 
-            const client =
-                item.clientNom ||
-                item.client ||
-                "Client non renseigné";
 
-            const montant =
-                item.totalTTC ??
-                item.totalHT ??
-                0;
+                const client =
+                    item.clientNom ||
+                    item.client ||
+                    "Client non renseigné";
 
-            return `
 
-                <div class="dqe-item">
+                const montant =
+                    item.totalTTC ??
+                    item.totalHT ??
+                    0;
 
-                    <div>
 
-                        <div class="dqe-reference">
-                            ${escapeHTML(reference)}
+                return `
+
+                    <div class="dqe-item">
+
+                        <div>
+
+                            <div class="dqe-reference">
+                                ${escapeHTML(reference)}
+                            </div>
+
+                            <div class="dqe-client">
+                                ${escapeHTML(client)}
+                            </div>
+
                         </div>
 
-                        <div class="dqe-client">
-                            ${escapeHTML(client)}
+                        <div class="dqe-price">
+                            ${formatFCFA(montant)}
                         </div>
 
                     </div>
 
-                    <div class="dqe-price">
-                        ${formatFCFA(montant)}
-                    </div>
+                `;
 
-                </div>
-
-            `;
-
-        }).join("");
+            })
+            .join("");
 
 }
 
@@ -2209,6 +2281,7 @@ function chargerFinances(){
                 0
             );
 
+
         depenses +=
             Number(
                 item.depenses ??
@@ -2216,11 +2289,13 @@ function chargerFinances(){
                 0
             );
 
+
         benefice +=
             Number(
                 item.benefice ??
                 0
             );
+
 
         tresorerie +=
             Number(
@@ -2252,15 +2327,18 @@ function chargerFinances(){
             "financeCA"
         );
 
+
     const financeDepenses =
         document.getElementById(
             "financeDepenses"
         );
 
+
     const financeBenefice =
         document.getElementById(
             "financeBenefice"
         );
+
 
     const financeTresorerie =
         document.getElementById(
@@ -2275,6 +2353,7 @@ function chargerFinances(){
 
     }
 
+
     if(financeDepenses){
 
         financeDepenses.textContent =
@@ -2282,12 +2361,14 @@ function chargerFinances(){
 
     }
 
+
     if(financeBenefice){
 
         financeBenefice.textContent =
             formatFCFA(benefice);
 
     }
+
 
     if(financeTresorerie){
 
@@ -2310,10 +2391,12 @@ function chargerIndicateurs(){
             "batiflowEquipe"
         );
 
+
     const documents =
         lireStorage(
             "batiflowDocuments"
         );
+
 
     const stocks =
         lireStorage(
@@ -2326,10 +2409,12 @@ function chargerIndicateurs(){
             "indicatorEquipe"
         );
 
+
     const elementDocuments =
         document.getElementById(
             "indicatorDocuments"
         );
+
 
     const elementStocks =
         document.getElementById(
@@ -2344,12 +2429,14 @@ function chargerIndicateurs(){
 
     }
 
+
     if(elementDocuments){
 
         elementDocuments.textContent =
             documents.length;
 
     }
+
 
     if(elementStocks){
 
@@ -2371,6 +2458,7 @@ function chargerAlertes(){
         document.getElementById(
             "alerts"
         );
+
 
     if(!container){
         return;
@@ -2416,31 +2504,33 @@ function chargerAlertes(){
 
 
     container.innerHTML =
-        alertes.map(function(message){
+        alertes
+            .map(function(message){
 
-            return `
+                return `
 
-                <div class="alert">
+                    <div class="alert">
 
-                    <div class="alert-icon">
-                        ⚠
+                        <div class="alert-icon">
+                            ⚠
+                        </div>
+
+                        <div class="alert-text">
+                            ${escapeHTML(message)}
+                        </div>
+
                     </div>
 
-                    <div class="alert-text">
-                        ${escapeHTML(message)}
-                    </div>
+                `;
 
-                </div>
-
-            `;
-
-        }).join("");
+            })
+            .join("");
 
 }
 
 
 /* =========================================================
-   ACTIVITÉ
+   ACTIVITE
 ========================================================= */
 
 function chargerActivite(){
@@ -2449,6 +2539,7 @@ function chargerActivite(){
         document.getElementById(
             "activity"
         );
+
 
     if(!container){
         return;
@@ -2460,10 +2551,12 @@ function chargerActivite(){
             "batiflowChantiers"
         );
 
+
     const devis =
         lireStorage(
             "batiflowDevis"
         );
+
 
     const dqe =
         lireStorage(
@@ -2477,11 +2570,14 @@ function chargerActivite(){
     if(chantiers.length){
 
         activites.push({
+
             texte:
                 chantiers.length +
                 " chantier(s) enregistré(s)",
+
             date:
                 "Données BATIFLOW"
+
         });
 
     }
@@ -2490,11 +2586,14 @@ function chargerActivite(){
     if(devis.length){
 
         activites.push({
+
             texte:
                 devis.length +
                 " devis enregistré(s)",
+
             date:
                 "Données BATIFLOW"
+
         });
 
     }
@@ -2503,11 +2602,14 @@ function chargerActivite(){
     if(dqe.length){
 
         activites.push({
+
             texte:
                 dqe.length +
                 " DQE enregistré(s)",
+
             date:
                 "Données BATIFLOW"
+
         });
 
     }
@@ -2527,119 +2629,125 @@ function chargerActivite(){
 
 
     container.innerHTML =
-        activites.map(function(item){
+        activites
+            .map(function(item){
 
-            return `
+                return `
 
-                <div class="activity-item">
+                    <div class="activity-item">
 
-                    <div class="activity-icon">
-                        ✓
-                    </div>
-
-                    <div>
-
-                        <div class="activity-text">
-                            ${escapeHTML(item.texte)}
+                        <div class="activity-icon">
+                            ✓
                         </div>
 
-                        <div class="activity-date">
-                            ${escapeHTML(item.date)}
+                        <div>
+
+                            <div class="activity-text">
+                                ${escapeHTML(item.texte)}
+                            </div>
+
+                            <div class="activity-date">
+                                ${escapeHTML(item.date)}
+                            </div>
+
                         </div>
 
                     </div>
 
-                </div>
+                `;
 
-            `;
-
-        }).join("");
+            })
+            .join("");
 
 }
 
 
 /* =========================================================
-   UTILISATEUR
+   UTILISATEUR SUPABASE
 ========================================================= */
 
-function chargerUtilisateur(){
-
-    let utilisateur = null;
-
+async function chargerUtilisateur(){
 
     try{
 
-        utilisateur =
-            JSON.parse(
-                localStorage.getItem(
-                    "batiflowUtilisateur"
-                )
+        const utilisateur =
+            await obtenirUtilisateurBATIFLOW();
+
+
+        if(!utilisateur){
+
+            return;
+
+        }
+
+
+        const metadata =
+            utilisateur.user_metadata || {};
+
+
+        const nom =
+            metadata.full_name ||
+            metadata.name ||
+            utilisateur.email ||
+            "Utilisateur";
+
+
+        const role =
+            metadata.role ||
+            "Professionnel BTP";
+
+
+        const userName =
+            document.getElementById(
+                "userName"
             );
+
+
+        const userRole =
+            document.getElementById(
+                "userRole"
+            );
+
+
+        const userAvatar =
+            document.getElementById(
+                "userAvatar"
+            );
+
+
+        if(userName){
+
+            userName.textContent =
+                nom;
+
+        }
+
+
+        if(userRole){
+
+            userRole.textContent =
+                role;
+
+        }
+
+
+        if(userAvatar){
+
+            userAvatar.textContent =
+                nom
+                    .trim()
+                    .charAt(0)
+                    .toUpperCase();
+
+        }
+
 
     }catch(error){
 
-        utilisateur = null;
-
-    }
-
-
-    if(!utilisateur){
-        return;
-    }
-
-
-    const nom =
-        utilisateur.nom ||
-        utilisateur.name ||
-        utilisateur.prenom ||
-        "Utilisateur";
-
-
-    const role =
-        utilisateur.role ||
-        utilisateur.fonction ||
-        "Professionnel BTP";
-
-
-    const userName =
-        document.getElementById(
-            "userName"
+        console.error(
+            "Erreur utilisateur :",
+            error
         );
-
-    const userRole =
-        document.getElementById(
-            "userRole"
-        );
-
-    const userAvatar =
-        document.getElementById(
-            "userAvatar"
-        );
-
-
-    if(userName){
-
-        userName.textContent =
-            nom;
-
-    }
-
-
-    if(userRole){
-
-        userRole.textContent =
-            role;
-
-    }
-
-
-    if(userAvatar){
-
-        userAvatar.textContent =
-            nom
-                .trim()
-                .charAt(0)
-                .toUpperCase();
 
     }
 
@@ -2656,6 +2764,7 @@ function activerRecherche(){
         document.getElementById(
             "searchInput"
         );
+
 
     if(!input){
         return;
@@ -2690,6 +2799,7 @@ function activerRecherche(){
             ){
 
                 chargerChantiers();
+
                 return;
 
             }
@@ -2742,10 +2852,12 @@ function activerRecherche(){
                             chantier.nom ||
                             "Chantier sans nom";
 
+
                         const client =
                             chantier.client ||
                             chantier.clientNom ||
                             "Client non renseigné";
+
 
                         const statut =
                             chantier.statut ||
@@ -2797,10 +2909,12 @@ function activerMenuMobile(){
             "mobileMenu"
         );
 
+
     const sidebar =
         document.getElementById(
             "sidebar"
         );
+
 
     const overlay =
         document.getElementById(
@@ -2829,17 +2943,21 @@ function activerMenuMobile(){
             "open"
         );
 
+
         overlay.classList.add(
             "show"
         );
 
+
         bouton.textContent =
             "✕";
+
 
         bouton.setAttribute(
             "aria-label",
             "Fermer le menu"
         );
+
 
         document.body.style.overflow =
             "hidden";
@@ -2853,17 +2971,21 @@ function activerMenuMobile(){
             "open"
         );
 
+
         overlay.classList.remove(
             "show"
         );
 
+
         bouton.textContent =
             "☰";
+
 
         bouton.setAttribute(
             "aria-label",
             "Ouvrir le menu"
         );
+
 
         document.body.style.overflow =
             "";
@@ -2940,6 +3062,50 @@ function activerMenuMobile(){
 
 
 /* =========================================================
+   DECONNEXION
+========================================================= */
+
+function activerDeconnexion(){
+
+    const bouton =
+        document.getElementById(
+            "logoutButton"
+        );
+
+
+    if(!bouton){
+        return;
+    }
+
+
+    bouton.addEventListener(
+        "click",
+        async function(event){
+
+            event.preventDefault();
+
+
+            bouton.style.opacity =
+                "0.6";
+
+
+            bouton.style.pointerEvents =
+                "none";
+
+
+            bouton.innerHTML =
+                '<span class="nav-icon">⏳</span> Déconnexion...';
+
+
+            await deconnecterBATIFLOW();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
    CHARGEMENT GLOBAL
 ========================================================= */
 
@@ -2980,6 +3146,8 @@ document.addEventListener(
 
         activerMenuMobile();
 
+        activerDeconnexion();
+
     }
 );
 
@@ -3013,6 +3181,8 @@ window.addEventListener(
 
 </script>
 
+
 </body>
+
 </html>
 
