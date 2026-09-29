@@ -1,1537 +1,443 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Créer un compte — BATIFLOW</title>
 
-<meta
-    name="description"
-    content="Créer un compte BATIFLOW — plateforme professionnelle de gestion BTP."
->
-
-<!-- =====================================================
-     SUPABASE
-===================================================== -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    min-height:100vh;
-    font-family:Arial,Helvetica,sans-serif;
-
-    background:
-        linear-gradient(
-            rgba(16,24,39,.95),
-            rgba(16,24,39,.98)
-        ),
-        radial-gradient(
-            circle at top right,
-            #f28c28 0%,
-            transparent 35%
-        );
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    color:#fff;
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #101827;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-
-/* =====================================================
-   CONTENEUR
-===================================================== */
-
-.register-wrapper{
-    width:100%;
-    max-width:500px;
+.container {
+    width: 100%;
+    max-width: 450px;
 }
 
-
-/* =====================================================
-   LOGO
-===================================================== */
-
-.logo-container{
-    text-align:center;
-    margin-bottom:30px;
+.logo {
+    text-align: center;
+    color: white;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 25px;
 }
 
-.logo{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-
-    font-size:34px;
-    font-weight:900;
-    letter-spacing:1px;
+.logo span {
+    color: #f28c28;
 }
 
-.logo-icon{
-    width:48px;
-    height:48px;
-
-    background:#f28c28;
-
-    border-radius:12px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    box-shadow:
-        0 10px 30px rgba(242,140,40,.30);
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
 }
 
-.logo-icon svg{
-    width:29px;
-    height:29px;
+h1 {
+    margin: 0 0 8px;
+    color: #101827;
+    text-align: center;
 }
 
-.logo span{
-    color:#f28c28;
+.subtitle {
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 25px;
 }
 
-.logo-subtitle{
-    margin-top:8px;
-
-    color:#aeb7c5;
-
-    font-size:14px;
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    color: #374151;
 }
 
-
-/* =====================================================
-   CARD
-===================================================== */
-
-.register-card{
-    background:#fff;
-
-    color:#111827;
-
-    border-radius:20px;
-
-    padding:35px;
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.35);
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    margin-bottom: 18px;
+    font-size: 15px;
+    outline: none;
 }
 
-.register-title{
-    font-size:26px;
-
-    font-weight:800;
-
-    margin-bottom:8px;
+input:focus {
+    border-color: #f28c28;
 }
 
-.register-description{
-    color:#6b7280;
-
-    font-size:14px;
-
-    margin-bottom:28px;
-
-    line-height:1.5;
+button {
+    width: 100%;
+    border: none;
+    border-radius: 9px;
+    padding: 14px;
+    background: #f28c28;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-
-/* =====================================================
-   FORMULAIRE
-===================================================== */
-
-.form-group{
-    margin-bottom:18px;
+button:hover {
+    background: #d97706;
 }
 
-.form-group label{
-    display:block;
-
-    margin-bottom:8px;
-
-    font-size:14px;
-
-    font-weight:700;
-
-    color:#374151;
+button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
 }
 
-.form-group input{
-    width:100%;
-
-    padding:14px 15px;
-
-    border:1px solid #d9dee7;
-
-    border-radius:10px;
-
-    font-size:15px;
-
-    outline:none;
-
-    transition:.2s;
-
-    background:#fff;
+.message {
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 8px;
+    display: none;
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: break-word;
 }
 
-.form-group input:focus{
-    border-color:#f28c28;
-
-    box-shadow:
-        0 0 0 3px rgba(242,140,40,.12);
+.success {
+    display: block;
+    background: #dcfce7;
+    color: #166534;
 }
 
-
-/* =====================================================
-   MOT DE PASSE
-===================================================== */
-
-.password-wrapper{
-    position:relative;
+.error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
 }
 
-.password-wrapper input{
-    padding-right:50px;
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #6b7280;
 }
 
-.toggle-password{
-    position:absolute;
-
-    right:12px;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    border:none;
-
-    background:none;
-
-    cursor:pointer;
-
-    color:#6b7280;
-
-    font-size:18px;
+.login-link a {
+    color: #f28c28;
+    font-weight: bold;
+    text-decoration: none;
 }
-
-
-/* =====================================================
-   FORCE MOT DE PASSE
-===================================================== */
-
-.password-strength{
-    margin-top:8px;
-
-    font-size:12px;
-
-    color:#6b7280;
-}
-
-.strength-bar{
-    height:5px;
-
-    background:#e5e7eb;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    margin-top:6px;
-}
-
-.strength-progress{
-    height:100%;
-
-    width:0%;
-
-    transition:.25s;
-}
-
-
-/* =====================================================
-   CONDITIONS
-===================================================== */
-
-.terms{
-    display:flex;
-
-    align-items:flex-start;
-
-    gap:9px;
-
-    margin:20px 0;
-
-    font-size:13px;
-
-    color:#6b7280;
-
-    line-height:1.5;
-}
-
-.terms input{
-    margin-top:3px;
-
-    accent-color:#f28c28;
-}
-
-.terms a{
-    color:#f28c28;
-
-    text-decoration:none;
-
-    font-weight:700;
-}
-
-
-/* =====================================================
-   BOUTON
-===================================================== */
-
-.register-button{
-    width:100%;
-
-    border:none;
-
-    background:#f28c28;
-
-    color:#fff;
-
-    padding:15px;
-
-    border-radius:10px;
-
-    font-size:16px;
-
-    font-weight:800;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.register-button:hover{
-    background:#dd7818;
-
-    transform:translateY(-1px);
-}
-
-.register-button:disabled{
-    opacity:.65;
-
-    cursor:not-allowed;
-
-    transform:none;
-}
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-.message{
-    display:none;
-
-    padding:12px 14px;
-
-    border-radius:9px;
-
-    margin-bottom:18px;
-
-    font-size:14px;
-
-    line-height:1.5;
-}
-
-.message.error{
-    display:block;
-
-    background:#fef2f2;
-
-    color:#b91c1c;
-
-    border:1px solid #fecaca;
-}
-
-.message.success{
-    display:block;
-
-    background:#ecfdf5;
-
-    color:#047857;
-
-    border:1px solid #a7f3d0;
-}
-
-
-/* =====================================================
-   SEPARATEUR
-===================================================== */
-
-.separator{
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin:25px 0;
-
-    color:#9ca3af;
-
-    font-size:12px;
-}
-
-.separator::before,
-.separator::after{
-    content:"";
-
-    height:1px;
-
-    flex:1;
-
-    background:#e5e7eb;
-}
-
-
-/* =====================================================
-   CONNEXION
-===================================================== */
-
-.login-text{
-    text-align:center;
-
-    color:#6b7280;
-
-    font-size:14px;
-}
-
-.login-link{
-    color:#f28c28;
-
-    text-decoration:none;
-
-    font-weight:800;
-}
-
-.login-link:hover{
-    text-decoration:underline;
-}
-
-
-/* =====================================================
-   RETOUR
-===================================================== */
-
-.back-home{
-    text-align:center;
-
-    margin-top:22px;
-}
-
-.back-home a{
-    color:#cbd5e1;
-
-    text-decoration:none;
-
-    font-size:13px;
-}
-
-.back-home a:hover{
-    color:#fff;
-}
-
-
-/* =====================================================
-   CHARGEMENT
-===================================================== */
-
-.loading-overlay{
-    position:fixed;
-
-    inset:0;
-
-    background:#101827;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    z-index:9999;
-
-    transition:.3s;
-}
-
-.loading-box{
-    text-align:center;
-}
-
-.spinner{
-    width:42px;
-
-    height:42px;
-
-    border:4px solid rgba(255,255,255,.15);
-
-    border-top-color:#f28c28;
-
-    border-radius:50%;
-
-    animation:spin .8s linear infinite;
-
-    margin:0 auto 15px;
-}
-
-.loading-box p{
-    color:#cbd5e1;
-
-    font-size:14px;
-}
-
-@keyframes spin{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media(max-width:520px){
-
-    body{
-        padding:15px;
-    }
-
-    .register-card{
-        padding:25px 20px;
-
-        border-radius:16px;
-    }
-
-    .logo{
-        font-size:29px;
-    }
-
-    .logo-icon{
-        width:43px;
-        height:43px;
-    }
-
-    .register-title{
-        font-size:23px;
-    }
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
+<div class="container">
 
-<!-- =====================================================
-     CHARGEMENT
-===================================================== -->
-
-<div
-    class="loading-overlay"
-    id="loadingOverlay"
->
-
-    <div class="loading-box">
-
-        <div class="spinner"></div>
-
-        <p>
-            Vérification de votre session...
-        </p>
-
+    <div class="logo">
+        BATI<span>FLOW</span>
     </div>
 
-</div>
+    <div class="card">
 
+        <h1>Créer votre compte</h1>
 
-
-<div class="register-wrapper">
-
-
-    <!-- =================================================
-         LOGO
-    ================================================== -->
-
-    <div class="logo-container">
-
-        <div class="logo">
-
-            <div class="logo-icon">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-
-                    <path
-                        d="M4 19V9L12 4L20 9V19"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-
-                    <path
-                        d="M8 19V13H16V19"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linejoin="round"
-                    />
-
-                    <path
-                        d="M12 4V9"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                    />
-
-                </svg>
-
-            </div>
-
-            <span>
-                BATIFLOW
-            </span>
-
+        <div class="subtitle">
+            Commencez votre essai gratuit de 3 jours
         </div>
-
-        <div class="logo-subtitle">
-            Gestion professionnelle des projets BTP
-        </div>
-
-    </div>
-
-
-
-    <!-- =================================================
-         CARD
-    ================================================== -->
-
-    <div class="register-card">
-
-
-        <h1 class="register-title">
-            Créer votre compte
-        </h1>
-
-
-        <p class="register-description">
-
-            Rejoignez BATIFLOW et gérez vos
-            chantiers, devis, DQE, clients et
-            documents depuis une seule plateforme.
-
-        </p>
-
-
-        <!-- =================================================
-             MESSAGE
-        ================================================== -->
-
-        <div
-            id="registerMessage"
-            class="message"
-        ></div>
-
-
-
-        <!-- =================================================
-             FORMULAIRE
-        ================================================== -->
 
         <form id="registerForm">
 
-
-            <!-- NOM -->
-
-            <div class="form-group">
-
-                <label for="registerName">
-                    Nom complet
-                </label>
-
-                <input
-                    type="text"
-                    id="registerName"
-                    name="name"
-                    placeholder="Ex : Jean Dupont"
-                    autocomplete="name"
-                    required
-                >
-
-            </div>
-
-
-
-            <!-- EMAIL -->
-
-            <div class="form-group">
-
-                <label for="registerEmail">
-                    Adresse e-mail
-                </label>
-
-                <input
-                    type="email"
-                    id="registerEmail"
-                    name="email"
-                    placeholder="exemple@email.com"
-                    autocomplete="email"
-                    required
-                >
-
-            </div>
-
-
-
-            <!-- MOT DE PASSE -->
-
-            <div class="form-group">
-
-                <label for="registerPassword">
-                    Mot de passe
-                </label>
-
-                <div class="password-wrapper">
-
-                    <input
-                        type="password"
-                        id="registerPassword"
-                        name="password"
-                        placeholder="Minimum 8 caractères"
-                        autocomplete="new-password"
-                        minlength="8"
-                        required
-                    >
-
-                    <button
-                        type="button"
-                        class="toggle-password"
-                        id="togglePassword"
-                        aria-label="Afficher le mot de passe"
-                    >
-                        👁
-                    </button>
-
-                </div>
-
-
-                <div
-                    class="password-strength"
-                    id="passwordStrength"
-                >
-                    Sécurité du mot de passe
-                </div>
-
-
-                <div class="strength-bar">
-
-                    <div
-                        class="strength-progress"
-                        id="strengthProgress"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- CONFIRMATION -->
-
-            <div class="form-group">
-
-                <label for="registerPasswordConfirm">
-                    Confirmer le mot de passe
-                </label>
-
-                <div class="password-wrapper">
-
-                    <input
-                        type="password"
-                        id="registerPasswordConfirm"
-                        name="passwordConfirm"
-                        placeholder="Répétez votre mot de passe"
-                        autocomplete="new-password"
-                        minlength="8"
-                        required
-                    >
-
-                    <button
-                        type="button"
-                        class="toggle-password"
-                        id="togglePasswordConfirm"
-                        aria-label="Afficher le mot de passe"
-                    >
-                        👁
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- CONDITIONS -->
-
-            <label class="terms">
-
-                <input
-                    type="checkbox"
-                    id="acceptTerms"
-                    required
-                >
-
-                <span>
-
-                    J'accepte les
-                    <a href="#">
-                        conditions d'utilisation
-                    </a>
-                    et la
-                    <a href="#">
-                        politique de confidentialité
-                    </a>
-                    de BATIFLOW.
-
-                </span>
-
+            <label for="registerName">
+                Nom complet
             </label>
 
-
-
-            <!-- BOUTON -->
-
-            <button
-                type="submit"
-                class="register-button"
-                id="registerButton"
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Ex : Maruis Lare"
+                required
             >
+
+            <label for="registerEmail">
+                Adresse e-mail
+            </label>
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="exemple@email.com"
+                required
+            >
+
+            <label for="registerPassword">
+                Mot de passe
+            </label>
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Minimum 6 caractères"
+                minlength="6"
+                required
+            >
+
+            <label for="registerPasswordConfirm">
+                Confirmer le mot de passe
+            </label>
+
+            <input
+                type="password"
+                id="registerPasswordConfirm"
+                placeholder="Répétez le mot de passe"
+                minlength="6"
+                required
+            >
+
+            <button type="submit" id="registerButton">
                 Créer mon compte
             </button>
 
-
         </form>
 
+        <div id="registerMessage" class="message"></div>
 
-
-        <!-- =================================================
-             SEPARATEUR
-        ================================================== -->
-
-        <div class="separator">
-            OU
-        </div>
-
-
-
-        <!-- =================================================
-             CONNEXION
-        ================================================== -->
-
-        <div class="login-text">
-
+        <div class="login-link">
             Vous avez déjà un compte ?
-
-            <a
-                href="login.html"
-                class="login-link"
-            >
-                Se connecter
-            </a>
-
+            <a href="login.html">Se connecter</a>
         </div>
 
-
     </div>
-
-
-
-    <!-- =================================================
-         RETOUR
-    ================================================== -->
-
-    <div class="back-home">
-
-        <a href="index.html">
-            ← Retour à l'accueil
-        </a>
-
-    </div>
-
 
 </div>
 
 
-
-<!-- =====================================================
-     JAVASCRIPT SUPABASE
-===================================================== -->
-
 <script>
 
-
-/* =====================================================
+/* =========================================================
    CONFIGURATION SUPABASE
-===================================================== */
+   ========================================================= */
 
 const SUPABASE_URL =
     "https://bwimievqpgaifjwbzayb.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_KEY =
     "sb_publishable_D6v3wBJQVQypsPNyRZPfsA_PVQ_u-PX";
-
 
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+        SUPABASE_KEY
     );
 
 
-
-/* =====================================================
+/* =========================================================
    ELEMENTS
-===================================================== */
+   ========================================================= */
 
 const registerForm =
     document.getElementById("registerForm");
 
-const registerName =
-    document.getElementById("registerName");
-
-const registerEmail =
-    document.getElementById("registerEmail");
-
-const registerPassword =
-    document.getElementById("registerPassword");
-
-const registerPasswordConfirm =
-    document.getElementById(
-        "registerPasswordConfirm"
-    );
-
 const registerButton =
     document.getElementById("registerButton");
 
-const registerMessage =
+const message =
     document.getElementById("registerMessage");
 
-const loadingOverlay =
-    document.getElementById("loadingOverlay");
 
-const togglePassword =
-    document.getElementById("togglePassword");
-
-const togglePasswordConfirm =
-    document.getElementById(
-        "togglePasswordConfirm"
-    );
-
-const passwordStrength =
-    document.getElementById("passwordStrength");
-
-const strengthProgress =
-    document.getElementById("strengthProgress");
-
-
-
-/* =====================================================
+/* =========================================================
    MESSAGE
-===================================================== */
+   ========================================================= */
 
-function afficherMessage(
-    message,
-    type
-){
+function showMessage(text, type) {
 
-    registerMessage.textContent =
-        message;
+    message.textContent = text;
 
-    registerMessage.className =
+    message.className =
         "message " + type;
-
 }
 
 
-
-/* =====================================================
-   CHARGEMENT
-===================================================== */
-
-function cacherChargement(){
-
-    loadingOverlay.style.opacity =
-        "0";
-
-    setTimeout(function(){
-
-        loadingOverlay.style.display =
-            "none";
-
-    },300);
-
-}
-
-
-
-/* =====================================================
-   VERIFIER SESSION
-===================================================== */
-
-async function verifierSession(){
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.auth.getSession();
-
-
-        if(error){
-
-            console.error(error);
-
-            cacherChargement();
-
-            return;
-
-        }
-
-
-        /*
-         * Si une session existe déjà,
-         * inutile de recréer un compte.
-         */
-
-        if(data.session){
-
-            window.location.replace(
-                "dashboard.html"
-            );
-
-            return;
-
-        }
-
-
-        cacherChargement();
-
-
-    }catch(error){
-
-        console.error(error);
-
-        cacherChargement();
-
-    }
-
-}
-
-
-
-/* =====================================================
-   AFFICHER / MASQUER MOT DE PASSE
-===================================================== */
-
-togglePassword.addEventListener(
-    "click",
-    function(){
-
-        if(
-            registerPassword.type ===
-            "password"
-        ){
-
-            registerPassword.type =
-                "text";
-
-            togglePassword.textContent =
-                "🙈";
-
-        }else{
-
-            registerPassword.type =
-                "password";
-
-            togglePassword.textContent =
-                "👁";
-
-        }
-
-    }
-);
-
-
-
-togglePasswordConfirm.addEventListener(
-    "click",
-    function(){
-
-        if(
-            registerPasswordConfirm.type ===
-            "password"
-        ){
-
-            registerPasswordConfirm.type =
-                "text";
-
-            togglePasswordConfirm.textContent =
-                "🙈";
-
-        }else{
-
-            registerPasswordConfirm.type =
-                "password";
-
-            togglePasswordConfirm.textContent =
-                "👁";
-
-        }
-
-    }
-);
-
-
-
-/* =====================================================
-   FORCE DU MOT DE PASSE
-===================================================== */
-
-registerPassword.addEventListener(
-    "input",
-    function(){
-
-        const password =
-            registerPassword.value;
-
-        let score = 0;
-
-
-        if(password.length >= 8){
-            score++;
-        }
-
-        if(/[A-Z]/.test(password)){
-            score++;
-        }
-
-        if(/[0-9]/.test(password)){
-            score++;
-        }
-
-        if(/[^A-Za-z0-9]/.test(password)){
-            score++;
-        }
-
-
-        if(!password){
-
-            strengthProgress.style.width =
-                "0%";
-
-            passwordStrength.textContent =
-                "Sécurité du mot de passe";
-
-            return;
-
-        }
-
-
-        if(score === 1){
-
-            strengthProgress.style.width =
-                "25%";
-
-            passwordStrength.textContent =
-                "Mot de passe faible";
-
-        }
-
-        else if(score === 2){
-
-            strengthProgress.style.width =
-                "50%";
-
-            passwordStrength.textContent =
-                "Mot de passe moyen";
-
-        }
-
-        else if(score === 3){
-
-            strengthProgress.style.width =
-                "75%";
-
-            passwordStrength.textContent =
-                "Bon mot de passe";
-
-        }
-
-        else{
-
-            strengthProgress.style.width =
-                "100%";
-
-            passwordStrength.textContent =
-                "Mot de passe très sécurisé";
-
-        }
-
-    }
-);
-
-
-
-/* =====================================================
-   VALIDATION EMAIL
-===================================================== */
-
-function emailValide(email){
-
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        .test(email);
-
-}
-
-
-
-/* =====================================================
+/* =========================================================
    INSCRIPTION
-===================================================== */
+   ========================================================= */
 
-registerForm.addEventListener(
-    "submit",
-    async function(event){
+registerForm.addEventListener("submit", async function(event) {
 
-        event.preventDefault();
+    event.preventDefault();
 
+    const name =
+        document.getElementById("registerName")
+        .value
+        .trim();
 
-        const name =
-            registerName.value.trim();
+    const email =
+        document.getElementById("registerEmail")
+        .value
+        .trim();
 
-        const email =
-            registerEmail.value
-                .trim()
-                .toLowerCase();
+    const password =
+        document.getElementById("registerPassword")
+        .value;
 
-        const password =
-            registerPassword.value;
-
-        const passwordConfirm =
-            registerPasswordConfirm.value;
-
-
-        /* ==============================
-           VALIDATIONS
-        ============================== */
-
-        if(name.length < 2){
-
-            afficherMessage(
-                "Veuillez saisir votre nom complet.",
-                "error"
-            );
-
-            registerName.focus();
-
-            return;
-
-        }
+    const passwordConfirm =
+        document.getElementById("registerPasswordConfirm")
+        .value;
 
 
-        if(!emailValide(email)){
+    /* Vérification nom */
 
-            afficherMessage(
-                "Veuillez saisir une adresse e-mail valide.",
-                "error"
-            );
+    if (!name) {
 
-            registerEmail.focus();
+        showMessage(
+            "Veuillez entrer votre nom.",
+            "error"
+        );
 
-            return;
-
-        }
-
-
-        if(password.length < 8){
-
-            afficherMessage(
-                "Le mot de passe doit contenir au moins 8 caractères.",
-                "error"
-            );
-
-            registerPassword.focus();
-
-            return;
-
-        }
+        return;
+    }
 
 
-        if(password !== passwordConfirm){
+    /* Vérification mot de passe */
 
-            afficherMessage(
-                "Les deux mots de passe ne correspondent pas.",
-                "error"
-            );
+    if (password.length < 6) {
 
-            registerPasswordConfirm.focus();
+        showMessage(
+            "Le mot de passe doit contenir au moins 6 caractères.",
+            "error"
+        );
 
-            return;
-
-        }
-
-
-        /* ==============================
-           DESACTIVER BOUTON
-        ============================== */
-
-        registerButton.disabled =
-            true;
-
-        registerButton.textContent =
-            "Création du compte...";
+        return;
+    }
 
 
-        registerMessage.className =
-            "message";
+    /* Confirmation */
+
+    if (password !== passwordConfirm) {
+
+        showMessage(
+            "Les mots de passe ne correspondent pas.",
+            "error"
+        );
+
+        return;
+    }
 
 
-        try{
+    registerButton.disabled = true;
+
+    registerButton.textContent =
+        "Création du compte...";
 
 
-            /* ==========================================
-               CREATION DU COMPTE SUPABASE
-            ========================================== */
+    try {
 
-            const {
-                data,
+        console.log("BATIFLOW : début inscription");
+
+        const { data, error } =
+            await supabaseClient.auth.signUp({
+
+                email: email,
+
+                password: password,
+
+                options: {
+
+                    data: {
+                        full_name: name
+                    },
+
+                    emailRedirectTo:
+                        window.location.origin +
+                        "/login.html"
+                }
+
+            });
+
+
+        console.log(
+            "Réponse Supabase :",
+            data
+        );
+
+
+        if (error) {
+
+            console.error(
+                "ERREUR SUPABASE :",
                 error
-            } =
-                await supabaseClient.auth.signUp({
-
-                    email: email,
-
-                    password: password,
-
-                    options: {
-
-                        data: {
-
-                            full_name: name
-
-                        },
-
-                        emailRedirectTo:
-                            window.location.origin +
-                            "/login.html"
-
-                    }
-
-                });
-
-
-
-            /* ==========================================
-               ERREUR
-            ========================================== */
-
-            if(error){
-
-                console.error(
-                    "Erreur inscription :",
-                    error
-                );
-
-
-                let message =
-                    "Impossible de créer le compte.";
-
-
-                if(
-                    error.message &&
-                    error.message
-                        .toLowerCase()
-                        .includes("already registered")
-                ){
-
-                    message =
-                        "Cette adresse e-mail est déjà utilisée.";
-
-                }
-
-
-                afficherMessage(
-                    message,
-                    "error"
-                );
-
-
-                registerButton.disabled =
-                    false;
-
-                registerButton.textContent =
-                    "Créer mon compte";
-
-                return;
-
-            }
-
-
-
-            /* ==========================================
-               COMPTE CREE
-            ========================================== */
-
-            if(data.user){
-
-                /*
-                 * Supabase peut être configuré
-                 * avec confirmation obligatoire
-                 * ou non.
-                 */
-
-                if(!data.session){
-
-                    afficherMessage(
-
-                        "Compte créé avec succès ! Vérifiez votre boîte e-mail pour confirmer votre adresse avant de vous connecter.",
-
-                        "success"
-
-                    );
-
-
-                    registerButton.textContent =
-                        "Compte créé ✓";
-
-
-                    /*
-                     * On laisse le message affiché.
-                     */
-
-                    return;
-
-                }
-
-
-                /*
-                 * Si la confirmation e-mail
-                 * n'est pas obligatoire,
-                 * une session est créée immédiatement.
-                 */
-
-                afficherMessage(
-
-                    "Compte créé avec succès ! Ouverture de votre espace...",
-
-                    "success"
-
-                );
-
-
-                setTimeout(function(){
-
-                    window.location.replace(
-                        "dashboard.html"
-                    );
-
-                },800);
-
-            }
-
-
-        }catch(error){
-
-            console.error(error);
-
-
-            afficherMessage(
-
-                "Une erreur inattendue est survenue. Veuillez réessayer.",
-
-                "error"
-
             );
 
+            showMessage(
+                "Erreur Supabase : " +
+                error.message,
+                "error"
+            );
 
-            registerButton.disabled =
-                false;
+            registerButton.disabled = false;
 
             registerButton.textContent =
                 "Créer mon compte";
 
+            return;
         }
 
+
+        /* =================================================
+           COMPTE CRÉÉ
+           ================================================= */
+
+        console.log(
+            "Compte BATIFLOW créé avec succès."
+        );
+
+
+        showMessage(
+            "Compte créé avec succès ! Vérifiez votre adresse e-mail si une confirmation est demandée.",
+            "success"
+        );
+
+
+        setTimeout(function() {
+
+            window.location.href =
+                "login.html";
+
+        }, 2500);
+
+
+    } catch (error) {
+
+        console.error(
+            "ERREUR JAVASCRIPT :",
+            error
+        );
+
+        showMessage(
+            "Erreur technique : " +
+            error.message,
+            "error"
+        );
+
+        registerButton.disabled = false;
+
+        registerButton.textContent =
+            "Créer mon compte";
     }
-);
 
-
-
-/* =====================================================
-   SURVEILLANCE AUTH
-===================================================== */
-
-supabaseClient.auth.onAuthStateChange(
-    function(event, session){
-
-        if(
-            event === "SIGNED_IN" &&
-            session
-        ){
-
-            /*
-             * La redirection principale
-             * est déjà gérée après inscription.
-             */
-
-        }
-
-    }
-);
-
-
-
-/* =====================================================
-   INITIALISATION
-===================================================== */
-
-verifierSession();
+});
 
 </script>
 
 </body>
 </html>
-
+```
