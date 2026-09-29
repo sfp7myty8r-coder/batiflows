@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Connexion — BATIFLOW</title>
+
+    <meta
+        name="description"
+        content="Connexion à BATIFLOW"
+    >
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a 0%,
+                    #101827 55%,
+                    #182235 100%
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px 15px;
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 440px;
+        }
+
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .logo-mark {
+
+            width: 58px;
+
+            height: 58px;
+
+            margin:
+                0 auto 12px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f28c28,
+                    #f59e0b
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-size: 25px;
+
+            font-weight: 900;
+
+            box-shadow:
+                0 10px 30px
+                rgba(242,140,40,.25);
+        }
+
+
+        .logo-name {
+
+            color: white;
+
+            font-size: 30px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+
+        .logo-name span {
+
+            color: #f28c28;
+        }
+
+
+        .subtitle {
+
+            color: #aeb8c8;
+
+            font-size: 14px;
+
+            margin-top: 6px;
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.35);
+        }
+
+
+        h1 {
+
+            margin:
+                0 0 8px;
+
+            color: #101827;
+
+            font-size: 25px;
+        }
+
+
+        .intro {
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        .message {
+
+            display: none;
+
+            border-radius: 10px;
+
+            padding: 12px;
+
+            margin-bottom: 18px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        .message.success {
+
+            display: block;
+
+            background: #ecfdf5;
+
+            border:
+                1px solid
+                #a7f3d0;
+
+            color: #047857;
+        }
+
+
+        .message.error {
+
+            display: block;
+
+            background: #fef2f2;
+
+            border:
+                1px solid
+                #fecaca;
+
+            color: #b91c1c;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+
+            margin-bottom: 18px;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #374151;
+        }
+
+
+        input {
+
+            width: 100%;
+
+            height: 48px;
+
+            border:
+                1px solid
+                #dbe1ea;
+
+            border-radius: 10px;
+
+            padding:
+                0 13px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: white;
+
+            color: #111827;
+
+            transition: .2s;
+        }
+
+
+        input:focus {
+
+            border-color: #f28c28;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(242,140,40,.12);
+        }
+
+
+        /* =========================
+           BOUTON
+        ========================= */
+
+        button {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f28c28,
+                    #f59e0b
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            margin-top: 8px;
+
+            transition: .2s;
+        }
+
+
+        button:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(242,140,40,.25);
+        }
+
+
+        button:disabled {
+
+            opacity: .6;
+
+            cursor:
+                not-allowed;
+
+            transform: none;
+        }
+
+
+        /* =========================
+           LIENS
+        ========================= */
+
+        .links {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin-top: 18px;
+
+            font-size: 13px;
+        }
+
+
+        .links a {
+
+            color: #f28c28;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+
+        .signup {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            font-size: 13px;
+
+            color: #6b7280;
+        }
+
+
+        .signup a {
+
+            color: #f28c28;
+
+            font-weight: 800;
+
+            text-decoration: none;
+        }
+
+
+        .footer {
+
+            text-align: center;
+
+            color: #7d899d;
+
+            font-size: 11px;
+
+            margin-top: 20px;
+        }
+
+
+        @media(max-width:500px) {
+
+            .card {
+
+                padding:
+                    22px 18px;
+            }
+
+
+            .logo-name {
+
+                font-size: 26px;
+            }
+
+
+            h1 {
+
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-mark">
+            BF
+        </div>
+
+
+        <div class="logo-name">
+
+            BATI<span>FLOW</span>
+
+        </div>
+
+
+        <div class="subtitle">
+
+            Gestion professionnelle des projets BTP
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CARD -->
+
+    <div class="card">
+
+
+        <h1>
+
+            Bienvenue sur BATIFLOW
+
+        </h1>
+
+
+        <div class="intro">
+
+            Connectez-vous à votre espace professionnel
+            pour gérer vos chantiers et vos projets BTP.
+
+        </div>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+
+        <!-- FORMULAIRE -->
+
+        <form id="loginForm">
+
+
+            <div class="form-group">
+
+                <label for="email">
+
+                    Adresse e-mail
+
+                </label>
+
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="exemple@email.com"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="password">
+
+                    Mot de passe
+
+                </label>
+
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Votre mot de passe"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                id="loginButton"
+            >
+
+                🔐 Se connecter
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- LIENS -->
+
+        <div class="links">
+
+            <a href="#" id="forgotPassword">
+
+                Mot de passe oublié ?
+
+            </a>
+
+        </div>
+
+
+
+        <div class="signup">
+
+            Vous n'avez pas encore de compte ?
+
+            <a href="inscription.html">
+
+                Créer un compte
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer">
+
+        BATIFLOW V1.0 — Gestion BTP
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+    // =====================================================
+    // CONFIGURATION SUPABASE
+    // =====================================================
+
+
+    const SUPABASE_URL =
+        "https://bwimievqpgaifjwbzayb.supabase.co";
+
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_D6v3wBJQVQypsPNyRZPfsA_PVQ_u-PX";
+
+
+    const {
+        createClient
+    } = supabase;
+
+
+    const supabaseClient =
+        createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
+
+
+
+    // =====================================================
+    // ELEMENTS
+    // =====================================================
+
+
+    const form =
+        document.getElementById(
+            "loginForm"
+        );
+
+
+    const button =
+        document.getElementById(
+            "loginButton"
+        );
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    const forgotPassword =
+        document.getElementById(
+            "forgotPassword"
+        );
+
+
+
+    // =====================================================
+    // MESSAGE
+    // =====================================================
+
+
+    function afficherMessage(
+        texte,
+        type
+    ) {
+
+        message.textContent =
+            texte;
+
+        message.className =
+            "message " + type;
+
+    }
+
+
+
+    // =====================================================
+    // CONNEXION
+    // =====================================================
+
+
+    form.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Connexion...";
+
+
+            message.className =
+                "message";
+
+
+
+            try {
+
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .signInWithPassword({
+
+                            email:
+                                email,
+
+                            password:
+                                password
+
+                        });
+
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+
+                // Vérification de session
+
+                if (
+                    !data ||
+                    !data.session
+                ) {
+
+                    throw new Error(
+                        "La connexion n'a pas pu être établie."
+                    );
+
+                }
+
+
+
+                afficherMessage(
+                    "Connexion réussie. Ouverture de BATIFLOW...",
+                    "success"
+                );
+
+
+
+                // Redirection
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    },
+                    700
+                );
+
+
+            }
+            catch(error) {
+
+
+                console.error(
+                    "Erreur connexion :",
+                    error
+                );
+
+
+                let texte =
+                    "E-mail ou mot de passe incorrect.";
+
+
+                if (
+                    error.message
+                    &&
+                    error.message
+                        .toLowerCase()
+                        .includes(
+                            "email not confirmed"
+                        )
+                ) {
+
+                    texte =
+                        "Votre adresse e-mail n'est pas encore confirmée. Vérifiez votre boîte e-mail.";
+
+                }
+
+
+                afficherMessage(
+                    texte,
+                    "error"
+                );
+
+
+                button.disabled =
+                    false;
+
+
+                button.textContent =
+                    "🔐 Se connecter";
+
+            }
+
+        }
+    );
+
+
+
+    // =====================================================
+    // MOT DE PASSE OUBLIE
+    // =====================================================
+
+
+    forgotPassword.addEventListener(
+        "click",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+            if (!email) {
+
+                afficherMessage(
+                    "Entrez d'abord votre adresse e-mail.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+
+            try {
+
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .resetPasswordForEmail(
+                            email,
+                            {
+
+                                redirectTo:
+                                    window.location.origin +
+                                    "/reset-password.html"
+
+                            }
+                        );
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                afficherMessage(
+                    "Un lien de réinitialisation a été envoyé à votre adresse e-mail.",
+                    "success"
+                );
+
+
+            }
+            catch(error) {
+
+
+                console.error(error);
+
+
+                afficherMessage(
+                    "Impossible d'envoyer le lien de réinitialisation.",
+                    "error"
+                );
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
+
