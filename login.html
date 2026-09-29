@@ -1,135 +1,1062 @@
-
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<title>Connexion — BATIFLOW</title>
 
-    <title>Connexion — BATIFLOW</title>
+<meta
+    name="description"
+    content="Connexion à BATIFLOW — plateforme professionnelle de gestion BTP."
+>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/auth.css">
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        linear-gradient(
+            rgba(16,24,39,.94),
+            rgba(16,24,39,.97)
+        ),
+        radial-gradient(circle at top right,#f28c28 0%,transparent 35%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    color:#fff;
+}
+
+/* =====================================================
+   CONTENEUR
+===================================================== */
+
+.login-wrapper{
+    width:100%;
+    max-width:460px;
+}
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo-container{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:34px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.logo-icon{
+    width:48px;
+    height:48px;
+    background:#f28c28;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 30px rgba(242,140,40,.30);
+}
+
+.logo-icon svg{
+    width:29px;
+    height:29px;
+}
+
+.logo span{
+    color:#f28c28;
+}
+
+.logo-subtitle{
+    margin-top:8px;
+    color:#aeb7c5;
+    font-size:14px;
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.login-card{
+    background:#fff;
+    color:#111827;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.35);
+}
+
+.login-title{
+    font-size:26px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.login-description{
+    color:#6b7280;
+    font-size:14px;
+    margin-bottom:28px;
+    line-height:1.5;
+}
+
+/* =====================================================
+   FORMULAIRE
+===================================================== */
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-size:14px;
+    font-weight:700;
+    color:#374151;
+}
+
+.form-group input{
+    width:100%;
+    padding:14px 15px;
+    border:1px solid #d9dee7;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+    transition:.2s;
+    background:#fff;
+}
+
+.form-group input:focus{
+    border-color:#f28c28;
+    box-shadow:0 0 0 3px rgba(242,140,40,.12);
+}
+
+/* =====================================================
+   MOT DE PASSE
+===================================================== */
+
+.password-wrapper{
+    position:relative;
+}
+
+.password-wrapper input{
+    padding-right:50px;
+}
+
+.toggle-password{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    border:none;
+    background:none;
+    cursor:pointer;
+    color:#6b7280;
+    font-size:18px;
+}
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+.form-options{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+    gap:10px;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:13px;
+    color:#6b7280;
+}
+
+.remember input{
+    accent-color:#f28c28;
+}
+
+.forgot-link{
+    color:#f28c28;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+}
+
+.forgot-link:hover{
+    text-decoration:underline;
+}
+
+/* =====================================================
+   BOUTON
+===================================================== */
+
+.login-button{
+    width:100%;
+    border:none;
+    background:#f28c28;
+    color:#fff;
+    padding:15px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.login-button:hover{
+    background:#dd7818;
+    transform:translateY(-1px);
+}
+
+.login-button:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message{
+    display:none;
+    padding:12px 14px;
+    border-radius:9px;
+    margin-bottom:18px;
+    font-size:14px;
+    line-height:1.4;
+}
+
+.message.error{
+    display:block;
+    background:#fef2f2;
+    color:#b91c1c;
+    border:1px solid #fecaca;
+}
+
+.message.success{
+    display:block;
+    background:#ecfdf5;
+    color:#047857;
+    border:1px solid #a7f3d0;
+}
+
+/* =====================================================
+   SEPARATEUR
+===================================================== */
+
+.separator{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:25px 0;
+    color:#9ca3af;
+    font-size:12px;
+}
+
+.separator::before,
+.separator::after{
+    content:"";
+    height:1px;
+    flex:1;
+    background:#e5e7eb;
+}
+
+/* =====================================================
+   INSCRIPTION
+===================================================== */
+
+.register-text{
+    text-align:center;
+    color:#6b7280;
+    font-size:14px;
+}
+
+.register-link{
+    color:#f28c28;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.register-link:hover{
+    text-decoration:underline;
+}
+
+/* =====================================================
+   RETOUR
+===================================================== */
+
+.back-home{
+    text-align:center;
+    margin-top:22px;
+}
+
+.back-home a{
+    color:#cbd5e1;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back-home a:hover{
+    color:#fff;
+}
+
+/* =====================================================
+   CHARGEMENT
+===================================================== */
+
+.loading-overlay{
+    position:fixed;
+    inset:0;
+    background:#101827;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    transition:.3s;
+}
+
+.loading-box{
+    text-align:center;
+}
+
+.spinner{
+    width:42px;
+    height:42px;
+    border:4px solid rgba(255,255,255,.15);
+    border-top-color:#f28c28;
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+    margin:0 auto 15px;
+}
+
+.loading-box p{
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:500px){
+
+    body{
+        padding:15px;
+    }
+
+    .login-card{
+        padding:25px 20px;
+        border-radius:16px;
+    }
+
+    .logo{
+        font-size:29px;
+    }
+
+    .logo-icon{
+        width:43px;
+        height:43px;
+    }
+
+    .login-title{
+        font-size:23px;
+    }
+
+    .form-options{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+}
+
+</style>
 
 </head>
 
-
 <body>
 
-    <main class="auth-page">
+<!-- =====================================================
+     ÉCRAN DE CHARGEMENT
+===================================================== -->
 
-        <div class="auth-container">
+<div class="loading-overlay" id="loadingOverlay">
 
-            <div class="auth-brand">
+    <div class="loading-box">
 
-                <a href="index.html" class="logo">
-                    BATI<span>FLOW</span>
-                </a>
+        <div class="spinner"></div>
 
-                <p>
-                    La solution numérique pensée pour le BTP.
-                </p>
+        <p>Vérification de votre session...</p>
 
-            </div>
+    </div>
 
-
-            <div class="auth-card">
-
-                <div class="auth-header">
-
-                    <h1>Bienvenue 👋</h1>
-
-                    <p>
-                        Connectez-vous à votre espace BATIFLOW.
-                    </p>
-
-                </div>
+</div>
 
 
-                <form id="loginForm">
+<div class="login-wrapper">
 
-                    <div class="form-group">
+    <!-- =================================================
+         LOGO
+    ================================================== -->
 
-                        <label for="loginEmail">
-                            Adresse e-mail
-                        </label>
+    <div class="logo-container">
 
-                        <input
-                            type="email"
-                            id="loginEmail"
-                            placeholder="exemple@email.com"
-                            required
-                        >
+        <div class="logo">
 
-                    </div>
+            <div class="logo-icon">
 
-
-                    <div class="form-group">
-
-                        <label for="loginPassword">
-                            Mot de passe
-                        </label>
-
-                        <input
-                            type="password"
-                            id="loginPassword"
-                            placeholder="Votre mot de passe"
-                            required
-                        >
-
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        class="auth-button"
-                    >
-                        Se connecter
-                    </button>
-
-                </form>
-
-
-                <div
-                    id="loginMessage"
-                    class="auth-message"
-                ></div>
-
-
-                <div class="auth-footer">
-
-                    <p>
-                        Vous n'avez pas encore de compte ?
-                    </p>
-
-                    <a href="register.html">
-                        Créer un compte
-                    </a>
-
-                </div>
-
-
-                <a
-                    href="index.html"
-                    class="back-home"
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
-                    ← Retour à l'accueil
-                </a>
+
+                    <path
+                        d="M4 19V9L12 4L20 9V19"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+
+                    <path
+                        d="M8 19V13H16V19"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linejoin="round"
+                    />
+
+                    <path
+                        d="M12 4V9"
+                        stroke="white"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
 
             </div>
+
+            <span>BATIFLOW</span>
 
         </div>
 
-    </main>
+        <div class="logo-subtitle">
+            Gestion professionnelle des projets BTP
+        </div>
+
+    </div>
 
 
-    <script src="js/auth.js"></script>
+    <!-- =================================================
+         CARD
+    ================================================== -->
+
+    <div class="login-card">
+
+        <h1 class="login-title">
+            Bienvenue sur BATIFLOW
+        </h1>
+
+        <p class="login-description">
+            Connectez-vous à votre espace professionnel
+            pour gérer vos chantiers, devis, DQE et clients.
+        </p>
+
+
+        <!-- MESSAGE -->
+
+        <div id="loginMessage" class="message"></div>
+
+
+        <!-- =================================================
+             FORMULAIRE
+        ================================================== -->
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label for="loginEmail">
+                    Adresse e-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    name="email"
+                    placeholder="exemple@email.com"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="loginPassword">
+                    Mot de passe
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        name="password"
+                        placeholder="Votre mot de passe"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        id="togglePassword"
+                        aria-label="Afficher le mot de passe"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-options">
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="rememberMe"
+                    >
+
+                    <span>
+                        Se souvenir de moi
+                    </span>
+
+                </label>
+
+                <a
+                    href="#"
+                    class="forgot-link"
+                    id="forgotPassword"
+                >
+                    Mot de passe oublié ?
+                </a>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                Se connecter
+            </button>
+
+        </form>
+
+
+        <!-- =================================================
+             SEPARATEUR
+        ================================================== -->
+
+        <div class="separator">
+            OU
+        </div>
+
+
+        <!-- =================================================
+             INSCRIPTION
+        ================================================== -->
+
+        <div class="register-text">
+
+            Vous n'avez pas encore de compte ?
+
+            <a
+                href="inscription.html"
+                class="register-link"
+            >
+                Créer un compte
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         RETOUR
+    ================================================== -->
+
+    <div class="back-home">
+
+        <a href="index.html">
+            ← Retour à l'accueil
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SCRIPT SUPABASE
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   CONFIGURATION SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://bwimievqpgaifjwbzayb.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_D6v3wBJQVQypsPNyRZPfsA_PVQ_u-PX";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const loginEmail =
+    document.getElementById("loginEmail");
+
+const loginPassword =
+    document.getElementById("loginPassword");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const loginMessage =
+    document.getElementById("loginMessage");
+
+const loadingOverlay =
+    document.getElementById("loadingOverlay");
+
+const togglePassword =
+    document.getElementById("togglePassword");
+
+const forgotPassword =
+    document.getElementById("forgotPassword");
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function afficherMessage(message, type){
+
+    loginMessage.textContent = message;
+
+    loginMessage.className =
+        "message " + type;
+
+}
+
+
+/* =====================================================
+   MASQUER LE CHARGEMENT
+===================================================== */
+
+function cacherChargement(){
+
+    loadingOverlay.style.opacity = "0";
+
+    setTimeout(function(){
+
+        loadingOverlay.style.display = "none";
+
+    },300);
+
+}
+
+
+/* =====================================================
+   VERIFICATION SESSION
+===================================================== */
+
+async function verifierSession(){
+
+    try{
+
+        const { data, error } =
+            await supabaseClient.auth.getSession();
+
+        if(error){
+
+            console.error(
+                "Erreur session :",
+                error
+            );
+
+            cacherChargement();
+
+            return;
+        }
+
+
+        /*
+         * Si l'utilisateur est déjà connecté,
+         * on l'envoie directement au dashboard.
+         */
+
+        if(data.session){
+
+            window.location.replace(
+                "dashboard.html"
+            );
+
+            return;
+
+        }
+
+
+        cacherChargement();
+
+    }catch(error){
+
+        console.error(error);
+
+        cacherChargement();
+
+    }
+
+}
+
+
+/* =====================================================
+   CONNEXION
+===================================================== */
+
+loginForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const email =
+            loginEmail.value.trim();
+
+        const password =
+            loginPassword.value;
+
+
+        if(!email || !password){
+
+            afficherMessage(
+                "Veuillez remplir tous les champs.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Désactivation du bouton pendant
+         * la connexion.
+         */
+
+        loginButton.disabled = true;
+
+        loginButton.textContent =
+            "Connexion en cours...";
+
+        loginMessage.className =
+            "message";
+
+
+        try{
+
+            const { data, error } =
+                await supabaseClient.auth.signInWithPassword({
+
+                    email: email,
+
+                    password: password
+
+                });
+
+
+            if(error){
+
+                console.error(
+                    "Erreur connexion :",
+                    error
+                );
+
+
+                let message =
+                    "E-mail ou mot de passe incorrect.";
+
+
+                if(
+                    error.message &&
+                    error.message.toLowerCase().includes(
+                        "email not confirmed"
+                    )
+                ){
+
+                    message =
+                        "Votre adresse e-mail n'est pas encore confirmée. Vérifiez votre boîte e-mail.";
+
+                }
+
+
+                afficherMessage(
+                    message,
+                    "error"
+                );
+
+
+                loginButton.disabled = false;
+
+                loginButton.textContent =
+                    "Se connecter";
+
+                return;
+
+            }
+
+
+            if(data.session){
+
+                afficherMessage(
+                    "Connexion réussie. Ouverture de votre espace...",
+                    "success"
+                );
+
+
+                /*
+                 * Petite pause pour permettre
+                 * à l'utilisateur de voir le message.
+                 */
+
+                setTimeout(function(){
+
+                    window.location.replace(
+                        "dashboard.html"
+                    );
+
+                },600);
+
+            }
+
+
+        }catch(error){
+
+            console.error(error);
+
+            afficherMessage(
+                "Une erreur est survenue. Veuillez réessayer.",
+                "error"
+            );
+
+
+            loginButton.disabled = false;
+
+            loginButton.textContent =
+                "Se connecter";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   AFFICHER / MASQUER MOT DE PASSE
+===================================================== */
+
+togglePassword.addEventListener(
+    "click",
+    function(){
+
+        if(loginPassword.type === "password"){
+
+            loginPassword.type = "text";
+
+            togglePassword.textContent = "🙈";
+
+        }else{
+
+            loginPassword.type = "password";
+
+            togglePassword.textContent = "👁";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   MOT DE PASSE OUBLIE
+===================================================== */
+
+forgotPassword.addEventListener(
+    "click",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const email =
+            loginEmail.value.trim();
+
+
+        if(!email){
+
+            afficherMessage(
+                "Entrez d'abord votre adresse e-mail.",
+                "error"
+            );
+
+            loginEmail.focus();
+
+            return;
+
+        }
+
+
+        try{
+
+            const { error } =
+                await supabaseClient.auth.resetPasswordForEmail(
+                    email,
+                    {
+                        redirectTo:
+                            window.location.origin +
+                            "/reset-password.html"
+                    }
+                );
+
+
+            if(error){
+
+                console.error(error);
+
+                afficherMessage(
+                    "Impossible d'envoyer le lien de réinitialisation.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            afficherMessage(
+                "Un lien de réinitialisation vient d'être envoyé à votre adresse e-mail.",
+                "success"
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+            afficherMessage(
+                "Une erreur est survenue. Veuillez réessayer.",
+                "error"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SURVEILLANCE AUTHENTIFICATION
+===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+    function(event, session){
+
+        /*
+         * Si Supabase détecte qu'une session
+         * existe déjà, on ouvre le dashboard.
+         */
+
+        if(
+            session &&
+            (
+                event === "SIGNED_IN" ||
+                event === "INITIAL_SESSION"
+            )
+        ){
+
+            /*
+             * On évite de rediriger pendant
+             * le chargement initial si verifierSession()
+             * est déjà en train de le faire.
+             */
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INITIALISATION
+===================================================== */
+
+verifierSession();
+
+</script>
 
 </body>
-
 </html>
+
